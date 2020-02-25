@@ -7,28 +7,31 @@
 @section('body')
     <div class="container-fluid">
         <div class="mx-auto w-50">
-            {!! Form::open(['url' => url('Install')]) !!}
-            @csrf
+            {!! Form::open(['url' => '/Install']) !!}
             <h1 class="openmeet-title text-center h1 my-5 text-primary">OpenMeet</h1>
-            <div class="form-group">
+            <div class="form-group {!! $errors->has('iName') ? 'is_invalid' : '' !!}">
                 {!! Form::label('iName', 'Nom du site', ['class' =>'control-label']) !!}
                 {!! Form::text('iName', $value = null, ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}
             </div>
 
-            <div class="form-group">
+            <div class="form-group {!! $errors->has('iColor') ? 'is_invalid' : '' !!}">
                 {!! Form::label('iColor', 'Couleur primaire', ['class' =>'control-label']) !!}
                 {!! Form::color('iColor', $value='#007BFF', ['class' => 'form-control']) !!}
             </div>
             <hr>
             <div class="form-group row">
-                <div class="col-lg-6">
-                    {!! Form::label('iUser', "Nom d'utilisateur administrateur", ['class' =>'control-label']) !!}
-                    {!! Form::text('iUser', $value = 'admin', ['class' => 'form-control']) !!}
+                <div class="{!! $errors->has('iUser') ? 'is_invalid' : '' !!}">
+                    <div class="col-lg-6">
+                        {!! Form::label('iUser', "Nom d'utilisateur administrateur", ['class' =>'control-label']) !!}
+                        {!! Form::text('iUser', $value = 'admin', ['class' => 'form-control']) !!}
+                    </div>
                 </div>
 
-                <div class="col-lg-6">
-                    {!! Form::label('iPass', 'Mot de passe administrateur', ['class' =>'control-label']) !!}
-                    {!! Form::password('iPass', ['class' => 'form-control', 'type' => 'password']) !!}
+                <div class="{!! $errors->has('iPass') ? 'is_invalid' : '' !!}">
+                    <div class="col-lg-6">
+                        {!! Form::label('iPass', 'Mot de passe administrateur', ['class' =>'control-label']) !!}
+                        {!! Form::password('iPass', ['class' => 'form-control', 'type' => 'password']) !!}
+                    </div>
                 </div>
             </div>
 

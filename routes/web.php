@@ -12,4 +12,4 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::post('/', 'HomeController@installPost');
+Route::post('/Install', 'HomeController@installPost');
