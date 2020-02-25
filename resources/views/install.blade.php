@@ -6,7 +6,13 @@
 
 @section('body')
     <div class="container">
-
-        <h1>CC</h1>
+        <div class="text-center">
+            <form method="post" action="{{ url('Install') }}"></form>
+            @csrf
+            <div class="form-group">
+                <label for="iName">Nom du site</label>
+                <input type="email" class="form-control" id="iName" name="iName" placeholder="OpenMeet">
+            </div>
+        </div>
     </div>
 @endsection
