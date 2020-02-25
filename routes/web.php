@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('install');
-});
+Route::get('/', 'HomeController@index');
