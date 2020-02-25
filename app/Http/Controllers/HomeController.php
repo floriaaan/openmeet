@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
+        //IF !INSTALL
         return $this->Install();
     }
 
-    public function Install() {
+    public function install() {
         return view('install');
+    }
+
+    public function installPost(){
+
     }
 }

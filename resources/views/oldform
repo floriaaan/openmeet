@@ -1,0 +1,45 @@
+        <!--<form method="post" action="{{ url('Install') }}">
+                @csrf
+            <h1 class="openmeet-title text-center h1 my-5 text-primary">OpenMeet</h1>
+            <div class="form-group">
+                <label for="iName">Nom du site</label>
+                <input type="text" class="form-control @error('iName') is-invalid @enderror" id="iName" name="iName"
+                           placeholder="{{ old('iName') }}">
+                    @error('iName')
+            <div class="invalid-feedback">{{ $iName }}</div>
+                    @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="iColor">Couleur primaire</label>
+                <input type="color" class="form-control" value="#007BFF" name="iColor">
+            </div>
+            <hr>
+
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <label for="iUsername">Nom d'utilisateur administrateur</label>
+                    <input type="email" class="form-control @error('iUsername') is-invalid @enderror" id="iUsername"
+                               name="iUsername" value="admin"
+                               placeholder="{{ old('iUsername') }}">
+                        @error('iUsername')
+            <div class="invalid-feedback">{{ $iUsername }}</div>
+                        @enderror
+            </div>
+            <div class="col-lg-6">
+                <label for="iPass">Mot de passe administrateur</label>
+                <input type="password" class="form-control @error('iPass') is-invalid @enderror" id="iPass"
+                               name="iPass"
+                               placeholder="{{ old('iPass') }}">
+                        @error('iPass')
+            <div class="invalid-feedback">{{ $iPass }}</div>
+                        @enderror
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 mr-auto">
+            <span class="text mr-1">Installer OpenMeet</span>
+            <span class="icon text-white-50">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+        </button>
+    </form>-->
