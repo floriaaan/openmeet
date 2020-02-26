@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('base.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/home.blade.php ENDPATH**/ ?>
