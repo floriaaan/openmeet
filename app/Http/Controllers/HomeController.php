@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
+use App\Http\Requests\InstallRequest;
 
 class HomeController extends Controller
 {
@@ -16,8 +15,13 @@ class HomeController extends Controller
         return view('install.form');
     }
 
-    public function installPost(Request $request){
-        print_r($request->input());
+    public function installPost(InstallRequest $request){
+        $post = $request->input();
+
+        file_put_contents('./css/custom.css',
+            ".openmeet-color{color:". $post['iColor']  .";}");
+
+        var_dump($post);
 
         //return view('install.done');
     }

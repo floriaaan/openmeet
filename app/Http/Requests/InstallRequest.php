@@ -13,7 +13,7 @@ class InstallRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class InstallRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'iName'=>'required|max:20',
+            'iUser'=>'required',
+            'iPass'=>'required',
+            'iMail'=>'required|email'
         ];
     }
 }
