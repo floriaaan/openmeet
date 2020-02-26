@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "anlutro/l4-settings": "^0.10.0",
         "caouecs/laravel-lang": "^4.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",

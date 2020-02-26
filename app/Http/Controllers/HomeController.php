@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InstallRequest;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use anlutro\LaravelSettings\SettingStore as Setting;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        var_dump(config('openmeet.install'));
-        var_dump(config('openmeet.name'));
         //IF !INSTALL
-        if (config('openmeet.install')) {
+        if (Setting('openmeet.install')) {
             return $this->Home();
         }
 
@@ -29,14 +26,16 @@ class HomeController extends Controller
     {
         $post = $request->input();
 
+
         /*file_put_contents('./css/custom.css',
             ".openmeet-color{color:". $post['iColor']  .";}");*/
 
-        config(['openmeet.install' => true]);
-        config(['openmeet.name' => $post['iName']]);
-        config(['openmeet.color' => $post['iColor']]);
+        Setting(['openmeet.install' => true]);
+        Setting(['openmeet.name' => $post['iName']]);
+        Setting(['openmeet.color' => $post['iColor']]);
 
-
+        var_dump(Setting());
+        Setting()->save();
         return view('install.done');
     }
 

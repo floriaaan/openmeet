@@ -5,9 +5,13 @@
 
 }
 
-.openmeet-install{
+.openmeet-install {
     font-size: 7em;
     margin-bottom: 10% !important;
+}
+
+.openmeet-nav {
+    font-size: 1.5em;
 }
 
 .wall-white {
@@ -17,13 +21,13 @@
 
 }
 
-.max-height{
+.max-height {
     height: 100vh;
     margin: initial;
 }
 
 @media (max-width: 700px) {
-    .openmeet-install{
+    .openmeet-install {
         font-size: 4em;
     }
 }
