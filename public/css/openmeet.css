@@ -5,6 +5,18 @@
     font-size: 7em;
 }
 
+.wall-white {
+    background: url("/assets/wall-white-30.svg") fixed no-repeat;
+    background-size: cover;
+
+
+}
+
+.max-height{
+    height: 100vh;
+    margin: initial;
+}
+
 @media (max-width: 700px) {
     .openmeet-title{
         font-size: 4em;
