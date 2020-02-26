@@ -13,3 +13,6 @@
 
 Route::get('/', 'HomeController@index');
 Route::post('/Install', 'HomeController@installPost');
+
+Route::get('/Notifications/{userId}', 'NotificationController@showAll');
+

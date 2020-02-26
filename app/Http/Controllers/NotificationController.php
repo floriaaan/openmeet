@@ -2,12 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use App\Notification;
 
 
 class NotificationController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index()
+    {
+        //
+    }
+
+    public function showAll($userId){
+        $notif = new Notification();
+        $notifications=$notif->showAll($userId);
+
+        return view('notification.showall',
+            [
+                'notifications'=>$notifications
+            ]);
+
+    }
+
+
+
+
+
+
+
+
+
+
 }
