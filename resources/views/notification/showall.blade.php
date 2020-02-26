@@ -1,7 +1,11 @@
 @extends('base.nav')
 
 @section('content')
+    <h1>Toutes vos notifications </h1>
+
     @foreach($notifications as $notif)
-        <h1>Notifications de </h1>
+        <a href="#">
+
+        </a>
     @endforeach
 @endsection
