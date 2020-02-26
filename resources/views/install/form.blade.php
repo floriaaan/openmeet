@@ -1,4 +1,4 @@
-@extends('index')
+@extends('base.index')
 
 @section('titre')
     OpenMeet - Installation
@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="mx-auto w-50">
                 {!! Form::open(['url' => '/Install']) !!}
-                <h1 class="openmeet-title text-center openmeet-color">OpenMeet</h1>
+                <h1 class="openmeet-title text-center openmeet-color openmeet-install">OpenMeet</h1>
                 <div class="form-group {!! $errors->has('iName') ? 'is_invalid' : '' !!}">
                     {!! Form::label('iName', 'Nom du site', ['class' =>'control-label']) !!}
                     {!! Form::text('iName', $value = null, ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}

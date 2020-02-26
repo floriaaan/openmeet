@@ -1,8 +1,13 @@
 .openmeet-title {
 
     font-family: 'Knewave', serif;
-    margin-bottom: 10% !important;
+
+
+}
+
+.openmeet-install{
     font-size: 7em;
+    margin-bottom: 10% !important;
 }
 
 .wall-white {
@@ -18,7 +23,7 @@
 }
 
 @media (max-width: 700px) {
-    .openmeet-title{
+    .openmeet-install{
         font-size: 4em;
     }
 }
