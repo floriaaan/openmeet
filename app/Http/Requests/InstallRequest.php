@@ -24,10 +24,9 @@ class InstallRequest extends FormRequest
     public function rules()
     {
         return [
-            'iName'=>'required|max:20',
-            'iUser'=>'required',
-            'iPass'=>'required',
-            'iMail'=>'required|email'
+            'iName'=>'required|alpha|min:1',
+            'iPass'=>'required|confirmed|min:3',
+            'iMail'=>'required|email|'
         ];
     }
 }

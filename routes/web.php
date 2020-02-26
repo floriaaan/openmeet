@@ -14,5 +14,8 @@
 Route::get('/', 'HomeController@index');
 Route::post('/Install', 'HomeController@installPost');
 
+Route::get('/Register', 'AuthController@registerForm');
+Route::post('/Register', 'AuthController@registerPost');
+
 Route::get('/Notifications/{userId}', 'NotificationController@showAll');
 
