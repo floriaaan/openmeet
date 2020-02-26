@@ -22,26 +22,29 @@
 
                 </div>
                 <hr>
+                <div class="form-group">
+
+                    {!! Form::label('iMail', "Adresse mail administrateur", ['class' =>'control-label']) !!}
+                    {!! Form::email('iMail', $value = null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('iMail', '<small class="text-danger">Le champ Adresse mail est incorrect.</small>') !!}
+
+
+                </div>
                 <div class="form-group row">
 
-                    <div class="col-lg-6 {!! $errors->has('iUser') ? 'is_invalid' : '' !!}">
-                        {!! Form::label('iUser', "Nom d'utilisateur administrateur", ['class' =>'control-label']) !!}
-                        {!! Form::text('iUser', $value = 'admin', ['class' => 'form-control']) !!}
-                        {!! $errors->first('iUser', '<small class="text-danger">Le champ Nom d\'utilisateur est incorrect.</small>') !!}
-                    </div>
 
-
-                    <div class="col-lg-6 {!! $errors->has('iPass') ? 'is_invalid' : '' !!}">
+                    <div class="col-lg-6">
                         {!! Form::label('iPass', 'Mot de passe administrateur', ['class' =>'control-label']) !!}
                         {!! Form::password('iPass', ['class' => 'form-control', 'type' => 'password']) !!}
                         {!! $errors->first('iPass', '<small class="text-danger">Le champ Mot de passe est incorrect.</small>') !!}
                     </div>
 
-                </div>
-                <div class="form-group">
-                    {!! Form::label('iMail', "Adresse mail administrateur", ['class' =>'control-label']) !!}
-                    {!! Form::email('iMail', $value = null, ['class' => 'form-control']) !!}
-                    {!! $errors->first('iMail', '<small class="text-danger">Le champ Adresse mail est incorrect.</small>') !!}
+                    <div class="col-lg-6">
+                        {!! Form::label('iPass_confirmation', 'Confirmation du mot de passe', ['class' =>'control-label']) !!}
+                        {!! Form::password('iPass_confirmation', ['class' => 'form-control', 'type' => 'password']) !!}
+                        {!! $errors->first('iPass_confirmation', '<small class="text-danger">Le champ Mot de passe est incorrect.</small>') !!}
+                    </div>
+
                 </div>
 
                 {!! Form::submit('Installer OpenMeet', ['class' => 'btn btn-primary mt-4 pull-right'] ) !!}
