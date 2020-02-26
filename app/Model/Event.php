@@ -9,5 +9,32 @@ use Illuminate\Notifications\Notifiable;
 
 class Event extends Model
 {
+
+    public function index()
+    {
+        //
+    }
+
+    public function create()
+    {
+        //
+    }
+
+
+    public function show()
+    {
+        //
+    }
+
+
+    public function edit()
+    {
+        //
+    }
+
+    public function Delete()
+    {
+        //
+    }
     //
 }
