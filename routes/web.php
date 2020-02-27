@@ -22,3 +22,7 @@ Route::get('/Notifications/{userId}', 'NotificationController@showAll');
 //ADMIN Routes
 Route::get('/Admin', 'AdminController@index');
 Route::post('/Admin/edit', 'AdminController@edit');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
