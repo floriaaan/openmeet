@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="langlois-william_openmeet@mysql-langlois-william.alwaysdata.net" uuid="88f2766b-0c57-4bff-82e2-0859f33d083d">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://mysql-langlois-william.alwaysdata.net:3306/langlois-william_openmeet</jdbc-url>
+    </data-source>
+  </component>
+</project>
