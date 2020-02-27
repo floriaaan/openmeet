@@ -24,8 +24,8 @@ class CreateGroupsTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->string('name',64);
-            $table->string('picrepo',255);
-            $table->string('picname',255);
+            $table->string('picrepo',255)->nullable();
+            $table->string('picname',255)->nullable();
             $table->date('datecreate');
             $table->timestamps();
         });

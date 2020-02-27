@@ -19,11 +19,11 @@ class CreateNotificationsTable extends Migration
             $table->foreign('id_user')
                     ->references('id')
                     ->on('users');
-            $table->boolean('isread');
-            $table->bigInteger('concerned');
-            $table->string('title',64);
-            $table->string('type',64);
-            $table->text('content');
+            $table->boolean('isread')->default(0);
+            $table->bigInteger('concerned')->nullable();
+            $table->string('title',64)->nullable();
+            $table->string('type',4)->nullable();
+            $table->text('content')->nullable();
             $table->dateTime('date');
             $table->timestamps();
         });

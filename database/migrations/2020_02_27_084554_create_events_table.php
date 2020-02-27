@@ -27,9 +27,9 @@ class CreateEventsTable extends Migration
             $table->string('country',64);
             $table->string('city',64);
             $table->string('street',64);
-            $table->string('numstreet',4);
+            $table->string('numstreet',4)->nullable();
             $table->string('zip',8);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
