@@ -26,7 +26,7 @@ class CreateSignalementsTable extends Migration
             $table->dateTime('date');
             $table->boolean('isread');
             $table->integer('Importance')->default(500);
-            $table->string('description',64);
+            $table->string('description',64)->nullable();
             $table->timestamps();
         });
     }
