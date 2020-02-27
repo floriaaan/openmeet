@@ -28,7 +28,7 @@ class Event extends Model
 
     public function create($groupId,$name,$datefrom,$dateto,$country,$zip,$city,$numstreet,$street,$desc)
     {
-        $query=DB::table('EVENTS')
+        $query=DB::table('events')
             ->insert([
                 'id_group'=>$groupId,
                 'name'=>$name,
@@ -43,7 +43,7 @@ class Event extends Model
             ]);
     }
 
-    public function show($eventId)
+    public function showOne($eventId)
     {
         $event = DB::table('events')
             ->select('*')
@@ -51,7 +51,7 @@ class Event extends Model
             ->get();
     }
 
-    public function showAll($groupId)
+    public function showAllEvents($groupId)
     {
             $events=DB::table('events')
                 ->select('*')
@@ -66,12 +66,20 @@ class Event extends Model
             return $listevent;
     }
 
-    public function edit($groupId,$description)
+    public function updateEvent($groupId,$name,$datefrom,$dateto,$country,$zip,$city,$numstreet,$street,$desc)
     {
         $query= DB::table('events')
             ->where('id_group','=',$groupId)
             ->update([
-                'description'=>$description
+                'name'=>$name,
+                'datefrom'=>$datefrom,
+                'dateto'=>$dateto,
+                'country'=>$country,
+                'zip'=>$zip,
+                'city'=>$city,
+                'numstreet'=>$numstreet,
+                'street'=>$street,
+                'description'=>$desc,
             ]);
     }
 

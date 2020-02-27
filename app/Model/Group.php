@@ -33,7 +33,7 @@ class Group extends Model
         ]);
     }
 
-    public function show($groupId)
+    public function showOne($groupId)
     {
         $events  = DB::table('groups')
             ->select('*')
@@ -57,12 +57,12 @@ class Group extends Model
         return $listgroups;
     }
 
-    public function updateAdmin ($groupId,$newAdmin)
+    public function updateAdmin ($groupId,$admin)
     {
         $query=DB::table('groups')
             ->where('id','=',$groupId)
             ->update([
-                'admin'=>$newAdmin
+                'admin'=>$admin
             ]);
 
     }

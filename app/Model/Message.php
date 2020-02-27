@@ -9,10 +9,17 @@ use Illuminate\Notifications\Notifiable;
 
 class Message extends Model
 {
-    public function index()
-    {
-        //
-    }
+    protected $fillable = [
+        'id',
+        'date',
+        'content',
+        'receiver',
+        'sender',
+        'isread',
+        'forgroup',
+    ];
+
+
 
     public function create()
     {
