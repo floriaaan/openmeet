@@ -27,15 +27,16 @@
     23 => 'Facade\\Ignition\\IgnitionServiceProvider',
     24 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     25 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    26 => 'Collective\\Html\\HtmlServiceProvider',
-    27 => 'Carbon\\Laravel\\ServiceProvider',
-    28 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    29 => 'Collective\\Html\\HtmlServiceProvider',
-    30 => 'anlutro\\LaravelSettings\\ServiceProvider',
-    31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'App\\Providers\\AuthServiceProvider',
-    33 => 'App\\Providers\\EventServiceProvider',
-    34 => 'App\\Providers\\RouteServiceProvider',
+    26 => 'Laravel\\Ui\\UiServiceProvider',
+    27 => 'Collective\\Html\\HtmlServiceProvider',
+    28 => 'Carbon\\Laravel\\ServiceProvider',
+    29 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    30 => 'Collective\\Html\\HtmlServiceProvider',
+    31 => 'anlutro\\LaravelSettings\\ServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'App\\Providers\\AuthServiceProvider',
+    34 => 'App\\Providers\\EventServiceProvider',
+    35 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -167,6 +168,8 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'Laravel\\Ui\\AuthCommand' => 'Laravel\\Ui\\UiServiceProvider',
+    'Laravel\\Ui\\UiCommand' => 'Laravel\\Ui\\UiServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
@@ -211,6 +214,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Ui\\UiServiceProvider' => 
     array (
     ),
     'Collective\\Html\\HtmlServiceProvider' => 

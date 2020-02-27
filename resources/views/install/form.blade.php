@@ -10,13 +10,13 @@
             <div class="mx-auto w-50">
                 {!! Form::open(['url' => '/Install']) !!}
                 <h1 class="openmeet-title text-center openmeet-color openmeet-install">OpenMeet</h1>
-                <div class="form-group {!! $errors->has('iName') ? 'is_invalid' : '' !!}">
+                <div class="form-group">
                     {!! Form::label('iName', 'Nom du site', ['class' =>'control-label']) !!}
                     {!! Form::text('iName', $value = null, ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}
                     {!! $errors->first('iName', '<small class="text-danger">Le champ Nom du site est incorrect.</small>') !!}
                 </div>
 
-                <div class="form-group {!! $errors->has('iColor') ? 'is_invalid' : '' !!}">
+                <div class="form-group">
                     {!! Form::label('iColor', 'Couleur primaire', ['class' =>'control-label']) !!}
                     {!! Form::color('iColor', $value='#007BFF', ['class' => 'form-control']) !!}
 
