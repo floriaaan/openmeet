@@ -15,12 +15,12 @@ class CreateSignalementTable extends Migration
     {
         Schema::create('signalement', function (Blueprint $table) {
             $table->bigIncrements('id');
-             $table->bigInteger('sender')->unsigned();
-             $table->foreign('sender')
+            $table->bigInteger('sender')->unsigned();
+            $table->foreign('sender')
                 ->references('id')
                 ->on('users');
-             $table->bigInteger('receiver')->unsigned();
-             $table->foreign('receiver')
+            $table->bigInteger('receiver')->unsigned();
+            $table->foreign('receiver')
                 ->references('id')
                 ->on('users');
             $table->dateTime('date');
