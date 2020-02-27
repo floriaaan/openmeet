@@ -3,39 +3,76 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use mysql_xdevapi\Schema;
-use mysql_xdevapi\TableSelect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Model
 {
-    public function index()
+
+    protected $fillable = [
+        'id',
+        'user',
+        'name',
+        'admin',
+        'picrepo',
+        'picname',
+        'datecrea',
+    ];
+
+
+    public function create($name,$userId,$admin,$picrepo,$picname)
     {
-        //
+        $group=DB::table('groups')
+        ->insert([
+            'name'=>$name,
+            'id_user'=>$userId,
+            'admin'=>$admin,
+            'picrepo'=>$picrepo,
+            'picname'=>$picname,
+            'datecrea'=>(date("Y-m-d H:i:s"))
+        ]);
     }
-
-    public function create()
-    {
-
-        //
-    }
-
 
     public function show()
     {
-        //
+        $events  = DB::table('groups')
+            ->select('*')
+            ->where('id_user')
+            ->get();
     }
 
-
-    public function edit()
+    public function showAll($userId)
     {
-        //
+        $groups=DB::table('groups')
+            ->select('*')
+            ->where('id_user',"=",$userId)
+            ->get();
+        $groupsArray=$groups;
+        $listgroups=[];
+        foreach ($groupsArray as $groupSQL)
+        {
+            $listgroups[]=$groupSQL;
+        }
+        return $listgroups;
+    }
+
+    public function edit ($groupsId)
+    {
+        $query=DB::table('groups')
+            ->update($groupsId);
     }
 
     public function delete()
     {
-        //
+        $query=DB::table('groups')
+            ->delete();
     }
+
+/*
+    public function transfert($groupsId)
+    {
+        $query=DB::table('groups')
+            ->
+    }
+*/
 }
