@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InstallRequest extends FormRequest
+class AdminEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class InstallRequest extends FormRequest
     public function rules()
     {
         return [
-            'iName'=>'required|min:3|max:40',
-            'iPass'=>'required|confirmed|min:3',
-            'iMail'=>'required|email'
+            'uName' => 'required|min:3|max:40',
+            'uColor' => 'required'
         ];
     }
 }

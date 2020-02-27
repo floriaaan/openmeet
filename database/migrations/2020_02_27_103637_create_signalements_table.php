@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSignalementTable extends Migration
+class CreateSignalementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateSignalementTable extends Migration
      */
     public function up()
     {
-        Schema::create('signalement', function (Blueprint $table) {
+        Schema::create('signalements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('sender')->unsigned();
-            $table->foreign('sender')
+            $table->bigInteger('submitter')->unsigned();
+            $table->foreign('submitter')
                 ->references('id')
                 ->on('users');
-            $table->bigInteger('receiver')->unsigned();
-            $table->foreign('receiver')
+             $table->bigInteger('concerned')->unsigned();
+             $table->foreign('concerned')
                 ->references('id')
                 ->on('users');
             $table->dateTime('date');
             $table->boolean('isread');
-            $table->integer('Importance');
+            $table->integer('Importance')->default(500);
             $table->string('description',64);
             $table->timestamps();
         });
@@ -38,6 +38,6 @@ class CreateSignalementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signalement');
+        Schema::dropIfExists('signalements');
     }
 }

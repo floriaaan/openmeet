@@ -18,9 +18,6 @@ class NotificationController extends Controller
         self::DeleteUselessNotification();
         $notif = new Notification();
         $notifications=$notif->getAllForUser($userId);
-        foreach ($notifications as $notification){
-            self::MakeReadedNotification($notification->id);
-        }
 
         return view('notification.showall',
             [

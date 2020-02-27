@@ -3,7 +3,7 @@
 
     <?php $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div id="oneNotif" style="left: 2em;">
-            <a href="#" style="text-decoration: none;">
+            <a href="" style="text-decoration: none;">
                 <h3 style="margin: 0"><?php echo e($notif->title); ?></h3>
                 <p style="margin: 0"><?php echo e($notif->content); ?></p>
                 <span style="margin: 0"><?php echo e($notif->date); ?></span>
