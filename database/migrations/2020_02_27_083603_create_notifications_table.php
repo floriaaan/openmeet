@@ -20,6 +20,7 @@ class CreateNotificationsTable extends Migration
                     ->references('id')
                     ->on('users');
             $table->boolean('isread');
+            $table->bigInteger('concerned');
             $table->string('title',64);
             $table->string('type',64);
             $table->text('content');
