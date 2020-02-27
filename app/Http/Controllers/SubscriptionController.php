@@ -8,5 +8,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class SubscriptionController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function index()
+    {
+        //
+    }
+
+    public static function SwitchAcceptNotif($groupId)
+    {
+
+    }
 }
