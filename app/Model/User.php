@@ -22,7 +22,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'bdate', 'email', 'password',
+        'id','fname', 'lname', 'bdate', 'email', 'password', 'country',
+        'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
+        'isadmin', 'defaultnotif', 'typenotif'
     ];
 
     /**
@@ -31,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'isadmin', 'defaultnotif', 'typenotif'
     ];
 
 
