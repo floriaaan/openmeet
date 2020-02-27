@@ -15,7 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->bigInteger('id_group')->unique();
+            $table->bigInteger('id_group')->unsigned();
+            $table->foreign('id_group')
+                ->references('id')
+                ->on('groups');
             $table->string('name',64);
             $table->dateTime('datefrom');
             $table->dateTime('dateto');

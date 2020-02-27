@@ -4,10 +4,12 @@
     <h1>Toutes vos notifications </h1>
 
     @foreach($notifications as $notif)
-        <a href="#">
-            <h3>{{$notif->NOTIF_TITLE}}</h3>
-            <p>{{$notif->NOTIF_CONTENT}}</p>
-            <span>{{$notif->NOTIF_DATE}}</span>
-        </a>
+        <div id="oneNotif" style="left: 2em;">
+            <a href="#" style="text-decoration: none;">
+                <h3 style="margin: 0">{{$notif->title}}</h3>
+                <p style="margin: 0">{{$notif->content}}</p>
+                <span style="margin: 0">{{$notif->date}}</span>
+            </a>
+        </div>
     @endforeach
 @endsection

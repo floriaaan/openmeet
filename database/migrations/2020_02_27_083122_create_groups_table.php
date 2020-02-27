@@ -15,11 +15,10 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-           /*
-           todo $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')
-                  ->references('id')
-                 ->on('users'); */
+            $table->bigInteger('id_user')->unsigned();
+                $table->foreign('id_user')
+                        ->references('id')
+                        ->on('users');
             $table->string('name',64);
             $table->string('picrepo',255);
             $table->string('picname',255);

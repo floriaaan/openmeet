@@ -17,8 +17,14 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->dateTime('date');
             $table->text('content');
-            $table->bigInteger('receiver'); //TODO: foreign key
-            $table->bigInteger('sender'); //TODO: foreign key
+            $table->bigInteger('receiver')->unsigned();
+            $table->foreign('id_user')
+                ->references('id')
+                ->on('users');
+            $table->bigInteger('sender')->unsigned();
+            $table->foreign('id_user')
+                ->references('id')
+                ->on('users');
             $table->boolean('isread');
             $table->boolean('forgroup');
 

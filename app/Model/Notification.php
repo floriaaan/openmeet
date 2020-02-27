@@ -19,17 +19,17 @@ class Notification extends Model
 
     public function create($title,$userId,$content)
     {
-        $query=DB::table('NOTIFICATIONS')
+        $query=DB::table('notifications')
             ->insert([
-                'NOTIF_TITLE'=>$title,
-                'ID_USER'=>$userId,
-                'NOTIF_CONTENT'=>$content,
-                "NOTIF_DATE"=>(date("Y-m-d H:i:s"))
+                'title'=>$title,
+                'id_user'=>$userId,
+                'content'=>$content,
+                "date"=>(date("Y-m-d H:i:s"))
             ]);
     }
 
     public function getAll(){
-        $query=DB::table('NOTIFICATIONS')
+        $query=DB::table('notifications')
             ->select('*')
             ->get();
 
@@ -44,9 +44,9 @@ class Notification extends Model
 
     public function getAllForUser($userId)
     {
-        $query=DB::table('NOTIFICATIONS')
+        $query=DB::table('notifications')
             ->select('*')
-            ->where('ID_USER',"=",$userId)
+            ->where('id_user',"=",$userId)
             ->get();
         $notificationsArray=$query;
         $listNotification=[];
@@ -60,17 +60,16 @@ class Notification extends Model
 
     public function MakeReaded($id)
     {
-        $query=DB::table('NOTIFICATIONS')
-            ->where('ID_NOTIF','=',$id)
-            ->update(['NOTIF_ISREAD'=>1]);
+        $query=DB::table('notifications')
+            ->where('id','=',$id)
+            ->update(['isread'=>1]);
 
     }
 
     public function Remove($notifId)
     {
-            $query = DB::table('NOTIFICATIONS')
-                ->where('ID_NOTIF','=',$notifId)
-                ->delete();
+            $query = DB::table('notifications')
+                ->delete($notifId);
     }
 
 }

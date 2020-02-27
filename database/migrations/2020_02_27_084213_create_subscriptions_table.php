@@ -15,8 +15,14 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //$table->bigInteger('id_user')->unique();
-            //$table->bigInteger('id_group')->unique();
+            $table->bigInteger('id_user')->unsigned();
+            $table->foreign('id_user')
+                ->references('id')
+                ->on('users');
+            $table->bigInteger('id_group')->unsigned();
+            $table->foreign('id_group')
+                ->references('id')
+                ->on('groups');
             $table->dateTime('date');
             $table->boolean('acceptnotif');
             $table->timestamps();

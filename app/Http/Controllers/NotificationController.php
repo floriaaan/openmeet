@@ -19,7 +19,7 @@ class NotificationController extends Controller
         $notif = new Notification();
         $notifications=$notif->getAllForUser($userId);
         foreach ($notifications as $notification){
-            self::MakeReadedNotification($notification->ID_NOTIF);
+            self::MakeReadedNotification($notification->id);
         }
 
         return view('notification.showall',
@@ -39,8 +39,8 @@ class NotificationController extends Controller
         $notif=new Notification();
         $notifications=$notif->getAll();
         foreach ($notifications as $notification){
-            if(($notification->NOTIF_ISREAD)==1){
-                $notif->Remove($notification->ID_NOTIF);
+            if(($notification->isread)==1){
+               //$notif->Remove($notification->ID_NOTIF);
             }
         }
     }
