@@ -39,6 +39,7 @@ class Group extends Model
             ->select('*')
             ->where('id','=',$groupId)
             ->get();
+
     }
 
     public function showAll($userId)
