@@ -19,6 +19,10 @@ class CreateGroupsTable extends Migration
                 $table->foreign('id_user')
                         ->references('id')
                         ->on('users');
+            $table->bigInteger('admin')->unsigned();
+            $table->foreign('admin')
+                ->references('id')
+                ->on('users');
             $table->string('name',64);
             $table->string('picrepo',255);
             $table->string('picname',255);

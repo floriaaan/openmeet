@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
                     ->on('users');
             $table->boolean('isread');
             $table->string('title',64);
+            $table->string('type',64);
             $table->text('content');
             $table->dateTime('date');
             $table->timestamps();

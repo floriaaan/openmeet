@@ -15,20 +15,17 @@ class CreateSignalementTable extends Migration
     {
         Schema::create('signalement', function (Blueprint $table) {
             $table->bigIncrements('id');
-            /*
-             todo $table->bigInteger('sender')->unsigned();
-                  $table->foreign('id_user')
+             $table->bigInteger('sender')->unsigned();
+             $table->foreign('sender')
                 ->references('id')
                 ->on('users');
-                $table
-             todo $table->bigInteger('receiver')->unsigned();
-                  $table->foreign('id_user')
+             $table->bigInteger('receiver')->unsigned();
+             $table->foreign('receiver')
                 ->references('id')
                 ->on('users');
-                $table*/
             $table->dateTime('date');
             $table->boolean('isread');
-            $table->integer('Importance',3);
+            $table->integer('Importance');
             $table->string('description',64);
             $table->timestamps();
         });
