@@ -35,7 +35,7 @@ class RegisterRequest extends FormRequest
             // return Carbon\Carbon::now()->diff(new Carbon\Carbon($value))->y >= $minAge;
         });
         return [
-            'user_mail' => 'required|email|unique:USERS',
+            'mail' => 'required|email|unique:users',
             'rPass' => 'required|confirmed|min:3',
             'rFName' => 'required|alpha|min:1',
             'rLName' => 'required|alpha|min:1',

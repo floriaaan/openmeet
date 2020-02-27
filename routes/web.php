@@ -10,12 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
+//HOME Routes
 Route::get('/', 'HomeController@index');
 Route::post('/Install', 'HomeController@installPost');
 
-Route::get('/Register', 'AuthController@registerForm');
-Route::post('/Register', 'AuthController@registerPost');
-
+//NOTIFICATION Routes
 Route::get('/Notifications/{userId}', 'NotificationController@showAll');
 
+//ADMIN Routes
+Route::get('/Admin', 'AdminController@index');
+Route::post('/Admin/edit', 'AdminController@edit');

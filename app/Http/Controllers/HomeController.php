@@ -10,7 +10,13 @@ class HomeController extends Controller
     public function index()
     {
         //IF !INSTALL
-        if (Setting('openmeet.install')) {
+        try {
+            $install = Setting('openmeet.install');
+        } catch (\Exception $e) {
+            $install = null;
+        }
+
+        if ($install != null && $install) {
             return $this->Home();
         }
 
@@ -25,17 +31,16 @@ class HomeController extends Controller
     public function installPost(InstallRequest $request)
     {
         $post = $request->input();
+        try{
+            Setting(['openmeet.install' => true]);
+            Setting(['openmeet.name' => $post['iName']]);
+            Setting(['openmeet.color' => $post['iColor']]);
 
+            Setting()->save();
+        } catch (\Exception $e) {
+            var_dump($e);
+        }
 
-        /*file_put_contents('./css/custom.css',
-            ".openmeet-color{color:". $post['iColor']  .";}");*/
-
-        Setting(['openmeet.install' => true]);
-        Setting(['openmeet.name' => $post['iName']]);
-        Setting(['openmeet.color' => $post['iColor']]);
-
-        var_dump(Setting());
-        Setting()->save();
         return view('install.done');
     }
 
