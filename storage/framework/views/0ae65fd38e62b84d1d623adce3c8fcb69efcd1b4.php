@@ -2,10 +2,10 @@
     <h1>Toutes vos notifications </h1>
 
     <?php $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <a href="#" >
+        <a href="#">
             <h3><?php echo e($notif->NOTIF_TITLE); ?></h3>
             <p><?php echo e($notif->NOTIF_CONTENT); ?></p>
-            <p><?php echo e($notif->NOTIF_DATE); ?></p>
+            <span><?php echo e($notif->NOTIF_DATE); ?></span>
         </a>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php $__env->stopSection(); ?>

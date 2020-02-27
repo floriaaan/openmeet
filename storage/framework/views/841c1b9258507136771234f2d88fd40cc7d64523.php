@@ -1,6 +1,6 @@
 <?php $__env->startSection('body'); ?>
 
-    <nav class="navbar navbar-expand-lg d-flex flex-row navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="50" height="50" class="d-inline-block align-top"
                  alt="<?php echo e(Setting('openmeet.name')); ?>">
@@ -12,19 +12,31 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navToggle">
+        <div class="collapse navbar-collapse flex-row-reverse" id="navToggle">
 
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
+            <div class="dropdown">
+                <?php if(auth()->check()): ?>
+                    <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <?php echo e(auth()->user()->USER_NAME); ?> <?php echo e(auth()->user()->USER_LASTNAME); ?>
+
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navDrop">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="/Logout">Déconnexion</a>
+                    </div>
+                <?php else: ?>
+                    <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Connexion / Inscription
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navDrop">
+                        <a class="dropdown-item" href="/Login">Connexion</a>
+                        <a class="dropdown-item" href="/Register">Inscription</a>
+                    </div>
+                <?php endif; ?>
+            </div>
 
         </div>
     </nav>
