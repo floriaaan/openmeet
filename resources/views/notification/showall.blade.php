@@ -1,4 +1,4 @@
-@extends('base.nav')
+@extends('layouts.nav')
 
 @section('content')
     <h1>Toutes vos notifications </h1>

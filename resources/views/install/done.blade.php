@@ -1,4 +1,4 @@
-@extends('base.index')
+@extends('layouts.index')
 
 @section('body')
 

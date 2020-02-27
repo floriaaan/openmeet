@@ -1,4 +1,4 @@
-@extends('base.index')
+@extends('layouts.index')
 
 @section('body')
 
@@ -16,16 +16,23 @@
 
         <div class="collapse navbar-collapse flex-row-reverse" id="navToggle">
 
-            <div class="dropdown">
+            <div class="dropleft">
                 @if (auth()->check())
                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        {{ auth()->user()->USER_NAME }} {{ auth()->user()->USER_LASTNAME }}
+                        {{ auth()->user()->fname }} {{ auth()->user()->lname }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="/Logout">Déconnexion</a>
+                        <a class="dropdown-item" href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            Déconnexion
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                 @else
                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -33,8 +40,8 @@
                         Connexion / Inscription
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navDrop">
-                        <a class="dropdown-item" href="/Login">Connexion</a>
-                        <a class="dropdown-item" href="/Register">Inscription</a>
+                        <a class="dropdown-item" href="/login">Connexion</a>
+                        <a class="dropdown-item" href="/register">Inscription</a>
                     </div>
                 @endif
             </div>
