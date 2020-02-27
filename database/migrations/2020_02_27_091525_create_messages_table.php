@@ -18,11 +18,11 @@ class CreateMessagesTable extends Migration
             $table->dateTime('date');
             $table->text('content');
             $table->bigInteger('receiver')->unsigned();
-            $table->foreign('id_user')
+            $table->foreign('receiver')
                 ->references('id')
                 ->on('users');
             $table->bigInteger('sender')->unsigned();
-            $table->foreign('id_user')
+            $table->foreign('sender')
                 ->references('id')
                 ->on('users');
             $table->boolean('isread');
