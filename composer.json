@@ -15,7 +15,8 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
-        "laravelcollective/html": "^6.0"
+        "laravelcollective/html": "^6.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

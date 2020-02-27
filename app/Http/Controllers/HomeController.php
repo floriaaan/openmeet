@@ -2,26 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\InstallRequest;
+use anlutro\LaravelSettings\SettingStore as Setting;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth');
+        //IF !INSTALL
+        try {
+            $install = Setting('openmeet.install');
+        } catch (\Exception $e) {
+            $install = null;
+        }
+
+        if ($install != null && $install) {
+            return $this->Home();
+        }
+
+        return $this->Install();
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function install()
+    {
+        return view('install.form');
+    }
+
+    public function installPost(InstallRequest $request)
+    {
+        $post = $request->input();
+        try{
+            Setting(['openmeet.install' => true]);
+            Setting(['openmeet.name' => $post['iName']]);
+            Setting(['openmeet.color' => $post['iColor']]);
+
+            Setting()->save();
+        } catch (\Exception $e) {
+            var_dump($e);
+        }
+
+        return view('install.done');
+    }
+
+    public function home()
     {
         return view('home');
     }
