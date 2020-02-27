@@ -1,1 +1,1 @@
-@extends('base.nav')
+@extends('layouts.nav')
