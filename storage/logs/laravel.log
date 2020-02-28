@@ -7,7 +7,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 08:43:43] local.ERROR: There are no commands defined in the "remove" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"remove\" namespace. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php:598)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php(651): Symfony\\Component\\Console\\Application->findNamespace('remove')
@@ -17,7 +17,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 09:44:38] local.ERROR: There are no commands defined in the "remove" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"remove\" namespace. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php:598)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php(651): Symfony\\Component\\Console\\Application->findNamespace('remove')
@@ -27,7 +27,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 09:44:42] local.ERROR: There are no commands defined in the "remove" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"remove\" namespace. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php:598)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php(651): Symfony\\Component\\Console\\Application->findNamespace('remove')
@@ -37,7 +37,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 09:44:50] local.ERROR: There are no commands defined in the "delete" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"delete\" namespace. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php:598)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php(651): Symfony\\Component\\Console\\Application->findNamespace('delete')
@@ -47,7 +47,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 09:44:57] local.ERROR: There are no commands defined in the "rm" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"rm\" namespace. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php:598)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Application.php(651): Symfony\\Component\\Console\\Application->findNamespace('rm')
@@ -57,7 +57,7 @@
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-26 10:45:47] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('2')
@@ -101,7 +101,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:49:15] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('2')
@@ -145,7 +145,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:49:25] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -189,7 +189,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:49:46] local.ERROR: Class 'App\Model\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Model\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -233,7 +233,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:50:17] local.ERROR: Class 'app\Model\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'app\\Model\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -277,7 +277,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:50:39] local.ERROR: Class 'app\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'app\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -321,7 +321,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:51:05] local.ERROR: Class 'app\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'app\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -365,7 +365,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:52:13] local.ERROR: Class 'app\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'app\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -409,7 +409,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:53:02] local.ERROR: Class 'App\Http\Controllers\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Http\\Controllers\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:55)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -453,7 +453,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:54:57] local.ERROR: Class 'App\Http\Controllers\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Http\\Controllers\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -497,7 +497,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:56:00] local.ERROR: Class 'App\Http\Controllers\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Http\\Controllers\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -541,7 +541,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:56:20] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -585,7 +585,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:56:44] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -629,7 +629,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 10:57:08] local.ERROR: Trying to get property 'title' of non-object {"exception":"[object] (ErrorException(code: 0): Trying to get property 'title' of non-object at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:57)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(57): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Trying to get p...', 'C:\\\\Users\\\\langl\\\\...', 57, Array)
@@ -674,7 +674,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 10:59:02] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause' (SQL: select * from `NOTIFICATIONS` where `id` = 1 limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause' (SQL: select * from `NOTIFICATIONS` where `id` = 1 limit 1) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -782,7 +782,7 @@
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2020-02-26 11:03:21] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -826,7 +826,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 11:03:54] local.ERROR: Property [title] does not exist on this collection instance. {"exception":"[object] (Exception(code: 0): Property [title] does not exist on this collection instance. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\EnumeratesValues.php:815)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(60): Illuminate\\Support\\Collection->__get('title')
@@ -871,7 +871,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 11:04:14] local.ERROR: Property [NOTIF_TITLE] does not exist on this collection instance. {"exception":"[object] (Exception(code: 0): Property [NOTIF_TITLE] does not exist on this collection instance. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\EnumeratesValues.php:815)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(60): Illuminate\\Support\\Collection->__get('NOTIF_TITLE')
@@ -916,7 +916,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 11:28:58] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -960,7 +960,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:26:51] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -1004,7 +1004,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:27:30] local.ERROR: Class 'App\Model\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Model\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -1048,7 +1048,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:27:48] local.ERROR: Undefined property: Illuminate\Support\Facades\Notification::$DB {"exception":"[object] (ErrorException(code: 0): Undefined property: Illuminate\\Support\\Facades\\Notification::$DB at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:58)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(58): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 58, Array)
@@ -1093,7 +1093,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 12:28:20] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -1137,7 +1137,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:29:09] local.ERROR: Class 'App\Notification' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Notification' not found at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:56)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('1')
@@ -1181,7 +1181,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:33:07] local.ERROR: Property [NOTIF_TITLE] does not exist on this collection instance. {"exception":"[object] (Exception(code: 0): Property [NOTIF_TITLE] does not exist on this collection instance. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\EnumeratesValues.php:815)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(60): Illuminate\\Support\\Collection->__get('NOTIF_TITLE')
@@ -1226,7 +1226,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 12:33:20] local.ERROR: Use of undefined constant NOTIF_TITLE - assumed 'NOTIF_TITLE' (this will throw an Error in a future version of PHP) {"exception":"[object] (ErrorException(code: 0): Use of undefined constant NOTIF_TITLE - assumed 'NOTIF_TITLE' (this will throw an Error in a future version of PHP) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:60)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(60): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Use of undefine...', 'C:\\\\Users\\\\langl\\\\...', 60, Array)
@@ -1271,7 +1271,7 @@
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #41 {main}
-"} 
+"}
 [2020-02-26 12:35:41] local.ERROR: syntax error, unexpected 'var_dump' (T_STRING) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected 'var_dump' (T_STRING) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:61)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile('C:\\\\Users\\\\langl\\\\...')
@@ -1306,7 +1306,7 @@
 #29 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #30 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #31 {main}
-"} 
+"}
 [2020-02-26 12:36:37] local.ERROR: Call to undefined method stdClass::get() {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Call to undefined method stdClass::get() at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:61)
 [stacktrace]
 #0 [internal function]: App\\Http\\Controllers\\NotificationController->show('2')
@@ -1350,7 +1350,7 @@
 #38 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #39 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #40 {main}
-"} 
+"}
 [2020-02-26 12:51:25] local.ERROR: Method App\Http\Controllers\NotificationController::show does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method App\\Http\\Controllers\\NotificationController::show does not exist. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php:68)
 [stacktrace]
 #0 [internal function]: Illuminate\\Routing\\Controller->__call('show', Array)
@@ -1396,7 +1396,7 @@
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #41 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #42 {main}
-"} 
+"}
 [2020-02-26 12:51:33] local.ERROR: Method App\Http\Controllers\NotificationController::showAll does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method App\\Http\\Controllers\\NotificationController::showAll does not exist. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php:68)
 [stacktrace]
 #0 [internal function]: Illuminate\\Routing\\Controller->__call('showAll', Array)
@@ -1442,7 +1442,7 @@
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #41 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #42 {main}
-"} 
+"}
 [2020-02-26 12:51:38] local.ERROR: Method App\Http\Controllers\NotificationController::showAll does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method App\\Http\\Controllers\\NotificationController::showAll does not exist. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php:68)
 [stacktrace]
 #0 [internal function]: Illuminate\\Routing\\Controller->__call('showAll', Array)
@@ -1488,7 +1488,7 @@
 #40 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #41 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #42 {main}
-"} 
+"}
 [2020-02-26 12:54:29] local.ERROR: Cannot make static method Illuminate\Database\Eloquent\Model::destroy() non static in class App\Notification {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot make static method Illuminate\\Database\\Eloquent\\Model::destroy() non static in class App\\Notification at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Notification.php:66)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(148): Symfony\\Component\\Debug\\Exception\\FatalErrorException->__construct()
@@ -1541,7 +1541,7 @@
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): App\\Http\\Kernel->handle()
 #48 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(0): {main}()
 #49 {main}
-"} 
+"}
 [2020-02-26 12:55:20] local.ERROR: Declaration of App\Notification::update(Illuminate\Http\Request $request, $id) should be compatible with Illuminate\Database\Eloquent\Model::update(array $attributes = Array, array $options = Array) {"exception":"[object] (ErrorException(code: 0): Declaration of App\\Notification::update(Illuminate\\Http\\Request $request, $id) should be compatible with Illuminate\\Database\\Eloquent\\Model::update(array $attributes = Array, array $options = Array) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Notification.php:55)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Declaration of ...', 'C:\\\\Users\\\\langl\\\\...', 55, Array)
@@ -1592,7 +1592,7 @@
 #45 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-26 12:56:58] local.ERROR: Maximum function nesting level of '256' reached, aborting! {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Maximum function nesting level of '256' reached, aborting! at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php:35)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(176): Illuminate\\Database\\Eloquent\\Model->getFillable()
@@ -1852,7 +1852,7 @@
 #254 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #255 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #256 {main}
-"} 
+"}
 [2020-02-26 12:58:22] local.ERROR: Maximum function nesting level of '256' reached, aborting! {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Maximum function nesting level of '256' reached, aborting! at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php:35)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(176): Illuminate\\Database\\Eloquent\\Model->getFillable()
@@ -2112,7 +2112,7 @@
 #254 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #255 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #256 {main}
-"} 
+"}
 [2020-02-26 13:06:32] local.ERROR: Too few arguments to function Illuminate\Support\Collection::get(), 0 passed in C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\app\Http\Controllers\NotificationController.php on line 20 and at least 1 expected {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Too few arguments to function Illuminate\\Support\\Collection::get(), 0 passed in C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php on line 20 and at least 1 expected at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Collection.php:413)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(20): Illuminate\\Support\\Collection->get()
@@ -2159,9 +2159,11 @@
 #41 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #42 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #43 {main}
-"} 
-[2020-02-26 13:15:32] local.ERROR: syntax error, unexpected 'endfor' (T_ENDFOR) (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): syntax error, unexpected 'endfor' (T_ENDFOR) (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:5)
+"}
+[2020-02-26 13:15:32] local.ERROR: syntax error, unexpected 'endfor' (T_ENDFOR) (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): syntax error, unexpected 'endfor' (T_ENDFOR) (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:5)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -2260,7 +2262,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #44 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #45 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #46 {main}
-"} 
+"}
 [2020-02-26 13:55:03] local.ERROR: Declaration of App\Notification::Delete($notifId) should be compatible with Illuminate\Database\Eloquent\Model::delete() {"exception":"[object] (ErrorException(code: 0): Declaration of App\\Notification::Delete($notifId) should be compatible with Illuminate\\Database\\Eloquent\\Model::delete() at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Notification.php:54)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Declaration of ...', 'C:\\\\Users\\\\langl\\\\...', 54, Array)
@@ -2311,7 +2313,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-26 13:55:40] local.ERROR: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'favicon.png' for column `langlois-william_openmeet`.`NOTIFICATIONS`.`ID_USER` at row 1 (SQL: insert into `NOTIFICATIONS` (`NOTIF_TITLE`, `ID_USER`, `NOTIF_CONTENT`, `NOTIF_DATE`) values (Nouvelle notification, favicon.png, l'utilisateur n°favicon.pngA regarder ses notifications, 2020-02-26 13:55:40)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 22007): SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'favicon.png' for column `langlois-william_openmeet`.`NOTIFICATIONS`.`ID_USER` at row 1 (SQL: insert into `NOTIFICATIONS` (`NOTIF_TITLE`, `ID_USER`, `NOTIF_CONTENT`, `NOTIF_DATE`) values (Nouvelle notification, favicon.png, l'utilisateur n°favicon.pngA regarder ses notifications, 2020-02-26 13:55:40)) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `NO...', Array, Object(Closure))
@@ -2417,7 +2419,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
+"}
 [2020-02-26 13:55:42] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(422): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
@@ -2458,7 +2460,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #35 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #36 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #37 {main}
-"} 
+"}
 [2020-02-26 13:55:44] production.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:44)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(422): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(NULL)
@@ -2478,7 +2480,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #14 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(183): Illuminate\\Foundation\\Http\\Kernel->terminateMiddleware(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
 #15 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(60): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
 #16 {main}
-"} 
+"}
 [2020-02-26 13:57:30] local.ERROR: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'favicon.png' for column `langlois-william_openmeet`.`NOTIFICATIONS`.`ID_USER` at row 1 (SQL: insert into `NOTIFICATIONS` (`NOTIF_TITLE`, `ID_USER`, `NOTIF_CONTENT`, `NOTIF_DATE`) values (Nouvelle notification, favicon.png, l'utilisateur n°favicon.pngA regarder ses notifications, 2020-02-26 13:57:30)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 22007): SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: 'favicon.png' for column `langlois-william_openmeet`.`NOTIFICATIONS`.`ID_USER` at row 1 (SQL: insert into `NOTIFICATIONS` (`NOTIF_TITLE`, `ID_USER`, `NOTIF_CONTENT`, `NOTIF_DATE`) values (Nouvelle notification, favicon.png, l'utilisateur n°favicon.pngA regarder ses notifications, 2020-02-26 13:57:30)) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `NO...', Array, Object(Closure))
@@ -2584,7 +2586,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
+"}
 [2020-02-26 14:29:00] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NOTIFICATIONS.id' in 'where clause' (SQL: delete from `NOTIFICATIONS` where `NOTIFICATIONS`.`id` = 3) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NOTIFICATIONS.id' in 'where clause' (SQL: delete from `NOTIFICATIONS` where `NOTIFICATIONS`.`id` = 3) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('delete from `NO...', Array, Object(Closure))
@@ -2692,7 +2694,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2020-02-27 08:35:33] local.ERROR: Not enough arguments (missing: "name"). {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Not enough arguments (missing: \"name\"). at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Input\\Input.php:76)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Command\\Command.php(250): Symfony\\Component\\Console\\Input\\Input->validate()
@@ -2704,7 +2706,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #6 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #7 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #8 {main}
-"} 
+"}
 [2020-02-27 10:17:07] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'langlois-william_openmeet.NOTIFICATIONS' doesn't exist (SQL: select * from `NOTIFICATIONS`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'langlois-william_openmeet.NOTIFICATIONS' doesn't exist (SQL: select * from `NOTIFICATIONS`) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -2816,7 +2818,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #51 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #52 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #53 {main}
-"} 
+"}
 [2020-02-27 10:20:18] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' (SQL: select * from `notifications` where `id_user` = 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' (SQL: select * from `notifications` where `id_user` = 1) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -2926,7 +2928,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #50 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #51 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #52 {main}
-"} 
+"}
 [2020-02-27 10:22:47] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' (SQL: select * from `notifications` where `id_user` = 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_user' in 'where clause' (SQL: select * from `notifications` where `id_user` = 1) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -3036,7 +3038,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #50 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #51 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #52 {main}
-"} 
+"}
 [2020-02-27 10:23:17] local.ERROR: Too many arguments, expected arguments "command". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments, expected arguments \"command\". at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Input\\ArgvInput.php:174)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\symfony\\console\\Input\\ArgvInput.php(85): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument('clear')
@@ -3050,7 +3052,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #8 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #9 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #10 {main}
-"} 
+"}
 [2020-02-27 10:23:25] local.ERROR: Command "migrate:clear" is not defined.
 
 Did you mean one of these?
@@ -3091,7 +3093,7 @@ Did you mean one of these?
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 {main}
-"} 
+"}
 [2020-02-27 10:25:28] local.ERROR: Undefined property: stdClass::$NOTIF_ISREAD {"exception":"[object] (ErrorException(code: 0): Undefined property: stdClass::$NOTIF_ISREAD at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php:42)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Http\\Controllers\\NotificationController.php(42): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 42, Array)
@@ -3139,11 +3141,14 @@ Did you mean one of these?
 #42 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #43 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #44 {main}
-"} 
-[2020-02-27 10:26:22] local.ERROR: Undefined property: stdClass::$NOTIF_TITLE (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$NOTIF_TITLE (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:8)
+"}
+[2020-02-27 10:26:22] local.ERROR: Undefined property: stdClass::$NOTIF_TITLE (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$NOTIF_TITLE (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:8)
 [stacktrace]
-#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(8): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 6, Array)
+#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(8): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 6, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3244,11 +3249,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
-[2020-02-27 10:27:05] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:8)
+"}
+[2020-02-27 10:27:05] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:8)
 [stacktrace]
-#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(8): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 6, Array)
+#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(8): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 6, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3349,13 +3357,15 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
-[2020-02-27 10:28:49] local.ERROR: htmlspecialchars() expects parameter 1 to be string, object given (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): htmlspecialchars() expects parameter 1 to be string, object given (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
+"}
+[2020-02-27 10:28:49] local.ERROR: htmlspecialchars() expects parameter 1 to be string, object given (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): htmlspecialchars() expects parameter 1 to be string, object given (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
 otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php:251)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'htmlspecialchar...', 'C:\\\\Users\\\\langl\\\\...', 251, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(251): htmlspecialchars(Object(stdClass), 3, 'UTF-8', true)
-#2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(7): e(Object(stdClass))
+#2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(7): e(Object(stdClass))
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3458,13 +3468,15 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
-[2020-02-27 10:29:10] local.ERROR: htmlspecialchars() expects parameter 1 to be string, object given (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): htmlspecialchars() expects parameter 1 to be string, object given (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
+"}
+[2020-02-27 10:29:10] local.ERROR: htmlspecialchars() expects parameter 1 to be string, object given (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): htmlspecialchars() expects parameter 1 to be string, object given (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
 otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php:251)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'htmlspecialchar...', 'C:\\\\Users\\\\langl\\\\...', 251, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(251): htmlspecialchars(Object(stdClass), 3, 'UTF-8', true)
-#2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(7): e(Object(stdClass))
+#2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(7): e(Object(stdClass))
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #4 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #5 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3567,11 +3579,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
-[2020-02-27 10:29:27] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:9)
+"}
+[2020-02-27 10:29:27] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:9)
 [stacktrace]
-#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
+#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3672,11 +3687,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
-[2020-02-27 10:29:53] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:9)
+"}
+[2020-02-27 10:29:53] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:9)
 [stacktrace]
-#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
+#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3777,11 +3795,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
-[2020-02-27 10:30:17] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views\
-otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php:9)
+"}
+[2020-02-27 10:30:17] local.ERROR: Undefined property: stdClass::$title (View: C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views\notification\showall.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$title (View: C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views\
+otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php:9)
 [stacktrace]
-#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
+#0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\
+esources\\views/notification/showall.blade.php(9): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\\\Users\\\\langl\\\\...', 8, Array)
 #1 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\langl\\\\...')
 #2 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\langl\\\\...', Array)
 #3 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\langl\\\\...', Array)
@@ -3882,7 +3903,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
+"}
 [2020-02-27 12:35:52] local.ERROR: Invalid JSON in C:\Users\tetra\Documents\DEV\PHP\openmeet\storage/settings.json {"exception":"[object] (RuntimeException(code: 0): Invalid JSON in C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\storage/settings.json at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\JsonSettingStore.php:58)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\SettingStore.php(198): anlutro\\LaravelSettings\\JsonSettingStore->read()
@@ -3933,7 +3954,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-27 12:36:46] local.ERROR: Invalid JSON in C:\Users\tetra\Documents\DEV\PHP\openmeet\storage/settings.json {"exception":"[object] (RuntimeException(code: 0): Invalid JSON in C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\storage/settings.json at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\JsonSettingStore.php:58)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\SettingStore.php(198): anlutro\\LaravelSettings\\JsonSettingStore->read()
@@ -3984,7 +4005,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-27 12:38:01] local.ERROR: Invalid JSON in C:\Users\tetra\Documents\DEV\PHP\openmeet\storage/settings.json {"exception":"[object] (RuntimeException(code: 0): Invalid JSON in C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\storage/settings.json at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\JsonSettingStore.php:58)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\anlutro\\l4-settings\\src\\SettingStore.php(198): anlutro\\LaravelSettings\\JsonSettingStore->read()
@@ -4035,7 +4056,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-27 12:54:10] local.ERROR: View [auth.login] not found. {"exception":"[object] (InvalidArgumentException(code: 0): View [auth.login] not found. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('auth.login', Array)
@@ -4087,7 +4108,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
+"}
 [2020-02-27 12:54:57] local.ERROR: Command "ui" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"ui\" is not defined. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\symfony\\console\\Application.php:670)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\symfony\\console\\Application.php(236): Symfony\\Component\\Console\\Application->find('ui')
@@ -4096,7 +4117,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #3 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #4 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 {main}
-"} 
+"}
 [2020-02-27 13:00:48] local.ERROR: View [auth.register] not found. {"exception":"[object] (InvalidArgumentException(code: 0): View [auth.register] not found. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('auth.register', Array)
@@ -4148,7 +4169,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
+"}
 [2020-02-27 13:02:38] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'langlois-william_openmeet.USERS' doesn't exist (SQL: select count(*) as aggregate from `USERS` where `user_mail` = florian.leroux3@laposte.net) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'langlois-william_openmeet.USERS' doesn't exist (SQL: select count(*) as aggregate from `USERS` where `user_mail` = florian.leroux3@laposte.net) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
@@ -4286,7 +4307,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #64 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #65 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #66 {main}
-"} 
+"}
 [2020-02-27 13:03:33] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mail' in 'where clause' (SQL: select count(*) as aggregate from `users` where `mail` = florian.leroux3@laposte.net) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mail' in 'where clause' (SQL: select count(*) as aggregate from `users` where `mail` = florian.leroux3@laposte.net) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
@@ -4424,7 +4445,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #64 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #65 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #66 {main}
-"} 
+"}
 [2020-02-27 13:04:35] local.ERROR: include(C:\Users\tetra\Documents\DEV\PHP\openmeet\vendor\composer/../../app/User.php): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\composer/../../app/User.php): failed to open stream: No such file or directory at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\composer\\ClassLoader.php:444)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(C:\\\\User...', 'C:\\\\Users\\\\tetra\\\\...', 444, Array)
@@ -4475,7 +4496,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-27 13:16:56] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'where clause' (SQL: select count(*) as aggregate from `users` where `email` = florian.leroux3@laposte.net) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'where clause' (SQL: select count(*) as aggregate from `users` where `email` = florian.leroux3@laposte.net) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
@@ -4603,7 +4624,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 13:17:33] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'where clause' (SQL: select count(*) as aggregate from `users` where `email` = florian.leroux3@laposte.net) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'where clause' (SQL: select count(*) as aggregate from `users` where `email` = florian.leroux3@laposte.net) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
@@ -4731,7 +4752,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 13:19:47] local.ERROR: Non-static method App\User::create() should not be called statically {"exception":"[object] (ErrorException(code: 0): Non-static method App\\User::create() should not be called statically at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\app\\Http\\Controllers\\Auth\\RegisterController.php:67)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\app\\Http\\Controllers\\Auth\\RegisterController.php(67): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8192, 'Non-static meth...', 'C:\\\\Users\\\\tetra\\\\...', 67, Array)
@@ -4781,7 +4802,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #44 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #45 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #46 {main}
-"} 
+"}
 [2020-02-27 13:20:27] local.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:20:27, 2020-02-27 13:20:27)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:20:27, 2020-02-27 13:20:27)) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
@@ -4913,7 +4934,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #61 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #62 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 {main}
-"} 
+"}
 [2020-02-27 13:21:16] local.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:21:16, 2020-02-27 13:21:16)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:21:16, 2020-02-27 13:21:16)) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
@@ -5045,7 +5066,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #61 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #62 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 {main}
-"} 
+"}
 [2020-02-27 13:42:02] local.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:42:01, 2020-02-27 13:42:01)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1364 Field 'fname' doesn't have a default value (SQL: insert into `users` (`updated_at`, `created_at`) values (2020-02-27 13:42:01, 2020-02-27 13:42:01)) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
@@ -5177,7 +5198,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #61 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #62 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 {main}
-"} 
+"}
 [2020-02-27 13:46:42] local.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'country' doesn't have a default value (SQL: insert into `users` (`fname`, `lname`, `bdate`, `email`, `password`, `updated_at`, `created_at`) values (Florian, Leroux, 2000-04-28, florian.leroux3@laposte.net, $2y$10$rx4PmfgVqlWYMeJF2jQy2OfyqWsPDxa0ZUL9RlJww0uF1bUIXz1Na, 2020-02-27 13:46:42, 2020-02-27 13:46:42)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1364 Field 'country' doesn't have a default value (SQL: insert into `users` (`fname`, `lname`, `bdate`, `email`, `password`, `updated_at`, `created_at`) values (Florian, Leroux, 2000-04-28, florian.leroux3@laposte.net, $2y$10$rx4PmfgVqlWYMeJF2jQy2OfyqWsPDxa0ZUL9RlJww0uF1bUIXz1Na, 2020-02-27 13:46:42, 2020-02-27 13:46:42)) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:669)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(629): Illuminate\\Database\\Connection->runQueryCallback('insert into `us...', Array, Object(Closure))
@@ -5309,12 +5330,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #61 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #62 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 {main}
-"} 
-[2020-02-27 14:24:46] local.ERROR: View [layouts.app] not found. (View: C:\Users\tetra\Documents\DEV\PHP\openmeet\resources\views\auth\passwords\email.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): View [layouts.app] not found. (View: C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\esources\\views\\auth\\passwords\\email.blade.php) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
+"}
+[2020-02-27 14:24:46] local.ERROR: View [layouts.app] not found. (View: C:\Users\tetra\Documents\DEV\PHP\openmeet\resources\views\auth\passwords\email.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): View [layouts.app] not found. (View: C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\
+esources\\views\\auth\\passwords\\email.blade.php) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('layouts.app', Array)
 #1 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Factory.php(131): Illuminate\\View\\FileViewFinder->find('layouts.app')
-#2 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\esources\\views/auth/passwords/email.blade.php(63): Illuminate\\View\\Factory->make('layouts.app', Array)
+#2 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\
+esources\\views/auth/passwords/email.blade.php(63): Illuminate\\View\\Factory->make('layouts.app', Array)
 #3 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\tetra\\\\...')
 #4 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\tetra\\\\...', Array)
 #5 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\tetra\\\\...', Array)
@@ -5417,12 +5440,14 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
-[2020-02-27 14:38:30] local.ERROR: View [layouts.app] not found. (View: C:\Users\tetra\Documents\DEV\PHP\openmeet\resources\views\auth\passwords\email.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): View [layouts.app] not found. (View: C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\esources\\views\\auth\\passwords\\email.blade.php) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
+"}
+[2020-02-27 14:38:30] local.ERROR: View [layouts.app] not found. (View: C:\Users\tetra\Documents\DEV\PHP\openmeet\resources\views\auth\passwords\email.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): View [layouts.app] not found. (View: C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\
+esources\\views\\auth\\passwords\\email.blade.php) at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php:137)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('layouts.app', Array)
 #1 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Factory.php(131): Illuminate\\View\\FileViewFinder->find('layouts.app')
-#2 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\esources\\views/auth/passwords/email.blade.php(63): Illuminate\\View\\Factory->make('layouts.app', Array)
+#2 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\
+esources\\views/auth/passwords/email.blade.php(63): Illuminate\\View\\Factory->make('layouts.app', Array)
 #3 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(43): include('C:\\\\Users\\\\tetra\\\\...')
 #4 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(59): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\Users\\\\tetra\\\\...', Array)
 #5 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\facade\\ignition\\src\\Views\\Engines\\CompilerEngine.php(36): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\Users\\\\tetra\\\\...', Array)
@@ -5525,7 +5550,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #48 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #49 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #50 {main}
-"} 
+"}
 [2020-02-27 15:04:13] local.ERROR: Cannot send message without a sender address {"exception":"[object] (Swift_TransportException(code: 0): Cannot send message without a sender address at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php:195)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mailer.php(71): Swift_Transport_AbstractSmtpTransport->send(Object(Swift_Message), Array)
@@ -5585,7 +5610,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #54 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2020-02-27 15:12:56] local.ERROR: Cannot send message without a sender address {"exception":"[object] (Swift_TransportException(code: 0): Cannot send message without a sender address at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php:195)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mailer.php(71): Swift_Transport_AbstractSmtpTransport->send(Object(Swift_Message), Array)
@@ -5645,7 +5670,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #54 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2020-02-27 15:13:49] local.ERROR: Address in mailbox given [admin@"${APP.NAME}".fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@\"${APP.NAME}\".fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@\"${APP.NA...')
@@ -5710,7 +5735,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 15:14:48] local.ERROR: Address in mailbox given [admin@"${APP.NAME}".fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@\"${APP.NAME}\".fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@\"${APP.NA...')
@@ -5775,7 +5800,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 15:15:47] local.ERROR: Address in mailbox given [admin@"${Setting('openmeet.name'}".fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@\"${Setting('openmeet.name'}\".fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@\"${Settin...')
@@ -5840,7 +5865,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 15:16:31] local.ERROR: Address in mailbox given [admin@"${Setting('openmeet.name')}".fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@\"${Setting('openmeet.name')}\".fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@\"${Settin...')
@@ -5905,7 +5930,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 15:20:16] local.ERROR: Address in mailbox given [admin@"${Setting('openmeet.name')}".fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@\"${Setting('openmeet.name')}\".fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@\"${Settin...')
@@ -5970,7 +5995,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 15:20:24] local.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6033,7 +6058,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #26 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #27 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #28 {main}
-"} 
+"}
 [2020-02-27 16:21:56] production.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6066,7 +6091,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #11 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #12 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #13 {main}
-"} 
+"}
 [2020-02-27 16:42:32] production.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6099,7 +6124,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #11 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #12 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #13 {main}
-"} 
+"}
 [2020-02-27 16:42:57] production.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6132,7 +6157,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #11 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #12 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #13 {main}
-"} 
+"}
 [2020-02-27 16:52:05] production.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6167,7 +6192,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #12 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #13 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #14 {main}
-"} 
+"}
 [2020-02-27 16:52:11] production.ERROR: Target class [setting] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [setting] does not exist. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('setting')
@@ -6202,7 +6227,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #12 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #13 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #14 {main}
-"} 
+"}
 [2020-02-27 16:57:17] production.ERROR: Cannot use object of type stdClass as array {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Cannot use object of type stdClass as array at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php:6)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
@@ -6213,7 +6238,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #5 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #6 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #7 {main}
-"} 
+"}
 [2020-02-27 17:04:23] production.ERROR: Cannot use object of type stdClass as array {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Cannot use object of type stdClass as array at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php:6)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
@@ -6224,7 +6249,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #5 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #6 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #7 {main}
-"} 
+"}
 [2020-02-27 16:15:50] local.ERROR: file_get_contents(../../storage/settings.json): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_get_contents(../../storage/settings.json): failed to open stream: No such file or directory at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\app\\Providers\\AppServiceProvider.php:26)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_get_conten...', 'C:\\\\Users\\\\tetra\\\\...', 26, Array)
@@ -6245,7 +6270,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #15 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #16 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #17 {main}
-"} 
+"}
 [2020-02-27 16:16:05] local.ERROR: Cannot use object of type stdClass as array {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Cannot use object of type stdClass as array at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php:5)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
@@ -6270,7 +6295,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #19 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #20 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #21 {main}
-"} 
+"}
 [2020-02-27 16:17:24] local.ERROR: Undefined variable: domain {"exception":"[object] (ErrorException(code: 0): Undefined variable: domain at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php:16)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php(16): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined varia...', 'C:\\\\Users\\\\tetra\\\\...', 16, Array)
@@ -6296,7 +6321,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #20 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #21 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #22 {main}
-"} 
+"}
 [2020-02-27 16:19:04] local.ERROR: file_get_contents(./storage/settings.json): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_get_contents(./storage/settings.json): failed to open stream: No such file or directory at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\app\\Providers\\AppServiceProvider.php:26)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_get_conten...', 'C:\\\\Users\\\\tetra\\\\...', 26, Array)
@@ -6318,7 +6343,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #16 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #17 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #18 {main}
-"} 
+"}
 [2020-02-27 16:19:49] local.ERROR: Address in mailbox given [admin@.fr] does not comply with RFC 2822, 3.6.2. {"exception":"[object] (Swift_RfcComplianceException(code: 0): Address in mailbox given [admin@.fr] does not comply with RFC 2822, 3.6.2. at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php:355)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mime\\Headers\\MailboxHeader.php(272): Swift_Mime_Headers_MailboxHeader->assertValidAddress('admin@.fr')
@@ -6383,7 +6408,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #59 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #60 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
-"} 
+"}
 [2020-02-27 17:22:52] production.ERROR: Cannot use object of type stdClass as array {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Cannot use object of type stdClass as array at C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\config\\mail.php:7)
 [stacktrace]
 #0 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(72): require()
@@ -6393,7 +6418,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #4 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #5 C:\\Users\\tetra\\Documents\\DEV\\PHP\\openmeet\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #6 {main}
-"} 
+"}
 [2020-02-28 09:55:48] local.ERROR: Declaration of App\Message::delete($messageId) should be compatible with Illuminate\Database\Eloquent\Model::delete() {"userId":2,"exception":"[object] (ErrorException(code: 0): Declaration of App\\Message::delete($messageId) should be compatible with Illuminate\\Database\\Eloquent\\Model::delete() at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Message.php:73)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(444): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Declaration of ...', 'C:\\\\Users\\\\langl\\\\...', 73, Array)
@@ -6444,7 +6469,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #45 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #46 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #47 {main}
-"} 
+"}
 [2020-02-28 09:56:08] local.ERROR: array_unique() expects parameter 1 to be array, object given {"userId":2,"exception":"[object] (ErrorException(code: 0): array_unique() expects parameter 1 to be array, object given at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Message.php:46)
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'array_unique() ...', 'C:\\\\Users\\\\langl\\\\...', 46, Array)
@@ -6493,7 +6518,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #43 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #44 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #45 {main}
-"} 
+"}
 [2020-02-28 10:10:38] local.ERROR: syntax error, unexpected ')' {"userId":2,"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected ')' at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Message.php:49)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile('C:\\\\Users\\\\langl\\\\...')
@@ -6542,7 +6567,7 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #43 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #44 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #45 {main}
-"} 
+"}
 [2020-02-28 10:11:47] local.ERROR: syntax error, unexpected ')' {"userId":2,"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): syntax error, unexpected ')' at C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\app\\Model\\Message.php:50)
 [stacktrace]
 #0 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile('C:\\\\Users\\\\langl\\\\...')
@@ -6591,4 +6616,4 @@ otification\\showall.blade.php) at C:\\Users\\langl\\Desktop\\Cours\\Projets\\Pr
 #43 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #44 C:\\Users\\langl\\Desktop\\Cours\\Projets\\ProjetClient\\OpenMeet\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #45 {main}
-"} 
+"}

@@ -21,6 +21,7 @@ Route::post('/Install', 'HomeController@installPost');
 
 //USER routes
 
+
 //ADMIN GROUP routes
 
 
@@ -48,7 +49,7 @@ Route::get('/Groups/delete', 'GroupController@deleteGroup');
 
 
 //EVENTS routes
-Route::get('/Events/{userId}', 'EventController@showAllEvent');
+Route::get('/Events/{userId}', 'EventController@showAllEvents');
 Route::get('/Events/Add', 'GroupController@addEvent');
 Route::post('/Events/Add', 'GroupController@addEvent');
 Route::post('/Events/edit', 'GroupController@updateEvent');
