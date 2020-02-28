@@ -12,13 +12,13 @@ class EventController extends Controller
 {
        use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function showAllEvent($userId){
-    $events = new Event();
-    $Event=$events->showAllEvents($userId);
+    public function showAllEvents($userId){
+    $event = new Event();
+    $events=$event->showAllEvents($userId);
 
-    return view('Event.showAllEvents',
+    return view('event.listevent',
         [
-            'Evenements'=>$Event
+            'Evenements'=>$events
         ]);
 
 }

@@ -42,7 +42,7 @@ class Group extends Model
 
     }
 
-    public function showAll($userId)
+    public function showAllGroup($userId)
     {
         $groups=DB::table('groups')
             ->select('*')

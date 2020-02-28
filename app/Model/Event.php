@@ -1,9 +1,7 @@
 <?php
 
 namespace App;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
@@ -13,7 +11,7 @@ class Event extends Model
     protected $fillable = [
         'idevent',
         'idgroup',
-        'participants'
+        'participants',
         'name',
         'datefrom',
         'dateto',
@@ -83,13 +81,13 @@ class Event extends Model
                 'description'=>$desc,
             ]);
     }
-
+/*
     public function delete($eventId)
     {
         $query=DB::table('events')
             ->delete($eventId);
     }
-
+*/
     public function DeleteTime($eventID)
     {
         $timer=date("Y-m-d H:i:s");
