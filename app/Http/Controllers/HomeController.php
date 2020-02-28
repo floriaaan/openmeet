@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InstallRequest;
-use anlutro\LaravelSettings\SettingStore as Setting;
+use App\Notification;
 
 class HomeController extends Controller
 {
