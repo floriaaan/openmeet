@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Message;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,7 +15,8 @@ class MessageController extends Controller
     {
         $conv=new Message();
         $personalconversations=$conv->getPersonnalConversationsForUser($userId);
-        $groupconversations=$conv->getGroupConversationsForUser($userId);
+        $group=new Group();
+        $groupconversation=$group->showAllGroup($userId);
 
     }
 }
