@@ -44,7 +44,7 @@
                     <div class="tab-pane fade show" id="nav-manage" role="tabpanel"
                          aria-labelledby="nav-manage-tab">
 
-                        {!! Form::open(['url' => '/Admin/edit']) !!}
+                        {!! Form::open(['url' => '/admin/edit']) !!}
                         <div class="form-group">
                             {!! Form::label('uName', 'Nom du site', ['class' =>'control-label']) !!}
                             {!! Form::text('uName', $value = Setting('openmeet.name'), ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}

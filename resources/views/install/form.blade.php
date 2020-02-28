@@ -8,7 +8,7 @@
     <div class="max-height wall-white">
         <div class="container-fluid">
             <div class="mx-auto w-50">
-                {!! Form::open(['url' => '/Install']) !!}
+                {!! Form::open(['url' => '/install']) !!}
                 <h1 class="openmeet-title text-center openmeet-color openmeet-install">OpenMeet</h1>
                 <div class="form-group">
                     {!! Form::label('iName', 'Nom du site', ['class' =>'control-label']) !!}

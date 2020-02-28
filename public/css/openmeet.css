@@ -32,6 +32,24 @@
     right: -1px;
 }
 
+.openmeet-search {
+    float: right;
+    width: 32px;
+    height: 32px;
+}
+
+.openmeet-search:hover {
+    width: 100%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+
+
+.openmeet-search:focus{
+    width: 100%;
+}
+
 @media (max-width: 700px) {
     .openmeet-install {
         font-size: 4em;

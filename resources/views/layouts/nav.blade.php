@@ -2,7 +2,7 @@
 
 @section('body')
 
-    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
+    <div class="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
@@ -16,7 +16,7 @@
 
         <div class="collapse navbar-collapse flex-row-reverse" id="navToggle">
 
-            <div class="dropleft">
+            <div class="dropleft ml-1">
                 @if (auth()->check())
                     @if(auth()->user()->picname != null)
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -55,7 +55,7 @@
                 @else
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        Connexion / Inscription
+                        <i class="fas fa-lg fa-user-circle"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <a class="dropdown-item" href="/login">Connexion</a>
@@ -64,7 +64,7 @@
                 @endif
             </div>
 
-            <div class="dropleft">
+            <div class="dropleft ml-1">
                 @if(!empty($notifications))
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
@@ -121,7 +121,7 @@
                         @endforeach
                         <div class="card-footer">
 
-                            <a href="{{ url('/Notifications/') .'/' .auth()->user()->id }}"
+                            <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
                                class="btn btn-primary btn-icon-split w-100">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-arrow-right"></i>
@@ -129,17 +129,54 @@
                                 <span class="text ml-2">Tout voir</span>
                             </a>
                         </div>
-                        @else
-                            <a class="nav-link" href="#" id="navDrop" role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-bell fa-lg"></i>
-                            </a>
-                        @endif
                     </div>
+                @else
+                    <a class="nav-link" href="#" id="navDrop" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-bell fa-lg"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="card-body">
+                            <p class="lead mx-auto">Aucune notification.</p>
+
+                        </div>
+
+                    </div>
+
+                @endif
             </div>
+
+            <div class="dropleft ml-1">
+                <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-plus"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navDrop">
+                    <a class="dropdown-item" href="/groups/create">Créer un groupe</a>
+                    <a class="dropdown-item" href="/evenements/create">Créer un évenement</a>
+                </div>
+            </div>
+
+            <form method="POST" action="{{url('/search')}}">
+                @csrf
+                <input type="text" name="search" id="search" required class="form-control openmeet-search">
+
+
+            </form>
         </div>
-    </nav>
+    </div>
     @yield('content')
 
+@endsection
+
+@section('js')
+    <script>
+
+        if($('#search').val() !== '') {
+            $('#search').width("100%");
+        }
+
+    </script>
 @endsection

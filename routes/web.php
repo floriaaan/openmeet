@@ -14,7 +14,7 @@ Auth::routes();
 
 //HOME Routes
 Route::get('/', 'HomeController@index');
-Route::post('/Install', 'HomeController@installPost');
+Route::post('/install', 'HomeController@installPost');
 
 //SUBSCRIPTIONS routes
 
@@ -26,15 +26,15 @@ Route::post('/Install', 'HomeController@installPost');
 
 
 //ADMIN Routes
-Route::get('/Admin', 'AdminController@index');
-Route::post('/Admin/edit', 'AdminController@edit');
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin/edit', 'AdminController@edit');
 
 
 //NOTIFICATION Routes
-Route::get('/Notifications/{userId}', 'NotificationController@showAll');
+Route::get('/notifications/{userId}', 'NotificationController@showAll');
 
 //MESSAGE routes
-Route::get('/Messages/{userId}','MessageController@showUserConversations');
+Route::get('/messages/{userId}','MessageController@showUserConversations');
 
 
 //SIGNALEMENT routes
