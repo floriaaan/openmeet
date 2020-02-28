@@ -69,6 +69,7 @@
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-lg fa-bell"></i>
+                        <span class="badge badge-pill badge-danger openmeet-badge">{{count($notifications)}}</span>
                     </a>
                     <div class="dropdown-menu" style="padding: 0" aria-labelledby="navDrop">
                         <div class="card-header">

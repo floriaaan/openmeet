@@ -26,6 +26,12 @@
     margin: initial;
 }
 
+.openmeet-badge {
+    position: absolute;
+    top: 1px;
+    right: -1px;
+}
+
 @media (max-width: 700px) {
     .openmeet-install {
         font-size: 4em;
