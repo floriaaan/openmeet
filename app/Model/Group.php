@@ -35,26 +35,14 @@ class Group extends Model
 
     public function getOne($groupId)
     {
-        $events  = DB::table('groups')
+        $query  = DB::table('groups')
             ->select('*')
             ->where('id','=',$groupId)
             ->get();
+        $queryresult=$query;
 
-    }
+        return $queryresult;
 
-    public function showAllGroup($userId)
-    {
-        $groups=DB::table('groups')
-            ->select('*')
-            ->where('id_user',"=",$userId)
-            ->get();
-        $groupsArray=$groups;
-        $listgroups=[];
-        foreach ($groupsArray as $groupSQL)
-        {
-            $listgroups[]=$groupSQL;
-        }
-        return $listgroups;
     }
 
     public function updateAdmin ($groupId,$newAdmin)
