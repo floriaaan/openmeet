@@ -2,7 +2,7 @@
 
 @section('body')
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+    <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
@@ -19,14 +19,14 @@
             <div class="dropleft">
                 @if (auth()->check())
                     @if(auth()->user()->picname != null)
-                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                        <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <img src="./{{ auth()->user()->picrepo }}/{{ auth()->user()->picname }}">
                         </a>
                     @else
-                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                        <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-lg fa-user-circle"></i>
                         </a>
 
                     @endif
@@ -53,7 +53,7 @@
 
                     </div>
                 @else
-                    <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                    <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Connexion / Inscription
                     </a>
@@ -64,36 +64,78 @@
                 @endif
             </div>
 
-            <div class="dropdown" style="padding-right: 5em;">
+            <div class="dropleft">
                 @if(!empty($notifications))
-                <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navDrop">
+                    <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-lg fa-bell"></i>
+                    </a>
+                    <div class="dropdown-menu" style="padding: 0" aria-labelledby="navDrop">
+                        <div class="card-header">
+                            Notifications
+                        </div>
                         @foreach($notifications as $notif)
                             @if($notif->type=='mes')
-                                <a class="dropdown-item"  href="#">
-                                    <p style="font-weight: bold">{{$notif->title}}</p>
-                                    <p>{{$notif->content}}</p>
-                                    <span style="color: gray;text-decoration: underline;font-size: small">{{$notif->date}}</span>
+                                <a class="dropdown-item" href="#">
+                                    <h6 class="dropdown-header mb-1 font-weight-bold">
+                                        <i class="fas fa-envelope text-primary"></i> {{$notif->title}}</h6>
+                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                    <hr class="my-4">
+                                    <footer class="blockquote-footer">
+                                        <small class="text-muted">
+                                            reçu à {{strftime("%R",strtotime($notif->date))}},
+                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                        </small>
+                                    </footer>
+                                </a>
+
+                            @elseif($notif->type=='sub')
+                                <a class="dropdown-item" href="#">
+                                    <h6 class="dropdown-header mb-1 font-weight-bold">
+                                        <i class="fas fa-users text-primary"></i> {{$notif->title}}</h6>
+                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                    <hr class="my-4">
+                                    <footer class="blockquote-footer">
+                                        <small class="text-muted">
+                                            créé à {{strftime("%R",strtotime($notif->date))}},
+                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                        </small>
+                                    </footer>
+                                </a>
+                            @elseif($notif->type=='eve')
+                                <a class="dropdown-item" href="#">
+                                    <h6 class="dropdown-header mb-1 font-weight-bold">
+                                        <i class="fas fa-handshake text-primary"></i> {{$notif->title}}</h6>
+                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                    <hr class="my-4">
+                                    <footer class="blockquote-footer">
+                                        <small class="text-muted">
+                                            créé à {{strftime("%R",strtotime($notif->date))}},
+                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                        </small>
+                                    </footer>
                                 </a>
                             @endif
-                            @if($notif->type=='sub')
-                                    <a class="dropdown-item"  href="#">
-                                        <p style="font-weight: bold">{{$notif->title}}</p>
-                                        <p>{{$notif->content}}</p>
-                                        <span style="color: gray;text-decoration: underline;font-size: small">{{$notif->date}}</span>
-                                    </a>
-                            @endif
+                            <div class="dropdown-divider"></div>
                         @endforeach
-                    @else
-                            <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-bell"></i>
+                        <div class="card-footer">
+
+                            <a href="{{ url('/Notifications/') .'/' .auth()->user()->id }}"
+                               class="btn btn-primary btn-icon-split w-100">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text ml-2">Tout voir</span>
                             </a>
-                    @endif
-                </div>
+                        </div>
+                        @else
+                            <a class="nav-link" href="#" id="navDrop" role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-bell fa-lg"></i>
+                            </a>
+                        @endif
+                    </div>
             </div>
         </div>
     </nav>
