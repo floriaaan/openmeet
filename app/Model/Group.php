@@ -11,7 +11,6 @@ class Group extends Model
 
     protected $fillable = [
         'id',
-        'user',
         'name',
         'admin',
         'picrepo',
@@ -20,12 +19,11 @@ class Group extends Model
     ];
 
 
-    public function create($name,$userId,$admin,$picrepo,$picname)
+    public function AddGroup($name,$admin,$picrepo,$picname)
     {
         $group=DB::table('groups')
         ->insert([
             'name'=>$name,
-            'id_user'=>$userId,
             'admin'=>$admin,
             'picrepo'=>$picrepo,
             'picname'=>$picname,
