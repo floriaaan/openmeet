@@ -19,6 +19,10 @@ class CreateEventsTable extends Migration
             $table->foreign('id_group')
                 ->references('id')
                 ->on('groups');
+            $table->bigInteger('participant')->unsigned();
+            $table->foreign('participant')
+                ->references('id')
+                ->on('users');
             $table->string('name',64);
             $table->dateTime('datefrom');
             $table->dateTime('dateto');

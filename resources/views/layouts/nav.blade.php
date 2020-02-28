@@ -66,9 +66,11 @@
 
             <div class="dropdown" style="padding-right: 5em;">
                 @if(!empty($notifications))
+
                 <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell"></i>
+                    {{count($notifications)}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navDrop">
                         @foreach($notifications as $notif)
