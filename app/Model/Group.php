@@ -33,12 +33,13 @@ class Group extends Model
         ]);
     }
 
-    public function show()
+    public function getOne($groupId)
     {
         $events  = DB::table('groups')
             ->select('*')
-            ->where('id_user')
+            ->where('id','=',$groupId)
             ->get();
+
     }
 
     public function showAll($userId)
@@ -56,10 +57,14 @@ class Group extends Model
         return $listgroups;
     }
 
-    public function edit ($groupsId)
+    public function updateAdmin ($groupId,$newAdmin)
     {
         $query=DB::table('groups')
-            ->update($groupsId);
+            ->where('id','=',$groupId)
+            ->update([
+                'admin'=>$newAdmin
+            ]);
+
     }
 
     public function delete()
@@ -68,11 +73,5 @@ class Group extends Model
             ->delete();
     }
 
-/*
-    public function transfert($groupsId)
-    {
-        $query=DB::table('groups')
-            ->
-    }
-*/
+
 }

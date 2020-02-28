@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class User
@@ -45,5 +46,17 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getOne($userId)
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->find($userId)
+            ->get();
+        $infoUser=$query;
+
+        return $infoUser;
+
     }
 }

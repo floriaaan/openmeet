@@ -2,7 +2,6 @@
 
 namespace App;
 use Carbon\Carbon;
-use Faker\Provider\DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +28,7 @@ class Event extends Model
 
     public function create($groupId,$name,$datefrom,$dateto,$country,$zip,$city,$numstreet,$street,$desc)
     {
-        $query=DB::table('EVENTS')
+        $query=DB::table('events')
             ->insert([
                 'id_group'=>$groupId,
                 'name'=>$name,
@@ -44,21 +43,21 @@ class Event extends Model
             ]);
     }
 
-    public function show()
+    public function showOne($eventId)
     {
-        $events  = DB::table('events')
+        $event = DB::table('events')
             ->select('*')
-            ->where('id_group')
+            ->where('id','=',$eventId)
             ->get();
     }
 
-    public function showall($groupId)
+    public function showAllEvents($groupId)
     {
-            $event=DB::table('events')
+            $events=DB::table('events')
                 ->select('*')
                 ->where('id_group',"=",$groupId)
                 ->get();
-            $eventsArray=$event;
+            $eventsArray=$events;
             $listevent=[];
             foreach ($eventsArray as $eventSQL)
             {
@@ -67,23 +66,34 @@ class Event extends Model
             return $listevent;
     }
 
-    public function edit($groupId)
+    public function updateEvent($groupId,$name,$datefrom,$dateto,$country,$zip,$city,$numstreet,$street,$desc)
     {
-        $events= DB::table('events')
-            ->update($groupId);
+        $query= DB::table('events')
+            ->where('id_group','=',$groupId)
+            ->update([
+                'name'=>$name,
+                'datefrom'=>$datefrom,
+                'dateto'=>$dateto,
+                'country'=>$country,
+                'zip'=>$zip,
+                'city'=>$city,
+                'numstreet'=>$numstreet,
+                'street'=>$street,
+                'description'=>$desc,
+            ]);
     }
 
-    public function delete($groupId)
+    public function delete($eventId)
     {
         $query=DB::table('events')
-            ->delete($groupId);
+            ->delete($eventId);
     }
 
     public function DeleteTime($eventID)
     {
-        $timer = DateTime::dateTime(now());
-        $events =DB::table('events')
-            ->where('dateto', '=', value($timer))
+        $timer=date("Y-m-d H:i:s");
+        $query =DB::table('events')
+            ->where('dateto', '=', $timer)
             ->delete($eventID);
     }
 

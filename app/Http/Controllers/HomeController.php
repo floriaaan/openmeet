@@ -7,6 +7,21 @@ use anlutro\LaravelSettings\SettingStore as Setting;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index()
     {
         //IF !INSTALL
@@ -46,6 +61,12 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('home');
+        $userId=auth()->user()->id;
+        $notif = new Notification();
+        $notifications=$notif->getAllForUser($userId);
+
+        return view('home',[
+            'notifications'=>$notifications
+        ]);
     }
 }

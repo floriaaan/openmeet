@@ -15,7 +15,6 @@
         </button>
 
         <div class="collapse navbar-collapse flex-row-reverse" id="navToggle">
-
             <div class="dropleft">
                 @if (auth()->check())
                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -24,7 +23,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{{url('#')}}">Autre action</a>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             Déconnexion
@@ -34,6 +33,7 @@
                             {{ csrf_field() }}
                         </form>
                     </div>
+
                 @else
                     <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
@@ -46,6 +46,37 @@
                 @endif
             </div>
 
+            <div class="dropdown" style="padding-right: 5em;">
+                @if(!empty($notifications))
+                <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navDrop">
+                        @foreach($notifications as $notif)
+                            @if($notif->type=='mes')
+                                <a class="dropdown-item"  href="#">
+                                    <p style="font-weight: bold">{{$notif->title}}</p>
+                                    <p>{{$notif->content}}</p>
+                                    <span style="color: gray;text-decoration: underline;font-size: small">{{$notif->date}}</span>
+                                </a>
+                            @endif
+                            @if($notif->type=='sub')
+                                    <a class="dropdown-item"  href="#">
+                                        <p style="font-weight: bold">{{$notif->title}}</p>
+                                        <p>{{$notif->content}}</p>
+                                        <span style="color: gray;text-decoration: underline;font-size: small">{{$notif->date}}</span>
+                                    </a>
+                            @endif
+                        @endforeach
+                    @else
+                            <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-bell"></i>
+                            </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
     @yield('content')
