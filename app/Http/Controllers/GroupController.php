@@ -29,12 +29,12 @@ class GroupController extends Controller
     }
 
     public function showAllGroup($userId){
-        $groups = new Group();
-        $group=$groups->showAll($userId);
+        $group = new Group();
+        $groups=$group->showAllGroup($userId);
 
-        return view('Group.showAllGroup',
+        return view('group.listgroup',
             [
-                'Group'=>$group
+                'Groups'=>$groups
             ]);
 
     }
