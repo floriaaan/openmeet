@@ -37,23 +37,68 @@ class Message extends Model
 
     public function getPersonnalConversationsForUser($userId)
     {
-        $query=DB::table('messages')
-            ->select('*')
-            ->where('receiver','=',$userId)
-            ->orWhere('sender','=',$userId)
+        $queryConv=DB::table('messages')
+            ->select('sender','receiver')->distinct()
+            ->where('receiver','=',$userId)->where('forgroup','=',0)
+            ->orWhere('sender','=',$userId)->where('forgroup','=',0)
             ->get();
-        $QueryUniqueless=$query;
-        $QueryUnique=array_unique($QueryUniqueless);
-
-        var_dump($QueryUniqueless);
-        var_dump($QueryUnique);
+        $queryConvArray=$queryConv;
+            var_dump($queryConvArray);
+            $convArray=[];
+            foreach ($queryConvArray as $messageSQL)
+            {
+                if(($messageSQL->sender)==$userId)
+                {
+                    $convArray[]=$messageSQL->receiver;
+                }
+                if(($messageSQL->receiver)==$userId)
+                {
+                    $convArray[]=$messageSQL->sender;
+                }
+            }
+            $conversations=[];
+            $conversations=array_unique($convArray);
+            var_dump($conversations);
         die;
     }
 
-    public function getGroupConversationsForUser($userId)
+    public function getLastMessageForPersonalConv($userId_1,$userId_2)
     {
+        $query=DB::table('messages')
+            ->select('*')
 
+            ->where('sender','=',$userId_1)
+                ->where('receiver','=',$userId_2)
+                ->where('forgroup','=',0)
+
+            ->orWhere('sender','=',$userId_2)
+                ->where('receiver','=',$userId_1)
+                ->where('forgroup','=',0)
+
+            ->orderBy('date','desc')
+            ->limit(1)
+            ->get();
+        $queryResult=$query;
+        var_dump($queryResult);
+        die;
     }
+
+    public function getLastMessageForGroupConv($groupId)
+    {
+        $query=DB::table('messages')
+            ->select('*')
+
+            ->where('receiver','=',$groupId)
+                ->where('forgroup','=',1)
+
+            ->orderBy('date','desc')
+            ->limit(1)
+            ->get();
+        $queryResult=$query;
+        var_dump($queryResult);
+        die;
+    }
+
 
     public function GetMessagesForConversation($userId_1,$userId_2)
     {
@@ -70,7 +115,7 @@ class Message extends Model
             ]);
     }
 
-    public function delete($messageId)
+    public function remove($messageId)
     {
         $query=DB::table('messages')
             ->delete($messageId);

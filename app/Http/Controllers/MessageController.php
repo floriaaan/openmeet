@@ -10,9 +10,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class MessageController extends Controller
 {
-    public function ShowUserConversations($userId)
+    public function showUserConversations($userId)
     {
         $conv=new Message();
-        $conversations=$conv->GetPe
+        $personalconversations=$conv->getPersonnalConversationsForUser($userId);
+        $groupconversations=$conv->getGroupConversationsForUser($userId);
+
     }
 }

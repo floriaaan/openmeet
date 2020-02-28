@@ -33,6 +33,7 @@ Route::post('/Admin/edit', 'AdminController@edit');
 Route::get('/Notifications/{userId}', 'NotificationController@showAll');
 
 //MESSAGE routes
+Route::get('/Messages/{userId}','MessageController@showUserConversations');
 
 
 //SIGNALEMENT routes
