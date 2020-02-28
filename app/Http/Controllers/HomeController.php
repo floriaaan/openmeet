@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userId=auth()->user()->id;
+        $notif = new Notification();
+        $notifications=$notif->getAllForUser($userId);
+
+        return view('home',[
+            'notifications'=>$notifications
+        ]);
     }
 }

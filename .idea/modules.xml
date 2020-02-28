@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/openmeet.iml" filepath="$PROJECT_DIR$/.idea/openmeet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/OpenMeet.iml" filepath="$PROJECT_DIR$/.idea/OpenMeet.iml" />
     </modules>
   </component>
 </project>

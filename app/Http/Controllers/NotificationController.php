@@ -15,7 +15,6 @@ class NotificationController extends Controller
     }
 
     public function showAll($userId){
-        self::DeleteUselessNotification();
         $notif = new Notification();
         $notifications=$notif->getAllForUser($userId);
 
