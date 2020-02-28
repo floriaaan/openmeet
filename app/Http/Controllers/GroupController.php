@@ -18,9 +18,15 @@ class GroupController extends Controller
         //
     }
 
-    public function Addgroup()
+    public function AddGroup($userId)
     {
-        //
+        $group = new Group();
+        $groups=$group->AddGroup($userId);
+        return view('group.creategroup',
+            [
+                'Groups'=>$groups
+            ]);
+
     }
 
     public function Deletegroup()

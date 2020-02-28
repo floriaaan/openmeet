@@ -11,7 +11,6 @@ class Group extends Model
 
     protected $fillable = [
         'id',
-        'user',
         'name',
         'admin',
         'picrepo',
@@ -20,12 +19,11 @@ class Group extends Model
     ];
 
 
-    public function create($name,$userId,$admin,$picrepo,$picname)
+    public function AddGroup($name,$admin,$picrepo,$picname)
     {
         $group=DB::table('groups')
         ->insert([
             'name'=>$name,
-            'id_user'=>$userId,
             'admin'=>$admin,
             'picrepo'=>$picrepo,
             'picname'=>$picname,
@@ -35,26 +33,14 @@ class Group extends Model
 
     public function getOne($groupId)
     {
-        $events  = DB::table('groups')
+        $query  = DB::table('groups')
             ->select('*')
             ->where('id','=',$groupId)
             ->get();
+        $queryresult=$query;
 
-    }
+        return $queryresult;
 
-    public function showAllGroup($userId)
-    {
-        $groups=DB::table('groups')
-            ->select('*')
-            ->where('id_user',"=",$userId)
-            ->get();
-        $groupsArray=$groups;
-        $listgroups=[];
-        foreach ($groupsArray as $groupSQL)
-        {
-            $listgroups[]=$groupSQL;
-        }
-        return $listgroups;
     }
 
     public function updateAdmin ($groupId,$newAdmin)

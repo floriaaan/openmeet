@@ -43,7 +43,7 @@ class Message extends Model
             ->orWhere('sender','=',$userId)->where('forgroup','=',0)
             ->get();
         $queryConvArray=$queryConv;
-            var_dump($queryConvArray);
+
             $convArray=[];
             foreach ($queryConvArray as $messageSQL)
             {
@@ -58,8 +58,7 @@ class Message extends Model
             }
             $conversations=[];
             $conversations=array_unique($convArray);
-            var_dump($conversations);
-        die;
+            return $conversations;
     }
 
     public function getLastMessageForPersonalConv($userId_1,$userId_2)
