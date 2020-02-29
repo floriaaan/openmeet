@@ -2,7 +2,7 @@
 
 @section('body')
 
-    <div class="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
+    <div class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="z-index: 500">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
@@ -48,7 +48,7 @@
                         @if(auth()->user()->isadmin)
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
-                            <a class="dropdown-item" href="/Admin">Panneau d'administration</a>
+                            <a class="dropdown-item" href="/admin">Panneau d'administration</a>
                         @endif
 
                     </div>
@@ -64,88 +64,90 @@
                 @endif
             </div>
 
-            <div class="dropleft ml-1">
-                @if(!empty($notifications))
-                    <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-lg fa-bell"></i>
-                        <span class="badge badge-pill badge-danger openmeet-badge">{{count($notifications)}}</span>
-                    </a>
-                    <div class="dropdown-menu" style="padding: 0" aria-labelledby="navDrop">
-                        <div class="card-header">
-                            Notifications
-                        </div>
-                        @foreach($notifications as $notif)
-                            @if($notif->type=='mes')
-                                <a class="dropdown-item" href="#">
-                                    <h6 class="dropdown-header mb-1 font-weight-bold">
-                                        <i class="fas fa-envelope text-primary"></i> {{$notif->title}}</h6>
-                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
-                                    <hr class="my-4">
-                                    <footer class="blockquote-footer">
-                                        <small class="text-muted">
-                                            reçu à {{strftime("%R",strtotime($notif->date))}},
-                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
-                                        </small>
-                                    </footer>
-                                </a>
+            @if(auth()->check())
+                <div class="dropleft ml-1">
+                    @if(!empty($notifications))
+                        <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-lg fa-bell"></i>
+                            <span class="badge badge-pill badge-danger openmeet-badge">{{count($notifications)}}</span>
+                        </a>
+                        <div class="dropdown-menu" style="padding: 0" aria-labelledby="navDrop">
+                            <div class="card-header">
+                                Notifications
+                            </div>
+                            @foreach($notifications as $notif)
+                                @if($notif->type=='mes')
+                                    <a class="dropdown-item" href="#">
+                                        <h6 class="dropdown-header mb-1 font-weight-bold">
+                                            <i class="fas fa-envelope text-primary"></i> {{$notif->title}}</h6>
+                                        <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                        <hr class="my-4">
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">
+                                                reçu à {{strftime("%R",strtotime($notif->date))}},
+                                                le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                            </small>
+                                        </footer>
+                                    </a>
 
-                            @elseif($notif->type=='sub')
-                                <a class="dropdown-item" href="#">
-                                    <h6 class="dropdown-header mb-1 font-weight-bold">
-                                        <i class="fas fa-users text-primary"></i> {{$notif->title}}</h6>
-                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
-                                    <hr class="my-4">
-                                    <footer class="blockquote-footer">
-                                        <small class="text-muted">
-                                            créé à {{strftime("%R",strtotime($notif->date))}},
-                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
-                                        </small>
-                                    </footer>
-                                </a>
-                            @elseif($notif->type=='eve')
-                                <a class="dropdown-item" href="#">
-                                    <h6 class="dropdown-header mb-1 font-weight-bold">
-                                        <i class="fas fa-handshake text-primary"></i> {{$notif->title}}</h6>
-                                    <p class="text-muted font-weight-light">{{$notif->content}}</p>
-                                    <hr class="my-4">
-                                    <footer class="blockquote-footer">
-                                        <small class="text-muted">
-                                            créé à {{strftime("%R",strtotime($notif->date))}},
-                                            le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
-                                        </small>
-                                    </footer>
-                                </a>
-                            @endif
-                            <div class="dropdown-divider"></div>
-                        @endforeach
-                        <div class="card-footer">
+                                @elseif($notif->type=='sub')
+                                    <a class="dropdown-item" href="#">
+                                        <h6 class="dropdown-header mb-1 font-weight-bold">
+                                            <i class="fas fa-users text-primary"></i> {{$notif->title}}</h6>
+                                        <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                        <hr class="my-4">
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">
+                                                créé à {{strftime("%R",strtotime($notif->date))}},
+                                                le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                            </small>
+                                        </footer>
+                                    </a>
+                                @elseif($notif->type=='eve')
+                                    <a class="dropdown-item" href="#">
+                                        <h6 class="dropdown-header mb-1 font-weight-bold">
+                                            <i class="fas fa-handshake text-primary"></i> {{$notif->title}}</h6>
+                                        <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                        <hr class="my-4">
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">
+                                                créé à {{strftime("%R",strtotime($notif->date))}},
+                                                le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                            </small>
+                                        </footer>
+                                    </a>
+                                @endif
+                                <div class="dropdown-divider"></div>
+                            @endforeach
+                            <div class="card-footer">
 
-                            <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
-                               class="btn btn-primary btn-icon-split w-100">
+                                <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
+                                   class="btn btn-primary btn-icon-split w-100">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-arrow-right"></i>
                                 </span>
-                                <span class="text ml-2">Tout voir</span>
-                            </a>
+                                    <span class="text ml-2">Tout voir</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <a class="nav-link" href="#" id="navDrop" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-bell fa-lg"></i>
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="card-body">
-                            <p class="lead mx-auto">Aucune notification.</p>
+                    @else
+                        <a class="nav-link" href="#" id="navDrop" role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-bell fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="card-body">
+                                <p class="lead mx-auto">Aucune notification.</p>
+
+                            </div>
 
                         </div>
 
-                    </div>
-
-                @endif
-            </div>
+                    @endif
+                </div>
+            @endif
 
             <div class="dropleft ml-1">
                 <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -167,6 +169,15 @@
             </form>
         </div>
     </div>
+
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            {{Session::get('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     @yield('content')
 
 @endsection
@@ -174,7 +185,7 @@
 @section('js')
     <script>
 
-        if($('#search').val() !== '') {
+        if ($('#search').val() !== '') {
             $('#search').width("100%");
         }
 

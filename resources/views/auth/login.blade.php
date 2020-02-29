@@ -1,73 +1,116 @@
 @extends('layouts.index')
 
 @section('body')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Connexion') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="max-height wall-white  text-center">
+        <form method="POST" action="{{ route('login') }}" class="form-signin">
+            @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
+            <img class="mb-4" src="/assets/logo.svg" alt="" width="72"
+                 height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            <label for="email" class="sr-only">{{ __('Adresse e-mail') }}</label>
+            <input type="email" id="email" name="email"
+                   class="form-control @error('email') is-invalid @enderror"
+                   placeholder="{{ __('Adresse e-mail') }}" value="{{ old('email') }}" required
+                   autofocus autocomplete="email">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
+
+            <label for="password" class="sr-only">{{ __('Mot de passe') }}</label>
+            <input type="password" id="password" name="password"
+                   class="form-control @error('email') is-invalid @enderror"
+                   placeholder="{{ __('Mot de passe') }}" required value="{{ old('password') }}">
+
+            @error('email')
+            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
+            @enderror
+            @error('password')
+            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-                        </div>
+            @enderror
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <div class="form-check my-3">
+                <input class="form-check-input" type="checkbox" name="remember"
+                       id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Se souvenir de moi') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Connexion') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('J\'ai oublié mon mot de passe') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <label class="form-check-label" for="remember">
+                    {{ __('Se souvenir de moi') }}
+                </label>
             </div>
-        </div>
+
+            <button type="submit" class="btn btn-primary">
+                {{ __('Connexion') }}
+            </button>
+            <div class="mt-3">
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        {{ __('J\'ai oublié mon mot de passe') }}
+                    </a>
+                @endif
+                @if (Route::has('register'))
+                    <a class="btn btn-link" href="{{ route('register') }}">
+                        {{ __('S\'inscrire') }}
+                    </a>
+                @endif
+            </div>
+
+            <p class="mt-5 mb-3 text-muted">&copy; OpenMeet - 2020</p>
+
+        </form>
     </div>
-</div>
+@endsection
+
+
+@section('css')
+
+    <style>
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
 @endsection

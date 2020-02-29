@@ -7,15 +7,7 @@ use App\Notification;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -61,12 +53,15 @@ class HomeController extends Controller
 
     public function home()
     {
-        $userId=auth()->user()->id;
-        $notif = new Notification();
-        $notifications=$notif->getAllForUser($userId);
-
+        /*$notifications = [];
+        if(auth()->check()) {
+            $userId=auth()->user()->id;
+            $notif = new Notification();
+            $notifications=$notif->getAllForUser($userId);
+        }
         return view('home',[
             'notifications'=>$notifications
-        ]);
+        ]);*/
+        return view('home');
     }
 }

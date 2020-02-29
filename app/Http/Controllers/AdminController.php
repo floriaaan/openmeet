@@ -6,33 +6,29 @@ use App\Http\Requests\AdminEditRequest;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+
+
     public function index()
     {
-        if (self::roleNeed()) {
-            return view('admin.panel');
-        }
-        return redirect('/login');
+        return view('admin.panel');
+
 
     }
 
     public function edit(AdminEditRequest $request)
     {
-        if(self::roleNeed()) {
-            $post = $request->input();
 
-            Setting(['openmeet.name' => $post['uName']]);
-            Setting(['openmeet.color' => $post['uColor']]);
+        $post = $request->input();
 
-            return redirect('/admin');
-        }
-        return redirect('/');
+        Setting(['openmeet.name' => $post['uName']]);
+        Setting(['openmeet.color' => $post['uColor']]);
+
     }
 
-    public static function roleNeed()
-    {
-        if (auth()->user() == null || !auth()->check() || !auth()->user()->isadmin) {
-            return false;
-        }
-        return true;
-    }
 }

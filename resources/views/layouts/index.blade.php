@@ -13,9 +13,10 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link href="/css/openmeet.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
-    <style>@yield('css')</style>
+
 </head>
 <body>
+@yield('css')
 @yield('body')
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
