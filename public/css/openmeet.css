@@ -17,8 +17,9 @@
 .wall-white {
     background: url("/assets/wall-white-30.svg") fixed no-repeat;
     background-size: cover;
-
-
+}
+.footer {
+    z-index: 5000;
 }
 
 .max-height {
@@ -48,6 +49,8 @@
 
 .openmeet-search:focus{
     width: 100%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
 @media (max-width: 700px) {

@@ -2,7 +2,8 @@
 
 @section('body')
 
-    <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top d-flex justify-content-between" style="z-index: 500">
+    <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top d-flex justify-content-between"
+         style="z-index: 500">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
@@ -125,7 +126,7 @@
                                 <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
                                    class="btn btn-primary btn-icon-split w-100">
                                 <span class="icon text-white-50">
-                                    <i class="fas fa-arrow-right"></i>
+                                    <i class="fas  fa-arrow-right"></i>
                                 </span>
                                     <span class="text ml-2">Tout voir</span>
                                 </a>
@@ -152,7 +153,7 @@
             <div class="dropleft ml-1">
                 <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-lg fa-plus"></i>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navDrop">
@@ -161,7 +162,11 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{url('/search')}}">
+            <button class="ml-1 btn-link border-0" onclick="displayForm()" style="background-color: initial;">
+                <i class="fas fa-lg fa-search"></i>
+            </button>
+
+            <form method="POST" action="{{url('/search')}}" class="d-none" id="searchForm">
                 @csrf
                 <input type="text" name="search" id="search" required class="form-control openmeet-search">
 
@@ -180,13 +185,24 @@
     @endif
     @yield('content')
 
+
+    <footer class="footer navbar-custom mt-auto py-3 fixed-bottom">
+        <div class="container">
+            <span class="text-muted">&copy; OpenMeet - 2020</span>
+        </div>
+    </footer>
 @endsection
 
 @section('js')
     <script>
 
-        if ($('#search').val() !== '') {
-            $('#search').width("100%");
+        function displayForm() {
+            if ($('#searchForm').hasClass('d-none')) {
+                $('#searchForm').removeClass('d-none');
+                $('#search').focus();
+            } else {
+                $('#searchForm').addClass('d-none');
+            }
         }
 
     </script>

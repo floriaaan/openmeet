@@ -3,7 +3,7 @@
 @section('content')
 
     <header class="masthead text-center text-white">
-        <div class="masthead-content">
+        <div class="masthead-content my-auto">
             <div class="container">
                 <h1 class="masthead-heading mb-0">Trouvez le Meet pour vous</h1>
                 <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
@@ -20,6 +20,7 @@
         <div class="bg-circle-3 bg-circle"></div>
         <div class="bg-circle-4 bg-circle"></div>
     </header>
+
 @endsection
 
 @section('css')
@@ -111,10 +112,10 @@
 
 
         @media (min-width: 992px) {
-            header.masthead {
+            /*header.masthead {
                 padding-top: calc(7rem + 55px);
                 padding-bottom: 4rem;
-            }
+            }*/
             header.masthead .masthead-content .masthead-heading {
                 font-size: 5rem;
             }

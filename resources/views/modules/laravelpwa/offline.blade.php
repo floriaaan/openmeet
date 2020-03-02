@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.index')
 
-@section('content')
+@section('body')
 
     <h1>You are currently not connected to any networks.</h1>
 

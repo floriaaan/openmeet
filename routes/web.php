@@ -33,7 +33,7 @@ Route::post('/admin/edit', 'AdminController@edit');
 
 
 //NOTIFICATION Routes
-Route::get('/notifications/{userId}', 'NotificationController@showAll');
+Route::get('/notifications/{userId}', 'NotificationController@showAll'); //TODO: remove session ID
 
 //MESSAGE routes
 Route::get('/messages/{userId}','MessageController@showUserConversations');
@@ -43,19 +43,19 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 
 
 //GROUP routes
-Route::get('/Groups/{userId}', 'GroupController@showAllGroup');
-Route::get('/Groups/Add', 'GroupController@addGroup');
-Route::post('/Groups/Add', 'GroupController@addGroup');
-Route::post('/Groups/edit', 'GroupController@updateGroup');
-Route::get('/Groups/delete', 'GroupController@deleteGroup');
+Route::get('/groups/{userId}', 'GroupController@showAllGroup'); //TODO: remove session ID
+Route::get('/groups/Add', 'GroupController@addGroup');
+Route::post('/groups/Add', 'GroupController@addGroup');
+Route::post('/groups/edit', 'GroupController@updateGroup');
+Route::get('/groups/delete', 'GroupController@deleteGroup');
 
 
 //EVENTS routes
-Route::get('/Events/{userId}', 'EventController@showAllEvents');
-Route::get('/Events/Add', 'GroupController@addEvent');
-Route::post('/Events/Add', 'GroupController@addEvent');
-Route::post('/Events/edit', 'GroupController@updateEvent');
-Route::get('/Events/delete', 'GroupController@deleteEvent');
+Route::get('/events/{userId}', 'EventController@showAllEvents'); //TODO: remove session ID
+Route::get('/events/Add', 'GroupController@addEvent');
+Route::post('/events/Add', 'GroupController@addEvent');
+Route::post('/events/edit', 'GroupController@updateEvent');
+Route::get('/events/delete', 'GroupController@deleteEvent');
 
 
 Auth::routes();
