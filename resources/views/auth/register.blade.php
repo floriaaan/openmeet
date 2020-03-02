@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('body')
-    <div class="max-height wall-white text-center">
+    <div class="h-100 w-100 wall-white text-center">
 
         <form method="POST" action="{{ route('register') }}" class="form-signin">
             @csrf
@@ -132,8 +132,11 @@
             display: flex;
             -ms-flex-align: center;
             align-items: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
+
+        }
+
+        .h-100 {
+            height: 100vh !important;
         }
 
         .form-signin {

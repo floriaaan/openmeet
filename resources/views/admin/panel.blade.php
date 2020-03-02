@@ -152,10 +152,12 @@
             width: 100%;
             align-items: stretch;
             perspective: 1500px;
+            margin-top: 66px;
+            background: url("/assets/wall-white-30.svg") fixed no-repeat;
+            background-size: cover;
         }
 
         @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 
 
         #sidebar {
@@ -231,7 +233,6 @@
             border-radius: 5px;
             margin-bottom: 5px;
         }
-
 
 
         /* ---------------------------------------------------

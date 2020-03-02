@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "anlutro/l4-settings": "^0.10.0",
         "caouecs/laravel-lang": "^4.0",
         "fideloper/proxy": "^4.0",
@@ -16,7 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
         "laravelcollective/html": "^6.0",
-      "ext-json": "*"
+        "silviolleite/laravelpwa": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

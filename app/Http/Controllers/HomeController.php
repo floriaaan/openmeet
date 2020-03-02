@@ -44,6 +44,8 @@ class HomeController extends Controller
             Setting(['openmeet.color' => $post['iColor']]);
 
             Setting()->save();
+
+            config(['APP_NAME' => $post['iName']]);
         } catch (\Exception $e) {
             var_dump($e);
         }

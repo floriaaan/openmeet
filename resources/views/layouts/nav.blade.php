@@ -2,7 +2,7 @@
 
 @section('body')
 
-    <div class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="z-index: 500">
+    <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top d-flex justify-content-between" style="z-index: 500">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link href="/css/openmeet.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
-
+    @laravelPWA
 </head>
 <body>
 @yield('css')
@@ -27,3 +27,7 @@
 @yield('js')
 </body>
 </html>
+
+@section('title')
+    {{ Setting('openmeet.name', 'OpenMeet') }}
+@endsection
