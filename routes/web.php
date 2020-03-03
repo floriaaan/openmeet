@@ -16,7 +16,9 @@ Auth::routes();
 
 //HOME Routes
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/install', 'HomeController@installPost');
+
 
 //SUBSCRIPTIONS routes
 
@@ -33,7 +35,7 @@ Route::post('/admin/edit', 'AdminController@edit');
 
 
 //NOTIFICATION Routes
-Route::get('/notifications/{userId}', 'NotificationController@showAll'); //TODO: remove session ID
+Route::get('/notifications/', 'NotificationController@showAll'); //TODO: remove session ID
 
 //MESSAGE routes
 Route::get('/messages/{userId}','MessageController@showUserConversations');
@@ -43,21 +45,21 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 
 
 //GROUP routes
-Route::get('/groups/{userId}', 'GroupController@showAllGroup'); //TODO: remove session ID
-Route::get('/groups/Add', 'GroupController@addGroup');
-Route::post('/groups/Add', 'GroupController@addGroup');
+Route::get('/groups/list', 'GroupController@showAllGroup');
+Route::get('/groups/create', 'GroupController@createForm');
+Route::post('/groups/create', 'GroupController@addGroup');
+Route::get('/groups/edit', 'GroupController@editForm');
 Route::post('/groups/edit', 'GroupController@updateGroup');
-Route::get('/groups/delete', 'GroupController@deleteGroup');
+Route::get('/groups/delete/{group_id}', 'GroupController@deleteGroup');
 
 
 //EVENTS routes
-Route::get('/events/{userId}', 'EventController@showAllEvents'); //TODO: remove session ID
-Route::get('/events/Add', 'GroupController@addEvent');
-Route::post('/events/Add', 'GroupController@addEvent');
+Route::get('/events/list/', 'EventController@showAllEvents');
+Route::get('/events/create', 'GroupController@createForm');
+Route::post('/events/create', 'GroupController@addEvent');
+Route::get('/events/edit', 'GroupController@editForm');
 Route::post('/events/edit', 'GroupController@updateEvent');
-Route::get('/events/delete', 'GroupController@deleteEvent');
+Route::get('/events/delete/{event_id}', 'GroupController@deleteEvent');
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
