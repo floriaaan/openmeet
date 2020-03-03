@@ -2,8 +2,8 @@
 
 @section('body')
 
-    <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top d-flex justify-content-between"
-         style="z-index: 500">
+    <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
+         style="z-index: 5000">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
@@ -183,14 +183,16 @@
             </button>
         </div>
     @endif
+    <div class="mt-nav">
     @yield('content')
-
+    </div>
 
     <footer class="footer navbar-custom mt-auto py-3 fixed-bottom">
         <div class="container">
             <span class="text-muted">&copy; OpenMeet - 2020</span>
         </div>
     </footer>
+    <div class="mt-nav"></div>
 @endsection
 
 @section('js')

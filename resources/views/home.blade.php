@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <header class="masthead text-center text-white">
+    <header class="masthead text-center text-white" style="margin: initial!important;">
         <div class="masthead-content my-auto">
             <div class="container">
                 <h1 class="masthead-heading mb-0">Trouvez le Meet pour vous</h1>

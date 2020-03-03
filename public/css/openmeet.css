@@ -77,3 +77,22 @@
     font-weight: 700;
     letter-spacing: 0.1rem;
 }
+
+.mt-nav {
+    margin-top: 4.5rem!important;
+}
+
+@media (max-width: 991px) {
+    .d-none-custom {
+        display: none;
+    }
+}
+
+.alert {
+    z-index: 5100;
+    top: 50px;
+}
+
+.w-list-admin {
+    width: 200px;
+}
