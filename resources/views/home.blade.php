@@ -11,7 +11,7 @@
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les groupes</a>
                 @else
                     <a href="{{ url('/login') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Connexion</a>
-                    <a href="{{ url('/register') }}" class="btn btn-primary rounded-pill mt-5">S'inscrire</a>
+                    <a href="{{ url('/register') }}" class="btn btn-primary btn-xl rounded-pill mt-5">S'inscrire</a>
                 @endif
             </div>
         </div>
@@ -26,7 +26,9 @@
 @section('css')
     <style>
         header.masthead {
-            position: relative;
+            position: absolute;
+            top: 0!important;
+            width: 100%;
             overflow: hidden;
             padding-top: calc(7rem + 72px);
             padding-bottom: 7rem;

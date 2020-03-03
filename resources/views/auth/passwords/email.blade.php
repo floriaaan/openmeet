@@ -1,47 +1,82 @@
 @extends('layouts.index')
 
 @section('body')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Réinitiliser le mot de passe') }}</div>
+    <div class="h-100 w-100 wall-white text-center mx-auto">
+        @if (session('status'))
+            <div class="alert alert-success mx-3" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
+        <div class="p-5 mt-5">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+            <form method="POST" action="{{ route('password.email') }}" class="form-signin">
+                @csrf
+                <a href="{{ url('/') }}" class="no-hover">
+                    <img class="mb-4" src="/assets/logo.svg" alt="" width="72" height="72">
+                </a>
+                <h1 class="h3 mb-3 font-weight-normal">Réinitialisation du mot de passe</h1>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse mail') }}</label>
+                <div class="form-group mt-5">
+                    <label for="email">{{ __('Adresse mail') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                           name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-                        </div>
+                    @enderror
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Envoyer le lien de réinitialisation') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-            </div>
+
+                <button type="submit" class="btn btn-xl rounded-pill btn-primary w-50 mt-4">
+                    {{ __('Envoyer un mail') }}
+                </button>
+            </form>
         </div>
     </div>
-</div>
+
+@endsection
+@section('css')
+
+    <style>
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+
+        }
+
+        .h-100 {
+            height: 100vh !important;
+        }
+
+        .form-signin {
+            width: 100%;
+            max-width: 720px;
+            padding: 5px;
+            margin: auto;
+        }
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+    </style>
 @endsection

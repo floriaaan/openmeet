@@ -15,9 +15,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse flex-row-reverse" id="navToggle">
+        <div class="collapse navbar-collapse flex-row-reverse " id="navToggle">
 
-            <div class="dropleft ml-1">
+            <div class="dropleft nav-responsive-patch ml-1">
                 @if (auth()->check())
                     @if(auth()->user()->picname != null)
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -40,7 +40,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            Déconnexion
+                            <i class="fas fa-user-lock"></i> Déconnexion
                         </a>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -49,7 +49,7 @@
                         @if(auth()->user()->isadmin)
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
-                            <a class="dropdown-item" href="/admin">Panneau d'administration</a>
+                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau d'administration</a>
                         @endif
 
                     </div>
@@ -59,14 +59,14 @@
                         <i class="fas fa-lg fa-user-circle"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navDrop">
-                        <a class="dropdown-item" href="/login">Connexion</a>
-                        <a class="dropdown-item" href="/register">Inscription</a>
+                        <a class="dropdown-item" href="/login"><i class="fas fa-user-lock"></i> Connexion</a>
+                        <a class="dropdown-item" href="/register"><i class="fas fa-user-plus"></i> Inscription</a>
                     </div>
                 @endif
             </div>
 
             @if(auth()->check())
-                <div class="dropleft ml-1">
+                <div class="dropleft nav-responsive-patch ml-1">
                     @if(!empty($notifications))
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -150,23 +150,25 @@
                 </div>
             @endif
 
-            <div class="dropleft ml-1">
+            @if (auth()->check())
+            <div class="dropleft nav-responsive-patch ml-1">
                 <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-lg fa-plus"></i>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navDrop">
-                    <a class="dropdown-item" href="/groups/create">Créer un groupe</a>
-                    <a class="dropdown-item" href="/evenements/create">Créer un évenement</a>
+                    <a class="dropdown-item" href="/groups/create"><i class="fas fa-users"></i> Créer un groupe</a>
+                    <a class="dropdown-item" href="/evenements/create"><i class="fas fa-handshake"></i> Créer un évenement</a>
                 </div>
             </div>
+            @endif
 
-            <button class="ml-1 btn-link border-0" onclick="displayForm()" style="background-color: initial;">
+            <button class="ml-1 btn-link border-0 nav-responsive-patch nav-responsive-patch2" onclick="displayForm()" style="background-color: initial;">
                 <i class="fas fa-lg fa-search"></i>
             </button>
 
-            <form method="POST" action="{{url('/search')}}" class="d-none" id="searchForm">
+            <form method="POST" action="{{url('/search')}}" class="d-none nav-responsive-patch nav-responsive-patch2" id="searchForm">
                 @csrf
                 <input type="text" name="search" id="search" required class="form-control openmeet-search">
 
