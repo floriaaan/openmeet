@@ -72,6 +72,12 @@
                             {!! Form::color('uColor', $value=Setting('openmeet.color'), ['class' => 'form-control']) !!}
 
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('uSlogan', 'Slogan du site', ['class' =>'control-label']) !!}
+                            {!! Form::text('uSlogan', $value = Setting('openmeet.slogan'), ['class' => 'form-control', 'placeholder' => 'Slogan']) !!}
+                            {!! $errors->first('uSlogan', '<small class="text-danger">Le champ Slogan est incorrect.</small>') !!}
+                        </div>
                         {!! Form::submit('Valider les modifications', ['class' => 'btn btn-primary mt-4 pull-right'] ) !!}
 
                         {!! Form::close()!!}

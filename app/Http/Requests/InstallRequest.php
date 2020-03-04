@@ -25,6 +25,7 @@ class InstallRequest extends FormRequest
     {
         return [
             'iName'=>'required|min:3|max:40',
+            'iSlogan' => 'min:3|max:40',
             'iPass'=>'required|confirmed|min:3',
             'iMail'=>'required|email'
         ];

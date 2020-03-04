@@ -25,7 +25,8 @@ class AdminEditRequest extends FormRequest
     {
         return [
             'uName' => 'required|min:3|max:40',
-            'uColor' => 'required'
+            'uColor' => 'required',
+            'uSlogan' => 'min:3|max:40'
         ];
     }
 }

@@ -113,6 +113,7 @@ class AdminController extends Controller
 
         Setting(['openmeet.name' => $post['uName']]);
         Setting(['openmeet.color' => $post['uColor']]);
+        Setting(['openmeet.slogan' => $post['uSlogan']]);
 
         return redirect('/admin');
     }

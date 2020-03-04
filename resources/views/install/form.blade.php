@@ -15,6 +15,11 @@
                     {!! Form::text('iName', $value = null, ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}
                     {!! $errors->first('iName', '<small class="text-danger">Le champ Nom du site est incorrect.</small>') !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('iSlogan', 'Slogan du site', ['class' =>'control-label']) !!}
+                    {!! Form::text('iSlogan', $value = null, ['class' => 'form-control', 'placeholder' => 'Slogan']) !!}
+                    {!! $errors->first('iSlogan', '<small class="text-danger">Le champ Slogan est incorrect.</small>') !!}
+                </div>
 
                 <div class="form-group">
                     {!! Form::label('iColor', 'Couleur primaire', ['class' =>'control-label']) !!}

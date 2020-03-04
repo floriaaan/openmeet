@@ -41,7 +41,10 @@ class HomeController extends Controller
         try{
             Setting(['openmeet.install' => true]);
             Setting(['openmeet.name' => $post['iName']]);
+            Setting(['openmeet.slogan' => $post['iSlogan']]);
             Setting(['openmeet.color' => $post['iColor']]);
+
+            Setting(['openmeet.robots' => true]);
 
             Setting()->save();
 

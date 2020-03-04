@@ -5,7 +5,7 @@
     <header class="masthead text-center text-white" style="margin: initial!important;">
         <div class="masthead-content my-auto">
             <div class="container">
-                <h1 class="masthead-heading mb-0">Trouvez le Meet pour vous</h1>
+                <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
                 <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
                 @if(auth()->check())
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les groupes</a>
