@@ -17,4 +17,27 @@ class Signalement extends Model
         'description',
     ];
 
+    public function getLimit($limit)
+    {
+        $query=DB::table('signalements')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
+    public function getCount()
+    {
+        $query=DB::table('signalements')
+            ->select('*')
+            ->get();
+
+
+        return $query->count();
+
+    }
+
 }

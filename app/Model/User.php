@@ -52,11 +52,10 @@ class User extends Authenticatable
     {
         $query=DB::table('users')
             ->select('*')
-            ->find($userId)
+            ->where('id', '=', $userId)
+            ->limit(1)
             ->get();
-        $infoUser=$query;
-
-        return $infoUser;
+        return $query[0];
 
     }
 
@@ -66,20 +65,21 @@ class User extends Authenticatable
             ->select('*')
             ->limit($limit)
             ->get();
-        $infoUser=$query;
 
-        return $infoUser;
+
+        return $query;
 
     }
 
-    public function getNumberofUsers()
+    public function getCount()
     {
         $query=DB::table('users')
             ->select('*')
             ->get();
-        $infoUser=$query;
 
-        return $infoUser->count();
+
+        return $query->count();
 
     }
+
 }

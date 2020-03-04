@@ -12,7 +12,7 @@ class Group extends Model
     protected $fillable = [
         'id',
         'name',
-        'admin',
+        'admin', //DANGER : pas le même que bdd
         'picrepo',
         'picname',
         'datecrea',
@@ -39,7 +39,7 @@ class Group extends Model
             ->get();
         $queryresult=$query;
 
-        return $queryresult;
+        return $queryresult[0];
 
     }
 
@@ -57,6 +57,29 @@ class Group extends Model
     {
         $query=DB::table('groups')
             ->delete();
+    }
+
+    public function getLimit($limit)
+    {
+        $query=DB::table('groups')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
+    public function getCount()
+    {
+        $query=DB::table('groups')
+            ->select('*')
+            ->get();
+
+
+        return $query->count();
+
     }
 
 

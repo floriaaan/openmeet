@@ -99,8 +99,11 @@
 }
 
 .alert {
+    position: fixed;
+    top: 80px;
+    right: 30px;
     z-index: 5100;
-    top: 50px;
+    max-width: 550px;
 }
 
 .w-list-admin {
@@ -126,3 +129,4 @@
     font-size: 0.8rem!important;
     font-weight: 300;
 }
+

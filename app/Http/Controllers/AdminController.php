@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
+use App\Group;
 use App\Http\Requests\AdminEditRequest;
+use App\Message;
+use App\Signalement;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -20,10 +24,73 @@ class AdminController extends Controller
     {
         $user = (new User);
         $listUser = $user->getLimit(5);
-        $countUser = $user->getNumberofUsers();
+        $countUser = $user->getCount();
+
+        $message = (new Message);
+        $listMessage = [];
+        $rawListMsg = $message->getLimit(10);
+
+        foreach ($rawListMsg as $msg) {
+            if ($msg->forgroup == 0) {
+                $listMessage[] = [
+                    'sender' => $user->getOne($msg->sender),
+                    'receiver' => $user->getOne($msg->receiver),
+                    'msg' => $msg
+                ];
+            } else {
+                $listMessage[] = [
+                    'sender' => $user->getOne($msg->sender),
+                    'receiver' => (new Group)->getOne($msg->receiver),
+                    'msg' => $msg
+                ];
+            }
+
+        }
+        $countMessage = $message->getCount();
+
+        $groups = (new Group);
+        $countGroup = $groups->getCount();
+        $rawListGroup = $groups->getLimit(10);
+
+        $listGroup = [];
+
+        foreach ($rawListGroup as $group) {
+            $listGroup[] = [
+                'group' => $group,
+                'admin' => $user->getOne($group->admin)
+            ];
+
+        }
+
+        $events = (new Event);
+        $countEvent = $events->getCount();
+        $rawListEvent = $events->getLimit(10);
+
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'group' => $groups->getOne($event->id_group)
+            ];
+
+        }
+
+        $report = (new Signalement);
+        $countReport = $report->getCount();
+        $listReport = $report->getLimit(10);
+
         return view('admin.panel', [
             'userList' => $listUser,
-            'userCount' => $countUser
+            'userCount' => $countUser,
+            'messageList' => $listMessage,
+            'messageCount' => $countMessage,
+            'groupList' => $listGroup,
+            'groupCount' => $countGroup,
+            'eventList' => $listEvent,
+            'eventCount' => $countEvent,
+            'reportList' => $listReport,
+            'reportCount' => $countReport,
+
         ]);
 
 
@@ -49,15 +116,18 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    public function listUser() {
+    public function listUser()
+    {
         return 'la liste';
     }
 
-    public function deleteUser($userID) {
+    public function deleteUser($userID)
+    {
         return 'delete ' . $userID;
     }
 
-    public function deleteConfirmed($userID) {
+    public function deleteConfirmed($userID)
+    {
         return 'delete confirmed (c\'est super pas cool) ' . $userID;
     }
 }

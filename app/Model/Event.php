@@ -11,8 +11,8 @@ class Event extends Model
 {
 
     protected $fillable = [
-        'idevent',
-        'idgroup',
+        'id',
+        'id_group',
         'participant',
         'name',
         'datefrom',
@@ -84,10 +84,10 @@ class Event extends Model
             ]);
     }
 
-    public function delete($eventId)
+    public function delete()
     {
         $query=DB::table('events')
-            ->delete($eventId);
+            ->delete();
     }
 
     public function DeleteTime($eventID)
@@ -98,4 +98,26 @@ class Event extends Model
             ->delete($eventID);
     }
 
+    public function getLimit($limit)
+    {
+        $query=DB::table('events')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
+    public function getCount()
+    {
+        $query=DB::table('events')
+            ->select('*')
+            ->get();
+
+
+        return $query->count();
+
+    }
 }
