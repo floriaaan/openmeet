@@ -5,7 +5,9 @@
     <div class="container position-relative" style="height: 100%">
         <div class="row">
             <div class="col-lg-3 d-none-custom">
-                <div id="scrollSite" class="list-group position-fixed w-list-admin">
+
+
+                <div class="list-group position-fixed w-list-admin">
                     <h5 class="list-title">Paramètres du site</h5>
                     <a class="list-group-item list-group-item-action" href="#settings">
                         Paramètres du site
@@ -21,7 +23,7 @@
                     </a>
                 </div>
 
-                <div id="scrollUser" class="list-group position-fixed w-list-admin" style="margin-top: 185px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 185px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
                         Utilisateurs
@@ -37,7 +39,7 @@
                     </a>
                 </div>
 
-                <div id="scrollGroup" class="list-group position-fixed w-list-admin" style="margin-top: 390px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 390px">
                     <h5 class="list-title">Paramètres relatifs aux groupes/événements</h5>
                     <a class="list-group-item list-group-item-action" href="#groups">
                         Groupes
@@ -109,7 +111,8 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications</button>
+                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications
+                            </button>
                         </form>
                     </div>
 
@@ -205,7 +208,8 @@
                                         <td>{{ $report['report']->date }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/admin/report/show/{{ $report['report']->id }}">
+                                                <a class="btn btn-success"
+                                                   href="/admin/report/show/{{ $report['report']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
@@ -424,11 +428,29 @@
 
                         <a href="{{url('/admin/messages/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
+
+                    <hr class="my-4">
+                    <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
+                    <div>
+                        <form action="/admin/search" method="POST">
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <input type="text" required name="search" class="form-control" placeholder="Rechercher">
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-secondary">Rechercher</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
+
 
 
 @endsection
