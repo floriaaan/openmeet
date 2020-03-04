@@ -59,4 +59,27 @@ class User extends Authenticatable
         return $infoUser;
 
     }
+
+    public function getLimit($limit)
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+        $infoUser=$query;
+
+        return $infoUser;
+
+    }
+
+    public function getNumberofUsers()
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->get();
+        $infoUser=$query;
+
+        return $infoUser->count();
+
+    }
 }

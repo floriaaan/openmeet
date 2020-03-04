@@ -121,3 +121,8 @@
     font-weight: 700;
     letter-spacing: 0.1rem;
 }
+
+.list-title {
+    font-size: 0.8rem!important;
+    font-weight: 300;
+}

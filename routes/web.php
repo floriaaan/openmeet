@@ -24,14 +24,20 @@ Route::post('/install', 'HomeController@installPost');
 
 
 //USER routes
-
+Route::get('/user/show/{userID}', 'UserController@show');
+Route::get('/user/report/{userID}', 'UserController@reportForm');
+Route::post('/user/report/', 'UserController@reportPost');
 
 //ADMIN GROUP routes
 
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
-Route::post('/admin/edit', 'AdminController@edit');
+Route::post('/admin/edit/settings', 'AdminController@editSettings');
+Route::post('/admin/edit/theme', 'AdminController@editTheme');
+Route::get('/admin/user/', 'AdminController@listUser');
+Route::get('/admin/user/delete/{userID}', 'AdminController@deleteUser');
+Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
 
 
 //NOTIFICATION Routes
