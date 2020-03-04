@@ -35,6 +35,7 @@ Route::post('/user/report/', 'UserController@reportPost');
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
+Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
 Route::get('/admin/user/', 'AdminController@listUser');
 Route::get('/admin/user/delete/{userID}', 'AdminController@deleteUser');
 Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
