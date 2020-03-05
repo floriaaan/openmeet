@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link href="/css/openmeet.css" rel="stylesheet">
-    <link href="/css/custom.css" rel="stylesheet">
     @laravelPWA
 
     <style>
@@ -68,6 +67,10 @@
             color: var(--openmeet) !important;
         }
 
+        .color {
+            color: var(--openmeet) !important;
+        }
+
         .form-control:focus {
             border-color: var(--openmeet-transparent) !important;
             box-shadow: 0 0 0 0.2rem var(--openmeet-transparent) !important;
@@ -82,6 +85,11 @@
         }
 
     </style>
+
+    @if(Setting('openmeet.theme') == "night")
+        <link href="/css/night.css" rel="stylesheet">
+    @endif
+
 </head>
 <body>
 @yield('css')

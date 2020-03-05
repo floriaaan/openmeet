@@ -52,21 +52,25 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 
 
 //GROUP routes
-Route::get('/groups/list', 'GroupController@showAllGroup');
-Route::get('/groups/create', 'GroupController@createForm');
-Route::post('/groups/create', 'GroupController@addGroup');
-Route::get('/groups/edit', 'GroupController@editForm');
-Route::post('/groups/edit', 'GroupController@updateGroup');
-Route::get('/groups/delete/{group_id}', 'GroupController@deleteGroup');
+Route::get('/groups/{group_id}', 'GroupController@show');
+Route::get('/groups/list', 'GroupController@showAll');
+Route::get('/groups/create', 'GroupController@addForm');
+Route::post('/groups/create', 'GroupController@addPost');
+Route::get('/groups/edit/{group_id}', 'GroupController@editForm');
+Route::post('/groups/edit', 'GroupController@editPost');
+Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm');
+Route::post('/groups/delete/', 'GroupController@deletePost');
 
 
 //EVENTS routes
-Route::get('/events/list/', 'EventController@showAllEvents');
-Route::get('/events/create', 'GroupController@createForm');
-Route::post('/events/create', 'GroupController@addEvent');
-Route::get('/events/edit', 'GroupController@editForm');
-Route::post('/events/edit', 'GroupController@updateEvent');
-Route::get('/events/delete/{event_id}', 'GroupController@deleteEvent');
+Route::get('/events/{event_id}', 'EventController@show');
+Route::get('/events/list/', 'EventController@showAll');
+Route::get('/events/create', 'EventController@addForm');
+Route::post('/events/create', 'EventController@addPost');
+Route::get('/events/edit/{event_id}', 'EventController@editForm');
+Route::post('/events/edit', 'EventController@editPost');
+Route::get('/events/delete/{event_id}', 'EventController@deleteForm');
+Route::get('/events/delete/', 'EventController@deletePost');
 
 
 

@@ -104,11 +104,11 @@
             right: -10px;
             bottom: -10px;
             border-radius: 100%;
-            background-image: linear-gradient(90deg, #FDA240, #C5087E), linear-gradient(90deg, #FDA240, #C5087E);
+            background-image: var(--openmeet);
             background-position: 0 0px, 100% 100%;
             background-size: 100% 5px;
-            border-left: 5px solid #FDA240;
-            border-right: 5px solid #C5087E;
+            border-left: 5px solid var(--openmeet);
+            border-right: 5px solid var(--openmeet);
             padding: 10px 5px;
         }
 
