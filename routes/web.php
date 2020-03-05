@@ -52,7 +52,7 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 
 
 //GROUP routes
-Route::get('/groups/{group_id}', 'GroupController@show');
+Route::get('/groups/show/{group_id}', 'GroupController@show');
 Route::get('/groups/list', 'GroupController@showAll');
 Route::get('/groups/create', 'GroupController@addForm');
 Route::post('/groups/create', 'GroupController@addPost');
@@ -63,7 +63,7 @@ Route::post('/groups/delete/', 'GroupController@deletePost');
 
 
 //EVENTS routes
-Route::get('/events/{event_id}', 'EventController@show');
+Route::get('/events/show/{event_id}', 'EventController@show');
 Route::get('/events/list/', 'EventController@showAll');
 Route::get('/events/create', 'EventController@addForm');
 Route::post('/events/create', 'EventController@addPost');

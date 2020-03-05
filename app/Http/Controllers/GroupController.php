@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Group;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -46,7 +47,8 @@ class GroupController extends Controller
     public function show($groupID)
     {
         return view('group.show', [
-            'group' => (new Group)->getOne($groupID)
+            'group' => (new Group)->getOne($groupID),
+            'listEvent' => (new Event)->getByGroup($groupID)
         ]);
     }
 

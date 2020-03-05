@@ -144,4 +144,19 @@ class Event extends Model
 
         return $query[0];
     }
+
+    public function getByGroup($groupID)
+    {
+        $query = DB::table('events')
+            ->select('*')
+            ->where('id_group', '=', $groupID )
+            ->get();
+
+        $listEvent = [];
+        foreach ($query as $event) {
+            $listEvent[] = $event;
+        }
+
+        return $listEvent;
+    }
 }
