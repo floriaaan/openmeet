@@ -14,6 +14,74 @@
     <link href="/css/openmeet.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
     @laravelPWA
+
+    <style>
+
+        :root {
+            --openmeet: {{Setting('openmeet.color')}};
+            --openmeet-transparent: {{Setting('openmeet.color')}}77;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: var(--openmeet);
+            border-color: var(--openmeet);
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #222;
+            border-color: #333;
+        }
+
+        .btn-primary:focus, .btn-primary.focus {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #fff;
+            background-color: var(--openmeet);
+            border-color: var(--openmeet);
+        }
+
+        .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+        .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: calc(50% * var(--openmeet));
+            border-color: calc(40% * var(--openmeet));
+        }
+
+        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
+
+        .nav-link {
+            color: var(--openmeet) !important;
+        }
+
+        .text-primary {
+            color: var(--openmeet) !important;
+        }
+
+        .btn-link {
+            color: var(--openmeet) !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--openmeet-transparent) !important;
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent) !important;
+        }
+
+        .dropdown-item:active {
+            color: var(--openmeet) !important;
+        }
+
+        .badge-primary {
+            background-color: var(--openmeet) !important;
+        }
+
+    </style>
 </head>
 <body>
 @yield('css')
@@ -33,3 +101,4 @@
 @section('title')
     {{ Setting('openmeet.name', 'OpenMeet') }}
 @endsection
+

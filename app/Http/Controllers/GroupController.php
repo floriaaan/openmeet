@@ -8,40 +8,51 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 
-
 class GroupController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index()
     {
-        //
+        return $this->showAll();
     }
 
-    public function AddGroup($userId)
+    public function addForm()
     {
-        $group = new Group();
-        $groups=$group->AddGroup($userId);
-        return view('group.creategroup',
-            [
-                'Groups'=>$groups
-            ]);
-
+        return view('group.create');
     }
 
-    public function Deletegroup()
+    public function addPost()
     {
-        //
+
+        //ACTIONS
+        return redirect('/group/');
     }
 
-    public function showAllGroup($userId){
-        $group = new Group();
-        $groups=$group->showAllGroup($userId);
+    public function deleteForm()
+    {
+        return view('group.delete');
+    }
 
-        return view('group.listgroup',
-            [
-                'Groups'=>$groups
-            ]);
+    public function deletePost()
+    {
+
+        //ACTIONS
+        return redirect('/group/');
+    }
+
+    public function show($groupID)
+    {
+        return view('group.show', ['group' => (new Group)->getOne($groupID)]);
+    }
+
+    public function showAll()
+    {
+        $listGroups = (new Group)->getAll();
+
+        return view('group.list', [
+            'listGroups' => $listGroups
+        ]);
 
     }
 }

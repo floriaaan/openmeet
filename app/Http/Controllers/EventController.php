@@ -10,17 +10,50 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class EventController extends Controller
 {
-       use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function showAllEvents($userId){
-    $event = new Event();
-    $events=$event->showAllEvents($userId);
+    public function index()
+    {
+        return $this->showAll();
+    }
 
-    return view('event.listevent',
-        [
-            'Evenements'=>$events
+    public function addForm()
+    {
+        return view('event.create');
+    }
+
+    public function addPost()
+    {
+
+        //ACTIONS
+        return redirect('/event/');
+    }
+
+    public function deleteForm()
+    {
+        return view('event.delete');
+    }
+
+    public function deletePost()
+    {
+
+        //ACTIONS
+        return redirect('/event/');
+    }
+
+    public function show($eventID)
+    {
+        return view('event.show', ['event' => (new Event)->getOne($eventID)]);
+    }
+
+    public function showAll()
+    {
+        $listEvent = (new Event())->getAll();
+
+        return view('event.list', [
+            'listGroups' => $listEvent
         ]);
 
-}
+    }
 
 }

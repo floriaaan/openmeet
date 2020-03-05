@@ -8,7 +8,7 @@
             <img src="/assets/logo.svg" width="40" height="40" class="d-inline-block align-top"
                  alt="{{ Setting('openmeet.name') }}">
             <span
-                class="ml-2 openmeet-title openmeet-nav text-center openmeet-color">{{ Setting('openmeet.name') }}</span>
+                class="ml-2 openmeet-title openmeet-nav text-center text-primary">{{ Setting('openmeet.name') }}</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggle"
                 aria-controls="navToggle" aria-expanded="false" aria-label="Toggle navigation">
