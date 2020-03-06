@@ -14,6 +14,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-2">{{$group->name}}</h5>
+                        @if($group->desc != null)<h5 class="text-muted ml-3">{{$group->desc}}</h5>@endif
                         <hr class="mx-4 my-4">
 
                         <div class="w-100 h-50">

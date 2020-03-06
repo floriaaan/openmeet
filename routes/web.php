@@ -54,8 +54,8 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 //GROUP routes
 Route::get('/groups/show/{group_id}', 'GroupController@show');
 Route::get('/groups/list', 'GroupController@showAll');
-Route::get('/groups/create', 'GroupController@addForm');
-Route::post('/groups/create', 'GroupController@addPost');
+Route::get('/groups/create', 'GroupController@addForm')->middleware('auth');
+Route::post('/groups/create', 'GroupController@addPost')->middleware('auth');
 Route::get('/groups/edit/{group_id}', 'GroupController@editForm');
 Route::post('/groups/edit', 'GroupController@editPost');
 Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm');

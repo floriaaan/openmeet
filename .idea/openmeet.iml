@@ -101,5 +101,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="tailwind" level="application" />
+    <orderEntry type="library" name="hover" level="application" />
   </component>
 </module>

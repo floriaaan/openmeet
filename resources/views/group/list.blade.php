@@ -12,12 +12,14 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{$group->name}}</h5>
-                            <p class="card-text">Prochain événement : <span></span></p>
+                            <h6 class="text-muted">{{$group->desc}}</h6>
+                            <hr class="mx-4 my-4">
+                            <p class="card-text mt-1">Prochain événement : <span></span></p>
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                         </div>
                         <div class="">
                             <a href="{{url('/groups/show/')}}/{{$group->id}}"
-                               class="btn btn-primary float-right mr-5">Voir {{$group->name}}</a>
+                               class="btn btn-primary float-right mr-5 mb-3">Voir {{$group->name}}</a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
     <style>
         .card-img {
             width: auto !important;
-            height: 200px;
+            height: 275px;
         }
     </style>
 @endsection

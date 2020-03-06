@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Group;
+use App\Http\Requests\GroupCreateRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -23,10 +24,18 @@ class GroupController extends Controller
         return view('group.create');
     }
 
-    public function addPost()
+    public function addPost(GroupCreateRequest $request)
     {
+        $post = $request->input();
+        $group = new Group();
+        $group->name = $post['gName'];
+        $group->admin = $post['gAdminID'];
+        $group->datecrea = date('Y-m-d H:i:s');
 
-        //ACTIONS
+        if(isset($post['gDesc']) && $post['gDesc'] == '') {
+            $group->desc = $post['gDesc'];
+        }
+
         return redirect('/group/');
     }
 
