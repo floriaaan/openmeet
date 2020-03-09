@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,7 +12,7 @@ class UserController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function show($userID){
-        return 'coucou ' . $userID;
+        return view('user.show', ['user' => (new User)->getOne($userID)]);
     }
 
     public function reportForm($userID) {

@@ -9,24 +9,15 @@ class Notification extends Model
 {
     protected $fillable = [
         'id',
-        'user',
+        'id_user',
         'title',
         'isread',
         'content',
-        'date'
+        'date',
+        'concerned'
     ];
 
 
-    public function create($title,$userId,$content)
-    {
-        $query=DB::table('notifications')
-            ->insert([
-                'title'=>$title,
-                'id_user'=>$userId,
-                'content'=>$content,
-                "date"=>(date("Y-m-d H:i:s"))
-            ]);
-    }
 
     public function getAll(){
         $query=DB::table('notifications')

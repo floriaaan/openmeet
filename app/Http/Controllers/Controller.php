@@ -16,10 +16,10 @@ class Controller extends BaseController
     public function __construct()
     {
         $notifications = [];
-        if(auth()->check()) {
-            $userId=auth()->user()->id;
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
             $notif = new Notification();
-            $notifications=$notif->getAllForUser($userId);
+            $notifications = $notif->getAllForUser($userId);
         }
         View::share('notifications', $notifications);
     }

@@ -15,16 +15,16 @@ class CreateBlocksTable extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('')->unsigned();
+            $table->bigInteger('target')->unsigned();
             $table->foreign('target')
                 ->references('id')
                 ->on('users');
-            $table->bigInteger('')->unsigned();
-            $table->foreign('Blocked')
+            $table->bigInteger('blocker')->unsigned();
+            $table->foreign('blocker')
                 ->references('id')
                 ->on('users');
             $table->dateTime('date');
-            $table->string('description',64)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

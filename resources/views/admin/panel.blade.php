@@ -5,7 +5,9 @@
     <div class="container position-relative" style="height: 100%">
         <div class="row">
             <div class="col-lg-3 d-none-custom">
-                <div id="scrollSite" class="list-group position-fixed w-list-admin">
+
+
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 20px">
                     <h5 class="list-title">Paramètres du site</h5>
                     <a class="list-group-item list-group-item-action" href="#settings">
                         Paramètres du site
@@ -21,7 +23,7 @@
                     </a>
                 </div>
 
-                <div id="scrollUser" class="list-group position-fixed w-list-admin" style="margin-top: 185px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 205px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
                         Utilisateurs
@@ -37,7 +39,7 @@
                     </a>
                 </div>
 
-                <div id="scrollGroup" class="list-group position-fixed w-list-admin" style="margin-top: 390px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 410px">
                     <h5 class="list-title">Paramètres relatifs aux groupes/événements</h5>
                     <a class="list-group-item list-group-item-action" href="#groups">
                         Groupes
@@ -55,7 +57,7 @@
             </div>
 
             <div class="col-lg-9">
-                <div data-spy="scroll" data-target="#scrollSite" data-offset="70" class="scrollspy">
+                <div>
                     <h4 id="settings" class="my-5">Paramètres de {{ Setting('openmeet.name') }}</h4>
                     <div>
                         {!! Form::open(['url' => '/admin/edit/settings']) !!}
@@ -70,6 +72,12 @@
                             {!! Form::color('uColor', $value=Setting('openmeet.color'), ['class' => 'form-control']) !!}
 
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('uSlogan', 'Slogan du site', ['class' =>'control-label']) !!}
+                            {!! Form::text('uSlogan', $value = Setting('openmeet.slogan'), ['class' => 'form-control', 'placeholder' => 'Slogan']) !!}
+                            {!! $errors->first('uSlogan', '<small class="text-danger">Le champ Slogan est incorrect.</small>') !!}
+                        </div>
                         {!! Form::submit('Valider les modifications', ['class' => 'btn btn-primary mt-4 pull-right'] ) !!}
 
                         {!! Form::close()!!}
@@ -81,12 +89,12 @@
                         @csrf
                         <div class="row">
                             <div class="btn-group btn-group-toggle mx-2" data-toggle="buttons">
-                                <label class="btn btn-light active">
+                                <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
                                     <input type="radio" name="theme" value="day" autocomplete="off"
                                            @if(Setting('openmeet.theme') == "day")checked @endif>
                                     <i class="fas fa-sun"></i> Jour
                                 </label>
-                                <label class="btn btn-dark">
+                                <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
                                     <input type="radio" name="theme" value="night" autocomplete="off"
                                            @if(Setting('openmeet.theme') == "night")checked @endif>
                                     <i class="fas fa-moon"></i> Nuit
@@ -100,13 +108,17 @@
 
                     <h4 id="privacy" class="my-5">Confidentialité</h4>
                     <div>
-                        <form action="{{url('/admin/edit/privacy')}}" method="POST">
+                        <form action="/admin/edit/privacy" method="POST">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="robots" id="robots">
-                                <label class="custom-control-label" for="robots">Visble sur Google (fichier robots.txt)</label>
+                                <input type="checkbox" class="custom-control-input" name="robots" id="robots"
+                                       @if(Setting('openmeet.robots'))checked @endif>
+                                <label class="custom-control-label" for="robots">
+                                    Visible sur Google (fichier robots.txt)
+                                </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications</button>
+                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications
+                            </button>
                         </form>
                     </div>
 
@@ -114,7 +126,7 @@
 
                 <hr class="my-5">
 
-                <div data-spy="scroll" data-target="#scrollUser" data-offset="70" class="scrollspy">
+                <div>
                     <h4 id="users" class="my-5">Utilisateurs (5 derniers utilisateurs)</h4>
                     <div class="table-responsive">
 
@@ -176,8 +188,55 @@
                         <a href="{{url('/admin/user/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <h4 id="reports" class="my-5">Signalements des utilisateurs</h4>
-                    <p>...</p>
+                    <h4 id="reports" class="my-5">Signalements des utilisateurs (10 derniers signalements)</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Concerné</th>
+                                <th scope="col">Envoyé par</th>
+                                <th scope="col">Créé le</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if(!empty($reportList))
+
+                                @foreach($reportList as $report)
+
+                                    <tr>
+                                        <td>#{{ $report['report']->id }}</td>
+                                        <td>{{ $report['concerned']->fname }} {{ $report['concerned']->lname }}</td>
+                                        <td>{{ $report['sender']->fname }} {{ $report['sender']->lname }}</td>
+                                        <td>{{ $report['report']->date }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class="btn btn-success"
+                                                   href="/admin/report/show/{{ $report['report']->id }}">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+
+                                                <a class="btn btn-danger"
+                                                   href="/admin/report/delete/{{ $report['report']->id }}">
+                                                    <i class="fas fa-skull-crossbones"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @endforeach
+                            @endif
+
+                            </tbody>
+                        </table>
+
+                        <a href="{{url('/admin/user/')}}" class="btn btn-primary float-right">Voir plus</a>
+                    </div>
 
                     <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
                     <div class="table-responsive">
@@ -230,8 +289,8 @@
 
                 <hr class="my-5">
 
-                <div data-spy="scroll" data-target="#scrollGroup" data-offset="70" class="scrollspy">
-                    <h4 id="groups" class="my-5">Groupes</h4>
+                <div>
+                    <h4 id="groups" class="my-5">Groupes (10 groupes)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -280,7 +339,7 @@
                         <a href="{{url('/admin/group/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <h4 id="events" class="my-5">Evénements</h4>
+                    <h4 id="events" class="my-5">Evénements (10 derniers événements)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -327,7 +386,7 @@
                         <a href="{{url('/admin/event/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <h4 id="gmessages" class="my-5">Messages des groupes</h4>
+                    <h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -375,11 +434,29 @@
 
                         <a href="{{url('/admin/messages/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
+
+                    <hr class="my-4">
+                    <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
+                    <div>
+                        <form action="/admin/search" method="POST">
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <input type="text" required name="search" class="form-control" placeholder="Rechercher">
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-secondary">Rechercher</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
+
 
 
 @endsection

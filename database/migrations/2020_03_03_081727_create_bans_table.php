@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupsTable extends Migration
+class CreateBansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('bans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('admin')->unsigned();
-            $table->foreign('admin')
+            $table->bigInteger('banned')->unsigned();
+            $table->foreign('banned')
                 ->references('id')
                 ->on('users');
-            $table->string('name',64);
-            $table->string('desc',255)->nullable();
-            $table->string('picrepo',255)->nullable();
-            $table->string('picname',255)->nullable();
-            $table->date('datecreate');
+            $table->bigInteger('banisher')->unsigned();
+            $table->foreign('banisher')
+                ->references('id')
+                ->on('groups');
+            $table->dateTime('date');
+            $table->string('description',64)->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('banishs');
     }
 }

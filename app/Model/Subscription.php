@@ -18,15 +18,6 @@ class Subscription extends Model
     ];
 
 
-    public function create($userId,$groupId)
-    {
-        $query=DB::table('subscriptions')
-            ->insert([
-                'id_user'=>$userId,
-                'id_group'=>$groupId,
-                'date'=>(date("Y-m-d H:i:s"))
-            ]);
-    }
 
     public function getOne($subId)
     {

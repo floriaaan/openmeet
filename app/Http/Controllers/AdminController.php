@@ -75,9 +75,19 @@ class AdminController extends Controller
 
         }
 
-        $report = (new Signalement);
-        $countReport = $report->getCount();
-        $listReport = $report->getLimit(10);
+        $reports = (new Signalement);
+        $countReport = $reports->getCount();
+        $rawListReport = $reports->getLimit(10);
+
+        $listReport = [];
+        foreach ($rawListReport as $report) {
+            $listReport[] = [
+                'report' => $report,
+                'sender' => $user->getOne($report->submitter),
+                'concerned' => $user->getOne($report->concerned),
+            ];
+
+        }
 
         return view('admin.panel', [
             'userList' => $listUser,
@@ -103,6 +113,7 @@ class AdminController extends Controller
 
         Setting(['openmeet.name' => $post['uName']]);
         Setting(['openmeet.color' => $post['uColor']]);
+        Setting(['openmeet.slogan' => $post['uSlogan']]);
 
         return redirect('/admin');
     }
@@ -114,6 +125,16 @@ class AdminController extends Controller
         Setting(['openmeet.theme' => $post['theme']]);
 
         return redirect('/admin');
+    }
+
+    public function editPrivacy(Request $request)
+    {
+
+        $post = $request->input();
+        var_dump($post);
+        //Setting(['openmeet.robots' => ($post['robots']) == "on"]);
+
+        //return redirect('/admin');
     }
 
     public function listUser()

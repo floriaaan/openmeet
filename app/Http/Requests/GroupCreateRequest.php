@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminEditRequest extends FormRequest
+class GroupCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class AdminEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'uName' => 'required|min:3|max:40',
-            'uColor' => 'required',
-            'uSlogan' => 'min:3|max:40'
+            'gName' => 'required|min:1|max:40',
+            //'gPic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gDesc' => 'max:255',
+            'gAdminID' => 'required|numeric'
         ];
     }
 }
