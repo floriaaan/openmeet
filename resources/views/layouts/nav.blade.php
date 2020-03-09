@@ -159,7 +159,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="navDrop">
                     <a class="dropdown-item" href="/groups/create"><i class="fas fa-users"></i> Créer un groupe</a>
-                    <a class="dropdown-item" href="/evenements/create"><i class="fas fa-handshake"></i> Créer un évenement</a>
+                    <a class="dropdown-item" href="/events/create"><i class="fas fa-handshake"></i> Créer un évenement</a>
                 </div>
             </div>
             @endif

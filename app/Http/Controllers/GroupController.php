@@ -30,13 +30,15 @@ class GroupController extends Controller
         $group = new Group();
         $group->name = $post['gName'];
         $group->admin = $post['gAdminID'];
-        $group->datecrea = date('Y-m-d H:i:s');
+        $group->datecreate = date('Y-m-d H:i:s');
 
-        if(isset($post['gDesc']) && $post['gDesc'] == '') {
+        if(isset($post['gDesc']) && $post['gDesc'] != '') {
             $group->desc = $post['gDesc'];
         }
 
-        return redirect('/group/');
+        $group->push();
+
+        return redirect('/groups/list');
     }
 
     public function deleteForm($groupID)

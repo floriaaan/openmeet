@@ -11,22 +11,13 @@ class Subscription extends Model
 
     protected $fillable = [
         'id',
-        'user',
-        'group',
+        'id_user',
+        'id_group',
         'date',
         'acceptnotif'
     ];
 
 
-    public function create($userId,$groupId)
-    {
-        $query=DB::table('subscriptions')
-            ->insert([
-                'id_user'=>$userId,
-                'id_group'=>$groupId,
-                'date'=>(date("Y-m-d H:i:s"))
-            ]);
-    }
 
     public function getOne($subId)
     {

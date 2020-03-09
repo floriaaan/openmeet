@@ -14,36 +14,20 @@ class Event extends Model
     protected $fillable = [
         'id',
         'id_group',
-        'participant',
+
         'name',
         'datefrom',
         'dateto',
-        'posX',
-        'posY',
+        'posx',
+        'posy',
         'country',
         'zip',
         'city',
         'numstreet',
         'street',
-        'desc',
+        'description',
     ];
 
-    public function create($groupId, $name, $datefrom, $dateto, $country, $zip, $city, $numstreet, $street, $desc)
-    {
-        $query = DB::table('events')
-            ->insert([
-                'id_group' => $groupId,
-                'name' => $name,
-                'datefrom' => $datefrom,
-                'dateto' => $dateto,
-                'country' => $country,
-                'zip' => $zip,
-                'city' => $city,
-                'numstreet' => $numstreet,
-                'street' => $street,
-                'description' => $desc,
-            ]);
-    }
 
     public function showOne($eventId)
     {
@@ -67,34 +51,13 @@ class Event extends Model
         return $listevent;
     }
 
-    public function updateEvent($groupId, $name, $datefrom, $dateto, $country, $zip, $city, $numstreet, $street, $desc)
-    {
-        $query = DB::table('events')
-            ->where('id_group', '=', $groupId)
-            ->update([
-                'name' => $name,
-                'datefrom' => $datefrom,
-                'dateto' => $dateto,
-                'country' => $country,
-                'zip' => $zip,
-                'city' => $city,
-                'numstreet' => $numstreet,
-                'street' => $street,
-                'description' => $desc,
-            ]);
-    }
 
-    public function delete()
-    {
-        $query = DB::table('events')
-            ->delete();
-    }
 
     public function DeleteTime($eventID)
     {
         $timer = date("Y-m-d H:i:s");
         $query = DB::table('events')
-            ->where('dateto', '=', $timer)
+            ->where('dateto', '<=', $timer)
             ->delete($eventID);
     }
 
@@ -159,4 +122,5 @@ class Event extends Model
 
         return $listEvent;
     }
+
 }

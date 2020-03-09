@@ -2,24 +2,34 @@
 
 @section('content')
 
-    <header class="masthead text-center text-white" style="margin: initial!important;">
-        <div class="masthead-content my-auto">
-            <div class="container">
-                <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
-                <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
-                @if(auth()->check())
-                    <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les groupes</a>
-                @else
-                    <a href="{{ url('/login') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Connexion</a>
-                    <a href="{{ url('/register') }}" class="btn btn-primary btn-xl rounded-pill mt-5">S'inscrire</a>
-                @endif
+    <div class="h-100">
+        <header class="masthead text-center text-white" style="margin: initial!important;">
+            <div class="masthead-content my-auto">
+                <div class="container">
+                    <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
+                    <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
+                    @if(auth()->check())
+                        <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
+                            groupes</a>
+                    @else
+                        <a href="{{ url('/login') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Connexion</a>
+                        <a href="{{ url('/register') }}" class="btn btn-primary btn-xl rounded-pill mt-5">S'inscrire</a>
+                    @endif
+                </div>
+
+
             </div>
-        </div>
-        <div class="bg-circle-1 bg-circle"></div>
-        <div class="bg-circle-2 bg-circle"></div>
-        <div class="bg-circle-3 bg-circle"></div>
-        <div class="bg-circle-4 bg-circle"></div>
-    </header>
+            <div class="bg-circle-1 bg-circle"></div>
+            <div class="bg-circle-2 bg-circle"></div>
+            <div class="bg-circle-3 bg-circle"></div>
+            <div class="bg-circle-4 bg-circle"></div>
+
+
+        </header>
+    </div>
+
+
+
 
 @endsection
 
@@ -27,7 +37,7 @@
     <style>
         header.masthead {
             position: absolute;
-            top: 0!important;
+            top: 0 !important;
             width: 100%;
             overflow: hidden;
             padding-top: calc(7rem + 72px);
@@ -103,6 +113,7 @@
                 transform: translateY(-55px);
             }
         }
+
         @-webkit-keyframes bg-circle {
             from {
                 transform: translateY(0px);
@@ -121,6 +132,7 @@
             header.masthead .masthead-content .masthead-heading {
                 font-size: 5rem;
             }
+
             header.masthead .masthead-content .masthead-subheading {
                 font-size: 2rem;
             }

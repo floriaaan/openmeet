@@ -3,22 +3,15 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="/groups/create" method="POST">
+        <form action="/events/create" method="POST">
             @csrf
             <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
                     <div class="col-md-4 m-auto p-2">
+                        adresse
+                        +
+                        date
 
-                        <div class="input-group">
-
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-file-image"></i></span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="gPic" id="gPic" lang="fr">
-                                <label class="custom-file-label mb-1" for="gPic">Photo du groupe</label>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-5">
@@ -28,36 +21,34 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user-friends"></i></span>
                                 </div>
-                                <input class="form-control form-control-lg @error('gName') is-invalid @enderror"
-                                       name="gName" type="text" value="{{ old('gName') }}" placeholder="Nom du groupe"
+                                <input class="form-control form-control-lg @error('eName') is-invalid @enderror"
+                                       name="eName" type="text" value="{{ old('eName') }}"
+                                       placeholder="Nom de l'événement"
                                        required id="title-input">
                             </div>
                             <hr class="mx-4 my-4">
 
-                            <textarea class="form-control @error('gDesc') is-invalid @enderror desc"
-                                      name="gDesc" rows="8"
-                                      placeholder="Description du groupe">{{ old('gDesc') }}</textarea>
+                            <textarea class="form-control @error('eDesc') is-invalid @enderror desc"
+                                      name="eDesc" rows="8"
+                                      placeholder="Description du groupe">{{ old('eDesc') }}</textarea>
 
                             <div class="input-group mt-1">
 
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Administrateur</span>
+                                    <span class="input-group-text">Organisateur</span>
                                 </div>
-                                <input class="form-control"
-                                       type="text" value="{{ auth()->user()->fname }} {{ auth()->user()->lname }}"
-                                       readonly
-                                       required>
+
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary float-right mb-4 mr-3">
-                            Créer un groupe
+                            Créer un événement
                         </button>
                     </div>
                 </div>
 
             </div>
 
-            <input type="hidden" name="gAdminID" value="{{auth()->id()}}">
+            <input type="hidden" name="eGroup" value="{{$group->id}}">
         </form>
     </div>
 

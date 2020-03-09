@@ -4,7 +4,7 @@ return [
     'name' => 'OpenMeet',
     'manifest' => [
         'name' => config('APP_NAME', 'OpenMeet'),
-        'short_name' => 'OpMt',
+        'short_name' => 'OpenMeet',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
@@ -19,18 +19,6 @@ return [
             '192x192' => '/images/icons/icon-192x192.png',
             '384x384' => '/images/icons/icon-384x384.png',
             '512x512' => '/images/icons/icon-512x512.png'
-        ],
-        'splash' => [
-            '640x1136' => '/images/icons/splash-640x1136.png',
-            '750x1334' => '/images/icons/splash-750x1334.png',
-            '828x1792' => '/images/icons/splash-828x1792.png',
-            '1125x2436' => '/images/icons/splash-1125x2436.png',
-            '1242x2208' => '/images/icons/splash-1242x2208.png',
-            '1242x2688' => '/images/icons/splash-1242x2688.png',
-            '1536x2048' => '/images/icons/splash-1536x2048.png',
-            '1668x2224' => '/images/icons/splash-1668x2224.png',
-            '1668x2388' => '/images/icons/splash-1668x2388.png',
-            '2048x2732' => '/images/icons/splash-2048x2732.png',
         ],
         'custom' => []
     ]

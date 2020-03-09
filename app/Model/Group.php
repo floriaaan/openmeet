@@ -12,24 +12,14 @@ class Group extends Model
     protected $fillable = [
         'id',
         'name',
-        'admin', //DANGER : pas le même que bdd
+        'admin',
         'picrepo',
         'picname',
-        'datecrea',
+        'datecreate',
+        'desc'
     ];
 
 
-    public function AddGroup($name, $admin, $picrepo, $picname)
-    {
-        $group = DB::table('groups')
-            ->insert([
-                'name' => $name,
-                'admin' => $admin,
-                'picrepo' => $picrepo,
-                'picname' => $picname,
-                'datecrea' => (date("Y-m-d H:i:s"))
-            ]);
-    }
 
     public function getOne($groupId)
     {
@@ -94,6 +84,21 @@ class Group extends Model
         }
 
         return $listGroup;
+    }
+
+    public function getByAdmin($userID) {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('admin', '=', $userID)
+            ->get();
+
+        $listGroup = [];
+        foreach ($query as $group) {
+            $listGroup[] = $group;
+        }
+
+        return $listGroup;
+
     }
 
 

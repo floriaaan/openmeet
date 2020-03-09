@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlocksTable extends Migration
+class CreateBansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateBlocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('blocks', function (Blueprint $table) {
+        Schema::create('bans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('target')->unsigned();
-            $table->foreign('target')
+            $table->bigInteger('banned')->unsigned();
+            $table->foreign('banned')
                 ->references('id')
                 ->on('users');
-            $table->bigInteger('blocker')->unsigned();
-            $table->foreign('blocker')
+            $table->bigInteger('banisher')->unsigned();
+            $table->foreign('banisher')
                 ->references('id')
-                ->on('users');
+                ->on('groups');
             $table->dateTime('date');
-            $table->text('description')->nullable();
+            $table->string('description',64)->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateBlocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blocks');
+        Schema::dropIfExists('banishs');
     }
 }

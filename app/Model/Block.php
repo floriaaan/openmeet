@@ -8,11 +8,9 @@ class Block extends Model
 {
     protected $fillable = [
         'id',
-        'blocked',
+        'blocker',
         'target',
         'date',
-        'isread',
-        'importance',
         'description',
     ];
 }

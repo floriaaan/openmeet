@@ -24,9 +24,9 @@ class CreateSignalementsTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->dateTime('date');
-            $table->boolean('isread');
-            $table->integer('Importance')->default(500);
-            $table->string('description',64)->nullable();
+            $table->boolean('isread')->default(0);
+            $table->integer('importance')->default(500);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
