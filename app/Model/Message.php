@@ -54,7 +54,7 @@ class Message extends Model
             ->orWhere('sender', '=', $userId_2)
             ->where('receiver', '=', $userId_1)
             ->where('forgroup', '=', 0)
-            ->orderBy('date', 'desc')
+            ->orderByDesc('date')
             ->limit(1)
             ->get();
         $queryResult = $query[0];
@@ -63,7 +63,6 @@ class Message extends Model
 
     public function getLastMessageForGroupConv($groupId)
     {
-        try {
             $query = DB::table('messages')
                 ->select('*')
                 ->where('receiver', '=', $groupId)
@@ -71,13 +70,16 @@ class Message extends Model
                 ->orderBy('date', 'desc')
                 ->limit(1)
                 ->get();
-            $queryResult = $query[0];
+            try{$queryResult = $query[0];}
+            catch (\Exception $e){$queryResult=[
+                'content'=>"Aucun message",
+                'receiver'=>$groupId,
+                'isread'=>1,
+                'date'=>'0000-00-00 00:00:00'
+                ];}
+
             return $queryResult;
 
-        }
-        catch (Exception $e){
-            return;
-        }
     }
 
 

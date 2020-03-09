@@ -30,12 +30,13 @@ class MessageController extends Controller
             $personalLastMessages[]=$message->getLastMessageForPersonalConv($userId,$personalConversation);
         }
 
-        /*
+        //Tri des messages personnels
+        $personalLastMessages=krsort($personalLastMessages,['id']);
+
         echo('personalInfoConv =');
         var_dump($personalInfoConversations);
-        echo('personalLastMessage =');
+        echo('personalLastMessages =');
         var_dump($personalLastMessages);
-        */
 
         $sub=new Subscription();
         $userSubscriptions=$sub->getAllForUser($userId);
@@ -46,17 +47,9 @@ class MessageController extends Controller
         {
          $group=new Group();
          $groupConversations[]=$group->getOne($subscription->id_group);
-         try {
-             $message = new Message();
-             $groupLastMessages[] = $message->getLastMessageForGroupConv($subscription->id_group);
-         }catch (\Exception $e){
-             $message = new Message();
-             $message->receiver=$subscription->id_group;
-             $message->content="Aucun message";
-             $message->isread=1;
-             $message->forgroup=1;
-             $groupLastMessages[] = $message;
-         }
+         $message = new Message();
+         $groupLastMessages[] = $message->getLastMessageForGroupConv($subscription->id_group);
+
         }
 
         echo('userSubscriptions =');
@@ -65,6 +58,9 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
+
+        //Tri des tableaux des derniers messages par date
+
      die;
     }
 }
