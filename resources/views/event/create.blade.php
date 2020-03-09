@@ -8,6 +8,61 @@
             <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
                     <div class="col-md-4 m-auto p-2">
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control @error('eNumStreet') is-invalid @enderror"
+                                   name="eNumStreet" type="text" value="{{ old('eNumStreet') }}"
+                                   placeholder="Numéro de rue"
+                                   required>
+                        </div>
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control @error('eStreet') is-invalid @enderror"
+                                   name="eStreet" type="text" value="{{ old('eStreet') }}"
+                                   placeholder="Rue"
+                                   required>
+                        </div>
+
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control @error('eCity') is-invalid @enderror"
+                                   name="eCity" type="text" value="{{ old('eCity') }}"
+                                   placeholder="Ville"
+                                   required>
+                        </div>
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control @error('eZip') is-invalid @enderror"
+                                   name="eZip" type="text" value="{{ old('eZip') }}"
+                                   placeholder="Code postal"
+                                   required>
+                        </div>
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control @error('eCountry') is-invalid @enderror"
+                                   name="eCountry" type="text" value="{{ old('eCountry') }}"
+                                   placeholder="Région"
+                                   required>
+                        </div>
+
+
                         adresse
                         +
                         date
@@ -52,6 +107,7 @@
                                 <select class="form-control" name="eGroup">
                                     @foreach($listGroup as $group)
                                         <option value="{{$group->id}}">{{$group->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

@@ -22,7 +22,7 @@ class EventController extends Controller
     public function addForm()
     {
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
-        return view('event.create', ['group' => $listGroup[0]]);
+        return view('event.create', ['listGroup' => $listGroup]);
     }
 
     public function addPost(EventCreateRequest $request)
@@ -32,9 +32,13 @@ class EventController extends Controller
         $event = new Event();
         $event->name = $post['eName'];
         $event->id_group = $post['eGroup'];
+        $event->dateFrom = $post['eDateFrom'];
 
         if(isset($post['eDesc']) && $post['eDesc'] != '') {
             $event->description = $post['eDesc'];
+        }
+        if(isset($post['eDateTo']) && $post['eDateTo'] != '') {
+            $event->dateTo = $post['eDateTo'];
         }
 
         $event->push();

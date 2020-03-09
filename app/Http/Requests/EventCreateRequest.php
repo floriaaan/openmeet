@@ -27,7 +27,13 @@ class EventCreateRequest extends FormRequest
             'eName' => 'required|min:1|max:64',
             'eDesc' => 'max:255',
             'eGroup' => 'required|numeric',
-            'eDateFrom' => 'required|'
+            'eDateFrom' => 'required|after_or_equal:now',
+            'eDateTo' => 'after_or_equal:eDateFrom',
+            'eNumStreet' => 'required',
+            'eStreet' => 'required',
+            'eCity' => 'required',
+            'eZip' => 'required|numeric|min:1|max:5',
+            'eCountry' => 'required'
         ];
     }
 }
