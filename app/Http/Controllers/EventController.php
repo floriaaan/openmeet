@@ -38,6 +38,8 @@ class EventController extends Controller
         }
 
         $event->push();
+
+        //notifications
         return redirect('/events/');
     }
 

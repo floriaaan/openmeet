@@ -26,7 +26,8 @@ class EventCreateRequest extends FormRequest
         return [
             'eName' => 'required|min:1|max:64',
             'eDesc' => 'max:255',
-            'eGroup' => 'required|numeric'
+            'eGroup' => 'required|numeric',
+            'eDateFrom' => 'required|'
         ];
     }
 }

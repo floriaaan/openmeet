@@ -32,12 +32,27 @@
                                       name="eDesc" rows="8"
                                       placeholder="Description du groupe">{{ old('eDesc') }}</textarea>
 
+                            <hr class="mx-4 my-4">
+
+                            <div class="input-group">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control @error('eDateFrom') is-invalid @enderror"
+                                       name="eDateFrom" type="date" value="{{ old('eDateFrom') }}"
+                                       required>
+                            </div>
+
                             <div class="input-group mt-1">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Organisateur</span>
                                 </div>
-
+                                <select class="form-control" name="eGroup">
+                                    @foreach($listGroup as $group)
+                                        <option value="{{$group->id}}">{{$group->name}}</option>
+                                </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary float-right mb-4 mr-3">
@@ -48,7 +63,6 @@
 
             </div>
 
-            <input type="hidden" name="eGroup" value="{{$group->id}}">
         </form>
     </div>
 
