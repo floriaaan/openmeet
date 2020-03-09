@@ -19,8 +19,8 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('id_user')
                 ->references('id')
                 ->on('users');
-            $table->bigInteger('id_group')->unsigned();
-            $table->foreign('id_group')
+            $table->bigInteger('group')->unsigned();
+            $table->foreign('group')
                 ->references('id')
                 ->on('groups');
             $table->dateTime('date');

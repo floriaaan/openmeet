@@ -11,8 +11,8 @@ class Subscription extends Model
 
     protected $fillable = [
         'id',
-        'user',
-        'group',
+        'id_user',
+        'id_group',
         'date',
         'acceptnotif'
     ];

@@ -18,15 +18,12 @@ class GroupController extends Controller
         //
     }
 
-    public function AddGroup($userId)
+    public function AddGroup()
     {
-        $group = new Group();
-        $groups=$group->AddGroup($userId);
-        return view('group.creategroup',
-            [
-                'Groups'=>$groups
-            ]);
-
+        $userId=auth()->user()->id;
+        return view('group.creategroup', [
+           'userId'=>$userId
+        ]);
     }
 
     public function Deletegroup()
@@ -34,14 +31,7 @@ class GroupController extends Controller
         //
     }
 
-    public function showAllGroup($userId){
-        $group = new Group();
-        $groups=$group->showAllGroup($userId);
-
-        return view('group.listgroup',
-            [
-                'Groups'=>$groups
-            ]);
+    public function showAllGroups(){
 
     }
 }

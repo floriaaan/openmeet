@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
 
 class Message extends Model
 {
@@ -19,20 +20,6 @@ class Message extends Model
         'isread',
         'forgroup',
     ];
-
-
-    public function create($sender, $receiver, $content, $forgroup)
-    {
-        $query = DB::table('messages')
-            ->insert([
-                'date' => date("Y-m-d H:i:s"),
-                'content' => $content,
-                'sender' => $sender,
-                'receiver' => $receiver,
-                'forgroup' => $forgroup
-            ]);
-    }
-
 
     public function getPersonnalConversationsForUser($userId)
     {
@@ -70,23 +57,27 @@ class Message extends Model
             ->orderBy('date', 'desc')
             ->limit(1)
             ->get();
-        $queryResult = $query;
-        var_dump($queryResult);
-        die;
+        $queryResult = $query[0];
+        return $queryResult;
     }
 
     public function getLastMessageForGroupConv($groupId)
     {
-        $query = DB::table('messages')
-            ->select('*')
-            ->where('receiver', '=', $groupId)
-            ->where('forgroup', '=', 1)
-            ->orderBy('date', 'desc')
-            ->limit(1)
-            ->get();
-        $queryResult = $query;
-        var_dump($queryResult);
-        die;
+        try {
+            $query = DB::table('messages')
+                ->select('*')
+                ->where('receiver', '=', $groupId)
+                ->where('forgroup', '=', 1)
+                ->orderBy('date', 'desc')
+                ->limit(1)
+                ->get();
+            $queryResult = $query[0];
+            return $queryResult;
+
+        }
+        catch (Exception $e){
+            return;
+        }
     }
 
 

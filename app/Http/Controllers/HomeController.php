@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InstallRequest;
 use App\Notification;
-
+use App\Message;
 class HomeController extends Controller
 {
 
@@ -55,15 +55,25 @@ class HomeController extends Controller
 
     public function home()
     {
-        /*$notifications = [];
+        //Récupération des notifications
+        $notifications = [];
         if(auth()->check()) {
             $userId=auth()->user()->id;
             $notif = new Notification();
-            $notifications=$notif->getAllForUser($userId);
+            $notifications=$notif->getLast5ForUser($userId);
         }
+
+        //Récupération des messages
+        $messages = [];
+        if(auth()->check()) {
+            $userId=auth()->user()->id;
+            $message = new Message();
+        }
+
         return view('home',[
-            'notifications'=>$notifications
-        ]);*/
+            'notifications'=>$notifications,
+            'messages'=>$messages
+        ]);
         return view('home');
     }
 }

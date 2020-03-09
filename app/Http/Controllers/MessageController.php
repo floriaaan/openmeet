@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Message;
 use App\Subscription;
+use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,23 +13,58 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class MessageController extends Controller
 {
+    //TODO : Création d'un message.
+
     public function showUserConversations($userId)
     {
         $conv=new Message();
         $personalConversations=$conv->getPersonnalConversationsForUser($userId);
+
+        $personalInfoConversations=[];
+        $personalLastMessages=[];
+        foreach ($personalConversations as $personalConversation)
+        {
+            $user=new User();
+            $personalInfoConversations[]=$user->getOne($personalConversation);
+            $message=new Message();
+            $personalLastMessages[]=$message->getLastMessageForPersonalConv($userId,$personalConversation);
+        }
+
+        /*
+        echo('personalInfoConv =');
+        var_dump($personalInfoConversations);
+        echo('personalLastMessage =');
+        var_dump($personalLastMessages);
+        */
+
         $sub=new Subscription();
         $userSubscriptions=$sub->getAllForUser($userId);
 
-        var_dump($personalConversations);
-        var_dump($userSubscriptions);
-
-        foreach ($userSubscriptions as $userSubscription)
+        $groupConversations=[];
+        $groupLastMessages=[];
+        foreach ($userSubscriptions as $subscription)
         {
          $group=new Group();
-         $groupConversations[]=$group->getOne($userSubscription->id_group);
+         $groupConversations[]=$group->getOne($subscription->id_group);
+         try {
+             $message = new Message();
+             $groupLastMessages[] = $message->getLastMessageForGroupConv($subscription->id_group);
+         }catch (\Exception $e){
+             $message = new Message();
+             $message->receiver=$subscription->id_group;
+             $message->content="Aucun message";
+             $message->isread=1;
+             $message->forgroup=1;
+             $groupLastMessages[] = $message;
+         }
         }
-        var_dump($groupConversations);
-        die;
 
+        echo('userSubscriptions =');
+        var_dump($userSubscriptions);
+        echo('groupConversations =');
+        var_dump($groupConversations);
+        echo ('groupLastMessages =');
+        var_dump($groupLastMessages);
+     die;
     }
 }
