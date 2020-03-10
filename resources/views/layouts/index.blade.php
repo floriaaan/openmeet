@@ -35,6 +35,10 @@
             border-color: #333;
         }
 
+        .bg-primary {
+            background-color: var(--openmeet) !important;
+        }
+
         .btn-primary:focus, .btn-primary.focus {
             box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
         }

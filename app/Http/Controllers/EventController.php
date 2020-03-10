@@ -33,6 +33,11 @@ class EventController extends Controller
         $event->name = $post['eName'];
         $event->id_group = $post['eGroup'];
         $event->dateFrom = $post['eDateFrom'];
+        $event->numstreet = $post['eNumStreet'];
+        $event->street = $post['eStreet'];
+        $event->city = $post['eCity'];
+        $event->zip = $post['eZip'];
+        $event->country = $post['eCountry'];
 
         if(isset($post['eDesc']) && $post['eDesc'] != '') {
             $event->description = $post['eDesc'];

@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title display-3">{{$group->name}}</h5>
+                        <h5 class="card-title display-4">{{$group->name}}</h5>
                         @if($group->desc != null)<h5 class="text-muted ml-3">{{$group->desc}}</h5>@endif
                         <hr class="mx-4 my-4">
 
@@ -35,7 +35,7 @@
 
                         <div class="d-flex justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
-                            <a href="{{url('/group/show/')}}/{{$group->id}}"
+                            <a href="{{url('/groups/subscribe/')}}/{{$group->id}}"
                                class="btn btn-primary ">S'abonner</a>
                         </div>
                     </div>

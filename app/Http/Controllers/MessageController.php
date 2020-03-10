@@ -34,11 +34,12 @@ class MessageController extends Controller
         krsort($personalLastMessages);
 
 
-
+        /*
         echo('personalInfoConv =');
         var_dump($personalInfoConversations);
         echo('personalLastMessages =');
         var_dump($personalLastMessages);
+        */
 
         $sub=new Subscription();
         $userSubscriptions=$sub->getAllForUser($userId);
@@ -70,6 +71,7 @@ class MessageController extends Controller
         //Tri des tableaux des derniers messages de groupe par id<=>date d'envoi
         krsort($groupLastMessages);
 
+        /*
         echo('userSubscriptions =');
         var_dump($userSubscriptions);
         echo('groupConversations =');
@@ -78,9 +80,13 @@ class MessageController extends Controller
         var_dump($groupLastMessages);
         echo('groupLastMessageInfo =');
         var_dump($groupLastMessageInfo);
+        */
 
+        return view('message.conversationslist',
+        [
+            "personalInfoConversations"=>$personalInfoConversations,
+            "personalLastMessages"
+        ]);
 
-
-     die;
     }
 }
