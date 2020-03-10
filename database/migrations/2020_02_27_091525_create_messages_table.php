@@ -25,7 +25,7 @@ class CreateMessagesTable extends Migration
             $table->foreign('sender')
                 ->references('id')
                 ->on('users');
-            $table->boolean('isread');
+            $table->boolean('isread')->default(0);
             $table->boolean('forgroup');
 
             $table->timestamps();
