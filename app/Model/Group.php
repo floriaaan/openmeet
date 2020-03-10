@@ -20,14 +20,12 @@ class Group extends Model
     ];
 
 
-
     public function getOne($groupId)
     {
         $query = DB::table('groups')
             ->select('*')
             ->where('id', '=', $groupId)
             ->get();
-
 
         return $query[0];
 
@@ -100,6 +98,5 @@ class Group extends Model
         return $listGroup;
 
     }
-
 
 }

@@ -14,7 +14,6 @@ class Event extends Model
     protected $fillable = [
         'id',
         'id_group',
-
         'name',
         'datefrom',
         'dateto',
@@ -50,7 +49,6 @@ class Event extends Model
         }
         return $listevent;
     }
-
 
 
     public function DeleteTime($eventID)
