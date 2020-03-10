@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 
 
 class MessageController extends Controller
@@ -27,11 +28,12 @@ class MessageController extends Controller
             $user=new User();
             $personalInfoConversations[]=$user->getOne($personalConversation);
             $message=new Message();
-            $personalLastMessages[]=$message->getLastMessageForPersonalConv($userId,$personalConversation);
+            $personalLastMessages[$message->getLastMessageForPersonalConv($userId,$personalConversation)->id]=$message->getLastMessageForPersonalConv($userId,$personalConversation);
         }
+        //tri des derniers messages personnels par id<=>date d'envoi
+        krsort($personalLastMessages);
 
-        //Tri des messages personnels
-        $personalLastMessages=krsort($personalLastMessages,['id']);
+
 
         echo('personalInfoConv =');
         var_dump($personalInfoConversations);
@@ -48,9 +50,25 @@ class MessageController extends Controller
          $group=new Group();
          $groupConversations[]=$group->getOne($subscription->id_group);
          $message = new Message();
-         $groupLastMessages[] = $message->getLastMessageForGroupConv($subscription->id_group);
-
+         try {
+             $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)->id] = $message->getLastMessageForGroupConv($subscription->id_group);
+         }
+         catch (\Exception $e){
+             $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)['id']] = $message->getLastMessageForGroupConv($subscription->id_group);
+         }
+         }
+        foreach ($groupLastMessages as $groupLastMessage)
+        {
+            try {
+                if ($groupLastMessage->sender != 0) {
+                    $user = new User();
+                    $groupLastMessageInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+                }
+            }catch (\Exception $e){}
         }
+
+        //Tri des tableaux des derniers messages de groupe par id<=>date d'envoi
+        krsort($groupLastMessages);
 
         echo('userSubscriptions =');
         var_dump($userSubscriptions);
@@ -58,8 +76,10 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
+        echo('groupLastMessageInfo =');
+        var_dump($groupLastMessageInfo);
 
-        //Tri des tableaux des derniers messages par date
+
 
      die;
     }

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class Message extends Model
 {
@@ -54,7 +55,7 @@ class Message extends Model
             ->orWhere('sender', '=', $userId_2)
             ->where('receiver', '=', $userId_1)
             ->where('forgroup', '=', 0)
-            ->orderByDesc('date')
+            ->orderBy('date', 'desc')
             ->limit(1)
             ->get();
         $queryResult = $query[0];
@@ -71,12 +72,17 @@ class Message extends Model
                 ->limit(1)
                 ->get();
             try{$queryResult = $query[0];}
-            catch (\Exception $e){$queryResult=[
-                'content'=>"Aucun message",
-                'receiver'=>$groupId,
-                'isread'=>1,
-                'date'=>'0000-00-00 00:00:00'
-                ];}
+            catch (\Exception $e){
+                $message=new Message();
+                $message->id=0;
+                $message->receiver=$groupId;
+                $message->sender=0;
+                $message->content="Aucun message";
+                $message->forgroup=1;
+
+                $queryResult=$message->attributes;
+
+                }
 
             return $queryResult;
 
