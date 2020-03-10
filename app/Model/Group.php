@@ -91,17 +91,20 @@ class Group extends Model
             ->select('*')
             ->where('admin', '=', $userID)
             ->get();
+        $listGroup = [];
+        foreach ($query as $group) {
+            $listGroup[] = $group;
+        }
 
-
-
+        return $listGroup;
     }
 
     public function getLike($str)
     {
         $query = DB::table('groups')
             ->select('*')
-            ->where('name', 'LIKE', $str)
-            ->orWhere('desc', 'LIKE', $str)
+            ->where('name', 'LIKE', "%{$str}%")
+            ->orWhere('desc', 'LIKE', "%{$str}%")
             ->get();
         $listGroup = [];
         foreach ($query as $group) {
