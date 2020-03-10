@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
     public function showAll(){
         $notif = new Notification();
-        $notifications=$notif->getAllForUser(auth()->id());
+        $notifications=$notif->getAllUser(auth()->id());
 
         return view('notification.list',
             [
@@ -44,6 +44,13 @@ class NotificationController extends Controller
     public static function MakeReadedNotification($notifId){
         $notif=new Notification();
         $notif->MakeReaded($notifId);
+    }
+
+    public static function readAll(Request $request) {
+        $user = $request->input('user');
+        (new Notification)->readAllUser($user);
+        return redirect('/notifications');
+
     }
 
 }

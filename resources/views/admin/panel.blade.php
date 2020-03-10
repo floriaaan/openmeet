@@ -170,7 +170,7 @@
                                                 <a class="btn btn-warning" href="/user/report/{{ $user->id }}">
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </a>
-                                                <a class="btn btn-danger" href="/admin/user/delete/{{ $user->id }}">
+                                                <a class="btn btn-danger" href="/admin/users/delete/{{ $user->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -185,7 +185,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/user/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="reports" class="my-5">Signalements des utilisateurs (10 derniers signalements)</h4>
@@ -215,12 +215,12 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a class="btn btn-success"
-                                                   href="/admin/report/show/{{ $report['report']->id }}">
+                                                   href="/admin/reports/show/{{ $report['report']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/report/delete/{{ $report['report']->id }}">
+                                                   href="/admin/reports/delete/{{ $report['report']->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -235,7 +235,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/user/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
@@ -316,12 +316,12 @@
                                         <td>{{ $group['group']->datecreate }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/group/show/{{ $group['group']->id }}">
+                                                <a class="btn btn-success" href="/groups/show/{{ $group['group']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/group/delete/{{ $group['group']->id }}">
+                                                   href="/admin/groups/delete/{{ $group['group']->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -336,7 +336,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/group/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/groups/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="events" class="my-5">Evénements (10 derniers événements)</h4>
@@ -364,12 +364,12 @@
                                         <td>{{ $event['event']->datefrom }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/event/show/{{ $event['event']->id }}">
+                                                <a class="btn btn-success" href="/events/show/{{ $event['event']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/event/delete/{{ $event['event']->id }}">
+                                                   href="/admin/events/delete/{{ $event['event']->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -383,7 +383,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/event/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/events/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>

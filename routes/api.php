@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/api/v1/session/unset/error', function () {
+    if(Session()->exists('error')) {
+        Session()->remove('error');
+        return "Removed";
+    }
+    return "Nothing to remove";
+});

@@ -48,6 +48,7 @@ Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfi
 
 //NOTIFICATION Routes
 Route::get('/notifications/', 'NotificationController@showAll')->middleware('auth');
+Route::post('/notifications/readall', 'NotificationController@readall')->middleware('auth');
 
 //MESSAGE routes
 Route::get('/messages/{userId}','MessageController@showUserConversations')->middleware('auth');
