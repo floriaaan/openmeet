@@ -92,13 +92,23 @@ class Group extends Model
             ->where('admin', '=', $userID)
             ->get();
 
+
+
+    }
+
+    public function getLike($str)
+    {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('name', 'LIKE', $str)
+            ->orWhere('desc', 'LIKE', $str)
+            ->get();
         $listGroup = [];
         foreach ($query as $group) {
             $listGroup[] = $group;
         }
 
         return $listGroup;
-
     }
 
 

@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/install', 'HomeController@installPost');
+Route::post('/search', 'HomeController@search');
 
 
 //SUBSCRIPTIONS routes
