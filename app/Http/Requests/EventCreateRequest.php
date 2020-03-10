@@ -32,7 +32,7 @@ class EventCreateRequest extends FormRequest
             'eNumStreet' => 'required',
             'eStreet' => 'required',
             'eCity' => 'required',
-            'eZip' => 'required|numeric|min:1|max:5',
+            'eZip' => 'required|numeric|min:1|max:99999',
             'eCountry' => 'required'
         ];
     }
