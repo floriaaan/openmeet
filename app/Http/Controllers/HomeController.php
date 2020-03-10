@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
+use App\Group;
 use App\Http\Requests\InstallRequest;
+use App\Http\Requests\SearchRequest;
 use App\Notification;
 use App\Message;
+use http\Env\Request;
+
 class HomeController extends Controller
 {
 
@@ -38,7 +43,7 @@ class HomeController extends Controller
     public function installPost(InstallRequest $request)
     {
         $post = $request->input();
-        try{
+        try {
             Setting(['openmeet.install' => true]);
             Setting(['openmeet.name' => $post['iName']]);
             Setting(['openmeet.slogan' => $post['iSlogan']]);
@@ -60,23 +65,41 @@ class HomeController extends Controller
     {
         //Récupération des notifications
         $notifications = [];
-        if(auth()->check()) {
-            $userId=auth()->user()->id;
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
             $notif = new Notification();
-            $notifications=$notif->getLast5ForUser($userId);
+            $notifications = $notif->getLast5ForUser($userId);
         }
 
         //Récupération des messages
         $messages = [];
-        if(auth()->check()) {
-            $userId=auth()->user()->id;
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
             $message = new Message();
         }
 
-        return view('home',[
-            'notifications'=>$notifications,
-            'messages'=>$messages
+        return view('home', [
+            'notifications' => $notifications,
+            'messages' => $messages
         ]);
         return view('home');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $post = $request->input();
+        $searchQuery = [];
+
+        $listGroup = (new Group)->getLike($post['search']);
+        foreach ($listGroup as $group) {
+            $searchQuery[] = [$group, 'type' => 'group'];
+        }
+
+        $listEvent = (new Event)->getLike($post['search']);
+        foreach ($listEvent as $event) {
+            $searchQuery[] = [$event, 'type' => 'event'];
+        }
+
+        return view('search', ['search' => $searchQuery]);
     }
 }

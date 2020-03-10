@@ -110,9 +110,24 @@ class Event extends Model
     {
         $query = DB::table('events')
             ->select('*')
-            ->where('id_group', '=', $groupID )
+            ->where('id_group', '=', $groupID)
             ->get();
 
+        $listEvent = [];
+        foreach ($query as $event) {
+            $listEvent[] = $event;
+        }
+
+        return $listEvent;
+    }
+
+    public function getLike($str)
+    {
+        $query = DB::table('events')
+            ->select('*')
+            ->where('name', 'LIKE', $str)
+            ->orWhere('description', 'LIKE', $str)
+            ->get();
         $listEvent = [];
         foreach ($query as $event) {
             $listEvent[] = $event;
