@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('content')
-    <div class="masthead text-center text-white" style="margin-top: -9vh!important; height: 30%!important;">
+    <div class="masthead text-center text-white" style="margin-top: -10vh!important; height: 30%!important;">
         <div class="masthead-content my-auto">
             <div class="container">
                 <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>

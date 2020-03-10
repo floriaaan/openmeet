@@ -82,24 +82,19 @@ class HomeController extends Controller
             'notifications' => $notifications,
             'messages' => $messages
         ]);
-        return view('home');
     }
 
     public function search(SearchRequest $request)
     {
         $post = $request->input();
-        $searchQuery = [];
 
         $listGroup = (new Group)->getLike($post['search']);
-        foreach ($listGroup as $group) {
-            $searchQuery[] = [$group, 'type' => 'group'];
-        }
-
         $listEvent = (new Event)->getLike($post['search']);
-        foreach ($listEvent as $event) {
-            $searchQuery[] = [$event, 'type' => 'event'];
-        }
 
-        return view('search', ['search' => $searchQuery]);
+        return view('search', [
+            'search' => $post['search'],
+            'groups' => $listGroup,
+            'events' => $listEvent
+        ]);
     }
 }

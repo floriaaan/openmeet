@@ -127,7 +127,7 @@
                             @endforeach
                             <div class="card-footer">
 
-                                <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
+                                <a href="{{ url('/notifications/')}}"
                                    class="btn btn-primary btn-icon-split w-100">
                                 <span class="icon text-white-50">
                                     <i class="fas  fa-arrow-right"></i>
@@ -199,19 +199,6 @@
         </div>
     </footer>
     <div class="mt-nav"></div>
+
 @endsection
 
-@section('js')
-    <script>
-
-        function displayForm() {
-            if ($('#searchForm').hasClass('d-none')) {
-                $('#searchForm').removeClass('d-none');
-                $('#search').focus();
-            } else {
-                $('#searchForm').addClass('d-none');
-            }
-        }
-
-    </script>
-@endsection

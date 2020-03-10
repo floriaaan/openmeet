@@ -11,6 +11,11 @@ class UserController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show($userID){
         return view('user.show', ['user' => (new User)->getOne($userID)]);
     }

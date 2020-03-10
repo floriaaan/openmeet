@@ -49,7 +49,7 @@ class EventController extends Controller
         $event->push();
 
         //notifications
-        return redirect('/events/');
+        return redirect('/groups/show/'.$post['eGroup']);
     }
 
     public function deleteForm()
