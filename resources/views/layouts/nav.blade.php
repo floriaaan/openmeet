@@ -50,6 +50,10 @@
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
                             <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                        @else
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Modération</h6>
+                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de modération</a>
                         @endif
 
                     </div>
