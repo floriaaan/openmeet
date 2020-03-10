@@ -65,6 +65,7 @@ Route::get('/groups/edit/{group_id}', 'GroupController@editForm')->middleware('g
 Route::post('/groups/edit', 'GroupController@editPost')->middleware('groupadmin');
 Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middleware('groupadmin');
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
+Route::post('groups/subscribe', 'GroupController@subscribe')->middleware('auth');
 
 
 //EVENTS routes
