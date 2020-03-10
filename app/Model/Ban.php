@@ -15,4 +15,5 @@ class Ban extends Model
         'importance',
         'description',
     ];
+
 }

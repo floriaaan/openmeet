@@ -65,12 +65,13 @@ class SubscriptionController extends Controller
     {
         $sub=new Subscription();
         $subscriptions=$sub->getAllForUser($userId);
-
+        $infoGroup=[];
         foreach ($subscriptions as $subscription)
         {
             $group=new Group();
-            $infoGroup=$group->getOne($subscription->id_group);
+            $infoGroup[$group->getOne($subscription->id_group)->id]=$group->getOne($subscription->id_group);
         }
+
 
         return view('subscription.usersubs',
             [
