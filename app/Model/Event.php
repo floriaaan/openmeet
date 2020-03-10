@@ -14,7 +14,6 @@ class Event extends Model
     protected $fillable = [
         'id',
         'id_group',
-
         'name',
         'datefrom',
         'dateto',
@@ -126,8 +125,8 @@ class Event extends Model
     {
         $query = DB::table('events')
             ->select('*')
-            ->where('name', 'LIKE', $str)
-            ->orWhere('description', 'LIKE', $str)
+            ->where('name', 'LIKE',"%{$str}%")
+            ->orWhere('description', 'LIKE', "%{$str}%")
             ->get();
         $listEvent = [];
         foreach ($query as $event) {

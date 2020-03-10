@@ -21,6 +21,7 @@ class GroupAdmin
             return $next($request);
         }
         Session::put('error', 'Vous n\'êtes pas administrateur de groupe.');
+
         return redirect('/');
 
 

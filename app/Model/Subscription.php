@@ -51,6 +51,7 @@ class Subscription extends Model
             ->select('*')
             ->where('id_user',"=",$userId)
             ->get();
+
         $subscriptionsArray=$query;
         $listSubscription=[];
         foreach ($subscriptionsArray as $subSQL)

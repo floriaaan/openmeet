@@ -34,8 +34,8 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue {{ auth()->user()->fname }} {{ auth()->user()->lname }}</h6>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{{ url('/groups/list/'.auth()->user()->id) }}">mes groupes</a>
+                        <a class="dropdown-item" href="{{ url('/events/list/'.auth()->user()->id) }}">mes évenements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
@@ -123,7 +123,7 @@
                             @endforeach
                             <div class="card-footer">
 
-                                <a href="{{ url('/notifications/') .'/' .auth()->user()->id }}"
+                                <a href="{{ url('/notifications/')}}"
                                    class="btn btn-primary btn-icon-split w-100">
                                 <span class="icon text-white-50">
                                     <i class="fas  fa-arrow-right"></i>
@@ -195,19 +195,6 @@
         </div>
     </footer>
     <div class="mt-nav"></div>
+
 @endsection
 
-@section('js')
-    <script>
-
-        function displayForm() {
-            if ($('#searchForm').hasClass('d-none')) {
-                $('#searchForm').removeClass('d-none');
-                $('#search').focus();
-            } else {
-                $('#searchForm').addClass('d-none');
-            }
-        }
-
-    </script>
-@endsection

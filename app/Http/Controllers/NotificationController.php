@@ -14,11 +14,11 @@ class NotificationController extends Controller
         //
     }
 
-    public function showAll($userId){
+    public function showAll(){
         $notif = new Notification();
-        $notifications=$notif->getAllForUser($userId);
+        $notifications=$notif->getAllForUser(auth()->id());
 
-        return view('notification.showall',
+        return view('notification.list',
             [
                 'notifications'=>$notifications
             ]);

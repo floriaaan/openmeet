@@ -109,7 +109,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+<script>
+
+    function displayForm() {
+        if ($('#searchForm').hasClass('d-none')) {
+            $('#searchForm').removeClass('d-none');
+            $('#search').focus();
+        } else {
+            $('#searchForm').addClass('d-none');
+        }
+    }
+
+</script>
 @yield('js')
+
+
 </body>
 </html>
 

@@ -20,14 +20,12 @@ class Group extends Model
     ];
 
 
-
     public function getOne($groupId)
     {
         $query = DB::table('groups')
             ->select('*')
             ->where('id', '=', $groupId)
             ->get();
-
 
         return $query[0];
 
@@ -91,18 +89,6 @@ class Group extends Model
             ->select('*')
             ->where('admin', '=', $userID)
             ->get();
-
-
-
-    }
-
-    public function getLike($str)
-    {
-        $query = DB::table('groups')
-            ->select('*')
-            ->where('name', 'LIKE', $str)
-            ->orWhere('desc', 'LIKE', $str)
-            ->get();
         $listGroup = [];
         foreach ($query as $group) {
             $listGroup[] = $group;
@@ -111,5 +97,19 @@ class Group extends Model
         return $listGroup;
     }
 
+    public function getLike($str)
+    {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('name', 'LIKE', "%{$str}%")
+            ->orWhere('desc', 'LIKE', "%{$str}%")
+            ->get();
+        $listGroup = [];
+        foreach ($query as $group) {
+            $listGroup[] = $group;
+        }
+
+        return $listGroup;
+    }
 
 }

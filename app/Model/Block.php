@@ -13,4 +13,5 @@ class Block extends Model
         'date',
         'description',
     ];
+
 }

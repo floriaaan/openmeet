@@ -16,13 +16,17 @@ Auth::routes();
 
 //HOME Routes
 Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home')->name('home');
 Route::post('/install', 'HomeController@installPost');
 Route::post('/search', 'HomeController@search');
 
 
 //SUBSCRIPTIONS routes
+Route::get('/groups/list/{userID}', 'SubscriptionController@ShowUserSubs');
 
+
+//PARTICIPATIONS routes
+Route::get('/events/list/{userID}', 'ParticipationController@ShowUserEvents');
 
 //USER routes
 Route::get('/user/show/{userID}', 'UserController@show');
@@ -43,10 +47,10 @@ Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfi
 
 
 //NOTIFICATION Routes
-Route::get('/notifications/', 'NotificationController@showAll'); //TODO: remove session ID
+Route::get('/notifications/', 'NotificationController@showAll')->middleware('auth');
 
 //MESSAGE routes
-Route::get('/messages/{userId}','MessageController@showUserConversations');
+Route::get('/messages/{userId}','MessageController@showUserConversations')->middleware('auth');
 
 
 //SIGNALEMENT routes
@@ -55,12 +59,13 @@ Route::get('/messages/{userId}','MessageController@showUserConversations');
 //GROUP routes
 Route::get('/groups/show/{group_id}', 'GroupController@show');
 Route::get('/groups/list', 'GroupController@showAll');
-Route::get('/groups/create', 'GroupController@addForm');
-Route::post('/groups/create', 'GroupController@addPost');
-Route::get('/groups/edit/{group_id}', 'GroupController@editForm');
-Route::post('/groups/edit', 'GroupController@editPost');
-Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm');
-Route::post('/groups/delete/', 'GroupController@deletePost');
+Route::get('/groups/create', 'GroupController@addForm')->middleware('auth');
+Route::post('/groups/create', 'GroupController@addPost')->middleware('auth');
+Route::get('/groups/edit/{group_id}', 'GroupController@editForm')->middleware('groupadmin');
+Route::post('/groups/edit', 'GroupController@editPost')->middleware('groupadmin');
+Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middleware('groupadmin');
+Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
+Route::post('groups/subscribe', 'GroupController@subscribe')->middleware('auth');
 
 
 //EVENTS routes
