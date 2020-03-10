@@ -23,23 +23,29 @@
 
     </div>
 
-    <div class="container-fluid mt-3">
-        <div class="card rounded mx-3 shadow-lg">
+    <div class="container-fluid mt-5">
+        <div class="card rounded mx-3 shadow-lg" id="pwa-card">
             <div class="row">
                 <div class="col-lg-9">
-                    <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos fugiat
-                        molestiae non quaerat quibusdam similique tempore velit vero! Accusamus aperiam esse ex id quis,
-                        quisquam quos sapiente? Alias, architecto, nesciunt!</p>
+                    <div class="p-5">
+                        <p class="display-4">Installer l'application</p>
+                        <p class="lead">Vos Meets dans la poche 🤳</p>
+
+                        <hr class="mx-5 my-4">
+                        <button class="mb-2 ml-lg-2 btn btn-xl btn-primary rounded-pill"
+                                id="pwa-btn">
+                            Installer <?php echo e(Setting('openmeet.title')); ?>
+
+                        </button>
+                    </div>
+
                 </div>
 
-                <div class="col-lg bg-primary">
-                    <img class="card-img p-5" src="/assets/logo.svg">
+                <div class="col-lg">
+                    <div class=" bg-primary">
+                        <img class="img-pwa p-5" src="/assets/logo.svg">
 
-                    <hr class="mx-5 my-4">
-                    <button class="mx-auto mb-2 btn btn-xl btn-primary rounded-pill">
-                        Installer <?php echo e(Setting('openmeet.title')); ?>
-
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,7 +115,7 @@
             height: 100px;
             width: 100px;
             top: 500px;
-            right: 300px;
+            left: 300px;
             animation: bounce 4s infinite alternate;
             -webkit-animation: bounce 4s infinite alternate;
         }
@@ -119,8 +125,8 @@
             width: 500px;
             top: 50px;
             right: 10px;
-            animation: bounce 5s infinite alternate;
-            -webkit-animation: bounce 5s infinite alternate;
+            animation: bounce 8s infinite alternate;
+            -webkit-animation: bounce 8s infinite alternate;
         }
 
         @keyframes  bounce {
@@ -156,12 +162,76 @@
             }
         }
 
-        .bg-primary{
+        .bg-primary {
             background-image: radial-gradient(circle, var(--openmeet), #ffffff);
         }
 
 
+        .img-pwa {
+            margin-left: 5%;
+            margin-right: 5%;
+            width: 90%;
+        }
+
+        .btn-pwa {
+
+        }
+
     </style>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js'); ?>
+
+    <script>
+
+        let deferredPrompt;
+        window.addEventListener('load', () => {
+            if (navigator.standalone) {
+                console.log('Launched: Installed (iOS)');
+                HidePromotion();
+            } else if (matchMedia('(display-mode: standalone)').matches) {
+                console.log('Launched: Installed');
+                HidePromotion();
+            } else {
+                console.log('Launched: Browser Tab');
+            }
+        });
+
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            console.log(e);
+            // Update UI notify the user they can install the PWA
+
+        });
+
+
+        document.getElementById('pwa-btn').addEventListener('click', (e) => {
+            // Hide the app provided install promotion
+
+            // Show the install prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    HidePromotion();
+
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+            })
+        });
+
+        function HidePromotion() {
+            $('#pwa-card').toggleClass('d-none');
+        }
+
+
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/home.blade.php ENDPATH**/ ?>

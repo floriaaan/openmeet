@@ -85,7 +85,8 @@ class MessageController extends Controller
         return view('message.conversationslist',
         [
             "personalInfoConversations"=>$personalInfoConversations,
-            "personalLastMessages"
+            "personalLastMessages"=>$personalLastMessages,
+            "group"
         ]);
 
     }

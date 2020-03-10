@@ -58,7 +58,19 @@ class Message extends Model
             ->orderBy('date', 'desc')
             ->limit(1)
             ->get();
-        $queryResult = $query[0];
+
+        $contentSplitted = mb_str_split($query[0]->content);
+        $newContent = "";
+
+        if(count($contentSplitted)>=40)
+            for($i=0;$i<40;$i++)
+            {
+                    {
+                        $newContent = $newContent.$contentSplitted[$i];
+                    }
+                $query[0]->content=$newContent.' ...';
+            }
+        $queryResult=$query[0];
         return $queryResult;
     }
 
@@ -71,7 +83,19 @@ class Message extends Model
                 ->orderBy('date', 'desc')
                 ->limit(1)
                 ->get();
-            try{$queryResult = $query[0];}
+            try{
+                $contentSplitted = mb_str_split($query[0]->content);
+                $newContent = "";
+
+                if(count($contentSplitted)>=40)
+                    for($i=0;$i<40;$i++)
+                    {
+                        {
+                            $newContent = $newContent.$contentSplitted[$i];
+                        }
+                        $query[0]->content=$newContent.' ...';
+                    }
+                $queryResult = $query[0];}
             catch (\Exception $e){
                 $message=new Message();
                 $message->id=0;

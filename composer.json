@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
         "laravelcollective/html": "^6.0",
-        "silviolleite/laravelpwa": "^1.0"
+        "silviolleite/laravelpwa": "^1.0",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
