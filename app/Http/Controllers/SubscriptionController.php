@@ -72,7 +72,7 @@ class SubscriptionController extends Controller
             $infoGroup[$group->getOne($subscription->id_group)->id]=$group->getOne($subscription->id_group);
         }
 
-var_dump($infoGroup);
+
         return view('subscription.usersubs',
             [
                 'subscriptions'=>$subscriptions,

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container ">
-        @foreach($listGroups as $group)
+        @foreach($groups as $group)
             <div class="card rounded shadow mt-2 mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-4" style="overflow: hidden">

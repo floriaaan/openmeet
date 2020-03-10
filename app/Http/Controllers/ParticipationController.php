@@ -70,7 +70,6 @@ class ParticipationController extends Controller
             $infoEvent[$event->getOne($participation->event)->id]=$event->getOne($participation->event);
         }
 
-        var_dump($infoEvent);
         return view('participation.userevents',
             [
                 'participations'=>$participations,
