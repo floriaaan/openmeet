@@ -34,8 +34,10 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue {{ auth()->user()->fname }} {{ auth()->user()->lname }}</h6>
-                        <a class="dropdown-item" href="{{ url('/groups/list/'.auth()->user()->id) }}">mes groupes</a>
-                        <a class="dropdown-item" href="{{ url('/events/list/'.auth()->user()->id) }}">mes évenements</a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Participations</h6>
+                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes groupes</a>
+                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"

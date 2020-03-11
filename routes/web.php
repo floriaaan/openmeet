@@ -21,17 +21,18 @@ Route::post('/install', 'HomeController@installPost');
 Route::post('/search', 'HomeController@search');
 
 
-//SUBSCRIPTIONS routes
-Route::get('/groups/list/{userID}', 'SubscriptionController@ShowUserSubs');
 
-
-//PARTICIPATIONS routes
-Route::get('/events/list/{userID}', 'ParticipationController@ShowUserEvents');
 
 //USER routes
 Route::get('/user/show/{userID}', 'UserController@show');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
+//User SUBSCRIPTIONS routes
+Route::get('/user/groups', 'SubscriptionController@ShowUserSubs');
+//User PARTICIPATIONS routes
+Route::get('/user/events', 'ParticipationController@showEvents');
+
+
 
 //ADMIN GROUP routes
 
@@ -78,6 +79,8 @@ Route::get('/events/edit/{event_id}', 'EventController@editForm');
 Route::post('/events/edit', 'EventController@editPost');
 Route::get('/events/delete/{event_id}', 'EventController@deleteForm');
 Route::get('/events/delete/', 'EventController@deletePost');
+Route::post('/events/participate/add/', 'ParticipationController@createParticipation')->middleware('auth');
+Route::post('/events/participate/remove/', 'ParticipationController@deleteParticipation')->middleware('auth');
 
 
 

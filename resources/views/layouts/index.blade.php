@@ -114,7 +114,7 @@
     $('#alert-close').click(function () {
         $.ajax({
             url: '{{url('/api/v1/session/unset/error')}}',
-            type: 'POST',
+            type: 'post',
             success: function(data) {
                 console.log('success', data)
             },
