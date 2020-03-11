@@ -22,6 +22,24 @@ class Message extends Model
         'forgroup',
     ];
 
+    public function getGroupChat($groupId){
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('receiver','=',$groupId)
+            ->where('forgroup','=',1)
+            ->orderByDesc('date')
+            ->get();
+        $queryArray = $query;
+        $messageArray = [];
+        foreach ($queryArray as $messageSQL){
+            $message=new Message();
+            $message=$messageSQL;
+            $messageArray[]=$message;
+
+        }
+        return $messageArray;
+    }
+
     public function getPersonnalConversationsForUser($userId)
     {
         $queryConv = DB::table('messages')
@@ -97,14 +115,14 @@ class Message extends Model
                     }
                 $queryResult = $query[0];}
             catch (\Exception $e){
-                $message=new Message();
+                $message=new \stdClass();
                 $message->id=0;
                 $message->receiver=$groupId;
                 $message->sender=0;
                 $message->content="Aucun message";
                 $message->forgroup=1;
 
-                $queryResult=$message->attributes;
+                $queryResult=$message;
 
                 }
 
@@ -113,9 +131,9 @@ class Message extends Model
     }
 
 
-    public function GetMessagesForConversation($userId_1, $userId_2)
+    public function GetMessagesForConversation($userId_2)
     {
-        //
+        $userId = auth()->id();
     }
 
 

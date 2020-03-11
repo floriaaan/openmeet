@@ -50,7 +50,8 @@ Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfi
 Route::get('/notifications/', 'NotificationController@showAll')->middleware('auth');
 
 //MESSAGE routes
-Route::get('/messages/{userId}','MessageController@showUserConversations')->middleware('auth');
+Route::get('/messages','MessageController@showUserConversations')->middleware('auth');
+Route::get('/messages/{typeConversation}/{correspondant}','MessageController@showChat')->middleware('auth');
 
 
 //SIGNALEMENT routes
