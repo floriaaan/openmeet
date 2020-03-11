@@ -7,9 +7,9 @@
             <div class="col-lg-3 d-none-custom">
 
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 20px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 1px">
                     <h5 class="list-title">Paramètres du site</h5>
-                    <a class="list-group-item list-group-item-action" href="#settings">
+                    <a class="list-group-item list-group-item-action" href="#settings" >
                         Paramètres du site
 
                     </a>
@@ -23,7 +23,7 @@
                     </a>
                 </div>
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 205px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 180px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
                         Utilisateurs
@@ -33,6 +33,15 @@
                         Signalements d'utilisateurs
                         <span class="badge badge-primary badge-pill">{{$reportCount}}</span>
                     </a>
+                <!--
+                    <a class="list-group-item list-group-item-action" href="#bans">
+                        Banissements d'utilisateurs
+                        <span class="badge badge-primary badge-pill">{{$banCount}}</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#blocks">
+                        Blocages d'utilisateurs
+                        <span class="badge badge-primary badge-pill">{{$blockCount}}</span>
+                    </a>-->
                     <a class="list-group-item list-group-item-action" href="#messages">
                         Messages
                         <span class="badge badge-primary badge-pill">{{$messageCount['foruser']}}</span>
@@ -70,7 +79,6 @@
                         <div class="form-group">
                             {!! Form::label('uColor', 'Couleur primaire', ['class' =>'control-label']) !!}
                             {!! Form::color('uColor', $value=Setting('openmeet.color'), ['class' => 'form-control']) !!}
-
                         </div>
 
                         <div class="form-group">
@@ -221,7 +229,105 @@
 
                                                 <a class="btn btn-danger"
                                                    href="/admin/reports/delete/{{ $report['report']->id }}">
-                                                    <i class="fas fa-skull-crossbones"></i>
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @endforeach
+                            @endif
+
+                            </tbody>
+                        </table>
+
+                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+                    </div>
+                    <h4 id="bans" class="my-5">bannissement des utilisateurs (10 derniers Bannissements)</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Concerné</th>
+                                <th scope="col">Du groupe</th>
+                                <th scope="col">Créé le</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if(!empty($banList))
+
+                                @foreach($banList as $ban)
+
+                                    <tr>
+                                        <td>#{{ $ban['ban']->id }}</td>
+                                        <td>{{ $ban['banned']->fname }} {{ $ban['banned']->lname }}</td>
+                                        <td>{{ $ban['banisher']->name }}</td>
+                                        <td>{{ $ban['ban']->date }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class="btn btn-success"
+                                                   href="/admin/ban/show/{{ $ban['ban']->id }}">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+
+                                                <a class="btn btn-danger"
+                                                   href="/admin/ban/delete/{{ $ban['ban']->id }}">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @endforeach
+                            @endif
+
+                            </tbody>
+                        </table>
+
+                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+                    </div>
+                    <h4 id="blocks" class="my-5">blocages des utilisateurs (10 derniers Blocages)</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Concerné</th>
+                                <th scope="col">Par</th>
+                                <th scope="col">Créé le</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if(!empty($blockList))
+
+                                @foreach($blockList as $block)
+
+                                    <tr>
+                                        <td>#{{ $block['block']->id }}</td>
+                                        <td>{{ $block['target']->fname }} {{ $block['target']->lname }}</td>
+                                        <td>{{ $block['blocker']->fname }} {{ $block['blocker']->lname }}</td>
+                                        <td>{{ $block['block']->date }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class="btn btn-success"
+                                                   href="/admin/ban/show/{{ $block['block']->id }}">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+
+                                                <a class="btn btn-danger"
+                                                   href="/admin/ban/delete/{{ $block['block']->id }}">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </div>
 

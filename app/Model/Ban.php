@@ -3,17 +3,38 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Ban extends Model
 {
     protected $fillable = [
         'id',
-        'banisher',
         'banned',
+        'banisher',
         'date',
-        'isread',
-        'importance',
-        'description',
+        'description'
     ];
 
+    public function getLimit($limit)
+    {
+        $query=DB::table('bans')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
+    public function getCount()
+    {
+        $query=DB::table('bans')
+            ->select('*')
+            ->get();
+
+
+        return $query->count();
+
+    }
 }
