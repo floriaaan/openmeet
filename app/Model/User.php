@@ -82,4 +82,17 @@ class User extends Authenticatable
 
     }
 
+    public function getAll()
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->get();
+
+        $listUser = [];
+        foreach ($query as $user) {
+            $listUser[] = $user;
+        }
+        return $listUser;
+    }
+
 }

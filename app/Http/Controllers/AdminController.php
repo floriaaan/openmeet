@@ -139,7 +139,7 @@ class AdminController extends Controller
 
     public function listUser()
     {
-        return 'la liste';
+        return view('admin.users.list', ['users' => (new User)->getAll()]);
     }
 
     public function deleteUser($userID)

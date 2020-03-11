@@ -41,9 +41,9 @@ Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
-Route::get('/admin/user/', 'AdminController@listUser');
-Route::get('/admin/user/delete/{userID}', 'AdminController@deleteUser');
-Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
+Route::get('/admin/users/', 'AdminController@listUser');
+Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
+Route::get('/admin/users/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
 
 
 //NOTIFICATION Routes
