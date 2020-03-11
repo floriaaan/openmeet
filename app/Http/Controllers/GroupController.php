@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Group;
 use App\Http\Requests\GroupCreateRequest;
+use App\Subscription;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -57,10 +58,17 @@ class GroupController extends Controller
 
     public function show($groupID)
     {
-        return view('group.show', [
+
+        $datas = [
             'group' => (new Group)->getOne($groupID),
             'listEvent' => (new Event)->getByGroup($groupID)
-        ]);
+        ];
+
+        if(auth()->check()) {
+            $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
+        }
+
+        return view('group.show', $datas);
     }
 
     public function showAll()

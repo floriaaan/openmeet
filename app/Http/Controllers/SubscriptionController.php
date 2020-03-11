@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Http\Requests\SubscriptionRequest;
 use App\Subscription;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -11,73 +12,62 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class SubscriptionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
     }
 
-    public function Subscribe ($userId,$groupId)
+    public function createSubscription(SubscriptionRequest $request)
     {
-        $sub=new Subscription();
-        $subscriptions=$sub->getAllForUser($userId);
+        $post = $request->input();
+        $userId = $post['user'];
+        $groupId = $post['group'];
+        if (!(new Subscription)->isSubscribed($userId, $groupId)) {
+            $subscription = new Subscription();
+            $subscription->id_user = $userId;
+            $subscription->id_group = $groupId;
+            $subscription->date = date('Y-m-d');
+            $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
+            $subscription->push();
+        } else {
+            Session()->put('errorSubscription', 'Vous êtes déjà abonné à ce groupe');
+        }
+        return redirect('/user/groups');
 
-        $alreadySub=0;
-        foreach ($subscriptions as $subscription)
-        {
-            if ($subscription->id_user == $userId)
-            {
-                $alreadySub=1;
-            }
+    }
+    public function deleteSubscription(SubscriptionRequest $request)
+    {
+        $post = $request->input();
+        $userId = $post['user'];
+        $groupId = $post['group'];
+        if ((new Subscription)->isSubscribed($userId, $groupId)) {
+            (new Subscription)->remove((new Subscription)->getSubscribed($userId, $groupId)->id);
+        } else {
+            Session()->put('errorParticipation', 'Vous ne participez pas à cet évenement');
         }
 
-        if($alreadySub==0) {
-            $sub = new Subscription();
-            $sub->create($userId, $groupId);
-            //TODO: header to the relative group page;
-
-        }
-        else{
-            $_SESSION['errorSubscription']="Vous êtes déjà abonné à ce groupe";
-            //TODO: header to the relative group page;
-        }
+        return redirect('/user/groups');
 
     }
 
-    public function ShowGroupSubs($groupId)
+    public function showGroups()
     {
-        $sub=new Subscription();
-        $subscriptions=$sub->getAllForGroup($groupId);
-
-        foreach ($subscriptions as $subscription)
-        {
-            $user=new User();
-            $infoUser=$user->getOne($subscription->id_user);
+        $subscriptions = (new Subscription())->getUser(auth()->id());
+        $groups = [];
+        foreach ($subscriptions as $subscription) {
+            $groups[] = (new Group)->getOne($subscription->id_group);
         }
 
-        return view('subscription.groupsubs',
-            [
-                'subscriptions'=>$subscriptions,
-                'users'=>$infoUser
-            ]);
-    }
-
-    public function ShowUserSubs($userId)
-    {
-        $sub=new Subscription();
-        $subscriptions=$sub->getAllForUser($userId);
-        $infoGroup=[];
-        foreach ($subscriptions as $subscription)
-        {
-            $group=new Group();
-            $infoGroup[$group->getOne($subscription->id_group)->id]=$group->getOne($subscription->id_group);
-        }
-
-
-        return view('subscription.usersubs',
-            [
-                'subscriptions'=>$subscriptions,
-                'groups'=>$infoGroup
-            ]);
+        return view('subscription.list', [
+            'subscriptions' => $subscriptions,
+            'groups' => $groups
+        ]);
     }
 
     public static function SwitchAcceptNotif($subId,$redirect)

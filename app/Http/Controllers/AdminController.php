@@ -151,4 +151,90 @@ class AdminController extends Controller
     {
         return 'delete confirmed (c\'est super pas cool) ' . $userID;
     }
+
+    public function oldindex()
+    {
+        $user = (new User);
+        $listUser = $user->getLimit(5);
+        $countUser = $user->getCount();
+
+        $message = (new Message);
+        $listMessage = [];
+        $rawListMsg = $message->getLimit(10);
+
+        foreach ($rawListMsg as $msg) {
+            if ($msg->forgroup == 0) {
+                $listMessage[] = [
+                    'sender' => $user->getOne($msg->sender),
+                    'receiver' => $user->getOne($msg->receiver),
+                    'msg' => $msg
+                ];
+            } else {
+                $listMessage[] = [
+                    'sender' => $user->getOne($msg->sender),
+                    'receiver' => (new Group)->getOne($msg->receiver),
+                    'msg' => $msg
+                ];
+            }
+
+        }
+        $countMessage = $message->getCount();
+
+        $groups = (new Group);
+        $countGroup = $groups->getCount();
+        $rawListGroup = $groups->getLimit(10);
+
+        $listGroup = [];
+
+        foreach ($rawListGroup as $group) {
+            $listGroup[] = [
+                'group' => $group,
+                'admin' => $user->getOne($group->admin)
+            ];
+
+        }
+
+        $events = (new Event);
+        $countEvent = $events->getCount();
+        $rawListEvent = $events->getLimit(10);
+
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'group' => $groups->getOne($event->id_group)
+            ];
+
+        }
+
+        $reports = (new Signalement);
+        $countReport = $reports->getCount();
+        $rawListReport = $reports->getLimit(10);
+
+        $listReport = [];
+        foreach ($rawListReport as $report) {
+            $listReport[] = [
+                'report' => $report,
+                'sender' => $user->getOne($report->submitter),
+                'concerned' => $user->getOne($report->concerned),
+            ];
+
+        }
+
+        return view('admin.panel', [
+            'userList' => $listUser,
+            'userCount' => $countUser,
+            'messageList' => $listMessage,
+            'messageCount' => $countMessage,
+            'groupList' => $listGroup,
+            'groupCount' => $countGroup,
+            'eventList' => $listEvent,
+            'eventCount' => $countEvent,
+            'reportList' => $listReport,
+            'reportCount' => $countReport,
+
+        ]);
+
+
+    }
 }
