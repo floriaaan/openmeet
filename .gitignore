@@ -1,6 +1,12 @@
-.idea/.gitignore
-.idea/misc.xml
-.idea/modules.xml
-.idea/openmeet.iml
-.idea/vcs.xml
+/node_modules
+/public/hot
 /vendor
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/storage/logs
+public/conf/

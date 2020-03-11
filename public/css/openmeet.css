@@ -1,0 +1,132 @@
+.openmeet-title {
+    font-family: 'Baloo', serif;
+}
+
+.openmeet-install {
+    font-size: 7em;
+    margin-bottom: 10% !important;
+}
+
+.openmeet-nav {
+    font-size: 2em;
+}
+
+.wall-white {
+    background: url("/assets/wall-white-30.svg") fixed no-repeat;
+    background-size: cover;
+}
+
+.footer {
+    z-index: 5000;
+}
+
+.max-height {
+    height: 100vh;
+    margin: initial;
+}
+
+.openmeet-badge {
+    position: absolute;
+    top: 1px;
+    right: -1px;
+}
+
+.openmeet-search {
+    float: right;
+    width: 32px;
+    height: 32px;
+}
+
+.openmeet-search:hover {
+    width: 100%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+
+.openmeet-search:focus {
+    width: 100%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+@media (max-width: 700px) {
+    .openmeet-install {
+        font-size: 4em;
+    }
+}
+
+.navbar-custom {
+
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-custom .navbar-brand {
+
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+}
+
+.navbar-custom .navbar-nav .nav-item .nav-link {
+
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+.mt-nav {
+    margin-top: 4.5rem !important;
+}
+
+@media (max-width: 991px) {
+    .d-none-custom {
+        display: none;
+    }
+
+    .btn-xl {
+        padding: 1.0rem 2.4rem;
+        font-size: 0.6rem;
+    }
+
+    .nav-responsive-patch {
+        float: right;
+    }
+
+    .nav-responsive-patch2 {
+        margin-top: 6px;
+    }
+}
+
+.alert {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    z-index: 5100;
+    max-width: 550px;
+}
+
+.w-list-admin {
+    width: 200px;
+}
+
+.btn-xl {
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+.btn-xs {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+.list-title {
+    font-size: 0.8rem!important;
+    font-weight: 300;
+}
+
