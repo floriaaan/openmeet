@@ -11,6 +11,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class SubscriptionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //

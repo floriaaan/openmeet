@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -14,51 +14,75 @@ class Participation extends Model
     ];
 
 
-    public function getOne($parId)
-    {
-        $query=DB::table('participations')
-            ->select('*')
-            ->find($parId)
-            ->get();
-
-        var_dump($query);
-    }
-
-    public function getAllForEvent($eventId)
-    {
-        $query=DB::table('participations')
-            ->select('*')
-            ->where('event',"=",$eventId)
-            ->get();
-        $participationsArray=$query;
-        $listParticipation=[];
-        foreach ($participationsArray as $parSQL)
-        {
-            $listParticipation[]=$parSQL;
-        }
-        return $listParticipation;
-    }
-
-    public function getAllForUser($userId)
-    {
-        $query=DB::table('participations')
-            ->select('*')
-            ->where('user',"=",$userId)
-            ->get();
-
-        $participationsArray=$query;
-        $listParticipation=[];
-        foreach ($participationsArray as $parSQL)
-        {
-            $listParticipation[]=$parSQL;
-        }
-        return $listParticipation;
-    }
-
-
-    public function Remove($parId)
+    public function getOne($participationId)
     {
         $query = DB::table('participations')
-            ->delete($parId);
+            ->select('*')
+            ->find($participationId)
+            ->get();
+
+        return $query[0];
+    }
+
+    public function getEvent($eventId)
+    {
+        $query = DB::table('participations')
+            ->select('*')
+            ->where('event', "=", $eventId)
+            ->get();
+        $listParticipation = [];
+        foreach ($query as $participation) {
+            $listParticipation[] = $participation;
+        }
+        return $listParticipation;
+    }
+
+    public function getUser($userId)
+    {
+        $query = DB::table('participations')
+            ->select('*')
+            ->where('user', "=", $userId)
+            ->get();
+
+        $listParticipation = [];
+        foreach ($query as $participation) {
+            $listParticipation[] = $participation;
+        }
+        return $listParticipation;
+    }
+
+
+    public function remove($parId)
+    {
+        try {
+            $query = DB::table('participations')
+                ->delete($parId);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
+
+    public function isParticipating($userID, $eventID)
+    {
+        $query = DB::table('participations')
+            ->select('*')
+            ->where('user', '=', $userID)
+            ->where('event', '=', $eventID)
+            ->get();
+
+        return !empty($query[0]);
+    }
+
+    public function getParticipating($userID, $eventID)
+    {
+        $query = DB::table('participations')
+            ->select('*')
+            ->where('user', '=', $userID)
+            ->where('event', '=', $eventID)
+            ->get();
+
+        return $query[0];
     }
 }

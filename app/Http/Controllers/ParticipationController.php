@@ -2,79 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ParticipationRequest;
+use App\Model\Participation;
 use App\Event;
-use App\Participation;
-use App\User;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+
 
 class ParticipationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
     }
 
-    public function Participe ($userId,$eventId)
+    public function createParticipation(ParticipationRequest $request)
     {
-        $sub=new Participation();
-        $participations=$sub->getAllForUser($userId);
+        $post = $request->input();
+        $userId = $post['user'];
+        $eventId = $post['event'];
+        if (!(new Participation)->isParticipating($userId, $eventId)) {
+            $participation = new Participation();
+            $participation->user = $userId;
+            $participation->event = $eventId;
+            $participation->push();
+        } else {
+            Session()->put('errorParticipation', 'Vous participez déja à cet évenement');
+        }
+        return redirect('/user/events');
 
-        $alreadyPar=0;
-        foreach ($participations as $participation)
-        {
-            if ($participation->user == $userId)
-            {
-                $alreadyPar=1;
-            }
+    }
+    public function deleteParticipation(ParticipationRequest $request)
+    {
+        $post = $request->input();
+        $userId = $post['user'];
+        $eventId = $post['event'];
+        if ((new Participation)->isParticipating($userId, $eventId)) {
+            (new Participation)->remove((new Participation)->getParticipating($userId, $eventId)->id);
+        } else {
+            Session()->put('errorParticipation', 'Vous ne participez pas à cet évenement');
         }
 
-        if($alreadyPar==0) {
-            $sub = new Participation();
-            $sub->create($userId, $eventId);
-
-        }
-        else{
-            $_SESSION['errorParticipation']="Vous participez déja à cet évenement";
-        }
+        return redirect('/user/events');
 
     }
 
-    public function ShowEventParticipations($eventId)
+    public function showEvents()
     {
-        $sub=new Participation();
-        $participations=$sub->getAllForEvent($eventId);
-
-        foreach ($participations as $participation)
-        {
-            $user=new User();
-            $infoUser=$user->getOne($participation->user);
+        $participations = (new Participation)->getUser(auth()->id());
+        $events = [];
+        foreach ($participations as $participation) {
+            $events[] = (new Event)->getOne($participation->event);
         }
 
-        return view('participation.eventparticipations',
-            [
-                'participations'=>$participations,
-                'users'=>$infoUser
-            ]);
-    }
-
-    public function ShowUserEvents($userId)
-    {
-        $par=new Participation();
-        $participations=$par->getAllForUser($userId);
-        $infoEvent=[];
-        foreach ($participations as $participation)
-        {
-            $event=new Event();
-            $infoEvent[$event->getOne($participation->event)->id]=$event->getOne($participation->event);
-        }
-
-        return view('participation.userevents',
-            [
-                'participations'=>$participations,
-                'events'=>$infoEvent
-            ]);
+        return view('participation.userevents', [
+            'participations' => $participations,
+            'events' => $events
+        ]);
     }
 
 }

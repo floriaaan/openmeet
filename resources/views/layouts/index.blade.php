@@ -111,6 +111,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
 <script>
 
+    $('#alert-close').click(function () {
+        $.ajax({
+            url: '{{url('/api/v1/session/unset/error')}}',
+            type: 'post',
+            success: function(data) {
+                console.log('success', data)
+            },
+            error: function (data) {
+                console.log('error', data)
+            }
+        })
+    });
+
+
     function displayForm() {
         if ($('#searchForm').hasClass('d-none')) {
             $('#searchForm').removeClass('d-none');

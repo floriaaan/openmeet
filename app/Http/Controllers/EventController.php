@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Group;
 use App\Http\Requests\EventCreateRequest;
+use App\Model\Participation;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -66,7 +67,14 @@ class EventController extends Controller
 
     public function show($eventID)
     {
-        return view('event.show', ['event' => (new Event)->getOne($eventID)]);
+        $datas = [
+            'event' => (new Event)->getOne($eventID)
+        ];
+
+        if(auth()->check()) {
+            $datas['isparticipating'] = (new Participation)->isParticipating(auth()->id(), $eventID);
+        }
+        return view('event.show', $datas);
     }
 
     public function showAll()

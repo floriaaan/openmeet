@@ -34,8 +34,10 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue {{ auth()->user()->fname }} {{ auth()->user()->lname }}</h6>
-                        <a class="dropdown-item" href="{{ url('/groups/list/'.auth()->user()->id) }}">mes groupes</a>
-                        <a class="dropdown-item" href="{{ url('/events/list/'.auth()->user()->id) }}">mes évenements</a>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Participations</h6>
+                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes groupes</a>
+                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
@@ -150,25 +152,35 @@
                 </div>
             @endif
 
-            @if (auth()->check())
-            <div class="dropleft nav-responsive-patch ml-1">
-                <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-lg fa-plus"></i>
+            @if(auth()->check())
+                <a class="nav-link" href="{{url('/messages')}}">
+                    <i class="fas fa-lg fa-envelope"></i>
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="navDrop">
-                    <a class="dropdown-item" href="/groups/create"><i class="fas fa-users"></i> Créer un groupe</a>
-                    <a class="dropdown-item" href="/events/create"><i class="fas fa-handshake"></i> Créer un évenement</a>
-                </div>
-            </div>
             @endif
 
-            <button class="ml-1 btn-link border-0 nav-responsive-patch nav-responsive-patch2" onclick="displayForm()" style="background-color: initial;">
+            @if (auth()->check())
+                <div class="dropleft nav-responsive-patch ml-1">
+                    <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-lg fa-plus"></i>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navDrop">
+                        <a class="dropdown-item" href="/groups/create"><i class="fas fa-users"></i> Créer un groupe</a>
+                        <a class="dropdown-item" href="/events/create"><i class="fas fa-handshake"></i> Créer un
+                            évenement</a>
+                    </div>
+                </div>
+            @endif
+
+            <button class="ml-1 btn-link border-0 nav-responsive-patch nav-responsive-patch2" onclick="displayForm()"
+                    style="background-color: initial;">
                 <i class="fas fa-lg fa-search"></i>
             </button>
 
-            <form method="POST" action="{{url('/search')}}" class="d-none nav-responsive-patch nav-responsive-patch2" id="searchForm">
+            <form method="POST" action="{{url('/search')}}" class="d-none nav-responsive-patch nav-responsive-patch2"
+                  id="searchForm">
                 @csrf
                 <input type="text" name="search" id="search" required class="form-control openmeet-search">
 
@@ -180,18 +192,18 @@
     @if(Session::has('error'))
         <div class="alert alert-danger">
             {{Session::get('error')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     @endif
     <div class="mt-nav">
-    @yield('content')
+        @yield('content')
     </div>
 
     <footer class="footer navbar-custom mt-auto py-3 fixed-bottom">
         <div class="container">
-            <span class="text-muted">&copy; OpenMeet - 2020</span>
+            <span class="text-muted">&copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}" class="btn-link">Conditions générales d'utilisation</a></span>
         </div>
     </footer>
     <div class="mt-nav"></div>

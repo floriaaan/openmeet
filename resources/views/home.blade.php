@@ -1,11 +1,17 @@
 @extends('layouts.nav')
 
+@section('title')
+    Accueil
+@endsection
+
 @section('content')
     <div class="masthead text-center text-white" style="margin-top: -10vh!important; height: 30%!important;">
         <div class="masthead-content my-auto">
             <div class="container">
                 <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
-                <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
+                <h2 class="masthead-subheading mb-0">{{(new \App\Event)->getCount()}}
+                    événement @if((new \App\Event)->getCount() > 1)s @endif à proximité | {{(new \App\Group)->getCount()}}
+                    groupe @if((new \App\Group)->getCount() > 1)s @endif à proximité</h2>
                 @if(auth()->check())
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
@@ -204,7 +210,6 @@
             e.preventDefault();
             // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            console.log(e);
             // Update UI notify the user they can install the PWA
 
         });
