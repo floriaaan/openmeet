@@ -10,6 +10,7 @@ class Subscription extends Model
 {
 
     protected $fillable = [
+
         'id',
         'id_user',
         'id_group',

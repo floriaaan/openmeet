@@ -50,7 +50,8 @@ Route::get('/notifications/', 'NotificationController@showAll')->middleware('aut
 Route::post('/notifications/readall', 'NotificationController@readall')->middleware('auth');
 
 //MESSAGE routes
-Route::get('/messages/{userId}','MessageController@showUserConversations')->middleware('auth');
+Route::get('/messages','MessageController@showUserConversations')->middleware('auth');
+Route::get('/messages/{typeConversation}/{correspondant}','MessageController@showChat')->middleware('auth');
 
 
 //SIGNALEMENT routes
