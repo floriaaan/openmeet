@@ -27,10 +27,8 @@ Route::post('/search', 'HomeController@search');
 Route::get('/user/show/{userID}', 'UserController@show');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
-//User SUBSCRIPTIONS routes
-Route::get('/user/groups', 'SubscriptionController@ShowUserSubs');
-//User PARTICIPATIONS routes
-Route::get('/user/events', 'ParticipationController@showEvents');
+Route::get('/user/groups', 'SubscriptionController@showGroups')->middleware('auth');
+Route::get('/user/events', 'ParticipationController@showEvents')->middleware('auth');
 
 
 
@@ -67,7 +65,8 @@ Route::get('/groups/edit/{group_id}', 'GroupController@editForm')->middleware('g
 Route::post('/groups/edit', 'GroupController@editPost')->middleware('groupadmin');
 Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middleware('groupadmin');
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
-Route::post('groups/subscribe', 'GroupController@subscribe')->middleware('auth');
+Route::post('groups/subscribe/add', 'SubscriptionController@createSubscription')->middleware('auth');
+Route::post('groups/subscribe/remove', 'SubscriptionController@deleteSubscription')->middleware('auth');
 
 
 //EVENTS routes
@@ -75,10 +74,10 @@ Route::get('/events/show/{event_id}', 'EventController@show');
 Route::get('/events/list/', 'EventController@showAll');
 Route::get('/events/create', 'EventController@addForm')->middleware('groupadmin');
 Route::post('/events/create', 'EventController@addPost')->middleware('groupadmin');
-Route::get('/events/edit/{event_id}', 'EventController@editForm');
-Route::post('/events/edit', 'EventController@editPost');
-Route::get('/events/delete/{event_id}', 'EventController@deleteForm');
-Route::get('/events/delete/', 'EventController@deletePost');
+Route::get('/events/edit/{event_id}', 'EventController@editForm')->middleware('groupadmin'); //TODO: + check if correct admin rights
+Route::post('/events/edit', 'EventController@editPost')->middleware('groupadmin'); // TODO
+Route::get('/events/delete/{event_id}', 'EventController@deleteForm')->middleware('groupadmin'); //TODO
+Route::get('/events/delete/', 'EventController@deletePost')->middleware('groupadmin'); //TODO
 Route::post('/events/participate/add/', 'ParticipationController@createParticipation')->middleware('auth');
 Route::post('/events/participate/remove/', 'ParticipationController@deleteParticipation')->middleware('auth');
 

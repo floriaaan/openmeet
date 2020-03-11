@@ -55,13 +55,33 @@
 
                         <div class="d-flex justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
-                            <a href="{{url('/groups/subscribe/')}}/{{$group->id}}"
-                               class="btn btn-primary"
-                               onclick="event.preventDefault();document.getElementById('subscribe').submit();">S'abonner</a>
+                            <div class="float-right mr-5">
+                                @if($issubscribed != null && $issubscribed)
+                                    <a class="btn btn-danger" style="color: #fff"
+                                       onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
+                                        <i class="fas fa-minus"></i> Se désabonner
+                                    </a>
 
-                            <form id="subscribe" action="{{url('/groups/subscribe/')}}/{{$group->id}}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+                                    <form id="toggleSubscription" action="{{url('/groups/subscribe/remove')}}"
+                                          method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="event" value="{{$group->id}}">
+                                        <input type="hidden" name="user" value="{{auth()->id()}}">
+                                    </form>
+                                @else
+                                    <a class="btn btn-primary" style="color: #fff"
+                                       onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
+                                        <i class="fas fa-plus"></i> S'abonner
+                                    </a>
+
+                                    <form id="toggleSubscription" action="{{url('/groups/subscribe/add')}}"
+                                          method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="event" value="{{$group->id}}">
+                                        <input type="hidden" name="user" value="{{auth()->id()}}">
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
