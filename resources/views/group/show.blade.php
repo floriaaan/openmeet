@@ -65,7 +65,7 @@
                                     <form id="toggleSubscription" action="{{url('/groups/subscribe/remove')}}"
                                           method="POST" style="display: none;">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="event" value="{{$group->id}}">
+                                        <input type="hidden" name="group" value="{{$group->id}}">
                                         <input type="hidden" name="user" value="{{auth()->id()}}">
                                     </form>
                                 @else
@@ -77,7 +77,7 @@
                                     <form id="toggleSubscription" action="{{url('/groups/subscribe/add')}}"
                                           method="POST" style="display: none;">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="event" value="{{$group->id}}">
+                                        <input type="hidden" name="group" value="{{$group->id}}">
                                         <input type="hidden" name="user" value="{{auth()->id()}}">
                                     </form>
                                 @endif

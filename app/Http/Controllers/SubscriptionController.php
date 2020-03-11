@@ -30,8 +30,10 @@ class SubscriptionController extends Controller
         $groupId = $post['group'];
         if (!(new Subscription)->isSubscribed($userId, $groupId)) {
             $subscription = new Subscription();
-            $subscription->user = $userId;
-            $subscription->group = $groupId;
+            $subscription->id_user = $userId;
+            $subscription->id_group = $groupId;
+            $subscription->date = date('Y-m-d');
+            $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
             $subscription->push();
         } else {
             Session()->put('errorSubscription', 'Vous êtes déjà abonné à ce groupe');
@@ -39,7 +41,7 @@ class SubscriptionController extends Controller
         return redirect('/user/groups');
 
     }
-    public function deleteParticipation(SubscriptionRequest $request)
+    public function deleteSubscription(SubscriptionRequest $request)
     {
         $post = $request->input();
         $userId = $post['user'];
@@ -59,10 +61,10 @@ class SubscriptionController extends Controller
         $subscriptions = (new Subscription())->getUser(auth()->id());
         $groups = [];
         foreach ($subscriptions as $subscription) {
-            $groups[] = (new Group)->getOne($subscription->group);
+            $groups[] = (new Group)->getOne($subscription->id_group);
         }
 
-        return view('subscription.usersubs', [
+        return view('subscription.list', [
             'subscriptions' => $subscriptions,
             'groups' => $groups
         ]);

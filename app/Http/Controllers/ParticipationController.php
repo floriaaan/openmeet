@@ -59,7 +59,7 @@ class ParticipationController extends Controller
             $events[] = (new Event)->getOne($participation->event);
         }
 
-        return view('participation.userevents', [
+        return view('participation.list', [
             'participations' => $participations,
             'events' => $events
         ]);
