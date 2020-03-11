@@ -33,15 +33,16 @@ class Notification extends Model
         return $listNotification;
     }
 
-    public function getAllForUser($userId)
+    public function getAllUser($userId)
     {
         $query=DB::table('notifications')
             ->select('*')
             ->where('id_user',"=",$userId)
+            ->where('isread', "=", 0)
             ->get();
-        $notificationsArray=$query;
+
         $listNotification=[];
-        foreach ($notificationsArray as $notifSQL)
+        foreach ($query as $notifSQL)
         {
             $listNotification[]=$notifSQL;
         }
@@ -53,6 +54,7 @@ class Notification extends Model
         $query=DB::table('notifications')
             ->select('*')
             ->where('id_user',"=",$userId)
+            ->where('isread',"=",0)
             ->orderBy('date','desc')
             ->limit(5)
             ->get();
@@ -78,6 +80,18 @@ class Notification extends Model
     {
             $query = DB::table('notifications')
                 ->delete($notifId);
+    }
+
+    public function readAllUser($userID)
+    {
+        try{
+            $query=DB::table('notifications')
+                ->where('id_user','=',$userID)
+                ->update(['isread'=>1]);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
 }

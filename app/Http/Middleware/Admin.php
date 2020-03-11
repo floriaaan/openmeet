@@ -19,8 +19,7 @@ class Admin
         if(auth()->user()->isadmin == 1){
             return $next($request);
         }
-        Session::put('error','Vous n\'avez pas les droits pour accéder à cette page');
-        return route('home');
+        abort(404);
 
     }
 }

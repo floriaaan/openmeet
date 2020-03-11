@@ -48,6 +48,7 @@ Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfi
 
 //NOTIFICATION Routes
 Route::get('/notifications/', 'NotificationController@showAll')->middleware('auth');
+Route::post('/notifications/readall', 'NotificationController@readall')->middleware('auth');
 
 //MESSAGE routes
 Route::get('/messages/{userId}','MessageController@showUserConversations')->middleware('auth');
@@ -65,6 +66,7 @@ Route::get('/groups/edit/{group_id}', 'GroupController@editForm')->middleware('g
 Route::post('/groups/edit', 'GroupController@editPost')->middleware('groupadmin');
 Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middleware('groupadmin');
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
+Route::post('groups/subscribe', 'GroupController@subscribe')->middleware('auth');
 
 
 //EVENTS routes
