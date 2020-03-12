@@ -145,7 +145,8 @@ class AdminController extends Controller
         return view('admin.users.list', ['users' => (new User)->getAll()]);
     }
 
-    public function listReport() {
+    public function listReport()
+    {
         $user = (new User);
         $reports = (new Signalement);
         $rawListReport = $reports->getAll();
@@ -191,7 +192,8 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    public function showReport($reportID){
+    public function showReport($reportID)
+    {
         $rpt = (new Signalement)->getOne($reportID);
         $report = [
             'report' => $rpt,
@@ -202,27 +204,62 @@ class AdminController extends Controller
         return view('admin.reports.show', ['report' => $report]);
     }
 
-    public function deleteReport($reportID){
+    public function deleteReport($reportID)
+    {
         (new Signalement)->remove($reportID);
         return redirect('/admin');
     }
 
-    public function search(SearchRequest $request){
+    public function search(SearchRequest $request)
+    {
         $post = $request->input();
 
+        $result = [];
+
         $listGroup = (new Group)->getLike($post['search']);
+        foreach ($listGroup as $group) {
+            $result[] = ['content' => $group, 'type' => 'group'];
+        }
+
         $listEvent = (new Event)->getLike($post['search']);
+        foreach ($listEvent as $event) {
+            $result[] = ['content' => $event, 'type' => 'event'];
+        }
+
         $listUser = (new User)->getLike($post['search']);
+        foreach ($listUser as $user) {
+            $result[] = ['content' => $user, 'type' => 'user'];
+        }
+
         $listMessage = (new Message)->getLike($post['search']);
+        foreach ($listMessage as $message) {
+            if ($message->forgroup) {
+                $result[] = ['content' => $message, 'type' => 'message',
+                    'sender' => (new User)->getOne($message->sender),
+                    'receiver' => (new Group)->getOne($message->receiver)
+                ];
+            } else {
+                $result[] = ['content' => $message, 'type' => 'message',
+                    'sender' => (new User)->getOne($message->sender),
+                    'receiver' => (new User)->getOne($message->receiver)
+                ];
+            }
+
+        }
+
         $listSignalement = (new Signalement)->getLike($post['search']);
+        foreach ($listSignalement as $signalement) {
+            $result[] = ['content' => $signalement, 'type' => 'signalement',
+                'sender' => (new User)->getOne($signalement->submitter),
+                'receiver' => (new User)->getOne($signalement->receiver),
+            ];
+        }
+
+        //shuffle($result);
 
         return view('admin.search', [
             'search' => $post['search'],
-            'groups' => $listGroup,
-            'events' => $listEvent,
-            'users' => $listUser,
-            'messages' => $listMessage,
-            'signalements' => $listSignalement
+            'results' => $result
         ]);
 
     }

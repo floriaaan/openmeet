@@ -315,7 +315,8 @@
                                         <td>{{ $group['group']->datecreate }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/groups/show/{{ $group['group']->id }}">
+                                                <a class="btn btn-success"
+                                                   href="/groups/show/{{ $group['group']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
@@ -363,7 +364,8 @@
                                         <td>{{ $event['event']->datefrom }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/events/show/{{ $event['event']->id }}">
+                                                <a class="btn btn-success"
+                                                   href="/events/show/{{ $event['event']->id }}">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
@@ -436,10 +438,11 @@
                     <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
                     <div>
                         <form action="/admin/search" method="POST">
-
+                            @csrf
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" required name="search" class="form-control" placeholder="Rechercher">
+                                    <input type="text" required name="search" class="form-control"
+                                           placeholder="Rechercher">
                                 </div>
                                 <div class="col-3">
                                     <button type="submit" class="btn btn-secondary">Rechercher</button>
