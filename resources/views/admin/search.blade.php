@@ -5,13 +5,51 @@
     <div class="container-fluid p-5">
         <h3 class="display-4">Résultats correspondants à : {{$search}}</h3>
         <hr class="my-3 mx-5">
+
+        <div class="row mt-3">
+            <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked class="custom-control-input" id="users">
+                    <label class="custom-control-label" for="users">Utilisateurs</label>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked class="custom-control-input" id="groups">
+                    <label class="custom-control-label" for="groups">Groupes</label>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked class="custom-control-input" id="events">
+                    <label class="custom-control-label" for="events">Evenements</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-lg-3">
+            <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked class="custom-control-input" id="messages">
+                    <label class="custom-control-label" for="messages">Messages</label>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked class="custom-control-input" id="signalements">
+                    <label class="custom-control-label" for="signalements">Signalements</label>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-3 mx-5">
         <div class="card-columns">
 
 
             @forelse($results as $result)
                 @if($result['type'] == 'group')
                     <a href="{{url('/groups/show')}}/{{$result['content']->id}}"
-                       style="text-decoration: none; color: inherit;">
+                       style="text-decoration: none; color: inherit;" id="groups-{{$loop->index}}">
                         <div class="p-3">
                             <div class="card border-group rounded hvr-grow shadow-sm">
 
@@ -33,7 +71,7 @@
                     </a>
                 @elseif($result['type'] == 'event')
                     <a href="{{url('/events/show')}}/{{$result['content']->id}}"
-                       style="text-decoration: none; color: inherit;">
+                       style="text-decoration: none; color: inherit;" id="events-{{$loop->index}}">
                         <div class="p-3">
                             <div class="card border-event rounded shadow-sm hvr-grow">
                                 <div class="card-body">
@@ -60,7 +98,7 @@
                     </a>
                 @elseif($result['type'] == 'user')
                     <a href="{{url('/user/show')}}/{{$result['content']->id}}"
-                       style="text-decoration: none; color: inherit;">
+                       style="text-decoration: none; color: inherit;" id="users-{{$loop->index}}">
                         <div class="p-3">
                             <div class="card border-user rounded shadow-sm hvr-grow">
                                 <div class="card-body">
@@ -82,7 +120,7 @@
                         </div>
                     </a>
                 @elseif($result['type'] == 'message')
-                    <div class="p-3">
+                    <div class="p-3" id="messages-{{$loop->index}}">
                         <div class="card rounded border-message shadow-sm hvr-grow">
                             <div class="card-body">
                                 <h5 class="card-title">{{$result['content']->content}}</h5>
@@ -106,7 +144,7 @@
 
                 @elseif($result['type'] == 'signalement')
                     <a href="{{url('/admin/reports/show')}}/{{$result['content']->id}}"
-                       style="text-decoration: none; color: inherit;">
+                       style="text-decoration: none; color: inherit;" id="signalements-{{$loop->index}}">
                         <div class="p-3">
                             <div class="card rounded border-signalements shadow-sm hvr-grow">
                                 <div class="card-body">
@@ -151,6 +189,25 @@
 @section('js')
 
     <script>
+        $('#users').click(function () {
+            $('[id*="users-"]').toggleClass('d-none')
+        });
+
+        $('#groups').click(function () {
+            $('[id*="groups-"]').toggleClass('d-none')
+        });
+
+        $('#events').click(function () {
+            $('[id*="events-"]').toggleClass('d-none')
+        });
+
+        $('#signalements').click(function () {
+            $('[id*="signalements-"]').toggleClass('d-none')
+        });
+
+        $('#messages').click(function () {
+            $('[id*="messages-"]').toggleClass('d-none')
+        });
 
     </script>
 @endsection

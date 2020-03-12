@@ -16,8 +16,9 @@ use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 class MessageController extends Controller
 {
     //TODO : Création d'un message.
-    public function showChat($typeConversation,$correspondant){
-        $userId=auth()->id();
+    public function showChat($typeConversation, $correspondant)
+    {
+        $userId = auth()->id();
 
         //=============================================================
         //Liste des conversations
@@ -65,7 +66,7 @@ class MessageController extends Controller
             } catch (\Exception $e) {
             }
         }
-        $groupLastMessagesInfo=[];
+        $groupLastMessagesInfo = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
                 if ($groupLastMessage->sender != 0) {
@@ -86,8 +87,8 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
-        echo('groupLastMessageInfo =');
-        var_dump($groupLastMessageInfo);
+        echo('groupLastMessagesInfo =');
+        var_dump($groupLastMessagesInfo);
         echo('groupWithoutLastMessage');
         var_dump($groupWithoutLastMessage);
         die;
@@ -99,23 +100,23 @@ class MessageController extends Controller
 
         //Si c'est une discussion de groupe
 
-        if($typeConversation =='group'){
-            $group=new Group();
-            $groupInfo=$group->getOne($correspondant);
-            $message=new Message();
-            $listMessages= $message->getGroupChat($correspondant);
+        if ($typeConversation == 'group') {
+            $group = new Group();
+            $groupInfo = $group->getOne($correspondant);
+            $message = new Message();
+            $listMessages = $message->getGroupChat($correspondant);
         }
         //Si c'est une discussion personnelle
 
-        $listUsers=[];
-        foreach ($listMessages as $message){
-            $listUsers[]=$message->sender;
+        $listUsers = [];
+        foreach ($listMessages as $message) {
+            $listUsers[] = $message->sender;
         }
-        $listUsers=array_unique($listUsers);
-        $usersInfos=[];
-        foreach ($listUsers as $id){
+        $listUsers = array_unique($listUsers);
+        $usersInfos = [];
+        foreach ($listUsers as $id) {
             $user = new User();
-            $usersInfos[]=$user->getOne($id);
+            $usersInfos[] = $user->getOne($id);
         }
 
         /*
@@ -129,16 +130,15 @@ class MessageController extends Controller
         var_dump($usersInfos);
         die;
         */
-
-        return view('message.groupchat',[
+        return view('message.groupchat', [
             "personalInfoConversations" => $personalInfoConversations,
             "personalLastMessages" => $personalLastMessages,
             "groupLastMessagesInfo" => $groupLastMessagesInfo,
             "groupLastMessages" => $groupLastMessages,
             "groupInfoConversations" => $groupConversations,
             "groupWithoutLastMessage" => $groupWithoutLastMessage,
-            "listMessages"=>$listMessages,
-            "usersInfos"=>$usersInfos
+            "listMessages" => $listMessages,
+            "usersInfos" => $usersInfos
         ]);
     }
 
@@ -190,11 +190,12 @@ class MessageController extends Controller
             } catch (\Exception $e) {
             }
         }
+        $groupLastMessagesInfo = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
-                    $groupLastMessageInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+                    $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
                 }
             } catch (\Exception $e) {
             }
@@ -210,8 +211,8 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
-        echo('groupLastMessageInfo =');
-        var_dump($groupLastMessageInfo);
+        echo('groupLastMessagesInfo =');
+        var_dump($groupLastMessagesInfo);
         echo('groupWithoutLastMessage');
         var_dump($groupWithoutLastMessage);
         die;
@@ -221,7 +222,7 @@ class MessageController extends Controller
             [
                 "personalInfoConversations" => $personalInfoConversations,
                 "personalLastMessages" => $personalLastMessages,
-                "groupLastMessageInfo" => $groupLastMessageInfo,
+                "groupLastMessagesInfo" => $groupLastMessagesInfo,
                 "groupLastMessages" => $groupLastMessages,
                 "groupInfoConversations" => $groupConversations,
                 "groupWithoutLastMessage" => $groupWithoutLastMessage
