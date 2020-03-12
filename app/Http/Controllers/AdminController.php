@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Ban;
+use App\Block;
 use App\Event;
 use App\Group;
 use App\Http\Requests\AdminEditRequest;
@@ -92,6 +94,34 @@ class AdminController extends Controller
 
         }
 
+        $bans = (new Ban);
+        $countBan = $bans->getCount();
+        $rawListBan = $bans->getLimit(10);
+
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banisher' => $groups->getOne($ban->banisher),
+                'banned' => $user->getOne($ban->banned),
+            ];
+
+        }
+
+        $blocks = (new Block);
+        $countBlock = $blocks->getCount();
+        $rawListBlock = $blocks->getLimit(10);
+
+        $listBlock = [];
+        foreach ($rawListBlock as $block) {
+            $listBlock[] = [
+                'block' => $block,
+                'blocker' => $user->getOne($block->blocker),
+                'target' => $user->getOne($block->target),
+            ];
+
+        }
+
         return view('admin.panel', [
             'userList' => $listUser,
             'userCount' => $countUser,
@@ -103,6 +133,10 @@ class AdminController extends Controller
             'eventCount' => $countEvent,
             'reportList' => $listReport,
             'reportCount' => $countReport,
+            'banList' => $listBan,
+            'banCount' => $countBan,
+            'blockList' => $listBlock,
+            'blockCount' => $countBlock
 
         ]);
 
@@ -261,92 +295,6 @@ class AdminController extends Controller
             'search' => $post['search'],
             'results' => $result
         ]);
-
-    }
-
-    public function oldindex()
-    {
-        $user = (new User);
-        $listUser = $user->getLimit(5);
-        $countUser = $user->getCount();
-
-        $message = (new Message);
-        $listMessage = [];
-        $rawListMsg = $message->getLimit(10);
-
-        foreach ($rawListMsg as $msg) {
-            if ($msg->forgroup == 0) {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => $user->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            } else {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => (new Group)->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            }
-
-        }
-        $countMessage = $message->getCount();
-
-        $groups = (new Group);
-        $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimit(10);
-
-        $listGroup = [];
-
-        foreach ($rawListGroup as $group) {
-            $listGroup[] = [
-                'group' => $group,
-                'admin' => $user->getOne($group->admin)
-            ];
-
-        }
-
-        $events = (new Event);
-        $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimit(10);
-
-        $listEvent = [];
-        foreach ($rawListEvent as $event) {
-            $listEvent[] = [
-                'event' => $event,
-                'group' => $groups->getOne($event->id_group)
-            ];
-
-        }
-
-        $reports = (new Signalement);
-        $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimit(10);
-
-        $listReport = [];
-        foreach ($rawListReport as $report) {
-            $listReport[] = [
-                'report' => $report,
-                'sender' => $user->getOne($report->submitter),
-                'concerned' => $user->getOne($report->concerned),
-            ];
-
-        }
-
-        return view('admin.panel', [
-            'userList' => $listUser,
-            'userCount' => $countUser,
-            'messageList' => $listMessage,
-            'messageCount' => $countMessage,
-            'groupList' => $listGroup,
-            'groupCount' => $countGroup,
-            'eventList' => $listEvent,
-            'eventCount' => $countEvent,
-            'reportList' => $listReport,
-            'reportCount' => $countReport,
-
-        ]);
-
 
     }
 }
