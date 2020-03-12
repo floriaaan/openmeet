@@ -85,4 +85,18 @@ class Signalement extends Model
         }
     }
 
+    public function getLike($str)
+    {
+        $query = DB::table('signalements')
+            ->select('*')
+            ->where('description', 'LIKE', "%{$str}%")
+            ->get();
+        $listSignalement = [];
+        foreach ($query as $signalement) {
+            $listSignalement[] = $signalement;
+        }
+
+        return $listSignalement;
+    }
+
 }

@@ -106,4 +106,22 @@ class User extends Authenticatable
 
     }
 
+    public function getLike($str)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('fname', 'LIKE', "%{$str}%")
+            ->orWhere('lname', 'LIKE', "%{$str}%")
+            ->orWhere('email', 'LIKE', "%{$str}%")
+            ->orWhere('country', 'LIKE', "%{$str}%")
+            ->orWhere('city', 'LIKE', "%{$str}%")
+            ->get();
+        $listUser = [];
+        foreach ($query as $user) {
+            $listUser[] = $user;
+        }
+
+        return $listUser;
+    }
+
 }

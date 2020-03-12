@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\AdminEditRequest;
 use App\Http\Requests\DeleteUserRequest;
+use App\Http\Requests\SearchRequest;
 use App\Message;
 use App\Signalement;
 use App\User;
@@ -204,6 +205,26 @@ class AdminController extends Controller
     public function deleteReport($reportID){
         (new Signalement)->remove($reportID);
         return redirect('/admin');
+    }
+
+    public function search(SearchRequest $request){
+        $post = $request->input();
+
+        $listGroup = (new Group)->getLike($post['search']);
+        $listEvent = (new Event)->getLike($post['search']);
+        $listUser = (new User)->getLike($post['search']);
+        $listMessage = (new Message)->getLike($post['search']);
+        $listSignalement = (new Signalement)->getLike($post['search']);
+
+        return view('admin.search', [
+            'search' => $post['search'],
+            'groups' => $listGroup,
+            'events' => $listEvent,
+            'users' => $listUser,
+            'messages' => $listMessage,
+            'signalements' => $listSignalement
+        ]);
+
     }
 
     public function oldindex()

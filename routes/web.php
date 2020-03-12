@@ -37,6 +37,7 @@ Route::get('/user/events', 'ParticipationController@showEvents')->middleware('au
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
+Route::post('/admin/search', 'AdminController@search');
 Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
