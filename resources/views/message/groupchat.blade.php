@@ -71,7 +71,7 @@
                                     @foreach($groupInfoConversations as $infoConversation)
                                         @if($lastMessage->receiver == $infoConversation->id)
                                             <div
-                                                @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style=";border-color: {{setting('openmeet.color')}};border-width: 1px;"
+                                                @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style="border-bottom-color: {{setting('openmeet.color')}};border-bottom-width: 2px;"
                                                 @endif class="card border-bottom-fmm mb-1">
 
                                                 <a href="/messages/group/{{$lastMessage->receiver}}"
