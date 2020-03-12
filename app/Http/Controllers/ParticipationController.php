@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ParticipationRequest;
-use App\Model\Participation;
+use App\Participation;
 use App\Event;
 
 
@@ -59,7 +59,7 @@ class ParticipationController extends Controller
             $events[] = (new Event)->getOne($participation->event);
         }
 
-        return view('participation.userevents', [
+        return view('participation.list', [
             'participations' => $participations,
             'events' => $events
         ]);

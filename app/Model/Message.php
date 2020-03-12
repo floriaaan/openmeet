@@ -184,4 +184,18 @@ class Message extends Model
         }
         return $msgList;
     }
+
+    public function getLike($str)
+    {
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('content', 'LIKE', "%{$str}%")
+            ->get();
+        $listMessage = [];
+        foreach ($query as $message) {
+            $listMessage[] = $message;
+        }
+
+        return $listMessage;
+    }
 }

@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','fname', 'lname', 'bdate', 'email', 'password', 'country',
+        'id', 'fname', 'lname', 'bdate', 'email', 'password', 'country',
         'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
         'isadmin', 'defaultnotif', 'typenotif'
     ];
@@ -38,7 +38,6 @@ class User extends Authenticatable
     ];
 
 
-
     /**
      * Add a mutator to ensure hashed passwords
      * @param $password
@@ -50,7 +49,7 @@ class User extends Authenticatable
 
     public function getOne($userId)
     {
-        $query=DB::table('users')
+        $query = DB::table('users')
             ->select('*')
             ->where('id', '=', $userId)
             ->limit(1)
@@ -61,7 +60,7 @@ class User extends Authenticatable
 
     public function getLimit($limit)
     {
-        $query=DB::table('users')
+        $query = DB::table('users')
             ->select('*')
             ->limit($limit)
             ->get();
@@ -73,13 +72,56 @@ class User extends Authenticatable
 
     public function getCount()
     {
-        $query=DB::table('users')
+        $query = DB::table('users')
             ->select('*')
             ->get();
 
 
         return $query->count();
 
+    }
+
+    public function getAll()
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->get();
+
+        $listUser = [];
+        foreach ($query as $user) {
+            $listUser[] = $user;
+        }
+        return $listUser;
+    }
+
+    public function remove($userID)
+    {
+        try {
+            $query = DB::table('users')
+                ->delete($userID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
+
+    public function getLike($str)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('fname', 'LIKE', "%{$str}%")
+            ->orWhere('lname', 'LIKE', "%{$str}%")
+            ->orWhere('email', 'LIKE', "%{$str}%")
+            ->orWhere('country', 'LIKE', "%{$str}%")
+            ->orWhere('city', 'LIKE', "%{$str}%")
+            ->get();
+        $listUser = [];
+        foreach ($query as $user) {
+            $listUser[] = $user;
+        }
+
+        return $listUser;
     }
 
 }

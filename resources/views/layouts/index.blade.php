@@ -115,11 +115,12 @@
         $.ajax({
             url: '{{url('/api/v1/session/unset/error')}}',
             type: 'post',
+            data: {'sessionid': '{{Session()->getId()}}'},
             success: function(data) {
                 console.log('success', data)
             },
-            error: function (data) {
-                console.log('error', data)
+            error: function () {
+                console.log('error')
             }
         })
     });

@@ -37,12 +37,18 @@ Route::get('/user/events', 'ParticipationController@showEvents')->middleware('au
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
+Route::post('/admin/search', 'AdminController@search');
+Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
-Route::get('/admin/user/', 'AdminController@listUser');
-Route::get('/admin/user/delete/{userID}', 'AdminController@deleteUser');
-Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
+Route::get('/admin/users/', 'AdminController@listUser');
+Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
+Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
+Route::get('/admin/groups/', 'AdminController@listGroup');
+Route::get('/admin/reports/', 'AdminController@listReport');
+Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
+Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
 
 
 //NOTIFICATION Routes
