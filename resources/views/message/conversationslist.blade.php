@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('content')
-    <div class="container w-50" style="margin-left: -1.75em;">
+    <div class="container extended" style="margin-left: -1.75em;overflow-y: scroll;height: 78vh !important;">
         <div class="rounded-lg overflow-hidden shadow">
             <!-- Users box-->
             <div class="px-0">
@@ -177,6 +177,30 @@
 
         .card {
             transition: all 0.3s;
+        }
+        .extended {
+            width: 65vw;
+            transition: all 0.5s;
+        }
+
+        .unextended {
+            width: 35vw;
+            transition: all 0.5s;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: {{setting('openmeet.color')}};
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
         }
     </style>
 

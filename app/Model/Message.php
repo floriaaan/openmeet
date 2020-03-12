@@ -34,9 +34,10 @@ class Message extends Model
         foreach ($queryArray as $messageSQL){
             $message=new Message();
             $message=$messageSQL;
-            $messageArray[]=$message;
+            $messageArray[$message->id]=$message;
 
         }
+        ksort($messageArray);
         return $messageArray;
     }
 
@@ -80,8 +81,8 @@ class Message extends Model
         $contentSplitted = mb_str_split($query[0]->content);
         $newContent = "";
 
-        if(count($contentSplitted)>=40)
-            for($i=0;$i<40;$i++)
+        if(count($contentSplitted)>=60)
+            for($i=0;$i<60;$i++)
             {
                     {
                         $newContent = $newContent.$contentSplitted[$i];
@@ -105,8 +106,8 @@ class Message extends Model
                 $contentSplitted = mb_str_split($query[0]->content);
                 $newContent = "";
 
-                if(count($contentSplitted)>=40)
-                    for($i=0;$i<40;$i++)
+                if(count($contentSplitted)>=60)
+                    for($i=0;$i<60;$i++)
                     {
                         {
                             $newContent = $newContent.$contentSplitted[$i];
