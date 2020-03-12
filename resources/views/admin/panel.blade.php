@@ -147,8 +147,8 @@
                                 @foreach($userList as $user)
                                     <tr>
                                         <td>#{{ $user->id }}</td>
-                                        <td>{{ $user->fname }}</td>
                                         <td>{{ $user->lname }}</td>
+                                        <td>{{ $user->fname }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>@if($user->isadmin)
                                                 <span class="badge badge-pill badge-success">
@@ -235,7 +235,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/reports/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
@@ -283,7 +283,6 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/messages/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
                 </div>
 
@@ -431,8 +430,6 @@
 
                             </tbody>
                         </table>
-
-                        <a href="{{url('/admin/messages/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <hr class="my-4">

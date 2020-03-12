@@ -283,7 +283,6 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/messages/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
                 </div>
 

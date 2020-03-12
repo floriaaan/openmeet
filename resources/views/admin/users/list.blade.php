@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prenom</th>
+                    <th scope="col">Prénom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Admin</th>
                     <th scope="col">Actions</th>

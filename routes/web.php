@@ -43,7 +43,11 @@ Route::post('/admin/edit/theme', 'AdminController@editTheme');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
 Route::get('/admin/users/', 'AdminController@listUser');
 Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
-Route::get('/admin/users/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
+Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
+Route::get('/admin/groups/', 'AdminController@listGroup');
+Route::get('/admin/reports/', 'AdminController@listReport');
+Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
+Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
 
 
 //NOTIFICATION Routes

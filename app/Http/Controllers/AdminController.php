@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Group;
 use App\Http\Requests\AdminEditRequest;
+use App\Http\Requests\DeleteUserRequest;
 use App\Message;
 use App\Signalement;
 use App\User;
+use DemeterChain\A;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -142,14 +144,66 @@ class AdminController extends Controller
         return view('admin.users.list', ['users' => (new User)->getAll()]);
     }
 
-    public function deleteUser($userID)
-    {
-        return 'delete ' . $userID;
+    public function listReport() {
+        $user = (new User);
+        $reports = (new Signalement);
+        $rawListReport = $reports->getAll();
+
+        $listReport = [];
+        foreach ($rawListReport as $report) {
+            $listReport[] = [
+                'report' => $report,
+                'sender' => $user->getOne($report->submitter),
+                'concerned' => $user->getOne($report->concerned),
+            ];
+
+        }
+        return view('admin.reports.list', ['reportList' => $listReport]);
     }
 
-    public function deleteConfirmed($userID)
+    public function listGroup()
     {
-        return 'delete confirmed (c\'est super pas cool) ' . $userID;
+        $groups = [];
+        $listGroups = (new Group)->getAll();
+
+        foreach ($listGroups as $group) {
+            $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
+        }
+        return view('admin.groups.list', ['groups' => $groups]);
+    }
+
+    public function deleteUser($userID)
+    {
+        $user = (new User)->getOne($userID);
+        if ($user->isadmin) { //Proposer une passation de pouvoir
+            return view('admin.users.deleteadmin');
+        }
+        return view('admin.users.deleteconfirmation', ['user' => $user]);
+    }
+
+    public function deleteUserPost(DeleteUserRequest $request)
+    {
+        $post = $request->input();
+        (new User)->remove($post['user']);
+
+
+        return redirect('/admin');
+    }
+
+    public function showReport($reportID){
+        $rpt = (new Signalement)->getOne($reportID);
+        $report = [
+            'report' => $rpt,
+            'sender' => (new User)->getOne($rpt->submitter),
+            'concerned' => (new User)->getOne($rpt->concerned),
+        ];
+        (new Signalement)->read($reportID);
+        return view('admin.reports.show', ['report' => $report]);
+    }
+
+    public function deleteReport($reportID){
+        (new Signalement)->remove($reportID);
+        return redirect('/admin');
     }
 
     public function oldindex()

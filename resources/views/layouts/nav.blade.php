@@ -159,6 +159,13 @@
 
             @endif
 
+            @if(auth()->check())
+                <a class="nav-link" href="{{url('/groups/list')}}">
+                    <i class="fas fa-lg fa-users"></i>
+                </a>
+
+            @endif
+
             @if (auth()->check())
                 <div class="dropleft nav-responsive-patch ml-1">
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ParticipationRequest;
-use App\Model\Participation;
+use App\Participation;
 use App\Event;
 
 
