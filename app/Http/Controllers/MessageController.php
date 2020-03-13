@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Http\Requests\MessageCreateRequest;
 use App\Message;
 use App\Subscription;
 use App\User;
@@ -15,7 +16,26 @@ use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 
 class MessageController extends Controller
 {
-    //TODO : Création d'un message.
+    public function createMessage(MessageCreateRequest $request)
+    {
+        $post = $request->input();
+        $message = new Message();
+        $message->receiver = $post['mReceiver'];
+        $message->forgroup = $post['mForgroup'];
+        $message->sender = auth()->id();
+        $message->isread = 0;
+        $message->content = $post['mContent'];
+        $message->date = date('Y-m-d H:i:s');
+
+        $message->push();
+        if ($post['mForgroup'] == 1) {
+            return redirect('/messages/group/' . $post['mReceiver']);
+        } else {
+            return redirect('/messages/user/' . $post['mReceiver']);
+        }
+    }
+
+
     public function showChat($typeConversation, $correspondant)
     {
         $userId = auth()->id();
@@ -87,8 +107,8 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
-        echo('groupLastMessagesInfo =');
-        var_dump($groupLastMessagesInfo);
+        echo('groupLastMessageInfo =');
+        var_dump($groupLastMessageInfo);
         echo('groupWithoutLastMessage');
         var_dump($groupWithoutLastMessage);
         die;
@@ -105,41 +125,62 @@ class MessageController extends Controller
             $groupInfo = $group->getOne($correspondant);
             $message = new Message();
             $listMessages = $message->getGroupChat($correspondant);
-        }
-        //Si c'est une discussion personnelle
 
-        $listUsers = [];
-        foreach ($listMessages as $message) {
-            $listUsers[] = $message->sender;
-        }
-        $listUsers = array_unique($listUsers);
-        $usersInfos = [];
-        foreach ($listUsers as $id) {
-            $user = new User();
-            $usersInfos[] = $user->getOne($id);
-        }
+            //Si c'est une discussion personnelle
 
-        /*
-        echo('groupInfo =');
-        var_dump($groupInfo);
-        echo ('listMessage =');
-        var_dump($listMessages);
-        echo('listUsers =');
-        var_dump($listUsers);
-        echo('usersInfos');
-        var_dump($usersInfos);
-        die;
-        */
-        return view('message.groupchat', [
-            "personalInfoConversations" => $personalInfoConversations,
-            "personalLastMessages" => $personalLastMessages,
-            "groupLastMessagesInfo" => $groupLastMessagesInfo,
-            "groupLastMessages" => $groupLastMessages,
-            "groupInfoConversations" => $groupConversations,
-            "groupWithoutLastMessage" => $groupWithoutLastMessage,
-            "listMessages" => $listMessages,
-            "usersInfos" => $usersInfos
-        ]);
+            $listUsers = [];
+            foreach ($listMessages as $message) {
+                $listUsers[] = $message->sender;
+            }
+            $listUsers = array_unique($listUsers);
+            $usersInfos = [];
+            foreach ($listUsers as $id) {
+                $user = new User();
+                $usersInfos[] = $user->getOne($id);
+            }
+
+            /*
+            echo('groupInfo =');
+            var_dump($groupInfo);
+            echo ('listMessage =');
+            var_dump($listMessages);
+            echo('listUsers =');
+            var_dump($listUsers);
+            echo('usersInfos');
+            var_dump($usersInfos);
+            die;
+            */
+
+            return view('message.groupchat', [
+                "personalInfoConversations" => $personalInfoConversations,
+                "personalLastMessages" => $personalLastMessages,
+                "groupLastMessagesInfo" => $groupLastMessagesInfo,
+                "groupLastMessages" => $groupLastMessages,
+                "groupInfoConversations" => $groupConversations,
+                "groupWithoutLastMessage" => $groupWithoutLastMessage,
+                "listMessages" => $listMessages,
+                "usersInfos" => $usersInfos,
+                "groupInfo" => $groupInfo
+            ]);
+        }
+        if($typeConversation == 'user'){
+            $message = new Message();
+            $listMessages = $message->getPersonalChat($correspondant);
+            $user=new User();
+            $userInfo = $user->getOne($correspondant);
+
+            return view('message.userchat', [
+                "personalInfoConversations" => $personalInfoConversations,
+                "personalLastMessages" => $personalLastMessages,
+                "groupLastMessagesInfo" => $groupLastMessagesInfo,
+                "groupLastMessages" => $groupLastMessages,
+                "groupInfoConversations" => $groupConversations,
+                "groupWithoutLastMessage" => $groupWithoutLastMessage,
+                "listMessages" => $listMessages,
+                "userInfo" => $userInfo,
+            ]);
+
+        }
     }
 
 
@@ -211,8 +252,8 @@ class MessageController extends Controller
         var_dump($groupConversations);
         echo ('groupLastMessages =');
         var_dump($groupLastMessages);
-        echo('groupLastMessagesInfo =');
-        var_dump($groupLastMessagesInfo);
+        echo('groupLastMessageInfo =');
+        var_dump($groupLastMessageInfo);
         echo('groupWithoutLastMessage');
         var_dump($groupWithoutLastMessage);
         die;
