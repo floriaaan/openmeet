@@ -58,7 +58,7 @@ Route::post('/notifications/readall', 'NotificationController@readall')->middlew
 //MESSAGE routes
 Route::get('/messages','MessageController@showUserConversations')->middleware('auth');
 Route::get('/messages/{typeConversation}/{correspondant}','MessageController@showChat')->middleware('auth');
-
+Route::post('/messages/create','MessageController@createMessage')->middleware('auth');
 
 //SIGNALEMENT routes
 

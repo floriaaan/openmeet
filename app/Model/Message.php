@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Composer\Command\BaseDependencyCommand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,6 +30,30 @@ class Message extends Model
             ->where('forgroup','=',1)
             ->orderByDesc('date')
             ->get();
+        $queryArray = $query;
+        $messageArray = [];
+        foreach ($queryArray as $messageSQL){
+            $message=new Message();
+            $message=$messageSQL;
+            $messageArray[$message->id]=$message;
+
+        }
+        ksort($messageArray);
+        return $messageArray;
+    }
+
+    public function getPersonalChat($userId_2){
+        $userId=auth()->id();
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('sender',"=",$userId)
+            ->where('receiver',"=",$userId_2)
+            ->where('forgroup','=',0)
+            ->orWhere('receiver','=',$userId)
+            ->where('sender','=',$userId_2)
+            ->where('forgroup',"=",0)
+            ->get();
+
         $queryArray = $query;
         $messageArray = [];
         foreach ($queryArray as $messageSQL){

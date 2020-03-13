@@ -193,7 +193,7 @@
                                     </a>
                                 </div>
 
-                                <div class="media-body ml-3">
+                                <div class="oneMessage media-body ml-3">
                                     <a href="#" style="text-decoration: none;" class="no-hover">
                                         <p style="color: gray; font-weight: bold"><?php echo e($userInfo->fname); ?> <?php echo e($userInfo->lname); ?></p>
                                     </a>
@@ -206,7 +206,7 @@
                     <?php else: ?>
                         <!-- Messages envoyé -->
                             <div class="media w-50 ml-auto mt-3">
-                                <div class="media-body">
+                                <div class="oneMessage media-body">
                                     <div style="background-color: <?php echo e(setting('openmeet.color')); ?>"
                                          class="bg-fmm rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 text-white"><?php echo e($message->content); ?></p>
@@ -220,24 +220,24 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-
             <hr class="mx-5 my-2">
 
             <div class="p-fixed">
-                <form action="/Messages/" method="post" class="bg-light">
+                <form action="/messages/create" method="post" class="bg-light">
+                    <?php echo csrf_field(); ?>
                     <div class="input-group">
                         <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
-                        <input value="" type="text" name="msg" placeholder="Envoyer un message"
+                        <input value="" type="text" name="mContent" placeholder="Envoyer un message"
                                aria-describedby="button-addon2"
                                class="form-control rounded-0 border-0 py-4 bg-light" required>
                         <div class="input-group-append">
-                            <button id="button-addon2" type="submit" class="btn btn-link"><i style="color: <?php echo e(setting('openmeet.color')); ?>" class="fa fa-paper-plane"></i>
+                            <button id="button-addon2" type="submit" class="btn btn-link"><i
+                                    style="color: <?php echo e(setting('openmeet.color')); ?>" class="fa fa-paper-plane"></i>
                             </button>
                         </div>
                     </div>
-                    <input type="hidden" name="mReceiver" value="#">
+                    <input type="hidden" name="mReceiver" value="<?php echo e($groupInfo->id); ?>">
                     <input type="hidden" name="mForgroup" value="1">
-                    <input type="hidden" name="mCSRF" value="#">
                 </form>
             </div>
 
@@ -285,6 +285,7 @@
 
         ::-webkit-scrollbar {
             width: 5px;
+            margin-left: -12px;
         }
 
         ::-webkit-scrollbar-track {
@@ -316,15 +317,20 @@
             font-size: 0.9rem;
             color: #999;
         }
-        .badge{
-            font-size:0;
+
+        .badge {
+            font-size: 0;
             width: 13px;
             height: 13px;
         }
 
-        @media(max-device-width: 600px ){
+        .extended .oneMessage {
+            width: 60vw !important;
+        }
 
-            .unextended .textNoPhoto{
+        @media (max-device-width: 600px ) {
+
+            .unextended .textNoPhoto {
                 display: none;
             }
 
@@ -336,29 +342,41 @@
                 display: none;
             }
 
-            .unextended .card{
-                 height: 10vh;
-                 max-height: 10vh;
-             }
-            .unextended .card card-withoutMessage{
+            .unextended .card {
+                height: 10vh;
+                max-height: 10vh;
+            }
+
+            .unextended .card card-withoutMessage {
                 height: 10vh;
                 max-height: 10vh;
                 background-color: dimgrey;
             }
+            .extended{
+                width: 80vw;
+                transition: all 0.5s;
+            }
 
-            .badge{
-                font-size:0;
+            .unextended{
+                width: 20vw;
+                transition: all 0.5s;
+            }
+
+            .badge {
+                font-size: 0;
                 width: 8px;
                 height: 8px;
             }
 
-            .unextended h6{
+            .unextended h6 {
                 display: none;
             }
-            .textTypeConversation{
+
+            .textTypeConversation {
                 display: none;
             }
-            .unextended .withoutMessageContent{
+
+            .unextended .withoutMessageContent {
                 display: none;
             }
         }
@@ -369,7 +387,7 @@
 <?php $__env->startSection('js'); ?>
     <script>
 
-        window.onload=function () {
+        window.onload = function () {
             var chatbox = document.getElementById("chatbox");
             chatbox.scrollTop = chatbox.scrollHeight;
             chatbox.focus();

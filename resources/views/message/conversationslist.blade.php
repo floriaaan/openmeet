@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('content')
-    <div class="container extended" style="margin-left: -1.75em;overflow-y: scroll;height: 78vh !important;">
+    <div class="container extended" style="padding-left: 1vw;overflow-y: scroll;height: 75vh !important;">
         <div class="rounded-lg overflow-hidden shadow">
             <!-- Users box-->
             <div class="px-0">
@@ -93,7 +93,7 @@
 
                                                         </div>
                                                         <p class="font-italic mb-0 text-small">
-                                                            @foreach($groupLastMessageInfo as $lastMessageInfo)
+                                                            @foreach($groupLastMessagesInfo as $lastMessageInfo)
                                                                 @if($lastMessageInfo->id == $lastMessage->sender)
                                                                     <span>{{$lastMessageInfo->fname}} {{$lastMessageInfo->lname}} : </span> {{ $lastMessage->content}}
                                                                 @endif
@@ -178,13 +178,16 @@
         .card {
             transition: all 0.3s;
         }
+
+
         .extended {
-            width: 65vw;
+            margin-left: -2vw;
+            width: 85vw;
             transition: all 0.5s;
         }
 
         .unextended {
-            width: 35vw;
+            width: 15vw;
             transition: all 0.5s;
         }
         ::-webkit-scrollbar {
@@ -202,6 +205,12 @@
             outline: 1px solid slategrey;
             border-radius: 1rem;
         }
+        .badge {
+            font-size: 0;
+            width: 13px;
+            height: 13px;
+        }
+
     </style>
 
 @endsection

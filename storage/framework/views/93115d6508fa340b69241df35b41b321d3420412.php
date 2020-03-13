@@ -5,9 +5,9 @@
             <div class="col-lg-3 d-none-custom">
 
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 20px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 1px">
                     <h5 class="list-title">Paramètres du site</h5>
-                    <a class="list-group-item list-group-item-action" href="#settings">
+                    <a class="list-group-item list-group-item-action" href="#settings" >
                         Paramètres du site
 
                     </a>
@@ -21,7 +21,7 @@
                     </a>
                 </div>
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 205px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 180px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
                         Utilisateurs
@@ -31,6 +31,15 @@
                         Signalements d'utilisateurs
                         <span class="badge badge-primary badge-pill"><?php echo e($reportCount); ?></span>
                     </a>
+                <!--
+                    <a class="list-group-item list-group-item-action" href="#bans">
+                        Banissements d'utilisateurs
+                        <span class="badge badge-primary badge-pill"><?php echo e($banCount); ?></span>
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#blocks">
+                        Blocages d'utilisateurs
+                        <span class="badge badge-primary badge-pill"><?php echo e($blockCount); ?></span>
+                    </a>-->
                     <a class="list-group-item list-group-item-action" href="#messages">
                         Messages
                         <span class="badge badge-primary badge-pill"><?php echo e($messageCount['foruser']); ?></span>
@@ -73,7 +82,6 @@
                             <?php echo Form::label('uColor', 'Couleur primaire', ['class' =>'control-label']); ?>
 
                             <?php echo Form::color('uColor', $value=Setting('openmeet.color'), ['class' => 'form-control']); ?>
-
 
                         </div>
 
@@ -156,8 +164,8 @@
                                 <?php $__currentLoopData = $userList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td>#<?php echo e($user->id); ?></td>
-                                        <td><?php echo e($user->fname); ?></td>
                                         <td><?php echo e($user->lname); ?></td>
+                                        <td><?php echo e($user->fname); ?></td>
                                         <td><?php echo e($user->email); ?></td>
                                         <td><?php if($user->isadmin): ?>
                                                 <span class="badge badge-pill badge-success">
@@ -179,7 +187,7 @@
                                                 <a class="btn btn-warning" href="/user/report/<?php echo e($user->id); ?>">
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </a>
-                                                <a class="btn btn-danger" href="/admin/user/delete/<?php echo e($user->id); ?>">
+                                                <a class="btn btn-danger" href="/admin/users/delete/<?php echo e($user->id); ?>">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -194,7 +202,7 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo e(url('/admin/user/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="<?php echo e(url('/admin/users/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="reports" class="my-5">Signalements des utilisateurs (10 derniers signalements)</h4>
@@ -224,13 +232,13 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a class="btn btn-success"
-                                                   href="/admin/report/show/<?php echo e($report['report']->id); ?>">
+                                                   href="/admin/reports/show/<?php echo e($report['report']->id); ?>">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/report/delete/<?php echo e($report['report']->id); ?>">
-                                                    <i class="fas fa-skull-crossbones"></i>
+                                                   href="/admin/reports/delete/<?php echo e($report['report']->id); ?>">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </div>
 
@@ -244,7 +252,105 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo e(url('/admin/user/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="<?php echo e(url('/admin/users/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                    </div>
+                    <h4 id="bans" class="my-5">bannissement des utilisateurs (10 derniers Bannissements)</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Concerné</th>
+                                <th scope="col">Du groupe</th>
+                                <th scope="col">Créé le</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php if(!empty($banList)): ?>
+
+                                <?php $__currentLoopData = $banList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ban): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <tr>
+                                        <td>#<?php echo e($ban['ban']->id); ?></td>
+                                        <td><?php echo e($ban['banned']->fname); ?> <?php echo e($ban['banned']->lname); ?></td>
+                                        <td><?php echo e($ban['banisher']->name); ?></td>
+                                        <td><?php echo e($ban['ban']->date); ?></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class="btn btn-success"
+                                                   href="/admin/ban/show/<?php echo e($ban['ban']->id); ?>">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+
+                                                <a class="btn btn-danger"
+                                                   href="/admin/ban/delete/<?php echo e($ban['ban']->id); ?>">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+
+                            </tbody>
+                        </table>
+
+                        <a href="<?php echo e(url('/admin/users/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                    </div>
+                    <h4 id="blocks" class="my-5">blocages des utilisateurs (10 derniers Blocages)</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Concerné</th>
+                                <th scope="col">Par</th>
+                                <th scope="col">Créé le</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php if(!empty($blockList)): ?>
+
+                                <?php $__currentLoopData = $blockList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $block): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <tr>
+                                        <td>#<?php echo e($block['block']->id); ?></td>
+                                        <td><?php echo e($block['target']->fname); ?> <?php echo e($block['target']->lname); ?></td>
+                                        <td><?php echo e($block['blocker']->fname); ?> <?php echo e($block['blocker']->lname); ?></td>
+                                        <td><?php echo e($block['block']->date); ?></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class="btn btn-success"
+                                                   href="/admin/ban/show/<?php echo e($block['block']->id); ?>">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+
+                                                <a class="btn btn-danger"
+                                                   href="/admin/ban/delete/<?php echo e($block['block']->id); ?>">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+
+                            </tbody>
+                        </table>
+
+                        <a href="<?php echo e(url('/admin/reports/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
@@ -292,7 +398,6 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo e(url('/admin/messages/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
                 </div>
 
@@ -325,12 +430,13 @@
                                         <td><?php echo e($group['group']->datecreate); ?></td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/group/show/<?php echo e($group['group']->id); ?>">
+                                                <a class="btn btn-success"
+                                                   href="/groups/show/<?php echo e($group['group']->id); ?>">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/group/delete/<?php echo e($group['group']->id); ?>">
+                                                   href="/admin/groups/delete/<?php echo e($group['group']->id); ?>">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -345,7 +451,7 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo e(url('/admin/group/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="<?php echo e(url('/admin/groups/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="events" class="my-5">Evénements (10 derniers événements)</h4>
@@ -373,12 +479,13 @@
                                         <td><?php echo e($event['event']->datefrom); ?></td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success" href="/event/show/<?php echo e($event['event']->id); ?>">
+                                                <a class="btn btn-success"
+                                                   href="/events/show/<?php echo e($event['event']->id); ?>">
                                                     <i class="far fa-eye"></i>
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/event/delete/<?php echo e($event['event']->id); ?>">
+                                                   href="/admin/events/delete/<?php echo e($event['event']->id); ?>">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -392,7 +499,7 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo e(url('/admin/event/')); ?>" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="<?php echo e(url('/admin/events/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>
@@ -440,18 +547,17 @@
 
                             </tbody>
                         </table>
-
-                        <a href="<?php echo e(url('/admin/messages/')); ?>" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <hr class="my-4">
                     <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
                     <div>
                         <form action="/admin/search" method="POST">
-
+                            <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" required name="search" class="form-control" placeholder="Rechercher">
+                                    <input type="text" required name="search" class="form-control"
+                                           placeholder="Rechercher">
                                 </div>
                                 <div class="col-3">
                                     <button type="submit" class="btn btn-secondary">Rechercher</button>

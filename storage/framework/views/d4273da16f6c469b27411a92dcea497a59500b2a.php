@@ -74,7 +74,8 @@
             overflow: hidden;
             padding-top: calc(7rem + 72px);
             padding-bottom: 7rem;
-            background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);
+            /*background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);*/
+            background-image: radial-gradient(circle, #2b2a2a, var(--openmeet));
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: scroll;

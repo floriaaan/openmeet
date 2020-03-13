@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-    <div class="container extended" style="margin-left: -1.75em;overflow-y: scroll;height: 78vh !important;">
+    <div class="container extended" style="padding-left: 1vw;overflow-y: scroll;height: 75vh !important;">
         <div class="rounded-lg overflow-hidden shadow">
             <!-- Users box-->
             <div class="px-0">
@@ -92,7 +92,7 @@
 
                                                         </div>
                                                         <p class="font-italic mb-0 text-small">
-                                                            <?php $__currentLoopData = $groupLastMessageInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php $__currentLoopData = $groupLastMessagesInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <?php if($lastMessageInfo->id == $lastMessage->sender): ?>
                                                                     <span><?php echo e($lastMessageInfo->fname); ?> <?php echo e($lastMessageInfo->lname); ?> : </span> <?php echo e($lastMessage->content); ?>
 
@@ -179,13 +179,16 @@
         .card {
             transition: all 0.3s;
         }
+
+
         .extended {
-            width: 65vw;
+            margin-left: -2vw;
+            width: 85vw;
             transition: all 0.5s;
         }
 
         .unextended {
-            width: 35vw;
+            width: 15vw;
             transition: all 0.5s;
         }
         ::-webkit-scrollbar {
@@ -203,6 +206,12 @@
             outline: 1px solid slategrey;
             border-radius: 1rem;
         }
+        .badge {
+            font-size: 0;
+            width: 13px;
+            height: 13px;
+        }
+
     </style>
 
 <?php $__env->stopSection(); ?>
