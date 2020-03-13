@@ -107,11 +107,11 @@
                                     <footer class="blockquote-footer">
                                         @if($result['content']->isadmin)
                                             <span class="badge badge-pill badge-success">
-                                                <i class="fas fa-user-check"></i>
+                                                <i class="fas fa-user-check"></i> Administrateur
                                             </span>
                                         @else
                                             <span class="badge badge-pill badge-danger">
-                                                <i class="fas fa-user-times"></i>
+                                                <i class="fas fa-user-times"></i> Non administrateur
                                             </span>
                                         @endif
                                     </footer>

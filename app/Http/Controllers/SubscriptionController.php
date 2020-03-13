@@ -63,6 +63,11 @@ class SubscriptionController extends Controller
         foreach ($subscriptions as $subscription) {
             $groups[] = (new Group)->getOne($subscription->id_group);
         }
+        $groupsWhereAdmin = (new Group)->getByAdmin(auth()->id());
+
+        foreach ($groupsWhereAdmin as $group) {
+            $groups[] = $group;
+        }
 
         return view('subscription.list', [
             'subscriptions' => $subscriptions,

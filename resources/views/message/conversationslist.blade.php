@@ -93,7 +93,7 @@
 
                                                         </div>
                                                         <p class="font-italic mb-0 text-small">
-                                                            @foreach($groupLastMessageInfo as $lastMessageInfo)
+                                                            @foreach($groupLastMessagesInfo as $lastMessageInfo)
                                                                 @if($lastMessageInfo->id == $lastMessage->sender)
                                                                     <span>{{$lastMessageInfo->fname}} {{$lastMessageInfo->lname}} : </span> {{ $lastMessage->content}}
                                                                 @endif

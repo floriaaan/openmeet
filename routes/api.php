@@ -21,3 +21,4 @@ Route::post('/v1/session/unset/error', function (Request $request) {
 
     return Session()->write($request['sessionid'], ['error' => null]);
 });
+
