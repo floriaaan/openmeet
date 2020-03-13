@@ -89,7 +89,18 @@
         .badge-primary {
             background-color: var(--openmeet) !important;
         }
+        .custom-control-input:checked + .custom-control-label::before {
+            border-color: var(--openmeet);
+            background-color : var(--openmeet);
+        }
 
+        .custom-control-input:focus + .custom-control-label::before {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
+
+        .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+            border-color: var(--openmeet);
+        }
 
     </style>
 

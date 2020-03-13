@@ -10,8 +10,9 @@
             <div class="container">
                 <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
                 <h2 class="masthead-subheading mb-0">{{(new \App\Event)->getCount()}}
-                    événement @if((new \App\Event)->getCount() > 1)s @endif à proximité | {{(new \App\Group)->getCount()}}
-                    groupe @if((new \App\Group)->getCount() > 1)s @endif à proximité</h2>
+                    {{str_plural('événement', (new \App\Event)->getCount())}} {{str_plural('organisé', (new \App\Event)->getCount())}}
+                    | {{(new \App\Group)->getCount()}}
+                    {{str_plural('groupe', (new \App\Group)->getCount())}} {{str_plural('créé', (new \App\Group)->getCount())}}</h2>
                 @if(auth()->check())
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
