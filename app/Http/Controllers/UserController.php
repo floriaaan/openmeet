@@ -16,6 +16,10 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+        return view('user.show', ['user' => (new User)->getOne(auth()->id())]);
+    }
+
     public function show($userID){
         return view('user.show', ['user' => (new User)->getOne($userID)]);
     }

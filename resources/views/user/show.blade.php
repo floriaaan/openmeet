@@ -1,142 +1,60 @@
 @extends('layouts.nav')
 
+@section('title')
+    Mon profil
+@endsection
+
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="myback-img">
+                <div class="p-3">
+                    <div class="card shadow-lg p-3" style="width: 22rem;">
+                        @if($user->picname != null)
                             <img
                                 alt="Photo de {{$user->fname}} {{$user->lname}}"
                                 src="{{$user->picrepo}}/{{$user->picname}}"
                                 class="">
+                        @else
+                            <small class="blockquote-footer">Pas de photo.</small>
+                        @endif
+                        <div class="card-body">
+                            <h5 class="card-title">{{$user->email}}</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the card's content.</p>
                         </div>
-                        <div class="myoverlay"></div>
-                        <div class="profile-img">
-                            <div class="borders avatar-profile">
-                                <img
-                                    src="{{$user->picrepo}}/{{$user->picname}}">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Membre
+                                de {{(new \App\Subscription)->countByUser($user->id)}} {{str_plural('groupe', (new \App\Subscription)->countByUser($user->id))}}
+                            </li>
+                            <li class="list-group-item">
+                                <small class="blockquote-footer">Administrateur
+                                    de {{count((new \App\Group)->getByAdmin($user->id))}} {{str_plural('groupe', count((new \App\Group)->getByAdmin($user->id)))}}
+                                </small>
+                            </li>
+
+                        </ul>
+                        @if($user->id != auth()->id())
+                            <div class="card-body">
+                                <a href="{{url('/user/report/'.$user->id)}}" class="card-link text-warning">Signaler</a>
                             </div>
-                        </div>
-                        <div class="profile-title">
-                            <h3>{{$user->fname}} {{$user->lname}}</h3>
-                        </div>
+                        @endif
                     </div>
                 </div>
+
             </div>
 
             <div class="col-lg-9">
-
-                Groupes et événements
-
+                <div class="p-5">
+                    Groupes et événements
+                </div>
             </div>
 
 
         </div>
     </div>
-
-@endsection
-
-@section('css')
-    <style>
-        .card {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: none;
-            border-radius: .25rem;
-        }
-
-        .myback-img {
-            display: flex;
-            justify-content: center;
-            height: 372px;
-            overflow: hidden;
-            object-fit: cover;
-            border-radius: .25rem;
-        }
-
-        .myoverlay {
-            position: absolute;
-            background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.72) 100%);
-            height: 100%;
-            width: 100%;
-            top: 0;
-        }
-
-        .card-body {
-            -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-            padding: 0;
-        }
-
-        .avatar-profile img {
-            width: 90px;
-            height: 90px;
-            border-radius: 100%;
-            overflow: hidden;
-            opacity: 0.9;
-            object-fit: cover;
-            -o-object-fit: cover;
-        }
-
-        .borders {
-            position: relative;
-            border: 5px solid #fff;
-            border-radius: 100%;
-        }
-
-        .borders:before {
-            content: " ";
-            position: absolute;
-            z-index: -1;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 100%;
-            background-image: var(--openmeet);
-            background-position: 0 0px, 100% 100%;
-            background-size: 100% 5px;
-            border-left: 5px solid var(--openmeet);
-            border-right: 5px solid var(--openmeet);
-            padding: 10px 5px;
-        }
-
-        .profile-img {
-            position: absolute;
-            top: 71%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .profile-title {
-            text-align: center;
-            position: relative;
-            top: -39px;
-            margin-bottom: -26px;
-        }
-
-        .profile-title h3 {
-            font-size: 18px;
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 0;
-        }
-
-        a:hover {
-            text-decoration: none !important;
-        }
-
-    </style>
 
 @endsection

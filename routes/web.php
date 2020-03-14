@@ -24,6 +24,7 @@ Route::post('/search', 'HomeController@search');
 
 
 //USER routes
+Route::get('/user/', 'UserController@index');
 Route::get('/user/show/{userID}', 'UserController@show');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');

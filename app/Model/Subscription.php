@@ -67,6 +67,15 @@ class Subscription extends Model
         return $listSubscription;
     }
 
+    public function countByUser($userID) {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('id_user', "=", $userID)
+            ->get();
+
+        return count($query);
+    }
+
 
     public function updateAcceptNotif($subId, $value)
     {

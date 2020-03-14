@@ -124,7 +124,7 @@
                         'group': this.id.substring(10)
                     },
                     success: function (data) {
-                        console.log(data)
+                        console.log(data[1])
                     },
                     error: function () {
                         console.log('Error while subscription')
@@ -141,12 +141,15 @@
 @section('css')
 
     <style>
+        .card-img{
+            height: 150px;
+        }
+
 
         .subscribe {
             width: 100px;
             height: 100px;
             position: absolute;
-            left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             background: url(https://abs.twimg.com/a/1450471907/img/t1/web_heart_animation.png) no-repeat;
@@ -172,9 +175,7 @@
             }
         }
 
-        .card-columns {
-            column-count: 4;
-        }
+
 
     </style>
 
