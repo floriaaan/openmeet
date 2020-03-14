@@ -161,20 +161,21 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        anlutro\LaravelSettings\ServiceProvider::class,
-        \App\Providers\NotificationsServiceProvider::class,
+
 
 
         /*
          * Package Service Providers...
          */
-
+        Collective\Html\HtmlServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
+        Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        \App\Providers\NotificationsServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,

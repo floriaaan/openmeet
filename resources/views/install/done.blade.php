@@ -1,5 +1,9 @@
 @extends('layouts.index')
 
+@section('title')
+    Installation
+@endsection
+
 @section('body')
 
     <div class="container-fluid wall-white max-height">

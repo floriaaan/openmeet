@@ -2,6 +2,8 @@
 
 @section('body')
 
+
+
     <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
          style="z-index: 5000">
         <a class="navbar-brand" href="/">
@@ -36,8 +38,10 @@
                             Bienvenue {{ auth()->user()->fname }} {{ auth()->user()->lname }}</h6>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Participations</h6>
-                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes groupes</a>
-                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes événements</a>
+                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes
+                            groupes</a>
+                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes
+                            événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
@@ -55,7 +59,8 @@
                         @else
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de modération</a>
+                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de
+                                modération</a>
                         @endif
 
                     </div>
@@ -220,4 +225,5 @@
     <div class="mt-nav"></div>
 
 @endsection
+
 

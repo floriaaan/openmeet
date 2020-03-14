@@ -59,14 +59,22 @@ class SubscriptionController extends Controller
     public function showGroups()
     {
         $subscriptions = (new Subscription())->getUser(auth()->id());
-        $groups = [];
+        $listgroups = [];
         foreach ($subscriptions as $subscription) {
-            $groups[] = (new Group)->getOne($subscription->id_group);
+            $listgroups[] = $subscription->id_group;
         }
         $groupsWhereAdmin = (new Group)->getByAdmin(auth()->id());
 
         foreach ($groupsWhereAdmin as $group) {
-            $groups[] = $group;
+            $listgroups[] = $group->id;
+        }
+
+        $listgroups = array_unique($listgroups);
+
+
+        $groups = [];
+        foreach ($listgroups as $idGroup) {
+            $groups[] = (new Group)->getOne($idGroup);
         }
 
         return view('subscription.list', [

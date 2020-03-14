@@ -26,14 +26,7 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-        Validator::extend('olderThan', function($attribute, $value, $parameters)
-        {
-            $minAge = ( ! empty($parameters)) ? (int) $parameters[0] : 18;
-            return (new DateTime)->diff(new DateTime($value))->y >= $minAge;
 
-            // or the same using Carbon:
-            // return Carbon\Carbon::now()->diff(new Carbon\Carbon($value))->y >= $minAge;
-        });
         return [
             'email' => 'required|email|unique:users',
             'rPass' => 'required|confirmed|min:3',

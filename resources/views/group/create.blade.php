@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Créer un groupe
+@endsection
+
 @section('content')
 
     <div class="container-fluid">

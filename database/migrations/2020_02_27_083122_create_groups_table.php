@@ -23,6 +23,7 @@ class CreateGroupsTable extends Migration
             $table->string('desc',255)->nullable();
             $table->string('picrepo',255)->nullable();
             $table->string('picname',255)->nullable();
+            $table->text('tags')->nullable();
             $table->date('datecreate');
             $table->timestamps();
         });

@@ -16,7 +16,8 @@ class Group extends Model
         'picrepo',
         'picname',
         'datecreate',
-        'desc'
+        'desc',
+        'tags'
     ];
 
 
@@ -110,6 +111,14 @@ class Group extends Model
         }
 
         return $listGroup;
+    }
+
+    public function getAdmin($groupID) {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('id', $groupID)
+            ->get();
+        return (new User)->getOne($query[0]->admin);
     }
 
 }

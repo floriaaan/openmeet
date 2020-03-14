@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    {{$event->name}}
+@endsection
+
 @section('content')
 
     <div class="container-fluid">

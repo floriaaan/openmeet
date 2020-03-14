@@ -1,5 +1,8 @@
 @extends('layouts.nav')
 
+@section('title')
+    Messages
+@endsection
 
 @section('content')
     <!--================================================

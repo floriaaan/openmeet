@@ -24,9 +24,9 @@ class AdminEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'uName' => 'required|min:3|max:40',
+            'uName' => 'required|profanity|min:3|max:40',
             'uColor' => 'required',
-            'uSlogan' => 'min:3|max:40'
+            'uSlogan' => 'min:3|profanity|max:40'
         ];
     }
 }

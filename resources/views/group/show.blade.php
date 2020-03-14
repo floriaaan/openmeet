@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    {{$group->name}}
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
@@ -56,6 +60,15 @@
                                     </div>
                                 </a>
                             @endforeach
+                        </div>
+
+                        <hr class="mx-4 my-2">
+
+                        <div class="px-5 pt-2">
+                            <small>Membres : {{ (new \App\Subscription)->countGroup($group->id) }}</small>
+                            <small class="blockquote-footer">
+                                Administrateur : {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
+                            </small>
                         </div>
 
 

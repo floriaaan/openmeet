@@ -24,16 +24,16 @@ class EventCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'eName' => 'required|min:1|max:64',
-            'eDesc' => 'max:255',
+            'eName' => 'required|profanity|min:1|max:64',
+            'eDesc' => 'max:255|profanity|',
             'eGroup' => 'required|numeric',
             'eDateFrom' => 'required|after_or_equal:now',
             'eDateTo' => 'after_or_equal:eDateFrom',
-            'eNumStreet' => 'required',
-            'eStreet' => 'required',
-            'eCity' => 'required',
-            'eZip' => 'required|numeric|min:1|max:99999',
-            'eCountry' => 'required'
+            'eNumStreet' => 'required|profanity|',
+            'eStreet' => 'required|profanity|',
+            'eCity' => 'required|profanity|',
+            'eZip' => 'required|numeric',
+            'eCountry' => 'required|profanity|'
         ];
     }
 }

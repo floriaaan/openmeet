@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Créer un événement
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
