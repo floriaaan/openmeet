@@ -13,6 +13,11 @@
                     {{str_plural('événement', (new \App\Event)->getCount())}} {{str_plural('organisé', (new \App\Event)->getCount())}}
                     | {{(new \App\Group)->getCount()}}
                     {{str_plural('groupe', (new \App\Group)->getCount())}} {{str_plural('créé', (new \App\Group)->getCount())}}</h2>
+                <form action="{{url('/search')}}" method="POST">
+                    @csrf
+                    <input type="text" name="search" class="mt-5 form-control form-control-lg rounded-pill p-4"
+                    placeholder="Rechercher un groupe ou événement">
+                </form>
                 @if(auth()->check())
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
