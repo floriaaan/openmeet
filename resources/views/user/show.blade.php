@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title')
-    Mon profil
+    {{$user->fname}} {{$user->lname}}
 @endsection
 
 @section('content')
@@ -54,7 +54,12 @@
             </div>
 
             <div class="col-lg-9">
+                @if(auth()->id() == $user->id)
+                    <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5">Editer mon profil</a>
+                    <hr class="my-3 mx-5">
+                @endif
                 <div class="p-3">
+
                     <div class="card shadow-sm p-3">
                         <div class="card-body">
                             <h5 class="card-title">Groupes de {{$user->fname}}</h5>

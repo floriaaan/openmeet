@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Participations
+@endsection
+
 @section('content')
     <div class="container ">
         @forelse($events as $event)

@@ -23,13 +23,17 @@ Route::post('/search', 'HomeController@search');
 
 
 
-//USER routes
+//USER routes (auth on middleware)
 Route::get('/user/', 'UserController@index');
 Route::get('/user/show/{userID}', 'UserController@show');
+Route::get('/user/edit', 'UserController@editForm');
+Route::post('/user/edit', 'UserController@edit');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
-Route::get('/user/groups', 'SubscriptionController@showGroups')->middleware('auth');
-Route::get('/user/events', 'ParticipationController@showEvents')->middleware('auth');
+Route::get('/user/groups', 'SubscriptionController@showGroups');
+Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
+Route::get('/user/events', 'ParticipationController@showEvents');
+Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->middleware('auth');
 
 
 

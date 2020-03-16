@@ -61,6 +61,28 @@ class UserController extends Controller
         ]);
     }
 
+    public function editForm() {
+        $listSubscription = (new Subscription)->getUser(auth()->id());
+        $groups = [];
+        foreach ($listSubscription as $sub) {
+            $groups[] = (new Group)->getOne($sub->id_group);
+        }
+
+        $listParticipations = (new Participation)->getUser(auth()->id());
+        $events = [];
+        foreach ($listParticipations as $participation) {
+            $events[] = (new Event)->getOne($participation->event);
+        }
+        return view('user.edit',[
+            'groups' => $groups,
+            'events' => $events,
+        ]);
+    }
+
+    public function edit() {
+        return redirect('/user');
+    }
+
     public function reportForm($userID) {
         return 'préparation du pas cool ' . $userID;
     }

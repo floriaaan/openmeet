@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Abonnements
+@endsection
+
 @section('content')
     <div class="container">
         @forelse($groups as $group)

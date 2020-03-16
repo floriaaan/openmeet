@@ -36,9 +36,12 @@
                             @if($sR['content']->picname != null)
                                 <a href="{{url('/groups/show')}}/{{$sR['content']->id}}"
                                    style="text-decoration: none; color: inherit;">
-                                    <img
-                                        src="{{url('/storage/upload/image/'.$sR['content']->picrepo.'/'.$sR['content']->picname)}}"
-                                        class="card-img" alt="Photo de {{$sR['content']->name}}">
+                                    <div class="mask-search">
+                                        <img
+                                            src="{{url('/storage/upload/image/'.$sR['content']->picrepo.'/'.$sR['content']->picname)}}"
+                                            class="card-img" alt="Photo de {{$sR['content']->name}}">
+                                    </div>
+
                                 </a>
                             @else
                                 <small class="p-3 blockquote-footer">Pas de photo</small>
@@ -57,7 +60,7 @@
                                     <div class="col-lg-4">
 
                                         <div class="subscribe" id="subscribe-{{$sR['content']->id}}"></div>
-                                        <span class="text-danger">J'aime</span>
+                                        <!--<span class="text-danger">J'aime</span>-->
 
                                     </div>
 
@@ -169,9 +172,14 @@
         .border-event {
             border-bottom: 0.25rem solid #49bd3a !important;
         }
+        .mask-search{
+            height: 150px;
+            overflow: hidden;
+        }
 
         .card-img {
-            height: 150px;
+            vertical-align: middle;
+            background-position: 50% 50%;
         }
 
 

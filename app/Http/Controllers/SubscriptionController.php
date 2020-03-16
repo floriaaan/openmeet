@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\SubscriptionRequest;
+use App\Participation;
 use App\Subscription;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -41,6 +42,7 @@ class SubscriptionController extends Controller
         return redirect('/user/groups');
 
     }
+
     public function deleteSubscription(SubscriptionRequest $request)
     {
         $post = $request->input();
@@ -83,10 +85,10 @@ class SubscriptionController extends Controller
         ]);
     }
 
-    public static function SwitchAcceptNotif($subId,$redirect)
+    public static function SwitchAcceptNotif($subId, $redirect)
     {
-        $sub=new Subscription();
-        $infoSub=$sub->getOne($subId);
+        $sub = new Subscription();
+        $infoSub = $sub->getOne($subId);
 
         //TODO : check actual status
 
@@ -95,6 +97,18 @@ class SubscriptionController extends Controller
         //TODO : check '$redirect' parameter
         //TODO : header to the page relative to the '$redirect' parameter;
         //
+    }
+
+    public function deleteAll()
+    {
+        $listSub = (new Subscription)->getUser(auth()->id());
+
+        foreach ($listSub as $sub) {
+            (new Subscription)->remove($sub->id);
+        }
+
+        return redirect('/user');
+
     }
 
 }

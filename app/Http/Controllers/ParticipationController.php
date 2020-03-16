@@ -65,4 +65,16 @@ class ParticipationController extends Controller
         ]);
     }
 
+    public function deleteAll()
+    {
+        $listParticipation = (new Participation)->getUser(auth()->id());
+
+        foreach ($listParticipation as $part) {
+            (new Participation)->remove($part->id);
+        }
+
+        return redirect('/user');
+
+    }
+
 }
