@@ -166,12 +166,20 @@ class AdminController extends Controller
 
     public function editPrivacy(Request $request)
     {
-
         $post = $request->input();
-        var_dump($post);
-        //Setting(['openmeet.robots' => ($post['robots']) == "on"]);
 
-        //return redirect('/admin');
+        $robotsOn = "User-agent: *\nDisallow:";
+        $robotsOff = "User-agent: *\nDisallow: *";
+
+        if (isset($post['robots']) && $post['robots'] == "on") {
+            file_put_contents('./robots.txt', $robotsOn);
+            Setting(['openmeet.robots' => true]);
+        } else {
+            file_put_contents('./robots.txt', $robotsOff);
+            Setting(['openmeet.robots' => false]);
+        }
+
+        return redirect('/admin');
     }
 
     public function listUser()
@@ -298,7 +306,8 @@ class AdminController extends Controller
 
     }
 
-    public function editViewsForm() {
+    public function editViewsForm()
+    {
         $mailingView = file_get_contents('./../resources/views/emails/eventcreated.blade.php');
 
         return view('admin.views.edit', [
@@ -306,7 +315,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function editViews(Request $request) {
+    public function editViews(Request $request)
+    {
         $post = $request->input();
 
         file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);

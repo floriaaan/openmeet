@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\GroupCreateRequest;
 use App\Subscription;
+use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -42,6 +43,12 @@ class GroupController extends Controller
         }
 
         $group->push();
+
+        $adminSub = new Subscription();
+        $adminSub->id_user = $post['gAdminID'];
+        $adminSub->id_group = $group->id;
+        $adminSub->date = date('Y-m-d');
+        $adminSub->acceptnotif = (new User)->getOne($post['gAdminID'])->defaultnotif;
 
         return redirect('/groups/list');
     }
