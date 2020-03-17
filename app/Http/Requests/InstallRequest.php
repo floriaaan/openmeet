@@ -24,8 +24,8 @@ class InstallRequest extends FormRequest
     public function rules()
     {
         return [
-            'iName'=>'required|min:3|max:40',
-            'iSlogan' => 'min:3|max:40',
+            'iName'=>'required|min:3|max:40|profanity|',
+            'iSlogan' => 'min:3|max:40|profanity|',
             'iPass'=>'required|confirmed|min:3',
             'iMail'=>'required|email'
         ];

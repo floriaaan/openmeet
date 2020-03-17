@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Evenements
+@endsection
+
 @section('content')
     <h1>Tout vos Evenements </h1>
 

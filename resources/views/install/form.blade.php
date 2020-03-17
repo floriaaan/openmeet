@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('titre')
-    OpenMeet - Installation
+    Installation
 @endsection
 
 @section('body')

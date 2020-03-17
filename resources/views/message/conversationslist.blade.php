@@ -1,7 +1,11 @@
 @extends('layouts.nav')
 
+@section('title')
+    Messages
+@endsection
+
 @section('content')
-    <div class="container w-50" style="margin-left: -1.75em;">
+    <div class="container extended" style="padding-left: 1vw;overflow-y: scroll;height: 75vh !important;">
         <div class="rounded-lg overflow-hidden shadow">
             <!-- Users box-->
             <div class="px-0">
@@ -15,12 +19,14 @@
                                 @foreach($personalInfoConversations as $infoConversation)
                                     @if($lastMessage->sender == $infoConversation->id || $lastMessage->receiver == $infoConversation->id)
                                         <div
-                                            @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style="border-bottom-width: 2px;border-bottom-color:{{setting('openmeet.color')}} " @endif class="card border-bottom-fmm mb-1">
-                                            <a href="/messages/user/{{$infoConversation->id}}" class="list-group-item list-group-item-action">
+                                            @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style="border-bottom-width: 2px;border-bottom-color:{{setting('openmeet.color')}} "
+                                            @endif class="card border-bottom-fmm mb-1">
+                                            <a href="/messages/user/{{$infoConversation->id}}"
+                                               class="list-group-item list-group-item-action">
                                                 @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
                                                     <span
                                                         class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                            @endif
+                                                @endif
                                                 <div class="media">
                                                     <div class="mask">
                                                         @if($infoConversation->picname != null & $infoConversation->picname != '')
@@ -61,14 +67,15 @@
                                 @foreach($groupInfoConversations as $infoConversation)
                                     @if($lastMessage->receiver == $infoConversation->id)
                                         <div
-                                            @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style=";border-color: {{setting('openmeet.color')}};border-width: 1px;"
+                                            @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style="border-bottom-color: {{setting('openmeet.color')}};border-bottom-width: 2px;"
                                             @endif class="card border-bottom-fmm mb-1">
 
-                                            <a href="/messages/group/{{$lastMessage->receiver}}" class="list-group-item list-group-item-action">
+                                            <a href="/messages/group/{{$lastMessage->receiver}}"
+                                               class="list-group-item list-group-item-action">
                                                 @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
                                                     <span
                                                         class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                            @endif
+                                                @endif
                                                 <div class="media">
                                                     <div class="mask">
                                                         @if($infoConversation->picname != null && $infoConversation->picname != '')
@@ -93,7 +100,7 @@
 
                                                         </div>
                                                         <p class="font-italic mb-0 text-small">
-                                                            @foreach($groupLastMessageInfo as $lastMessageInfo)
+                                                            @foreach($groupLastMessagesInfo as $lastMessageInfo)
                                                                 @if($lastMessageInfo->id == $lastMessage->sender)
                                                                     <span>{{$lastMessageInfo->fname}} {{$lastMessageInfo->lname}} : </span> {{ $lastMessage->content}}
                                                                 @endif
@@ -114,7 +121,8 @@
                                 @foreach($groupInfoConversations as $infoConversation)
                                     @if($infoConversation->id == $withoutMessage->receiver)
                                         <div class="card border-bottom-fmm mb-1">
-                                            <a class="list-group-item list-group-item-action" href="/messages/group/{{$infoConversation->id}}">
+                                            <a class="list-group-item list-group-item-action"
+                                               href="/messages/group/{{$infoConversation->id}}">
                                                 <div class="media">
                                                     <div class="mask">
                                                         @if($infoConversation->picname != null && $infoConversation->picname != '')
@@ -178,6 +186,41 @@
         .card {
             transition: all 0.3s;
         }
+
+
+        .extended {
+            margin-left: -2vw;
+            width: 85vw;
+            transition: all 0.5s;
+        }
+
+        .unextended {
+            width: 15vw;
+            transition: all 0.5s;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: {{setting('openmeet.color')}};
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
+
+        .badge {
+            font-size: 0;
+            width: 13px;
+            height: 13px;
+        }
+
     </style>
 
 @endsection

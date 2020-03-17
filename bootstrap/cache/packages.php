@@ -10,6 +10,13 @@
       0 => 'anlutro\\LaravelSettings\\ServiceProvider',
     ),
   ),
+  'askedio/laravel5-profanity-filter' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Askedio\\Laravel5ProfanityFilter\\Providers\\ProfanityFilterServiceProvider',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 

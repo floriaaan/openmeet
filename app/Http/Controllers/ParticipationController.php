@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ParticipationRequest;
-use App\Model\Participation;
+use App\Participation;
 use App\Event;
 
 
@@ -63,6 +63,18 @@ class ParticipationController extends Controller
             'participations' => $participations,
             'events' => $events
         ]);
+    }
+
+    public function deleteAll()
+    {
+        $listParticipation = (new Participation)->getUser(auth()->id());
+
+        foreach ($listParticipation as $part) {
+            (new Participation)->remove($part->id);
+        }
+
+        return redirect('/user');
+
     }
 
 }

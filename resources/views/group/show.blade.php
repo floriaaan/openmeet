@@ -1,8 +1,18 @@
 @extends('layouts.nav')
 
+@section('title')
+    {{$group->name}}
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
+        <a class="btn btn-link float-right mr-5"
+           href="{{url('/groups/list')}}">
+            Retour
+            <i class="fas fa-arrow-right"></i>
+        </a>
+        <hr class="m-4">
         <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
             <div class="row no-gutters">
                 <div class="col-md-4 m-auto" style="overflow: hidden;">
@@ -52,11 +62,22 @@
                             @endforeach
                         </div>
 
+                        <hr class="mx-4 my-2">
+
+                        <div class="px-5 pt-2">
+                            <small>Membres : {{ (new \App\Subscription)->countGroup($group->id) }}</small>
+                            <small class="blockquote-footer">
+                                Administrateur : {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
+                            </small>
+                        </div>
+
 
                         <div class="d-flex justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                             <div class="float-right mr-5">
-                                @if($issubscribed != null && $issubscribed)
+                                @if($group->admin == auth()->id())
+                                    <small class="text-muted blockquote-footer">Vous êtes administrateur du groupe.</small>
+                                @elseif($issubscribed != null && $issubscribed)
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

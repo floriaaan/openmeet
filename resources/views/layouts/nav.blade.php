@@ -2,6 +2,8 @@
 
 @section('body')
 
+
+
     <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
          style="z-index: 5000">
         <a class="navbar-brand" href="/">
@@ -22,7 +24,10 @@
                     @if(auth()->user()->picname != null)
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="./{{ auth()->user()->picrepo }}/{{ auth()->user()->picname }}">
+                            <img
+                                src="{{url('/storage/upload/image/'.auth()->user()->picrepo.'/'.auth()->user()->picname)}}"
+                                class="img-thumbnail rounded-circle"
+                                style="height: 40px; width: 40px">
                         </a>
                     @else
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -34,10 +39,14 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue {{ auth()->user()->fname }} {{ auth()->user()->lname }}</h6>
+                        <a class="dropdown-item" href="{{ url('/user/') }}"><i class="fas fa-user"></i> Mon
+                            profil</a>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Participations</h6>
-                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes groupes</a>
-                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes événements</a>
+                        <a class="dropdown-item" href="{{ url('/user/groups/') }}"><i class="fas fa-users"></i> Mes
+                            groupes</a>
+                        <a class="dropdown-item" href="{{ url('/user/events') }}"> <i class="fas fa-handshake"></i> Mes
+                            événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url('/logout') }}"
@@ -52,6 +61,11 @@
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
                             <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                        @else
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Modération</h6>
+                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de
+                                modération</a>
                         @endif
 
                     </div>
@@ -159,6 +173,13 @@
 
             @endif
 
+            @if(auth()->check())
+                <a class="nav-link" href="{{url('/groups/list')}}">
+                    <i class="fas fa-lg fa-users"></i>
+                </a>
+
+            @endif
+
             @if (auth()->check())
                 <div class="dropleft nav-responsive-patch ml-1">
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -209,4 +230,5 @@
     <div class="mt-nav"></div>
 
 @endsection
+
 

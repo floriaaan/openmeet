@@ -1,9 +1,17 @@
+<?php $__env->startSection('title'); ?>
+    Accueil
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="masthead text-center text-white" style="margin-top: -10vh!important; height: 30%!important;">
         <div class="masthead-content my-auto">
             <div class="container">
                 <h1 class="masthead-heading mb-0"><?php echo e(Setting('openmeet.slogan')); ?></h1>
-                <h2 class="masthead-subheading mb-0">1 événement à proximité | 2 groupes à proximités</h2>
+                <h2 class="masthead-subheading mb-0"><?php echo e((new \App\Event)->getCount()); ?>
+
+                    événement <?php if((new \App\Event)->getCount() > 1): ?>s <?php endif; ?> à proximité | <?php echo e((new \App\Group)->getCount()); ?>
+
+                    groupe <?php if((new \App\Group)->getCount() > 1): ?>s <?php endif; ?> à proximité</h2>
                 <?php if(auth()->check()): ?>
                     <a href="<?php echo e(url('/groups/list')); ?>" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
@@ -66,7 +74,8 @@
             overflow: hidden;
             padding-top: calc(7rem + 72px);
             padding-bottom: 7rem;
-            background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);
+            /*background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);*/
+            background-image: radial-gradient(circle, #2b2a2a, var(--openmeet));
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: scroll;
@@ -203,7 +212,6 @@
             e.preventDefault();
             // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            console.log(e);
             // Update UI notify the user they can install the PWA
 
         });

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Composer\Command\BaseDependencyCommand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,9 +35,34 @@ class Message extends Model
         foreach ($queryArray as $messageSQL){
             $message=new Message();
             $message=$messageSQL;
-            $messageArray[]=$message;
+            $messageArray[$message->id]=$message;
 
         }
+        ksort($messageArray);
+        return $messageArray;
+    }
+
+    public function getPersonalChat($userId_2){
+        $userId=auth()->id();
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('sender',"=",$userId)
+            ->where('receiver',"=",$userId_2)
+            ->where('forgroup','=',0)
+            ->orWhere('receiver','=',$userId)
+            ->where('sender','=',$userId_2)
+            ->where('forgroup',"=",0)
+            ->get();
+
+        $queryArray = $query;
+        $messageArray = [];
+        foreach ($queryArray as $messageSQL){
+            $message=new Message();
+            $message=$messageSQL;
+            $messageArray[$message->id]=$message;
+
+        }
+        ksort($messageArray);
         return $messageArray;
     }
 
@@ -80,8 +106,8 @@ class Message extends Model
         $contentSplitted = mb_str_split($query[0]->content);
         $newContent = "";
 
-        if(count($contentSplitted)>=40)
-            for($i=0;$i<40;$i++)
+        if(count($contentSplitted)>=60)
+            for($i=0;$i<60;$i++)
             {
                     {
                         $newContent = $newContent.$contentSplitted[$i];
@@ -105,8 +131,8 @@ class Message extends Model
                 $contentSplitted = mb_str_split($query[0]->content);
                 $newContent = "";
 
-                if(count($contentSplitted)>=40)
-                    for($i=0;$i<40;$i++)
+                if(count($contentSplitted)>=60)
+                    for($i=0;$i<60;$i++)
                     {
                         {
                             $newContent = $newContent.$contentSplitted[$i];
@@ -182,5 +208,19 @@ class Message extends Model
             $msgList[]=$msgSQL;
         }
         return $msgList;
+    }
+
+    public function getLike($str)
+    {
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('content', 'LIKE', "%{$str}%")
+            ->get();
+        $listMessage = [];
+        foreach ($query as $message) {
+            $listMessage[] = $message;
+        }
+
+        return $listMessage;
     }
 }

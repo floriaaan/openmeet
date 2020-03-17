@@ -10,8 +10,16 @@
             <div class="container">
                 <h1 class="masthead-heading mb-0">{{Setting('openmeet.slogan')}}</h1>
                 <h2 class="masthead-subheading mb-0">{{(new \App\Event)->getCount()}}
-                    événement @if((new \App\Event)->getCount() > 1)s @endif à proximité | {{(new \App\Group)->getCount()}}
-                    groupe @if((new \App\Group)->getCount() > 1)s @endif à proximité</h2>
+                    {{str_plural('événement', (new \App\Event)->getCount())}} {{str_plural('organisé', (new \App\Event)->getCount())}}
+                    | {{(new \App\Group)->getCount()}}
+                    {{str_plural('groupe', (new \App\Group)->getCount())}} {{str_plural('créé', (new \App\Group)->getCount())}}</h2>
+                <form action="{{url('/search')}}" method="POST">
+                    @csrf
+                    <input  type="text" name="search"
+                            class="text-center mt-5 form-control form-control-lg rounded-pill"
+                            style="padding:2rem; font-size:15px"
+                            placeholder="Rechercher un groupe ou événement">
+                </form>
                 @if(auth()->check())
                     <a href="{{ url('/groups/list') }}" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
@@ -73,7 +81,8 @@
             overflow: hidden;
             padding-top: calc(7rem + 72px);
             padding-bottom: 7rem;
-            background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);
+            /*background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);*/
+            background-image: radial-gradient(circle, #2b2a2a, var(--openmeet));
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: scroll;

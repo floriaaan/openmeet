@@ -44,6 +44,15 @@ class Subscription extends Model
         return $listSubscription;
     }
 
+    public function countGroup($groupId) {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('id_group', "=", $groupId)
+            ->get();
+
+        return count($query);
+    }
+
     public function getUser($userId)
     {
         $query = DB::table('subscriptions')
@@ -56,6 +65,15 @@ class Subscription extends Model
             $listSubscription[] = $subcription;
         }
         return $listSubscription;
+    }
+
+    public function countByUser($userID) {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('id_user', "=", $userID)
+            ->get();
+
+        return count($query);
     }
 
 

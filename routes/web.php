@@ -23,12 +23,17 @@ Route::post('/search', 'HomeController@search');
 
 
 
-//USER routes
+//USER routes (auth on middleware)
+Route::get('/user/', 'UserController@index');
 Route::get('/user/show/{userID}', 'UserController@show');
+Route::get('/user/edit', 'UserController@editForm');
+Route::post('/user/edit', 'UserController@edit');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
-Route::get('/user/groups', 'SubscriptionController@showGroups')->middleware('auth');
-Route::get('/user/events', 'ParticipationController@showEvents')->middleware('auth');
+Route::get('/user/groups', 'SubscriptionController@showGroups');
+Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
+Route::get('/user/events', 'ParticipationController@showEvents');
+Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->middleware('auth');
 
 
 
@@ -37,13 +42,18 @@ Route::get('/user/events', 'ParticipationController@showEvents')->middleware('au
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
+Route::post('/admin/search', 'AdminController@search');
 Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
-Route::get('/admin/user/', 'AdminController@listUser');
-Route::get('/admin/user/delete/{userID}', 'AdminController@deleteUser');
-Route::get('/admin/user/delete/confirmed/{userID}', 'AdminController@deleteConfirmed');
+Route::get('/admin/users/', 'AdminController@listUser');
+Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
+Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
+Route::get('/admin/groups/', 'AdminController@listGroup');
+Route::get('/admin/reports/', 'AdminController@listReport');
+Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
+Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
 
 
 //NOTIFICATION Routes
@@ -53,7 +63,7 @@ Route::post('/notifications/readall', 'NotificationController@readall')->middlew
 //MESSAGE routes
 Route::get('/messages','MessageController@showUserConversations')->middleware('auth');
 Route::get('/messages/{typeConversation}/{correspondant}','MessageController@showChat')->middleware('auth');
-
+Route::post('/messages/create','MessageController@createMessage')->middleware('auth');
 
 //SIGNALEMENT routes
 
@@ -63,8 +73,8 @@ Route::get('/groups/show/{group_id}', 'GroupController@show');
 Route::get('/groups/list', 'GroupController@showAll');
 Route::get('/groups/create', 'GroupController@addForm')->middleware('auth');
 Route::post('/groups/create', 'GroupController@addPost')->middleware('auth');
-Route::get('/groups/edit/{group_id}', 'GroupController@editForm')->middleware('groupadmin');
-Route::post('/groups/edit', 'GroupController@editPost')->middleware('groupadmin');
+Route::get('/groups/admin/{group_id}', 'GroupController@editForm')->middleware('groupadmin');
+Route::post('/groups/admin', 'GroupController@editPost')->middleware('groupadmin');
 Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middleware('groupadmin');
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
 Route::post('groups/subscribe/add', 'SubscriptionController@createSubscription')->middleware('auth');

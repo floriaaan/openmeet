@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Ban;
+use App\Block;
 use App\Event;
 use App\Group;
 use App\Http\Requests\AdminEditRequest;
+use App\Http\Requests\DeleteUserRequest;
+use App\Http\Requests\SearchRequest;
 use App\Message;
 use App\Signalement;
 use App\User;
+use DemeterChain\A;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -89,6 +94,34 @@ class AdminController extends Controller
 
         }
 
+        $bans = (new Ban);
+        $countBan = $bans->getCount();
+        $rawListBan = $bans->getLimit(10);
+
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banisher' => $groups->getOne($ban->banisher),
+                'banned' => $user->getOne($ban->banned),
+            ];
+
+        }
+
+        $blocks = (new Block);
+        $countBlock = $blocks->getCount();
+        $rawListBlock = $blocks->getLimit(10);
+
+        $listBlock = [];
+        foreach ($rawListBlock as $block) {
+            $listBlock[] = [
+                'block' => $block,
+                'blocker' => $user->getOne($block->blocker),
+                'target' => $user->getOne($block->target),
+            ];
+
+        }
+
         return view('admin.panel', [
             'userList' => $listUser,
             'userCount' => $countUser,
@@ -100,6 +133,10 @@ class AdminController extends Controller
             'eventCount' => $countEvent,
             'reportList' => $listReport,
             'reportCount' => $countReport,
+            'banList' => $listBan,
+            'banCount' => $countBan,
+            'blockList' => $listBlock,
+            'blockCount' => $countBlock
 
         ]);
 
@@ -139,77 +176,14 @@ class AdminController extends Controller
 
     public function listUser()
     {
-        return 'la liste';
+        return view('admin.users.list', ['users' => (new User)->getAll()]);
     }
 
-    public function deleteUser($userID)
-    {
-        return 'delete ' . $userID;
-    }
-
-    public function deleteConfirmed($userID)
-    {
-        return 'delete confirmed (c\'est super pas cool) ' . $userID;
-    }
-
-    public function oldindex()
+    public function listReport()
     {
         $user = (new User);
-        $listUser = $user->getLimit(5);
-        $countUser = $user->getCount();
-
-        $message = (new Message);
-        $listMessage = [];
-        $rawListMsg = $message->getLimit(10);
-
-        foreach ($rawListMsg as $msg) {
-            if ($msg->forgroup == 0) {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => $user->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            } else {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => (new Group)->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            }
-
-        }
-        $countMessage = $message->getCount();
-
-        $groups = (new Group);
-        $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimit(10);
-
-        $listGroup = [];
-
-        foreach ($rawListGroup as $group) {
-            $listGroup[] = [
-                'group' => $group,
-                'admin' => $user->getOne($group->admin)
-            ];
-
-        }
-
-        $events = (new Event);
-        $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimit(10);
-
-        $listEvent = [];
-        foreach ($rawListEvent as $event) {
-            $listEvent[] = [
-                'event' => $event,
-                'group' => $groups->getOne($event->id_group)
-            ];
-
-        }
-
         $reports = (new Signalement);
-        $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimit(10);
+        $rawListReport = $reports->getAll();
 
         $listReport = [];
         foreach ($rawListReport as $report) {
@@ -220,21 +194,107 @@ class AdminController extends Controller
             ];
 
         }
+        return view('admin.reports.list', ['reportList' => $listReport]);
+    }
 
-        return view('admin.panel', [
-            'userList' => $listUser,
-            'userCount' => $countUser,
-            'messageList' => $listMessage,
-            'messageCount' => $countMessage,
-            'groupList' => $listGroup,
-            'groupCount' => $countGroup,
-            'eventList' => $listEvent,
-            'eventCount' => $countEvent,
-            'reportList' => $listReport,
-            'reportCount' => $countReport,
+    public function listGroup()
+    {
+        $groups = [];
+        $listGroups = (new Group)->getAll();
 
+        foreach ($listGroups as $group) {
+            $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
+        }
+        return view('admin.groups.list', ['groups' => $groups]);
+    }
+
+    public function deleteUser($userID)
+    {
+        $user = (new User)->getOne($userID);
+        if ($user->isadmin) { //Proposer une passation de pouvoir
+            return view('admin.users.deleteadmin');
+        }
+        return view('admin.users.deleteconfirmation', ['user' => $user]);
+    }
+
+    public function deleteUserPost(DeleteUserRequest $request)
+    {
+        $post = $request->input();
+        (new User)->remove($post['user']);
+
+
+        return redirect('/admin');
+    }
+
+    public function showReport($reportID)
+    {
+        $rpt = (new Signalement)->getOne($reportID);
+        $report = [
+            'report' => $rpt,
+            'sender' => (new User)->getOne($rpt->submitter),
+            'concerned' => (new User)->getOne($rpt->concerned),
+        ];
+        (new Signalement)->read($reportID);
+        return view('admin.reports.show', ['report' => $report]);
+    }
+
+    public function deleteReport($reportID)
+    {
+        (new Signalement)->remove($reportID);
+        return redirect('/admin');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $post = $request->input();
+
+        $result = [];
+
+        $listGroup = (new Group)->getLike($post['search']);
+        foreach ($listGroup as $group) {
+            $result[] = ['content' => $group, 'type' => 'group'];
+        }
+
+        $listEvent = (new Event)->getLike($post['search']);
+        foreach ($listEvent as $event) {
+            $result[] = ['content' => $event, 'type' => 'event'];
+        }
+
+        $listUser = (new User)->getLike($post['search']);
+        foreach ($listUser as $user) {
+            $result[] = ['content' => $user, 'type' => 'user'];
+        }
+
+        $listMessage = (new Message)->getLike($post['search']);
+        foreach ($listMessage as $message) {
+            if ($message->forgroup) {
+                $result[] = ['content' => $message, 'type' => 'message',
+                    'sender' => (new User)->getOne($message->sender),
+                    'receiver' => (new Group)->getOne($message->receiver)
+                ];
+            } else {
+                $result[] = ['content' => $message, 'type' => 'message',
+                    'sender' => (new User)->getOne($message->sender),
+                    'receiver' => (new User)->getOne($message->receiver)
+                ];
+            }
+
+        }
+
+        $listSignalement = (new Signalement)->getLike($post['search']);
+        foreach ($listSignalement as $signalement) {
+            $result[] = ['content' => $signalement, 'type' => 'signalement',
+                'sender' => (new User)->getOne($signalement->submitter),
+                'receiver' => (new User)->getOne($signalement->receiver),
+            ];
+        }
+
+        //shuffle($result);
+
+        return view('admin.search', [
+            'search' => $post['search'],
+            'results' => $result
         ]);
-
 
     }
 }

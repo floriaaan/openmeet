@@ -63,25 +63,9 @@ class HomeController extends Controller
 
     public function home()
     {
-        //Récupération des notifications
-        $notifications = [];
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
-            $notif = new Notification();
-            $notifications = $notif->getLast5ForUser($userId);
-        }
 
-        //Récupération des messages
-        $messages = [];
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
-            $message = new Message();
-        }
 
-        return view('home', [
-            'notifications' => $notifications,
-            'messages' => $messages
-        ]);
+        return view('home');
     }
 
     public function search(SearchRequest $request)
@@ -91,10 +75,18 @@ class HomeController extends Controller
         $listGroup = (new Group)->getLike($post['search']);
         $listEvent = (new Event)->getLike($post['search']);
 
+        $searchResult = [];
+
+        foreach ($listGroup as $g) {
+            $searchResult[] = ['content' => $g, 'type' => 'group'];
+        }
+        foreach ($listEvent as $e) {
+            $searchResult[] = ['content' => $e, 'type' => 'event'];
+        }
+
         return view('search', [
-            'search' => $post['search'],
-            'groups' => $listGroup,
-            'events' => $listEvent
+            's' => $post['search'],
+            'search' => $searchResult
         ]);
     }
 }

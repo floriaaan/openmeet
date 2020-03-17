@@ -1,8 +1,18 @@
 @extends('layouts.nav')
 
+@section('title')
+    {{$event->name}}
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
+        <a class="btn btn-link float-right mr-5"
+           href="{{url('/groups/list')}}">
+            Retour
+            <i class="fas fa-arrow-right"></i>
+        </a>
+        <hr class="m-4">
         <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
             <div class="row no-gutters">
 

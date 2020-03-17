@@ -1,5 +1,9 @@
 @extends('layouts.index')
 
+@section('title')
+    Inscription
+@endsection
+
 @section('body')
     <div class="h-100 w-100 wall-white text-center">
 

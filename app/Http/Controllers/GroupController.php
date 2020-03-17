@@ -37,6 +37,10 @@ class GroupController extends Controller
             $group->desc = $post['gDesc'];
         }
 
+        if(isset($post['gTags']) && $post['gTags'] != '') {
+            $group->tags = $post['gTags'];
+        }
+
         $group->push();
 
         return redirect('/groups/list');
