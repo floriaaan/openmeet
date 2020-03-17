@@ -121,4 +121,14 @@ class Group extends Model
         return (new User)->getOne($query[0]->admin);
     }
 
+    public function getLastID() {
+        $query = DB::table('groups')
+            ->select('id')
+            ->limit(1)
+            ->orderByDesc('id')
+            ->get();
+
+        return $query[0];
+    }
+
 }

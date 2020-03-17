@@ -40,7 +40,7 @@
 
                     <div class="col-lg-6">
                         {!! Form::label('iPass', 'Mot de passe administrateur', ['class' =>'control-label']) !!}
-                        {!! Form::password('iPass', ['class' => 'form-control', 'type' => 'password']) !!}
+                        {!! Form::password('iPass', ['class' => 'form-control', 'type' => 'password', 'autocomplete' => 'new-password']) !!}
                         {!! $errors->first('iPass', '<small class="text-danger">Le champ Mot de passe est incorrect.</small>') !!}
                     </div>
 

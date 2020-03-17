@@ -123,6 +123,7 @@
 
                     <h4 id="privacy" class="my-5">Confidentialité</h4>
                     <form action="/admin/edit/privacy" method="POST">
+                        @csrf
                         <div class="row justify-content-between">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="robots" id="robots"
