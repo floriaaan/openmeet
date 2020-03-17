@@ -23,13 +23,17 @@ Route::post('/search', 'HomeController@search');
 
 
 
-//USER routes
+//USER routes (auth on middleware)
 Route::get('/user/', 'UserController@index');
 Route::get('/user/show/{userID}', 'UserController@show');
+Route::get('/user/edit', 'UserController@editForm');
+Route::post('/user/edit', 'UserController@edit');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
-Route::get('/user/groups', 'SubscriptionController@showGroups')->middleware('auth');
-Route::get('/user/events', 'ParticipationController@showEvents')->middleware('auth');
+Route::get('/user/groups', 'SubscriptionController@showGroups');
+Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
+Route::get('/user/events', 'ParticipationController@showEvents');
+Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->middleware('auth');
 
 
 
@@ -42,6 +46,8 @@ Route::post('/admin/search', 'AdminController@search');
 Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
+Route::get('/admin/edit/views', 'AdminController@editViewsForm');
+Route::post('/admin/edit/views', 'AdminController@editViews');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
 Route::get('/admin/users/', 'AdminController@listUser');
 Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');

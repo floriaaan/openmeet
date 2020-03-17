@@ -24,6 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jakub-onderka/php-console-color" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jorenvanhocht/laravel-share" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/helpers" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/tinker" />
@@ -102,5 +103,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="tailwind" level="application" />
+    <orderEntry type="library" name="hover" level="application" />
+    <orderEntry type="library" name="ckeditor" level="application" />
   </component>
 </module>

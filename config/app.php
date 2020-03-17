@@ -170,6 +170,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -233,6 +234,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Setting' => anlutro\LaravelSettings\Facade::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
     ],
 

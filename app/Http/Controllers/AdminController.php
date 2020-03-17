@@ -297,4 +297,20 @@ class AdminController extends Controller
         ]);
 
     }
+
+    public function editViewsForm() {
+        $mailingView = file_get_contents('./../resources/views/emails/eventcreated.blade.php');
+
+        return view('admin.views.edit', [
+            'mail' => $mailingView
+        ]);
+    }
+
+    public function editViews(Request $request) {
+        $post = $request->input();
+
+        file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);
+
+        return redirect('/admin');
+    }
 }
