@@ -24,9 +24,9 @@ class GroupCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'gName' => 'required|min:1|profanity|max:40',
+            'gName' => 'required|min:1|profanity|max:100',
             //'gPic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'gDesc' => 'profanity',
+            'gDesc' => 'required',
             'gAdminID' => 'required|numeric'
         ];
     }
