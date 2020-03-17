@@ -12,8 +12,8 @@
             <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
 
-                    <div class="col-md-8">
-                        <div class="card-body p-5">
+                    <div class="col-md-7">
+                        <div class="card-body p-4">
                             <h2 class="display-4 mb-1" id="title-group"></h2>
                             <div class="input-group">
 
@@ -49,7 +49,7 @@
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
-                                       name="eDateFrom" type="date" value="{{ old('eDateFrom') }}"
+                                       name="eDateFrom" type="datetime-local" value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\Th:m')}}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
@@ -59,6 +59,23 @@
                             </div>
 
                             <div class="input-group mt-1">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input class="form-control @error('eDateTo') is-invalid @enderror"
+                                       name="eDateTo" type="datetime-local" value="{{(old('eDateTo') != null ) ? old('eDateTo') : date('Y-m-d\Th:m')}}"
+                                       required>
+                                @error('eDateTo')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <hr class="mx-3 my-4">
+
+                            <div class="input-group mt-2">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Organisateur</span>
@@ -77,7 +94,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-4 m-auto p-2">
+                    <div class="col-md-5 m-auto p-4">
 
                         <div id="map">
 
@@ -90,8 +107,8 @@
 
                                 <input class="form-control @error('eNumStreet') is-invalid @enderror"
                                        name="eNumStreet" type="text" value="{{ old('eNumStreet') }}"
-                                       placeholder="Numéro de rue"
-                                       required>
+                                       placeholder="Num"
+                                       required autocomplete="off">
                                 @error('eNumStreet')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,7 +150,7 @@
                             <div class="col-lg-2">
 
                                 <input class="form-control @error('eZip') is-invalid @enderror"
-                                       name="eZip" type="number" value="{{ old('eZip') }}"
+                                       name="eZip" type="text" value="{{ old('eZip') }}"
                                        placeholder="Code postal"
                                        required>
                                 @error('eZip')
