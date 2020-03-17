@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Ban;
+use App\Block;
 use App\Event;
 use App\Group;
 use App\Mail\EventCreated;
+use App\Message;
 use App\Participation;
+use App\Signalement;
 use App\Subscription;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -40,6 +44,7 @@ class UserController extends Controller
             'events' => $events,
         ]);
     }
+
 
     public function show($userID){
         $listSubscription = (new Subscription)->getUser($userID);

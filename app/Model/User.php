@@ -76,10 +76,20 @@ class User extends Authenticatable
             ->select('*')
             ->get();
 
+        return $query->count();
+
+    }
+
+    public function getCountUserByGroup()
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->get();
 
         return $query->count();
 
     }
+
 
     public function getAll()
     {

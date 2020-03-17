@@ -29,6 +29,8 @@ Route::get('/user/show/{userID}', 'UserController@show');
 Route::get('/user/edit', 'UserController@editForm');
 Route::post('/user/edit', 'UserController@edit');
 Route::get('/user/report/{userID}', 'UserController@reportForm');
+Route::get('/user/ban/', 'UserController@ban');
+Route::get('/user/block/', 'UserController@block');
 Route::post('/user/report/', 'UserController@reportPost');
 Route::get('/user/groups', 'SubscriptionController@showGroups');
 Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
@@ -37,8 +39,8 @@ Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->midd
 
 
 
-//ADMIN GROUP routes
-
+//Gestion GROUP routes
+Route::get('/admingroup/', 'AdminGroupController@gestion');
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
