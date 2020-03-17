@@ -22,7 +22,10 @@
                     <?php if(auth()->user()->picname != null): ?>
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="./<?php echo e(auth()->user()->picrepo); ?>/<?php echo e(auth()->user()->picname); ?>">
+                            <img
+                                src="<?php echo e(url('/storage/upload/image/'.auth()->user()->picrepo.'/'.auth()->user()->picname)); ?>"
+                                class="img-thumbnail rounded-circle"
+                                style="height: 40px; width: 40px">
                         </a>
                     <?php else: ?>
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -34,6 +37,8 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue <?php echo e(auth()->user()->fname); ?> <?php echo e(auth()->user()->lname); ?></h6>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/')); ?>"><i class="fas fa-user"></i> Mon
+                            profil</a>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Participations</h6>
                         <a class="dropdown-item" href="<?php echo e(url('/user/groups/')); ?>"><i class="fas fa-users"></i> Mes

@@ -71,6 +71,45 @@ class ScrapingController extends Controller
         $eventDesc = $scrapEventDesc[1];
         dump($eventDesc);
         //===========================================================================//
+        //====================Heure de début de l'évènement=================================//
+        $regexEventHourFrom = '#<span class="eventTimeDisplay-startDate-time"><span>(.*?)<\/span><\/span>#';
+        preg_match($regexEventHourFrom,$pageContent,$scrapEventHourFrom);
+        $eventHourFrom =$scrapEventHourFrom[1];
+        dump($eventHourFrom);
+        //===========================================================================//
+        //====================Heure de fin de l'évènement=================================//
+        $regexEventHourTo = '#<span class="eventTimeDisplay-endDate-partialTime"><span>(.*?)<\/span><\/span>#';
+        preg_match($regexEventHourTo,$pageContent,$scrapEventHourTo);
+        $eventHourTo =strip_tags($scrapEventHourTo[1]);
+        dump($eventHourTo);
+        //===========================================================================//
+        //====================Heure de fin de l'évènement=================================//
+        $regexEventDate = '#<time class="eventStatusLabel" (.*?)><span>(.*?)<\/span><\/time>#';
+        preg_match($regexEventDate,$pageContent,$scrapEventDate);
+        $eventDateStr = $scrapEventDate[2];
+        $eventDateStrExp = explode(' ',$eventDateStr);
+        $eventDay = $eventDateStrExp[1];
+        $eventMonth=null;
+        $eventYear = $eventDateStrExp[3];
+        $mois=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+        $i = 0;
+        while($eventMonth == null || $eventMonth=="")
+        {
+            if ($eventDateStrExp[2] == $mois[$i])
+            {
+                if($i+1 >=10){
+
+                    $eventMonth=$i+1;
+                }
+                else{
+                    $eventMonth="0".($i+1);
+                }
+            }
+            $i++;
+        }
+        $eventDate = $eventYear."-".$eventMonth."-".$eventDay;
+        dump($eventDate);
+        //===========================================================================//
 
         echo ($pageContent);
         die;
