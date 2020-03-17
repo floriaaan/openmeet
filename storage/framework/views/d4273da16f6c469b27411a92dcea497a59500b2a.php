@@ -14,6 +14,13 @@
                     | <?php echo e((new \App\Group)->getCount()); ?>
 
                     <?php echo e(str_plural('groupe', (new \App\Group)->getCount())); ?> <?php echo e(str_plural('créé', (new \App\Group)->getCount())); ?></h2>
+                <form action="<?php echo e(url('/search')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <input  type="text" name="search"
+                            class="text-center mt-5 form-control form-control-lg rounded-pill"
+                            style="padding:2rem; font-size:15px"
+                            placeholder="Rechercher un groupe ou événement">
+                </form>
                 <?php if(auth()->check()): ?>
                     <a href="<?php echo e(url('/groups/list')); ?>" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>
