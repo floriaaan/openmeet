@@ -33,7 +33,7 @@ class SubscriptionController extends Controller
             $subscription = new Subscription();
             $subscription->id_user = $userId;
             $subscription->id_group = $groupId;
-            $subscription->date = date('Y-m-d');
+            $subscription->date = date('Y-m-d H:m:s');
             $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
             $subscription->push();
         } else {

@@ -50,6 +50,8 @@ class GroupController extends Controller
         $adminSub->date = date('Y-m-d');
         $adminSub->acceptnotif = (new User)->getOne($post['gAdminID'])->defaultnotif;
 
+        $adminSub->push();
+
         return redirect('/groups/list');
     }
 
