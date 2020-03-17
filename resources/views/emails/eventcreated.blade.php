@@ -1,238 +1,498 @@
-<!--[if !mso]--><!-- --><!-- <![endif]-->
-<p>{{Setting(&#39;openmeet.title&#39;)}} - Nouvel &eacute;v&eacute;nement de {{(new \App\Group)-&gt;getOne($event-&gt;id_group)-&gt;name}}<!-- [if gte mso 9]>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+    <!--[if !mso]--><!-- -->
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700' rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
+    <!-- <![endif]-->
+
+    <title>{{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+        de {{(new \App\Group)->getOne($event->id_group)->name}}</title>
+
+    <style type="text/css">
+        body {
+            width: 100%;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            mso-margin-top-alt: 0px;
+            mso-margin-bottom-alt: 0px;
+            mso-padding-alt: 0px 0px 0px 0px;
+        }
+
+        .display-4 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        span.preheader {
+            display: none;
+            font-size: 1px;
+        }
+
+        html {
+            width: 100%;
+        }
+
+        table {
+            font-size: 14px;
+            border: 0;
+        }
+
+        /* ----------- responsivity ----------- */
+
+        @media only screen and (max-width: 640px) {
+            /*------ top header ------ */
+            .main-header {
+                font-size: 20px !important;
+            }
+
+            .main-section-header {
+                font-size: 28px !important;
+            }
+
+            .show {
+                display: block !important;
+            }
+
+            .hide {
+                display: none !important;
+            }
+
+            .align-center {
+                text-align: center !important;
+            }
+
+            .no-bg {
+                background: none !important;
+            }
+
+            /*----- main image -------*/
+            .main-image img {
+                width: 440px !important;
+                height: auto !important;
+            }
+
+            /* ====== divider ====== */
+            .divider img {
+                width: 440px !important;
+            }
+
+            /*-------- container --------*/
+            .container590 {
+                width: 440px !important;
+            }
+
+            .container580 {
+                width: 400px !important;
+            }
+
+            .main-button {
+                width: 220px !important;
+            }
+
+            /*-------- secions ----------*/
+            .section-img img {
+                width: 320px !important;
+                height: auto !important;
+            }
+
+            .team-img img {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media only screen and (max-width: 479px) {
+            /*------ top header ------ */
+            .main-header {
+                font-size: 18px !important;
+            }
+
+            .main-section-header {
+                font-size: 26px !important;
+            }
+
+            /* ====== divider ====== */
+            .divider img {
+                width: 280px !important;
+            }
+
+            /*-------- container --------*/
+            .container590 {
+                width: 280px !important;
+            }
+
+            .container590 {
+                width: 280px !important;
+            }
+
+            .container580 {
+                width: 260px !important;
+            }
+
+            /*-------- secions ----------*/
+            .section-img img {
+                width: 280px !important;
+                height: auto !important;
+            }
+        }
+    </style>
+    <!-- [if gte mso 9]>
     <style type=”text/css”>
         body {
             font-family: arial, sans-serif !important;
         }
     </style>
-    <![endif]--><!-- pre-header --></p>
+    <![endif]-->
+</head>
 
-<table>
-	<tbody>
-		<tr>
-			<td>
-			<p>{{Setting(&#39;openmeet.title&#39;)}} - Nouvel &eacute;v&eacute;nement de {{(new \App\Group)-&gt;getOne($event-&gt;id_group)-&gt;name}}</p>
-			</td>
-		</tr>
-	</tbody>
+
+<body class="respond" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<!-- pre-header -->
+<table style="display:none!important;">
+    <tr>
+        <td>
+            <div
+                style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
+                {{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+                de {{(new \App\Group)->getOne($event->id_group)->name}}
+            </div>
+        </td>
+    </tr>
 </table>
-<!-- pre-header end --><!-- header -->
+<!-- pre-header end -->
+<!-- header -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff">
 
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-	<tbody>
-		<tr>
-			<td>
-			<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:590px">
-				<tbody>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:590px">
-							<tbody>
-								<tr>
-									<td style="height:70px"><a href=""><img alt="" src="https://floriaaan.alwaysdata.net/docs/fmm.svg" style="width:100px" /></a></td>
-								</tr>
-							</tbody>
-						</table>
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-				</tbody>
-			</table>
-			</td>
-		</tr>
-	</tbody>
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+
+                        <table border="0" align="center" width="590" cellpadding="0" cellspacing="0"
+                               class="container590">
+
+                            <tr>
+                                <td align="center" height="70" style="height:70px;">
+                                    <a href="{{url('/')}}"
+                                       style="display: block; border-style: none !important; border: 0 !important;"><img
+                                            width="100" border="0" style="display: block; width: 100px;"
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
 </table>
-<!-- end header --><!-- big image section -->
+<!-- end header -->
 
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-	<tbody>
-		<tr>
-			<td>
-			<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:590px">
-				<tbody>
-					<tr>
-						<td>
-						<p>Un nouvel &eacute;v&eacute;nement a &eacute;t&eacute; cr&eacute;&eacute;</p>
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<p>aura lieu le <cite>{{strftime(&quot;%A %d %b %Y&quot;,strtotime($event-&gt;datefrom))}} &agrave; {{strftime(&quot;%R&quot;,strtotime($event-&gt;datefrom))}}</cite> @if($event-&gt;dateto != null)<br />
-						jusqu&#39;au <cite>{{strftime(&quot;%A %d %b %Y&quot;,strtotime($event-&gt;dateto))}} &agrave; {{strftime(&quot;%R&quot;,strtotime($event-&gt;dateto))}}</cite> @endif</p>
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:40px">
-							<tbody>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:160px">
-							<tbody>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td>
-									<p><a href="{{url('/events/show'.$event-&gt;id)}}">Voir l&#39;&eacute;v&eacute;nement</a></p>
-									</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</td>
-		</tr>
-	</tbody>
+<!-- big image section -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
+
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+                <tr>
+
+                    <td align="center" class="section-img">
+                        <div style="font-size: 25px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                            Un nouvel événement a été créé
+                        </div>
+                        <hr class="mx-5 my-3" style="color:#ddd">
+                        <div style="font-size: 18px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                            {{(new \App\Group)->getOne($event->id_group)->name}} vous invite à {{$event->name}}
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="color: #343434; font-size: 15px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 20px;"
+                        class="main-header">
+
+
+                        <div style="line-height: 35px">
+
+                            aura lieu le
+                            <cite>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}
+                                à {{strftime("%R",strtotime($event->datefrom))}}</cite>
+
+                            @if($event->dateto != null)
+                                <br>
+                                jusqu'au <cite>{{strftime("%A %d %b %Y",strtotime($event->dateto))}}
+                                    à {{strftime("%R",strtotime($event->dateto))}}</cite>
+                            @endif
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+                        <table border="0" width="40" align="center" cellpadding="0" cellspacing="0" bgcolor="eeeeee">
+                            <tr>
+                                <td height="2" style="font-size: 2px; line-height: 2px;">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                </tr>
+
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+                        <table border="0" align="center" width="160" cellpadding="0" cellspacing="0"
+                               style="background-color: {{Setting('openmeet.color')}}">
+
+                            <tr>
+                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td align="center"
+                                    style="color: #ffffff; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;">
+
+
+                                    <div style="line-height: 26px;">
+                                        <a href="{{url('/events/show'.$event->id)}}"
+                                           style="color: #ffffff; text-decoration: none;">Voir l'événement</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+
+            </table>
+
+        </td>
+    </tr>
+
 </table>
-<!-- end section --><!-- contact section -->
+<!-- end section -->
 
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-	<tbody>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="border-top:1px solid #e0e0e0">&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-			<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:590px">
-				<tbody>
-					<tr>
-						<td>
-						<table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:300px">
-							<tbody>
-								<tr><!-- logo -->
-									<td><a href=""><img alt="" src="https://floriaaan.alwaysdata.net/docs/fmm.svg" style="width:40px" /></a></td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td>
-									<p>Contact:<br />
-									<a href="mailto:{{Setting('openmeet.admin.email', 'contact@openmeet.fr')}}">{{strtolower(Setting(&#39;openmeet.title&#39;))}}</a></p>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+<!-- contact section -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
 
-						<table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:2px">
-							<tbody>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
+    <tr class="hide">
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td>
+    </tr>
 
-						<table align="right" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:200px">
-							<tbody>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-								<tr>
-									<td>
-									<table align="right" border="0" cellpadding="0" cellspacing="0">
-										<tbody>
-											<tr>
-												<td><a href="https://www.facebook.com/"><img alt="" src="http://i.imgur.com/Qc3zTxn.png" style="width:24px" /></a></td>
-												<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-												<td><a href="https://twitter.com/"><img alt="" src="http://i.imgur.com/RBRORq1.png" style="width:24px" /></a></td>
-												<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-												<td><a href="https://plus.google.com/"><img alt="" src="http://i.imgur.com/Wji3af6.png" style="width:24px" /></a></td>
-											</tr>
-										</tbody>
-									</table>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-	</tbody>
+    <tr>
+        <td height="60" style="border-top: 1px solid #e0e0e0;font-size: 60px; line-height: 60px;">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590 bg_color">
+
+                <tr>
+                    <td>
+                        <table border="0" width="300" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+
+                            <tr>
+                                <!-- logo -->
+                                <td align="left">
+                                    <a href=""
+                                       style="display: block; border-style: none !important; border: 0 !important;"><img
+                                            width="40" border="0" style="display: block; width: 40px;"
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td align="left"
+                                    style="color: #888888; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 23px;"
+                                    class="text_color">
+                                    <div
+                                        style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
+
+                                        Contact: <br/> <a href="mailto:{{Setting('openmeet.admin.email', 'contact@openmeet.fr')}}"
+                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{(Setting('openmeet.title', 'OpenMeet'))}}</a>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <table border="0" width="2" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td width="2" height="10" style="font-size: 10px; line-height: 10px;"></td>
+                            </tr>
+                        </table>
+
+                        <table border="0" width="200" align="right" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+
+                            <tr>
+                                <td class="hide" height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                            </tr>
+
+
+                            <tr>
+                                <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table border="0" align="right" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <a href="https://www.facebook.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/Qc3zTxn.png" alt=""></a>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <a href="https://twitter.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/RBRORq1.png" alt=""></a>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <a href="https://plus.google.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/Wji3af6.png" alt=""></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td>
+    </tr>
+
 </table>
-<!-- end section --><!-- footer ====== -->
+<!-- end section -->
 
-<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
-	<tbody>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-			<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:590px">
-				<tbody>
-					<tr>
-						<td>
-						<table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
-							<tbody>
-								<tr>
-									<td>
-									<p>OpenMeet - 2020</p>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+<!-- footer ====== -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="f4f4f4">
 
-						<table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width:5px">
-							<tbody>
-								<tr>
-									<td>&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-	</tbody>
+    <tr>
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td align="center">
+
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+
+                <tr>
+                    <td>
+                        <table border="0" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td align="left"
+                                    style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                    <div style="line-height: 24px;">
+
+                                        <span style="color: #333333;">OpenMeet - 2020</span>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table border="0" align="left" width="5" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td height="20" width="5" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                            </tr>
+                        </table>
+
+
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+
 </table>
 <!-- end footer ====== -->
+
+</body>
+
+</html>

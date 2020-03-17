@@ -13,14 +13,14 @@
 
             <label for="mail">Page Mail</label>
             <div id="toolbar"></div>
-            <textarea name="mail" id="mail" class="form-control" style="height: 40%!important;">
+            <textarea name="mail" id="mail" class="form-control" rows="25" style="height: 40%!important;">
                 {{$mail}}
             </textarea>
-            <script>
+            <!--<script>
                 let editor = CKEDITOR.replace('mail');
                 editor.config.height = '30vh';
 
-            </script>
+            </script>-->
 
 
             <button type="submit" class="btn btn-primary ml-2 mt-2">Valider</button>
