@@ -35,6 +35,17 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
+  'jorenvanhocht/laravel-share' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Jorenvh\\Share\\Providers\\ShareServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Share' => 'Jorenvh\\Share\\ShareFacade',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 

@@ -9,7 +9,7 @@
 
                 <div class="list-group position-fixed w-list-admin" style="margin-top: 1px">
                     <h5 class="list-title">Paramètres du site</h5>
-                    <a class="list-group-item list-group-item-action" href="#settings" >
+                    <a class="list-group-item list-group-item-action" href="#settings">
                         Paramètres du site
 
                     </a>
@@ -95,28 +95,35 @@
                     <h4 id="theming" class="my-5">Thèmes</h4>
                     <form method="POST" action="{{ url('/admin/edit/theme') }}">
                         @csrf
-                        <div class="row">
-                            <div class="btn-group btn-group-toggle mx-2" data-toggle="buttons">
-                                <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
-                                    <input type="radio" name="theme" value="day" autocomplete="off"
-                                           @if(Setting('openmeet.theme') == "day")checked @endif>
-                                    <i class="fas fa-sun"></i> Jour
-                                </label>
-                                <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
-                                    <input type="radio" name="theme" value="night" autocomplete="off"
-                                           @if(Setting('openmeet.theme') == "night")checked @endif>
-                                    <i class="fas fa-moon"></i> Nuit
-                                </label>
+                        <div class="row justify-content-between">
+                            <div>
+                                <div class="btn-group btn-group-toggle mx-2" data-toggle="buttons">
+                                    <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
+                                        <input type="radio" name="theme" value="day" autocomplete="off"
+                                               @if(Setting('openmeet.theme') == "day")checked @endif>
+                                        <i class="fas fa-sun"></i> Jour
+                                    </label>
+                                    <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
+                                        <input type="radio" name="theme" value="night" autocomplete="off"
+                                               @if(Setting('openmeet.theme') == "night")checked @endif>
+                                        <i class="fas fa-moon"></i> Nuit
+                                    </label>
+                                </div>
                             </div>
+                            <button type="submit" class="btn btn-primary ">Valider les modifications</button>
                         </div>
-                        <button type="submit" class="btn btn-primary float-right">Valider les modifications</button>
+
 
                     </form>
+                    <div class="row justify-content-end mt-2">
+                        <a href="{{url('/admin/edit/views')}}" class="btn btn-secondary mt-2">Modifier les pages</a>
+
+                    </div>
 
 
                     <h4 id="privacy" class="my-5">Confidentialité</h4>
-                    <div>
-                        <form action="/admin/edit/privacy" method="POST">
+                    <form action="/admin/edit/privacy" method="POST">
+                        <div class="row justify-content-between">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="robots" id="robots"
                                        @if(Setting('openmeet.robots'))checked @endif>
@@ -125,10 +132,12 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications
+                            <button type="submit" class="btn btn-primary">
+                                Valider les modifications
                             </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+
 
                 </div>
 
@@ -245,7 +254,7 @@
 
                         <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
-                    <h4 id="bans" class="my-5">bannissement des utilisateurs (10 derniers Bannissements)</h4>
+                    <h4 id="bans" class="my-5">Bannissement des utilisateurs (10 derniers Bannissements)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -294,7 +303,7 @@
 
                         <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
-                    <h4 id="blocks" class="my-5">blocages des utilisateurs (10 derniers Blocages)</h4>
+                    <h4 id="blocks" class="my-5">Blocages des utilisateurs (10 derniers Blocages)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">

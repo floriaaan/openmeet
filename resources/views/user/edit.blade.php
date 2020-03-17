@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="uPic" id="uPic" lang="fr">
-                                    <label class="custom-file-label mb-1" for="gPic">Photo d'utilisateur</label>
+                                    <label class="custom-file-label mb-1" for="uPic">Photo d'utilisateur</label>
                                 </div>
                             </div>
                             <div class="card-body">

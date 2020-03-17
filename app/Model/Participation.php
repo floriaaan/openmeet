@@ -85,4 +85,9 @@ class Participation extends Model
 
         return $query[0];
     }
+
+    public function getCount($eventID)
+    {
+        return count((new Participation)->getEvent($eventID));
+    }
 }

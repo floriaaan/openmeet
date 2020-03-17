@@ -46,6 +46,8 @@ Route::post('/admin/search', 'AdminController@search');
 Route::get('/admin/v1', 'AdminController@oldindex');
 Route::post('/admin/edit/settings', 'AdminController@editSettings');
 Route::post('/admin/edit/theme', 'AdminController@editTheme');
+Route::get('/admin/edit/views', 'AdminController@editViewsForm');
+Route::post('/admin/edit/views', 'AdminController@editViews');
 Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
 Route::get('/admin/users/', 'AdminController@listUser');
 Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
