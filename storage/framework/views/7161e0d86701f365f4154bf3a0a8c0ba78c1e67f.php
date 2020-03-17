@@ -4,8 +4,13 @@
             <div class="card rounded shadow mt-2 mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-4" style="overflow: hidden">
-                        <img src="<?php echo e(url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)); ?>"
-                             class="card-img hvr-grow" alt="Photo de <?php echo e($group->name); ?>">
+
+                        <?php if($group->picname != null): ?>
+                            <img src="<?php echo e(url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)); ?>"
+                                 class="card-img hvr-grow" alt="Photo de <?php echo e($group->name); ?>">
+                        <?php else: ?>
+                            <small class="p-3 blockquote-footer">Pas de photo</small>
+                        <?php endif; ?>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

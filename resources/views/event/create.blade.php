@@ -133,7 +133,7 @@
                             <div class="col-lg-2">
 
                                 <input class="form-control @error('eZip') is-invalid @enderror"
-                                       name="eZip" type="number" value="{{ old('eZip') }}"
+                                       name="eZip" type="text" value="{{ old('eZip') }}"
                                        placeholder="Code postal"
                                        required>
                                 @error('eZip')
@@ -157,6 +157,12 @@
 
                             </div>
                         </div>
+                        <a style="text-decoration: none" href="/frommeetup/event" class="float-right mb-4 mr-3">
+                            <button style="margin-bottom: 0" type="button" class="btn btn-primary">
+                                <p style=" font-weight: lighter;text-decoration: underline;font-size: 1vw;margin-bottom: 0">Vous avez déjà des évènements enregistrés sur Meetup.com ?</p>
+                                Importer à partir de meetup
+                            </button>
+                        </a>
 
                         <button type="submit" class="btn btn-primary float-right my-4 mr-3">
                             Créer un événement

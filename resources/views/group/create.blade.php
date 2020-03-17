@@ -53,6 +53,12 @@
                                        required>
                             </div>
                         </div>
+                        <a style="text-decoration: none" href="/frommeetup/group" class="float-right mb-4 mr-3">
+                            <button type="button" class="btn btn-primary">
+                                <p style="text-decoration: underline;font-size: 1.2vw;margin-bottom: 0">Vous avez déjà un groupe sur Meetup.com ?</p>
+                                Importer à partir de meetup
+                            </button>
+                        </a>
                         <button type="submit" class="btn btn-primary float-right mb-4 mr-3">
                             Créer un groupe
                         </button>

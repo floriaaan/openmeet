@@ -28,6 +28,31 @@ class MessageController extends Controller
         $message->date = date('Y-m-d H:i:s');
 
         $message->push();
+
+        //Envoi d'une notification
+        $contentSplitted = mb_str_split($message->content);
+        $contentExt = "";
+        $contentExtract="";
+
+        if(count($contentSplitted)>=50) {
+            for ($i = 0; $i < 50; $i++) {
+                {
+                    $contentExt = $contentExt . $contentSplitted[$i];
+                }
+                $contentExtract = $contentExt . ' ...';
+            }
+        }else{
+            $contentExtract=$message->content;
+        }
+
+        $notifType='mes';
+        $notifTitle='Nouveau message de '.auth()->user()->fname.' '.auth()->user()->lname;
+        $notifContent = "Contenu du message : ".$contentExtract;
+
+        NotificationController::CreateNotification($notifType,$notifTitle,$message->receiver,$notifContent,$message->id);
+
+            //TODO : envoyer un notification pour un message de groupe
+
         if ($post['mForgroup'] == 1) {
             return redirect('/messages/group/' . $post['mReceiver']);
         } else {

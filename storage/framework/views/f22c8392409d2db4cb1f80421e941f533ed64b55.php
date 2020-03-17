@@ -1,3 +1,7 @@
+<?php $__env->startSection('title'); ?>
+    Messages
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="container extended" style="padding-left: 1vw;overflow-y: scroll;height: 75vh !important;">
         <div class="rounded-lg overflow-hidden shadow">
@@ -13,12 +17,14 @@
                                 <?php $__currentLoopData = $personalInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($lastMessage->sender == $infoConversation->id || $lastMessage->receiver == $infoConversation->id): ?>
                                         <div
-                                            <?php if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()): ?> style="border-bottom-width: 2px;border-bottom-color:<?php echo e(setting('openmeet.color')); ?> " <?php endif; ?> class="card border-bottom-fmm mb-1">
-                                            <a href="/messages/user/<?php echo e($infoConversation->id); ?>" class="list-group-item list-group-item-action">
+                                            <?php if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()): ?> style="border-bottom-width: 2px;border-bottom-color:<?php echo e(setting('openmeet.color')); ?> "
+                                            <?php endif; ?> class="card border-bottom-fmm mb-1">
+                                            <a href="/messages/user/<?php echo e($infoConversation->id); ?>"
+                                               class="list-group-item list-group-item-action">
                                                 <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                     <span
                                                         class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                            <?php endif; ?>
+                                                <?php endif; ?>
                                                 <div class="media">
                                                     <div class="mask">
                                                         <?php if($infoConversation->picname != null & $infoConversation->picname != ''): ?>
@@ -63,11 +69,12 @@
                                             <?php if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()): ?> style="border-bottom-color: <?php echo e(setting('openmeet.color')); ?>;border-bottom-width: 2px;"
                                             <?php endif; ?> class="card border-bottom-fmm mb-1">
 
-                                            <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>" class="list-group-item list-group-item-action">
+                                            <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>"
+                                               class="list-group-item list-group-item-action">
                                                 <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                     <span
                                                         class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                            <?php endif; ?>
+                                                <?php endif; ?>
                                                 <div class="media">
                                                     <div class="mask">
                                                         <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
@@ -114,7 +121,8 @@
                                 <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($infoConversation->id == $withoutMessage->receiver): ?>
                                         <div class="card border-bottom-fmm mb-1">
-                                            <a class="list-group-item list-group-item-action" href="/messages/group/<?php echo e($infoConversation->id); ?>">
+                                            <a class="list-group-item list-group-item-action"
+                                               href="/messages/group/<?php echo e($infoConversation->id); ?>">
                                                 <div class="media">
                                                     <div class="mask">
                                                         <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
@@ -191,6 +199,7 @@
             width: 15vw;
             transition: all 0.5s;
         }
+
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -206,6 +215,7 @@
             outline: 1px solid slategrey;
             border-radius: 1rem;
         }
+
         .badge {
             font-size: 0;
             width: 13px;

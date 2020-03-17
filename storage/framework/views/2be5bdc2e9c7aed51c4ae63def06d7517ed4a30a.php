@@ -62,7 +62,9 @@
                         <div class="d-flex justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le <?php echo e($group->datecreate); ?></small></p>
                             <div class="float-right mr-5">
-                                <?php if($issubscribed != null && $issubscribed): ?>
+                                <?php if($group->admin == auth()->id()): ?>
+                                    <small class="text-muted blockquote-footer">Vous êtes administrateur du groupe.</small>
+                                <?php elseif($issubscribed != null && $issubscribed): ?>
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

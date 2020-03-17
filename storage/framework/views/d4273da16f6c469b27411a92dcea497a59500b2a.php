@@ -9,9 +9,11 @@
                 <h1 class="masthead-heading mb-0"><?php echo e(Setting('openmeet.slogan')); ?></h1>
                 <h2 class="masthead-subheading mb-0"><?php echo e((new \App\Event)->getCount()); ?>
 
-                    événement <?php if((new \App\Event)->getCount() > 1): ?>s <?php endif; ?> à proximité | <?php echo e((new \App\Group)->getCount()); ?>
+                    <?php echo e(str_plural('événement', (new \App\Event)->getCount())); ?> <?php echo e(str_plural('organisé', (new \App\Event)->getCount())); ?>
 
-                    groupe <?php if((new \App\Group)->getCount() > 1): ?>s <?php endif; ?> à proximité</h2>
+                    | <?php echo e((new \App\Group)->getCount()); ?>
+
+                    <?php echo e(str_plural('groupe', (new \App\Group)->getCount())); ?> <?php echo e(str_plural('créé', (new \App\Group)->getCount())); ?></h2>
                 <?php if(auth()->check()): ?>
                     <a href="<?php echo e(url('/groups/list')); ?>" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
                         groupes</a>

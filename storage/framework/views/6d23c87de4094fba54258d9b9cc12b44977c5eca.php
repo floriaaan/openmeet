@@ -1,3 +1,7 @@
+<?php $__env->startSection('title'); ?>
+    Connexion
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('body'); ?>
 
     <div class="h-100 w-100 wall-white text-center mx-auto">

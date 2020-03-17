@@ -1,5 +1,7 @@
 <?php $__env->startSection('body'); ?>
 
+
+
     <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
          style="z-index: 5000">
         <a class="navbar-brand" href="/">
@@ -34,8 +36,10 @@
                             Bienvenue <?php echo e(auth()->user()->fname); ?> <?php echo e(auth()->user()->lname); ?></h6>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Participations</h6>
-                        <a class="dropdown-item" href="<?php echo e(url('/user/groups/')); ?>"><i class="fas fa-users"></i> Mes groupes</a>
-                        <a class="dropdown-item" href="<?php echo e(url('/user/events')); ?>"> <i class="fas fa-handshake"></i> Mes événements</a>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/groups/')); ?>"><i class="fas fa-users"></i> Mes
+                            groupes</a>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/events')); ?>"> <i class="fas fa-handshake"></i> Mes
+                            événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo e(url('/logout')); ?>"
@@ -54,7 +58,8 @@
                         <?php else: ?>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de modération</a>
+                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de
+                                modération</a>
                         <?php endif; ?>
 
                     </div>
@@ -220,6 +225,7 @@
     <div class="mt-nav"></div>
 
 <?php $__env->stopSection(); ?>
+
 
 
 <?php echo $__env->make('layouts.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/layouts/nav.blade.php ENDPATH**/ ?>

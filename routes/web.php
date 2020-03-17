@@ -89,5 +89,10 @@ Route::get('/events/delete/', 'EventController@deletePost')->middleware('groupad
 Route::post('/events/participate/add/', 'ParticipationController@createParticipation')->middleware('auth');
 Route::post('/events/participate/remove/', 'ParticipationController@deleteParticipation')->middleware('auth');
 
+//Scraping routes
+Route::get('/frommeetup/group','ScrapingController@ChooseGroup')->middleware('auth');
+Route::post('/frommeetup/group','ScrapingController@ChooseGroupConfirmation')->middleware('auth');
+Route::get('/frommeetup/event','ScrapingController@ChooseEvent')->middleware('auth');
+Route::post('/frommeetup/event','ScrapingController@ChooseEventConfirmation')->middleware('auth');
 
 
