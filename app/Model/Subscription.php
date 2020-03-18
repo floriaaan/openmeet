@@ -29,6 +29,18 @@ class Subscription extends Model
         var_dump($query);
     }
 
+    public function getLimit($limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
 
     public function getGroup($groupId)
     {
@@ -116,5 +128,15 @@ class Subscription extends Model
             ->get();
 
         return $query[0];
+    }
+
+    public function getnameGroup()
+    {
+            $query = DB::table('groups')
+                ->select('name')
+                ->get();
+
+            return $query;
+
     }
 }
