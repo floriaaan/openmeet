@@ -43,6 +43,7 @@
 
                             <hr class="mx-4 my-4">
 
+                            <label for="eDateFrom" class="my-1"><small>A partir de :</small></label>
                             <div class="input-group">
 
                                 <div class="input-group-prepend">
@@ -58,16 +59,15 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            <div class="input-group mt-1">
+                            <label for="eDateFrom" class="my-1"><small>Jusqu'à :</small></label>
+                            <div class="input-group">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
                                 <input class="form-control @error('eDateTo') is-invalid @enderror"
                                        name="eDateTo" type="datetime-local"
-                                       value="{{(old('eDateTo') != null ) ? old('eDateTo') : date('Y-m-d\Th:m')}}"
-                                       required>
+                                       value="{{old('eDateTo')}}">
                                 @error('eDateTo')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
