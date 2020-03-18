@@ -223,4 +223,16 @@ class Message extends Model
 
         return $listMessage;
     }
+
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('messages')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
 }

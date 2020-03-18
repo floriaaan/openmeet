@@ -104,7 +104,9 @@ class SubscriptionController extends Controller
         $listSub = (new Subscription)->getUser(auth()->id());
 
         foreach ($listSub as $sub) {
-            (new Subscription)->remove($sub->id);
+            if((new Group)->getOne($sub->id_group)->admin != auth()->id()) {
+                (new Subscription)->remove($sub->id);
+            }
         }
 
         return redirect('/user');

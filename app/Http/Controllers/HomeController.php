@@ -8,6 +8,7 @@ use App\Http\Requests\InstallRequest;
 use App\Http\Requests\SearchRequest;
 use App\Notification;
 use App\Message;
+use App\User;
 use http\Env\Request;
 
 class HomeController extends Controller
@@ -43,22 +44,48 @@ class HomeController extends Controller
     public function installPost(InstallRequest $request)
     {
         $post = $request->input();
+        var_dump($post);
         try {
             Setting(['openmeet.install' => true]);
             Setting(['openmeet.name' => $post['iName']]);
             Setting(['openmeet.slogan' => $post['iSlogan']]);
             Setting(['openmeet.color' => $post['iColor']]);
 
+            Setting(['openmeet.theme' => 'day']);
             Setting(['openmeet.robots' => true]);
 
             Setting()->save();
+
+            $user = new User();
+            $user->fname = $post['fname'];
+            $user->lname = $post['lname'];
+            $user->email = $post['email'];
+            $user->bdate = $post['bdate'];
+            $user->password = $post['password'];
+            $user->isadmin = 1;
+            $user->push();
+
+            Setting(['database.host' => $post['iDBHost']]);
+            Setting(['database.user' => $post['iDBUser']]);
+            Setting(['database.pass' => $post['iDBPass']]);
+
+            self::changeEnvironmentVariable('DB_HOST', $post['iDBHost']);
+            self::changeEnvironmentVariable('DB_DATABASE', $post['iDBName']);
+            self::changeEnvironmentVariable('DB_USERNAME', $post['iDBUser']);
+            isset($post['iDBPass']) ? $pass = $post['iDBPass'] : '';
+            self::changeEnvironmentVariable('DB_PASSWORD', $pass);
+
+            if(isset($post['iDBMigrate']) && $post['iDBMigrate'] == 'on') {
+                Artisan::call('migrate');
+            }
+
 
             config(['APP_NAME' => $post['iName']]);
         } catch (\Exception $e) {
             var_dump($e);
         }
 
-        return view('install.done');
+        //return view('install.done');
     }
 
     public function home()
@@ -88,5 +115,27 @@ class HomeController extends Controller
             's' => $post['search'],
             'search' => $searchResult
         ]);
+    }
+
+    public static function changeEnvironmentVariable($key,$value)
+    {
+        $path = base_path('.env');
+
+        if(is_bool(env($key)))
+        {
+            $old = env($key)? 'true' : 'false';
+        }
+        elseif(env($key)===null){
+            $old = 'null';
+        }
+        else{
+            $old = env($key);
+        }
+
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                "$key=".$old, "$key=".$value, file_get_contents($path)
+            ));
+        }
     }
 }

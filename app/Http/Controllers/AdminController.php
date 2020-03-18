@@ -28,12 +28,12 @@ class AdminController extends Controller
     public function index()
     {
         $user = (new User);
-        $listUser = $user->getLimit(5);
+        $listUser = $user->getLimitDesc(5);
         $countUser = $user->getCount();
 
         $message = (new Message);
         $listMessage = [];
-        $rawListMsg = $message->getLimit(10);
+        $rawListMsg = $message->getLimitDesc(10);
 
         foreach ($rawListMsg as $msg) {
             if ($msg->forgroup == 0) {
@@ -55,7 +55,7 @@ class AdminController extends Controller
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimit(10);
+        $rawListGroup = $groups->getLimitDesc(10);
 
         $listGroup = [];
 
@@ -69,7 +69,7 @@ class AdminController extends Controller
 
         $events = (new Event);
         $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimit(10);
+        $rawListEvent = $events->getLimitDesc(10);
 
         $listEvent = [];
         foreach ($rawListEvent as $event) {
@@ -82,7 +82,7 @@ class AdminController extends Controller
 
         $reports = (new Signalement);
         $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimit(10);
+        $rawListReport = $reports->getLimitDesc(10);
 
         $listReport = [];
         foreach ($rawListReport as $report) {
@@ -96,7 +96,7 @@ class AdminController extends Controller
 
         $bans = (new Ban);
         $countBan = $bans->getCount();
-        $rawListBan = $bans->getLimit(10);
+        $rawListBan = $bans->getLimitDesc(10);
 
         $listBan = [];
         foreach ($rawListBan as $ban) {
@@ -110,7 +110,7 @@ class AdminController extends Controller
 
         $blocks = (new Block);
         $countBlock = $blocks->getCount();
-        $rawListBlock = $blocks->getLimit(10);
+        $rawListBlock = $blocks->getLimitDesc(10);
 
         $listBlock = [];
         foreach ($rawListBlock as $block) {

@@ -116,3 +116,8 @@ Route::post('/frommeetup/event','ScrapingController@ChooseEventConfirmation')->m
 Route::get('/debug/mail', function (){
    return view('emails.eventcreated', ['event' => (new \App\Event)->getOne(3)]);
 });
+
+Route::get('/debug/install', function (){
+    return view('install.form');
+});
+

@@ -115,6 +115,7 @@ class Group extends Model
             ->select('*')
             ->where('name', 'LIKE', "%{$str}%")
             ->orWhere('desc', 'LIKE', "%{$str}%")
+            ->orWhere('tags', 'LIKE', "%{$str}%")
             ->get();
         $listGroup = [];
         foreach ($query as $group) {
@@ -140,6 +141,18 @@ class Group extends Model
             ->get();
 
         return $query[0];
+    }
+
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('groups')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
     }
 
 }
