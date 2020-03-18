@@ -253,7 +253,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/reports')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
                     <h4 id="bans" class="my-5">Bannissement des utilisateurs (10 derniers Bannissements)</h4>
                     <div class="table-responsive">
@@ -264,7 +264,6 @@
                                 <th scope="col">Concerné</th>
                                 <th scope="col">Du groupe</th>
                                 <th scope="col">Créé le</th>
-
                                 <th scope="col">Actions</th>
 
                             </tr>
@@ -302,7 +301,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/bans/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
                     <h4 id="blocks" class="my-5">Blocages des utilisateurs (10 derniers Blocages)</h4>
                     <div class="table-responsive">
@@ -313,7 +312,6 @@
                                 <th scope="col">Concerné</th>
                                 <th scope="col">Par</th>
                                 <th scope="col">Créé le</th>
-
                                 <th scope="col">Actions</th>
 
                             </tr>
@@ -351,7 +349,7 @@
                             </tbody>
                         </table>
 
-                        <a href="{{url('/admin/reports/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        <a href="{{url('/admin/blocks/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
                     <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>

@@ -41,6 +41,12 @@ Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->midd
 
 //Gestion GROUP routes
 Route::get('/admingroup/', 'AdminGroupController@gestion');
+Route::get('/admingroup/subscriptions/', 'AdminGroupController@listSubscription');
+Route::get('/admingroup/groups/', 'AdminGroupController@listGroup');
+Route::get('/admingroup/reports/', 'AdminGroupController@listReport');
+Route::get('/admingroup/bans/', 'AdminGroupController@listBan');
+Route::get('/admingroup/events/', 'AdminGroupController@listEvent');
+
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
@@ -56,6 +62,9 @@ Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
 Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
 Route::get('/admin/groups/', 'AdminController@listGroup');
 Route::get('/admin/reports/', 'AdminController@listReport');
+Route::get('/admin/blocks/', 'AdminController@listBlock');
+Route::get('/admin/bans/', 'AdminController@listBan');
+Route::get('/admin/events/', 'AdminController@listEvent');
 Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
 Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
 

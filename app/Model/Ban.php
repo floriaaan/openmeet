@@ -15,6 +15,20 @@ class Ban extends Model
         'description'
     ];
 
+
+    public function getAll()
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->get();
+
+        $listBans = [];
+        foreach ($query as $ban) {
+            $listBans[] = $ban;
+        }
+        return $listBans;
+    }
+
     public function getLimit($limit)
     {
         $query=DB::table('bans')
