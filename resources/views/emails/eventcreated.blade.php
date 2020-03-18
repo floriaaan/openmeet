@@ -300,7 +300,7 @@
 
 
                                     <div style="line-height: 26px;">
-                                        <a href="{{url('/events/show'.$event->id)}}"
+                                        <a href="{{url('/events/show/'.$event->id)}}"
                                            style="color: #ffffff; text-decoration: none;">Voir l'événement</a>
                                     </div>
                                 </td>

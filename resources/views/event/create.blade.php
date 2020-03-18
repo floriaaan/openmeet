@@ -49,7 +49,8 @@
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
-                                       name="eDateFrom" type="datetime-local" value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\Th:m')}}"
+                                       name="eDateFrom" type="datetime-local"
+                                       value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\Th:m')}}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
@@ -64,7 +65,8 @@
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
                                 <input class="form-control @error('eDateTo') is-invalid @enderror"
-                                       name="eDateTo" type="datetime-local" value="{{(old('eDateTo') != null ) ? old('eDateTo') : date('Y-m-d\Th:m')}}"
+                                       name="eDateTo" type="datetime-local"
+                                       value="{{(old('eDateTo') != null ) ? old('eDateTo') : date('Y-m-d\Th:m')}}"
                                        required>
                                 @error('eDateTo')
                                 <span class="invalid-feedback" role="alert">
@@ -174,16 +176,20 @@
 
                             </div>
                         </div>
-                        <a style="text-decoration: none" href="/frommeetup/event" class="float-right mb-4 mr-3">
-                            <button style="margin-bottom: 0" type="button" class="btn btn-primary">
-                                <p style=" font-weight: lighter;text-decoration: underline;font-size: 1vw;margin-bottom: 0">Vous avez déjà des évènements enregistrés sur Meetup.com ?</p>
-                                Importer à partir de meetup
-                            </button>
-                        </a>
 
-                        <button type="submit" class="btn btn-primary float-right my-4 mr-3">
-                            Créer un événement
-                        </button>
+
+                        <div class="row justify-content-end p-5">
+                            <a href="{{url('/frommeetup/event')}}" class="btn btn-danger btn-icon-split mx-2">
+                                <span class="icon text-white-50">
+                                    <i class="fab fa-meetup"></i>
+                                </span>
+                                <span class="text">Importer à partir de Meetup</span>
+                            </a>
+
+                            <button type="submit" class="btn btn-primary mr-3">
+                                Créer un événement
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -43,6 +43,8 @@ class HomeController extends Controller
     public function installPost(InstallRequest $request)
     {
         $post = $request->input();
+        var_dump($post);
+        die;
         try {
             Setting(['openmeet.install' => true]);
             Setting(['openmeet.name' => $post['iName']]);
