@@ -156,7 +156,6 @@
                     </div>
 
 
-
                     <hr class="m-5">
 
                     <div class="row justify-content-between">
@@ -178,8 +177,7 @@
                 </div>
 
                 <div class="card mx-auto shadow-lg p-5 w-75 card-install d-none"
-                     id="card-admin"
-                     style="top:4%!important;">
+                     id="card-admin">
 
                     <h3 class="openmeet-title text-center openmeet-install"
                         style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
@@ -315,14 +313,34 @@
     <script>
         $('#btn-general-next').click(function (e) {
             e.preventDefault();
-            $('#card-general').fadeOut(500);
-            $('#card-general').toggleClass('d-none');
-            $('#card-database').toggleClass('d-none');
-            $('#card-database').fadeIn(500);
+
+            if ($('#iName').val() !== '' && $('#iSlogan').val() !== '') {
+                if ($('#iName').hasClass('is-invalid')) {
+                    $('#iName').removeClass('is-invalid')
+                }
+                if ($('#iSlogan').hasClass('is-invalid')) {
+                    $('#iSlogan').removeClass('is-invalid')
+                }
+
+                $('#card-general').fadeOut(500);
+                $('#card-general').toggleClass('d-none');
+                $('#card-database').toggleClass('d-none');
+                $('#card-database').fadeIn(500);
+            } else {
+                shake($('#card-general'));
+                if ($('#iName').val() === '') {
+                    $('#iName').toggleClass('is-invalid')
+                }
+                if ($('#iSlogan').val() === '') {
+                    $('#iSlogan').toggleClass('is-invalid')
+                }
+            }
+
         });
 
         $('#btn-database-previous').click(function (e) {
             e.preventDefault();
+
             $('#card-database').fadeOut(500);
             $('#card-database').toggleClass('d-none');
             $('#card-general').toggleClass('d-none');
@@ -331,10 +349,34 @@
 
         $('#btn-database-next').click(function (e) {
             e.preventDefault();
-            $('#card-database').fadeOut(500);
-            $('#card-database').toggleClass('d-none');
-            $('#card-admin').toggleClass('d-none');
-            $('#card-admin').fadeIn(500);
+            if ($('#iDBHost').val() !== '' && $('#iDBName').val() !== '' && $('#iDBUser').val() !== '') {
+                if ($('#iDBHost').hasClass('is-invalid')) {
+                    $('#iDBHost').removeClass('is-invalid')
+                }
+                if ($('#iDBName').hasClass('is-invalid')) {
+                    $('#iDBName').removeClass('is-invalid')
+                }
+                if ($('#iDBUser').hasClass('is-invalid')) {
+                    $('#iDBUser').removeClass('is-invalid')
+                }
+
+
+                $('#card-database').fadeOut(500);
+                $('#card-database').toggleClass('d-none');
+                $('#card-admin').toggleClass('d-none');
+                $('#card-admin').fadeIn(500);
+            } else {
+                shake($('#card-database'));
+                if ($('#iDBHost').val() === '') {
+                    $('#iDBHost').toggleClass('is-invalid')
+                }
+                if ($('#iDBName').val() === '') {
+                    $('#iDBName').toggleClass('is-invalid')
+                }
+                if ($('#iDBUser').val() === '') {
+                    $('#iDBUser').toggleClass('is-invalid')
+                }
+            }
         });
 
         $('#btn-admin-previous').click(function (e) {
@@ -353,6 +395,19 @@
                 $('#form').submit();
             })
         });
+
+
+        function shake(div) {
+            for (let i = 0; i < 5; i++) {
+                div.animate({
+                    left: '+=20'
+                }, 100);
+                div.animate({
+                    left: '-=20'
+                }, 100)
+            }
+
+        }
     </script>
 
 @endsection
@@ -365,19 +420,8 @@
         }
 
         .card-install {
-            top: 12%
+            height: 100vh;
         }
 
-        @media (max-width: 1460px) {
-            .card-install {
-                top: 8%
-            }
-        }
-
-        @media (max-width: 900px) {
-            .card-install {
-                top: 6%
-            }
-        }
     </style>
 @endsection
