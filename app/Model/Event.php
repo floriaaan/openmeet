@@ -136,4 +136,16 @@ class Event extends Model
         return $listEvent;
     }
 
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('events')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
 }

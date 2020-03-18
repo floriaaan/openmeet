@@ -124,4 +124,16 @@ class User extends Authenticatable
         return $listUser;
     }
 
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
 }

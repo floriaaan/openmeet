@@ -11,7 +11,7 @@
             @csrf
             <div class="card rounded shadow-lg mt-1 mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
-                    <div class="col-md-4 m-auto p-2">
+                    <div class="col-md-4 m-auto p-4">
 
                         <div class="input-group">
 
@@ -23,6 +23,21 @@
                                 <label class="custom-file-label mb-1" for="gPic">Photo du groupe</label>
                             </div>
                         </div>
+
+                        <hr class="m-5">
+
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-hashtag"></i>
+                                </span>
+                            </div>
+                            <input class="form-control @error('gTags') is-invalid @enderror"
+                                   name="gName" type="text" value="{{ old('gTags') }}" placeholder="Tags du groupe"
+                                   id="gTags">
+                        </div>
+                        <label for="gTags"><small>Séparés par des points-virgules 🛑</small></label>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-5">

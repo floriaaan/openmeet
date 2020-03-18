@@ -38,4 +38,16 @@ class Block extends Model
 
     }
 
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('blocks')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
 }

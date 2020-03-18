@@ -102,6 +102,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="iDBName" class="">Nom de la base de données</label>
+                        <input class="form-control @error('iDBName') is-invalid @enderror"
+                               name="iDBName" type="text"
+                               value="{{ old('iDBName') }}"
+                               placeholder="Database"
+                               required id="iDBName"
+                               autocomplete="off">
+                        @error('iDBName')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="iDBUser" class="">Utilisateur de la base de données</label>
                         <input class="form-control @error('iDBUser') is-invalid @enderror"
                                name="iDBUser" type="text"
@@ -122,13 +137,22 @@
                                name="iDBPass" type="password"
                                value="{{ old('iDBUser') }}"
                                placeholder="pass"
-                               required id="iDBPass"
+                               id="iDBPass"
                                autocomplete="off">
                         @error('iDBPass')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="iDBMigrate" id="iDBMigrate">
+                            <label class="custom-control-label" for="iDBMigrate">Mettre à zéro la base de données <code>(artisan
+                                    migrate)</code></label>
+                        </div>
+
                     </div>
 
 
@@ -155,7 +179,7 @@
 
                 <div class="card mx-auto shadow-lg p-5 w-75 card-install d-none"
                      id="card-admin"
-                style="top:4%!important;">
+                     style="top:4%!important;">
 
                     <h3 class="openmeet-title text-center openmeet-install"
                         style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
@@ -201,7 +225,8 @@
                         <label for="bdate">{{ __('Date de naissance') }}</label>
 
 
-                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror" name="bdate"
+                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror"
+                               name="bdate"
                                value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
                         <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
                             &#128286;</small>
@@ -258,7 +283,6 @@
 
 
                     </div>
-
 
 
                     <hr class="m-5">
@@ -324,7 +348,7 @@
         $('#btn-admin-next').click(function (e) {
             e.preventDefault();
             $('#card-admin').animate({
-                top : '+=3000'
+                top: '+=3000'
             }, 1000, function () {
                 $('#form').submit();
             })

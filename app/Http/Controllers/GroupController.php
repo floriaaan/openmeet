@@ -38,7 +38,7 @@ class GroupController extends Controller
             $group->desc = $post['gDesc'];
         }
 
-        if(isset($post['gTags']) && $post['gTags'] != '') {
+        if(isset($post['gTags'])) {
             $group->tags = $post['gTags'];
         }
 
@@ -72,9 +72,15 @@ class GroupController extends Controller
     public function show($groupID)
     {
 
+
+
+        $group = (new Group)->getOne($groupID);
+        $tags = explode(";",$group->tags);
+
         $datas = [
-            'group' => (new Group)->getOne($groupID),
-            'listEvent' => (new Event)->getByGroup($groupID)
+            'group' => $group,
+            'listEvent' => (new Event)->getByGroup($groupID),
+            'tags' => $tags
         ];
 
         if(auth()->check()) {

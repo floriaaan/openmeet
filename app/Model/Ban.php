@@ -37,4 +37,16 @@ class Ban extends Model
         return $query->count();
 
     }
+
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('bans')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
 }
