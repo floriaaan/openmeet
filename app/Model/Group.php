@@ -96,7 +96,8 @@ class Group extends Model
         return $listGroup;
     }
 
-    public function getByAdmin($userID) {
+    public function getByAdmin($userID)
+    {
         $query = DB::table('groups')
             ->select('*')
             ->where('admin', '=', $userID)
@@ -125,7 +126,8 @@ class Group extends Model
         return $listGroup;
     }
 
-    public function getAdmin($groupID) {
+    public function getAdmin($groupID)
+    {
         $query = DB::table('groups')
             ->select('*')
             ->where('id', $groupID)
@@ -133,7 +135,8 @@ class Group extends Model
         return (new User)->getOne($query[0]->admin);
     }
 
-    public function getLastID() {
+    public function getLastID()
+    {
         $query = DB::table('groups')
             ->select('id')
             ->limit(1)
@@ -145,7 +148,7 @@ class Group extends Model
 
     public function getLimitDesc($limit)
     {
-        $query=DB::table('groups')
+        $query = DB::table('groups')
             ->select('*')
             ->limit($limit)
             ->orderByDesc('id')
@@ -155,6 +158,10 @@ class Group extends Model
         return $query;
     }
 
-
+    public function getTagsByGroup($groupID)
+    {
+        $tags = (new Group)->getOne($groupID)->tags;
+        return explode(";", $tags);
+    }
 
 }
