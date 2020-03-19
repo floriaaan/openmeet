@@ -31,8 +31,8 @@ class SubscriptionController extends Controller
         $groupId = $post['group'];
         if (!(new Subscription)->isSubscribed($userId, $groupId)) {
             $subscription = new Subscription();
-            $subscription->id_user = $userId;
-            $subscription->id_group = $groupId;
+            $subscription->user = $userId;
+            $subscription->group = $groupId;
             $subscription->date = date('Y-m-d H:m:s');
             $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
             $subscription->push();
@@ -63,7 +63,7 @@ class SubscriptionController extends Controller
         $subscriptions = (new Subscription())->getUser(auth()->id());
         $listgroups = [];
         foreach ($subscriptions as $subscription) {
-            $listgroups[] = $subscription->id_group;
+            $listgroups[] = $subscription->group;
         }
         $groupsWhereAdmin = (new Group)->getByAdmin(auth()->id());
 
@@ -104,7 +104,7 @@ class SubscriptionController extends Controller
         $listSub = (new Subscription)->getUser(auth()->id());
 
         foreach ($listSub as $sub) {
-            if((new Group)->getOne($sub->id_group)->admin != auth()->id()) {
+            if((new Group)->getOne($sub->group)->admin != auth()->id()) {
                 (new Subscription)->remove($sub->id);
             }
         }

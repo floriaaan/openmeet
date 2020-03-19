@@ -46,7 +46,7 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_group', "=", $groupId)
+            ->where('group', "=", $groupId)
             ->get();
 
         $listSubscription = [];
@@ -59,7 +59,7 @@ class Subscription extends Model
     public function countGroup($groupId) {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_group', "=", $groupId)
+            ->where('group', "=", $groupId)
             ->get();
 
         return count($query);
@@ -69,7 +69,7 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', "=", $userId)
+            ->where('user', "=", $userId)
             ->get();
 
         $listSubscription = [];
@@ -82,7 +82,7 @@ class Subscription extends Model
     public function countByUser($userID) {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', "=", $userID)
+            ->where('user', "=", $userID)
             ->get();
 
         return count($query);
@@ -112,8 +112,8 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', '=', $userID)
-            ->where('id_group', '=', $groupID)
+            ->where('user', '=', $userID)
+            ->where('group', '=', $groupID)
             ->get();
 
         return !empty($query[0]);
@@ -123,20 +123,11 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', '=', $userID)
-            ->where('id_group', '=', $groupID)
+            ->where('user', '=', $userID)
+            ->where('group', '=', $groupID)
             ->get();
 
         return $query[0];
     }
 
-    public function getnameGroup()
-    {
-            $query = DB::table('groups')
-                ->select('name')
-                ->get();
-
-            return $query;
-
-    }
 }

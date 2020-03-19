@@ -40,7 +40,7 @@ class Event extends Model
     {
         $events = DB::table('events')
             ->select('*')
-            ->where('id_group', "=", $groupId)
+            ->where('group', "=", $groupId)
             ->get();
         $eventsArray = $events;
         $listevent = [];
@@ -110,7 +110,7 @@ class Event extends Model
     {
         $query = DB::table('events')
             ->select('*')
-            ->where('id_group', '=', $groupID)
+            ->where('group', '=', $groupID)
             ->get();
 
         $listEvent = [];
