@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="/groups/create" method="POST">
+        <form action="{{url('/groups/create')}}" method="POST">
             @csrf
             <div class="card rounded shadow-lg mt-1 mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
@@ -34,7 +34,7 @@
                                 </span>
                             </div>
                             <input class="form-control @error('gTags') is-invalid @enderror"
-                                   name="gName" type="text" value="{{ $groupTags ?? '' }}" placeholder="Tags du groupe"
+                                   name="gTags" type="text" value="{{ $groupTags ?? '' }}" placeholder="Tags du groupe"
                                    id="gTags">
                         </div>
                         <label for="gTags"><small>Séparés par des points-virgules 🛑</small></label>

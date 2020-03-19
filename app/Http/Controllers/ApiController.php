@@ -83,7 +83,9 @@ class ApiController extends Controller
             $url = file_get_contents('https://api.qwant.com/api/search/images?count=2&q=' . $tag . '+logo&t=images&safesearch=1&locale=fr_FR&uiv=4');
             $json = json_decode($url, true);
             $tag = str_replace('%20', ' ', $tag);
-            $result[] = ['tag' => $tag, 'img' => $json['data']['result']['items'][0]['media']];
+
+            $img = $json['status'] == "success" && isset($json['data']['result']['items'][0]) ? $json['data']['result']['items'][0]['media'] : "https://picsum.photos/200";
+                $result[] = ['tag' => $tag, 'img' => $img];
         }
 
         return $result;

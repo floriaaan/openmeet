@@ -47,7 +47,7 @@ class ScrapingController extends Controller
         $regexGroupTags="#<a class=\"topicsList-topicItem display--inlineBlock text--smaller button--small button--neutral\" href=\"(.*?)\">(.*?)<\/a>#";
         preg_match_all($regexGroupTags,$pageContent,$scrapGroupTags);
         $groupTagsArray=$scrapGroupTags[2];
-        $groupTags = implode(',',$groupTagsArray);
+        $groupTags = implode(';',$groupTagsArray);
         //dump($groupTagsArray);
         //dump($groupTags);
         //==============================================================//
