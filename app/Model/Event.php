@@ -125,7 +125,7 @@ class Event extends Model
     {
         $query = DB::table('events')
             ->select('*')
-            ->where('name', 'LIKE',"%{$str}%")
+            ->where('name', 'LIKE', "%{$str}%")
             ->orWhere('description', 'LIKE', "%{$str}%")
             ->get();
         $listEvent = [];
@@ -138,13 +138,35 @@ class Event extends Model
 
     public function getLimitDesc($limit)
     {
-        $query=DB::table('events')
+        $query = DB::table('events')
             ->select('*')
             ->limit($limit)
             ->orderByDesc('id')
             ->get();
 
 
+        return $query;
+    }
+
+    public function getByArea($lon, $lat, $limit)
+    {
+        $query = DB::table('events')
+                    ->select('*')
+                    ->where();
+        /*SELECT
+          id, (
+            3959 * acos (
+              cos ( radians(78.3232) )
+              * cos( radians( lat ) )
+              * cos( radians( lng ) - radians(65.3234) )
+              + sin ( radians(78.3232) )
+              * sin( radians( lat ) )
+            )
+          ) AS distance
+        FROM markers
+        HAVING distance < 30
+        ORDER BY distance
+        LIMIT 0 , 20;*/
         return $query;
     }
 

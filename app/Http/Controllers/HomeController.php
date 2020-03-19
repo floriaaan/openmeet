@@ -10,6 +10,7 @@ use App\Notification;
 use App\Message;
 use App\User;
 use http\Env\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -56,14 +57,14 @@ class HomeController extends Controller
 
             Setting()->save();
 
-            $user = new User();
+            /*$user = new User();
             $user->fname = $post['fname'];
             $user->lname = $post['lname'];
             $user->email = $post['email'];
             $user->bdate = $post['bdate'];
             $user->password = $post['password'];
             $user->isadmin = 1;
-            $user->push();
+            $user->push();*/
 
             Setting(['database.host' => $post['iDBHost']]);
             Setting(['database.user' => $post['iDBUser']]);
@@ -72,11 +73,17 @@ class HomeController extends Controller
             self::changeEnvironmentVariable('DB_HOST', $post['iDBHost']);
             self::changeEnvironmentVariable('DB_DATABASE', $post['iDBName']);
             self::changeEnvironmentVariable('DB_USERNAME', $post['iDBUser']);
-            isset($post['iDBPass']) ? $pass = $post['iDBPass'] : '';
+            $pass = isset($post['iDBPass']) ? $post['iDBPass'] : '';
             self::changeEnvironmentVariable('DB_PASSWORD', $pass);
 
+
+
             if(isset($post['iDBMigrate']) && $post['iDBMigrate'] == 'on') {
-                Artisan::call('migrate');
+                Artisan::call('config:cache');
+                Artisan::call('config:clear');
+                Artisan::call('cache:clear');
+                Artisan::call('serve');
+                Artisan::call('migrate:fresh');
             }
 
 
