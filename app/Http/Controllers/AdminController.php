@@ -209,7 +209,7 @@ class AdminController extends Controller
     {
         $user = (new User);
         $bans = (new Ban);
-        $groups =(new Group);
+        $groups = (new Group);
         $rawListBan = $bans->getAll();
 
         $listBan = [];
@@ -229,7 +229,7 @@ class AdminController extends Controller
         $user = (new User);
         $rawlistBlock = (new Block)->getAll();
 
-        foreach ( $rawlistBlock as $block) {
+        foreach ($rawlistBlock as $block) {
             $listBLock[] = [
                 'block' => $block,
                 'blocker' => $user->getOne($block->blocker),

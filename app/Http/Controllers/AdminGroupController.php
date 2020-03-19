@@ -182,7 +182,7 @@ class AdminGroupController extends Controller
             ];
 
         }
-        return view('admingroup.reports.list', ['reportList' => $listReport]);
+        return view('group.admin.reports.list', ['reportList' => $listReport]);
     }
 
     public function listBan()
@@ -201,7 +201,7 @@ class AdminGroupController extends Controller
             ];
 
         }
-        return view('admingroup.bans.list', ['banList' => $listBan]);
+        return view('group.admin.bans.list', ['banList' => $listBan]);
     }
 
     public function listGroup()
@@ -212,6 +212,6 @@ class AdminGroupController extends Controller
         foreach ($listGroups as $group) {
             $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
         }
-        return view('admingroup.groups.list', ['groups' => $groups]);
+        return view('group.admin.groups.list', ['groups' => $groups]);
     }
 }
