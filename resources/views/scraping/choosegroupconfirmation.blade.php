@@ -9,9 +9,9 @@
     <div class="container-fluid">
         <form action="/groups/create" method="POST">
             @csrf
-            <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
+            <div class="card rounded shadow-lg mt-1 mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
-                    <div class="col-md-4 m-auto p-2">
+                    <div class="col-md-4 m-auto p-4">
 
                         <div class="input-group">
 
@@ -23,6 +23,21 @@
                                 <label class="custom-file-label mb-1" for="gPic">Photo du groupe</label>
                             </div>
                         </div>
+
+                        <hr class="m-5">
+
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-hashtag"></i>
+                                </span>
+                            </div>
+                            <input class="form-control @error('gTags') is-invalid @enderror"
+                                   name="gName" type="text" value="{{ $groupTags ?? '' }}" placeholder="Tags du groupe"
+                                   id="gTags">
+                        </div>
+                        <label for="gTags"><small>Séparés par des points-virgules 🛑</small></label>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-5">
@@ -33,7 +48,7 @@
                                     <span class="input-group-text"><i class="fas fa-user-friends"></i></span>
                                 </div>
                                 <input class="form-control form-control-lg @error('gName') is-invalid @enderror"
-                                       name="gName" type="text" value="{{ $groupName  }}" placeholder="Nom du groupe"
+                                       name="gName" type="text" value="{{ $groupName }}" placeholder="Nom du groupe"
                                        required id="title-input">
                             </div>
                             <hr class="mx-4 my-4">
@@ -53,13 +68,20 @@
                                        required>
                             </div>
                         </div>
-                        <a style="text-decoration: none" href="/frommeetup/group" class="btn btn-primary float-right mb-4 mr-3">
-                            <p style="text-decoration: underline;font-size: 1.2vw;margin-bottom: 0">Ce n'est pas votre groupe ?</p>
-                            Importer à partir de meetup
-                        </a>
-                        <button type="submit" class="btn btn-primary float-right mb-4 mr-3">
-                            Créer un groupe
-                        </button>
+
+                        <div class="row justify-content-end p-5">
+                            <a href="{{url('/frommeetup/group')}}" class="btn btn-danger btn-icon-split mx-2">
+                                <span class="icon text-white-50">
+                                    <i class="fab fa-meetup"></i>
+                                </span>
+                                <span class="text">Importer à partir de Meetup</span>
+                            </a>
+
+                            <button type="submit" class="btn btn-primary mr-3">
+                                Créer un groupe
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 

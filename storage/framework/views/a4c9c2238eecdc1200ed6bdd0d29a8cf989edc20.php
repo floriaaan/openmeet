@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.png"/>
+    <link rel="icon" href="<?php echo e(url('')); ?>/favicon.png"/>
     <title><?php echo e(Setting('openmeet.title', 'OpenMeet')); ?> - <?php echo $__env->yieldContent('title'); ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet"

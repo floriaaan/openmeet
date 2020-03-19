@@ -51,7 +51,7 @@
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
                                        name="eDateFrom" type="datetime-local"
-                                       value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\Th:m')}}"
+                                       value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\TH:i')}}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-2">
 
-                                <input class="form-control @error('eNumStreet') is-invalid @enderror"
+                                <input id="inputNumRue" class="form-control @error('eNumStreet') is-invalid @enderror"
                                        name="eNumStreet" type="text" value="{{ old('eNumStreet') }}"
                                        placeholder="Num"
                                        required autocomplete="off">
@@ -121,7 +121,7 @@
 
                             <div class="col-lg-10">
 
-                                <input class="form-control @error('eStreet') is-invalid @enderror"
+                                <input id="inputRue" class="form-control @error('eStreet') is-invalid @enderror"
                                        name="eStreet" type="text" value="{{ old('eStreet') }}"
                                        placeholder="Rue"
                                        required>
@@ -137,7 +137,7 @@
                         <div class="row mb-5">
                             <div class="col-lg-6">
 
-                                <input class="form-control @error('eCity') is-invalid @enderror"
+                                <input id="inputVille" class="form-control @error('eCity') is-invalid @enderror"
                                        name="eCity" type="text" value="{{ old('eCity') }}"
                                        placeholder="Ville"
                                        required>
@@ -151,7 +151,7 @@
 
                             <div class="col-lg-2">
 
-                                <input class="form-control @error('eZip') is-invalid @enderror"
+                                <input id="inputCP" class="form-control @error('eZip') is-invalid @enderror"
                                        name="eZip" type="text" value="{{ old('eZip') }}"
                                        placeholder="Code postal"
                                        required>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-lg-4">
 
-                                <input class="form-control @error('eCountry') is-invalid @enderror"
+                                <input id="inputCountry" class="form-control @error('eCountry') is-invalid @enderror"
                                        name="eCountry" type="text" value="{{ old('eCountry') }}"
                                        placeholder="Région"
                                        required>
@@ -176,6 +176,8 @@
 
                             </div>
                         </div>
+                        <input id="inputPosx" type="hidden" name="elon" value="">
+                        <input id="inputPosy" type="hidden" name="elat" value="">
 
 
                         <div class="row justify-content-end p-5">
@@ -206,7 +208,143 @@
             $('#title-input').keyup(function () {
                 let input = $('#title-input').val();
                 $('#title-group').text(input);
-            })
-        })
+            });
+        });
+
+        window.onload = function Init() {
+            var numRue = document.getElementById('inputNumRue');
+            var rue = document.getElementById('inputRue');
+            var ville = document.getElementById('inputVille');
+            var cp = document.getElementById('inputCP');
+            var pays = document.getElementById('inputCountry');
+            var inputPosx = document.getElementById('inputPosx');
+            var inputPosy = document.getElementById('inputPosy');
+
+            numRue.addEventListener('change',function e() {
+
+                if (numRue.value != "" && rue.value != "" && ville.value != "") {
+                    var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
+                } else {
+                    if (rue.value != "" && ville.value != "") {
+                        var url = "https://api-adresse.data.gouv.fr/search/?q=" + rue.value + " " + ville.value + "&type=street&autocomplete=1";
+                    } else {
+                        if (ville.value != "") {
+                            var url = "https://api-adresse.data.gouv.fr/search/?q=" + ville.value + "&type=municipality&autocomplete=1";
+                        } else {
+                            var url = ""
+                        }
+                    }
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.features[0] != undefined) {
+                            cp.value = data.features[0].properties.postcode;
+                            pays.value = "France";
+                            inputPosx.value = data.features[0].geometry.coordinates[0];
+                            inputPosy.value = data.features[0].geometry.coordinates[1];
+                        } else {
+                            cp.value = "";
+                            pays.value = "";
+                            inputPosx.value = "";
+                            inputPosy.value = "";
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+
+            });
+
+            rue.addEventListener('change',function e() {
+
+                if (numRue.value != "" && rue.value != "" && ville.value != "") {
+                    var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
+                } else {
+                    if (rue.value != "" && ville.value != "") {
+                        var url = "https://api-adresse.data.gouv.fr/search/?q=" + rue.value + " " + ville.value + "&type=street&autocomplete=1";
+                    } else {
+                        if (ville.value != "") {
+                            var url = "https://api-adresse.data.gouv.fr/search/?q=" + ville.value + "&type=municipality&autocomplete=1";
+                        } else {
+                            var url = ""
+                        }
+                    }
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.features[0] != undefined) {
+                            cp.value = data.features[0].properties.postcode;
+                            pays.value = "France";
+                            inputPosx.value = data.features[0].geometry.coordinates[0];
+                            inputPosy.value = data.features[0].geometry.coordinates[1];
+                        } else {
+                            cp.value = "";
+                            pays.value = "";
+                            inputPosx.value = "";
+                            inputPosy.value = "";
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+
+            });
+
+            ville.addEventListener('change',function e() {
+
+                if (numRue.value != "" && rue.value != "" && ville.value != "") {
+                    var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
+                } else {
+                    if (rue.value != "" && ville.value != "") {
+                        var url = "https://api-adresse.data.gouv.fr/search/?q=" + rue.value + " " + ville.value + "&type=street&autocomplete=1";
+                    } else {
+                        if (ville.value != "") {
+                            var url = "https://api-adresse.data.gouv.fr/search/?q=" + ville.value + "&type=municipality&autocomplete=1";
+                        } else {
+                            var url = ""
+                        }
+                    }
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.features[0] != undefined) {
+                            cp.value = data.features[0].properties.postcode;
+                            pays.value = "France";
+                            inputPosx.value = data.features[0].geometry.coordinates[0];
+                            inputPosy.value = data.features[0].geometry.coordinates[1];
+                        } else {
+                            cp.value = "";
+                            pays.value = "";
+                            inputPosx.value = "";
+                            inputPosy.value = "";
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+
+            });
+        }
     </script>
 @endsection

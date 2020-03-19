@@ -23,6 +23,7 @@
                     <small class="text-muted">
                         Participants : {{(new \App\Participation)->getCount($event->id)}}
                     </small>
+
                     <hr class="mx-4 my-4">
 
                     <div id="map" class="p-5">
@@ -100,7 +101,6 @@
             </div>
         </div>
 
-    </div>
     </div>
 
 @endsection

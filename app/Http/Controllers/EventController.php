@@ -43,6 +43,8 @@ class EventController extends Controller
         $event->city = $post['eCity'];
         $event->zip = $post['eZip'];
         $event->country = $post['eCountry'];
+        $event->posx = $post['elon'];
+        $event->posy = $post['elat'];
 
         if (isset($post['eDesc']) && $post['eDesc'] != '') {
             $event->description = $post['eDesc'];

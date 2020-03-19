@@ -7,7 +7,7 @@
         <h4 id="users" class="my-5">Utilisateurs</h4>
 
         <a class="btn btn-link float-right mr-5"
-           href="{{url('/admin')}}">
+           href="{{url('/groups/admin/')}}">
             Retour
             <i class="fas fa-arrow-right"></i>
         </a>
@@ -21,7 +21,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Admin</th>
+                    <th scope="col">Groupe</th>
                     <th scope="col">Actions</th>
 
                 </tr>
@@ -33,6 +33,7 @@
                         <td>{{ $user->fname }}</td>
                         <td>{{ $user->lname }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $NameGroup }}</td>
                         <td>@if($user->isadmin)
                                 <span class="badge badge-pill badge-success">
                                                 <i class="fas fa-user-check"></i>
