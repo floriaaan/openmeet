@@ -39,6 +39,7 @@ Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->midd
 
 
 
+
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin/search', 'AdminController@search');
@@ -53,6 +54,9 @@ Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
 Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
 Route::get('/admin/groups/', 'AdminController@listGroup');
 Route::get('/admin/reports/', 'AdminController@listReport');
+Route::get('/admin/blocks/', 'AdminController@listBlock');
+Route::get('/admin/bans/', 'AdminController@listBan');
+Route::get('/admin/events/', 'AdminController@listEvent');
 Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
 Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
 
@@ -82,6 +86,11 @@ Route::post('groups/subscribe/add', 'SubscriptionController@createSubscription')
 Route::post('groups/subscribe/remove', 'SubscriptionController@deleteSubscription')->middleware('auth');
 //Gestion GROUP routes
 Route::get('/groups/admin/', 'AdminGroupController@gestion');
+Route::get('/groups/admin/subscriptions/', 'AdminGroupController@listSubscription');
+Route::get('/groups/admin/groups/', 'AdminGroupController@listGroup');
+Route::get('/groups/admin/reports/', 'AdminGroupController@listReport');
+Route::get('/groups/admin/bans/', 'AdminGroupController@listBan');
+Route::get('/groups/admin/events/', 'AdminGroupController@listEvent');
 
 
 //EVENTS routes

@@ -29,7 +29,7 @@ class AdminGroupController extends Controller
         $countUser = $user->getCount();
 
 
-        $sub = (new Subscription());
+        $sub = (new Subscription);
         $UserByGroup = $sub->countGroup(3);
 
 
@@ -161,5 +161,58 @@ class AdminGroupController extends Controller
         ]);
 
 
+    }
+
+    public function listSubscription()
+    {
+        return view('group.admin.subscription.list', ['users' => (new User)->getAll()]);
+    }
+
+    public function listReport()
+    {
+        $user = (new User);
+        $reports = (new Signalement);
+        $rawListReport = $reports->getAll();
+
+        $listReport = [];
+        foreach ($rawListReport as $report) {
+            $listReport[] = [
+                'report' => $report,
+                'sender' => $user->getOne($report->submitter),
+                'concerned' => $user->getOne($report->concerned),
+            ];
+
+        }
+        return view('admingroup.reports.list', ['reportList' => $listReport]);
+    }
+
+    public function listBan()
+    {
+        $user = (new User);
+        $bans = (new Ban);
+        $groups =(new Group);
+        $rawListBan = $bans->getAll();
+
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banisher' => $groups->getOne($ban->banisher),
+                'banned' => $user->getOne($ban->banned),
+            ];
+
+        }
+        return view('admingroup.bans.list', ['banList' => $listBan]);
+    }
+
+    public function listGroup()
+    {
+        $groups = [];
+        $listGroups = (new Group)->getAll();
+
+        foreach ($listGroups as $group) {
+            $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
+        }
+        return view('admingroup.groups.list', ['groups' => $groups]);
     }
 }
