@@ -171,4 +171,23 @@ class User extends Authenticatable
         return $query;
     }
 
+    public function updateUser($user) {
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['defaultnotif' => $user->defaultnotif]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['typenotif' => $user->typenotif]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['picname' => $user->picname]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['picrepo' => $user->picrepo]);
+    }
+
 }

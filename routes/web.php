@@ -104,6 +104,9 @@ Route::post('/frommeetup/group','ScrapingController@ChooseGroupConfirmation')->m
 Route::get('/frommeetup/event','ScrapingController@ChooseEvent')->middleware('auth');
 Route::post('/frommeetup/event','ScrapingController@ChooseEventConfirmation')->middleware('auth');
 
+//Legal Routes
+Route::get('/legal/cgu', 'LegalController@cgu');
+
 
 Route::get('/debug/mail', function (){
    return view('emails.eventcreated', ['event' => (new \App\Event)->getOne(3)]);

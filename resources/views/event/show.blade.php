@@ -26,10 +26,11 @@
 
                     <hr class="mx-4 my-4">
 
-                    <div id="map" class="p-5">
-                        TODO: MAP
+                    <div id="map" class="p-1">
+
 
                     </div>
+
                     <div id="socialshare" class="p-3 mx-5">
                         {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
                             ->facebook()
@@ -105,6 +106,17 @@
 
 @endsection
 
+@section('js')
+    <script src="{{url('/js/map.js')}}"></script>
+
+    <script>
+        displayMap();
+        displayEvent({{$event->posx}}, {{$event->posy}});
+
+
+    </script>
+@endsection
+
 @section('css')
 
     <style>
@@ -113,7 +125,12 @@
         }
 
         #socialshare ul {
-            list-style-type:none;
+            list-style-type: none;
+        }
+
+        #map {
+            height: 250px;
+            width: 100%;
         }
     </style>
 @endsection

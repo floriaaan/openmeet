@@ -1,16 +1,25 @@
 @extends('layouts.nav')
 
+@section('title')
+    Importer depuis Meetup.com
+@endsection
+
 @section('content')
-    <div class="container-fluid flex-column align-items-center justify-content-center">
-        <div class="container flex-column align-items-center justify-content-center">
-            <form method="post" action="/frommeetup/event">
-                @csrf
-                <input type="text" placeholder="Entrez le lien de la page de votre évènement sur meetup.com" class="w-75 input-group-text" name="url">
-                <div>
-                    <button type="submit" class="btn btn-primary w-75">Confirmer</button>
+
+    <div class="container">
+        <div class="card mt-5 shadow-lg p-3">
+            <form method="post" class="mx-auto w-100" action="{{url('/frommeetup/event')}}">
+                <input type="text" placeholder="Entrez le lien de la page de votre groupe sur meetup.com"
+                       class="form-control text-center" name="url">
+
+                <hr class="m-5">
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Confirmer</button>
                 </div>
             </form>
         </div>
     </div>
+
 
 @endsection

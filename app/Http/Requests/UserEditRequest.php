@@ -26,6 +26,7 @@ class UserEditRequest extends FormRequest
         return [
             'email' => 'email|unique:users',
             //'uPic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'notifications' => 'required'
         ];
     }
 }

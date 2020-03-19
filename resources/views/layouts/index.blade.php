@@ -13,6 +13,14 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"
           integrity="sha256-c+C87jupO1otD1I5uyxV68WmSLCqtIoNlcHLXtzLCT0=" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+
     <link href="/css/openmeet.css" rel="stylesheet">
     @laravelPWA
 
@@ -89,16 +97,17 @@
         .badge-primary {
             background-color: var(--openmeet) !important;
         }
+
         .custom-control-input:checked + .custom-control-label::before {
             border-color: var(--openmeet);
-            background-color : var(--openmeet);
+            background-color: var(--openmeet);
         }
 
         .custom-control-input:focus + .custom-control-label::before {
             box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
         }
 
-        .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+        .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
             border-color: var(--openmeet);
         }
 
@@ -128,7 +137,7 @@
             url: '{{url('/api/v1/session/unset/error')}}',
             type: 'post',
             data: {'sessionid': '{{Session()->getId()}}'},
-            success: function(data) {
+            success: function (data) {
                 console.log('success', data)
             },
             error: function () {

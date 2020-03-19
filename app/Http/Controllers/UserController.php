@@ -7,6 +7,7 @@ use App\Block;
 use App\Event;
 use App\Group;
 use App\Http\Requests\ReportRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Mail\EventCreated;
 use App\Message;
 use App\Participation;
@@ -88,8 +89,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(UserEditRequest $request)
     {
+        $post = $request->input();
+        $user = (new User)->getOne(auth()->id());
+
+        if(!($post['notifications'] == 'none')) {
+            $user->defaultnotif = 1;
+            if($post['notifications'] == 'push') {
+                $user->typenotif = 1;
+            } else if ($post['notifications'] == 'mail') {
+                $user->typenotif = 2;
+            } else if ($post['notifications'] == 'both') {
+                $user->typenotif = 3;
+            }
+        } else {
+            $user->defaultnotif = 0;
+            $user->typenotif = 0;
+        }
+        (new User)->updateUser($user);
+
         return redirect('/user');
     }
 
