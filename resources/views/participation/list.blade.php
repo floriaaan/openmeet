@@ -20,6 +20,9 @@
                                         aura lieu le
                                         <cite>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}</cite>
                                     </small>
+                                    <small class="text-muted">
+                                        Participants : {{(new \App\Participation)->getCount($event->id)}}
+                                    </small>
                                     @if($event->dateto != null)
                                         <br>
                                         <small class="text-muted">

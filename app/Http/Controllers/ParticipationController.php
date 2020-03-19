@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ParticipationRequest;
 use App\Participation;
 use App\Event;
+use Illuminate\Support\Facades\DB;
 
 
 class ParticipationController extends Controller
@@ -61,7 +62,7 @@ class ParticipationController extends Controller
 
         return view('participation.list', [
             'participations' => $participations,
-            'events' => $events
+            'events' => $events,
         ]);
     }
 

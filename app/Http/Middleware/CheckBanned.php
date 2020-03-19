@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\User;
+use App\group;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Closure;
@@ -18,18 +19,13 @@ class CheckBanned
      * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+   /* public function handle($request, Closure $next)
     {
-
-        if (auth()->user()->isBan(auth()->user()->id )) {
-            if (auth()->user()->isBanG(auth()->user()->id )){
-            return abort(403, 'BAN ACTIF CONTACTER VOTRE ADMIN');
+        dump(auth()->user()->isBan(auth()->user()->id, ));
+            if (auth()->user()->isBan(auth()->user()->id )){
+            return abort(403, 'BAN ACTIF');
             }
-
-        }
-
-
-        return $next($request);
-
+                return $next($request);}
+*/
 }
-}
+

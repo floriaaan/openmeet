@@ -57,7 +57,6 @@ class AdminGroupController extends Controller
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
-        $NameGroup = $groups->getnameGroup();
         $rawListGroup = $groups->getLimit(10);
 
         $listGroup = [];
@@ -79,7 +78,7 @@ class AdminGroupController extends Controller
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'group' => $groups->getOne($event->id_group)
+                'group' => $groups->getOne($event->group)
             ];
 
         }
@@ -113,7 +112,7 @@ class AdminGroupController extends Controller
         }
 
         $blocks = (new Block);
-        $countBlockG = $blocks->getCount();
+        $countBlock = $blocks->getCount();
         $rawListBlock = $blocks->getLimit(10);
 
         $listBlock = [];
@@ -140,7 +139,7 @@ class AdminGroupController extends Controller
 
         }*/
 
-        return view('group.admin', [
+        return view('admingroup.panelgestion', [
             'userList' => $listUser,
             'userCount' => $countUser,
             'messageList' => $listMessage,
@@ -153,7 +152,6 @@ class AdminGroupController extends Controller
             'reportCount' => $countReport,
             'banList' => $listBan,
             'banCount' => $countBan,
-            'NameGroup' => $NameGroup,
             'UserByGroup' => $UserByGroup
 
 
@@ -164,7 +162,11 @@ class AdminGroupController extends Controller
 
     public function listSubscription()
     {
-        return view('group.admin.subscription.list', ['users' => (new User)->getAll()]);
+        return view('admingroup.users.list', ['users' => (new User)->getAll()]);
+    }
+    public function listEvent()
+    {
+        return view('admingroup.eventlist', ['users' => (new User)->getAll()]);
     }
 
     public function listReport()
@@ -201,7 +203,7 @@ class AdminGroupController extends Controller
             ];
 
         }
-        return view('group.admin.bans.list', ['banList' => $listBan]);
+        return view('admingroup.banlist', ['banList' => $listBan]);
     }
 
     public function listGroup()
@@ -212,6 +214,6 @@ class AdminGroupController extends Controller
         foreach ($listGroups as $group) {
             $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
         }
-        return view('group.admin.groups.list', ['groups' => $groups]);
+        return view('admingroup.grouplist', ['groups' => $groups]);
     }
 }

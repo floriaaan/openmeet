@@ -24,6 +24,15 @@ class Participation extends Model
         return $query[0];
     }
 
+    public function countEvent($eventId) {
+        $query = DB::table('participations')
+            ->select('*')
+            ->where('event', "=", $eventId)
+            ->get();
+
+        return count($query);
+    }
+
     public function getEvent($eventId)
     {
         $query = DB::table('participations')
