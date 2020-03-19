@@ -44,19 +44,29 @@ class ApiController extends Controller
 
     }
 
-    public function getGroups(){
+    public function getGroups()
+    {
         return (new Group)->getAll();
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         return (new User)->getAll();
     }
 
-    public function getEvents(){
+    public function getEvents()
+    {
         return (new Event)->getAll();
     }
 
-    public function getSettings(){
+    public function getSettings()
+    {
         return Setting('openmeet');
+    }
+
+    public function getELocation(Request $request)
+    {
+        $post = $request->input();
+        return (new Event)->getByArea($post['lon'], $post['lat'], $post['limit']);
     }
 }
