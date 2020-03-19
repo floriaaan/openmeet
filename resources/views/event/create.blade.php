@@ -51,7 +51,7 @@
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
                                        name="eDateFrom" type="datetime-local"
-                                       value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\Th:m')}}"
+                                       value="{{(old('eDateFrom') != null ) ? old('eDateFrom') : date('Y-m-d\TH:i')}}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
