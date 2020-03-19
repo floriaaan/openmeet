@@ -45,9 +45,9 @@ class GroupController extends Controller
         $group->push();
 
         $adminSub = new Subscription();
-        $adminSub->id_user = $post['gAdminID'];
-        $adminSub->id_group = $group->id;
-        $adminSub->date = date('Y-m-d');
+        $adminSub->user = $post['gAdminID'];
+        $adminSub->group = $group->id;
+        $adminSub->date = date('Y-m-d H:M:s');
         $adminSub->acceptnotif = (new User)->getOne($post['gAdminID'])->defaultnotif;
 
         $adminSub->push();
