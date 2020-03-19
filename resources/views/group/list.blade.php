@@ -5,11 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid p-5">
-        <div class="card-columns">
+    <div class="container p-5">
 
 
-            @foreach($listGroups as $group)
+        @foreach($listGroups as $group)
 
 
                 <div class="card rounded shadow mt-2 mb-3">
@@ -40,7 +39,6 @@
                 </div>
             @endforeach
         </div>
-    </div>
 
 @endsection
 
@@ -49,9 +47,10 @@
         .card-columns {
             column-count: 2;
         }
+
         .card-img {
-            width: auto !important;
-            height: 275px;
+            width: 100% !important;
+            height: auto;
         }
     </style>
 @endsection

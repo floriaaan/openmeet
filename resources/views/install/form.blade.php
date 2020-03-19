@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('titre')
+@section('title')
     Installation
 @endsection
 
@@ -8,8 +8,8 @@
     <form action="{{url('/install')}}" method="POST" id="form">
         @csrf
         <div class="max-height wall-white">
-            <div class="container-fluid max-height position-relative">
-                <div class="card mx-auto shadow-lg p-5 w-75 card-install"
+            <div class="container-fluid h-100 p-5 position-relative">
+                <div class="card mx-auto shadow-lg p-5 w-75"
                      id="card-general">
 
                     <h3 class="openmeet-title text-center openmeet-install"
@@ -17,7 +17,7 @@
                         OpenMeet - Paramètres généraux
                     </h3>
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
                     <div class="form-group">
                         <label for="iName" class="">Nom du site</label>
                         <input class="form-control @error('iName') is-invalid @enderror"
@@ -62,7 +62,7 @@
 
                     </div>
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
 
                     <div class="row justify-content-end">
 
@@ -77,7 +77,7 @@
 
                 </div>
 
-                <div class="card mx-auto shadow-lg p-5 w-75 card-install d-none"
+                <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-database">
 
                     <h3 class="openmeet-title text-center openmeet-install"
@@ -85,7 +85,7 @@
                         OpenMeet - Base de données
                     </h3>
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
                     <div class="form-group">
                         <label for="iDBHost" class="">Hôte de la base de données</label>
                         <input class="form-control @error('iDBHost') is-invalid @enderror"
@@ -156,7 +156,7 @@
                     </div>
 
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
 
                     <div class="row justify-content-between">
                         <button class="btn btn-outline-secondary rounded-pill btn-install"
@@ -176,7 +176,8 @@
 
                 </div>
 
-                <div class="card mx-auto shadow-lg p-5 w-75 card-install d-none"
+
+                <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-admin">
 
                     <h3 class="openmeet-title text-center openmeet-install"
@@ -184,7 +185,7 @@
                         OpenMeet - Administration
                     </h3>
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
                     <div class="form-group row">
                         <div class="col-lg-6">
                             <label for="fname">{{ __('Prénom') }}</label>
@@ -283,7 +284,7 @@
                     </div>
 
 
-                    <hr class="m-5">
+                    <hr class="mx-5 my-3">
 
                     <div class="row justify-content-between">
                         <button class="btn btn-outline-secondary rounded-pill btn-install"

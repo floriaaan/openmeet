@@ -17,6 +17,11 @@ use App\User;
 class AdminGroupController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function gestion()
     {
         $user = (new User);
@@ -24,7 +29,7 @@ class AdminGroupController extends Controller
         $countUser = $user->getCount();
 
 
-        $sub =(new Subscription());
+        $sub = (new Subscription());
         $UserByGroup = $sub->countGroup(3);
 
 
@@ -135,7 +140,7 @@ class AdminGroupController extends Controller
 
         }*/
 
-        return view('user.panelgestion', [
+        return view('group.admin', [
             'userList' => $listUser,
             'userCount' => $countUser,
             'messageList' => $listMessage,

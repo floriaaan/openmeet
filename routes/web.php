@@ -21,16 +21,14 @@ Route::post('/install', 'HomeController@installPost');
 Route::post('/search', 'HomeController@search');
 
 
-
-
 //USER routes (auth on middleware)
 Route::get('/user/', 'UserController@index');
 Route::get('/user/show/{userID}', 'UserController@show');
 Route::get('/user/edit', 'UserController@editForm');
 Route::post('/user/edit', 'UserController@edit');
-Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::get('/user/ban/', 'UserController@ban');
 Route::get('/user/block/', 'UserController@block');
+Route::get('/user/report/{userID}', 'UserController@reportForm');
 Route::post('/user/report/', 'UserController@reportPost');
 Route::get('/user/groups', 'SubscriptionController@showGroups');
 Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
@@ -39,8 +37,7 @@ Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->midd
 
 
 
-//Gestion GROUP routes
-Route::get('/admingroup/', 'AdminGroupController@gestion');
+
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
@@ -83,6 +80,8 @@ Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middlewar
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
 Route::post('groups/subscribe/add', 'SubscriptionController@createSubscription')->middleware('auth');
 Route::post('groups/subscribe/remove', 'SubscriptionController@deleteSubscription')->middleware('auth');
+//Gestion GROUP routes
+Route::get('/groups/admin/', 'AdminGroupController@gestion');
 
 
 //EVENTS routes

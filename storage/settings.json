@@ -1,1 +1,15 @@
-{"openmeet":{"install":true,"name":"Coucou","slogan":"Slogan","color":"#007bff","robots":true,"theme":"day"},"database":{"host":"mysql.host.fr","user":"user","pass":"pass"}}
+{
+    "openmeet": {
+        "install": true,
+        "name": "OpenTest",
+        "slogan": "Slogan",
+        "color": "#007bff",
+        "robots": true,
+        "theme": "day"
+    },
+    "database": {
+        "host": "mysql.host.fr",
+        "user": "user",
+        "pass": "pass"
+    }
+}

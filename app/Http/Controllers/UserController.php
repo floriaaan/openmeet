@@ -6,6 +6,7 @@ use App\Ban;
 use App\Block;
 use App\Event;
 use App\Group;
+use App\Http\Requests\ReportRequest;
 use App\Mail\EventCreated;
 use App\Message;
 use App\Participation;
@@ -25,7 +26,8 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
@@ -46,7 +48,8 @@ class UserController extends Controller
     }
 
 
-    public function show($userID){
+    public function show($userID)
+    {
         $listSubscription = (new Subscription)->getUser($userID);
         $groups = [];
         foreach ($listSubscription as $sub) {
@@ -66,7 +69,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function editForm() {
+    public function editForm()
+    {
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
@@ -78,21 +82,39 @@ class UserController extends Controller
         foreach ($listParticipations as $participation) {
             $events[] = (new Event)->getOne($participation->event);
         }
-        return view('user.edit',[
+        return view('user.edit', [
             'groups' => $groups,
             'events' => $events,
         ]);
     }
 
-    public function edit() {
+    public function edit()
+    {
         return redirect('/user');
     }
 
-    public function reportForm($userID) {
-        return 'préparation du pas cool ' . $userID;
+    public function reportForm($userID)
+    {
+        return view('user.report.form', [
+            'submitter' => auth()->id(),
+            'concerned' => (new User)->getOne($userID)
+        ]);
     }
 
-    public function reportPost() {
-        return 'el famoso pas cool';
+    public function reportPost(ReportRequest $request)
+    {
+        $post = $request->input();
+
+        $report = new Signalement();
+        $report->submitter = $post['submitter'];
+        $report->concerned = $post['concerned'];
+        //$report->importance = $post['importance'];
+        $report->description = $post['description'];
+        $report->date = date('Y-m-d H:m:s');
+
+        $report->push();
+
+        return redirect('/');
+
     }
 }

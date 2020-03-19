@@ -85,7 +85,10 @@
                             <small>Membres : {{ (new \App\Subscription)->countGroup($group->id) }}</small>
                             <small class="blockquote-footer">
                                 Administrateur
-                                : {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
+                                : <a
+                                    href="{{url('/user/show/'.$group->admin)}}">
+                                    {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
+                                </a>
                             </small>
                         </div>
 
