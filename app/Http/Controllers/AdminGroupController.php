@@ -153,9 +153,8 @@ class AdminGroupController extends Controller
             'reportCount' => $countReport,
             'banList' => $listBan,
             'banCount' => $countBan,
-            'NameGroup'=> $NameGroup,
-            'UserByGroup'=> $UserByGroup
-
+            'NameGroup' => $NameGroup,
+            'UserByGroup' => $UserByGroup
 
 
         ]);
@@ -190,7 +189,7 @@ class AdminGroupController extends Controller
     {
         $user = (new User);
         $bans = (new Ban);
-        $groups =(new Group);
+        $groups = (new Group);
         $rawListBan = $bans->getAll();
 
         $listBan = [];

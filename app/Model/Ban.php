@@ -31,7 +31,7 @@ class Ban extends Model
 
     public function getLimit($limit)
     {
-        $query=DB::table('bans')
+        $query = DB::table('bans')
             ->select('*')
             ->limit($limit)
             ->get();

@@ -35,11 +35,6 @@ Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middl
 Route::get('/user/events', 'ParticipationController@showEvents');
 Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->middleware('auth');
 
-
-
-
-
-
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');
 Route::post('/admin/search', 'AdminController@search');
@@ -66,12 +61,9 @@ Route::get('/notifications/', 'NotificationController@showAll')->middleware('aut
 Route::post('/notifications/readall', 'NotificationController@readall')->middleware('auth');
 
 //MESSAGE routes
-Route::get('/messages','MessageController@showUserConversations')->middleware('auth');
+Route::get('/messages', 'MessageController@showUserConversations')->middleware('auth');
 Route::get('/messages/{typeConversation}/{correspondant}','MessageController@showChat')->middleware('auth');
 Route::post('/messages/create','MessageController@createMessage')->middleware('auth');
-
-//SIGNALEMENT routes
-
 
 //GROUP routes
 Route::get('/groups/show/{group_id}', 'GroupController@show');
