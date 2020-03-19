@@ -80,7 +80,7 @@ class ApiController extends Controller
         $result = [];
         foreach ($tags as $tag) {
             $tag = str_replace(' ', '%20', $tag);
-            $url = file_get_contents('https://api.qwant.com/api/search/images?count=2&q=' . $tag . '+logo&t=images&safesearch=1&locale=fr_FR&uiv=4');
+            $url = file_get_contents('https://api.qwant.com/api/search/images?count=2&q=' . $tag . '&t=images&safesearch=1&locale=fr_FR&uiv=4');
             $json = json_decode($url, true);
             $tag = str_replace('%20', ' ', $tag);
 
