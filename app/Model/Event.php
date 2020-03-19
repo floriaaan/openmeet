@@ -13,7 +13,7 @@ class Event extends Model
 
     protected $fillable = [
         'id',
-        'id_group',
+        'group',
         'name',
         'datefrom',
         'dateto',

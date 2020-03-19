@@ -49,6 +49,7 @@
         .card-columns {
             column-count: 2;
         }
+
         .card-img {
             width: auto !important;
             height: 275px;

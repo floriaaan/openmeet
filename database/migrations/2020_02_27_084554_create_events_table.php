@@ -15,8 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_group')->unsigned();
-            $table->foreign('id_group')
+            $table->bigInteger('group')->unsigned();
+            $table->foreign('group')
                 ->references('id')
                 ->on('groups');
 

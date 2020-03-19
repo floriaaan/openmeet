@@ -11,6 +11,7 @@ use App\Message;
 use App\User;
 use http\Env\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -45,7 +46,6 @@ class HomeController extends Controller
     public function installPost(InstallRequest $request)
     {
         $post = $request->input();
-        var_dump($post);
         try {
             Setting(['openmeet.install' => true]);
             Setting(['openmeet.name' => $post['iName']]);
@@ -57,14 +57,7 @@ class HomeController extends Controller
 
             Setting()->save();
 
-            /*$user = new User();
-            $user->fname = $post['fname'];
-            $user->lname = $post['lname'];
-            $user->email = $post['email'];
-            $user->bdate = $post['bdate'];
-            $user->password = $post['password'];
-            $user->isadmin = 1;
-            $user->push();*/
+
 
             Setting(['database.host' => $post['iDBHost']]);
             Setting(['database.user' => $post['iDBUser']]);
@@ -79,20 +72,25 @@ class HomeController extends Controller
 
 
             if(isset($post['iDBMigrate']) && $post['iDBMigrate'] == 'on') {
-                Artisan::call('config:cache');
-                Artisan::call('config:clear');
-                Artisan::call('cache:clear');
-                Artisan::call('serve');
+                DB::purge();
+                DB::connection();
                 Artisan::call('migrate:fresh');
             }
 
-
+            $user = new User();
+            $user->fname = $post['fname'];
+            $user->lname = $post['lname'];
+            $user->email = $post['email'];
+            $user->bdate = $post['bdate'];
+            $user->password = $post['password'];
+            $user->isadmin = 1;
+            $user->push();
             config(['APP_NAME' => $post['iName']]);
         } catch (\Exception $e) {
             var_dump($e);
         }
 
-        //return view('install.done');
+        return view('install.done');
     }
 
     public function home()
