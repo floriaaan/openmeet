@@ -11,6 +11,7 @@ use App\Message;
 use App\User;
 use http\Env\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -79,10 +80,7 @@ class HomeController extends Controller
 
 
             if(isset($post['iDBMigrate']) && $post['iDBMigrate'] == 'on') {
-                Artisan::call('config:cache');
-                Artisan::call('config:clear');
-                Artisan::call('cache:clear');
-                Artisan::call('serve');
+                DB::connection();
                 Artisan::call('migrate:fresh');
             }
 
