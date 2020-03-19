@@ -76,6 +76,7 @@ Route::get('/groups/delete/{group_id}', 'GroupController@deleteForm')->middlewar
 Route::post('/groups/delete/', 'GroupController@deletePost')->middleware('groupadmin');
 Route::post('groups/subscribe/add', 'SubscriptionController@createSubscription')->middleware('auth');
 Route::post('groups/subscribe/remove', 'SubscriptionController@deleteSubscription')->middleware('auth');
+
 //Gestion GROUP routes
 Route::get('/groups/admin/', 'AdminGroupController@gestion');
 Route::get('/groups/admin/subscriptions/', 'AdminGroupController@listSubscription');

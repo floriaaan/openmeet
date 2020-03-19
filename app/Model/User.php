@@ -58,6 +58,31 @@ class User extends Authenticatable
 
     }
 
+    public function isBan($userId,$groupId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banned', '=', $userId )
+            ->where('banisher','=',$groupId)
+            ->get();
+        return $query->count() > 0;
+    }
+
+    public function isBlock($userId,$blockId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('target', '=', $userId )
+            ->where('blocker','=',$blockId)
+            ->get();
+        return $query->count() > 0;
+    }
+
+
+
+
     public function getLimit($limit)
     {
         $query = DB::table('users')

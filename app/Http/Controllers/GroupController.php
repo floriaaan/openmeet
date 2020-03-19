@@ -85,6 +85,9 @@ class GroupController extends Controller
 
         if(auth()->check()) {
             $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
+            if (auth()->user()->isBan(auth()->user()->id,$groupID )){
+                return abort(403, 'BAN ACTIF');
+            }
         }
 
         return view('group.show', $datas);
@@ -113,4 +116,5 @@ class GroupController extends Controller
         //ACTIONS
         return redirect('/group/');
     }
+
 }
