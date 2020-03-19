@@ -113,4 +113,5 @@ class GroupController extends Controller
         //ACTIONS
         return redirect('/group/');
     }
+
 }

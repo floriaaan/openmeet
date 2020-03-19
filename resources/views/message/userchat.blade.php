@@ -186,7 +186,7 @@
         @if($message->sender != auth()->id())
             <!-- Message Reçu-->
                 <div class="media w-50 mt-3">
-                    <div class="mask"><a href="#" style="text-decoration: none;" class="no-hover">
+                    <div class="mask"><a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;" class="no-hover">
                             @if($userInfo->picname != null & $userInfo->picname != '')
                                 <img width="50" style="top:50%"
                                      alt="Photo de {{$userInfo->fname}} {{$userInfo->lname}}"
@@ -199,7 +199,7 @@
                     </div>
 
                     <div class="oneMessage media-body ml-3">
-                        <a href="#" style="text-decoration: none;" class="no-hover">
+                        <a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;" class="no-hover">
                             <p style="color: gray; font-weight: bold">{{$userInfo->fname}} {{$userInfo->lname}}</p>
                         </a>
                         <div class="bg-light rounded py-2 px-3 mb-2">
@@ -226,10 +226,10 @@
         <hr class="mx-5 my-2">
 
         <div class="p-fixed">
-            <form action="/messages/create" method="post" class="bg-light">
+            <form action="{{url('/messages/create')}}" method="post" class="bg-light">
                 @csrf
                 <div class="input-group">
-                    <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
+                    <a href="{{url('/messages/')}}" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
                     <input value="" type="text" name="mContent" placeholder="Envoyer un message"
                            aria-describedby="button-addon2"
                            class="form-control rounded-0 border-0 py-4 bg-light" required>

@@ -11,7 +11,7 @@
     <!-- <![endif]-->
 
     <title>{{Setting('openmeet.title')}} - Nouvel événement
-        de {{(new \App\Group)->getOne($event->id_group)->name}}</title>
+        de {{(new \App\Group)->getOne($event->group)->name}}</title>
 
     <style type="text/css">
         body {
@@ -173,7 +173,7 @@
             <div
                 style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
                 {{Setting('openmeet.title')}} - Nouvel événement
-                de {{(new \App\Group)->getOne($event->id_group)->name}}
+                de {{(new \App\Group)->getOne($event->group)->name}}
             </div>
         </td>
     </tr>

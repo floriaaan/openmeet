@@ -164,4 +164,25 @@ class Group extends Model
         return explode(";", $tags);
     }
 
+    public function getTags()
+    {
+        $query = DB::table('groups')
+            ->select('tags')
+            ->get();
+
+        $tags = [];
+        foreach ($query as $tag) {
+            if ($tag->tags != null) {
+                $tagExploded = explode(";", $tag->tags);
+                foreach ($tagExploded as $tagE) {
+                    $tags[] = $tagE;
+                }
+
+            }
+
+        }
+        array_unique($tags);
+        return $tags;
+    }
+
 }

@@ -31,7 +31,7 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());
@@ -53,7 +53,7 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser($userID);
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser($userID);
@@ -74,7 +74,7 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());

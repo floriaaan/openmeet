@@ -24,6 +24,7 @@ Route::post('/v1/session/unset/error', function (Request $request) {
 Route::get('/v1/groups/', 'ApiController@getGroups');
 Route::get('/v1/groups/subscribe/{userID}', 'ApiController@getSubscription');
 Route::post('/v1/groups/subscribe/', 'ApiController@toggleSubscription');
+Route::get('/v1/groups/tags/', 'ApiController@getTags');
 
 
 Route::get('/v1/events/', 'ApiController@getEvents');

@@ -69,10 +69,8 @@
 
     </div>
 
-    <div class="container-fluid mt-5">
-        <div class="card rounded mx-3 shadow-lg">
-            <div class="card-columns" id="locationCard"></div>
-        </div>
+    <div class="container-fluid mt-5" id="containerTags">
+
     </div>
 
 
@@ -200,6 +198,30 @@
 
         }
 
+        .card-tag{
+            height: 200px;
+            width: auto;
+            color:white;
+            text-transform: capitalize;
+        }
+
+        .card-tag img {
+            height: 200px!important;
+            width: auto!important;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 900px) {
+            .card-columns{
+                column-count: 2;
+            }
+        }
+        @media (max-width: 700px) {
+            .card-columns{
+                column-count: 1;
+            }
+        }
+
     </style>
 @endsection
 
@@ -274,7 +296,7 @@
                 data: {'lat': datas.lat, 'lon': datas.lon, 'limit': 6},
                 datatype: 'json',
                 success: function (data) {
-                    console.log('API.Self', data);
+                    console.log('API.self events', data);
                 },
                 error: function () {
                     console.log('Error')
@@ -282,5 +304,37 @@
             })
         }
 
+
+        function getTags() {
+            $.ajax({
+                url: '{{url('/api/v1/groups/tags')}}',
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log('API.self tags', data);
+                    $('#containerTags').append('<div class="card rounded mx-3 shadow-lg"><div class="card-columns p-5" id="locationCard"></div></div>');
+                    for(let i = 0; i < data.length; i++){
+                        $('#locationCard').append(
+                            '<div class="card bg-dark shadow-sm card-tag" id="card-'+ data[i].tag +'" onclick="event.preventDefault();document.getElementById("form-'+ data[i].tag.trim() +'").submit();">' +
+                                '<img src="'+ data[i].img +'" class="card-img-top mx-auto" alt="Image de '+ data[i].tag +'">' +
+                                '<div class="card-img-overlay">' +
+                                    '<h5 class="card-title">'+ data[i].tag +'</h5>' +
+                                '</div>' +
+                            '</div>' +
+                            '<form id="form-'+ data[i].tag.trim() +'" action="{{url("/search")}}" method="post" class="d-none">@csrf' +
+                                '<input type="hidden" name="search" value="'+ data[i].tag +'">' +
+                            '</form>');
+
+                    }
+                    console.log( $('#locationCard').innerHTML)
+
+                },
+                error: function () {
+                    console.log('Error')
+                }
+            });
+        }
+
+        getTags()
     </script>
 @endsection

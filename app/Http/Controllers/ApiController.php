@@ -69,4 +69,23 @@ class ApiController extends Controller
         $post = $request->input();
         return (new Event)->getByArea($post['lon'], $post['lat'], $post['limit']);
     }
+
+    public function getTags()
+    {
+        $tags = (new Group)->getTags();
+        header('Access-Control-Allow-Origin "*"');
+        header('Access-Control-Allow-Headers "origin, x-requested-with, content-type, Authorization"');
+        header('Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"');
+        header('User-Agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"');
+        $result = [];
+        foreach ($tags as $tag) {
+            $tag = str_replace(' ', '%20', $tag);
+            $url = file_get_contents('https://api.qwant.com/api/search/images?count=2&q=' . $tag . '+logo&t=images&safesearch=1&locale=fr_FR&uiv=4');
+            $json = json_decode($url, true);
+            $tag = str_replace('%20', ' ', $tag);
+            $result[] = ['tag' => $tag, 'img' => $json['data']['result']['items'][0]['media']];
+        }
+
+        return $result;
+    }
 }
