@@ -16,10 +16,10 @@
                     <?php echo e(str_plural('groupe', (new \App\Group)->getCount())); ?> <?php echo e(str_plural('créé', (new \App\Group)->getCount())); ?></h2>
                 <form action="<?php echo e(url('/search')); ?>" method="POST">
                     <?php echo csrf_field(); ?>
-                    <input  type="text" name="search"
-                            class="text-center mt-5 form-control form-control-lg rounded-pill"
-                            style="padding:2rem; font-size:15px"
-                            placeholder="Rechercher un groupe ou événement">
+                    <input type="text" name="search"
+                           class="text-center mt-5 form-control form-control-lg rounded-pill"
+                           style="padding:2rem; font-size:15px"
+                           placeholder="Rechercher un groupe ou événement">
                 </form>
                 <?php if(auth()->check()): ?>
                     <a href="<?php echo e(url('/groups/list')); ?>" class="btn btn-primary btn-xl rounded-pill mt-5">Voir les
@@ -39,6 +39,8 @@
 
 
     </div>
+
+
 
     <div class="container-fluid mt-5">
         <div class="card rounded mx-3 shadow-lg" id="pwa-card">
@@ -69,6 +71,11 @@
 
     </div>
 
+    <div class="container-fluid mt-5">
+        <div class="card rounded mx-3 shadow-lg">
+            <div class="card-columns" id="locationCard"></div>
+        </div>
+    </div>
 
 
 
@@ -247,6 +254,35 @@
             $('#pwa-card').toggleClass('d-none');
         }
 
+        function ipLocateAndCreateHomeCards() {
+            $.ajax({
+                url: 'http://ip-api.com/json',
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log('API.ip', data);
+                    getGroupAndCreateCard(data);
+                },
+                error: function () {
+                    console.log('Error')
+                }
+            });
+        }
+
+        function getEventAndCreateCard(datas) {
+            $.ajax({
+                url: "<?php echo e(url('/api/v1/events/location')); ?>",
+                type: 'POST',
+                data: {'lat': datas.lat, 'lon': datas.lon, 'limit': 6},
+                datatype: 'json',
+                success: function (data) {
+                    console.log('API.Self', data);
+                },
+                error: function () {
+                    console.log('Error')
+                }
+            })
+        }
 
     </script>
 <?php $__env->stopSection(); ?>

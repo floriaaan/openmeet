@@ -33,7 +33,9 @@ class EventCreateRequest extends FormRequest
             'eStreet' => 'profanity|',
             'eCity' => 'profanity|',
             'eZip' => 'profanity|',
-            'eCountry' => 'profanity|'
+            'eCountry' => 'profanity|',
+             'elon'=>'',
+             'elat'=>'',
         ];
     }
 }

@@ -42,13 +42,34 @@ class ScrapingController extends Controller
         $groupDesc = str_replace('<br />','\n',$groupDesc);
         //dump($groupDesc);
         //===========================================================================//D
+        //========================Tags du groupe======================//
+        $groupTags="";
+        $regexGroupTags="#<a class=\"topicsList-topicItem display--inlineBlock text--smaller button--small button--neutral\" href=\"(.*?)\">(.*?)<\/a>#";
+        preg_match_all($regexGroupTags,$pageContent,$scrapGroupTags);
+        $groupTagsArray=$scrapGroupTags[2];
+        $groupTags = implode(',',$groupTagsArray);
+        //dump($groupTagsArray);
+        //dump($groupTags);
+        //==============================================================//
+
+
 
         return view('scraping.choosegroupconfirmation',[
             'url'=>$url,
             'groupName'=>$groupName,
-            'groupDesc'=>$groupDesc
+            'groupDesc'=>$groupDesc,
+            'groupTags'=>$groupTags
+
         ]);
     }
+
+
+
+
+
+
+
+
 
     public function ChooseEvent(){
         return view('scraping.chooseevent');
@@ -148,6 +169,7 @@ class ScrapingController extends Controller
 
 
 
+
         return view('scraping.chooseeventconfirmation',[
             'eventName'=>$eventName,
             'eventDesc'=>$eventDesc,
@@ -156,7 +178,7 @@ class ScrapingController extends Controller
             'eventNumRue'=>$eventNumRue,
             'eventRue'=>$eventRue,
             'eventVille'=>$eventVille,
-            'listGroup'=>$listGroup
+            'listGroup'=>$listGroup,
         ]);
     }
 
