@@ -30,7 +30,7 @@ class NotificationController extends Controller
     {
         $notif = new Notification();
         $notif->title = $title;
-        $notif->id_user=$userId;
+        $notif->user=$userId;
         $notif->content=$content;
         $notif->concerned=$concerned;
         $notif->date= date('Y-m-d H:i:s');
@@ -45,7 +45,7 @@ class NotificationController extends Controller
         $notifications = $notif->getAll();
         foreach ($notifications as $notification) {
             if(($notification->isread) == 1) {
-                //$notif->Remove($notification->ID_NOTIF);
+                //$notif->Remove($notification->NOTIF);
             }
         }
     }

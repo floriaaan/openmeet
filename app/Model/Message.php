@@ -42,15 +42,15 @@ class Message extends Model
         return $messageArray;
     }
 
-    public function getPersonalChat($userId_2){
+    public function getPersonalChat($user2){
         $userId=auth()->id();
         $query = DB::table('messages')
             ->select('*')
             ->where('sender',"=",$userId)
-            ->where('receiver',"=",$userId_2)
+            ->where('receiver',"=",$user2)
             ->where('forgroup','=',0)
             ->orWhere('receiver','=',$userId)
-            ->where('sender','=',$userId_2)
+            ->where('sender','=',$user2)
             ->where('forgroup',"=",0)
             ->get();
 
@@ -89,15 +89,15 @@ class Message extends Model
         return $conversations;
     }
 
-    public function getLastMessageForPersonalConv($userId_1, $userId_2)
+    public function getLastMessageForPersonalConv($user1, $user2)
     {
         $query = DB::table('messages')
             ->select('*')
-            ->where('sender', '=', $userId_1)
-            ->where('receiver', '=', $userId_2)
+            ->where('sender', '=', $user1)
+            ->where('receiver', '=', $user2)
             ->where('forgroup', '=', 0)
-            ->orWhere('sender', '=', $userId_2)
-            ->where('receiver', '=', $userId_1)
+            ->orWhere('sender', '=', $user2)
+            ->where('receiver', '=', $user1)
             ->where('forgroup', '=', 0)
             ->orderBy('date', 'desc')
             ->limit(1)
@@ -157,7 +157,7 @@ class Message extends Model
     }
 
 
-    public function GetMessagesForConversation($userId_2)
+    public function GetMessagesForConversation($user2)
     {
         $userId = auth()->id();
     }

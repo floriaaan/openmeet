@@ -20,8 +20,8 @@ class ApiController extends Controller
             return [200, 'Unsubscribed'];
         } else {
             $subscription = new Subscription();
-            $subscription->id_user = $userID;
-            $subscription->id_group = $groupID;
+            $subscription->user = $userID;
+            $subscription->group = $groupID;
             $subscription->date = date('Y-m-d');
             $subscription->acceptnotif = (new User)->getOne($userID)->defaultnotif;
             $subscription->push();

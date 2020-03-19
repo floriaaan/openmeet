@@ -100,13 +100,13 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->id_group);
+            $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
-                if ($message->getLastMessageForGroupConv($subscription->id_group)->id != 0) {
-                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)->id] = $message->getLastMessageForGroupConv($subscription->id_group);
+                if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
+                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
                 } else {
-                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->id_group);
+                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {
             }
@@ -245,13 +245,13 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->id_group);
+            $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
-                if ($message->getLastMessageForGroupConv($subscription->id_group)->id != 0) {
-                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)->id] = $message->getLastMessageForGroupConv($subscription->id_group);
+                if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
+                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
                 } else {
-                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->id_group);
+                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {
             }

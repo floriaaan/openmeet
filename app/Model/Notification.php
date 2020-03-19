@@ -36,7 +36,7 @@ class Notification extends Model
     {
         $query = DB::table('notifications')
             ->select('*')
-            ->where('id_user', "=", $userId)
+            ->where('user', "=", $userId)
             ->where('isread', "=", 0)
             ->get();
 
@@ -51,7 +51,7 @@ class Notification extends Model
     {
         $query = DB::table('notifications')
             ->select('*')
-            ->where('id_user', "=", $userId)
+            ->where('user', "=", $userId)
             ->where('isread', "=", 0)
             ->orderBy('date', 'desc')
             ->limit(5)
@@ -83,7 +83,7 @@ class Notification extends Model
     {
         try {
             $query = DB::table('notifications')
-                ->where('id_user', '=', $userID)
+                ->where('user', '=', $userID)
                 ->update(['isread' => 1]);
             return true;
         } catch (\Exception $e) {

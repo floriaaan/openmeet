@@ -36,7 +36,7 @@ class EventController extends Controller
 
         $event = new Event();
         $event->name = $post['eName'];
-        $event->id_group = $post['eGroup'];
+        $event->group = $post['eGroup'];
         $event->dateFrom = $post['eDateFrom'];
         $event->numstreet = $post['eNumStreet'];
         $event->street = $post['eStreet'];
@@ -56,7 +56,7 @@ class EventController extends Controller
         if($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
             foreach ($usersSub as $userSub) {
-                $user = (new User)->getOne($userSub->id_user);
+                $user = (new User)->getOne($userSub->user);
 
                 if ($user->defaultnotif && ($user->typenotif == 2 || $user->typenotif == 3)) {
                     Mail::to($user->email)
