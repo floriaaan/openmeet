@@ -25,10 +25,11 @@ class GroupCreateRequest extends FormRequest
     {
         return [
             'gName' => 'required|min:1|profanity|max:100',
-            //'gPic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'gTags' => 'profanity',
+            'gPic' => '',
+            'gTags' => '',
             'gDesc' => 'required',
             'gAdminID' => 'required|numeric'
         ];
     }
 }
+//image|mimes:jpeg,png,jpg,gif,svg|max:2048

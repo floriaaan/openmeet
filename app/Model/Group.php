@@ -185,4 +185,29 @@ class Group extends Model
         return $tags;
     }
 
+    public function updateGroup(Group $group)
+    {
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['name' => $group->name]);
+
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['desc' => $group->desc]);
+
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['tags' => $group->tags]);
+
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['picname' => $group->picname]);
+
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['picrepo' => $group->picrepo]);
+
+
+    }
+
 }

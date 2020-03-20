@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Storage;
 
 
 class GroupController extends Controller
@@ -34,15 +35,29 @@ class GroupController extends Controller
         $group->admin = $post['gAdminID'];
         $group->datecreate = date('Y-m-d H:i:s');
 
-        if(isset($post['gDesc']) && $post['gDesc'] != '') {
+        if (isset($post['gDesc']) && $post['gDesc'] != '') {
             $group->desc = $post['gDesc'];
         }
 
-        if(isset($post['gTags'])) {
+        if (isset($post['gTags'])) {
             $group->tags = $post['gTags'];
         }
-
         $group->push();
+        if ($request->file('gPic') != null) {
+            $uploadedFile = $request->file('gPic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/group/' . $group->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $group->picrepo = 'group/' . $group->id;
+            $group->picname = $filename;
+        }
+        (new Group)->updateGroup($group);
 
         $adminSub = new Subscription();
         $adminSub->user = $post['gAdminID'];
@@ -73,9 +88,8 @@ class GroupController extends Controller
     {
 
 
-
         $group = (new Group)->getOne($groupID);
-        $tags = explode(";",$group->tags);
+        $tags = explode(";", $group->tags);
 
         $datas = [
             'group' => $group,
@@ -83,9 +97,9 @@ class GroupController extends Controller
             'tags' => $tags
         ];
 
-        if(auth()->check()) {
+        if (auth()->check()) {
             $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
-            if (auth()->user()->isBan(auth()->user()->id,$groupID )){
+            if (auth()->user()->isBan(auth()->user()->id, $groupID)) {
                 return abort(403, 'BAN ACTIF');
             }
         }
