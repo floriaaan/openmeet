@@ -17,6 +17,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -94,9 +95,9 @@ class UserController extends Controller
         $post = $request->input();
         $user = (new User)->getOne(auth()->id());
 
-        if(!($post['notifications'] == 'none')) {
+        if (!($post['notifications'] == 'none')) {
             $user->defaultnotif = 1;
-            if($post['notifications'] == 'push') {
+            if ($post['notifications'] == 'push') {
                 $user->typenotif = 1;
             } else if ($post['notifications'] == 'mail') {
                 $user->typenotif = 2;
@@ -106,6 +107,23 @@ class UserController extends Controller
         } else {
             $user->defaultnotif = 0;
             $user->typenotif = 0;
+        }
+
+        if ($request->file('uPic') != null) {
+
+
+            $uploadedFile = $request->file('uPic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/user/' . $user->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $user->picrepo = 'user/' . $user->id;
+            $user->picname = $filename;
         }
         (new User)->updateUser($user);
 
