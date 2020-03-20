@@ -220,4 +220,15 @@ class Event extends Model
 
     }
 
+    public function remove($eventID)
+    {
+        try {
+            $query = DB::table('events')
+                ->delete($eventID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
 }

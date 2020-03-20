@@ -67,6 +67,9 @@
                                     <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2">
                                         Modifier l'évenement
                                     </a>
+                                    <a href="{{url('/events/delete/'.$event->id)}}" class="btn btn-danger mx-2">
+                                        Supprimer l'évenement
+                                    </a>
                                 @endif
                                 <div class="mx-2">
                                     @if($isparticipating != null && $isparticipating)
@@ -116,8 +119,9 @@
 
     <script>
         displayMap();
-        displayEvent({{$event->posx}}, {{$event->posy}});
-
+        @if($event->posx != null && $event->posy != null)
+            displayEvent({{$event->posx}}, {{$event->posy}});
+        @endif
 
     </script>
 @endsection

@@ -90,13 +90,12 @@ Route::get('/groups/admin/events/', 'AdminGroupController@listEvent');
 
 //EVENTS routes
 Route::get('/events/show/{event_id}', 'EventController@show');
-Route::get('/events/list/', 'EventController@showAll');
 Route::get('/events/create', 'EventController@addForm')->middleware('groupadmin');
 Route::post('/events/create', 'EventController@addPost')->middleware('groupadmin');
 Route::get('/events/edit/{event_id}', 'EventController@editForm')->middleware('groupadmin'); //TODO: + check if correct admin rights
 Route::post('/events/edit', 'EventController@editPost')->middleware('groupadmin'); // TODO
 Route::get('/events/delete/{event_id}', 'EventController@deleteForm')->middleware('groupadmin'); //TODO
-Route::get('/events/delete/', 'EventController@deletePost')->middleware('groupadmin'); //TODO
+Route::post('/events/delete/', 'EventController@deletePost')->middleware('groupadmin'); //TODO
 Route::post('/events/participate/add/', 'ParticipationController@createParticipation')->middleware('auth');
 Route::post('/events/participate/remove/', 'ParticipationController@deleteParticipation')->middleware('auth');
 

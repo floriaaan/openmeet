@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -74,16 +75,22 @@ class EventController extends Controller
         return redirect('/groups/show/' . $post['eGroup']);
     }
 
-    public function deleteForm()
+    public function deleteForm($eventID)
     {
-        return view('event.delete');
+        return view('event.delete', ['event' => (new Event)->getOne($eventID)]);
     }
 
-    public function deletePost()
+    public function deletePost(Request $request)
     {
+        $post = $request->input();
+        $list = (new Participation)->getEvent($post['event']);
 
-        //ACTIONS
-        return redirect('/event/');
+        foreach ($list as $participation) {
+            (new Participation)->remove($participation->id);
+        }
+        (new Event)->remove($post['event']);
+
+        return redirect('/events/');
     }
 
     public function show($eventID)

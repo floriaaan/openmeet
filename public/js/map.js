@@ -1,4 +1,4 @@
-var mymap = L.map('map').setView([49.43866, 1.077265], 13);
+var mymap = L.map('map').setView([46.728427, 2.611003], 4);
 
 function displayMap() {
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
