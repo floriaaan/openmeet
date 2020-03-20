@@ -135,10 +135,10 @@ class GroupController extends Controller
         $group->admin = $post['gAdminID'];
 
         if ($request->file('gPic') != null) {
+            unlink('public/upload/image/' . $group->picrepo . '/' . $group->picname);
             $uploadedFile = $request->file('gPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
-            //TODO: unlink previous
 
             Storage::disk('local')->putFileAs(
                 'public/upload/image/group/' . $group->id . '/',

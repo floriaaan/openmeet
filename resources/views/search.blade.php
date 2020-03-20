@@ -54,7 +54,7 @@
                                         <a href="{{url('/groups/show')}}/{{$sR['content']->id}}"
                                            style="text-decoration: none; color: inherit;">
                                             <h5 class="card-title">{{$sR['content']->name}}</h5>
-                                            <p class="card-text">{{$sR['content']->desc}}</p>
+                                            <p class="card-text">{!! str_replace('\\n','<br>',$sR['content']->desc) !!}</p>
                                         </a>
                                     </div>
                                     <div class="col-lg-4">
@@ -79,7 +79,7 @@
                             <div class="card rounded shadow-sm hvr-grow">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$sR['content']->name}}</h5>
-                                    <p class="card-text">{{$sR['content']->description}}</p>
+                                    <p class="card-text">{!! str_replace('\\n','<br>',$sR['content']->description) !!}</p>
                                     <footer class="blockquote-footer">
                                         <small class="text-muted">
                                             aura lieu le

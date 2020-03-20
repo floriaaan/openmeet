@@ -170,4 +170,54 @@ class Event extends Model
         return $query;
     }
 
+    public function updateEvent($event)
+    {
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['name' => $event->name]);
+
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['datefrom' => $event->datefrom]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['dateto' => $event->dateto]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['numstreet' => $event->numstreet]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['street' => $event->street]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['city' => $event->city]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['zip' => $event->zip]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['country' => $event->country]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['posx' => $event->posx]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['posy' => $event->posy]);
+
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['description' => $event->description]);
+
+
+    }
+
 }

@@ -12,7 +12,7 @@
                 <div class="card hvr-grow rounded shadow">
                     <div class="card-body">
                         <h5 class="card-title">{{$event->name}}</h5>
-                        <p class="card-text">{{$event->description}}</p>
+                        <p class="card-text">{!! str_replace('\\n', '<br>', $event->description) !!}</p>
                         <div class="row">
                             <div class="col-lg-8">
                                 <footer class="blockquote-footer">
@@ -62,7 +62,7 @@
 @section('css')
     <style>
         .hvr-grow {
-            display: inherit!important;
+            display: inherit !important;
         }
     </style>
 @endsection

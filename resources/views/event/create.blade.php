@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="/events/create" method="POST">
+        <form action="{{url('/events/create')}}" method="POST">
             @csrf
             <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
@@ -220,6 +220,8 @@
             });
         });
         function reverseLatLng(lat, lng) {
+            inputPosx.value = lng;
+            inputPosy.value = lat;
             $.ajax({
                 url: 'https://api-adresse.data.gouv.fr/reverse/?lon=' + lng + '&lat=' + lat,
                 type: 'GET',

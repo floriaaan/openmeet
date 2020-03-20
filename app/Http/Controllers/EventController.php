@@ -55,7 +55,7 @@ class EventController extends Controller
 
 
         //var_dump((new Subscription)->getGroup($post['eGroup']));
-        if($event->push()) {
+        if ($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
             foreach ($usersSub as $userSub) {
                 $user = (new User)->getOne($userSub->user);
@@ -106,6 +106,34 @@ class EventController extends Controller
             'listGroups' => $listEvent
         ]);
 
+    }
+
+    public function editForm($eventID)
+    {
+        return view('event.edit', ['event' => (new Event)->getOne($eventID)]);
+    }
+
+    public function editPost(EventCreateRequest $request)
+    {
+        $post = $request->input();
+        $event = (new Event)->getOne($post['eventID']);
+
+        $event->name = $post['eName'];
+        $event->dateFrom = $post['eDateFrom']; //TODO: fix
+        $event->dateTo = $post['eDateTo']; //TODO: fix
+        $event->numstreet = $post['eNumStreet'];
+        $event->street = $post['eStreet'];
+        $event->city = $post['eCity'];
+        $event->zip = $post['eZip'];
+        $event->country = $post['eCountry'];
+        $event->posx = $post['elon'];
+        $event->posy = $post['elat'];
+        $event->description = $post['eDesc'];
+
+        (new Event)->updateEvent($event);
+
+
+        return redirect('/events/show/' . $post['eventID']);
     }
 
 }
