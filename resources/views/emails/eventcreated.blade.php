@@ -10,8 +10,8 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>{{Setting('openmeet.title')}} - Nouvel événement
-        de {{(new \App\Group)->getOne($event->id_group)->name}}</title>
+    <title>{{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+        de {{(new \App\Group)->getOne($event->group)->name}}</title>
 
     <style type="text/css">
         body {
@@ -172,8 +172,8 @@
         <td>
             <div
                 style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                {{Setting('openmeet.title')}} - Nouvel événement
-                de {{(new \App\Group)->getOne($event->id_group)->name}}
+                {{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+                de {{(new \App\Group)->getOne($event->group)->name}}
             </div>
         </td>
     </tr>
@@ -198,10 +198,10 @@
 
                             <tr>
                                 <td align="center" height="70" style="height:70px;">
-                                    <a href=""
+                                    <a href="{{url('/')}}"
                                        style="display: block; border-style: none !important; border: 0 !important;"><img
                                             width="100" border="0" style="display: block; width: 100px;"
-                                            src="https://floriaaan.alwaysdata.net/docs/fmm.svg" alt=""/></a>
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
                                 </td>
                             </tr>
                         </table>
@@ -227,11 +227,13 @@
                 <tr>
 
                     <td align="center" class="section-img">
-                        <div class="display-4"
-                             style=" border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                        <div style="font-size: 25px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
                             Un nouvel événement a été créé
                         </div>
-
+                        <hr class="mx-5 my-3" style="color:#ddd">
+                        <div style="font-size: 18px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                            {{(new \App\Group)->getOne($event->group)->name}} vous invite à {{$event->name}}
+                        </div>
 
                     </td>
                 </tr>
@@ -240,7 +242,7 @@
                 </tr>
                 <tr>
                     <td align="center"
-                        style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;"
+                        style="color: #343434; font-size: 15px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 20px;"
                         class="main-header">
 
 
@@ -285,8 +287,8 @@
 
                 <tr>
                     <td align="center">
-                        <table border="0" align="center" width="160" cellpadding="0" cellspacing="0" bgcolor="730EBD"
-                               style="">
+                        <table border="0" align="center" width="160" cellpadding="0" cellspacing="0"
+                               style="background-color: {{Setting('openmeet.color')}}">
 
                             <tr>
                                 <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
@@ -298,7 +300,7 @@
 
 
                                     <div style="line-height: 26px;">
-                                        <a href="{{url('/events/show'.$event->id)}}"
+                                        <a href="{{url('/events/show/'.$event->id)}}"
                                            style="color: #ffffff; text-decoration: none;">Voir l'événement</a>
                                     </div>
                                 </td>
@@ -351,7 +353,7 @@
                                     <a href=""
                                        style="display: block; border-style: none !important; border: 0 !important;"><img
                                             width="40" border="0" style="display: block; width: 40px;"
-                                            src="https://floriaaan.alwaysdata.net/docs/fmm.svg" alt=""/></a>
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
                                 </td>
                             </tr>
 
@@ -367,7 +369,7 @@
                                         style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
                                         Contact: <br/> <a href="mailto:{{Setting('openmeet.admin.email', 'contact@openmeet.fr')}}"
-                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{strtolower(Setting('openmeet.title'))}}</a>
+                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{(Setting('openmeet.title', 'OpenMeet'))}}</a>
 
                                     </div>
                                 </td>

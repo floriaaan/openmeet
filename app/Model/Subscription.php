@@ -12,8 +12,8 @@ class Subscription extends Model
     protected $fillable = [
 
         'id',
-        'id_user',
-        'id_group',
+        'user',
+        'group',
         'date',
         'acceptnotif'
     ];
@@ -29,12 +29,24 @@ class Subscription extends Model
         var_dump($query);
     }
 
+    public function getLimit($limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->limit($limit)
+            ->get();
+
+
+        return $query;
+
+    }
+
 
     public function getGroup($groupId)
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_group', "=", $groupId)
+            ->where('group', "=", $groupId)
             ->get();
 
         $listSubscription = [];
@@ -47,7 +59,7 @@ class Subscription extends Model
     public function countGroup($groupId) {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_group', "=", $groupId)
+            ->where('group', "=", $groupId)
             ->get();
 
         return count($query);
@@ -57,7 +69,7 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', "=", $userId)
+            ->where('user', "=", $userId)
             ->get();
 
         $listSubscription = [];
@@ -70,7 +82,7 @@ class Subscription extends Model
     public function countByUser($userID) {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', "=", $userID)
+            ->where('user', "=", $userID)
             ->get();
 
         return count($query);
@@ -100,8 +112,8 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', '=', $userID)
-            ->where('id_group', '=', $groupID)
+            ->where('user', '=', $userID)
+            ->where('group', '=', $groupID)
             ->get();
 
         return !empty($query[0]);
@@ -111,10 +123,11 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('id_user', '=', $userID)
-            ->where('id_group', '=', $groupID)
+            ->where('user', '=', $userID)
+            ->where('group', '=', $groupID)
             ->get();
 
         return $query[0];
     }
+
 }

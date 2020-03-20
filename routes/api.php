@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/v1/session/unset/error', function (Request $request) {
 
     return Session()->write($request['sessionid'], ['error' => null]);
@@ -28,9 +24,11 @@ Route::post('/v1/session/unset/error', function (Request $request) {
 Route::get('/v1/groups/', 'ApiController@getGroups');
 Route::get('/v1/groups/subscribe/{userID}', 'ApiController@getSubscription');
 Route::post('/v1/groups/subscribe/', 'ApiController@toggleSubscription');
+Route::get('/v1/groups/tags/', 'ApiController@getTags');
 
 
 Route::get('/v1/events/', 'ApiController@getEvents');
+Route::post('/v1/events/location', 'ApiController@getELocation');
 
 
 Route::get('/v1/settings/', 'ApiController@getSettings');

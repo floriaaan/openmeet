@@ -29,13 +29,38 @@ class Block extends Model
 
     public function getCount()
     {
-        $query=DB::table('blocks')
+        $query = DB::table('blocks')
             ->select('*')
             ->get();
 
 
         return $query->count();
 
+    }
+
+    public function getAll()
+    {
+        $query = DB::table('blocks')
+            ->select('*')
+            ->get();
+
+        $listBlocks = [];
+        foreach ($query as $block) {
+            $listBlocks[] = $block;
+        }
+        return $listBlocks;
+    }
+
+    public function getLimitDesc($limit)
+    {
+        $query = DB::table('blocks')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
     }
 
 }

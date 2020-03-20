@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \anlutro\LaravelSettings\SaveMiddleware::class
+        \anlutro\LaravelSettings\SaveMiddleware::class,
     ];
 
     /**
@@ -64,6 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //'banned' => \App\Http\Middleware\CheckBanned::class,
+       // 'blocked' => \App\Http\Middleware\CheckBlock::class,
     ];
 
     /**

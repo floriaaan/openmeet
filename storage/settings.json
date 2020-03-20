@@ -1,1 +1,1 @@
-{"openmeet":{"install":true,"name":"CryptoMeet","color":"#8080ff","slogan":"Trouvez le Meet en vous \ud83d\udd30","theme":"day"}}
+{"openmeet":{"install":true,"name":"OpenTest","slogan":"Slogan","color":"#007bff","theme":"day","robots":true},"database":{"host":"localhost","user":"root","pass":null}}

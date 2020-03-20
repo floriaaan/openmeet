@@ -29,10 +29,11 @@ class RegisterRequest extends FormRequest
 
         return [
             'email' => 'required|email|unique:users',
-            'rPass' => 'required|confirmed|min:3',
-            'rFName' => 'required|alpha|min:1',
-            'rLName' => 'required|alpha|min:1',
-            'rBDate' => 'required|date|before_or_equal:-18 years'
+            'password' => 'required|min:3',
+            'password-confirm' => 'required|same:password|min:3',
+            'fname' => 'required|alpha|min:1',
+            'lname' => 'required|alpha|min:1',
+            'bdate' => 'required|date|before_or_equal:-18 years'
         ];
     }
 }

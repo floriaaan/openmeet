@@ -28,6 +28,31 @@ class MessageController extends Controller
         $message->date = date('Y-m-d H:i:s');
 
         $message->push();
+
+        //Envoi d'une notification
+        $contentSplitted = mb_str_split($message->content);
+        $contentExt = "";
+        $contentExtract="";
+
+        if(count($contentSplitted)>=50) {
+            for ($i = 0; $i < 50; $i++) {
+                {
+                    $contentExt = $contentExt . $contentSplitted[$i];
+                }
+                $contentExtract = $contentExt . ' ...';
+            }
+        }else{
+            $contentExtract=$message->content;
+        }
+
+        $notifType='mes';
+        $notifTitle='Nouveau message de '.auth()->user()->fname.' '.auth()->user()->lname;
+        $notifContent = "Contenu du message : ".$contentExtract;
+
+        NotificationController::CreateNotification($notifType,$notifTitle,$message->receiver,$notifContent,$message->id);
+
+            //TODO : envoyer un notification pour un message de groupe
+
         if ($post['mForgroup'] == 1) {
             return redirect('/messages/group/' . $post['mReceiver']);
         } else {
@@ -75,13 +100,13 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->id_group);
+            $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
-                if ($message->getLastMessageForGroupConv($subscription->id_group)->id != 0) {
-                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)->id] = $message->getLastMessageForGroupConv($subscription->id_group);
+                if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
+                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
                 } else {
-                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->id_group);
+                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {
             }
@@ -220,13 +245,13 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->id_group);
+            $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
-                if ($message->getLastMessageForGroupConv($subscription->id_group)->id != 0) {
-                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->id_group)->id] = $message->getLastMessageForGroupConv($subscription->id_group);
+                if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
+                    $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
                 } else {
-                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->id_group);
+                    $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {
             }

@@ -99,4 +99,16 @@ class Signalement extends Model
         return $listSignalement;
     }
 
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('signalements')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
 }

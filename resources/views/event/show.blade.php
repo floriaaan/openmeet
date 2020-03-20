@@ -20,14 +20,28 @@
                     <h5 class="card-title display-4">{{$event->name}}</h5>
                     @if($event->description != null)<h5
                         class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>@endif
+                    <small class="text-muted">
+                        Participants : {{(new \App\Participation)->getCount($event->id)}}
+                    </small>
+
                     <hr class="mx-4 my-4">
 
-                    <div id="map" class="p-5">
-                        TODO: MAP
+                    <div id="map" class="p-1">
+
 
                     </div>
 
-                    <div class="row">
+                    <div id="socialshare" class="p-3 mx-5">
+                        {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
+                            ->facebook()
+                            ->twitter()
+                            ->linkedin('Extra linkedin summary can be passed here')
+                            ->whatsapp() !!}
+                    </div>
+
+                    <hr class="mx-5 my-2">
+
+                    <div class="row mt-2">
                         <div class="col-lg-6">
                             <footer class="blockquote-footer">
                                 <small class="text-muted">
@@ -42,39 +56,50 @@
                                             à {{strftime("%R",strtotime($event->dateto))}}</cite>
                                     </small>
                                 @endif
+
+
                             </footer>
                         </div>
 
                         <div class="col-lg-6">
-                            <div class="float-right mr-5">
-
-
-                                @if($isparticipating != null && $isparticipating)
-                                    <a class="btn btn-danger" style="color: #fff"
-                                       onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
-                                        <i class="fas fa-times"></i> Ne participe plus
+                            <div class="row justify-content-end">
+                                @if((new \App\Group)->getAdmin($event->group)->id == auth()->id())
+                                    <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2">
+                                        Modifier l'évenement
                                     </a>
-
-                                    <form id="toggleParticipation" action="{{url('/events/participate/remove')}}"
-                                          method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="event" value="{{$event->id}}">
-                                        <input type="hidden" name="user" value="{{auth()->id()}}">
-                                    </form>
-                                @else
-                                    <a class="btn btn-success" style="color: #fff"
-                                       onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
-                                        <i class="fas fa-check"></i> Participer
+                                    <a href="{{url('/events/delete/'.$event->id)}}" class="btn btn-danger mx-2">
+                                        Supprimer l'évenement
                                     </a>
-
-                                    <form id="toggleParticipation" action="{{url('/events/participate/add')}}"
-                                          method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="event" value="{{$event->id}}">
-                                        <input type="hidden" name="user" value="{{auth()->id()}}">
-                                    </form>
                                 @endif
+                                <div class="mx-2">
+                                    @if($isparticipating != null && $isparticipating)
+                                        <a class="btn btn-danger" style="color: #fff"
+                                           onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
+                                            <i class="fas fa-times"></i> Ne participe plus
+                                        </a>
+
+                                        <form id="toggleParticipation" action="{{url('/events/participate/remove')}}"
+                                              method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="event" value="{{$event->id}}">
+                                            <input type="hidden" name="user" value="{{auth()->id()}}">
+                                        </form>
+                                    @else
+                                        <a class="btn btn-success" style="color: #fff"
+                                           onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
+                                            <i class="fas fa-check"></i> Participer
+                                        </a>
+
+                                        <form id="toggleParticipation" action="{{url('/events/participate/add')}}"
+                                              method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="event" value="{{$event->id}}">
+                                            <input type="hidden" name="user" value="{{auth()->id()}}">
+                                        </form>
+                                    @endif
+                                </div>
                             </div>
+
 
                         </div>
                     </div>
@@ -86,8 +111,19 @@
         </div>
 
     </div>
-    </div>
 
+@endsection
+
+@section('js')
+    <script src="{{url('/js/map.js')}}"></script>
+
+    <script>
+        displayMap();
+        @if($event->posx != null && $event->posy != null)
+            displayEvent({{$event->posx}}, {{$event->posy}});
+        @endif
+
+    </script>
 @endsection
 
 @section('css')
@@ -95,6 +131,15 @@
     <style>
         .blockquote-footer {
             font-size: initial !important;
+        }
+
+        #socialshare ul {
+            list-style-type: none;
+        }
+
+        #map {
+            height: 250px;
+            width: 100%;
         }
     </style>
 @endsection

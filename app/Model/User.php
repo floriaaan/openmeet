@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id', 'fname', 'lname', 'bdate', 'email', 'country',
         'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
-        'defaultnotif', 'typenotif'
+        'defaultnotif', 'typenotif', 'password'
     ];
 
     /**
@@ -58,6 +58,31 @@ class User extends Authenticatable
 
     }
 
+    public function isBan($userId,$groupId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banned', '=', $userId )
+            ->where('banisher','=',$groupId)
+            ->get();
+        return $query->count() > 0;
+    }
+
+    public function isBlock($userId,$blockId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('target', '=', $userId )
+            ->where('blocker','=',$blockId)
+            ->get();
+        return $query->count() > 0;
+    }
+
+
+
+
     public function getLimit($limit)
     {
         $query = DB::table('users')
@@ -76,10 +101,20 @@ class User extends Authenticatable
             ->select('*')
             ->get();
 
+        return $query->count();
+
+    }
+
+    public function getCountUserByGroup()
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->get();
 
         return $query->count();
 
     }
+
 
     public function getAll()
     {
@@ -122,6 +157,37 @@ class User extends Authenticatable
         }
 
         return $listUser;
+    }
+
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('users')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
+    public function updateUser($user) {
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['defaultnotif' => $user->defaultnotif]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['typenotif' => $user->typenotif]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['picname' => $user->picname]);
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['picrepo' => $user->picrepo]);
     }
 
 }

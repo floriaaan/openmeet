@@ -1,5 +1,7 @@
 <?php $__env->startSection('body'); ?>
 
+
+
     <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
          style="z-index: 5000">
         <a class="navbar-brand" href="/">
@@ -20,7 +22,10 @@
                     <?php if(auth()->user()->picname != null): ?>
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="./<?php echo e(auth()->user()->picrepo); ?>/<?php echo e(auth()->user()->picname); ?>">
+                            <img
+                                src="<?php echo e(url('/storage/upload/image/'.auth()->user()->picrepo.'/'.auth()->user()->picname)); ?>"
+                                class="img-thumbnail rounded-circle"
+                                style="height: 40px; width: 40px">
                         </a>
                     <?php else: ?>
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -32,10 +37,14 @@
                     <div class="dropdown-menu" aria-labelledby="navDrop">
                         <h6 class="dropdown-header">
                             Bienvenue <?php echo e(auth()->user()->fname); ?> <?php echo e(auth()->user()->lname); ?></h6>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/')); ?>"><i class="fas fa-user"></i> Mon
+                            profil</a>
                         <div class="dropdown-divider"></div>
                         <h6 class="dropdown-header">Participations</h6>
-                        <a class="dropdown-item" href="<?php echo e(url('/user/groups/')); ?>"><i class="fas fa-users"></i> Mes groupes</a>
-                        <a class="dropdown-item" href="<?php echo e(url('/user/events')); ?>"> <i class="fas fa-handshake"></i> Mes événements</a>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/groups/')); ?>"><i class="fas fa-users"></i> Mes
+                            groupes</a>
+                        <a class="dropdown-item" href="<?php echo e(url('/user/events')); ?>"> <i class="fas fa-handshake"></i> Mes
+                            événements</a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo e(url('/logout')); ?>"
@@ -50,11 +59,16 @@
                         <?php if(auth()->user()->isadmin): ?>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
-                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                            <a class="dropdown-item" href="<?php echo e(url('/admin/')); ?>"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Modération</h6>
+                            <a class="dropdown-item" href="<?php echo e(url('/groups/admin/')); ?>"><i class="fas fa-tools"></i> Panneau de
+                                modération</a>
                         <?php else: ?>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="/admin"><i class="fas fa-tools"></i> Panneau de modération</a>
+                            <a class="dropdown-item" href="<?php echo e(url('/groups/admin/')); ?>"><i class="fas fa-tools"></i> Panneau de
+                                modération</a>
                         <?php endif; ?>
 
                     </div>
@@ -220,6 +234,7 @@
     <div class="mt-nav"></div>
 
 <?php $__env->stopSection(); ?>
+
 
 
 <?php echo $__env->make('layouts.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/layouts/nav.blade.php ENDPATH**/ ?>

@@ -20,9 +20,8 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{$group->name}}</h5>
-                            <h6 class="text-muted">{{$group->desc}}</h6>
+                            <h6 class="text-muted">{!! str_replace('\\n','<br>',$group->desc) !!}</h6>
                             <hr class="mx-4 my-4">
-                            <p class="card-text mt-1">Prochain événement : <span></span></p>
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                         </div>
                         <div class="">

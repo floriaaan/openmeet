@@ -24,10 +24,12 @@ class GroupCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'gName' => 'required|min:1|profanity|max:40',
-            //'gPic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'gDesc' => 'max:255|profanity|',
+            'gName' => 'required|min:1|profanity|max:100',
+            'gPic' => '',
+            'gTags' => '',
+            'gDesc' => 'required',
             'gAdminID' => 'required|numeric'
         ];
     }
 }
+//image|mimes:jpeg,png,jpg,gif,svg|max:2048

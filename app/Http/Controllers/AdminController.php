@@ -28,12 +28,12 @@ class AdminController extends Controller
     public function index()
     {
         $user = (new User);
-        $listUser = $user->getLimit(5);
+        $listUser = $user->getLimitDesc(5);
         $countUser = $user->getCount();
 
         $message = (new Message);
         $listMessage = [];
-        $rawListMsg = $message->getLimit(10);
+        $rawListMsg = $message->getLimitDesc(10);
 
         foreach ($rawListMsg as $msg) {
             if ($msg->forgroup == 0) {
@@ -55,7 +55,7 @@ class AdminController extends Controller
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimit(10);
+        $rawListGroup = $groups->getLimitDesc(10);
 
         $listGroup = [];
 
@@ -69,20 +69,20 @@ class AdminController extends Controller
 
         $events = (new Event);
         $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimit(10);
+        $rawListEvent = $events->getLimitDesc(10);
 
         $listEvent = [];
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'group' => $groups->getOne($event->id_group)
+                'group' => $groups->getOne($event->group)
             ];
 
         }
 
         $reports = (new Signalement);
         $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimit(10);
+        $rawListReport = $reports->getLimitDesc(10);
 
         $listReport = [];
         foreach ($rawListReport as $report) {
@@ -96,7 +96,7 @@ class AdminController extends Controller
 
         $bans = (new Ban);
         $countBan = $bans->getCount();
-        $rawListBan = $bans->getLimit(10);
+        $rawListBan = $bans->getLimitDesc(10);
 
         $listBan = [];
         foreach ($rawListBan as $ban) {
@@ -110,7 +110,7 @@ class AdminController extends Controller
 
         $blocks = (new Block);
         $countBlock = $blocks->getCount();
-        $rawListBlock = $blocks->getLimit(10);
+        $rawListBlock = $blocks->getLimitDesc(10);
 
         $listBlock = [];
         foreach ($rawListBlock as $block) {
@@ -166,12 +166,20 @@ class AdminController extends Controller
 
     public function editPrivacy(Request $request)
     {
-
         $post = $request->input();
-        var_dump($post);
-        //Setting(['openmeet.robots' => ($post['robots']) == "on"]);
 
-        //return redirect('/admin');
+        $robotsOn = "User-agent: *\nDisallow:";
+        $robotsOff = "User-agent: *\nDisallow: *";
+
+        if (isset($post['robots']) && $post['robots'] == "on") {
+            file_put_contents('./robots.txt', $robotsOn);
+            Setting(['openmeet.robots' => true]);
+        } else {
+            file_put_contents('./robots.txt', $robotsOff);
+            Setting(['openmeet.robots' => false]);
+        }
+
+        return redirect('/admin');
     }
 
     public function listUser()
@@ -197,16 +205,67 @@ class AdminController extends Controller
         return view('admin.reports.list', ['reportList' => $listReport]);
     }
 
+    public function listBan()
+    {
+        $user = (new User);
+        $bans = (new Ban);
+        $groups = (new Group);
+        $rawListBan = $bans->getAll();
+
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banisher' => $groups->getOne($ban->banisher),
+                'banned' => $user->getOne($ban->banned),
+            ];
+
+        }
+        return view('admin.bans.list', ['banList' => $listBan]);
+    }
+
+    public function listBlock()
+    {
+        $user = (new User);
+        $rawlistBlock = (new Block)->getAll();
+
+        foreach ($rawlistBlock as $block) {
+            $listBLock[] = [
+                'block' => $block,
+                'blocker' => $user->getOne($block->blocker),
+                'target' => $user->getOne($block->target),
+            ];
+
+        }
+        return view('admin.blocks.list', ['blockList' => $listBLock]);
+    }
+
     public function listGroup()
     {
         $groups = [];
         $listGroups = (new Group)->getAll();
 
         foreach ($listGroups as $group) {
-            $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
+            $groups[] = [
+                'group' => $group,
+                'admin' => (new User)->getOne($group->admin)];
         }
         return view('admin.groups.list', ['groups' => $groups]);
     }
+
+    public function listEvent()
+    {
+        $events = [];
+        $listEvents = (new Event)->getAll();
+
+        foreach ($listEvents as $event) {
+            $events[] = [
+                'event' => $event,
+                'group' => (new Group)->getOne($event->id_group)];
+        }
+        return view('admin.events.list', ['events' => $events]);
+    }
+
 
     public function deleteUser($userID)
     {
@@ -296,5 +355,23 @@ class AdminController extends Controller
             'results' => $result
         ]);
 
+    }
+
+    public function editViewsForm()
+    {
+        $mailingView = file_get_contents('./../resources/views/emails/eventcreated.blade.php');
+
+        return view('admin.views.edit', [
+            'mail' => $mailingView
+        ]);
+    }
+
+    public function editViews(Request $request)
+    {
+        $post = $request->input();
+
+        file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);
+
+        return redirect('/admin');
     }
 }

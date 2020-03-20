@@ -1,3 +1,7 @@
+<?php $__env->startSection('title'); ?>
+    Messages
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <!--================================================
      List des conversation

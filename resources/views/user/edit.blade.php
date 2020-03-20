@@ -29,17 +29,17 @@
                                 </div>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="uPic" id="uPic" lang="fr">
-                                    <label class="custom-file-label mb-1" for="gPic">Photo d'utilisateur</label>
+                                    <label class="custom-file-label mb-1" for="uPic">Photo d'utilisateur</label>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{auth()->user()->fname}} {{auth()->user()->lname}}</h5>
 
-                                <input type="email" name="email" value="{{auth()->user()->email}}" class="form-control">
+                                <input type="email" readonly value="{{auth()->user()->email}}" class="form-control">
 
 
                             </div>
-                                <hr class="mx-5 my-3">
+                            <hr class="mx-5 my-3">
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     Membre
@@ -55,6 +55,43 @@
 
                             </ul>
 
+                            <hr class="my-4 mx-4">
+                            <div class="form-group">
+                                <h5 class="text-muted">Notifications</h5>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" id="none" value="none" name="notifications"
+                                           class="custom-control-input"
+                                           @if(!auth()->user()->defaultnotif || auth()->user()->typenotif == 0) checked @endif>
+                                    <label class="custom-control-label" for="none">
+                                        Aucun
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" id="push" value="push" name="notifications"
+                                           class="custom-control-input"
+                                           @if(auth()->user()->defaultnotif && auth()->user()->typenotif == 1) checked @endif>
+                                    <label class="custom-control-label" for="push">
+                                        Par Notifications Push
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" id="email" value="email" name="notifications"
+                                           class="custom-control-input"
+                                           @if(auth()->user()->defaultnotif && auth()->user()->typenotif == 2) checked @endif>
+                                    <label class="custom-control-label" for="email">
+                                        Par Mail
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio my-1">
+                                    <input type="radio" id="both" value="both" name="notifications"
+                                           class="custom-control-input"
+                                           @if(auth()->user()->defaultnotif && auth()->user()->typenotif == 3) checked @endif>
+                                    <label class="custom-control-label" for="both">
+                                        Par Mail et Notifications Push
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -62,7 +99,7 @@
 
                 <div class="col-lg-9">
 
-                    <button type="submit" class="btn btn-primary mx-5">Valider</button>
+                    <button type="submit" class="btn btn-primary mx-5 mt-2">Valider</button>
                     <hr class="my-3 mx-5">
 
                     <div class="p-3">

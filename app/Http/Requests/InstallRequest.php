@@ -24,10 +24,18 @@ class InstallRequest extends FormRequest
     public function rules()
     {
         return [
-            'iName'=>'required|min:3|max:40|profanity|',
-            'iSlogan' => 'min:3|max:40|profanity|',
-            'iPass'=>'required|confirmed|min:3',
-            'iMail'=>'required|email'
+            'iName' => 'required|max:40|profanity|',
+            'iSlogan' => 'max:40|profanity|',
+            'iDBHost' => 'required',
+            'iDBName' => 'required',
+            'iDBUser' => 'required',
+            'iDBPass' => '',
+            'email' => 'required|email',
+            'password' => 'required|min:3',
+            'password-confirm' => 'required|same:password|min:3',
+            'fname' => 'required|alpha',
+            'lname' => 'required|alpha',
+            'bdate' => 'required|date|before_or_equal:-18 years'
         ];
     }
 }

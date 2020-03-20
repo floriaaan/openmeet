@@ -1,12 +1,17 @@
 @extends('layouts.nav')
 
+@section('title')
+    Suppression
+@endsection
+
 @section('content')
 
     <div class="container p-5">
 
         <div class="card shadow-lg p-3" style="opacity: 0.8">
 
-            <h3 class="display-4 text-center mt-4">Voulez-vous vraiment supprimer {{$user->fname}} {{$user->lname}} ?</h3>
+            <h3 class="display-4 text-center mt-4">Voulez-vous vraiment supprimer {{$user->fname}} {{$user->lname}}
+                ?</h3>
             <hr class="mx-3 my-5">
             <p class="lead p-5">Cette action est irréversible. Etes-vous vraiment sûr de vouloir faire ceci?</p>
 

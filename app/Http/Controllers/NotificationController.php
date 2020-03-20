@@ -26,11 +26,17 @@ class NotificationController extends Controller
 
     }
 
-    public static function CreateNotification($title, $userId, $content)
+    public static function CreateNotification($type,$title, $userId, $content, $concerned)
     {
-        $notifsend = new Notification();
-        $notifsend->create($title, $userId, $content);
+        $notif = new Notification();
+        $notif->title = $title;
+        $notif->user=$userId;
+        $notif->content=$content;
+        $notif->concerned=$concerned;
+        $notif->date= date('Y-m-d H:i:s');
+        $notif->type=$type;
 
+        $notif->push();
     }
 
     public static function DeleteUselessNotification()
@@ -38,8 +44,8 @@ class NotificationController extends Controller
         $notif = new Notification();
         $notifications = $notif->getAll();
         foreach ($notifications as $notification) {
-            if (($notification->isread) == 1) {
-                //$notif->Remove($notification->ID_NOTIF);
+            if(($notification->isread) == 1) {
+                //$notif->Remove($notification->NOTIF);
             }
         }
     }

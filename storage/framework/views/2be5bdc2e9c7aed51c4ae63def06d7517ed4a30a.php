@@ -1,3 +1,8 @@
+<?php $__env->startSection('title'); ?>
+    <?php echo e($group->name); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 
     <div class="container-fluid">
@@ -16,8 +21,25 @@
                     <?php else: ?>
                         <small class="p-3 blockquote-footer">Pas de photo</small>
                     <?php endif; ?>
+                    <hr class="mx-5 my-2">
+                    <div class="pl-5 pb-5 pt-3">
 
+                        <?php $__empty_1 = true; $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <?php if($tag != ''): ?>
+                                <a onclick="event.preventDefault();document.getElementById('form-<?php echo e($tag); ?>').submit();">
+                                    <span class="badge badge-secondary"><?php echo e($tag); ?></span>
+                                </a>
 
+                                <form id="form-<?php echo e($tag); ?>" action="<?php echo e(url('/search')); ?>" method="post" class="d-none">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="search" value="<?php echo e($tag); ?>">
+                                </form>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <span>Aucun tag</span>
+                        <?php endif; ?>
+
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -58,11 +80,28 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
 
+                        <hr class="mx-4 my-2">
+
+                        <div class="px-5 pt-2">
+                            <small>Membres : <?php echo e((new \App\Subscription)->countGroup($group->id)); ?></small>
+                            <small class="blockquote-footer">
+                                Administrateur
+                                : <a
+                                    href="<?php echo e(url('/user/show/'.$group->admin)); ?>">
+                                    <?php echo e((new \App\Group)->getAdmin($group->id)->fname); ?> <?php echo e((new \App\Group)->getAdmin($group->id)->lname); ?>
+
+                                </a>
+                            </small>
+                        </div>
+
 
                         <div class="d-flex justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le <?php echo e($group->datecreate); ?></small></p>
                             <div class="float-right mr-5">
-                                <?php if($issubscribed != null && $issubscribed): ?>
+                                <?php if($group->admin == auth()->id()): ?>
+                                    <small class="text-muted blockquote-footer">Vous êtes administrateur du
+                                        groupe.</small>
+                                <?php elseif($issubscribed != null && $issubscribed): ?>
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Ban;
+use App\Block;
 use App\Event;
 use App\Group;
+use App\Http\Requests\ReportRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Mail\EventCreated;
+use App\Message;
 use App\Participation;
+use App\Signalement;
 use App\Subscription;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,11 +28,12 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());
@@ -41,11 +49,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function show($userID){
+
+    public function show($userID)
+    {
         $listSubscription = (new Subscription)->getUser($userID);
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser($userID);
@@ -61,11 +71,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function editForm() {
+    public function editForm()
+    {
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->id_group);
+            $groups[] = (new Group)->getOne($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());
@@ -73,21 +84,74 @@ class UserController extends Controller
         foreach ($listParticipations as $participation) {
             $events[] = (new Event)->getOne($participation->event);
         }
-        return view('user.edit',[
+        return view('user.edit', [
             'groups' => $groups,
             'events' => $events,
         ]);
     }
 
-    public function edit() {
+    public function edit(UserEditRequest $request)
+    {
+        $post = $request->input();
+        $user = (new User)->getOne(auth()->id());
+
+        if (!($post['notifications'] == 'none')) {
+            $user->defaultnotif = 1;
+            if ($post['notifications'] == 'push') {
+                $user->typenotif = 1;
+            } else if ($post['notifications'] == 'mail') {
+                $user->typenotif = 2;
+            } else if ($post['notifications'] == 'both') {
+                $user->typenotif = 3;
+            }
+        } else {
+            $user->defaultnotif = 0;
+            $user->typenotif = 0;
+        }
+
+        if ($request->file('uPic') != null) {
+            unlink('public/upload/image/' . $user->picrepo . '/' . $user->picname);
+
+            $uploadedFile = $request->file('uPic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/user/' . $user->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $user->picrepo = 'user/' . $user->id;
+            $user->picname = $filename;
+        }
+        (new User)->updateUser($user);
+
         return redirect('/user');
     }
 
-    public function reportForm($userID) {
-        return 'préparation du pas cool ' . $userID;
+    public function reportForm($userID)
+    {
+        return view('user.report.form', [
+            'submitter' => auth()->id(),
+            'concerned' => (new User)->getOne($userID)
+        ]);
     }
 
-    public function reportPost() {
-        return 'el famoso pas cool';
+    public function reportPost(ReportRequest $request)
+    {
+        $post = $request->input();
+
+        $report = new Signalement();
+        $report->submitter = $post['submitter'];
+        $report->concerned = $post['concerned'];
+        //$report->importance = $post['importance'];
+        $report->description = $post['description'];
+        $report->date = date('Y-m-d H:m:s');
+
+        $report->push();
+
+        return redirect('/');
+
     }
 }

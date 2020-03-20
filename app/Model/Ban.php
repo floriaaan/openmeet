@@ -15,9 +15,23 @@ class Ban extends Model
         'description'
     ];
 
+
+    public function getAll()
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->get();
+
+        $listBans = [];
+        foreach ($query as $ban) {
+            $listBans[] = $ban;
+        }
+        return $listBans;
+    }
+
     public function getLimit($limit)
     {
-        $query=DB::table('bans')
+        $query = DB::table('bans')
             ->select('*')
             ->limit($limit)
             ->get();
@@ -36,5 +50,17 @@ class Ban extends Model
 
         return $query->count();
 
+    }
+
+    public function getLimitDesc($limit)
+    {
+        $query=DB::table('bans')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
     }
 }

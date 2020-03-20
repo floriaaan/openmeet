@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -36,13 +37,15 @@ class EventController extends Controller
 
         $event = new Event();
         $event->name = $post['eName'];
-        $event->id_group = $post['eGroup'];
+        $event->group = $post['eGroup'];
         $event->dateFrom = $post['eDateFrom'];
         $event->numstreet = $post['eNumStreet'];
         $event->street = $post['eStreet'];
         $event->city = $post['eCity'];
         $event->zip = $post['eZip'];
         $event->country = $post['eCountry'];
+        $event->posx = $post['elon'];
+        $event->posy = $post['elat'];
 
         if (isset($post['eDesc']) && $post['eDesc'] != '') {
             $event->description = $post['eDesc'];
@@ -53,10 +56,10 @@ class EventController extends Controller
 
 
         //var_dump((new Subscription)->getGroup($post['eGroup']));
-        if($event->push()) {
+        if ($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
             foreach ($usersSub as $userSub) {
-                $user = (new User)->getOne($userSub->id_user);
+                $user = (new User)->getOne($userSub->user);
 
                 if ($user->defaultnotif && ($user->typenotif == 2 || $user->typenotif == 3)) {
                     Mail::to($user->email)
@@ -72,16 +75,22 @@ class EventController extends Controller
         return redirect('/groups/show/' . $post['eGroup']);
     }
 
-    public function deleteForm()
+    public function deleteForm($eventID)
     {
-        return view('event.delete');
+        return view('event.delete', ['event' => (new Event)->getOne($eventID)]);
     }
 
-    public function deletePost()
+    public function deletePost(Request $request)
     {
+        $post = $request->input();
+        $list = (new Participation)->getEvent($post['event']);
 
-        //ACTIONS
-        return redirect('/event/');
+        foreach ($list as $participation) {
+            (new Participation)->remove($participation->id);
+        }
+        (new Event)->remove($post['event']);
+
+        return redirect('/events/');
     }
 
     public function show($eventID)
@@ -104,6 +113,34 @@ class EventController extends Controller
             'listGroups' => $listEvent
         ]);
 
+    }
+
+    public function editForm($eventID)
+    {
+        return view('event.edit', ['event' => (new Event)->getOne($eventID)]);
+    }
+
+    public function editPost(EventCreateRequest $request)
+    {
+        $post = $request->input();
+        $event = (new Event)->getOne($post['eventID']);
+
+        $event->name = $post['eName'];
+        $event->dateFrom = $post['eDateFrom']; //TODO: fix
+        $event->dateTo = $post['eDateTo']; //TODO: fix
+        $event->numstreet = $post['eNumStreet'];
+        $event->street = $post['eStreet'];
+        $event->city = $post['eCity'];
+        $event->zip = $post['eZip'];
+        $event->country = $post['eCountry'];
+        $event->posx = $post['elon'];
+        $event->posy = $post['elat'];
+        $event->description = $post['eDesc'];
+
+        (new Event)->updateEvent($event);
+
+
+        return redirect('/events/show/' . $post['eventID']);
     }
 
 }
