@@ -99,18 +99,29 @@ class ScrapingController extends Controller
         $regexEventHourFrom = '#<span class="eventTimeDisplay-startDate-time"><span>(.*?)<\/span><\/span>#';
         preg_match($regexEventHourFrom,$pageContent,$scrapEventHourFrom);
         $eventHourFrom =$scrapEventHourFrom[1];
+
         //dump($eventHourFrom);
         //===========================================================================//
         //====================Heure de fin de l'évènement=================================//
         $regexEventHourTo = '#<span class="eventTimeDisplay-endDate-partialTime"><span>(.*?)<\/span><\/span>#';
         preg_match($regexEventHourTo,$pageContent,$scrapEventHourTo);
-        $eventHourTo =strip_tags($scrapEventHourTo[1]);
+        if(isset($scrapEventHourTo[1])){
+            $eventHourTo =strip_tags($scrapEventHourTo[1]);
+            $multipleDay = 0;
+        }
+        else{
+            $regexEventHourTo = '#<span class="eventTimeDisplay-endDate-time"><span>(.*?)<\/span><\/span>#';
+            preg_match($regexEventHourTo,$pageContent,$scrapEventHourTo);
+            $eventHourTo =strip_tags($scrapEventHourTo[1]);
+            $multipleDay =1 ;
+        }
         //dump($eventHourTo);
         //===========================================================================//
-        //====================Heure de fin de l'évènement=================================//
+        //====================Date de début de l'évènement=================================//
         $regexEventDate = '#<time class="eventStatusLabel" (.*?)><span>(.*?)<\/span><\/time>#';
         preg_match($regexEventDate,$pageContent,$scrapEventDate);
         $eventDateStr = $scrapEventDate[2];
+        //dump($eventDateStr);
         $eventDateStrExp = explode(' ',$eventDateStr);
         $eventDay = $eventDateStrExp[1];
         $eventMonth=null;
@@ -131,8 +142,38 @@ class ScrapingController extends Controller
             }
             $i++;
         }
+        if($eventDay < 10){
+            $eventDay = "0".$eventDay;
+        }
         $eventDateFrom = $eventYear."-".$eventMonth."-".$eventDay."T".$eventHourFrom;
-        $eventDateTo = $eventYear."-".$eventMonth."-".$eventDay."T".$eventHourTo;
+        if($multipleDay==1){
+            $regexFullDate = "#<span class=\"eventTimeDisplay-endDate-fullDate\"><span>(.*?)<\/span>#";
+            preg_match($regexFullDate,$pageContent,$scrapEventDateFull);
+            $eventDateFullStr = $scrapEventDateFull[1];
+            $eventDateFullStrExp = explode(' ',$eventDateFullStr);
+            $eventDayFull = $eventDateFullStrExp[1];
+            $eventMonthFull=null;
+            $eventYearFull = $eventDateFullStrExp[3];
+            $mois=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+            $i = 0;
+            while($eventMonthFull == null || $eventMonthFull=="")
+            {
+                if ($eventDateFullStrExp[2] == $mois[$i])
+                {
+                    if($i+1 >=10){
+
+                        $eventMonthFull=$i+1;
+                    }
+                    else{
+                        $eventMonthFull="0".($i+1);
+                    }
+                }
+                $i++;
+            }
+            $eventDateTo = $eventYearFull."-".$eventMonthFull."-".$eventDayFull."T".$eventHourTo;
+        }else{
+            $eventDateTo = $eventYear."-".$eventMonth."-".$eventDay."T".$eventHourTo;
+        }
         //dump($eventDateFrom);
         //dump($eventDateTo);
 
@@ -140,37 +181,49 @@ class ScrapingController extends Controller
         //====================Ville de l'évènement=================================//
         $regexEventVille = "#<span> · <!-- -->(.*?)<\/span>#";
         preg_match($regexEventVille,$pageContent,$scrapEventVille);
-        $eventVille =$scrapEventVille[1];
+        if(isset($scrapEventVille[1]))
+        {
+            $eventVille =$scrapEventVille[1];
+        }else {
+            $eventVille ="N/A";
+        }
         //dump($eventVille);
         //===========================================================================/
         $regexEventRue = '#<p class="venueDisplay-venue-address text--secondary text--small (.*?)">(.*?)<span>#';
         preg_match($regexEventRue,$pageContent,$scrapEventRue);
-        $eventRueStr = $scrapEventRue[2];
-        $eventRueStrExp = explode(' ',$eventRueStr);
-        $eventRue="";
-        if(is_numeric($eventRueStrExp[0])){
-            $eventNumRue=$eventRueStrExp[0];
-            for($i=0;$i<count($eventRueStrExp);$i++){
-                if($i>0){
-                    $eventRue=$eventRue.$eventRueStrExp[$i]." ";
+        if(isset($scrapEventRue[2])) {
+            $eventRueStr = $scrapEventRue[2];
+            $eventRueStrExp = explode(' ', $eventRueStr);
+            $eventRue = "";
+            if (is_numeric($eventRueStrExp[0])) {
+                $eventNumRue = $eventRueStrExp[0];
+                for ($i = 0; $i < count($eventRueStrExp); $i++) {
+                    if ($i > 0) {
+                        $eventRue = $eventRue . $eventRueStrExp[$i] . " ";
+                    }
                 }
+                $eventRue = trim($eventRue);
+            } else {
+                $eventNumRue = "";
+                $eventRue = $eventRueStr;
             }
-            $eventRue=trim($eventRue);
         }
         else{
-            $eventNumRue ="";
-            $eventRue=$eventRueStr;
+            $eventNumRue = "N/A";
+            $eventRue = "N/A";
         }
         //dump($eventNumRue);
         //dump($eventRue);
         //dump($eventRueStr);
         //echo ($pageContent);
+        //die;
 
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
 
 
 
-
+        //dump($eventName,$eventDesc,$eventDateFrom,$eventDateTo,$eventNumRue,$eventRue,$eventVille,$listGroup);
+        //die;
         return view('scraping.chooseeventconfirmation',[
             'eventName'=>$eventName,
             'eventDesc'=>$eventDesc,
