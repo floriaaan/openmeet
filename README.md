@@ -39,5 +39,5 @@ If you discover a security vulnerability within OpenMeet, please open an issue t
 
 ## License
 
-The OpenMeet project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The OpenMeet project is open-sourced software licensed under the [GNU GPL license].
 
