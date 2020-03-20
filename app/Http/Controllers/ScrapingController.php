@@ -143,9 +143,9 @@ class ScrapingController extends Controller
         $eventVille =$scrapEventVille[1];
         //dump($eventVille);
         //===========================================================================/
-        $regexEventRue = '#<p class="venueDisplay-venue-address text--secondary text--small">(.*?)<span>#';
+        $regexEventRue = '#<p class="venueDisplay-venue-address text--secondary text--small (.*?)">(.*?)<span>#';
         preg_match($regexEventRue,$pageContent,$scrapEventRue);
-        $eventRueStr = $scrapEventRue[1];
+        $eventRueStr = $scrapEventRue[2];
         $eventRueStrExp = explode(' ',$eventRueStr);
         $eventRue="";
         if(is_numeric($eventRueStrExp[0])){
@@ -163,8 +163,9 @@ class ScrapingController extends Controller
         }
         //dump($eventNumRue);
         //dump($eventRue);
-
+        //dump($eventRueStr);
         //echo ($pageContent);
+
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
 
 
