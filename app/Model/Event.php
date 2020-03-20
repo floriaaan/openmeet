@@ -222,6 +222,13 @@ class Event extends Model
 
     public function remove($eventID)
     {
+
+        $list = (new Participation)->getEvent($eventID);
+
+        foreach ($list as $participation) {
+            (new Participation)->remove($participation->id);
+        }
+
         try {
             $query = DB::table('events')
                 ->delete($eventID);

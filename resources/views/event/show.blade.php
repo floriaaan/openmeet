@@ -65,9 +65,11 @@
                             <div class="row justify-content-end">
                                 @if((new \App\Group)->getAdmin($event->group)->id == auth()->id())
                                     <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2">
+                                        <i class="fas fa-pencil-alt"></i>
                                         Modifier l'évenement
                                     </a>
                                     <a href="{{url('/events/delete/'.$event->id)}}" class="btn btn-danger mx-2">
+                                        <i class="fas fa-trash-alt"></i>
                                         Supprimer l'évenement
                                     </a>
                                 @endif

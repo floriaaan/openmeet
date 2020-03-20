@@ -49,7 +49,7 @@
                             class="text-muted ml-3 blockquote-footer">{!! str_replace('\\n','<br>',$group->desc) !!}</p>@endif
                         <hr class="mx-4 my-4">
 
-                        <div class="h-50 p-3" style="height: 40vh!important; overflow-y: scroll!important;">
+                        <div class="h-50 p-3" style="height: 30vh!important; overflow-y: scroll!important;">
 
 
                             @foreach($listEvent as $event)
@@ -98,14 +98,20 @@
                             <div class="float-right mr-5">
                                 @if($group->admin == auth()->id())
                                     <div class="row justify-content-end">
-
+                                        <small class="text-muted blockquote-footer m-1">
+                                            Vous êtes administrateur du groupe.
+                                        </small>
+                                        <a href="{{url('/groups/delete/'.$group->id)}}" class="btn btn-danger m-1">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Supprimer {{$group->name}}
+                                        </a>
+                                        <a href="{{url('/groups/edit/'.$group->id)}}" class="btn btn-primary m-1">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Modifier {{$group->name}}
+                                        </a>
                                     </div>
-                                    <small class="text-muted blockquote-footer m-1">Vous êtes administrateur du
-                                        groupe.</small>
-                                    <a href="{{url('/groups/edit/'.$group->id)}}" class="btn btn-primary m-1">
-                                        Modifier {{$group->name}}
-                                    </a>
-                                @elseif($issubscribed != null && $issubscribed)
+
+                                @elseif($issubscribed ?? '' != null && $issubscribed ?? '')
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -73,15 +74,16 @@ class GroupController extends Controller
     public function deleteForm($groupID)
     {
         return view('group.delete', [
-            'groupID' => $groupID
+            'group' => (new Group)->getOne($groupID)
         ]);
     }
 
-    public function deletePost()
+    public function deletePost(Request $request)
     {
+        $post = $request->input();
+        (new Group)->remove($post['group']);
 
-        //ACTIONS
-        return redirect('/group/');
+        return redirect('/groups/list');
     }
 
     public function show($groupID)

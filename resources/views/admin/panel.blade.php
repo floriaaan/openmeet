@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Administration
+@endsection
+
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
@@ -41,14 +45,14 @@
                     <a class="list-group-item list-group-item-action" href="#blocks">
                         Blocages d'utilisateurs
                         <span class="badge badge-primary badge-pill">{{$blockCount}}</span>
-                    </a>-->
+                    </a>
                     <a class="list-group-item list-group-item-action" href="#messages">
                         Messages
                         <span class="badge badge-primary badge-pill">{{$messageCount['foruser']}}</span>
-                    </a>
+                    </a>-->
                 </div>
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 410px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 335px">
                     <h5 class="list-title">Paramètres relatifs aux groupes/événements</h5>
                     <a class="list-group-item list-group-item-action" href="#groups">
                         Groupes
@@ -58,10 +62,10 @@
                         Evénements
                         <span class="badge badge-primary badge-pill">{{$eventCount}}</span>
                     </a>
-                    <a class="list-group-item list-group-item-action" href="#gmessages">
+                    <!--<a class="list-group-item list-group-item-action" href="#gmessages">
                         Messages de groupes
                         <span class="badge badge-primary badge-pill">{{$messageCount['forgroup']}}</span>
-                    </a>
+                    </a>-->
                 </div>
             </div>
 
@@ -352,7 +356,7 @@
                         <a href="{{url('/admin/blocks/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
+                    <!--<h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -400,10 +404,10 @@
                     </div>
                 </div>
 
-                <hr class="my-5">
+                <hr class="my-5">-->
 
                 <div>
-                    <h4 id="groups" class="my-5">Groupes (10 groupes)</h4>
+                    <h4 id="groups" class="my-5">Groupes (10 derniers groupes)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -435,7 +439,7 @@
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/groups/delete/{{ $group['group']->id }}">
+                                                   href="/groups/delete/{{ $group['group']->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -484,7 +488,7 @@
                                                 </a>
 
                                                 <a class="btn btn-danger"
-                                                   href="/admin/events/delete/{{ $event['event']->id }}">
+                                                   href="/events/delete/{{ $event['event']->id }}">
                                                     <i class="fas fa-skull-crossbones"></i>
                                                 </a>
                                             </div>
@@ -501,7 +505,7 @@
                         <a href="{{url('/admin/events/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>
+                    <!--<h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -546,7 +550,7 @@
 
                             </tbody>
                         </table>
-                    </div>
+                    </div>-->
 
                     <hr class="my-4">
                     <h4 id="search" class="my-5">Recherche super-utilisateur</h4>

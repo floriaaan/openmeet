@@ -23,8 +23,8 @@ class EventCreateRequest extends FormRequest
      */
     public function rules()
     {
-         return [
-            'eName' => 'required|profanity|min:1|max:128',
+        return [
+            'eName' => 'required|min:1|max:128',
             'eDesc' => '',
             'eGroup' => 'required|numeric',
             'eDateFrom' => 'required|after_or_equal:now',
@@ -34,8 +34,8 @@ class EventCreateRequest extends FormRequest
             'eCity' => 'profanity|',
             'eZip' => 'profanity|',
             'eCountry' => 'profanity|',
-             'elon'=>'',
-             'elat'=>'',
+            'elon' => '',
+            'elat' => '',
         ];
     }
 }

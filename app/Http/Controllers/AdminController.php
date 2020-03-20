@@ -261,7 +261,7 @@ class AdminController extends Controller
         foreach ($listEvents as $event) {
             $events[] = [
                 'event' => $event,
-                'group' => (new Group)->getOne($event->id_group)];
+                'group' => (new Group)->getOne($event->group)];
         }
         return view('admin.events.list', ['events' => $events]);
     }
@@ -270,7 +270,7 @@ class AdminController extends Controller
     public function deleteUser($userID)
     {
         $user = (new User)->getOne($userID);
-        if ($user->isadmin) { //Proposer une passation de pouvoir
+        if ($user->isadmin) { //TODO:Proposer une passation de pouvoir
             return view('admin.users.deleteadmin');
         }
         return view('admin.users.deleteconfirmation', ['user' => $user]);
@@ -324,7 +324,7 @@ class AdminController extends Controller
             $result[] = ['content' => $user, 'type' => 'user'];
         }
 
-        $listMessage = (new Message)->getLike($post['search']);
+        /*$listMessage = (new Message)->getLike($post['search']);
         foreach ($listMessage as $message) {
             if ($message->forgroup) {
                 $result[] = ['content' => $message, 'type' => 'message',
@@ -338,7 +338,7 @@ class AdminController extends Controller
                 ];
             }
 
-        }
+        }*/
 
         $listSignalement = (new Signalement)->getLike($post['search']);
         foreach ($listSignalement as $signalement) {

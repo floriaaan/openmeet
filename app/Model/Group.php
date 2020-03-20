@@ -53,10 +53,25 @@ class Group extends Model
 
     }
 
-    public function delete()
+    public function remove($groupID)
     {
-        $query = DB::table('groups')
-            ->delete();
+        $listE = (new Event)->getByGroup($groupID);
+        foreach ($listE as $event) {
+            (new Event)->remove($event->id);
+        }
+
+        $listS = (new Subscription)->getGroup($groupID);
+        foreach ($listS as $sub) {
+            (new Subscription)->remove($sub->id);
+        }
+
+        try {
+            $query = DB::table('groups')
+                ->delete($groupID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function getLimit($limit)

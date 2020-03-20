@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Supression
+@endsection
+
 @section('content')
 
     <div class="container p-5">

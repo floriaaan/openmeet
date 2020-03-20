@@ -55,7 +55,10 @@
 
             <div class="col-lg-9">
                 @if(auth()->id() == $user->id)
-                    <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5 mt-2">Editer mon profil</a>
+                    <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5 mt-2">
+                        <i class="fas fa-pencil-alt"></i>
+                        Editer mon profil
+                    </a>
 
                     @else
                     <a href="{{url('/messages/user/'.$user->id)}}" class="btn btn-secondary mx-5 mt-2">

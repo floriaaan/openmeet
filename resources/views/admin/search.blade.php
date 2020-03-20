@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Super-Recherche
+    @endsection
+
 @section('content')
 
     <div class="container-fluid p-5">
@@ -28,12 +32,12 @@
         </div>
 
         <div class="row mt-lg-3">
-            <div class="col-lg-4">
+            <!--<div class="col-lg-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" checked class="custom-control-input" id="messages">
                     <label class="custom-control-label" for="messages">Messages</label>
                 </div>
-            </div>
+            </div>->
             <div class="col-lg-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" checked class="custom-control-input" id="signalements">
@@ -64,7 +68,7 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">{{$result['content']->name}}</h5>
-                                    <p class="card-text">{{$result['content']->desc}}</p>
+                                    <p class="card-text">{!! str_replace('\\n','<br>',$result['content']->desc) !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +80,7 @@
                             <div class="card border-event rounded shadow-sm hvr-grow">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$result['content']->name}}</h5>
-                                    <p class="card-text">{{$result['content']->description}}</p>
+                                    <p class="card-text">{!! str_replace('\\n','<br>',$result['content']->description) !!}</p>
                                     <footer class="blockquote-footer">
                                         <small class="text-muted">
                                             aura lieu le

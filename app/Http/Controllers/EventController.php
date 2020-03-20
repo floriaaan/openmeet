@@ -83,11 +83,7 @@ class EventController extends Controller
     public function deletePost(Request $request)
     {
         $post = $request->input();
-        $list = (new Participation)->getEvent($post['event']);
 
-        foreach ($list as $participation) {
-            (new Participation)->remove($participation->id);
-        }
         (new Event)->remove($post['event']);
 
         return redirect('/events/');

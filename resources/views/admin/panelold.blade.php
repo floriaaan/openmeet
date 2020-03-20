@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Administration
+@endsection
+
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
