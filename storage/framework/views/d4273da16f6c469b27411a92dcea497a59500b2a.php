@@ -43,7 +43,9 @@
 
 
     <div class="container-fluid mt-5">
-        <div class="card rounded mx-3 shadow-lg" id="pwa-card">
+        <!--<div class="card rounded mx-3 shadow-lg" id="pwa-card">-->
+        <div class="mx-3" id="pwa-card">
+            <hr class="my-4 mx-3">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="p-5">
@@ -60,8 +62,8 @@
 
                 </div>
 
-                <div class="col-lg">
-                    <div class=" bg-primary">
+                <div class="col-lg-3 h-100">
+                    <div class="bg-primary rounded-pill">
                         <img class="img-pwa p-5" src="/assets/logo.svg">
 
                     </div>
@@ -71,10 +73,14 @@
 
     </div>
 
-    <div class="container-fluid mt-5">
-        <div class="card rounded mx-3 shadow-lg">
-            <div class="card-columns" id="locationCard"></div>
-        </div>
+    <hr class="my-4 mx-5">
+
+    <div class="container-fluid mt-5" id="containerEvents">
+
+    </div>
+
+    <div class="container-fluid mt-5" id="containerTags">
+
     </div>
 
 
@@ -202,6 +208,45 @@
 
         }
 
+        .card-tag{
+            height: 200px;
+            width: auto;
+            color:white;
+            text-transform: capitalize;
+        }
+
+        .card-tag img {
+            margin-left: auto;
+            margin-right: auto;
+
+            height: 200px!important;
+            width: auto!important;
+            opacity: 0.8;
+        }
+
+
+        @media (max-width: 990px) {
+            .img-pwa {
+                width: 60%;
+                margin: auto!important;
+
+            }
+
+        }
+
+        @media (max-width: 900px) {
+
+
+            .card-columns{
+                column-count: 2;
+            }
+        }
+        @media (max-width: 700px) {
+            .card-columns{
+                column-count: 1;
+            }
+        }
+
     </style>
 <?php $__env->stopSection(); ?>
 
@@ -276,7 +321,7 @@
                 data: {'lat': datas.lat, 'lon': datas.lon, 'limit': 6},
                 datatype: 'json',
                 success: function (data) {
-                    console.log('API.Self', data);
+                    console.log('API.self events', data);
                 },
                 error: function () {
                     console.log('Error')
@@ -284,6 +329,38 @@
             })
         }
 
+
+        function getTags() {
+            $.ajax({
+                url: '<?php echo e(url('/api/v1/groups/tags')); ?>',
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    console.log('API.self tags', data);
+                    $('#containerTags').append('<hr class=" mx-5"><div class="card rounded mx-3 shadow-lg"><div class="card-columns p-5" id="locationCard"></div></div>');
+                    for(let i = 0; i < data.length; i++){
+                        $('#locationCard').append(
+                            '<div class="card bg-dark shadow-sm card-tag" id="card-'+ data[i].tag +'">' +
+                                '<img src="'+ data[i].img +'" class="card-img-top mx-auto" alt="Image de '+ data[i].tag +'">' +
+                                '<div class="card-img-overlay" onclick="event.preventDefault();document.getElementById("form-'+ data[i].tag.trim() +'").submit();">' +
+                                    '<h5 class="card-title">'+ data[i].tag +'</h5>' +
+                                '</div>' +
+                            '</div>' +
+                            '<form id="form-'+ data[i].tag.trim() +'" action="<?php echo e(url("/search")); ?>" method="post" class="d-none"><?php echo csrf_field(); ?>' +
+                                '<input type="hidden" name="search" value="'+ data[i].tag +'">' +
+                            '</form>');
+
+                    }
+                    console.log( $('#locationCard').innerHTML)
+
+                },
+                error: function () {
+                    console.log('Error')
+                }
+            });
+        }
+
+        //getTags()
     </script>
 <?php $__env->stopSection(); ?>
 

@@ -100,7 +100,7 @@
 
                         <div id="map">
 
-                            TODO:MAP
+
 
                         </div>
                         <hr class="my-4 mx-4">
@@ -197,13 +197,24 @@
             </div>
         </form>
     </div>
+<script src="{{url('/js/map.js')}}"></script>
 
 @endsection
 
 @section('js')
 
     <script>
-        $(function () {
+
+        var numRue = document.getElementById('inputNumRue');
+        var rue = document.getElementById('inputRue');
+        var ville = document.getElementById('inputVille');
+        var cp = document.getElementById('inputCP');
+        var pays = document.getElementById('inputCountry');
+        var inputPosx = document.getElementById('inputPosx');
+        var inputPosy = document.getElementById('inputPosy');
+        displayMap();
+
+    $(function () {
             console.log($('#title-group').text());
             $('#title-input').keyup(function () {
                 let input = $('#title-input').val();
@@ -211,14 +222,34 @@
             })
         });
 
-        window.onload = function Init() {
-            var numRue = document.getElementById('inputNumRue');
-            var rue = document.getElementById('inputRue');
-            var ville = document.getElementById('inputVille');
-            var cp = document.getElementById('inputCP');
-            var pays = document.getElementById('inputCountry');
-            var inputPosx = document.getElementById('inputPosx');
-            var inputPosy = document.getElementById('inputPosy');
+    function reverseLatLng(lat, lng) {
+        $.ajax({
+            url: 'https://api-adresse.data.gouv.fr/reverse/?lon=' + lng + '&lat=' + lat,
+            type: 'GET',
+            datatype: 'json',
+            success: function (data) {
+                console.log(data)
+                mymap.eachLayer(function (layer) {
+                    if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                        mymap.removeLayer(layer);
+                    }
+                })
+                displayEvent(lng, lat);
+                ville.value = data.features[0].properties.city;
+                pays.value = "France";
+                cp.value = data.features[0].properties.postcode;
+                numRue.value = data.features[0].properties.housenumber;
+                rue.value = data.features[0].properties.street;
+            },
+            error: function () {
+                console.log('Reverse LatLng failed')
+            }
+        })
+    }
+
+
+
+    window.onload = function Init() {
 
             if (numRue.value != "" && rue.value != "" && ville.value != "") {
                 var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
@@ -241,11 +272,16 @@
                 success: function (data) {
                     console.log(data);
                     if (data.features[0] != undefined) {
+                        mymap.eachLayer(function (layer) {
+                            if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                mymap.removeLayer(layer);
+                            }
+                        })
                         cp.value = data.features[0].properties.postcode;
                         pays.value = "France";
                         inputPosx.value = data.features[0].geometry.coordinates[0];
                         inputPosy.value = data.features[0].geometry.coordinates[1];
-                        posFrom.value = "ville";
+                        displayEvent(data.features[0].geometry.coordinates[0], data.features[0].geometry.coordinates[1]);
                     } else {
                         cp.value = "";
                         pays.value = "";
@@ -257,7 +293,7 @@
 
                 }
             });
-            numRue.addEventListener('change',function e() {
+            numRue.addEventListener('keyup',function e() {
 
                 if (numRue.value != "" && rue.value != "" && ville.value != "") {
                     var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
@@ -280,10 +316,17 @@
                     success: function (data) {
                         console.log(data);
                         if (data.features[0] != undefined) {
+                            mymap.eachLayer(function (layer) {
+                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                    mymap.removeLayer(layer);
+                                }
+                            })
                             cp.value = data.features[0].properties.postcode;
                             pays.value = "France";
                             inputPosx.value = data.features[0].geometry.coordinates[0];
                             inputPosy.value = data.features[0].geometry.coordinates[1];
+                            displayEvent(data.features[0].geometry.coordinates[0], data.features[0].geometry.coordinates[1]);
+
                         } else {
                             cp.value = "";
                             pays.value = "";
@@ -299,7 +342,7 @@
 
             });
 
-            rue.addEventListener('change',function e() {
+            rue.addEventListener('keyup',function e() {
 
                 if (numRue.value != "" && rue.value != "" && ville.value != "") {
                     var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
@@ -322,10 +365,17 @@
                     success: function (data) {
                         console.log(data);
                         if (data.features[0] != undefined) {
+                            mymap.eachLayer(function (layer) {
+                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                    mymap.removeLayer(layer);
+                                }
+                            })
                             cp.value = data.features[0].properties.postcode;
                             pays.value = "France";
                             inputPosx.value = data.features[0].geometry.coordinates[0];
                             inputPosy.value = data.features[0].geometry.coordinates[1];
+                            displayEvent(data.features[0].geometry.coordinates[0], data.features[0].geometry.coordinates[1]);
+
                         } else {
                             cp.value = "";
                             pays.value = "";
@@ -341,7 +391,7 @@
 
             });
 
-            ville.addEventListener('change',function e() {
+            ville.addEventListener('keyup',function e() {
 
                 if (numRue.value != "" && rue.value != "" && ville.value != "") {
                     var url = "https://api-adresse.data.gouv.fr/search/?q=" + numRue.value + " " + rue.value + " " + ville.value + "&type=housenumber&autocomplete=1";
@@ -364,10 +414,17 @@
                     success: function (data) {
                         console.log(data);
                         if (data.features[0] != undefined) {
+                            mymap.eachLayer(function (layer) {
+                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                    mymap.removeLayer(layer);
+                                }
+                            })
                             cp.value = data.features[0].properties.postcode;
                             pays.value = "France";
                             inputPosx.value = data.features[0].geometry.coordinates[0];
                             inputPosy.value = data.features[0].geometry.coordinates[1];
+                            displayEvent(data.features[0].geometry.coordinates[0], data.features[0].geometry.coordinates[1]);
+
                         } else {
                             cp.value = "";
                             pays.value = "";
@@ -380,6 +437,13 @@
                     }
                 });
 
+
+            });
+            mymap.on('click', function (e) {
+                let popup = L.popup();
+                popup.setLatLng(e.latlng)
+                    .setContent('<button class="btn btn-primary" onclick="event.preventDefault();reverseLatLng(' + e.latlng.lat + ', ' + e.latlng.lng + ')">Choisir cet emplacement</button>')
+                    .openOn(mymap);
 
             });
 
@@ -387,3 +451,13 @@
 
     </script>
 @endsection
+
+@section('css')
+    <style>
+        #map {
+            height: 250px;
+            width: 100%;
+        }
+    </style>
+@endsection
+

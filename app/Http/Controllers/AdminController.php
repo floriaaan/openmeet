@@ -75,7 +75,7 @@ class AdminController extends Controller
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'group' => $groups->getOne($event->id_group)
+                'group' => $groups->getOne($event->group)
             ];
 
         }
