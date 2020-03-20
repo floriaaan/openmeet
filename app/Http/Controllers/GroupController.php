@@ -120,15 +120,39 @@ class GroupController extends Controller
     public function editForm($groupID)
     {
         return view('group.edit', [
-            'groupID' => $groupID
+            'group' => (new Group)->getOne($groupID)
         ]);
     }
 
-    public function editPost()
+    public function editPost(GroupCreateRequest $request)
     {
+        $post = $request->input();
+        $group = (new Group)->getOne($post['groupID']);
 
-        //ACTIONS
-        return redirect('/group/');
+        $group->name = $post['gName'];
+        $group->desc = $post['gDesc'];
+        $group->tags = $post['gTags'];
+        $group->admin = $post['gAdminID'];
+
+        if ($request->file('gPic') != null) {
+            $uploadedFile = $request->file('gPic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+            //TODO: unlink previous
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/group/' . $group->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $group->picrepo = 'group/' . $group->id;
+            $group->picname = $filename;
+        }
+        (new Group)->updateGroup($group);
+
+
+        return redirect('/groups/show/' . $group->id);
     }
 
 }
