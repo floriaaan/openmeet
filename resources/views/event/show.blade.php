@@ -62,8 +62,13 @@
                         </div>
 
                         <div class="col-lg-6">
-                            <div class="justify-content-end">
-                                <div class="float-right mr-5">
+                            <div class="row justify-content-end">
+                                @if((new \App\Group)->getAdmin($event->group)->id == auth()->id())
+                                    <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2">
+                                        Modifier l'évenement
+                                    </a>
+                                @endif
+                                <div class="mx-2">
                                     @if($isparticipating != null && $isparticipating)
                                         <a class="btn btn-danger" style="color: #fff"
                                            onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">

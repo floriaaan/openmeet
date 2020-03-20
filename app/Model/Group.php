@@ -185,7 +185,7 @@ class Group extends Model
         return $tags;
     }
 
-    public function updateGroup(Group $group)
+    public function updateGroup($group)
     {
         DB::table('groups')
             ->where('id', $group->id)
@@ -198,6 +198,10 @@ class Group extends Model
         DB::table('groups')
             ->where('id', $group->id)
             ->update(['tags' => $group->tags]);
+
+        DB::table('groups')
+            ->where('id', $group->id)
+            ->update(['admin' => $group->admin]);
 
         DB::table('groups')
             ->where('id', $group->id)

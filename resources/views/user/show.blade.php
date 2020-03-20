@@ -27,9 +27,7 @@
                                 <h5 class="text-muted">{{$user->email}}</h5>
                             @endif
                             <hr class="my-4 mx-3">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the card's content.</p>
+
                         </div>
                         <ul class="list-group">
                             <li class="list-group-item">
@@ -45,7 +43,9 @@
                         </ul>
                         @if($user->id != auth()->id())
                             <div class="card-body">
-                                <a href="{{url('/user/report/'.$user->id)}}" class="card-link text-warning">Signaler</a>
+                                <a href="{{url('/user/report/'.$user->id)}}" class="btn btn-warning">
+                                    <i class="fas fa-radiation"></i> Signaler
+                                </a>
                             </div>
                         @endif
                     </div>
@@ -58,7 +58,9 @@
                     <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5 mt-2">Editer mon profil</a>
 
                     @else
-                    <a href="{{url('/messages/user/'.$user->id)}}" class="btn btn-secondary mx-5 mt-2">Messages</a>
+                    <a href="{{url('/messages/user/'.$user->id)}}" class="btn btn-secondary mx-5 mt-2">
+                        <i class="fas fa-envelope"></i> Messages
+                    </a>
                 @endif
                     <hr class="my-3 mx-5">
                 <div class="p-3">

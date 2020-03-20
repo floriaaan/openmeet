@@ -25,7 +25,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{$group->name}}</h5>
-                            <h6 class="text-muted">{{$group->desc}}</h6>
+                            <h6 class="text-muted">{!! str_replace('\\n','<br>',$group->desc) !!}</h6>
                             <hr class="mx-4 my-4">
                             <div class="row p-1">
                                 @forelse((new \App\Group)->getTagsByGroup($group->id) as $tag)

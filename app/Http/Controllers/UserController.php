@@ -110,7 +110,7 @@ class UserController extends Controller
         }
 
         if ($request->file('uPic') != null) {
-
+            unlink('public/upload/image/' . $user->picrepo . '/' . $user->picname);
 
             $uploadedFile = $request->file('uPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();

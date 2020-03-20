@@ -45,8 +45,8 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-4">{{$group->name}}</h5>
-                        @if($group->desc != null)<h5
-                            class="text-muted ml-3 blockquote-footer">{{$group->desc}}</h5>@endif
+                        @if($group->desc != null)<p
+                            class="text-muted ml-3 blockquote-footer">{!! str_replace('\\n','<br>',$group->desc) !!}</p>@endif
                         <hr class="mx-4 my-4">
 
                         <div class="h-50 p-3" style="height: 40vh!important; overflow-y: scroll!important;">
@@ -57,7 +57,7 @@
                                    style="text-decoration: none; color: inherit;">
                                     <div class="p-4 shadow-sm mt-2">
                                         <h5>{{$event->name}}</h5>
-                                        <p class="text-muted">{{$event->description}}</p>
+                                        <p class="text-muted">{!!str_replace('\n','</p><p class="text-muted">',$event->description)!!}</p>
                                         <p style="text-transform: capitalize">
                                             à {{$event->numstreet}} {{$event->street}}</p>
                                         <p>{{$event->zip}} - {{$event->city}}</p>
@@ -97,8 +97,14 @@
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                             <div class="float-right mr-5">
                                 @if($group->admin == auth()->id())
-                                    <small class="text-muted blockquote-footer">Vous êtes administrateur du
+                                    <div class="row justify-content-end">
+
+                                    </div>
+                                    <small class="text-muted blockquote-footer m-1">Vous êtes administrateur du
                                         groupe.</small>
+                                    <a href="{{url('/groups/edit/'.$group->id)}}" class="btn btn-primary m-1">
+                                        Modifier {{$group->name}}
+                                    </a>
                                 @elseif($issubscribed != null && $issubscribed)
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
