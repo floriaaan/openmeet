@@ -63,9 +63,9 @@ class EventController extends Controller
 
                 if ($user->defaultnotif && ($user->typenotif == 2 || $user->typenotif == 3)) {
                     Mail::to($user->email)
-                        ->send(new EventCreated($event));
+                        ->send(new EventCreated((new Event)->getOne($event->id)));
                 } elseif ($user->defaultnotif && ($user->typenotif == 1 || $user->typenotif == 3)) {
-                    //PUSH
+                    //TODO:PUSH
                 }
 
             }

@@ -19,7 +19,7 @@ class EventCreated extends Mailable
      *
      * @param Event $event
      */
-    public function __construct(Event $event)
+    public function __construct($event)
     {
         $this->event = $event;
     }
