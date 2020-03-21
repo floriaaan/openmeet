@@ -63,7 +63,7 @@ class ApiController extends Controller
             $request = [
                 'USER' => 'anonymous',
                 'ID' => ['anonymous', $token],
-                'AccessTo' => 'UserList',
+                'AccessTo' => 'GroupsList',
                 'Status' => 'denied'
             ];
 
@@ -90,7 +90,7 @@ class ApiController extends Controller
             $request = [
                 'USER' => 'anonymous',
                 'ID' => ['anonymous', $token],
-                'AccessTo' => 'UserList',
+                'AccessTo' => 'EventsList',
                 'Status' => 'denied'
             ];
 
@@ -146,7 +146,7 @@ class ApiController extends Controller
             $request = [
                 'USER' => $user->fname . ' ' . $user->lname,
                 'ID' => [$user->id, $token],
-                'AccessTo' => 'UserList',
+                'AccessTo' => 'UsersList',
                 'Status' => 'granted'
             ];
 
@@ -158,7 +158,7 @@ class ApiController extends Controller
             $request = [
                 'USER' => $user->fname . ' ' . $user->lname,
                 'ID' => [$user->id, $token],
-                'AccessTo' => 'UserList',
+                'AccessTo' => 'UsersList',
                 'Status' => 'denied'
             ];
 
@@ -169,7 +169,7 @@ class ApiController extends Controller
             $request = [
                 'USER' => 'anonymous',
                 'ID' => ['anonymous', $token],
-                'AccessTo' => 'UserList',
+                'AccessTo' => 'UsersList',
                 'Status' => 'denied'
             ];
 
