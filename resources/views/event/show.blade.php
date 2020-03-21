@@ -74,7 +74,7 @@
                                     </a>
                                 @endif
                                 <div class="mx-2">
-                                    @if($isparticipating != null && $isparticipating)
+                                    @if($isparticipating ?? '' != null && $isparticipating ?? '')
                                         <a class="btn btn-danger" style="color: #fff"
                                            onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
                                             <i class="fas fa-times"></i> Ne participe plus

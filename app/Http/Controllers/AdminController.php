@@ -179,6 +179,12 @@ class AdminController extends Controller
             Setting(['openmeet.robots' => false]);
         }
 
+        if (isset($post['apidoc']) && $post['apidoc'] == "on") {
+            Setting(['openmeet.apidoc' => true]);
+        } else {
+            Setting(['openmeet.apidoc' => false]);
+        }
+
         return redirect('/admin');
     }
 

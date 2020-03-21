@@ -128,19 +128,33 @@
                     <h4 id="privacy" class="my-5">Confidentialité</h4>
                     <form action="/admin/edit/privacy" method="POST">
                         @csrf
-                        <div class="row justify-content-between">
+                        <div class="row">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="robots" id="robots"
-                                       @if(Setting('openmeet.robots'))checked @endif>
+                                       @if(Setting('openmeet.robots')) checked @endif>
                                 <label class="custom-control-label" for="robots">
                                     Visible sur Google (fichier robots.txt)
                                 </label>
                             </div>
+                        </div>
 
+                        <div class="row mt-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="apidoc" id="apidoc"
+                                       @if(Setting('openmeet.apidoc')) checked @endif>
+                                <label class="custom-control-label" for="apidoc">
+                                    Activer l'APIDoc (<code>URL : '/doc'</code>)
+                                    <small class="text-muted font-weight-bolder">Attention toutes les routes seront affichées !</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end mt-1">
                             <button type="submit" class="btn btn-primary">
                                 Valider les modifications
                             </button>
                         </div>
+
                     </form>
 
 

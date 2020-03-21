@@ -14,6 +14,11 @@
 
 Auth::routes();
 
+if(Setting('openmeet.apidoc')) {
+    \Mpociot\ApiDoc\ApiDoc::routes();
+}
+
+
 //HOME Routes
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@home')->name('home');
