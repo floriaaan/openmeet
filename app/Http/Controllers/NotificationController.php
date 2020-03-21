@@ -26,18 +26,7 @@ class NotificationController extends Controller
 
     }
 
-    public static function CreateNotification($type,$title, $userId, $content, $concerned)
-    {
-        $notif = new Notification();
-        $notif->title = $title;
-        $notif->user=$userId;
-        $notif->content=$content;
-        $notif->concerned=$concerned;
-        $notif->date= date('Y-m-d H:i:s');
-        $notif->type=$type;
 
-        $notif->push();
-    }
 
     public static function DeleteUselessNotification()
     {

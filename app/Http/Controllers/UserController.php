@@ -10,6 +10,7 @@ use App\Http\Requests\ReportRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Mail\EventCreated;
 use App\Message;
+use App\Notification;
 use App\Participation;
 use App\Signalement;
 use App\Subscription;
@@ -151,11 +152,36 @@ class UserController extends Controller
 
         $report->push();
 
+        $contentSplitted = mb_str_split($post['description']);
+        $contentExt = "";
+        $contentExtract = "";
+
+        if (count($contentSplitted) >= 50) {
+            for ($i = 0; $i < 50; $i++) {
+                {
+                    $contentExt = $contentExt . $contentSplitted[$i];
+                }
+                $contentExtract = $contentExt . ' ...';
+            }
+        } else {
+            $contentExtract = $post['description'];
+        }
+
+        foreach ((new User)->getAdmin() as $admin) {
+            (new Notification)->CreateNotification('rep',
+                'Signalement de ' . (new User)->getOne($post['concerned'])->fname . ' ' . (new User)->getOne($post['concerned'])->lname,
+                $admin->id,
+                'Contenu du signalement : ' .$contentExtract,
+                $report->id);
+        }
+
+
         return redirect('/');
 
     }
 
-    public function generateAPIToken($userID) {
+    public function generateAPIToken($userID)
+    {
         (new User)->createApiToken($userID);
         return redirect('/user/edit');
     }

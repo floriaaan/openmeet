@@ -213,4 +213,14 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getAdmin()
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('isadmin', '=', 1)
+            ->get();
+
+        return $query;
+    }
+
 }

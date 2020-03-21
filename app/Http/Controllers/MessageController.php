@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\MessageCreateRequest;
 use App\Message;
+use App\Notification;
 use App\Subscription;
 use App\User;
 use App\Participation;
@@ -49,7 +50,7 @@ class MessageController extends Controller
         $notifTitle='Nouveau message de '.auth()->user()->fname.' '.auth()->user()->lname;
         $notifContent = "Contenu du message : ".$contentExtract;
 
-        NotificationController::CreateNotification($notifType,$notifTitle,$message->receiver,$notifContent,$message->id);
+        (new Notification)->CreateNotification($notifType,$notifTitle,$message->receiver,$notifContent,$message->id);
 
             //TODO : envoyer un notification pour un message de groupe
 
