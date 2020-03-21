@@ -18,20 +18,19 @@ Route::post('/v1/session/unset/error', function (Request $request) {
     return Session()->write($request['sessionid'], ['error' => null]);
 });
 
-//Route::get('/v1/users/', 'ApiController@getUsers');
 
-
-Route::get('/v1/groups/', 'ApiController@getGroups');
+//ESSENTIALS
 Route::get('/v1/groups/subscribe/{userID}', 'ApiController@getSubscription');
 Route::post('/v1/groups/subscribe/', 'ApiController@toggleSubscription');
 Route::get('/v1/groups/tags/', 'ApiController@getTags');
-
-
-Route::get('/v1/events/', 'ApiController@getEvents');
 Route::post('/v1/events/location', 'ApiController@getELocation');
 
 
-Route::get('/v1/settings/', 'ApiController@getSettings');
+//NON ESSENTIALS (need ApiToken)
+Route::get('/v1/groups/{token}', 'ApiController@getGroups');
+Route::get('/v1/events/{token}', 'ApiController@getEvents');
+Route::get('/v1/settings/{token}', 'ApiController@getSettings');
+Route::get('/v1/users/{token}', 'ApiController@getUsers');
 
 
 

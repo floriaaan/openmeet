@@ -22,18 +22,19 @@ Route::post('/search', 'HomeController@search');
 
 
 //USER routes (auth on middleware)
-Route::get('/user/', 'UserController@index');
+Route::get('/user/', 'UserController@index')->middleware('auth');;
 Route::get('/user/show/{userID}', 'UserController@show');
-Route::get('/user/edit', 'UserController@editForm');
-Route::post('/user/edit', 'UserController@edit');
-Route::get('/user/ban/', 'UserController@ban');
-Route::get('/user/block/', 'UserController@block');
-Route::get('/user/report/{userID}', 'UserController@reportForm');
-Route::post('/user/report/', 'UserController@reportPost');
+Route::get('/user/edit', 'UserController@editForm')->middleware('auth');
+Route::post('/user/edit', 'UserController@edit')->middleware('auth');
+Route::get('/user/ban/', 'UserController@ban')->middleware('auth');
+Route::get('/user/block/', 'UserController@block')->middleware('auth');
+Route::get('/user/report/{userID}', 'UserController@reportForm')->middleware('auth');
+Route::post('/user/report/', 'UserController@reportPost')->middleware('auth');
 Route::get('/user/groups', 'SubscriptionController@showGroups');
 Route::get('/user/groups/remove/all', 'SubscriptionController@deleteAll')->middleware('auth');
 Route::get('/user/events', 'ParticipationController@showEvents');
 Route::get('/user/events/remove/all', 'ParticipationController@deleteAll')->middleware('auth');
+Route::get('/user/generate/API/{user_id}', 'UserController@generateAPIToken')->middleware('auth');
 
 //ADMIN Routes
 Route::get('/admin', 'AdminController@index');

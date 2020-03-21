@@ -6,7 +6,9 @@ use App\Event;
 use App\Group;
 use App\Subscription;
 use App\User;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
 {
@@ -44,24 +46,138 @@ class ApiController extends Controller
 
     }
 
-    public function getGroups()
+    public function getGroups($token)
     {
-        return (new Group)->getAll();
+        $user = (new User)->getToken($token);
+        if ($user != false) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'GroupsList',
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return (new Group)->getAll();
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'UserList',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json',json_encode($request).',');
+            return abort(404);
+        }
+
     }
 
-    public function getUsers()
+    public function getEvents($token)
     {
-        return (new User)->getAll();
+        $user = (new User)->getToken($token);
+        if ($user != false) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'EventsList',
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return (new Event)->getAll();
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'UserList',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json',json_encode($request).',');
+            return abort(404);
+        }
+
     }
 
-    public function getEvents()
+    public function getSettings($token)
     {
-        return (new Event)->getAll();
+        $user = (new User)->getToken($token);
+        if ($user != false && $user->isadmin == 1) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Settings',
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return Setting('');
+        } elseif ($user != false) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Settings',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json',json_encode($request).',');
+
+            return abort(404);
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'Settings',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request).',');
+            return abort(404);
+        }
+
     }
 
-    public function getSettings()
+    public function getUsers($token)
     {
-        return Setting('openmeet');
+        $user = (new User)->getToken($token);
+        if ($user != false && $user->isadmin == 1) {
+
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'UserList',
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request).',');
+
+            return (new User)->getAll();
+        } else if ($user != false) {
+
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'UserList',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json',json_encode($request).',');
+
+            return abort(404);
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'UserList',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json',json_encode($request).',');
+
+            return abort(404);
+        }
+
     }
 
     public function getELocation(Request $request)
@@ -85,7 +201,7 @@ class ApiController extends Controller
             $tag = str_replace('%20', ' ', $tag);
 
             $img = $json['status'] == "success" && isset($json['data']['result']['items'][0]) ? $json['data']['result']['items'][0]['media'] : "https://picsum.photos/200";
-                $result[] = ['tag' => $tag, 'img' => $img];
+            $result[] = ['tag' => $tag, 'img' => $img];
         }
 
         return $result;

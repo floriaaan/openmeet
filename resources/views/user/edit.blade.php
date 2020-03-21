@@ -37,6 +37,15 @@
 
                                 <input type="email" readonly value="{{auth()->user()->email}}" class="form-control">
 
+                                <hr class="mx-5 my-1">
+                                <h6 class="text-muted">Token API:</h6>
+                                @if(auth()->user()->apitoken != null)
+                                    <input type="text" readonly value="{{auth()->user()->apitoken}}"
+                                           class="form-control my-1">
+                                @else
+                                    <a href="{{url('/user/generate/API/'.auth()->id())}}"
+                                       class="btn btn-secondary my-1">Générer un token</a>
+                                @endif
 
                             </div>
                             <hr class="mx-5 my-3">

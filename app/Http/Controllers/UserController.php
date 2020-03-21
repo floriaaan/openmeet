@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     public function index()
@@ -153,5 +153,10 @@ class UserController extends Controller
 
         return redirect('/');
 
+    }
+
+    public function generateAPIToken($userID) {
+        (new User)->createApiToken($userID);
+        return redirect('/user/edit');
     }
 }

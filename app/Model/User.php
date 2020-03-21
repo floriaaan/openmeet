@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id', 'fname', 'lname', 'bdate', 'email', 'country',
         'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
-        'defaultnotif', 'typenotif', 'password'
+        'defaultnotif', 'typenotif', 'password', 'apitoken'
     ];
 
     /**
@@ -58,29 +58,27 @@ class User extends Authenticatable
 
     }
 
-    public function isBan($userId,$groupId)
+    public function isBan($userId, $groupId)
     {
 
         $query = DB::table('bans')
             ->select('*')
-            ->where('banned', '=', $userId )
-            ->where('banisher','=',$groupId)
+            ->where('banned', '=', $userId)
+            ->where('banisher', '=', $groupId)
             ->get();
         return $query->count() > 0;
     }
 
-    public function isBlock($userId,$blockId)
+    public function isBlock($userId, $blockId)
     {
 
         $query = DB::table('bans')
             ->select('*')
-            ->where('target', '=', $userId )
-            ->where('blocker','=',$blockId)
+            ->where('target', '=', $userId)
+            ->where('blocker', '=', $blockId)
             ->get();
         return $query->count() > 0;
     }
-
-
 
 
     public function getLimit($limit)
@@ -161,7 +159,7 @@ class User extends Authenticatable
 
     public function getLimitDesc($limit)
     {
-        $query=DB::table('users')
+        $query = DB::table('users')
             ->select('*')
             ->limit($limit)
             ->orderByDesc('id')
@@ -171,7 +169,8 @@ class User extends Authenticatable
         return $query;
     }
 
-    public function updateUser($user) {
+    public function updateUser($user)
+    {
 
         DB::table('users')
             ->where('id', $user->id)
@@ -188,6 +187,30 @@ class User extends Authenticatable
         DB::table('users')
             ->where('id', $user->id)
             ->update(['picrepo' => $user->picrepo]);
+    }
+
+    public function createApiToken($userID)
+    {
+        $token = random_bytes(32);
+        $token = sha1($token);
+
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['apitoken' => $token]);
+
+    }
+
+    public function getToken($token)
+    {
+        $query = DB::table('users')
+            ->where('apitoken', $token)
+            ->get();
+        if ($query != null) {
+            if (!empty($query) && isset($query[0]->isadmin)) {
+                return $query[0];
+            }
+        }
+        return false;
     }
 
 }

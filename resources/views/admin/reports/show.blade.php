@@ -53,7 +53,7 @@
                     <a class="btn btn-danger" style="color: white"
                        href="{{url('/admin/users/delete/'. $report['concerned']->id)}}">
                         <i class="fas fa-trash"></i>
-                        Désactiver {{$report['concerned']->fname}} {{$report['concerned']->lname}}
+                        Supprimer {{$report['concerned']->fname}} {{$report['concerned']->lname}}
                     </a>
 
                 </div>
