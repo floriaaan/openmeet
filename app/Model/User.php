@@ -223,4 +223,11 @@ class User extends Authenticatable
         return $query;
     }
 
+    public function updateAdmin($userID, $param)
+    {
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['isadmin' => $param ? 1 : 0]);
+    }
+
 }

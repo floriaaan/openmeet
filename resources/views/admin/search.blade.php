@@ -37,7 +37,7 @@
                     <input type="checkbox" checked class="custom-control-input" id="messages">
                     <label class="custom-control-label" for="messages">Messages</label>
                 </div>
-            </div>->
+            </div>-->
             <div class="col-lg-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" checked class="custom-control-input" id="signalements">

@@ -62,7 +62,7 @@
                         Evénements
                         <span class="badge badge-primary badge-pill">{{$eventCount}}</span>
                     </a>
-                    <!--<a class="list-group-item list-group-item-action" href="#gmessages">
+                <!--<a class="list-group-item list-group-item-action" href="#gmessages">
                         Messages de groupes
                         <span class="badge badge-primary badge-pill">{{$messageCount['forgroup']}}</span>
                     </a>-->
@@ -144,7 +144,8 @@
                                        @if(Setting('openmeet.apidoc')) checked @endif>
                                 <label class="custom-control-label" for="apidoc">
                                     Activer l'APIDoc (<code>URL : '/doc'</code>)
-                                    <small class="text-muted font-weight-bolder">Attention toutes les routes seront affichées !</small>
+                                    <small class="text-muted font-weight-bolder">Attention toutes les routes seront
+                                        affichées !</small>
                                 </label>
                             </div>
                         </div>
@@ -186,15 +187,20 @@
                                         <td>{{ $user->lname }}</td>
                                         <td>{{ $user->fname }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>@if($user->isadmin)
-                                                <span class="badge badge-pill badge-success">
-                                                <i class="fas fa-user-check"></i>
-                                            </span>
-                                            @else
-                                                <span class="badge badge-pill badge-danger">
-                                                <i class="fas fa-user-times"></i>
-                                            </span>
-                                            @endif
+                                        <td>
+                                            <a href="{{url('/admin/roles/'.$user->id)}}">
+                                                @if($user->isadmin)
+                                                    <span class="badge badge-pill badge-success">
+                                                        <i class="fas fa-user-check"></i>
+                                                        <small class="">Changer</small>
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-pill badge-danger">
+                                                        <i class="fas fa-user-times"></i>
+                                                        <small class="">Changer</small>
+                                                    </span>
+                                                @endif
+                                            </a>
                                         </td>
                                         <td>
 
@@ -370,226 +376,139 @@
                         <a href="{{url('/admin/blocks/')}}" class="btn btn-primary float-right">Voir plus</a>
                     </div>
 
-                    <!--<h4 id="messages" class="my-5">Messages des utilisateurs (10 derniers messages)</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Envoyé par</th>
-                                <th scope="col">Reçu par</th>
-                                <th scope="col">Contenu</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Lu</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if(!empty($messageList))
-
-                                @foreach($messageList as $message)
-                                    @if($message['msg']->forgroup == 0)
-                                        <tr>
-                                            <td>#{{ $message['msg']->id }}</td>
-                                            <td>{{ $message['sender']->fname }} {{ $message['sender']->lname }}</td>
-                                            <td>{{ $message['receiver']->fname }} {{ $message['receiver']->lname }}</td>
-                                            <td>{{ $message['msg']->content }}</td>
-                                            <td>{{ $message['msg']->date }}</td>
-                                            <td>
-                                                @if($message['msg']->isread)
-                                                    <span class="badge badge-pill badge-success">
-                                                        <i class="far fa-bookmark"></i> Lu
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-pill badge-danger">
-                                                        <i class="fas fa-bookmark"></i> Non lu
-                                                    </span>
-                                                @endif
-                                            </td>
-
-                                        </tr>
-
-                                    @endif
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-
-                <hr class="my-5">-->
-
-                <div>
-                    <h4 id="groups" class="my-5">Groupes (10 derniers groupes)</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Admin</th>
-                                <th scope="col">Créé le</th>
-
-                                <th scope="col">Actions</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if(!empty($groupList))
-
-                                @foreach($groupList as $group)
-
-                                    <tr>
-                                        <td>#{{ $group['group']->id }}</td>
-                                        <td>{{ $group['group']->name }}</td>
-                                        <td>{{ $group['admin']->fname }} {{ $group['admin']->lname }}</td>
-                                        <td>{{ $group['group']->datecreate }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success"
-                                                   href="/groups/show/{{ $group['group']->id }}">
-                                                    <i class="far fa-eye"></i>
-                                                </a>
-
-                                                <a class="btn btn-danger"
-                                                   href="/groups/delete/{{ $group['group']->id }}">
-                                                    <i class="fas fa-skull-crossbones"></i>
-                                                </a>
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                @endforeach
-                            @endif
-
-                            </tbody>
-                        </table>
-
-                        <a href="{{url('/admin/groups/')}}" class="btn btn-primary float-right">Voir plus</a>
-                    </div>
-
-                    <h4 id="events" class="my-5">Evénements (10 derniers événements)</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Organisateur</th>
-                                <th scope="col">Date de début</th>
-                                <th scope="col">Actions</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if(!empty($eventList))
-
-                                @foreach($eventList as $event)
-
-                                    <tr>
-                                        <td>#{{ $event['event']->id }}</td>
-                                        <td>{{ $event['event']->name }}</td>
-                                        <td>{{ $event['group']->name }}</td>
-                                        <td>{{ $event['event']->datefrom }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a class="btn btn-success"
-                                                   href="/events/show/{{ $event['event']->id }}">
-                                                    <i class="far fa-eye"></i>
-                                                </a>
-
-                                                <a class="btn btn-danger"
-                                                   href="/events/delete/{{ $event['event']->id }}">
-                                                    <i class="fas fa-skull-crossbones"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-                                @endforeach
-                            @endif
-
-                            </tbody>
-                        </table>
-
-                        <a href="{{url('/admin/events/')}}" class="btn btn-primary float-right">Voir plus</a>
-                    </div>
-
-                    <!--<h4 id="gmessages" class="my-5">Messages des groupes (10 derniers messages)</h4>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Envoyé par</th>
-                                <th scope="col">Reçu par</th>
-                                <th scope="col">Contenu</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Lu</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if(!empty($messageList))
-
-                                @foreach($messageList as $message)
-                                    @if($message['msg']->forgroup == 1)
-                                        <tr>
-                                            <td>#{{ $message['msg']->id }}</td>
-                                            <td>{{ $message['sender']->fname }} {{ $message['sender']->lname }}</td>
-                                            <td>{{ $message['receiver']->name }}</td>
-                                            <td>{{ $message['msg']->content }}</td>
-                                            <td>{{ $message['msg']->date }}</td>
-                                            <td>
-                                                @if($message['msg']->isread)
-                                                    <span class="badge badge-pill badge-success">
-                                                        <i class="far fa-bookmark"></i> Lu
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-pill badge-danger">
-                                                        <i class="fas fa-bookmark"></i> Non lu
-                                                    </span>
-                                                @endif
-                                            </td>
-
-                                        </tr>
-
-                                    @endif
-                                @endforeach
-                            @endif
-
-                            </tbody>
-                        </table>
-                    </div>-->
-
-                    <hr class="my-4">
-                    <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
                     <div>
-                        <form action="/admin/search" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-9">
-                                    <input type="text" required name="search" class="form-control"
-                                           placeholder="Rechercher">
-                                </div>
-                                <div class="col-3">
-                                    <button type="submit" class="btn btn-secondary">Rechercher</button>
-                                </div>
-                            </div>
+                        <h4 id="groups" class="my-5">Groupes (10 derniers groupes)</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Admin</th>
+                                    <th scope="col">Créé le</th>
 
-                        </form>
+                                    <th scope="col">Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(!empty($groupList))
+
+                                    @foreach($groupList as $group)
+
+                                        <tr>
+                                            <td>#{{ $group['group']->id }}</td>
+                                            <td>{{ $group['group']->name }}</td>
+                                            <td>{{ $group['admin']->fname }} {{ $group['admin']->lname }}</td>
+                                            <td>{{ $group['group']->datecreate }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class="btn btn-success"
+                                                       href="/groups/show/{{ $group['group']->id }}">
+                                                        <i class="far fa-eye"></i>
+                                                    </a>
+
+                                                    <a class="btn btn-danger"
+                                                       href="/groups/delete/{{ $group['group']->id }}">
+                                                        <i class="fas fa-skull-crossbones"></i>
+                                                    </a>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
+                                    @endforeach
+                                @endif
+
+                                </tbody>
+                            </table>
+
+                            <a href="{{url('/admin/groups/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        </div>
+
+                        <h4 id="events" class="my-5">Evénements (10 derniers événements)</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Organisateur</th>
+                                    <th scope="col">Date de début</th>
+                                    <th scope="col">Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(!empty($eventList))
+
+                                    @foreach($eventList as $event)
+
+                                        <tr>
+                                            <td>#{{ $event['event']->id }}</td>
+                                            <td>{{ $event['event']->name }}</td>
+                                            <td>{{ $event['group']->name }}</td>
+                                            <td>{{ $event['event']->datefrom }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class="btn btn-success"
+                                                       href="/events/show/{{ $event['event']->id }}">
+                                                        <i class="far fa-eye"></i>
+                                                    </a>
+
+                                                    <a class="btn btn-danger"
+                                                       href="/events/delete/{{ $event['event']->id }}">
+                                                        <i class="fas fa-skull-crossbones"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                    @endforeach
+                                @endif
+
+                                </tbody>
+                            </table>
+
+                            <a href="{{url('/admin/events/')}}" class="btn btn-primary float-right">Voir plus</a>
+                        </div>
+
+
+                        <hr class="my-4">
+                        <h4 id="search" class="my-5">Recherche super-utilisateur</h4>
+                        <div>
+                            <form action="/admin/search" method="POST" class="form-inline justify-content-between">
+                                @csrf
+
+
+                                <input type="text" required name="search" class="form-control w-50 mx-1"
+                                       placeholder="Rechercher">
+
+                                <button type="submit" class="btn btn-secondary mx-1">Rechercher</button>
+
+
+                            </form>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
+
     </div>
-
-
 
 @endsection
 
+@section('css')
+    <style>
+        .row {
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+
+    </style>
+
+@endsection

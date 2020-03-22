@@ -277,7 +277,7 @@ class AdminController extends Controller
     {
         $user = (new User)->getOne($userID);
         if ($user->isadmin) { //TODO:Proposer une passation de pouvoir
-            return view('admin.users.deleteadmin');
+            return view('admin.users.deleteadmin', ['user' => $user]);
         }
         return view('admin.users.deleteconfirmation', ['user' => $user]);
     }
@@ -350,7 +350,7 @@ class AdminController extends Controller
         foreach ($listSignalement as $signalement) {
             $result[] = ['content' => $signalement, 'type' => 'signalement',
                 'sender' => (new User)->getOne($signalement->submitter),
-                'receiver' => (new User)->getOne($signalement->receiver),
+                'receiver' => (new User)->getOne($signalement->concerned),
             ];
         }
 
@@ -379,5 +379,19 @@ class AdminController extends Controller
         file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);
 
         return redirect('/admin');
+    }
+
+    public function rolesForm($userID) {
+        return view('admin.users.roles', ['user' => (new User)->getOne($userID)]);
+    }
+
+    public function rolesPost(Request $request) {
+        $post = $request->input();
+
+        $admin = isset($post['admin']) && $post['admin'] == 'on' ? true : false;
+
+        (new User)->updateAdmin($post['user'], $admin);
+
+        return redirect('/admin/');
     }
 }

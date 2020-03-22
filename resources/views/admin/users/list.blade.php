@@ -37,15 +37,20 @@
                         <td>{{ $user->fname }}</td>
                         <td>{{ $user->lname }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>@if($user->isadmin)
-                                <span class="badge badge-pill badge-success">
-                                                <i class="fas fa-user-check"></i>
-                                            </span>
-                            @else
-                                <span class="badge badge-pill badge-danger">
-                                                <i class="fas fa-user-times"></i>
-                                            </span>
-                            @endif
+                        <td>
+                            <a href="{{url('/admin/roles/'.$user->id)}}">
+                                @if($user->isadmin)
+                                    <span class="badge badge-pill badge-success">
+                                                        <i class="fas fa-user-check"></i>
+                                                        <small class="">Changer</small>
+                                                    </span>
+                                @else
+                                    <span class="badge badge-pill badge-danger">
+                                                        <i class="fas fa-user-times"></i>
+                                                        <small class="">Changer</small>
+                                                    </span>
+                                @endif
+                            </a>
                         </td>
                         <td>
 

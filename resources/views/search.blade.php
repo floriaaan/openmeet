@@ -31,7 +31,7 @@
 
                 @if($sR['type'] == 'group')
                     <div class="p-3" id="group-{{$sR['content']->id}}">
-                        <div class="card rounded hvr-grow shadow-sm">
+                        <div class="card rounded hvr-grow shadow-sm border-group">
 
                             @if($sR['content']->picname != null)
                                 <a href="{{url('/groups/show')}}/{{$sR['content']->id}}"
@@ -76,7 +76,7 @@
                     <a href="{{url('/events/show')}}/{{$sR['content']->id}}" id="event-{{$sR['content']->id}}"
                        style="text-decoration: none; color: inherit;">
                         <div class="p-3">
-                            <div class="card rounded shadow-sm hvr-grow">
+                            <div class="card rounded shadow-sm hvr-grow border-event">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$sR['content']->name}}</h5>
                                     <p class="card-text">{!! str_replace('\\n','<br>',$sR['content']->description) !!}</p>
@@ -210,6 +210,14 @@
             100% {
                 background-position: -2800px 0;
             }
+        }
+
+        .border-group {
+            border-bottom: 0.25rem solid var(--openmeet) !important;
+        }
+
+        .border-event {
+            border-bottom: 0.25rem solid #49bd3a !important;
         }
 
 
