@@ -303,7 +303,7 @@ class AdminController extends Controller
     public function deleteUserPost(DeleteUserRequest $request)
     {
         $post = $request->input();
-        (new User)->remove($post['user']);
+        (new User)->disable($post['user']);
 
 
         return redirect('/admin');

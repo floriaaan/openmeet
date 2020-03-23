@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id', 'fname', 'lname', 'bdate', 'email', 'country',
         'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
-        'defaultnotif', 'typenotif', 'password', 'apitoken'
+        'defaultnotif', 'typenotif', 'password', 'apitoken', 'disabled'
     ];
 
     /**
@@ -140,6 +140,8 @@ class User extends Authenticatable
 
     public function remove($userID)
     {
+
+
         try {
             $query = DB::table('users')
                 ->delete($userID);
@@ -239,6 +241,14 @@ class User extends Authenticatable
         $query = DB::table('users')
             ->where('id', $userID)
             ->update(['isadmin' => $param ? 1 : 0]);
+    }
+
+    public function disable($userID)
+    {
+        $user = (new User)->getOne($userID);
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['disabled' => !($user->disabled)]);
     }
 
 }

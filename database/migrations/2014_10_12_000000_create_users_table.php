@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('picname', 255)->nullable();
             $table->string('apitoken', 255)->nullable();
             $table->boolean('isadmin')->default(0);
+            $table->boolean('disabled')->default(0);
             $table->boolean('defaultnotif')->default(1);
             $table->integer('typenotif')->default(2);
 
