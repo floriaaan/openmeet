@@ -11,7 +11,7 @@ DB_HOST=mysql-langlois-william.alwaysdata.net
 DB_PORT=3306
 DB_DATABASE=langlois-william_openmeet
 DB_USERNAME=192615_openmeet
-DB_PASSWORD=sWfNF!E4S33C!!82d::!Xv:6a4a8hv
+DB_PASSWORD=
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file

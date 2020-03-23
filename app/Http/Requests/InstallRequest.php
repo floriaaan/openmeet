@@ -26,10 +26,10 @@ class InstallRequest extends FormRequest
         return [
             'iName' => 'required|max:40|profanity|',
             'iSlogan' => 'max:40|profanity|',
-            'iDBHost' => 'required',
+            /*'iDBHost' => 'required',
             'iDBName' => 'required',
             'iDBUser' => 'required',
-            'iDBPass' => '',
+            'iDBPass' => '',*/
             'email' => 'required|email',
             'password' => 'required|min:3',
             'password-confirm' => 'required|same:password|min:3',

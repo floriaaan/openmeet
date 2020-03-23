@@ -11,11 +11,14 @@
             <div class="container-fluid h-100 p-5 position-relative">
                 <div class="card mx-auto shadow-lg p-5 w-75"
                      id="card-general">
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Paramètres généraux
+                        </h3>
+                    </div>
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Paramètres généraux
-                    </h3>
 
                     <hr class="mx-5 my-3">
                     <div class="form-group">
@@ -80,13 +83,16 @@
                 <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-database">
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Base de données
-                    </h3>
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Base de données
+                        </h3>
+                    </div>
 
                     <hr class="mx-5 my-3">
-                    <div class="form-group">
+                <!--<div class="form-group">
                         <label for="iDBHost" class="">Hôte de la base de données</label>
                         <input class="form-control @error('iDBHost') is-invalid @enderror"
                                name="iDBHost" type="text"
@@ -95,8 +101,8 @@
                                required id="iDBHost"
                                autocomplete="off">
                         @error('iDBHost')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
                     </div>
@@ -110,8 +116,8 @@
                                required id="iDBName"
                                autocomplete="off">
                         @error('iDBName')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
                     </div>
@@ -125,8 +131,8 @@
                                required id="iDBUser"
                                autocomplete="off">
                         @error('iDBUser')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
                     </div>
@@ -140,20 +146,27 @@
                                id="iDBPass"
                                autocomplete="off">
                         @error('iDBPass')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="iDBMigrate" id="iDBMigrate">
-                            <label class="custom-control-label" for="iDBMigrate">Mettre à zéro la base de données <code>(artisan
-                                    migrate)</code></label>
-                        </div>
 
-                    </div>
+                            <input type="checkbox" class="" name="iDBMigrate" id="iDBMigrate" checked>
+                            <label class="" for="iDBMigrate">Mettre à zéro la base de données <code>(artisan
+                                    migrate)</code></label>
+
+
+                    </div>-->
+
+                    <p class="lead p-5">
+                        N'oubliez pas de changer les paramètres liés à la base de données dans le
+                        fichier <code>.env</code>
+                        <br>
+                        Il faut aussi que vous executiez cette commande : <code>php artisan migrate:fresh</code>
+                    </p>
 
 
                     <hr class="mx-5 my-3">
@@ -180,10 +193,13 @@
                 <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-admin">
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Administration
-                    </h3>
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Administration
+                        </h3>
+                    </div>
 
                     <hr class="mx-5 my-3">
                     <div class="form-group row">
@@ -350,7 +366,7 @@
 
         $('#btn-database-next').click(function (e) {
             e.preventDefault();
-            if ($('#iDBHost').val() !== '' && $('#iDBName').val() !== '' && $('#iDBUser').val() !== '') {
+            /*if ($('#iDBHost').val() !== '' && $('#iDBName').val() !== '' && $('#iDBUser').val() !== '') {
                 if ($('#iDBHost').hasClass('is-invalid')) {
                     $('#iDBHost').removeClass('is-invalid')
                 }
@@ -377,7 +393,11 @@
                 if ($('#iDBUser').val() === '') {
                     $('#iDBUser').toggleClass('is-invalid')
                 }
-            }
+            }*/
+            $('#card-database').fadeOut(500);
+            $('#card-database').toggleClass('d-none');
+            $('#card-admin').toggleClass('d-none');
+            $('#card-admin').fadeIn(500);
         });
 
         $('#btn-admin-previous').click(function (e) {
