@@ -8,7 +8,7 @@
     <form action="{{url('/install')}}" method="POST" id="form">
         @csrf
         <div class="max-height wall-white">
-            <div class="container-fluid h-100 p-5 position-relative">
+            <div class="container-fluid h-100 p-5 position-relative" >
                 <div class="card mx-auto shadow-lg p-5 w-75"
                      id="card-general">
                     <div class="row justify-content-between">
@@ -408,14 +408,14 @@
             $('#card-database').fadeIn(500);
         });
 
-        $('#btn-admin-next').click(function (e) {
+        /*$('#btn-admin-next').click(function (e) {
             e.preventDefault();
             $('#card-admin').animate({
                 top: '+=3000'
             }, 1000, function () {
                 $('#form').submit();
             })
-        });
+        });*/
 
 
         function shake(div) {

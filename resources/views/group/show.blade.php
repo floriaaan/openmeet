@@ -52,7 +52,7 @@
                         <div class="h-50 p-3" style="height: 30vh!important; overflow-y: scroll!important;">
 
 
-                            @foreach($listEvent as $event)
+                            @forelse($listEvent as $event)
                                 <a href="{{url('/events/show')}}/{{$event->id}}"
                                    style="text-decoration: none; color: inherit;">
                                     <div class="p-4 shadow-sm mt-2">
@@ -79,7 +79,27 @@
                                         @endif
                                     </div>
                                 </a>
-                            @endforeach
+                            @empty
+                                @if((new \App\Group)->getAdmin($group->id)->id == auth()->id())
+                                    <div class="p-3 shadow-sm mt-2">
+                                        <div class="card-body text-center display-4">
+                                            Il n'y a pas encore d'événements
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <a href="{{url('/events/create')}}"
+                                               class="btn btn-primary mx-auto">
+                                                Créer votre premier événement
+                                            </a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="p-1 shadow-sm mt-2">
+                                        <div class="card-body text-center display-4">
+                                            Le groupe n'a pas encore d'événement.
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforelse
                         </div>
 
                         <hr class="mx-4 my-2">
