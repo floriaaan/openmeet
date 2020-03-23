@@ -111,7 +111,15 @@ class UserController extends Controller
         }
 
         if ($request->file('uPic') != null) {
-            unlink('public/upload/image/' . $user->picrepo . '/' . $user->picname);
+            if(!Storage::exists('public/upload/image/' . $user->picrepo . '/' . $user->picname)) {
+                Storage::delete('public/upload/image/' . $user->picrepo . '/' . $user->picname);
+            }
+            if(!Storage::exists('public/upload/image/user')) {
+                Storage::makeDirectory('public/upload/image/user');
+            }
+            if(!Storage::exists('public/upload/image/user/'.$user->id)){
+                Storage::makeDirectory('public/upload/image/user/'.$user->id);
+            }
 
             $uploadedFile = $request->file('uPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();

@@ -32,7 +32,6 @@ class ResetPasswordController extends Controller
 
     public function reset(Request $request)
     {
-        var_dump('coucou');
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         // Here we will attempt to reset the user's password. If it is successful we

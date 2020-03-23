@@ -60,16 +60,18 @@
                         @if(auth()->user()->isadmin)
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
-                            <a class="dropdown-item" href="{{url('/admin/')}}"><i class="fas fa-tools"></i> Panneau d'administration</a>
+                            <a class="dropdown-item" href="{{url('/admin/')}}">
+                                <i class="fas fa-tools"></i>
+                                Panneau d'administration
+                            </a>
+                        @endif
+                        @if(!empty((new \App\Group)->getByAdmin(auth()->id())))
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="{{url('/groups/admin/')}}"><i class="fas fa-tools"></i> Panneau de
-                                modération</a>
-                        @else
-                            <div class="dropdown-divider"></div>
-                            <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="{{url('/groups/admin/')}}"><i class="fas fa-tools"></i> Panneau de
-                                modération</a>
+                            <a class="dropdown-item" href="{{url('/groups/admin/')}}">
+                                <i class="fas fa-tools"></i>
+                                Panneau de modération
+                            </a>
                         @endif
 
                     </div>

@@ -56,6 +56,15 @@ class EventController extends Controller
         }
 
         if ($request->file('ePic') != null) {
+            if(!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
+                Storage::delete('public/upload/image/' . $event->picrepo . '/' . $event->picname);
+            }
+            if(!Storage::exists('public/upload/image/event')) {
+                Storage::makeDirectory('public/upload/image/event');
+            }
+            if(!Storage::exists('public/upload/image/event/'.$event->id)){
+                Storage::makeDirectory('public/upload/image/event/'.$event->id);
+            }
             $uploadedFile = $request->file('ePic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
@@ -71,7 +80,6 @@ class EventController extends Controller
         }
 
 
-        //var_dump((new Subscription)->getGroup($post['eGroup']));
         if ($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
             foreach ($usersSub as $userSub) {
@@ -138,8 +146,8 @@ class EventController extends Controller
         $event = (new Event)->getOne($post['eventID']);
 
         $event->name = $post['eName'];
-        $event->dateFrom = $post['eDateFrom']; //TODO: fix
-        $event->dateTo = $post['eDateTo']; //TODO: fix
+        $event->dateFrom = $post['eDateFrom'];
+        $event->dateTo = $post['eDateTo'];
         $event->numstreet = $post['eNumStreet'];
         $event->street = $post['eStreet'];
         $event->city = $post['eCity'];
@@ -150,6 +158,15 @@ class EventController extends Controller
         $event->description = $post['eDesc'];
 
         if ($request->file('ePic') != null) {
+            if(!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
+                Storage::delete('public/upload/image/' . $event->picrepo . '/' . $event->picname);
+            }
+            if(!Storage::exists('public/upload/image/event')) {
+                Storage::makeDirectory('public/upload/image/event');
+            }
+            if(!Storage::exists('public/upload/image/event/'.$event->id)){
+                Storage::makeDirectory('public/upload/image/event/'.$event->id);
+            }
             $uploadedFile = $request->file('ePic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 

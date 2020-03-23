@@ -66,11 +66,12 @@
 
                 </div>
             </div>
+            <hr class="my-4 mx-3">
         </div>
 
     </div>
 
-    <hr class="my-4 mx-5">
+
 
     <div class="container-fluid mt-5" id="containerEvents">
 

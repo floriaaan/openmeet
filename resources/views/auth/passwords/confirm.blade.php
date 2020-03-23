@@ -1,5 +1,9 @@
 @extends('layouts.index')
 
+@section('title')
+    Réinitialisation du mot de passe
+@endsection
+
 @section('body')
     <div class="container">
         <div class="row justify-content-center">

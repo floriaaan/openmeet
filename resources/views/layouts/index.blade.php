@@ -132,7 +132,7 @@
 <script src="{{ asset('js/share.js') }}"></script>
 <script>
 
-    $('#alert-close').click(function () {
+    /*$('#alert-close').click(function () {
         $.ajax({
             url: '{{url('/api/v1/session/unset/error')}}',
             type: 'post',
@@ -144,7 +144,7 @@
                 console.log('error')
             }
         })
-    });
+    });*/
 
 
     function displayForm() {

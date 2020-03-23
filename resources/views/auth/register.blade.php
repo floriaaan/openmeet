@@ -51,24 +51,6 @@
 
 
                 <div class="form-group ">
-                    <label for="bdate">{{ __('Date de naissance') }}</label>
-
-
-                    <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror" name="bdate"
-                           value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
-                    <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
-                        &#128286;</small>
-
-                    @error('bdate')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                    @enderror
-
-                </div>
-
-
-                <div class="form-group ">
                     <label for="email">{{ __('Adresse mail') }}</label>
 
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -87,7 +69,10 @@
                         <label for="password">{{ __('Mot de passe') }}</label>
                         <input id="password" type="password"
                                class="form-control @error('password') is-invalid @enderror"
-                               name="password" required autocomplete="new-password">
+                               name="password" required autocomplete="new-password" aria-describedby="passwordHelp">
+                        <small id="passwordHelp" class="form-text text-muted">
+                            8 caractères minimum.
+                        </small>
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -107,6 +92,22 @@
 
                 </div>
 
+                <div class="form-group ">
+                    <label for="bdate">{{ __('Date de naissance') }}</label>
+
+
+                    <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror" name="bdate"
+                           value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
+                    <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
+                        &#128286;</small>
+
+                    @error('bdate')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+
+                </div>
 
                 <button type="submit" class="btn btn-xl rounded-pill btn-primary w-50">
                     {{ __('S\'inscrire') }}
@@ -131,6 +132,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('js')
+    <script src="{{url('/js/zxcvbn.js')}}"></script>
+    <script>
+        console.log(zxcvbn());
+
+    </script>
 @endsection
 
 @section('css')

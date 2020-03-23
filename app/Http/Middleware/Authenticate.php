@@ -21,12 +21,12 @@ class Authenticate extends Middleware
     {
 
         if (!auth()->check()) {
-            Session::put('error','Vous n\'êtes pas connecté(e).');
+            $request->session()->flash('error','Vous n\'êtes pas connecté(e).');
             return route('home');
         }
 
         if (auth()->user()->disabled) {
-            Session::put('error','Vous avez été désactivé(e).');
+            $request->session()->flash('error','Vous avez été désactivé(e).');
             return route('home');
         }
     }

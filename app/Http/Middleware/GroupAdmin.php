@@ -20,7 +20,7 @@ class GroupAdmin
         if ((auth()->check() && !empty((new Group)->getByAdmin(auth()->id()))) || (auth()->check() && auth()->user()->isadmin)) {
             return $next($request);
         }
-        Session::put('error', 'Vous n\'êtes pas administrateur de groupe.');
+        $request->session()->flash('error','Vous n\'êtes pas administrateur de groupe.');
 
         return redirect('/');
 

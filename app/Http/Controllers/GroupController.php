@@ -45,6 +45,16 @@ class GroupController extends Controller
         }
         $group->push();
         if ($request->file('gPic') != null) {
+            if(!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+                Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            }
+            if(!Storage::exists('public/upload/image/group')) {
+                Storage::makeDirectory('public/upload/image/group');
+            }
+            if(!Storage::exists('public/upload/image/group/'.$group->id)){
+                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            }
+
             $uploadedFile = $request->file('gPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
@@ -137,7 +147,16 @@ class GroupController extends Controller
         $group->admin = $post['gAdminID'];
 
         if ($request->file('gPic') != null) {
-            unlink('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            if(!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+                Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            }
+            if(!Storage::exists('public/upload/image/group')) {
+                Storage::makeDirectory('public/upload/image/group');
+            }
+            if(!Storage::exists('public/upload/image/group/'.$group->id)){
+                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            }
+
             $uploadedFile = $request->file('gPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
