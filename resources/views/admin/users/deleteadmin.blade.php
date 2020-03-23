@@ -20,7 +20,7 @@
 
                 <a href="{{url('/admin')}}" class="btn btn-secondary mx-2"> <i class="fas fa-arrow-right"></i>
                     Retour</a>
-                <a href="{{url('/admin/roles/')}}" class="btn btn-danger mx-2"> <i class="fas fa-user-times"></i>
+                <a href="{{url('/admin/roles/'.$user->id)}}" class="btn btn-danger mx-2"> <i class="fas fa-user-times"></i>
                     Deshériter {{$user->fname}} {{$user->lname}}</a>
 
             </div>

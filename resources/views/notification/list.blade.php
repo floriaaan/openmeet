@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    {{count($notifications)}} {{str_plural('notification', count($notifications))}} non {{str_plural('lue', count($notifications))}}
+@endsection
+
 @section('content')
 
     <div class="container p-5 h-100">
@@ -330,7 +334,7 @@
                 @endif
             @endif
         @empty
-            <p>Aucune notification non lue.</p>
+            <p class="lead text-center">Aucune notification non lue.</p>
         @endforelse
     </div>
 @endsection
@@ -341,6 +345,7 @@
         .hvr-grow {
             display: flex !important;
         }
+
         #a811ccc3-bd41-4105-81cf-f3cac7d18e76 {
             width: 150px;
             height: 150px;

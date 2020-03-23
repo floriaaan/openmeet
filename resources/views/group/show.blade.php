@@ -82,8 +82,8 @@
                             @empty
                                 @if((new \App\Group)->getAdmin($group->id)->id == auth()->id())
                                     <div class="p-3 shadow-sm mt-2">
-                                        <div class="card-body text-center display-4">
-                                            Il n'y a pas encore d'événements
+                                        <div class="card-body text-center">
+                                            <p class="lead">Il n'y a pas encore d'événements</p>
                                         </div>
                                         <div class="row justify-content-center">
                                             <a href="{{url('/events/create')}}"
@@ -94,7 +94,7 @@
                                     </div>
                                 @else
                                     <div class="p-1 shadow-sm mt-2">
-                                        <div class="card-body text-center display-4">
+                                        <div class="card-body text-center lead">
                                             Le groupe n'a pas encore d'événement.
                                         </div>
                                     </div>
