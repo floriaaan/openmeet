@@ -44,11 +44,11 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title display-4"><?php echo e($group->name); ?></h5>
-                        <?php if($group->desc != null): ?><h5
-                            class="text-muted ml-3 blockquote-footer"><?php echo e($group->desc); ?></h5><?php endif; ?>
+                        <?php if($group->desc != null): ?><p
+                            class="text-muted ml-3 blockquote-footer"><?php echo str_replace('\\n','<br>',$group->desc); ?></p><?php endif; ?>
                         <hr class="mx-4 my-4">
 
-                        <div class="h-50 p-3" style="height: 40vh!important; overflow-y: scroll!important;">
+                        <div class="h-50 p-3" style="height: 30vh!important; overflow-y: scroll!important;">
 
 
                             <?php $__currentLoopData = $listEvent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -56,7 +56,7 @@
                                    style="text-decoration: none; color: inherit;">
                                     <div class="p-4 shadow-sm mt-2">
                                         <h5><?php echo e($event->name); ?></h5>
-                                        <p class="text-muted"><?php echo e($event->description); ?></p>
+                                        <p class="text-muted"><?php echo str_replace('\n','</p><p class="text-muted">',$event->description); ?></p>
                                         <p style="text-transform: capitalize">
                                             à <?php echo e($event->numstreet); ?> <?php echo e($event->street); ?></p>
                                         <p><?php echo e($event->zip); ?> - <?php echo e($event->city); ?></p>
@@ -99,9 +99,23 @@
                             <p class="card-text"><small class="text-muted">Créé le <?php echo e($group->datecreate); ?></small></p>
                             <div class="float-right mr-5">
                                 <?php if($group->admin == auth()->id()): ?>
-                                    <small class="text-muted blockquote-footer">Vous êtes administrateur du
-                                        groupe.</small>
-                                <?php elseif($issubscribed != null && $issubscribed): ?>
+                                    <div class="row justify-content-end">
+                                        <small class="text-muted blockquote-footer m-1">
+                                            Vous êtes administrateur du groupe.
+                                        </small>
+                                        <a href="<?php echo e(url('/groups/delete/'.$group->id)); ?>" class="btn btn-danger m-1">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Supprimer <?php echo e($group->name); ?>
+
+                                        </a>
+                                        <a href="<?php echo e(url('/groups/edit/'.$group->id)); ?>" class="btn btn-primary m-1">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Modifier <?php echo e($group->name); ?>
+
+                                        </a>
+                                    </div>
+
+                                <?php elseif($issubscribed ?? '' != null && $issubscribed ?? ''): ?>
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

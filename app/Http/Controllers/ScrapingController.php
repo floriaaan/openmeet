@@ -39,7 +39,7 @@ class ScrapingController extends Controller
         $regexGroupDesc = '#<\/p><p class="group-description margin--bottom" (.*?)>(.*?)<\/p><\/div>#';
         preg_match($regexGroupDesc,$pageContent,$scrapGroupDesc);
         $groupDesc = $scrapGroupDesc[2];
-        $groupDesc = str_replace('<br />','\n',$groupDesc);
+        $groupDesc = str_replace('<br />','<br>',$groupDesc);
         //dump($groupDesc);
         //===========================================================================//D
         //========================Tags du groupe======================//
@@ -92,7 +92,7 @@ class ScrapingController extends Controller
         $regexEventDesc = '#<div class="event-description runningText"><p>(.*)<\/p><\/div>#Ui';
         preg_match($regexEventDesc,$pageContent,$scrapEventDesc);
         $eventDesc = $scrapEventDesc[1];
-        $eventDesc = str_replace('<br/>','\n',$eventDesc);
+        $eventDesc = str_replace('<br/>','<br>',$eventDesc);
         //dump($eventDesc);
         //===========================================================================//
         //====================Heure de début de l'évènement=================================//
@@ -185,7 +185,7 @@ class ScrapingController extends Controller
         {
             $eventVille =$scrapEventVille[1];
         }else {
-            $eventVille ="N/A";
+            $eventVille ="";
         }
         //dump($eventVille);
         //===========================================================================/
@@ -209,8 +209,8 @@ class ScrapingController extends Controller
             }
         }
         else{
-            $eventNumRue = "N/A";
-            $eventRue = "N/A";
+            $eventNumRue = "";
+            $eventRue = "";
         }
         //dump($eventNumRue);
         //dump($eventRue);

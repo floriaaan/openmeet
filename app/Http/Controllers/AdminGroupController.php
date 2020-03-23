@@ -126,19 +126,18 @@ class AdminGroupController extends Controller
         }
 
 
-        $subs = (new Subscription);
-        $countSub = $subs->getCount();
-        $rawListSub = $subs->getLimitDesc(10);
+        /* $subs = (new Subscription);
+         $rawListSub = $subs->getLimit(10);
+         $NameGroupG = $subs->getnameGroup();
+         $listSubG = [];
+         foreach ($rawListSub as $sub) {
+             $listSubG[] = [
+                 'lastsub' => $sub,
+                 'group' => $user->getOne($sub->id_group),
+                 'user' => $user->getOne($sub->id_user),
+             ];
 
-        $listSub = [];
-        foreach ($rawListSub as $sub) {
-            $listSub[] = [
-                'sub' => $sub,
-                'user' => $user->getOne($sub->user),
-                'group' => $groups->getOne($sub->group),
-            ];
-
-        }
+         }*/
 
         return view('admingroup.panelgestion', [
             'userList' => $listUser,
@@ -153,8 +152,7 @@ class AdminGroupController extends Controller
             'reportCount' => $countReport,
             'banList' => $listBan,
             'banCount' => $countBan,
-            'subList' => $listSub,
-            'subCount' => $countSub
+            'UserByGroup' => $UserByGroup
 
 
         ]);
@@ -164,7 +162,7 @@ class AdminGroupController extends Controller
 
     public function listSubscription()
     {
-        return view('admingroup.sublist', ['users' => (new Subscription())->getAll()]);
+        return view('admingroup.users.list', ['users' => (new User)->getAll()]);
     }
     public function listEvent()
     {
