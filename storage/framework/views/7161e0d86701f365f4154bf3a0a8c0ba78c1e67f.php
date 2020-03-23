@@ -23,7 +23,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo e($group->name); ?></h5>
-                            <h6 class="text-muted"><?php echo e($group->desc); ?></h6>
+                            <h6 class="text-muted"><?php echo str_replace('\\n','<br>',$group->desc); ?></h6>
                             <hr class="mx-4 my-4">
                             <div class="row p-1">
                                 <?php $__empty_1 = true; $__currentLoopData = (new \App\Group)->getTagsByGroup($group->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
