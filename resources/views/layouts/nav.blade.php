@@ -125,6 +125,19 @@
                                             </small>
                                         </footer>
                                     </a>
+                                @elseif($notif->type=='rep')
+                                    <a class="dropdown-item" href="#">
+                                        <h6 class="dropdown-header mb-1 font-weight-bold">
+                                            <i class="fas fa-shield-alt text-primary"></i> {{$notif->title}}</h6>
+                                        <p class="text-muted font-weight-light">{{$notif->content}}</p>
+                                        <hr class="my-4">
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">
+                                                créé à {{strftime("%R",strtotime($notif->date))}},
+                                                le <cite>{{strftime("%A %d %b %Y",strtotime($notif->date))}}</cite>
+                                            </small>
+                                        </footer>
+                                    </a>
                                 @elseif($notif->type=='eve')
                                     <a class="dropdown-item" href="#">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
