@@ -11,6 +11,7 @@ use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SearchRequest;
 use App\Message;
 use App\Signalement;
+use App\Subscription;
 use App\User;
 use DemeterChain\A;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class AdminController extends Controller
         $user = (new User);
         $listUser = $user->getLimitDesc(5);
         $countUser = $user->getCount();
+
 
         $message = (new Message);
         $listMessage = [];
@@ -122,6 +124,20 @@ class AdminController extends Controller
 
         }
 
+        $subs = (new Subscription);
+        $countSub = $subs->getCount();
+        $rawListSub = $subs->getLimitDesc(10);
+
+        $listSub = [];
+        foreach ($rawListSub as $sub) {
+            $listSub[] = [
+                'sub' => $sub,
+                'user' => $user->getOne($sub->user),
+                'group' => $groups->getOne($sub->group),
+            ];
+
+        }
+
         return view('admin.panel', [
             'userList' => $listUser,
             'userCount' => $countUser,
@@ -136,7 +152,9 @@ class AdminController extends Controller
             'banList' => $listBan,
             'banCount' => $countBan,
             'blockList' => $listBlock,
-            'blockCount' => $countBlock
+            'blockCount' => $countBlock,
+            'subList' => $listSub,
+            'subCount' => $countSub
 
         ]);
 
@@ -306,6 +324,24 @@ class AdminController extends Controller
     public function deleteReport($reportID)
     {
         (new Signalement)->remove($reportID);
+        return redirect('/admin');
+    }
+
+    public function showBlock($blockID)
+    {
+        $blocks= (new Block)->getOne($blockID);
+        $block = [
+            'block' => $blocks,
+            'blocker' => (new User)->getOne($blocks->blocker),
+            'target' => (new User)->getOne($blocks->target),
+        ];
+        (new Block)->read($blockID);
+        return view('admin.blocks.show', ['block' => $block]);
+    }
+
+    public function deleteBlock($blockID)
+    {
+        (new Block)->remove($blockID);
         return redirect('/admin');
     }
 

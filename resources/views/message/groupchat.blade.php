@@ -180,6 +180,7 @@
 
         @foreach($listMessages as $message)
             @foreach($usersInfos as $userInfo)
+
                 @if($message->sender == $userInfo->id)
                     @if($message->sender != auth()->id())
                         <!-- Message Reçu-->
@@ -199,6 +200,20 @@
                                 <div class="oneMessage media-body ml-3">
                                     <a href="#" style="text-decoration: none;" class="no-hover">
                                         <p style="color: gray; font-weight: bold">{{$userInfo->fname}} {{$userInfo->lname}}</p>
+
+                                        <div>
+                                            <a href="#" style="text-decoration: none;">
+                                            <i class="fas fa-radiation"></i>
+                                            </a>
+                                            <a href="#" style="text-decoration: none;">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </a>
+                                            <a href="#" style="text-decoration: none;">
+                                            <i class="fas fa-ban"></i>
+                                            </a>
+                                        </div>
+
+
                                     </a>
                                     <div class="bg-light rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 text-muted">{{$message->content}}</p>

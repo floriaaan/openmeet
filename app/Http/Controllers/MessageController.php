@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Group;
 use App\Http\Requests\MessageCreateRequest;
 use App\Message;
@@ -112,6 +113,7 @@ class MessageController extends Controller
             } catch (\Exception $e) {
             }
         }
+
         $groupLastMessagesInfo = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
@@ -212,10 +214,11 @@ class MessageController extends Controller
 
     public function showUserConversations()
     {
-
         $userId = auth()->id();
         $conv = new Message();
         $personalConversations = $conv->getPersonnalConversationsForUser($userId);
+
+
 
         $personalInfoConversations = [];
         $personalLastMessages = [];
@@ -257,12 +260,14 @@ class MessageController extends Controller
             } catch (\Exception $e) {
             }
         }
+
         $groupLastMessagesInfo = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
                     $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+
                 }
             } catch (\Exception $e) {
             }

@@ -62,6 +62,7 @@ Route::get('/admin/bans/', 'AdminController@listBan');
 Route::get('/admin/events/', 'AdminController@listEvent');
 Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
 Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
+Route::get('/admin/blocks/show/{blockID}', 'AdminController@showBlock');
 Route::get('/admin/roles/{user_id}', 'AdminController@rolesForm');
 Route::post('/admin/roles/', 'AdminController@rolesPost');
 

@@ -21,6 +21,7 @@ class Group extends Model
     ];
 
 
+
     public function getOne($groupId)
     {
         $query = DB::table('groups')

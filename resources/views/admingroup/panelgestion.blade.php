@@ -151,7 +151,7 @@
                                         <td>{{ $user->lname }}</td>
                                         <td>{{ $user->fname }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>test</td>
+                                        <td></td>
 
                                         <td>
 

@@ -29,6 +29,19 @@ class Subscription extends Model
         var_dump($query);
     }
 
+    public function getAll()
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->get();
+
+        $listSub = [];
+        foreach ($query as $sub) {
+            $listSub[] = $sub;
+        }
+        return $listSub;
+    }
+
     public function getLimit($limit)
     {
         $query = DB::table('subscriptions')
@@ -50,8 +63,8 @@ class Subscription extends Model
             ->get();
 
         $listSubscription = [];
-        foreach ($query as $subcription) {
-            $listSubscription[] = $subcription;
+        foreach ($query as $subscription) {
+            $listSubscription[] = $subscription;
         }
         return $listSubscription;
     }
@@ -86,6 +99,16 @@ class Subscription extends Model
             ->get();
 
         return count($query);
+    }
+
+    public function getLastSub($userID,$groupID){
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('user', "=", $userID)
+            ->where('group', '=',$groupID)
+            ->limit(1)
+            ->get();
+        return $query;
     }
 
 
@@ -128,6 +151,27 @@ class Subscription extends Model
             ->get();
 
         return $query[0];
+    }
+
+    public function getCount()
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->get();
+
+        return $query->count();
+
+    }
+
+    public function getLimitDesc( $limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+        return $query;
     }
 
 }

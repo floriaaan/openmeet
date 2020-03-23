@@ -72,7 +72,7 @@ class User extends Authenticatable
     public function isBlock($userId, $blockId)
     {
 
-        $query = DB::table('bans')
+        $query = DB::table('blocks')
             ->select('*')
             ->where('target', '=', $userId)
             ->where('blocker', '=', $blockId)
@@ -111,6 +111,17 @@ class User extends Authenticatable
 
         return $query->count();
 
+    }
+
+    public function getLastSub($userID,$groupID){
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('user', "=", $userID)
+            ->where('group', '=',$groupID)
+            ->latest()
+            ->limit(1)
+            ->get();
+        return $query;
     }
 
 

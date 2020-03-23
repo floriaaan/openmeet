@@ -63,4 +63,15 @@ class Block extends Model
         return $query;
     }
 
+    public function read($blockID)
+    {
+        try {
+            return $query = DB::table('blocks')
+                ->where('id', $blockID)
+                ->update(['isread' => 1]);
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
 }
