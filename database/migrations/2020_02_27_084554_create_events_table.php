@@ -30,6 +30,8 @@ class CreateEventsTable extends Migration
             $table->string('street',64)->nullable();
             $table->string('numstreet',8)->nullable();
             $table->string('zip',8)->nullable();
+            $table->string('picrepo',255)->nullable();
+            $table->string('picname',255)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

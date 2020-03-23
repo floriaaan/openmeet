@@ -25,6 +25,8 @@ class Event extends Model
         'numstreet',
         'street',
         'description',
+        'picrepo',
+        'picname'
     ];
 
 
@@ -151,8 +153,9 @@ class Event extends Model
     public function getByArea($lon, $lat, $limit)
     {
         $query = DB::table('events')
-                    ->select('*')
-                    ->where();
+            ->select('*')
+            ->where()
+            ->get();
         /*SELECT
           id, (
             3959 * acos (
@@ -217,7 +220,13 @@ class Event extends Model
             ->where('id', $event->id)
             ->update(['description' => $event->description]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picrepo' => $event->picrepo]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picname' => $event->picname]);
     }
 
     public function remove($eventID)

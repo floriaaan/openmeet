@@ -9,44 +9,52 @@
         @forelse($events as $event)
 
             <div class="p-3">
-                <div class="card hvr-grow rounded shadow">
+                <div class="card rounded shadow">
                     <div class="card-body">
-                        <h5 class="card-title">{{$event->name}}</h5>
-                        <p class="card-text">{!! str_replace('\\n', '<br>', $event->description) !!}</p>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <footer class="blockquote-footer">
+                        <a href="{{url('/events/show/'.$event->id)}}" style="text-decoration: none; color: inherit;">
+                            <h5 class="card-title">{{$event->name}}</h5>
+                            <p class="card-text">{!! str_replace('\\n', '<br>', $event->description) !!}</p>
+                            <hr class="mx-2 my-1">
+                            <small class="text-muted mx-1">
+                                Participants : {{(new \App\Participation)->getCount($event->id)}}
+                            </small>
+                        </a>
+                        <div class="row justify-content-between mx-3">
+
+                            <footer class="blockquote-footer">
+                                <small class="text-muted">
+                                    aura lieu le
+                                    <cite>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}</cite>
+                                </small>
+
+                                @if($event->dateto != null)
+                                    <br>
                                     <small class="text-muted">
-                                        aura lieu le
-                                        <cite>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}</cite>
+                                        jusqu'au <cite>{{strftime("%A %d %b %Y",strtotime($event->dateto))}}</cite>
                                     </small>
-                                    <small class="text-muted">
-                                        Participants : {{(new \App\Participation)->getCount($event->id)}}
-                                    </small>
-                                    @if($event->dateto != null)
-                                        <br>
-                                        <small class="text-muted">
-                                            jusqu'au <cite>{{strftime("%A %d %b %Y",strtotime($event->dateto))}}</cite>
-                                        </small>
-                                    @endif
-                                </footer>
-                            </div>
-                            <div class="col-lg-4">
-                                <a class="btn btn-danger" style="color: #fff"
+                                @endif
+
+                            </footer>
+
+                            <div class="row justify-content-end">
+
+                                <a class="btn btn-danger mx-1" style="color: #fff"
                                    onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
                                     <i class="fas fa-times"></i> Ne participe plus
                                 </a>
 
-                                <form id="toggleParticipation" action="{{url('/events/participate/remove')}}"
-                                      method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="event" value="{{$event->id}}">
-                                    <input type="hidden" name="user" value="{{auth()->id()}}">
-                                </form>
+
                             </div>
+                            <form id="toggleParticipation" action="{{url('/events/participate/remove')}}"
+                                  method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="event" value="{{$event->id}}">
+                                <input type="hidden" name="user" value="{{auth()->id()}}">
+                            </form>
 
 
                         </div>
+
 
                     </div>
                 </div>

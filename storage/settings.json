@@ -1,1 +1,1 @@
-{"openmeet":{"install":true,"name":"OpenMeth","slogan":"Trouvez le Meet en vous \ud83d\udd30","color":"#007bff","theme":"day","robots":true,"apidoc":true},"database":{"host":"localhost","user":"root","pass":null}}
+{"openmeet":{"install":true,"name":"openmeet","slogan":"tr","color":"#007bff","theme":"day","robots":true}}

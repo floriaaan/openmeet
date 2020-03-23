@@ -43,11 +43,13 @@
                         </ul>
                         @if($user->id != auth()->id())
                             <div class="card-body">
-                                <a href="{{url('/user/report/'.$user->id)}}" class="btn btn-warning">
+                                <a href="{{url('/user/report/'.$user->id)}}" class="btn btn-warning mx-1">
                                     <i class="fas fa-radiation"></i> Signaler
-                                    <a href="{{url('/user/block/'.$user->id)}}" class="btn btn-primary mt-2">
-                                        <i class="fas fa-shield-alt"></i> Bloquer
-                                    </a>
+
+                                </a>
+
+                                <a href="{{url('/user/block/'.$user->id)}}" class="btn btn-danger mx-1">
+                                    <i class="fas fa-shield-alt"></i> Bloquer
                                 </a>
 
                             </div>
