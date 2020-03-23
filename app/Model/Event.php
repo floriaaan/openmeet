@@ -151,8 +151,9 @@ class Event extends Model
     public function getByArea($lon, $lat, $limit)
     {
         $query = DB::table('events')
-                    ->select('*')
-                    ->where();
+            ->select('*')
+            ->where()
+            ->get();
         /*SELECT
           id, (
             3959 * acos (

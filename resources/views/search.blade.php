@@ -80,6 +80,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{$sR['content']->name}}</h5>
                                     <p class="card-text">{!! str_replace('\\n','<br>',$sR['content']->description) !!}</p>
+                                    @if($sR['content']->datefrom <= date('Y-m-d H:i:s') && $sR['content']->dateto > date('Y-m-d H:i:s'))
+                                        <span class="badge badge-primary glow-primary">En cours</span>
+                                    @endif
                                     <footer class="blockquote-footer">
                                         <small class="text-muted">
                                             aura lieu le

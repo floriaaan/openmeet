@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+@extends('group.admin.groups.resources.views.layouts.nav')
 
 @section('title')
     Groupes

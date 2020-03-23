@@ -58,6 +58,9 @@
                                     <div class="p-4 shadow-sm mt-2">
                                         <h5>{{$event->name}}</h5>
                                         <p class="text-muted">{!!str_replace('\n','</p><p class="text-muted">',$event->description)!!}</p>
+                                        @if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s'))
+                                            <span class="badge badge-primary glow-primary">En cours</span>
+                                        @endif
                                         <p style="text-transform: capitalize">
                                             à {{$event->numstreet}} {{$event->street}}</p>
                                         <p>{{$event->zip}} - {{$event->city}}</p>

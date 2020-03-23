@@ -18,8 +18,12 @@
 
                 <div class="card-body">
                     <h5 class="card-title display-4">{{$event->name}}</h5>
-                    @if($event->description != null)<h5
-                        class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>@endif
+                    @if($event->description != null)
+                        <h5 class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>
+                    @endif
+                    @if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s'))
+                        <span class="badge badge-primary glow-primary">En cours</span>
+                    @endif
                     <small class="text-muted">
                         Participants : {{(new \App\Participation)->getCount($event->id)}}
                     </small>
@@ -31,14 +35,19 @@
 
                     </div>
 
-                    <div id="socialshare" class="p-3 mx-5">
-                        {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
-                            ->facebook()
-                            ->twitter()
-                            ->linkedin('Extra linkedin summary can be passed here')
-                            ->whatsapp() !!}
-                    </div>
 
+                    <div class="row justify-content-around">
+                        <div id="socialshare" class="p-3 mx-5">
+                            {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
+                                ->facebook()
+                                ->twitter()
+                                ->linkedin('Extra linkedin summary can be passed here')
+                                ->whatsapp() !!}
+                        </div>
+
+
+
+                    </div>
                     <hr class="mx-5 my-2">
 
                     <div class="row mt-2">
@@ -122,7 +131,7 @@
     <script>
         displayMap();
         @if($event->posx != null && $event->posy != null)
-            displayEvent({{$event->posx}}, {{$event->posy}});
+        displayEvent({{$event->posx}}, {{$event->posy}});
         @endif
 
     </script>

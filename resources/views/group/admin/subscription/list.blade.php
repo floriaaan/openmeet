@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+@extends('group.admin.subscription.resources.views.layouts.nav')
 
 @section('content')
 
