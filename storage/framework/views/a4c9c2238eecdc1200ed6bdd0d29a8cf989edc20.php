@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<?php echo e(url('')); ?>/favicon.png"/>
-    <title><?php echo e(Setting('openmeet.title', 'OpenMeet')); ?> - <?php echo $__env->yieldContent('title'); ?></title>
+    <title><?php echo e(Setting('openmeet.name', 'OpenMeet')); ?> - <?php echo $__env->yieldContent('title'); ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
