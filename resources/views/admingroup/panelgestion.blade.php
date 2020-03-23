@@ -6,20 +6,6 @@
         <div class="row">
             <div class="col-lg-3 d-none-custom">
 
-
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 1px">
-                    <h5 class="list-title">Paramètres du site</h5>
-                    <a class="list-group-item list-group-item-action" href="#settings">
-                        Paramètres du site
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="#theming">
-                        Thèmes
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="#privacy">
-                        Confidentialité
-                    </a>
-                </div>
-
                 <div class="list-group position-fixed w-list-admin" style="margin-top: 180px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
@@ -59,71 +45,7 @@
             </div>
 
             <div class="col-lg-9">
-                <div>
-                    <h4 id="settings" class="my-5">Paramètres de {{ Setting('openmeet.name') }}</h4>
-                    <div>
-                        {!! Form::open(['url' => '/admin/edit/settings']) !!}
-                        <div class="form-group">
-                            {!! Form::label('uName', 'Nom du site', ['class' =>'control-label']) !!}
-                            {!! Form::text('uName', $value = Setting('openmeet.name'), ['class' => 'form-control', 'placeholder' => 'Nom du site']) !!}
-                            {!! $errors->first('uName', '<small class="text-danger">Le champ Nom du site est incorrect.</small>') !!}
-                        </div>
 
-                        <div class="form-group">
-                            {!! Form::label('uColor', 'Couleur primaire', ['class' =>'control-label']) !!}
-                            {!! Form::color('uColor', $value=Setting('openmeet.color'), ['class' => 'form-control']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('uSlogan', 'Slogan du site', ['class' =>'control-label']) !!}
-                            {!! Form::text('uSlogan', $value = Setting('openmeet.slogan'), ['class' => 'form-control', 'placeholder' => 'Slogan']) !!}
-                            {!! $errors->first('uSlogan', '<small class="text-danger">Le champ Slogan est incorrect.</small>') !!}
-                        </div>
-                        {!! Form::submit('Valider les modifications', ['class' => 'btn btn-primary mt-4 pull-right'] ) !!}
-
-                        {!! Form::close()!!}
-                    </div>
-
-
-                    <h4 id="theming" class="my-5">Thèmes</h4>
-                    <form method="POST" action="{{ url('/admin/edit/theme') }}">
-                        @csrf
-                        <div class="row">
-                            <div class="btn-group btn-group-toggle mx-2" data-toggle="buttons">
-                                <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
-                                    <input type="radio" name="theme" value="day" autocomplete="off"
-                                           @if(Setting('openmeet.theme') == "day")checked @endif>
-                                    <i class="fas fa-sun"></i> Jour
-                                </label>
-                                <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
-                                    <input type="radio" name="theme" value="night" autocomplete="off"
-                                           @if(Setting('openmeet.theme') == "night")checked @endif>
-                                    <i class="fas fa-moon"></i> Nuit
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary float-right">Valider les modifications</button>
-
-                    </form>
-
-
-                    <h4 id="privacy" class="my-5">Confidentialité</h4>
-                    <div>
-                        <form action="/admin/edit/privacy" method="POST">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="robots" id="robots"
-                                       @if(Setting('openmeet.robots'))checked @endif>
-                                <label class="custom-control-label" for="robots">
-                                    Visible sur Google (fichier robots.txt)
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary mx-1 float-right">Valider les modifications
-                            </button>
-                        </form>
-                    </div>
-
-                </div>
 
                 <hr class="my-5">
 
