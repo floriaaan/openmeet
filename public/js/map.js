@@ -22,7 +22,6 @@ function displayEvent(lon, lat) {
 
 
     L.marker([lat, lon], {icon: greenIcon})
-        .bindPopup()
         .addTo(mymap);
 
 

@@ -149,6 +149,21 @@ class EventController extends Controller
         $event->posy = $post['elat'];
         $event->description = $post['eDesc'];
 
+        if ($request->file('ePic') != null) {
+            $uploadedFile = $request->file('ePic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/event/' . $event->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $event->picrepo = 'event/' . $event->id;
+            $event->picname = $filename;
+        }
+
         (new Event)->updateEvent($event);
 
 

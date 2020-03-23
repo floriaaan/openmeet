@@ -76,16 +76,28 @@
                             </div>
 
                             <hr class="mx-3 my-4">
+                            <div class="input-group mt-2">
 
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-file-image"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="ePic" id="ePic" lang="fr">
+                                    <label class="custom-file-label mb-1" for="ePic">Photo de l'événement</label>
+                                </div>
+                            </div>
                             <div class="input-group mt-2">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Organisateur</span>
                                 </div>
-                                <input type="text" class="form-control" value="{{(new \App\Group)->getOne($event->group)->name}}">
+                                <input type="text" class="form-control"
+                                       value="{{(new \App\Group)->getOne($event->group)->name}}">
                                 <input type="hidden" name="eGroup" value="{{$event->group}}">
 
                             </div>
+
+
                         </div>
 
                     </div>
@@ -209,6 +221,7 @@
                 $('#title-group').text(input);
             });
         });
+
         function reverseLatLng(lat, lng) {
             inputPosx.value = lng;
             inputPosy.value = lat;
@@ -390,7 +403,6 @@
                     .openOn(mymap);
 
             });
-
 
 
         }

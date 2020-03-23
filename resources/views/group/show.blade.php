@@ -112,6 +112,9 @@
                                     href="{{url('/user/show/'.$group->admin)}}">
                                     {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
                                 </a>
+                                <a href="{{url('/messages/user/'.$group->admin)}}">
+                                    <span class="badge badge-secondary">Contacter</span>
+                                </a>
                             </small>
                         </div>
 
