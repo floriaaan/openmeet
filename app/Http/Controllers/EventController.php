@@ -14,6 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 
 class EventController extends Controller
@@ -54,6 +55,21 @@ class EventController extends Controller
             $event->dateTo = $post['eDateTo'];
         }
 
+        if ($request->file('ePic') != null) {
+            $uploadedFile = $request->file('ePic');
+            $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
+
+
+            Storage::disk('local')->putFileAs(
+                'public/upload/image/event/' . $event->id . '/',
+                $uploadedFile,
+                $filename
+            );
+
+            $event->picrepo = 'event/' . $event->id;
+            $event->picname = $filename;
+        }
+
 
         //var_dump((new Subscription)->getGroup($post['eGroup']));
         if ($event->push()) {
@@ -86,7 +102,7 @@ class EventController extends Controller
 
         (new Event)->remove($post['event']);
 
-        return redirect('/events/');
+        return redirect('/');
     }
 
     public function show($eventID)

@@ -76,6 +76,16 @@
                             </div>
 
                             <hr class="mx-3 my-4">
+                            <div class="input-group mt-2">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-file-image"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="ePic" id="ePic" lang="fr">
+                                    <label class="custom-file-label mb-1" for="ePic">Photo de l'événement</label>
+                                </div>
+                            </div>
 
                             <div class="input-group mt-2">
 
@@ -83,7 +93,7 @@
                                     <span class="input-group-text">Organisateur</span>
                                 </div>
                                 <select class="form-control" name="eGroup">
-                                    @foreach($listGroup as $group)
+                                @foreach($listGroup as $group)
                                         <option value="{{$group->id}}">{{$group->name}}</option>
                                     @endforeach
                                 </select>
@@ -93,6 +103,7 @@
                                     </span>
                                 @enderror
                             </div>
+
                         </div>
 
                     </div>
@@ -177,8 +188,8 @@
 
                             </div>
                         </div>
-                        <input id="inputPosx" type="hidden" name="elon" value="">
-                        <input id="inputPosy" type="hidden" name="elat" value="">
+                        <input id="inputPosx" type="hidden" name="elon" value="{{old('elon')}}">
+                        <input id="inputPosy" type="hidden" name="elat" value="{{old('elat')}}">
 
 
                         <div class="row justify-content-end p-3">

@@ -29,13 +29,14 @@ class EventCreateRequest extends FormRequest
             'eGroup' => 'required|numeric',
             'eDateFrom' => 'required|after_or_equal:now',
             'eDateTo' => 'after_or_equal:eDateFrom',
-            'eNumStreet' => 'profanity|',
-            'eStreet' => 'profanity|',
-            'eCity' => 'profanity|',
-            'eZip' => 'profanity|',
-            'eCountry' => 'profanity|',
+            'eNumStreet' => '|',
+            'eStreet' => '|',
+            'eCity' => '|',
+            'eZip' => '|',
+            'eCountry' => '|',
             'elon' => '',
             'elat' => '',
+            'ePic' => ''
         ];
     }
 }

@@ -51,7 +51,7 @@
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
                                        name="eDateFrom" type="datetime-local"
-                                       value="{{ $event->datefrom }}"
+                                       value="{{ date_format(date_create($event->datefrom), 'Y-m-d\TH:i') }}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                                 </div>
                                 <input class="form-control @error('eDateTo') is-invalid @enderror"
                                        name="eDateTo" type="datetime-local"
-                                       value="{{ $event->dateto }}">
+                                       value="{{ date_format(date_create($event->dateto), 'Y-m-d\TH:i') }}">
                                 @error('eDateTo')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -201,6 +201,7 @@
         var inputPosx = document.getElementById('inputPosx');
         var inputPosy = document.getElementById('inputPosy');
         displayMap();
+        displayEvent({{$event->posx}}, {{$event->posy}});
         $(function () {
             console.log($('#title-group').text());
             $('#title-input').keyup(function () {

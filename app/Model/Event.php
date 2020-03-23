@@ -25,6 +25,8 @@ class Event extends Model
         'numstreet',
         'street',
         'description',
+        'picrepo',
+        'picname'
     ];
 
 
@@ -218,7 +220,13 @@ class Event extends Model
             ->where('id', $event->id)
             ->update(['description' => $event->description]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picrepo' => $event->picrepo]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picname' => $event->picname]);
     }
 
     public function remove($eventID)
