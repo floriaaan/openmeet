@@ -130,9 +130,11 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
 <script src="<?php echo e(asset('js/share.js')); ?>"></script>
+
 <script>
 
-    $('#alert-close').click(function () {
+
+    /*$('#alert-close').click(function () {
         $.ajax({
             url: '<?php echo e(url('/api/v1/session/unset/error')); ?>',
             type: 'post',
@@ -144,7 +146,7 @@
                 console.log('error')
             }
         })
-    });
+    });*/
 
 
     function displayForm() {

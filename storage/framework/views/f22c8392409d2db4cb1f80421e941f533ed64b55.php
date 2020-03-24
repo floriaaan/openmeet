@@ -23,7 +23,7 @@
                                                class="list-group-item list-group-item-action">
                                                 <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                     <span
-                                                        class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                        class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                 <?php endif; ?>
                                                 <div class="media">
                                                     <div class="mask">
@@ -73,7 +73,7 @@
                                                class="list-group-item list-group-item-action">
                                                 <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                     <span
-                                                        class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                        class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                 <?php endif; ?>
                                                 <div class="media">
                                                     <div class="mask">
@@ -216,7 +216,7 @@
             border-radius: 1rem;
         }
 
-        .badge {
+        .badge-mes {
             font-size: 0;
             width: 13px;
             height: 13px;
