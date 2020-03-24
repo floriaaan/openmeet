@@ -31,6 +31,7 @@ class EventController extends Controller
     {
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
         return view('event.create', ['listGroup' => $listGroup]);
+
     }
 
     public function addPost(EventCreateRequest $request)
