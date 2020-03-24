@@ -236,23 +236,7 @@
                     </div>
 
 
-                    <div class="form-group ">
-                        <label for="bdate">{{ __('Date de naissance') }}</label>
 
-
-                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror"
-                               name="bdate"
-                               value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
-                        <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
-                            &#128286;</small>
-
-                        @error('bdate')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-
-                    </div>
 
 
                     <div class="form-group ">
@@ -274,7 +258,16 @@
                             <label for="password">{{ __('Mot de passe') }}</label>
                             <input id="password" type="password"
                                    class="form-control @error('password') is-invalid @enderror"
-                                   name="password" required autocomplete="new-password">
+                                   name="password" required autocomplete="new-password" aria-describedby="passwordHelp">
+                            <div class="progress mt-1" style="height: 5px;">
+                                <div class="progress-bar bg-danger" role="progressbar"
+                                     style="width: 0%;" aria-valuenow="25"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     id="password-strenght"></div>
+                            </div>
+                            <small id="password-strenght-help" class="form-text text-muted">
+                                8 caractères minimum.
+                            </small>
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -286,16 +279,38 @@
                         <div class="col-lg-6">
                             <label for="password-confirm">{{ __('Confirmer le mot de passe') }}</label>
 
-                            <input id="password-confirm" type="password" class="form-control" name="password-confirm"
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                                    required autocomplete="new-password">
-                            @error('password-confirm')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
+
+                            <div class="progress mt-1" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: 0%;" aria-valuenow="25"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     id="password-same"></div>
+                            </div>
+                            <small id="password-same-text" class="form-text text-muted">
+                                Les mots de passe doivent être identiques.
+                            </small>
 
                         </div>
 
+
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="bdate">{{ __('Date de naissance') }}</label>
+
+
+                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror" name="bdate"
+                               value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
+                        <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
+                            &#128286;</small>
+
+                        @error('bdate')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
 
                     </div>
 
@@ -327,7 +342,83 @@
 
 @section('js')
 
+    <script src="{{url('/js/zxcvbn.js')}}"></script>
     <script>
+        $('#password').keyup(function () {
+            let score = zxcvbn($('#password').val()).score;
+            $('#password-strenght').width(score * 25 + '%');
+            if (score == 0) {
+
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+                $('#password-strenght').addClass('bg-danger');
+
+            } else if (score == 1) {
+
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+
+                $('#password-strenght').addClass('bg-danger');
+            } else if (score == 2) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+
+                $('#password-strenght').addClass('bg-warning');
+
+            } else if (score == 3) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+
+                $('#password-strenght').addClass('bg-success');
+            } else if (score == 4) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+
+                $('#password-strenght').addClass('bg-success');
+            }
+            if($('#password-confirm').val() !== '' && $('#password-confirm').val() === $('#password').val()) {
+                $('#password-same').width('100%');
+                $('#password-same-text').text("Identiques ✅");
+            } else {
+                $('#password-same').width('0%');
+                $('#password-same-text').text("Ne correspondent pas ❌");
+            }
+        });
+
+        $('#password-confirm').keyup(function() {
+            if($('#password-confirm').val() !== '' && $('#password-confirm').val() === $('#password').val()) {
+                $('#password-same').width('100%');
+                $('#password-same-text').text("Identiques ✅");
+            } else {
+                $('#password-same').width('0%');
+                $('#password-same-text').text("Ne correspondent pas ❌");
+            }
+
+        });
+
         $('#btn-general-next').click(function (e) {
             e.preventDefault();
 

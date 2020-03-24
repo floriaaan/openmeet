@@ -45,7 +45,7 @@ class GroupController extends Controller
         }
         $group->push();
         if ($request->file('gPic') != null) {
-            if(!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+            if(Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
                 Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
             }
             if(!Storage::exists('public/upload/image/group')) {
