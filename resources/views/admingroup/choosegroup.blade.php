@@ -1,9 +1,5 @@
 @extends('layouts.nav')
 
-@section('title')
-    Administration
-@endsection
-
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
@@ -20,11 +16,7 @@
 
                         <select class="form-control" name="pGroup">
                             @foreach($groupList as $group)
-                                @if($group->id == $groupChoosen)
-                                    <option selected value="{{$group->id}}">{{$group->name}}</option>
-                                @else
-                                    <option value="{{$group->id}}">{{$group->name}}</option>
-                                @endif
+                                <option value="{{$group->id}}">{{$group->name}}</option>
                             @endforeach
                         </select>
                         @error('eGroup')
@@ -32,10 +24,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
-                        <input class="btn btn-primary" type="submit">
+                        <input class="btn btn-primary" type="submit" >
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
 @endsection

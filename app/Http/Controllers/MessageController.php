@@ -28,43 +28,50 @@ class MessageController extends Controller
         $message->isread = 0;
         $message->content = $post['mContent'];
         $message->date = date('Y-m-d H:i:s');
+        if (auth()->user()->isBlock(auth()->user()->id, $post['mReceiver'])) {
+            //TODO : si utilisateurs bloqué
+            //return abort(403, 'BLOCK ACTIF');
+        } else {
+            $message->push();
 
-        $message->push();
+            //Envoi d'une notification
+            $contentSplitted = mb_str_split($message->content);
+            $contentExt = "";
+            $contentExtract = "";
 
-        //Envoi d'une notification
-        $contentSplitted = mb_str_split($message->content);
-        $contentExt = "";
-        $contentExtract="";
-
-        if(count($contentSplitted)>=50) {
-            for ($i = 0; $i < 50; $i++) {
-                {
-                    $contentExt = $contentExt . $contentSplitted[$i];
+            if (count($contentSplitted) >= 50) {
+                for ($i = 0; $i < 50; $i++) {
+                    {
+                        $contentExt = $contentExt . $contentSplitted[$i];
+                    }
+                    $contentExtract = $contentExt . ' ...';
                 }
-                $contentExtract = $contentExt . ' ...';
+            } else {
+                $contentExtract = $message->content;
             }
-        }else{
-            $contentExtract=$message->content;
-        }
 
-        $notifType='mes';
-        $notifTitle='Nouveau message de '.auth()->user()->fname.' '.auth()->user()->lname;
-        $notifContent = "Contenu du message : ".$contentExtract;
+            $notifType = 'mes';
+            $notifTitle = 'Nouveau message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
+            $notifContent = "Contenu du message : " . $contentExtract;
 
-        (new Notification)->CreateNotification($notifType,$notifTitle,$message->receiver,$notifContent,$message->id);
+            (new Notification)->CreateNotification($notifType, $notifTitle, $message->receiver, $notifContent, $message->id);
 
             //TODO : envoyer un notification pour un message de groupe
 
-        if ($post['mForgroup'] == 1) {
-            return redirect('/messages/group/' . $post['mReceiver']);
-        } else {
-            return redirect('/messages/user/' . $post['mReceiver']);
+            if ($post['mForgroup'] == 1) {
+                return redirect('/messages/group/' . $post['mReceiver']);
+            } else {
+                return redirect('/messages/user/' . $post['mReceiver']);
+            }
         }
+
+
     }
 
 
     public function showChat($typeConversation, $correspondant)
     {
+
         $userId = auth()->id();
 
         //=============================================================
@@ -149,6 +156,11 @@ class MessageController extends Controller
         //Si c'est une discussion de groupe
 
         if ($typeConversation == 'group') {
+
+            if (auth()->user()->isBan(auth()->user()->id, $correspondant)) {
+                return abort(403, 'BAN ACTIF');
+            }
+
             $group = new Group();
             $groupInfo = $group->getOne($correspondant);
             $message = new Message();
@@ -191,10 +203,12 @@ class MessageController extends Controller
                 "groupInfo" => $groupInfo
             ]);
         }
-        if($typeConversation == 'user'){
+        if ($typeConversation == 'user') {
+
+
             $message = new Message();
             $listMessages = $message->getPersonalChat($correspondant);
-            $user=new User();
+            $user = new User();
             $userInfo = $user->getOne($correspondant);
 
             return view('message.userchat', [
@@ -219,15 +233,17 @@ class MessageController extends Controller
         $personalConversations = $conv->getPersonnalConversationsForUser($userId);
 
 
-
         $personalInfoConversations = [];
         $personalLastMessages = [];
         foreach ($personalConversations as $personalConversation) {
+
             $user = new User();
             $personalInfoConversations[] = $user->getOne($personalConversation);
             $message = new Message();
+
             $personalLastMessages[$message->getLastMessageForPersonalConv($userId, $personalConversation)->id] = $message->getLastMessageForPersonalConv($userId, $personalConversation);
         }
+
         //tri des derniers messages personnels par id<=>date d'envoi
         krsort($personalLastMessages);
 
@@ -252,11 +268,9 @@ class MessageController extends Controller
             $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
-
                 if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
                     $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
-                }
-                else {
+                } else {
                     $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {

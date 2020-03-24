@@ -97,7 +97,9 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::post('groups/subscribe/remove', 'SubscriptionController@deleteSubscription')->middleware('auth');
 
 //Gestion GROUP routes
-    Route::get('/groups/admin/', 'AdminGroupController@gestion');
+    Route::get('/groups/admin/', 'AdminGroupController@chooseGroup');
+    Route::post('/groups/admin/', 'AdminGroupController@showPanel');
+
     Route::get('/groups/admin/subscriptions/', 'AdminGroupController@listSubscription');
     Route::get('/groups/admin/groups/', 'AdminGroupController@listGroup');
     Route::get('/groups/admin/reports/', 'AdminGroupController@listReport');
