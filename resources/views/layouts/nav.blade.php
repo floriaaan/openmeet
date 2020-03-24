@@ -89,17 +89,17 @@
 
             @if(auth()->check())
                 <div class="dropleft nav-responsive-patch ml-1">
-                    @if(!empty($notifications))
+                    @if(!empty($notifsnav))
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-lg fa-bell"></i>
-                            <span class="badge badge-pill badge-danger openmeet-badge">{{count($notifications)}}</span>
+                            <span class="badge badge-pill badge-danger openmeet-badge">{{count((new \App\Notification)->getAllUser(auth()->id()))}}</span>
                         </a>
                         <div class="dropdown-menu" style="padding: 0" aria-labelledby="navDrop">
                             <div class="card-header">
                                 Notifications
                             </div>
-                            @foreach($notifications as $notif)
+                            @foreach($notifsnav as $notif)
                                 @if($notif->type=='mes')
                                     <a class="dropdown-item" href="#">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
@@ -163,7 +163,7 @@
                                 <span class="icon text-white-50">
                                     <i class="fas  fa-arrow-right"></i>
                                 </span>
-                                    <span class="text ml-2">Tout voir</span>
+                                    <span class="text ml-2">Accéder aux notifications</span>
                                 </a>
                             </div>
                         </div>
@@ -175,10 +175,19 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="card-body">
-                                <p class="lead mx-auto">Aucune notification.</p>
+                                <p class="lead">Aucune notification.</p>
 
                             </div>
+                            <div class="card-footer">
 
+                                <a href="{{ url('/notifications/')}}"
+                                   class="btn btn-primary btn-icon-split w-100">
+                                <span class="icon text-white-50">
+                                    <i class="fas  fa-arrow-right"></i>
+                                </span>
+                                    <span class="text ml-2">Accéder aux notifications</span>
+                                </a>
+                            </div>
                         </div>
 
                     @endif

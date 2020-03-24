@@ -24,7 +24,7 @@ class Notifications
         if (auth()->check()) {
             $userId = auth()->user()->id;
             $notif = new Notification();
-            $notifications = $notif->getLast5ForUser($userId);
+            $notifications = $notif->getNav($userId);
         }
 
         //Récupération des messages
@@ -35,7 +35,7 @@ class Notifications
         }
 
 
-        View::share('notifications', $notifications);
+        View::share('notifsnav', $notifications);
         View::share('messages', $messages);
         return $next($request);
     }

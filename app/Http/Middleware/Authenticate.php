@@ -25,9 +25,5 @@ class Authenticate extends Middleware
             return route('home');
         }
 
-        if (auth()->user()->disabled) {
-            $request->session()->flash('error','Vous avez été désactivé(e).');
-            return route('home');
-        }
     }
 }

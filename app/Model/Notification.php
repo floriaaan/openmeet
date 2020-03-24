@@ -47,14 +47,14 @@ class Notification extends Model
         return $listNotification;
     }
 
-    public function getLast5ForUser($userId)
+    public function getNav($userId)
     {
         $query = DB::table('notifications')
             ->select('*')
             ->where('user', "=", $userId)
             ->where('isread', "=", 0)
             ->orderBy('date', 'desc')
-            ->limit(5)
+            ->limit(3)
             ->get();
         $notificationsArray = $query;
         $listNotification = [];

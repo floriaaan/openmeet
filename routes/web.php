@@ -22,7 +22,7 @@ if(Setting('openmeet.apidoc')) {
 
 Route::post('/install', 'HomeController@installPost');
 
-Route::group(['middleware' => 'notifications'], function () {
+Route::group(['middleware' => 'notifications', 'disable'], function () {
 //HOME Routes
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@home')->name('home');
