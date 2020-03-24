@@ -11,7 +11,7 @@
             <div class="col-lg-3 d-none-custom">
 
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 1px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 20px">
                     <h5 class="list-title">Paramètres du site</h5>
                     <a class="list-group-item list-group-item-action" href="#settings">
                         Paramètres du site
@@ -27,7 +27,7 @@
                     </a>
                 </div>
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 180px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 200px">
                     <h5 class="list-title">Paramètres relatifs aux utilisateurs</h5>
                     <a class="list-group-item list-group-item-action" href="#users">
                         Utilisateurs
@@ -52,7 +52,7 @@
                     </a>-->
                 </div>
 
-                <div class="list-group position-fixed w-list-admin" style="margin-top: 335px">
+                <div class="list-group position-fixed w-list-admin" style="margin-top: 355px">
                     <h5 class="list-title">Paramètres relatifs aux groupes/événements</h5>
                     <a class="list-group-item list-group-item-action" href="#groups">
                         Groupes

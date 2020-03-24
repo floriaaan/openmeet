@@ -27,7 +27,7 @@ class AdminGroupController extends Controller
     {
 
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
-        return view('admingroup.choosegroup', [
+        return view('group.admin.choose', [
         'groupList'=> $listGroup
         ]);
 
@@ -43,8 +43,9 @@ class AdminGroupController extends Controller
 
         }
 
-        return view('admingroup.panelgestion', [
-            'groupList'=> $listGroup
+        return view('group.admin.panel', [
+            'groupList'=> $listGroup,
+            'groupChosen' => $groupChosen
         ]);
 
 

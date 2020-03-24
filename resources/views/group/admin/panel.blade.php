@@ -20,11 +20,10 @@
 
                         <select class="form-control" name="pGroup">
                             @foreach($groupList as $group)
-                                @if($group->id == $groupChoosen)
-                                    <option selected value="{{$group->id}}">{{$group->name}}</option>
-                                @else
-                                    <option value="{{$group->id}}">{{$group->name}}</option>
-                                @endif
+
+                                <option @if($group->id == $groupChosen) selected
+                                        @endif value="{{$group->id}}">{{$group->name}}</option>
+
                             @endforeach
                         </select>
                         @error('eGroup')
