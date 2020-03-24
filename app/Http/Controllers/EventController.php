@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\EventCreateRequest;
 use App\Mail\EventCreated;
+use App\Notification;
 use App\Participation;
 use App\Subscription;
 use App\User;
@@ -56,14 +57,14 @@ class EventController extends Controller
         }
 
         if ($request->file('ePic') != null) {
-            if(!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
+            if (!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
                 Storage::delete('public/upload/image/' . $event->picrepo . '/' . $event->picname);
             }
-            if(!Storage::exists('public/upload/image/event')) {
+            if (!Storage::exists('public/upload/image/event')) {
                 Storage::makeDirectory('public/upload/image/event');
             }
-            if(!Storage::exists('public/upload/image/event/'.$event->id)){
-                Storage::makeDirectory('public/upload/image/event/'.$event->id);
+            if (!Storage::exists('public/upload/image/event/' . $event->id)) {
+                Storage::makeDirectory('public/upload/image/event/' . $event->id);
             }
             $uploadedFile = $request->file('ePic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
@@ -82,6 +83,7 @@ class EventController extends Controller
 
         if ($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
+            $group = (new Group)->getOne($post['eGroup']);
             foreach ($usersSub as $userSub) {
                 $user = (new User)->getOne($userSub->user);
 
@@ -92,7 +94,15 @@ class EventController extends Controller
                     //TODO:PUSH
                 }
 
+                //TODO:SEND NOTIFICATION
+                (new Notification)->CreateNotification('eve',
+                    'Nouvel événement de ' . $group->name,
+                    $userSub->user,
+                    $event->name,
+                    $event->id);
+
             }
+
         }
 
         //notifications
@@ -158,14 +168,14 @@ class EventController extends Controller
         $event->description = $post['eDesc'];
 
         if ($request->file('ePic') != null) {
-            if(!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
+            if (!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
                 Storage::delete('public/upload/image/' . $event->picrepo . '/' . $event->picname);
             }
-            if(!Storage::exists('public/upload/image/event')) {
+            if (!Storage::exists('public/upload/image/event')) {
                 Storage::makeDirectory('public/upload/image/event');
             }
-            if(!Storage::exists('public/upload/image/event/'.$event->id)){
-                Storage::makeDirectory('public/upload/image/event/'.$event->id);
+            if (!Storage::exists('public/upload/image/event/' . $event->id)) {
+                Storage::makeDirectory('public/upload/image/event/' . $event->id);
             }
             $uploadedFile = $request->file('ePic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();

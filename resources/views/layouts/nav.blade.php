@@ -163,7 +163,7 @@
                             </div>
                             @foreach($notifsnav as $notif)
                                 @if($notif->type=='mes')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url('/messages/')}}">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
                                             <i class="fas fa-envelope text-primary"></i> {{$notif->title}}</h6>
                                         <p class="text-muted font-weight-light">{{$notif->content}}</p>
@@ -177,7 +177,7 @@
                                     </a>
 
                                 @elseif($notif->type=='sub')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url('/groups/show/'.$notif->concerned)}}">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
                                             <i class="fas fa-users text-primary"></i> {{$notif->title}}</h6>
                                         <p class="text-muted font-weight-light">{{$notif->content}}</p>
@@ -190,7 +190,7 @@
                                         </footer>
                                     </a>
                                 @elseif($notif->type=='rep')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url('/admin/reports/show/'.$notif->concerned)}}">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
                                             <i class="fas fa-shield-alt text-primary"></i> {{$notif->title}}</h6>
                                         <p class="text-muted font-weight-light">{{$notif->content}}</p>
@@ -203,7 +203,7 @@
                                         </footer>
                                     </a>
                                 @elseif($notif->type=='eve')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url('/events/show/'.$notif->concerned)}}">
                                         <h6 class="dropdown-header mb-1 font-weight-bold">
                                             <i class="fas fa-handshake text-primary"></i> {{$notif->title}}</h6>
                                         <p class="text-muted font-weight-light">{{$notif->content}}</p>
@@ -257,18 +257,22 @@
             @endif
 
             @if(auth()->check())
-                <a class="nav-link" href="{{url('/messages')}}" style="margin-right: -25px">
-                    @if((new \App\Message)->getCountUnread(auth()->id()) != 0)
+
+                @if((new \App\Message)->getCountUnread(auth()->id()) != 0)
+                    <a class="nav-link" href="{{url('/messages')}}" style="margin-right: -25px">
                         <i class="fas fa-lg fa-envelope"></i>
                         <span
                             class="badge badge-pill badge-danger"
                             style="top:-12px; right: 7px; position: relative">
                             {{(new \App\Message)->getCountUnread(auth()->id())}}
                         </span>
-                    @else
+                    </a>
+                @else
+                    <a class="nav-link" href="{{url('/messages')}}">
                         <i class="far fa-lg fa-envelope"></i>
-                    @endif
-                </a>
+                    </a>
+                @endif
+
 
 
 

@@ -241,6 +241,7 @@ class Message extends Model
             ->select('*')
             ->where('receiver', $userID)
             ->where('isread', '=', 0)
+            ->where('forgroup', '=', 0)
             ->get();
 
         return count($query);
