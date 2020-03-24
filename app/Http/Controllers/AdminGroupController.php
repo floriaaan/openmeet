@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Ban;
-use App\Block;
 use App\Event;
 use App\Group;
-use App\Http\Requests\AdminEditRequest;
-use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\GroupPanelChooseRequest;
-use App\Http\Requests\SearchRequest;
-use App\Message;
-use App\Signalement;
+use App\Participation;
 use App\Subscription;
-use App\User;
 
 class AdminGroupController extends Controller
 {
@@ -21,6 +16,7 @@ class AdminGroupController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     public function chooseGroup()
@@ -28,23 +24,37 @@ class AdminGroupController extends Controller
 
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
         return view('group.admin.choose', [
-        'groupList'=> $listGroup
+            'groupList' => $listGroup
         ]);
 
 
     }
 
-    public function showPanel(GroupPanelChooseRequest $request){
-        $post= $request->input();
+    public function showPanel(GroupPanelChooseRequest $request)
+    {
+        $post = $request->input();
         $groupChosen = $post['pGroup'];
 
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
-        foreach ($listGroup as $group){
+        $listSub = (new Subscription)->getLimitGroupDesc($groupChosen, 5);
 
+        $rawListEvent = (new Event)->getLimitGroupDesc($groupChosen, 5);
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'participations' => (new Participation)->getEvent($event->id)
+            ];
         }
 
+        $listBan = (new Ban)->getCountGroup($groupChosen);
+
         return view('group.admin.panel', [
-            'groupList'=> $listGroup,
+            'group' => (new Group)->getOne($groupChosen),
+            'groupList' => $listGroup,
+            'subList' => $listSub,
+            'eventList' => $listEvent,
+            'banList' => $listBan,
             'groupChosen' => $groupChosen
         ]);
 

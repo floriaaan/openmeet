@@ -164,10 +164,22 @@ class Subscription extends Model
     }
 
 
-    public function getLimitDesc( $limit)
+    public function getLimitDesc($limit)
     {
         $query = DB::table('subscriptions')
             ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+        return $query;
+    }
+
+    public function getLimitGroupDesc($groupID, $limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('group', $groupID)
             ->limit($limit)
             ->orderByDesc('id')
             ->get();

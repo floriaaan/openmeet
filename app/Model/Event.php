@@ -150,6 +150,19 @@ class Event extends Model
         return $query;
     }
 
+    public function getLimitGroupDesc($groupID, $limit)
+    {
+        $query = DB::table('events')
+            ->select('*')
+            ->where('group', $groupID)
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
     public function getByArea($lon, $lat, $limit)
     {
         $query = DB::table('events')

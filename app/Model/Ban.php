@@ -40,17 +40,7 @@ class Ban extends Model
         return $listBans;
     }
 
-    public function getLimit($limit)
-    {
-        $query = DB::table('bans')
-            ->select('*')
-            ->limit($limit)
-            ->get();
 
-
-        return $query;
-
-    }
 
     public function getCount()
     {
@@ -63,16 +53,16 @@ class Ban extends Model
 
     }
 
-    public function getLimitDesc($limit)
+    public function getCountGroup($groupId)
     {
         $query=DB::table('bans')
             ->select('*')
-            ->limit($limit)
-            ->orderByDesc('id')
+            ->where('banisher', $groupId)
             ->get();
 
 
-        return $query;
+        return $query->count();
+
     }
 
     public function remove($parId)

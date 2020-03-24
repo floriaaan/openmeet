@@ -2,12 +2,17 @@
 
 @section('content')
 
-    <div class="container position-relative" style="height: 100%">
-        <div class="row">
+    <div class="container">
+        <div class="card p-5 shadow-lg mx-auto">
 
-            <form method="post" action="{{url('/groups/admin/')}}">
-                @csrf
-                <div class="col-lg-9">
+            <p class="text-center lead">Quel groupe voulez-vous gérer?</p>
+            <hr class="m-5">
+
+            <div class="row justify-content-center">
+
+                <form method="post" action="{{url('/groups/admin/')}}">
+                    @csrf
+
                     <div class="input-group mt-2">
 
                         <div class="input-group-prepend">
@@ -19,15 +24,13 @@
                                 <option value="{{$group->id}}">{{$group->name}}</option>
                             @endforeach
                         </select>
-                        @error('eGroup')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                        <input class="btn btn-primary" type="submit" >
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Valider</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                </form>
+            </div>
         </div>
     </div>
 
