@@ -17,7 +17,7 @@ class Block extends Model
 
     public function getLimit($limit)
     {
-        $query=DB::table('blocks')
+        $query = DB::table('blocks')
             ->select('*')
             ->limit($limit)
             ->get();
@@ -63,15 +63,17 @@ class Block extends Model
         return $query;
     }
 
-    public function read($blockID)
+
+    public function isBlock($userId, $blockId)
     {
-        try {
-            return $query = DB::table('blocks')
-                ->where('id', $blockID)
-                ->update(['isread' => 1]);
-        } catch (\Exception $e) {
-            return $e;
-        }
+
+        $query = DB::table('blocks')
+            ->select('*')
+            ->where('target', '=', $userId)
+            ->where('blocker', '=', $blockId)
+            ->get();
+        return $query->count() > 0;
     }
+
 
 }

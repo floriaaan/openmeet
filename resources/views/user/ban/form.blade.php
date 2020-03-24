@@ -1,21 +1,21 @@
 @extends('layouts.nav')
 
 @section('title')
-    Bloquer
+    Bannir
 @endsection
 
 @section('content')
 
     <div class="container">
-        <form action="{{url('/user/block')}}" class="" method="POST">
+        <form action="{{url('/user/ban')}}" class="" method="POST">
             @csrf
             <div class="card shadow-lg mx-auto">
-                <h5 class="display-4 p-3 ml-4 ">Bloquer {{$target->fname}} {{$target->lname}}</h5>
+                <h5 class="display-4 p-3 ml-4 ">Bannir {{$banned->fname}} {{$banned->lname}}</h5>
 
                 <hr class="mx-5 my-3">
                 <div class="form-group mx-5">
                     <label for="description">
-                        Décrivez-nous pourquoi vous Bloquer cette personne :
+                        Décrivez-nous pourquoi vous bannissez cette personne :
                         <small>(30 caractères minimums)</small>
                     </label>
                     <textarea class="form-control @error('description') is-invalid @enderror"
@@ -39,8 +39,8 @@
 
                 </div>
             </div>
-            <input type="hidden" name="blocker" value="{{auth()->id()}}">
-            <input type="hidden" name="target" value="{{$target->id}}">
+            <input type="hidden" name="Banisher" value="{{$banisher->id}}">
+            <input type="hidden" name="Banned" value="{{$banned->id}}">
         </form>
     </div>
 

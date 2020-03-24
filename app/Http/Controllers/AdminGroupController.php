@@ -30,7 +30,7 @@ class AdminGroupController extends Controller
 
 
         $sub = (new Subscription);
-        $UserByGroup = $sub->countGroup(3);
+
 
 
         $message = (new Message);
@@ -53,6 +53,7 @@ class AdminGroupController extends Controller
             }
 
         }
+
         $countMessage = $message->getCount();
 
         $groups = (new Group);
@@ -215,5 +216,6 @@ class AdminGroupController extends Controller
             $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
         }
         return view('admingroup.grouplist', ['groups' => $groups]);
+        
     }
 }

@@ -252,9 +252,11 @@ class MessageController extends Controller
             $groupConversations[] = $group->getOne($subscription->group);
             $message = new Message();
             try {
+
                 if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
                     $groupLastMessages[$message->getLastMessageForGroupConv($subscription->group)->id] = $message->getLastMessageForGroupConv($subscription->group);
-                } else {
+                }
+                else {
                     $groupWithoutLastMessage[] = $message->getLastMessageForGroupConv($subscription->group);
                 }
             } catch (\Exception $e) {

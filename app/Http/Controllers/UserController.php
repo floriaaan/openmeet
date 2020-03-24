@@ -6,6 +6,8 @@ use App\Ban;
 use App\Block;
 use App\Event;
 use App\Group;
+use App\Http\Requests\BanRequest;
+use App\Http\Requests\BlockRequest;
 use App\Http\Requests\ReportRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Mail\EventCreated;
@@ -138,6 +140,57 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+
+    public function banForm($userID)
+    {
+        return view('user.ban.form', [
+            'bannisher' => auth()->id(),
+            'banned' => (new User)->getOne($userID)
+        ]);
+    }
+
+    public function banPost(BanRequest $request)
+    {
+        $post = $request->input();
+
+        $ban = new Ban();
+        $ban->banisher = $post['banisher'];
+        $ban->banned = $post['banned'];
+        $ban->description = $post['description'];
+        $ban->date = date('Y-m-d H:m:s');
+
+        $ban->push();
+
+        return redirect('/');
+    }
+
+
+
+        public function blockForm($userID)
+    {
+        return view('user.block.form', [
+            'blocker' => auth()->id(),
+            'target' => (new User)->getOne($userID)
+        ]);
+    }
+
+    public function blockPost(BlockRequest $request)
+    {
+        $post = $request->input();
+
+        $block = new Block();
+        $block->blocker = $post['blocker'];
+        $block->target = $post['target'];
+        $block->description = $post['description'];
+        $block->date = date('Y-m-d H:m:s');
+
+        $block->push();
+
+        return redirect('/');
+    }
+
+
 
     public function reportForm($userID)
     {

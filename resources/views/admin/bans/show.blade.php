@@ -6,25 +6,26 @@
         <div class="card shadow-sm p-5 mt-2">
 
             <div class="card-title display-4">
-                Signalement #{{$block['block']->id}}
+                Bannissement #{{$ban['banned']->id}}
 
             </div>
+
             <hr class="mx-1">
 
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4">Concerné</div>
-                    <div class="col-lg-8">{{$block['target']->fname}} {{$block['target']->lname}}</div>
+                    <div class="col-lg-8">{{$report['banned']->fname}} {{$report['banned']->lname}}</div>
                 </div>
                 <hr class="mx-3">
                 <div class="row">
                     <div class="col-lg-4">Emetteur</div>
-                    <div class="col-lg-8">{{$block['blocker']->fname}} {{$block['blocker']->lname}}</div>
+                    <div class="col-lg-8">{{$report['banisher']->name}}</div>
                 </div>
                 <hr class="mx-3 my-4">
                 <div class="row">
                     <div class="col-lg-4">Description</div>
-                    <div class="col-lg-8">{{$block['block']->description}}</div>
+                    <div class="col-lg-8">{{$ban['ban']->description}}</div>
                 </div>
 
             </div>
@@ -38,17 +39,17 @@
                 </div>
                 <div class="mx-2">
                     <a class="btn btn-danger" style="color: white"
-                       href="{{url('/admin/reports/delete/'. $block['block']->id)}}">
+                       href="{{url('/admin/bans/delete/'. $ban['ban']->id)}}">
                         <i class="fas fa-trash"></i>
-                        Supprimer le Blocage
+                        Supprimer le Bannissement
                     </a>
 
                 </div>
                 <div class="mx-2">
                     <a class="btn btn-danger" style="color: white"
-                       href="{{url('/admin/users/delete/'. $block['target']->id)}}">
+                       href="{{url('/admin/users/delete/'. $ban['banned']->id)}}">
                         <i class="fas fa-trash"></i>
-                        Supprimer {{$block['target']->fname}} {{$block['target']->lname}}
+                        Supprimer {{$ban['banned']->fname}} {{$ban['banned']->lname}}
                     </a>
 
                 </div>
