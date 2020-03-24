@@ -34,7 +34,7 @@
                                 </span>
                             </div>
                             <input class="form-control @error('gTags') is-invalid @enderror"
-                                   name="gTags" type="text" value="{{ old('gTags') }}" placeholder="Tags du groupe"
+                                   name="gTags" type="text" value="{{ $group->tags }}" placeholder="Tags du groupe"
                                    id="gTags">
                         </div>
                         <label for="gTags"><small>Séparés par des points-virgules 🛑</small></label>

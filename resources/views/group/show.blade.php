@@ -119,14 +119,11 @@
                         </div>
 
 
-                        <div class="d-flex justify-content-between px-5 mt-4">
+                        <div class="row justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                             <div class="float-right mr-5">
                                 @if($group->admin == auth()->id())
                                     <div class="row justify-content-end">
-                                        <small class="text-muted blockquote-footer m-1">
-                                            Vous êtes administrateur du groupe.
-                                        </small>
                                         <a href="{{url('/groups/delete/'.$group->id)}}" class="btn btn-danger m-1">
                                             <i class="fas fa-trash-alt"></i>
                                             Supprimer {{$group->name}}
