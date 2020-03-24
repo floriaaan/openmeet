@@ -54,14 +54,12 @@
                                                                 <h6 class="mb-0"> {{$infoConversation->fname}} {{$infoConversation->lname}}  </h6>
 
                                                             </div>
-                                                            <div><i class="fas fa-arrow-circle-right"></i></div>
                                                             <p style="overflow: hidden;height: 3vh;"
                                                                class="font-italic mb-0 text-small lastMessageContent">
                                                                 {{ $lastMessage->content}}
                                                             </p>
                                                             <small style="color: dimgrey"
                                                                    class="small font-weight-lighter lastMessageDate"> {{$lastMessage->date}}</small>
-                                                            <div><i class="fas fa-cog align-self-end"></i></div>
                                                         </div>
                                                     </div>
                                                 </a>
