@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Signalement
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -37,7 +41,7 @@
             <hr class="mx-1">
             <div class="mt-3 d-flex justify-content-end">
                 <div class="mx-2">
-                    <a class="btn btn-primary" href="{{url('/admin')}}">
+                    <a class="btn btn-secondary" href="{{url('/admin')}}">
                         <i class="fas fa-times"></i> Annuler
                     </a>
                 </div>
@@ -50,10 +54,10 @@
 
                 </div>
                 <div class="mx-2">
-                    <a class="btn btn-danger" style="color: white"
+                    <a class="btn btn-warning" style="color: white"
                        href="{{url('/admin/users/delete/'. $report['concerned']->id)}}">
-                        <i class="fas fa-trash"></i>
-                        Supprimer {{$report['concerned']->fname}} {{$report['concerned']->lname}}
+                        <i class="fas fa-radiation-alt"></i>
+                        Désactiver {{$report['concerned']->fname}} {{$report['concerned']->lname}}
                     </a>
 
                 </div>
