@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
@@ -51,4 +52,8 @@ class ResetPasswordController extends Controller
             : $this->sendResetFailedResponse($request, $response);
     }
 
+    protected function setUserPassword($user, $password)
+    {
+        $user->password = $password;
+    }
 }
