@@ -23,43 +23,45 @@ class Message extends Model
         'forgroup',
     ];
 
-    public function getGroupChat($groupId){
+    public function getGroupChat($groupId)
+    {
         $query = DB::table('messages')
             ->select('*')
-            ->where('receiver','=',$groupId)
-            ->where('forgroup','=',1)
+            ->where('receiver', '=', $groupId)
+            ->where('forgroup', '=', 1)
             ->orderByDesc('date')
             ->get();
         $queryArray = $query;
         $messageArray = [];
-        foreach ($queryArray as $messageSQL){
-            $message=new Message();
-            $message=$messageSQL;
-            $messageArray[$message->id]=$message;
+        foreach ($queryArray as $messageSQL) {
+            $message = new Message();
+            $message = $messageSQL;
+            $messageArray[$message->id] = $message;
 
         }
         ksort($messageArray);
         return $messageArray;
     }
 
-    public function getPersonalChat($user2){
-        $userId=auth()->id();
+    public function getPersonalChat($user2)
+    {
+        $userId = auth()->id();
         $query = DB::table('messages')
             ->select('*')
-            ->where('sender',"=",$userId)
-            ->where('receiver',"=",$user2)
-            ->where('forgroup','=',0)
-            ->orWhere('receiver','=',$userId)
-            ->where('sender','=',$user2)
-            ->where('forgroup',"=",0)
+            ->where('sender', "=", $userId)
+            ->where('receiver', "=", $user2)
+            ->where('forgroup', '=', 0)
+            ->orWhere('receiver', '=', $userId)
+            ->where('sender', '=', $user2)
+            ->where('forgroup', "=", 0)
             ->get();
 
         $queryArray = $query;
         $messageArray = [];
-        foreach ($queryArray as $messageSQL){
-            $message=new Message();
-            $message=$messageSQL;
-            $messageArray[$message->id]=$message;
+        foreach ($queryArray as $messageSQL) {
+            $message = new Message();
+            $message = $messageSQL;
+            $messageArray[$message->id] = $message;
 
         }
         ksort($messageArray);
@@ -106,53 +108,51 @@ class Message extends Model
         $contentSplitted = mb_str_split($query[0]->content);
         $newContent = "";
 
-        if(count($contentSplitted)>=60)
-            for($i=0;$i<60;$i++)
-            {
-                    {
-                        $newContent = $newContent.$contentSplitted[$i];
-                    }
-                $query[0]->content=$newContent.' ...';
+        if (count($contentSplitted) >= 60)
+            for ($i = 0; $i < 60; $i++) {
+                {
+                    $newContent = $newContent . $contentSplitted[$i];
+                }
+                $query[0]->content = $newContent . ' ...';
             }
-        $queryResult=$query[0];
+        $queryResult = $query[0];
         return $queryResult;
     }
 
     public function getLastMessageForGroupConv($groupId)
     {
-            $query = DB::table('messages')
-                ->select('*')
-                ->where('receiver', '=', $groupId)
-                ->where('forgroup', '=', 1)
-                ->orderBy('date', 'desc')
-                ->limit(1)
-                ->get();
-            try{
-                $contentSplitted = mb_str_split($query[0]->content);
-                $newContent = "";
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('receiver', '=', $groupId)
+            ->where('forgroup', '=', 1)
+            ->orderBy('date', 'desc')
+            ->limit(1)
+            ->get();
+        try {
+            $contentSplitted = mb_str_split($query[0]->content);
+            $newContent = "";
 
-                if(count($contentSplitted)>=60)
-                    for($i=0;$i<60;$i++)
+            if (count($contentSplitted) >= 60)
+                for ($i = 0; $i < 60; $i++) {
                     {
-                        {
-                            $newContent = $newContent.$contentSplitted[$i];
-                        }
-                        $query[0]->content=$newContent.' ...';
+                        $newContent = $newContent . $contentSplitted[$i];
                     }
-                $queryResult = $query[0];}
-            catch (\Exception $e){
-                $message=new \stdClass();
-                $message->id=0;
-                $message->receiver=$groupId;
-                $message->sender=0;
-                $message->content="Aucun message";
-                $message->forgroup=1;
-
-                $queryResult=$message;
-
+                    $query[0]->content = $newContent . ' ...';
                 }
+            $queryResult = $query[0];
+        } catch (\Exception $e) {
+            $message = new \stdClass();
+            $message->id = 0;
+            $message->receiver = $groupId;
+            $message->sender = 0;
+            $message->content = "Aucun message";
+            $message->forgroup = 1;
 
-            return $queryResult;
+            $queryResult = $message;
+
+        }
+
+        return $queryResult;
 
     }
 
@@ -203,9 +203,8 @@ class Message extends Model
             ->get();
 
         $msgList = [];
-        foreach ($query as $msgSQL)
-        {
-            $msgList[]=$msgSQL;
+        foreach ($query as $msgSQL) {
+            $msgList[] = $msgSQL;
         }
         return $msgList;
     }
@@ -226,7 +225,7 @@ class Message extends Model
 
     public function getLimitDesc($limit)
     {
-        $query=DB::table('messages')
+        $query = DB::table('messages')
             ->select('*')
             ->limit($limit)
             ->orderByDesc('id')
@@ -234,5 +233,16 @@ class Message extends Model
 
 
         return $query;
+    }
+
+    public function getCountUnread($userID)
+    {
+        $query = DB::table('messages')
+            ->select('*')
+            ->where('receiver', $userID)
+            ->where('isread', '=', 0)
+            ->get();
+
+        return count($query);
     }
 }
