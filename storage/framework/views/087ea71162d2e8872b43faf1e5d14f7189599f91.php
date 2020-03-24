@@ -29,7 +29,7 @@
                                                    class="list-group-item list-group-item-action">
                                                     <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                         <span
-                                                            class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                     <?php endif; ?>
                                                     <div class="media">
                                                         <div class="mask">
@@ -80,7 +80,7 @@
                                                    class="list-group-item list-group-item-action">
                                                     <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
                                                         <span
-                                                            class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                     <?php endif; ?>
                                                     <div class="media">
                                                         <div class="mask">
@@ -181,6 +181,7 @@
 
         <?php $__currentLoopData = $listMessages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $message): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php $__currentLoopData = $usersInfos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
                 <?php if($message->sender == $userInfo->id): ?>
                     <?php if($message->sender != auth()->id()): ?>
                         <!-- Message Reçu-->
@@ -200,6 +201,20 @@
                                 <div class="oneMessage media-body ml-3">
                                     <a href="#" style="text-decoration: none;" class="no-hover">
                                         <p style="color: gray; font-weight: bold"><?php echo e($userInfo->fname); ?> <?php echo e($userInfo->lname); ?></p>
+
+                                        <div>
+                                            <a href="#" style="text-decoration: none;">
+                                            <i class="fas fa-radiation"></i>
+                                            </a>
+                                            <a href="#" style="text-decoration: none;">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </a>
+                                            <a href="#" style="text-decoration: none;">
+                                            <i class="fas fa-ban"></i>
+                                            </a>
+                                        </div>
+
+
                                     </a>
                                     <div class="bg-light rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 text-muted"><?php echo e($message->content); ?></p>
@@ -322,7 +337,7 @@
             color: #999;
         }
 
-        .badge {
+        .badge-mes{
             font-size: 0;
             width: 13px;
             height: 13px;
@@ -366,7 +381,7 @@
                 transition: all 0.5s;
             }
 
-            .badge {
+            .badge-mes {
                 font-size: 0;
                 width: 8px;
                 height: 8px;

@@ -51,12 +51,15 @@
                         <div class="h-50 p-3" style="height: 30vh!important; overflow-y: scroll!important;">
 
 
-                            <?php $__currentLoopData = $listEvent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__empty_1 = true; $__currentLoopData = $listEvent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                 <a href="<?php echo e(url('/events/show')); ?>/<?php echo e($event->id); ?>"
                                    style="text-decoration: none; color: inherit;">
                                     <div class="p-4 shadow-sm mt-2">
                                         <h5><?php echo e($event->name); ?></h5>
                                         <p class="text-muted"><?php echo str_replace('\n','</p><p class="text-muted">',$event->description); ?></p>
+                                        <?php if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s')): ?>
+                                            <span class="badge badge-primary glow-primary">En cours</span>
+                                        <?php endif; ?>
                                         <p style="text-transform: capitalize">
                                             à <?php echo e($event->numstreet); ?> <?php echo e($event->street); ?></p>
                                         <p><?php echo e($event->zip); ?> - <?php echo e($event->city); ?></p>
@@ -77,7 +80,27 @@
                                         <?php endif; ?>
                                     </div>
                                 </a>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                <?php if((new \App\Group)->getAdmin($group->id)->id == auth()->id()): ?>
+                                    <div class="p-3 shadow-sm mt-2">
+                                        <div class="card-body text-center">
+                                            <p class="lead">Il n'y a pas encore d'événements</p>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <a href="<?php echo e(url('/events/create')); ?>"
+                                               class="btn btn-primary mx-auto">
+                                                Créer votre premier événement
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="p-1 shadow-sm mt-2">
+                                        <div class="card-body text-center lead">
+                                            Le groupe n'a pas encore d'événement.
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </div>
 
                         <hr class="mx-4 my-2">
@@ -91,18 +114,18 @@
                                     <?php echo e((new \App\Group)->getAdmin($group->id)->fname); ?> <?php echo e((new \App\Group)->getAdmin($group->id)->lname); ?>
 
                                 </a>
+                                <a href="<?php echo e(url('/messages/user/'.$group->admin)); ?>">
+                                    <span class="badge badge-secondary">Contacter</span>
+                                </a>
                             </small>
                         </div>
 
 
-                        <div class="d-flex justify-content-between px-5 mt-4">
+                        <div class="row justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le <?php echo e($group->datecreate); ?></small></p>
                             <div class="float-right mr-5">
                                 <?php if($group->admin == auth()->id()): ?>
                                     <div class="row justify-content-end">
-                                        <small class="text-muted blockquote-footer m-1">
-                                            Vous êtes administrateur du groupe.
-                                        </small>
                                         <a href="<?php echo e(url('/groups/delete/'.$group->id)); ?>" class="btn btn-danger m-1">
                                             <i class="fas fa-trash-alt"></i>
                                             Supprimer <?php echo e($group->name); ?>

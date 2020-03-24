@@ -31,7 +31,7 @@
                                                    class="list-group-item list-group-item-action">
                                                     @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
                                                         <span
-                                                            class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                     @endif
                                                     <div class="media">
                                                         <div class="mask">
@@ -54,14 +54,12 @@
                                                                 <h6 class="mb-0"> {{$infoConversation->fname}} {{$infoConversation->lname}}  </h6>
 
                                                             </div>
-                                                            <div><i class="fas fa-arrow-circle-right"></i></div>
                                                             <p style="overflow: hidden;height: 3vh;"
                                                                class="font-italic mb-0 text-small lastMessageContent">
                                                                 {{ $lastMessage->content}}
                                                             </p>
                                                             <small style="color: dimgrey"
                                                                    class="small font-weight-lighter lastMessageDate"> {{$lastMessage->date}}</small>
-                                                            <div><i class="fas fa-cog align-self-end"></i></div>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -85,7 +83,7 @@
                                                class="list-group-item list-group-item-action">
                                                 @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
                                                     <span
-                                                        class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                        class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                 @endif
                                                 <div class="media">
                                                     <div class="mask">
@@ -325,7 +323,7 @@
             color: #999;
         }
 
-        .badge {
+        .badge-mes {
             font-size: 0;
             width: 13px;
             height: 13px;
