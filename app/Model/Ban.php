@@ -15,6 +15,17 @@ class Ban extends Model
         'description'
     ];
 
+    public function isBan($userId, $groupId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banned', '=', $userId)
+            ->where('banisher', '=', $groupId)
+            ->get();
+        return $query->count() > 0;
+    }
+
 
     public function getAll()
     {
@@ -63,4 +74,17 @@ class Ban extends Model
 
         return $query;
     }
+
+    public function remove($parId)
+    {
+        try {
+            $query = DB::table('bans')
+                ->delete($parId);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
+
 }

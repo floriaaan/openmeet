@@ -113,11 +113,12 @@ class User extends Authenticatable
 
     }
 
-    public function getLastSub($userID,$groupID){
+    public function getLastSub($userID, $groupID)
+    {
         $query = DB::table('subscriptions')
             ->select('*')
             ->where('user', "=", $userID)
-            ->where('group', '=',$groupID)
+            ->where('group', '=', $groupID)
             ->latest()
             ->limit(1)
             ->get();

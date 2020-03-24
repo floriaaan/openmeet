@@ -20,9 +20,9 @@ if(Setting('openmeet.apidoc')) {
     \Mpociot\ApiDoc\ApiDoc::routes();
 }
 
-Route::post('/install', 'HomeController@installPost');
+    Route::post('/install', 'HomeController@installPost');
 
-Route::group(['middleware' => 'notifications'], function () {
+    Route::group(['middleware' => 'notifications'], function () {
 //HOME Routes
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@home')->name('home');
@@ -34,8 +34,10 @@ Route::group(['middleware' => 'notifications'], function () {
     Route::get('/user/show/{userID}', 'UserController@show');
     Route::get('/user/edit', 'UserController@editForm')->middleware('auth');
     Route::post('/user/edit', 'UserController@edit')->middleware('auth');
-    Route::get('/user/ban/', 'UserController@ban')->middleware('auth');
-    Route::get('/user/block/', 'UserController@block')->middleware('auth');
+    Route::get('/user/ban/{userID}', 'UserController@banForm')->middleware('auth');
+    Route::post('/user/ban/', 'UserController@banPost')->middleware('auth');
+    Route::get('/user/block/{userID}', 'UserController@blockForm')->middleware('auth');
+    Route::post('/user/block/', 'UserController@blockPost')->middleware('auth');
     Route::get('/user/report/{userID}', 'UserController@reportForm')->middleware('auth');
     Route::post('/user/report/', 'UserController@reportPost')->middleware('auth');
     Route::get('/user/groups', 'SubscriptionController@showGroups');
@@ -64,6 +66,9 @@ Route::group(['middleware' => 'notifications'], function () {
     Route::get('/admin/reports/show/{reportID}', 'AdminController@showReport');
     Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
     Route::get('/admin/blocks/show/{blockID}', 'AdminController@showBlock');
+    Route::get('/admin/blocks/delete/{blockID}', 'AdminController@deleteBlock');
+    Route::get('/admin/bans/show/{banID}', 'AdminController@showBan');
+    Route::get('/admin/bans/delete/{banID}', 'AdminController@deleteBan');
     Route::get('/admin/roles/{user_id}', 'AdminController@rolesForm');
     Route::post('/admin/roles/', 'AdminController@rolesPost');
 
@@ -119,14 +124,14 @@ Route::group(['middleware' => 'notifications'], function () {
 
 });
 //Legal Routes
-Route::get('/legal/cgu', 'LegalController@cgu');
+    Route::get('/legal/cgu', 'LegalController@cgu');
 
 
-Route::get('/debug/mail', function (){
+    Route::get('/debug/mail', function (){
    return view('emails.eventcreated', ['event' => (new \App\Event)->getOne(3)]);
 });
 
-Route::get('/debug/install', function (){
+    Route::get('/debug/install', function (){
     return view('install.form');
 });
 
