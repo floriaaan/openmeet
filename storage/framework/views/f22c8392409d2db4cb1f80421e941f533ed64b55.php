@@ -62,59 +62,63 @@
                         <!-- Conversations de groupe -->
                             <span style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
                             <hr class="mx-5 my-2">
-                            <?php $__currentLoopData = $groupLastMessages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($lastMessage->receiver == $infoConversation->id): ?>
-                                        <div
-                                            <?php if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()): ?> style="border-bottom-color: <?php echo e(setting('openmeet.color')); ?>;border-bottom-width: 2px;"
-                                            <?php endif; ?> class="card border-bottom-fmm mb-1">
+                            <?php $__currentLoopData = $groupConcernedNotifs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $concernedNotif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $groupLastMessages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($lastMessage->id == $concernedNotif->concerned): ?>
+                                            <?php if($lastMessage->receiver == $infoConversation->id): ?>
+                                                <div
+                                                    <?php if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0): ?> style="border-bottom-color: <?php echo e(setting('openmeet.color')); ?>;border-bottom-width: 2px;"
+                                                    <?php endif; ?> class="card border-bottom-fmm mb-1">
 
-                                            <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>"
-                                               class="list-group-item list-group-item-action">
-                                                <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
-                                                    <span
-                                                        class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                                <?php endif; ?>
-                                                <div class="media">
-                                                    <div class="mask">
-                                                        <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
-                                                            <img width="50" style="top:50%"
-                                                                 alt="Photo du groupe : <?php echo e($infoConversation->name); ?>"
-                                                                 src="<?php echo e(url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)); ?>">
-                                                        <?php else: ?>
-                                                            <i class="fas fa-users fa-2x"></i>
-                                                            <div>
-                                                                <small
-                                                                    style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
-                                                                    de photo</small>
-                                                            </div>
+                                                    <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>"
+                                                       class="list-group-item list-group-item-action">
+                                                        <?php if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0): ?>
+                                                            <span
+                                                                class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                         <?php endif; ?>
-                                                    </div>
-
-                                                    <div class="media-body ml-4">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-between mb-1">
-
-                                                            <h6 class="mb-0"><?php echo e($infoConversation->name); ?> </h6>
-
-                                                        </div>
-                                                        <p class="font-italic mb-0 text-small">
-                                                            <?php $__currentLoopData = $groupLastMessagesInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <?php if($lastMessageInfo->id == $lastMessage->sender): ?>
-                                                                    <span><?php echo e($lastMessageInfo->fname); ?> <?php echo e($lastMessageInfo->lname); ?> : </span> <?php echo e($lastMessage->content); ?>
-
+                                                        <div class="media">
+                                                            <div class="mask">
+                                                                <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
+                                                                    <img width="50" style="top:50%"
+                                                                         alt="Photo du groupe : <?php echo e($infoConversation->name); ?>"
+                                                                         src="<?php echo e(url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)); ?>">
+                                                                <?php else: ?>
+                                                                    <i class="fas fa-users fa-2x"></i>
+                                                                    <div>
+                                                                        <small
+                                                                            style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
+                                                                            de photo</small>
+                                                                    </div>
                                                                 <?php endif; ?>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        </p>
-                                                        <?php if($lastMessage->sender != 0): ?>
-                                                            <small style="color: dimgrey"
-                                                                   class="small font-weight-lighter"> <?php echo e($lastMessage->date); ?></small>
-                                                        <?php endif; ?>
-                                                    </div>
+                                                            </div>
+
+                                                            <div class="media-body ml-4">
+                                                                <div
+                                                                    class="d-flex align-items-center justify-content-between mb-1">
+
+                                                                    <h6 class="mb-0"><?php echo e($infoConversation->name); ?> </h6>
+
+                                                                </div>
+                                                                <p class="font-italic mb-0 text-small">
+                                                                    <?php $__currentLoopData = $groupLastMessagesInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <?php if($lastMessageInfo->id == $lastMessage->sender): ?>
+                                                                            <span><?php echo e($lastMessageInfo->fname); ?> <?php echo e($lastMessageInfo->lname); ?> : </span> <?php echo e($lastMessage->content); ?>
+
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </p>
+                                                                <?php if($lastMessage->sender != 0): ?>
+                                                                    <small style="color: dimgrey"
+                                                                           class="small font-weight-lighter"> <?php echo e($lastMessage->date); ?></small>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php $__currentLoopData = $groupWithoutLastMessage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $withoutMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -191,12 +195,12 @@
 
         .extended {
             margin-left: -2vw;
-            width: 85vw;
+            width: 65vw;
             transition: all 0.5s;
         }
 
         .unextended {
-            width: 15vw;
+            width: 35vw;
             transition: all 0.5s;
         }
 

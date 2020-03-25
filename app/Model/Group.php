@@ -27,9 +27,22 @@ class Group extends Model
         $query = DB::table('groups')
             ->select('*')
             ->where('id', '=', $groupId)
+            ->limit(1)
             ->get();
 
         return $query[0];
+
+    }
+
+    public function getOneAdmin($adminID)
+    {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('admin','=',$adminID)
+            ->limit(1)
+            ->get();
+
+        return $query;
 
     }
 

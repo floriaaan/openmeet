@@ -894,7 +894,7 @@
                                     <td>{{strftime("%d %b %Y",strtotime($ban['ban']->date))}}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{url('/group/admin/bans/'.$ban['ban']->id)}}"
+                                            <a href="{{url('/groups/admin/bans/delete/'.$ban['ban']->id)}}"
                                                class="btn btn-secondary">
                                                 <i class="fas fa-user-slash"></i>
                                                 Débannir

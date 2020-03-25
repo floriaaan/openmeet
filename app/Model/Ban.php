@@ -41,10 +41,9 @@ class Ban extends Model
     }
 
 
-
     public function getCount()
     {
-        $query=DB::table('bans')
+        $query = DB::table('bans')
             ->select('*')
             ->get();
 
@@ -55,7 +54,7 @@ class Ban extends Model
 
     public function getCountGroup($groupId)
     {
-        $query=DB::table('bans')
+        $query = DB::table('bans')
             ->select('*')
             ->where('banisher', $groupId)
             ->get();
@@ -65,23 +64,25 @@ class Ban extends Model
 
     }
 
-    public function getGroup($groupID) {
-        $query=DB::table('bans')
+    public function getGroup($groupID)
+    {
+        $query = DB::table('bans')
             ->select('*')
             ->where('banisher', $groupID)
             ->get();
         return $query;
     }
 
-    public function remove($parId)
+    public function remove($banID)
     {
         try {
             $query = DB::table('bans')
-                ->delete($parId);
+                ->delete($banID);
             return true;
         } catch (\Exception $e) {
             return $e;
         }
+
 
     }
 

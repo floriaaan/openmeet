@@ -34,7 +34,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/user/show/{userID}', 'UserController@show');
     Route::get('/user/edit', 'UserController@editForm')->middleware('auth');
     Route::post('/user/edit', 'UserController@edit')->middleware('auth');
-    Route::get('/user/ban/{userID}', 'UserController@banForm')->middleware('auth');
+    Route::get('/user/ban/{groupID}/{userID}', 'UserController@banForm')->middleware('auth');
     Route::post('/user/ban/', 'UserController@banPost')->middleware('auth');
     Route::get('/user/block/{userID}', 'UserController@blockForm')->middleware('auth');
     Route::post('/user/block/', 'UserController@blockPost')->middleware('auth');
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
     Route::get('/admin/blocks/show/{blockID}', 'AdminController@showBlock');
     Route::get('/admin/blocks/delete/{blockID}', 'AdminController@deleteBlock');
-    Route::get('/admin/bans/show/{banID}', 'AdminController@showBan');
+    Route::get('/admin/bans/show/{banID}/', 'AdminController@showBan');
     Route::get('/admin/bans/delete/{banID}', 'AdminController@deleteBan');
     Route::get('/admin/roles/{user_id}', 'AdminController@rolesForm');
     Route::post('/admin/roles/', 'AdminController@rolesPost');
@@ -99,10 +99,10 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
 //Gestion GROUP routes
     Route::get('/groups/admin/', 'AdminGroupController@chooseGroup');
     Route::post('/groups/admin/', 'AdminGroupController@showPanel');
-
     Route::post('/groups/admin/subscriptions/list', 'AdminGroupController@listSub');
     Route::post('/groups/admin/bans/list', 'AdminGroupController@listBan');
     Route::post('/groups/admin/events/list', 'AdminGroupController@listEvent');
+    Route::get('/groups/admin/bans/delete/{banID}', 'AdminGroupController@deleteBan');
     Route::get('/groups/admin/transfer/{group_id}/{user_id}', 'AdminGroupController@transferRolesConfirm');
     Route::post('/groups/admin/transfer','AdminGroupController@transferRolesPost');
 

@@ -84,5 +84,18 @@ class Block extends Model
         return $query->count() > 0;
     }
 
+    public function remove($blockID)
+    {
+        try {
+            $query = DB::table('blocks')
+                ->delete($blockID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+
+    }
+
 
 }

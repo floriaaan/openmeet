@@ -153,5 +153,12 @@ class AdminGroupController extends Controller
         return redirect('/groups/show/' . $post['group']);
     }
 
+    public function deleteBan($banID)
+    {
+        (new Ban)->remove($banID);
+        return redirect('/groups/admin');
+    }
+
+
 
 }

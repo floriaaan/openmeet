@@ -117,6 +117,15 @@
 
                         </form>
 
+                        <?php if(!empty((new \App\Group)->getByAdmin(auth()->id()))): ?>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Modération de groupe</h6>
+                            <a class="dropdown-item" href="<?php echo e(url('/groups/admin/')); ?>">
+                                <i class="fas fa-tools"></i>
+                                Panneau de modération
+                            </a>
+                        <?php endif; ?>
+
                         <?php if(auth()->user()->isadmin): ?>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
@@ -125,15 +134,6 @@
                                 Panneau d'administration
                             </a>
                         <?php endif; ?>
-                        <?php if(!empty((new \App\Group)->getByAdmin(auth()->id()))): ?>
-                            <div class="dropdown-divider"></div>
-                            <h6 class="dropdown-header">Modération</h6>
-                            <a class="dropdown-item" href="<?php echo e(url('/groups/admin/')); ?>">
-                                <i class="fas fa-tools"></i>
-                                Panneau de modération
-                            </a>
-                        <?php endif; ?>
-
                     </div>
                 <?php else: ?>
                     <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
