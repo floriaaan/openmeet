@@ -65,6 +65,14 @@ class Ban extends Model
 
     }
 
+    public function getGroup($groupID) {
+        $query=DB::table('bans')
+            ->select('*')
+            ->where('banisher', $groupID)
+            ->get();
+        return $query;
+    }
+
     public function remove($parId)
     {
         try {
