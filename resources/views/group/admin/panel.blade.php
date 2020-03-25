@@ -327,5 +327,75 @@
 
 
     </div>
+    <hr class="my-5">
+    <div>
+        <h4 id="users" class="my-5">Membres (5 derniers Membres)</h4>
+        <div class="table-responsive">
+
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+                </thead>
+
+            </table>
+
+            <a href="{{url('/admin/users/')}}" class="btn btn-primary float-right">Voir plus</a>
+        </div>
+
+        <hr class="my-5">
+
+        <h4 id="bans" class="my-5">Bannissement des utilisateurs (10 derniers Bannissements)</h4>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Concerné</th>
+                    <th scope="col">Créé le</th>
+                    <th scope="col">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @if(!empty($banList))
+
+                    @foreach($banList as $ban)
+
+                        <tr>
+                            <td>#{{ $ban['ban']->id }}</td>
+                            <td>{{ $ban['banned']->fname }} {{ $ban['banned']->lname }}</td>
+                            <td>{{ $ban['ban']->date }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a class="btn btn-success"
+                                       href="/admin/bans/show/{{ $ban['ban']->id }}">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+
+                                    <a class="btn btn-danger"
+                                       href="/admin/bans/delete/{{ $ban['ban']->id }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    @endforeach
+                @endif
+
+                </tbody>
+            </table>
+
+            <a href="{{url('/admin/bans/')}}" class="btn btn-primary float-right">Voir plus</a>
+        </div>
 @endsection
 

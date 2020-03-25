@@ -63,7 +63,8 @@ class AdminGroupController extends Controller
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
-                'banned' => (new User)->getOne($ban->banned),
+                'ban'=> $ban,
+                'banned' => (new User)->getOne($ban->banned)
             ];
         }
 
