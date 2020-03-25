@@ -15,7 +15,7 @@
             <form method="post" action="{{url('/groups/admin/')}}">
                 @csrf
 
-                <div class="input-group mt-2">
+                <div class="input-group">
 
                     <div class="input-group-prepend">
                         <span class="input-group-text">Groupe</span>
@@ -38,11 +38,17 @@
 
             </form>
 
+            <a class="btn btn-secondary mx-2"
+               href="{{url('/groups/edit/'.$groupChosen)}}">
+                <i class="fas fa-pencil-alt"></i>
+                Editer {{(new \App\Group)->getOne($groupChosen)->name}}
+            </a>
+
         </div>
     </div>
     <hr class="mx-5 my-2">
     <div class="container-fluid px-5">
-        <div class="row p-5" id="events">
+        <div class="row p-lg-5" id="events">
             <div class="col-md-4">
                 <div class="row justify-content-center">
                     <svg id="53917d2c-59b7-443c-9dc6-ca37ebed1a74" data-name="Layer 1"
@@ -347,7 +353,7 @@
 
         <hr class="mx-5 my-2">
 
-        <div class="row justify-content-between p-5" id="sub">
+        <div class="row justify-content-between p-lg-5">
             <div class="col-md-8">
                 <div class="row align-content-center p-4 h-100"
                      style="overflow-x: scroll!important; white-space: nowrap;">
@@ -357,26 +363,33 @@
                         @forelse($subList as $sub)
                             <a href="{{url('/user/show')}}/{{$sub['user']->id}}"
                                style="text-decoration: none; color: inherit;">
-                            <li class="list-inline-item">
-                                <div class="card p-5">
-                                    <div class="media">
-                                        @if($sub['user']->picname != null)
-                                            <div class="overflow-hidden">
-                                                <img
-                                                    alt="Photo"
-                                                    src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
-                                                    class="mr-3" width="auto" height="30px">
+                                <li class="list-inline-item">
+                                    <div class="card p-5">
+                                        <div class="media">
+                                            @if($sub['user']->picname != null)
+                                                <div class="overflow-hidden">
+                                                    <img
+                                                        alt="Photo"
+                                                        src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
+                                                        class="mr-3" width="auto" height="30px">
+                                                </div>
+                                            @endif
+                                            <div class="media-body">
+
+                                                <h5 class="mt-0">{{$sub['user']->fname}} {{$sub['user']->lname}}</h5>
+
+
+                                                <small class="text-muted">
+                                                    Abonné(e)
+                                                    le {{strftime("%A %d %b %Y",strtotime($sub['sub']->date))}}
+                                                </small>
                                             </div>
-                                        @endif
-                                        <div class="media-body">
-                                            <h5 class="mt-0">{{$sub['user']->fname}} {{$sub['user']->lname}}</h5>
-                                            <small class="text-muted">
-                                                Abonné(e) le {{strftime("%A %d %b %Y",strtotime($sub['sub']->date))}}
-                                            </small>
                                         </div>
+
                                     </div>
-                                </div>
-                            </li>
+
+                                </li>
+                            </a>
                         @empty
                             <li class="list-inline-item">
                                 <p class="lead justify-content-center align-content-center">Aucun abonné(e)</p>
@@ -584,7 +597,7 @@
 
         <hr class="mx-5 my-2">
 
-        <div class="row justify-content-between p-5" id="sub">
+        <div class="row justify-content-between p-lg-5" id="sub">
             <div class="col-md-4">
 
                 <div class="row justify-content-center">

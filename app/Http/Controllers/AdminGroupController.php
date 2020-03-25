@@ -81,7 +81,8 @@ class AdminGroupController extends Controller
 
     }
 
-    public function listEvent(Request $request) {
+    public function listEvent(Request $request)
+    {
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
@@ -95,10 +96,11 @@ class AdminGroupController extends Controller
 
         }
 
-        return view('group.admin.event.list',['list' => $listEvent, 'group' => $groupChosen]);
+        return view('group.admin.event.list', ['list' => $listEvent, 'group' => $groupChosen]);
     }
 
-    public function listSub(Request $request) {
+    public function listSub(Request $request)
+    {
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
@@ -111,11 +113,12 @@ class AdminGroupController extends Controller
             ];
         }
 
-        return view('group.admin.subscription.list',['list' => $listSub, 'group' => $groupChosen]);
+        return view('group.admin.subscription.list', ['list' => $listSub, 'group' => $groupChosen]);
 
     }
 
-    public function listBan(Request $request) {
+    public function listBan(Request $request)
+    {
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
@@ -128,8 +131,26 @@ class AdminGroupController extends Controller
             ];
         }
 
-        return view('group.admin.ban.list',['list' => $listBan, 'group' => $groupChosen]);
+        return view('group.admin.ban.list', ['list' => $listBan, 'group' => $groupChosen]);
 
+    }
+
+    public function transferRolesConfirm($groupID, $userID)
+    {
+
+        return view('group.admin.transfer', [
+            'group' => (new Group)->getOne($groupID),
+            'user' => (new User)->getOne($userID)
+        ]);
+
+    }
+
+    public function transferRolesPost(Request $request)
+    {
+        $post = $request->input();
+
+        (new Group)->updateAdmin($post['group'], $post['user']);
+        return redirect('/groups/show/' . $post['group']);
     }
 
 

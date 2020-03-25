@@ -103,6 +103,8 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::post('/groups/admin/subscriptions/list', 'AdminGroupController@listSub');
     Route::post('/groups/admin/bans/list', 'AdminGroupController@listBan');
     Route::post('/groups/admin/events/list', 'AdminGroupController@listEvent');
+    Route::get('/groups/admin/transfer/{group_id}/{user_id}', 'AdminGroupController@transferRolesConfirm');
+    Route::post('/groups/admin/transfer','AdminGroupController@transferRolesPost');
 
 
 //EVENTS routes

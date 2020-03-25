@@ -71,7 +71,14 @@
                         </div>
 
                         <div class="row justify-content-end p-5">
-                            <button type="submit" class="btn btn-primary mr-3">
+                            <a class="btn btn-secondary float-right mx-4" style="color: white"
+                               onclick="event.preventDefault();document.getElementById('return').submit()">
+                                <i class="fas fa-tools"></i>
+                                Panneau de gestion
+                            </a>
+
+                            <button type="submit" class="btn btn-primary mx-4">
+                                <i class="fas fa-pencil-alt"></i>
                                 Modifier {{$group->name}}
                             </button>
                         </div>
@@ -85,6 +92,10 @@
         </form>
     </div>
 
+    <form action="{{url('/groups/admin/')}}" method="POST" class="d-none" id="return">
+        @csrf
+        <input type="hidden" name="pGroup" value="{{$group->id}}">
+    </form>
 @endsection
 
 @section('js')

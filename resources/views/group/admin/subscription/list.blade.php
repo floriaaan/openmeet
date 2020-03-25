@@ -28,6 +28,7 @@
                     <th scope="col">Nom</th>
 
                     <th scope="col">Date d'abonnement</th>
+                    <th scope="col">Lui transférer le groupe</th>
 
 
                 </tr>
@@ -40,6 +41,12 @@
                         <td>#{{ $sub['sub']->id }}</td>
                         <td>{{ $sub['user']->fname }} {{ $sub['user']->lname }}</td>
                         <td>{{strftime("%A %d %b %Y",strtotime($sub['sub']->date))}}</td>
+                        <td>
+                            <a href="{{url('/groups/admin/transfer')}}/{{$group}}/{{$sub['user']->id}}"
+                               class="btn btn-success">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </td>
 
                     </tr>
 
@@ -47,6 +54,7 @@
                     <tr>
                         <td>❎</td>
                         <td>❎ Aucun abonné(e)</td>
+                        <td>❎</td>
                         <td>❎</td>
 
                     </tr>
