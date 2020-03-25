@@ -273,49 +273,58 @@
             </div>
 
             <div class="col-md-8">
-                <div class="row align-content-center p-2" style="overflow-x: scroll!important;">
-                    @forelse($eventList as $e)
-                        <div class="card shadow-sm p-5">
-                            <div class="media">
-                                @if($e['event']->picname != null)
-                                    <img
-                                        src="{{url('/storage/upload/image/'.$e['event']->picrepo.'/'.$e['event']->picname)}}"
-                                        class="mr-3 hvr-grow" alt="Photo de {{$e['event']->name}}">
-                                @endif
-                                <div class="media-body">
-                                    <div class="row my-1 justify-content-between">
-                                        <h5 class="" style="font-size: 1rem!important;">{{$e['event']->name}}</h5>
-
-                                    </div>
-
-                                    <p>{!! str_replace('\\n','<br>',$e['event']->description) !!}</p>
-                                    <small class="text-muted">
-                                        aura lieu le
-                                        <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->datefrom))}}
-                                            à {{strftime("%R",strtotime($e['event']->datefrom))}}</cite>
-                                        @if($e['event']->dateto != null)
-
-
-                                            jusqu'au <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->dateto))}}
-                                                à {{strftime("%R",strtotime($e['event']->dateto))}}</cite>
-
+                <div class="row align-content-center p-4" style="overflow-x: scroll!important; white-space: nowrap;">
+                    <ul class="list-inline mr-5">
+                        @forelse($eventList as $e)
+                            <li class="list-inline-item">
+                                <div class="card shadow-sm p-5">
+                                    <div class="media">
+                                        @if($e['event']->picname != null)
+                                            <img
+                                                src="{{url('/storage/upload/image/'.$e['event']->picrepo.'/'.$e['event']->picname)}}"
+                                                class="mr-3 hvr-grow" alt="Photo"
+                                                width="auto" height="70px">
                                         @endif
+                                        <div class="media-body">
+                                            <div class="row my-1 justify-content-between">
+                                                <h5 class=""
+                                                    style="font-size: 1rem!important;">{{$e['event']->name}}</h5>
 
-                                    </small>
-                                    <hr class="mx-4 my-1">
-                                    <div class="row justify-content-between mt-2">
-                                        <small>Participations : {{count($e['participations'])}}</small>
-                                        @if($e['event']->datefrom <= date('Y-m-d H:i:s') && $e['event']->dateto > date('Y-m-d H:i:s'))
-                                            <span class="badge badge-primary glow-primary">En cours</span>
-                                        @endif
+                                            </div>
+
+                                            <p>{!! str_replace('\\n','<br>',$e['event']->description) !!}</p>
+                                            <small class="text-muted">
+                                                aura lieu le
+                                                <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->datefrom))}}
+                                                    à {{strftime("%R",strtotime($e['event']->datefrom))}}</cite>
+                                                @if($e['event']->dateto != null)
+
+
+                                                    jusqu'au
+                                                    <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->dateto))}}
+                                                        à {{strftime("%R",strtotime($e['event']->dateto))}}</cite>
+
+                                                @endif
+
+                                            </small>
+                                            <hr class="mx-4 my-1">
+                                            <div class="row justify-content-between mt-2">
+                                                <small>Participations : {{count($e['participations'])}}</small>
+                                                @if($e['event']->datefrom <= date('Y-m-d H:i:s') && $e['event']->dateto > date('Y-m-d H:i:s'))
+                                                    <span class="badge badge-primary glow-primary">En cours</span>
+                                                @endif
+                                            </div>
+
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        </div>
-                    @empty
-                        <p class="lead justify-content-center align-content-center">Aucun événement</p>
-                    @endforelse
+                            </li>
+                        @empty
+                            <li class="list-inline-item">
+                                <p class="lead justify-content-center align-content-center">Aucun événement</p>
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
                 @if(!empty($eventList))
                     <div class="row justify-content-end mt-2">
@@ -337,30 +346,38 @@
 
         <div class="row justify-content-between p-5" id="sub">
             <div class="col-md-8">
-                <div class="row align-content-center p-2 h-100" style="overflow-x: scroll!important; white-space: nowrap; width: 100vh!important;">
+                <div class="row align-content-center p-4 h-100"
+                     style="overflow-x: scroll!important; white-space: nowrap;">
+                    <ul class="list-inline mr-5">
 
-                    @forelse($subList as $sub)
-                        <div class="card p-5">
-                            <div class="media">
-                                @if($sub['user']->picname != null)
-                                    <div class="overflow-hidden">
-                                        <img
-                                            alt="Photo"
-                                            src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
-                                            class="mr-3" width="40px" height="40px">
+
+                        @forelse($subList as $sub)
+                            <li class="list-inline-item">
+                                <div class="card p-5">
+                                    <div class="media">
+                                        @if($sub['user']->picname != null)
+                                            <div class="overflow-hidden">
+                                                <img
+                                                    alt="Photo"
+                                                    src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
+                                                    class="mr-3" width="auto" height="70px">
+                                            </div>
+                                        @endif
+                                        <div class="media-body">
+                                            <h5 class="mt-0">{{$sub['user']->fname}} {{$sub['user']->lname}}</h5>
+                                            <small class="text-muted">
+                                                Abonné(e) le {{strftime("%A %d %b %Y",strtotime($sub['sub']->date))}}
+                                            </small>
+                                        </div>
                                     </div>
-                                @endif
-                                <div class="media-body">
-                                    <h5 class="mt-0">{{$sub['user']->fname}} {{$sub['user']->lname}}</h5>
-                                    <small class="text-muted">
-                                        Abonné(e) le {{strftime("%A %d %b %Y",strtotime($sub['sub']->date))}}
-                                    </small>
                                 </div>
-                            </div>
-                        </div>
-                    @empty
-                        <p class="lead justify-content-center align-content-center">Aucun abonné(e)</p>
-                    @endforelse
+                            </li>
+                        @empty
+                            <li class="list-inline-item">
+                                <p class="lead justify-content-center align-content-center">Aucun abonné(e)</p>
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
                 @if(!empty($subList))
                     <div class="row justify-content-end mt-2">
@@ -877,7 +894,6 @@
                             @endforelse
                             </tbody>
                         </table>
-
 
 
                     </div>
