@@ -100,11 +100,9 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/groups/admin/', 'AdminGroupController@chooseGroup');
     Route::post('/groups/admin/', 'AdminGroupController@showPanel');
 
-    Route::get('/groups/admin/subscriptions/', 'AdminGroupController@listSubscription');
-    Route::get('/groups/admin/groups/', 'AdminGroupController@listGroup');
-    Route::get('/groups/admin/reports/', 'AdminGroupController@listReport');
-    Route::get('/groups/admin/bans/', 'AdminGroupController@listBan');
-    Route::get('/groups/admin/events/', 'AdminGroupController@listEvent');
+    Route::post('/groups/admin/subscriptions/list', 'AdminGroupController@listSub');
+    Route::post('/groups/admin/bans/list', 'AdminGroupController@listBan');
+    Route::post('/groups/admin/events/list', 'AdminGroupController@listEvent');
 
 
 //EVENTS routes

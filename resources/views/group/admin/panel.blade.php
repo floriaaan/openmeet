@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title')
-    Administration
+    Gestion de groupe
 @endsection
 
 @section('content')
@@ -337,7 +337,7 @@
 
         <div class="row justify-content-between p-5" id="sub">
             <div class="col-md-8">
-                <div class="row align-content-center p-2 h-100" style="overflow-x: scroll!important;">
+                <div class="row align-content-center p-2 h-100" style="overflow-x: scroll!important; white-space: nowrap; width: 100vh!important;">
 
                     @forelse($subList as $sub)
                         <div class="card p-5">
@@ -858,7 +858,7 @@
                                     <td>{{strftime("%d %b %Y",strtotime($ban['ban']->date))}}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{url('/group/admin/ban/'.$ban['ban']->id)}}"
+                                            <a href="{{url('/group/admin/bans/'.$ban['ban']->id)}}"
                                                class="btn btn-secondary">
                                                 <i class="fas fa-user-slash"></i>
                                                 Débannir
@@ -878,21 +878,21 @@
                             </tbody>
                         </table>
 
-                        @if(!empty($banList))
-                            <div class="row justify-content-end mt-2">
-                                <a onclick="event.preventDefault();document.getElementById('ban').submit()"
-                                   class="btn btn-primary mr-3" style="color: white;">
-                                    Voir plus
-                                </a>
-                                <form action="{{url('/groups/admin/ban/list')}}" method="POST" id="ban"
-                                      class="d-none"> @csrf
-                                    <input type="hidden" name="groupChosen" value="{{$groupChosen}}">
-                                </form>
-                            </div>
-                        @endif
 
 
                     </div>
+                    @if(!empty($banList))
+                        <div class="row justify-content-end mt-2">
+                            <a onclick="event.preventDefault();document.getElementById('ban').submit()"
+                               class="btn btn-primary mr-3" style="color: white;">
+                                Voir plus
+                            </a>
+                            <form action="{{url('/groups/admin/bans/list')}}" method="POST" id="ban"
+                                  class="d-none"> @csrf
+                                <input type="hidden" name="groupChosen" value="{{$groupChosen}}">
+                            </form>
+                        </div>
+                    @endif
                 </div>
 
 

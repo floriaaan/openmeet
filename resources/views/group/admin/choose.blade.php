@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Gestion de groupe
+@endsection
+
 @section('content')
 
     <div class="container">

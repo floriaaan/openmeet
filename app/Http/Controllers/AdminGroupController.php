@@ -10,6 +10,8 @@ use App\Http\Requests\GroupPanelChooseRequest;
 use App\Participation;
 use App\Subscription;
 use App\User;
+use Illuminate\Http\Request;
+
 
 class AdminGroupController extends Controller
 {
@@ -76,6 +78,57 @@ class AdminGroupController extends Controller
             'groupChosen' => $groupChosen
         ]);
 
+
+    }
+
+    public function listEvent(Request $request) {
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
+
+        $rawListEvent = (new Event)->getByGroup($groupChosen);
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'participations' => (new Participation)->getEvent($event->id),
+            ];
+
+        }
+
+        return view('group.admin.event.list',['list' => $listEvent, 'group' => $groupChosen]);
+    }
+
+    public function listSub(Request $request) {
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
+
+        $rawListSub = (new Subscription)->getGroup($groupChosen);
+        $listSub = [];
+        foreach ($rawListSub as $sub) {
+            $listSub[] = [
+                'user' => (new User)->getOne($sub->user),
+                'sub' => $sub
+            ];
+        }
+
+        return view('group.admin.subscription.list',['list' => $listSub, 'group' => $groupChosen]);
+
+    }
+
+    public function listBan(Request $request) {
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
+
+        $rawListBan = (new Ban)->getGroup($groupChosen);
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banned' => (new User)->getOne($ban->banned)
+            ];
+        }
+
+        return view('group.admin.ban.list',['list' => $listBan, 'group' => $groupChosen]);
 
     }
 
