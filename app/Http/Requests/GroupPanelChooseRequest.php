@@ -25,6 +25,7 @@ class GroupPanelChooseRequest extends FormRequest
     {
         return [
             'pGroup' =>""
+
         ];
     }
 }

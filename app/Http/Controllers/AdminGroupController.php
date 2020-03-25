@@ -55,6 +55,7 @@ class AdminGroupController extends Controller
                 'event' => $event,
                 'participations' => (new Participation)->getEvent($event->id)
             ];
+
         }
 
         $rawListBan = (new Ban)->getGroup($groupChosen);

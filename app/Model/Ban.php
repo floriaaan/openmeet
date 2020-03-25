@@ -85,4 +85,31 @@ class Ban extends Model
 
     }
 
+    public function getLimitDesc($limit)
+    {
+        {
+            $query = DB::table('bans')
+                ->select('*')
+                ->limit($limit)
+                ->orderByDesc('id')
+                ->get();
+
+
+            return $query;
+        }
+    }
+
+    public function getLimitGroupDesc($userID, $limit)
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banisher', $userID)
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
 }
