@@ -34,6 +34,18 @@ class Group extends Model
 
     }
 
+    public function getOneAdmin($adminID)
+    {
+        $query = DB::table('groups')
+            ->select('*')
+            ->where('admin','=',$adminID)
+            ->limit(1)
+            ->get();
+
+        return $query;
+
+    }
+
     public function updateAdmin($groupId, $newAdmin)
     {
         $query = DB::table('groups')

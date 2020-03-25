@@ -132,5 +132,12 @@ class AdminGroupController extends Controller
 
     }
 
+    public function deleteBan($banID)
+    {
+        (new Ban)->remove($banID);
+        return redirect('/groups/admin');
+    }
+
+
 
 }

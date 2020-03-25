@@ -354,6 +354,12 @@ class AdminController extends Controller
         return view('admin.bans.show', ['ban' => $ban]);
     }
 
+    public function deleteBan($banID)
+    {
+        (new Ban)->remove($banID);
+        return redirect('/admin');
+    }
+
     public function search(SearchRequest $request)
     {
         $post = $request->input();

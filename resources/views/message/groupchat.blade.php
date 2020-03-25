@@ -216,10 +216,12 @@
                                             </a>
 
                                                 @if($groupInfo->admin == auth()->id())
-                                                    <a href="{{url('/user/ban/'.$userInfo->id)}}"
+
+                                                    <a href="{{url('/user/ban/')}}/{{$groupInfo->id}}/{{$userInfo->id}}"
                                                        style="text-decoration: none;">
                                                         <i class="fas fa-ban"></i>
                                                     </a>
+
                                                 @endif
 
                                         </div>
