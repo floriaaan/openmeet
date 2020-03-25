@@ -142,8 +142,9 @@ class UserController extends Controller
     }
 
 
-    public function banForm($userID,$groupID)
+    public function banForm($groupID,$userID)
     {
+
         return view('user.ban.form', [
             'banisher' => (new Group)->getOne($groupID),
             'banned' => (new User)->getOne($userID)
