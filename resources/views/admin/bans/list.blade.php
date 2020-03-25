@@ -1,10 +1,15 @@
 @extends('layouts.nav')
 
+
+@section('title')
+    Bannissements
+@endsection
+
 @section('content')
 
     <div class="container">
 
-        <h4 id="bans" class="my-5">Bannissement des utilisateurs </h4>
+        <h4 id="bans" class="my-5">Bannissements des utilisateurs </h4>
 
         <a class="btn btn-link float-right mr-5"
            href="{{url('/admin')}}">

@@ -51,16 +51,36 @@ class MessageController extends Controller
             }
 
             $notifType = 'mes';
-            $notifTitle = 'Nouveau message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
             $notifContent = "Contenu du message : " . $contentExtract;
 
-            (new Notification)->CreateNotification($notifType, $notifTitle, $message->receiver, $notifContent, $message->id);
+            if($post['mForgroup'] == 0) {
+                $notifTitle = 'Nouveau message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
+                (new Notification)->CreateNotification($notifType, $notifTitle, $message->receiver, $notifContent, $message->id);
+            }
+            if($post['mForgroup'] == 1){
+                $group=new Group();
+                $infoGroup = $group->getOne($post['mReceiver']);
+                var_dump($infoGroup);
+                $sub = new Subscription();
+                $listSubs = $sub->getGroup($post['mReceiver']);
+                $listReceiver = [];
+                foreach ($listSubs as $oneSub){
+                    if($oneSub->user != auth()->id()) {
+                        $listReceiver[] = $oneSub->user;
+                    }
+                }
+                $notifTitle = '['.$infoGroup->name.']'.'Message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
 
-            //TODO : envoyer un notification pour un message de groupe
+                foreach ($listReceiver as $receiver) {
+                    (new Notification)->CreateNotification($notifType, $notifTitle, $receiver, $notifContent, $message->id);
+                }
+            }
+
 
             if ($post['mForgroup'] == 1) {
                 return redirect('/messages/group/' . $post['mReceiver']);
-            } else {
+            }
+            else {
                 return redirect('/messages/user/' . $post['mReceiver']);
             }
         }
@@ -73,6 +93,7 @@ class MessageController extends Controller
     {
 
         $userId = auth()->id();
+
 
         //=============================================================
         //Liste des conversations
@@ -158,7 +179,7 @@ class MessageController extends Controller
         if ($typeConversation == 'group') {
 
             if (auth()->user()->isBan(auth()->user()->id, $correspondant)) {
-                return abort(403, 'BAN ACTIF');
+                return abort(403, 'Vous avez été banni');
             }
 
             $group = new Group();
@@ -210,6 +231,26 @@ class MessageController extends Controller
             $listMessages = $message->getPersonalChat($correspondant);
             $user = new User();
             $userInfo = $user->getOne($correspondant);
+            $listNotifs = [];
+            foreach ($listMessages as $mes) {
+                if ($mes->receiver == auth()->id()) {
+                    $message = new Message();
+                    $message->MakeReaded($mes->id);
+                    $notif = new Notification();
+                    $listNotifs[] = $notif->GetByConcernedMessage($mes->id);
+                }
+            }
+
+            if (!empty($listNotifs)) {
+                foreach ($listNotifs as $Notif) {
+                    if ($Notif->isread == 0) {
+                        NotificationController::MakeReadedNotification($Notif->id);
+
+                    } else {
+
+                    }
+                }
+            }
 
             return view('message.userchat', [
                 "personalInfoConversations" => $personalInfoConversations,
@@ -222,6 +263,8 @@ class MessageController extends Controller
                 "userInfo" => $userInfo,
             ]);
 
+        } else {
+            return 0;
         }
     }
 
@@ -283,12 +326,12 @@ class MessageController extends Controller
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
                     $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
-
+                    $notif = new Notification();
+                    $concernedNotif = $notif->GetByConcernedMessage($groupLastMessage->id);
                 }
             } catch (\Exception $e) {
             }
         }
-
         //Tri des tableaux des derniers messages de groupe par id<=>date d'envoi
         krsort($groupLastMessages);
 
@@ -317,4 +360,5 @@ class MessageController extends Controller
             ]);
 
     }
+
 }
