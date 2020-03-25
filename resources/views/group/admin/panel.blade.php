@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between mx-3">
 
             <div class="mx-1">
                 <p class="lead">Gestion de {{$group->name}}</p>
@@ -327,7 +327,7 @@
                     </ul>
                 </div>
                 @if(!empty($eventList))
-                    <div class="row justify-content-end mt-2">
+                    <div class="row justify-content-end my-2">
                         <a onclick="event.preventDefault();document.getElementById('eve').submit()"
                            class="btn btn-primary mr-3" style="color: white;">
                             Voir plus
@@ -379,10 +379,11 @@
                         @endforelse
                     </ul>
                 </div>
+
                 @if(!empty($subList))
-                    <div class="row justify-content-end mt-2">
+                    <div class="row justify-content-end">
                         <a onclick="event.preventDefault();document.getElementById('sub').submit()"
-                           class="btn btn-primary mr-3" style="color: white;">
+                           class="btn btn-primary mr-3 my-2" style="color: white; z-index: 3000">
                             Voir plus
                         </a>
                         <form action="{{url('/groups/admin/subscriptions/list')}}" method="POST" id="sub"
@@ -396,7 +397,7 @@
 
             <div class="col-md-4">
 
-                <div class="row justify-content-center">
+                <div class="row mt-sm-5 justify-content-center">
                     <svg id="f5754dbe-bb36-43e2-9e63-0bb9c441defe" data-name="Layer 1"
                          xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1184.11 743.5"><title>
                             team page</title>
