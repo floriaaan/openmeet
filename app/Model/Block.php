@@ -63,6 +63,15 @@ class Block extends Model
         return $query;
     }
 
+    public function getOne($userId)
+    {
+        $query = DB::table('blocks')
+            ->select('*')
+            ->where('id', '=', $userId)
+            ->limit(1)
+            ->get();
+        return $query[0];
+    }
 
     public function isBlock($userId, $blockId)
     {

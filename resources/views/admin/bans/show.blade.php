@@ -15,12 +15,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4">Concerné</div>
-                    <div class="col-lg-8">{{$report['banned']->fname}} {{$report['banned']->lname}}</div>
+                    <div class="col-lg-8">{{$ban['banned']->fname}} {{$ban['banned']->lname}}</div>
                 </div>
                 <hr class="mx-3">
                 <div class="row">
                     <div class="col-lg-4">Emetteur</div>
-                    <div class="col-lg-8">{{$report['banisher']->name}}</div>
+                    <div class="col-lg-8">{{$ban['banisher']->name}}</div>
                 </div>
                 <hr class="mx-3 my-4">
                 <div class="row">
