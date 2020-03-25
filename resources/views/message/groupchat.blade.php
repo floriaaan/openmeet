@@ -198,19 +198,25 @@
                                 </div>
 
                                 <div class="oneMessage media-body ml-3">
-                                    <a href="#" style="text-decoration: none;" class="no-hover">
+                                    <a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;"
+                                       class="no-hover">
                                         <p style="color: gray; font-weight: bold">{{$userInfo->fname}} {{$userInfo->lname}}</p>
 
                                         <div>
-                                            <a href="#" style="text-decoration: none;">
-                                            <i class="fas fa-radiation"></i>
+                                            <a href="{{url('/user/report/'.$userInfo->id)}}"
+                                               style="text-decoration: none;">
+                                                <i class="fas fa-radiation"></i>
                                             </a>
-                                            <a href="#" style="text-decoration: none;">
+                                            <a href="{{url('/user/block/'.$userInfo->id)}}"
+                                               style="text-decoration: none;">
                                                 <i class="fas fa-shield-alt"></i>
                                             </a>
-                                            <a href="#" style="text-decoration: none;">
-                                            <i class="fas fa-ban"></i>
-                                            </a>
+                                            @if(auth()->user()->isadmin)
+                                                <a href="{{url('/user/ban/'.$userInfo->id)}}"
+                                                   style="text-decoration: none;">
+                                                    <i class="fas fa-ban"></i>
+                                                </a>
+                                            @endif
                                         </div>
 
 
@@ -336,7 +342,7 @@
             color: #999;
         }
 
-        .badge-mes{
+        .badge-mes {
             font-size: 0;
             width: 13px;
             height: 13px;
@@ -370,12 +376,13 @@
                 max-height: 10vh;
                 background-color: dimgrey;
             }
-            .extended{
+
+            .extended {
                 width: 80vw;
                 transition: all 0.5s;
             }
 
-            .unextended{
+            .unextended {
                 width: 20vw;
                 transition: all 0.5s;
             }
