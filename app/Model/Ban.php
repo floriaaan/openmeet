@@ -112,4 +112,14 @@ class Ban extends Model
         return $query;
     }
 
+    public function getOne($banID)
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('id', '=', $banID)
+            ->limit(1)
+            ->get();
+        return $query[0];
+    }
+
 }

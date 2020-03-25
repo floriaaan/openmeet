@@ -235,7 +235,6 @@ class AdminController extends Controller
         $bans = (new Ban);
         $groups = (new Group);
         $rawListBan = $bans->getAll();
-
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
@@ -251,7 +250,8 @@ class AdminController extends Controller
     public function listBlock()
     {
         $user = (new User);
-        $rawlistBlock = (new Block)->getAll();
+        $block = (new Block);
+        $rawlistBlock = $block ->getAll();
 
         foreach ($rawlistBlock as $block) {
             $listBLock[] = [
@@ -259,7 +259,6 @@ class AdminController extends Controller
                 'blocker' => $user->getOne($block->blocker),
                 'target' => $user->getOne($block->target),
             ];
-
         }
         return view('admin.blocks.list', ['blockList' => $listBLock]);
     }
@@ -335,7 +334,6 @@ class AdminController extends Controller
             'blocker' => (new User)->getOne($blocks->blocker),
             'target' => (new User)->getOne($blocks->target),
         ];
-        (new Block)->read($blockID);
         return view('admin.blocks.show', ['block' => $block]);
     }
 
@@ -343,6 +341,17 @@ class AdminController extends Controller
     {
         (new Block)->remove($blockID);
         return redirect('/admin');
+    }
+
+    public function showBan($banID)
+    {
+        $bans= (new Ban)->getOne($banID);
+        $ban = [
+            'ban' => $bans,
+            'banisher' => (new Group)->getOne($bans->banisher),
+            'banned' => (new User)->getOne($bans->banned),
+        ];
+        return view('admin.bans.show', ['ban' => $ban]);
     }
 
     public function search(SearchRequest $request)
