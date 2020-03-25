@@ -151,7 +151,7 @@ class EventController extends Controller
         return view('event.edit', ['event' => (new Event)->getOne($eventID)]);
     }
 
-    public function editPost(EventCreateRequest $request)
+    public function editPost(Request $request)
     {
         $post = $request->input();
         $event = (new Event)->getOne($post['eventID']);
@@ -167,8 +167,8 @@ class EventController extends Controller
         $event->posx = $post['elon'];
         $event->posy = $post['elat'];
         $event->description = $post['eDesc'];
-
         if ($request->file('ePic') != null) {
+
             if (!Storage::exists('public/upload/image/' . $event->picrepo . '/' . $event->picname)) {
                 Storage::delete('public/upload/image/' . $event->picrepo . '/' . $event->picname);
             }

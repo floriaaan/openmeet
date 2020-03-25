@@ -17,10 +17,21 @@
             <div class="row no-gutters">
 
                 <div class="card-body">
-                    <h5 class="card-title display-4">{{$event->name}}</h5>
-                    @if($event->description != null)
-                        <h5 class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>
-                    @endif
+                    <div class="media mb-3">
+                        @if($event->picname != null)
+                            <img
+                                src="{{url('/storage/upload/image/'.$event->picrepo.'/'.$event->picname)}}"
+                                class="mr-3 hvr-grow" alt="Photo"
+                                width="auto" height="100px">
+                        @endif
+                        <div class="media-body">
+                            <h5 class="card-title display-4">{{$event->name}}</h5>
+                            @if($event->description != null)
+                                <h5 class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>
+                            @endif
+                        </div>
+                    </div>
+
                     @if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s'))
                         <span class="badge badge-primary glow-primary">En cours</span>
                     @endif

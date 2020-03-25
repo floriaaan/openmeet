@@ -276,49 +276,52 @@
                 <div class="row align-content-center p-4" style="overflow-x: scroll!important; white-space: nowrap;">
                     <ul class="list-inline mr-5">
                         @forelse($eventList as $e)
-                            <li class="list-inline-item">
-                                <div class="card shadow-sm p-5">
-                                    <div class="media">
-                                        @if($e['event']->picname != null)
-                                            <img
-                                                src="{{url('/storage/upload/image/'.$e['event']->picrepo.'/'.$e['event']->picname)}}"
-                                                class="mr-3 hvr-grow" alt="Photo"
-                                                width="auto" height="30px">
-                                        @endif
-                                        <div class="media-body">
-                                            <div class="row my-1 justify-content-between">
-                                                <h5 class=""
-                                                    style="font-size: 1rem!important;">{{$e['event']->name}}</h5>
+                            <a href="{{url('/events/show')}}/{{$e['event']->id}}"
+                               style="text-decoration: none; color: inherit;">
+                                <li class="list-inline-item">
+                                    <div class="card shadow-sm p-5">
+                                        <div class="media">
+                                            @if($e['event']->picname != null)
+                                                <img
+                                                    src="{{url('/storage/upload/image/'.$e['event']->picrepo.'/'.$e['event']->picname)}}"
+                                                    class="mr-3 hvr-grow" alt="Photo"
+                                                    width="auto" height="30px">
+                                            @endif
+                                            <div class="media-body">
+                                                <div class="row my-1 justify-content-between">
+                                                    <h5 class=""
+                                                        style="font-size: 1rem!important;">{{$e['event']->name}}</h5>
+
+                                                </div>
+
+                                                <p>{!! str_replace('\\n','<br>',$e['event']->description) !!}</p>
+                                                <small class="text-muted">
+                                                    aura lieu le
+                                                    <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->datefrom))}}
+                                                        à {{strftime("%R",strtotime($e['event']->datefrom))}}</cite>
+                                                    @if($e['event']->dateto != null)
+
+
+                                                        jusqu'au
+                                                        <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->dateto))}}
+                                                            à {{strftime("%R",strtotime($e['event']->dateto))}}</cite>
+
+                                                    @endif
+
+                                                </small>
+                                                <hr class="mx-4 my-1">
+                                                <div class="row justify-content-between mt-2">
+                                                    <small>Participations : {{count($e['participations'])}}</small>
+                                                    @if($e['event']->datefrom <= date('Y-m-d H:i:s') && $e['event']->dateto > date('Y-m-d H:i:s'))
+                                                        <span class="badge badge-primary glow-primary">En cours</span>
+                                                    @endif
+                                                </div>
 
                                             </div>
-
-                                            <p>{!! str_replace('\\n','<br>',$e['event']->description) !!}</p>
-                                            <small class="text-muted">
-                                                aura lieu le
-                                                <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->datefrom))}}
-                                                    à {{strftime("%R",strtotime($e['event']->datefrom))}}</cite>
-                                                @if($e['event']->dateto != null)
-
-
-                                                    jusqu'au
-                                                    <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->dateto))}}
-                                                        à {{strftime("%R",strtotime($e['event']->dateto))}}</cite>
-
-                                                @endif
-
-                                            </small>
-                                            <hr class="mx-4 my-1">
-                                            <div class="row justify-content-between mt-2">
-                                                <small>Participations : {{count($e['participations'])}}</small>
-                                                @if($e['event']->datefrom <= date('Y-m-d H:i:s') && $e['event']->dateto > date('Y-m-d H:i:s'))
-                                                    <span class="badge badge-primary glow-primary">En cours</span>
-                                                @endif
-                                            </div>
-
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            </a>
                         @empty
                             <li class="list-inline-item">
                                 <p class="lead justify-content-center align-content-center">Aucun événement</p>
@@ -352,6 +355,8 @@
 
 
                         @forelse($subList as $sub)
+                            <a href="{{url('/user/show')}}/{{$sub['user']->id}}"
+                               style="text-decoration: none; color: inherit;">
                             <li class="list-inline-item">
                                 <div class="card p-5">
                                     <div class="media">
