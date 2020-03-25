@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\MessageCreateRequest;
 use Composer\Command\BaseDependencyCommand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -22,6 +23,12 @@ class Message extends Model
         'isread',
         'forgroup',
     ];
+
+    public function MakeReaded($id){
+        $query = DB::table('messages')
+            ->where('id', '=', $id)
+            ->update(['isread' => 1]);
+    }
 
     public function getGroupChat($groupId)
     {

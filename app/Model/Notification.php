@@ -18,6 +18,7 @@ class Notification extends Model
     ];
 
 
+
     public function getAll()
     {
         $query = DB::table('notifications')
@@ -107,6 +108,16 @@ class Notification extends Model
         $notif->type = $type;
 
         $notif->push();
+    }
+
+    public function GetByConcernedMessage($concerned){
+        $query = DB::table('notifications')
+            ->select('*')
+            ->where('type','=','mes')
+            ->where('concerned','=',$concerned)
+            ->get();
+            $Notif=$query[0];
+        return $Notif;
     }
 
 }
