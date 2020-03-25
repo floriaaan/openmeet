@@ -53,23 +53,22 @@ class MessageController extends Controller
             $notifType = 'mes';
             $notifContent = "Contenu du message : " . $contentExtract;
 
-            if($post['mForgroup'] == 0) {
+            if ($post['mForgroup'] == 0) {
                 $notifTitle = 'Nouveau message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
                 (new Notification)->CreateNotification($notifType, $notifTitle, $message->receiver, $notifContent, $message->id);
             }
-            if($post['mForgroup'] == 1){
-                $group=new Group();
+            if ($post['mForgroup'] == 1) {
+                $group = new Group();
                 $infoGroup = $group->getOne($post['mReceiver']);
-                var_dump($infoGroup);
                 $sub = new Subscription();
                 $listSubs = $sub->getGroup($post['mReceiver']);
                 $listReceiver = [];
-                foreach ($listSubs as $oneSub){
-                    if($oneSub->user != auth()->id()) {
+                foreach ($listSubs as $oneSub) {
+                    if ($oneSub->user != auth()->id()) {
                         $listReceiver[] = $oneSub->user;
                     }
                 }
-                $notifTitle = '['.$infoGroup->name.']'.'Message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
+                $notifTitle = '[' . $infoGroup->name . ']' . 'Message de ' . auth()->user()->fname . ' ' . auth()->user()->lname;
 
                 foreach ($listReceiver as $receiver) {
                     (new Notification)->CreateNotification($notifType, $notifTitle, $receiver, $notifContent, $message->id);
@@ -79,8 +78,7 @@ class MessageController extends Controller
 
             if ($post['mForgroup'] == 1) {
                 return redirect('/messages/group/' . $post['mReceiver']);
-            }
-            else {
+            } else {
                 return redirect('/messages/user/' . $post['mReceiver']);
             }
         }
@@ -149,6 +147,15 @@ class MessageController extends Controller
                     $user = new User();
                     $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
                 }
+                if ($groupLastMessage->sender != auth()->id()) {
+                    $notif = new Notification();
+                    $concernedNotifs [] = $notif->GetByConcernedMessage($groupLastMessage->id);
+                }
+                else{
+                    $notif = new Notification();
+                    $notif->concerned = $groupLastMessage->id;
+                    $concernedNotifs[]=$notif;
+                }
             } catch (\Exception $e) {
             }
         }
@@ -190,9 +197,29 @@ class MessageController extends Controller
             //Si c'est une discussion personnelle
 
             $listUsers = [];
-            foreach ($listMessages as $message) {
-                $listUsers[] = $message->sender;
+            $listNotifs = [];
+            foreach ($listMessages as $mes) {
+                $listUsers[] = $mes->sender;
+                if ($mes->sender != auth()->id()) {
+                    $message = new Message();
+                    $message->MakeReaded($mes->id);
+                    $notif = new Notification();
+                    $listNotifs[] = $notif->GetByConcernedMessage($mes->id);
+                }
             }
+
+            if (!empty($listNotifs)) {
+                foreach ($listNotifs as $Notif) {
+                    if ($Notif != null) {
+                        if ($Notif->isread == 0) {
+                            NotificationController::MakeReadedNotification($Notif->id);
+                        } else {
+
+                        }
+                    }
+                }
+            }
+
             $listUsers = array_unique($listUsers);
             $usersInfos = [];
             foreach ($listUsers as $id) {
@@ -221,7 +248,8 @@ class MessageController extends Controller
                 "groupWithoutLastMessage" => $groupWithoutLastMessage,
                 "listMessages" => $listMessages,
                 "usersInfos" => $usersInfos,
-                "groupInfo" => $groupInfo
+                "groupInfo" => $groupInfo,
+                "groupConcernedNotifs" => $concernedNotifs
             ]);
         }
         if ($typeConversation == 'user') {
@@ -253,6 +281,7 @@ class MessageController extends Controller
             }
 
             return view('message.userchat', [
+                "userInfo" => $userInfo,
                 "personalInfoConversations" => $personalInfoConversations,
                 "personalLastMessages" => $personalLastMessages,
                 "groupLastMessagesInfo" => $groupLastMessagesInfo,
@@ -260,7 +289,7 @@ class MessageController extends Controller
                 "groupInfoConversations" => $groupConversations,
                 "groupWithoutLastMessage" => $groupWithoutLastMessage,
                 "listMessages" => $listMessages,
-                "userInfo" => $userInfo,
+                "groupConcernedNotifs" => $concernedNotifs
             ]);
 
         } else {
@@ -269,7 +298,8 @@ class MessageController extends Controller
     }
 
 
-    public function showUserConversations()
+    public
+    function showUserConversations()
     {
         $userId = auth()->id();
         $conv = new Message();
@@ -321,13 +351,21 @@ class MessageController extends Controller
         }
 
         $groupLastMessagesInfo = [];
+        $concernedNotifs = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
                     $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+                }
+                if ($groupLastMessage->sender != auth()->id()) {
                     $notif = new Notification();
-                    $concernedNotif = $notif->GetByConcernedMessage($groupLastMessage->id);
+                    $concernedNotifs [] = $notif->GetByConcernedMessage($groupLastMessage->id);
+                }
+                else{
+                    $notif = new Notification();
+                    $notif->concerned = $groupLastMessage->id;
+                    $concernedNotifs[]=$notif;
                 }
             } catch (\Exception $e) {
             }
@@ -356,7 +394,8 @@ class MessageController extends Controller
                 "groupLastMessagesInfo" => $groupLastMessagesInfo,
                 "groupLastMessages" => $groupLastMessages,
                 "groupInfoConversations" => $groupConversations,
-                "groupWithoutLastMessage" => $groupWithoutLastMessage
+                "groupWithoutLastMessage" => $groupWithoutLastMessage,
+                "groupConcernedNotifs" => $concernedNotifs
             ]);
 
     }

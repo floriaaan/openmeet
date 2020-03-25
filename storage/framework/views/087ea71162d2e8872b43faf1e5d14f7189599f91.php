@@ -67,65 +67,68 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <!-- Conversations de groupe -->
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
                                 <hr class="mx-5 my-2">
-                                <?php $__currentLoopData = $groupLastMessages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($lastMessage->receiver == $infoConversation->id): ?>
-                                            <div
-                                                <?php if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()): ?> style="border-bottom-color: <?php echo e(setting('openmeet.color')); ?>;border-bottom-width: 2px;"
-                                                <?php endif; ?> class="card border-bottom-fmm mb-1">
+                                <?php $__currentLoopData = $groupConcernedNotifs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $concernedNotif): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $groupLastMessages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($lastMessage->id == $concernedNotif->concerned): ?>
+                                                <?php if($lastMessage->receiver == $infoConversation->id): ?>
+                                                    <div
+                                                        <?php if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0): ?> style="border-bottom-color: <?php echo e(setting('openmeet.color')); ?>;border-bottom-width: 2px;"
+                                                        <?php endif; ?> class="card border-bottom-fmm mb-1">
 
-                                                <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>"
-                                                   class="list-group-item list-group-item-action">
-                                                    <?php if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id()): ?>
-                                                        <span
-                                                            class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                                    <?php endif; ?>
-                                                    <div class="media">
-                                                        <div class="mask">
-                                                            <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
-                                                                <img width="50" style="top:50%"
-                                                                     alt="Photo du groupe : <?php echo e($infoConversation->name); ?>"
-                                                                     src="<?php echo e(url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)); ?>">
-                                                            <?php else: ?>
-                                                                <i class="fas fa-users fa-2x"></i>
-                                                                <div class="textNoPhoto">
-                                                                    <small
-                                                                        style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
-                                                                        de photo</small>
+                                                        <a href="/messages/group/<?php echo e($lastMessage->receiver); ?>"
+                                                           class="list-group-item list-group-item-action">
+                                                            <?php if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0): ?>
+                                                                <span
+                                                                    class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            <?php endif; ?>
+                                                            <div class="media">
+                                                                <div class="mask">
+                                                                    <?php if($infoConversation->picname != null && $infoConversation->picname != ''): ?>
+                                                                        <img width="50" style="top:50%"
+                                                                             alt="Photo du groupe : <?php echo e($infoConversation->name); ?>"
+                                                                             src="<?php echo e(url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)); ?>">
+                                                                    <?php else: ?>
+                                                                        <i class="fas fa-users fa-2x"></i>
+                                                                        <div>
+                                                                            <small
+                                                                                style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
+                                                                                de photo</small>
+                                                                        </div>
+                                                                    <?php endif; ?>
                                                                 </div>
-                                                            <?php endif; ?>
-                                                        </div>
 
-                                                        <div class="media-body ml-4">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between mb-1">
+                                                                <div class="media-body ml-4">
+                                                                    <div
+                                                                        class="d-flex align-items-center justify-content-between mb-1">
 
-                                                                <h6 class="mb-0"><?php echo e($infoConversation->name); ?> </h6>
+                                                                        <h6 class="mb-0"><?php echo e($infoConversation->name); ?> </h6>
 
-                                                            </div>
-                                                            <?php $__currentLoopData = $groupLastMessagesInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <?php if($lastMessageInfo->id == $lastMessage->sender): ?>
-                                                                    <p style="height: 3vh; overflow: hidden"
-                                                                       class="font-italic mb-0 text-small lastMessageContent">
-                                                                        <?php echo e($lastMessage->content); ?>
+                                                                    </div>
+                                                                    <p class="font-italic mb-0 text-small">
+                                                                        <?php $__currentLoopData = $groupLastMessagesInfo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lastMessageInfo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                            <?php if($lastMessageInfo->id == $lastMessage->sender): ?>
+                                                                                <span><?php echo e($lastMessageInfo->fname); ?> <?php echo e($lastMessageInfo->lname); ?> : </span> <?php echo e($lastMessage->content); ?>
 
+                                                                            <?php endif; ?>
+                                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                     </p>
-                                                                <?php endif; ?>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php if($lastMessage->sender != 0): ?>
-                                                                <small style="color: dimgrey"
-                                                                       class="small font-weight-lighter lastMessageDate"> <?php echo e($lastMessage->date); ?></small>
-                                                            <?php endif; ?>
-                                                        </div>
+                                                                    <?php if($lastMessage->sender != 0): ?>
+                                                                        <small style="color: dimgrey"
+                                                                               class="small font-weight-lighter"> <?php echo e($lastMessage->date); ?></small>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-                                                </a>
-                                            </div>
-                                        <?php endif; ?>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
                                 <hr class="mx-5 my-2">
                                 <?php $__currentLoopData = $groupWithoutLastMessage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $withoutMessage): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php $__currentLoopData = $groupInfoConversations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $infoConversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -199,19 +202,27 @@
                                 </div>
 
                                 <div class="oneMessage media-body ml-3">
-                                    <a href="#" style="text-decoration: none;" class="no-hover">
+                                    <a href="<?php echo e(url('/user/show/'.$userInfo->id)); ?>" style="text-decoration: none;"
+                                       class="no-hover">
                                         <p style="color: gray; font-weight: bold"><?php echo e($userInfo->fname); ?> <?php echo e($userInfo->lname); ?></p>
 
                                         <div>
-                                            <a href="#" style="text-decoration: none;">
-                                            <i class="fas fa-radiation"></i>
+                                            <a href="<?php echo e(url('/user/report/'.$userInfo->id)); ?>"
+                                               style="text-decoration: none;">
+                                                <i class="fas fa-radiation"></i>
                                             </a>
-                                            <a href="#" style="text-decoration: none;">
+                                            <a href="<?php echo e(url('/user/block/'.$userInfo->id)); ?>"
+                                               style="text-decoration: none;">
                                                 <i class="fas fa-shield-alt"></i>
                                             </a>
-                                            <a href="#" style="text-decoration: none;">
-                                            <i class="fas fa-ban"></i>
-                                            </a>
+
+                                                <?php if($groupInfo->admin == auth()->id()): ?>
+                                                    <a href="<?php echo e(url('/user/ban/'.$userInfo->id)); ?>"
+                                                       style="text-decoration: none;">
+                                                        <i class="fas fa-ban"></i>
+                                                    </a>
+                                                <?php endif; ?>
+
                                         </div>
 
 
@@ -245,7 +256,7 @@
                 <form action="/messages/create" method="post" class="bg-light">
                     <?php echo csrf_field(); ?>
                     <div class="input-group">
-                        <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
+                        <a href="/messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
                         <input value="" type="text" name="mContent" placeholder="Envoyer un message"
                                aria-describedby="button-addon2"
                                class="form-control rounded-0 border-0 py-4 bg-light" required>
@@ -337,7 +348,7 @@
             color: #999;
         }
 
-        .badge-mes{
+        .badge-mes {
             font-size: 0;
             width: 13px;
             height: 13px;
@@ -371,12 +382,13 @@
                 max-height: 10vh;
                 background-color: dimgrey;
             }
-            .extended{
+
+            .extended {
                 width: 80vw;
                 transition: all 0.5s;
             }
 
-            .unextended{
+            .unextended {
                 width: 20vw;
                 transition: all 0.5s;
             }

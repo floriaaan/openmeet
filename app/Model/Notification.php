@@ -111,13 +111,20 @@ class Notification extends Model
     }
 
     public function GetByConcernedMessage($concerned){
-        $query = DB::table('notifications')
-            ->select('*')
-            ->where('type','=','mes')
-            ->where('concerned','=',$concerned)
-            ->get();
-            $Notif=$query[0];
-        return $Notif;
+
+            $query = DB::table('notifications')
+                ->select('*')
+                ->where('type','=','mes')
+                ->where('concerned','=',$concerned)
+                ->where('user','=',auth()->id())
+                ->get();
+
+            if(isset($query[0])){
+                $Notif=$query[0];
+                return $Notif;
+            }else{
+                return null;
+            }
     }
 
 }
