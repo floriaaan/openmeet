@@ -10,7 +10,7 @@
         <form action="{{url('/user/ban')}}" class="" method="POST">
             @csrf
             <div class="card shadow-lg mx-auto">
-                <h5 class="display-4 p-3 ml-4 ">Bannir {{$banned->fname}} {{$banned->lname}}</h5>
+                <h5 class="display-4 p-3 ml-4 ">Bannir {{$banned->fname}} {{$banned->lname}} de {{$banisher->name}}</h5>
 
                 <hr class="mx-5 my-3">
                 <div class="form-group mx-5">
@@ -39,8 +39,8 @@
 
                 </div>
             </div>
-            <input type="hidden" name="Banisher" value="{{$banisher->id}}">
-            <input type="hidden" name="Banned" value="{{$banned->id}}">
+            <input type="hidden" name="banisher" value="{{$banisher->id}}">
+            <input type="hidden" name="banned" value="{{$banned->id}}">
         </form>
     </div>
 

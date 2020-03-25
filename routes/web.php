@@ -34,7 +34,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/user/show/{userID}', 'UserController@show');
     Route::get('/user/edit', 'UserController@editForm')->middleware('auth');
     Route::post('/user/edit', 'UserController@edit')->middleware('auth');
-    Route::get('/user/ban/{userID}', 'UserController@banForm')->middleware('auth');
+    Route::get('/user/ban/{userID}/{groupID}', 'UserController@banForm')->middleware('auth');
     Route::post('/user/ban/', 'UserController@banPost')->middleware('auth');
     Route::get('/user/block/{userID}', 'UserController@blockForm')->middleware('auth');
     Route::post('/user/block/', 'UserController@blockPost')->middleware('auth');
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/admin/reports/delete/{reportID}', 'AdminController@deleteReport');
     Route::get('/admin/blocks/show/{blockID}', 'AdminController@showBlock');
     Route::get('/admin/blocks/delete/{blockID}', 'AdminController@deleteBlock');
-    Route::get('/admin/bans/show/{banID}', 'AdminController@showBan');
+    Route::get('/admin/bans/show/{banID}/', 'AdminController@showBan');
     Route::get('/admin/bans/delete/{banID}', 'AdminController@deleteBan');
     Route::get('/admin/roles/{user_id}', 'AdminController@rolesForm');
     Route::post('/admin/roles/', 'AdminController@rolesPost');

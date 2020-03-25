@@ -211,12 +211,14 @@
                                                style="text-decoration: none;">
                                                 <i class="fas fa-shield-alt"></i>
                                             </a>
-                                            @if(auth()->user()->isadmin)
-                                                <a href="{{url('/user/ban/'.$userInfo->id)}}"
-                                                   style="text-decoration: none;">
-                                                    <i class="fas fa-ban"></i>
-                                                </a>
-                                            @endif
+
+                                                @if($groupInfo->admin == auth()->id())
+                                                    <a href="{{url('/user/ban/'.$userInfo->id)}}"
+                                                       style="text-decoration: none;">
+                                                        <i class="fas fa-ban"></i>
+                                                    </a>
+                                                @endif
+
                                         </div>
 
 
