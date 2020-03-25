@@ -38,7 +38,6 @@ class AdminGroupController extends Controller
 
         $listGroup = (new Group)->getByAdmin(auth()->user()->id);
         $listSub = (new Subscription)->getLimitGroupDesc($groupChosen, 5);
-
         $rawListEvent = (new Event)->getLimitGroupDesc($groupChosen, 5);
         $listEvent = [];
         foreach ($rawListEvent as $event) {
@@ -49,16 +48,22 @@ class AdminGroupController extends Controller
 
         }
 
-        $rawListUSer = (new User)->getLimitGroupDesc($groupChosen, 5);
+        $rawListUser = (new User)->getLimitGroupDesc($groupChosen, 5);
         $listUser = [];
-        foreach ($rawListUSer as $user) {
+        foreach ($rawListUser as $user) {
             $listUser[] = [
                 'user' => (new Subscription)->getAllSub($user->id)
             ];
-
         }
 
-        $listBan = (new Ban)->getCountGroup($groupChosen);
+        $rawListBan = (new Ban)->getLimitGroupDesc($groupChosen,10);
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'banned' => (new User)->getOne($ban->banned),
+            ];
+        }
+
         return view('group.admin.panel', [
             'group' => (new Group)->getOne($groupChosen),
             'groupList' => $listGroup,
@@ -67,6 +72,7 @@ class AdminGroupController extends Controller
             'banList' => $listBan,
             'userList' => $listUser,
             'groupChosen' => $groupChosen
+
         ]);
 
 
