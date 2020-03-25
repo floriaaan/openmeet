@@ -111,6 +111,23 @@
             border-color: var(--openmeet);
         }
 
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: {{setting('openmeet.color')}};
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
+
+
     </style>
 
     @if(Setting('openmeet.theme') == "night")
