@@ -314,7 +314,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="display-4 justify-content-center align-content-center">Aucun événement</p>
+                        <p class="lead justify-content-center align-content-center">Aucun événement</p>
                     @endforelse
                 </div>
                 @if(!empty($eventList))
@@ -359,7 +359,7 @@
                             </div>
                         </div>
                     @empty
-
+                        <p class="lead justify-content-center align-content-center">Aucun abonné(e)</p>
                     @endforelse
                 </div>
                 @if(!empty($subList))
@@ -368,7 +368,8 @@
                            class="btn btn-primary mr-3" style="color: white;">
                             Voir plus
                         </a>
-                        <form action="{{url('/groups/admin/subscriptions/list')}}" method="POST" id="sub" class="d-none"> @csrf
+                        <form action="{{url('/groups/admin/subscriptions/list')}}" method="POST" id="sub"
+                              class="d-none"> @csrf
                             <input type="hidden" name="groupChosen" value="{{$groupChosen}}">
                         </form>
                     </div>
@@ -883,7 +884,8 @@
                                    class="btn btn-primary mr-3" style="color: white;">
                                     Voir plus
                                 </a>
-                                <form action="{{url('/groups/admin/ban/list')}}" method="POST" id="ban" class="d-none"> @csrf
+                                <form action="{{url('/groups/admin/ban/list')}}" method="POST" id="ban"
+                                      class="d-none"> @csrf
                                     <input type="hidden" name="groupChosen" value="{{$groupChosen}}">
                                 </form>
                             </div>
@@ -897,11 +899,12 @@
             </div>
 
         </div>
-        @endsection
+    </div>
+@endsection
 
-        @section('css')
-            <style>
+@section('css')
+    <style>
 
-            </style>
+    </style>
 
 @endsection
