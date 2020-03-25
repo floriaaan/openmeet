@@ -283,7 +283,7 @@
                                             <img
                                                 src="{{url('/storage/upload/image/'.$e['event']->picrepo.'/'.$e['event']->picname)}}"
                                                 class="mr-3 hvr-grow" alt="Photo"
-                                                width="auto" height="70px">
+                                                width="auto" height="30px">
                                         @endif
                                         <div class="media-body">
                                             <div class="row my-1 justify-content-between">
@@ -360,7 +360,7 @@
                                                 <img
                                                     alt="Photo"
                                                     src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
-                                                    class="mr-3" width="auto" height="70px">
+                                                    class="mr-3" width="auto" height="30px">
                                             </div>
                                         @endif
                                         <div class="media-body">
