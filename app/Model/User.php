@@ -103,27 +103,6 @@ class User extends Authenticatable
 
     }
 
-    public function getCountUserByGroup()
-    {
-        $query = DB::table('users')
-            ->select('*')
-            ->get();
-
-        return $query->count();
-
-    }
-
-    public function getLastSub($userID, $groupID)
-    {
-        $query = DB::table('subscriptions')
-            ->select('*')
-            ->where('user', "=", $userID)
-            ->where('group', '=', $groupID)
-            ->latest()
-            ->limit(1)
-            ->get();
-        return $query;
-    }
 
 
     public function getAll()
@@ -138,6 +117,9 @@ class User extends Authenticatable
         }
         return $listUser;
     }
+
+
+
 
     public function remove($userID)
     {
@@ -175,6 +157,19 @@ class User extends Authenticatable
     {
         $query = DB::table('users')
             ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
+    public function getLimitGroupDesc($userID, $limit)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('id', $userID)
             ->limit($limit)
             ->orderByDesc('id')
             ->get();
@@ -251,5 +246,6 @@ class User extends Authenticatable
             ->where('id', $userID)
             ->update(['disabled' => !($user->disabled)]);
     }
+
 
 }

@@ -68,7 +68,7 @@
                                     @endforeach
                                 @endforeach
                             <!-- Conversations de groupe -->
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
                                 <hr class="mx-5 my-2">
                                 @foreach($groupLastMessages as $lastMessage)
                                     @foreach($groupInfoConversations as $infoConversation)
@@ -125,7 +125,7 @@
                                         @endif
                                     @endforeach
                                 @endforeach
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
                                 <hr class="mx-5 my-2">
                                 @foreach($groupWithoutLastMessage as $withoutMessage)
                                     @foreach($groupInfoConversations as $infoConversation)

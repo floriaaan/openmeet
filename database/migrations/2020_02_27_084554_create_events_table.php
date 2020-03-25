@@ -20,18 +20,18 @@ class CreateEventsTable extends Migration
                 ->references('id')
                 ->on('groups');
 
-            $table->string('name',128);
+            $table->string('name', 128);
             $table->dateTime('datefrom');
             $table->dateTime('dateto')->nullable();
-            $table->float('posx')->nullable();
-            $table->float('posy')->nullable();
-            $table->string('country',64)->nullable();
-            $table->string('city',64)->nullable();
-            $table->string('street',64)->nullable();
-            $table->string('numstreet',8)->nullable();
-            $table->string('zip',8)->nullable();
-            $table->string('picrepo',255)->nullable();
-            $table->string('picname',255)->nullable();
+            $table->double('posx', 12, 8)->nullable();
+            $table->double('posy', 12, 8)->nullable();
+            $table->string('country', 64)->nullable();
+            $table->string('city', 64)->nullable();
+            $table->string('street', 64)->nullable();
+            $table->string('numstreet', 8)->nullable();
+            $table->string('zip', 8)->nullable();
+            $table->string('picrepo', 255)->nullable();
+            $table->string('picname', 255)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
