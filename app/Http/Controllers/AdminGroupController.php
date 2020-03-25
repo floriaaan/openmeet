@@ -9,6 +9,7 @@ use App\Group;
 use App\Http\Requests\GroupPanelChooseRequest;
 use App\Participation;
 use App\Subscription;
+use App\User;
 
 class AdminGroupController extends Controller
 {
@@ -45,16 +46,26 @@ class AdminGroupController extends Controller
                 'event' => $event,
                 'participations' => (new Participation)->getEvent($event->id)
             ];
+
+        }
+
+        $rawListUSer = (new User)->getLimitGroupDesc($groupChosen, 5);
+        $listUser = [];
+        foreach ($rawListUSer as $user) {
+            $listUser[] = [
+                'user' => (new Subscription)->getAllSub($user->id)
+            ];
+
         }
 
         $listBan = (new Ban)->getCountGroup($groupChosen);
-
         return view('group.admin.panel', [
             'group' => (new Group)->getOne($groupChosen),
             'groupList' => $listGroup,
             'subList' => $listSub,
             'eventList' => $listEvent,
             'banList' => $listBan,
+            'userList' => $listUser,
             'groupChosen' => $groupChosen
         ]);
 

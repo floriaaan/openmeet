@@ -84,10 +84,9 @@ class Subscription extends Model
             ->select('*')
             ->where('user', "=", $userId)
             ->get();
-
         $listSubscription = [];
-        foreach ($query as $subcription) {
-            $listSubscription[] = $subcription;
+        foreach ($query as $subscription) {
+            $listSubscription[] = $subscription;
         }
         return $listSubscription;
     }
@@ -101,15 +100,6 @@ class Subscription extends Model
         return count($query);
     }
 
-    public function getLastSub($userID,$groupID){
-        $query = DB::table('subscriptions')
-            ->select('*')
-            ->where('user', "=", $userID)
-            ->where('group', '=',$groupID)
-            ->limit(1)
-            ->get();
-        return $query;
-    }
 
 
     public function updateAcceptNotif($subId, $value)
@@ -185,6 +175,22 @@ class Subscription extends Model
             ->get();
 
         return $query;
+    }
+
+
+
+    public function getAllSub($id)
+
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('group','=',$id)
+            ->get();
+        $listSub = [];
+        foreach ($query as $sub) {
+            $listSub[] = $sub;
+        }
+        return $listSub;
     }
 
 }

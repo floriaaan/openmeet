@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title')
-    Administration
+    Modération
 @endsection
 
 @section('content')
@@ -11,6 +11,11 @@
 
             <div class="mx-1">
                 <p class="lead">Gestion de {{$group->name}}</p>
+            </div>
+            <div class="mt-2">
+                @foreach($userList as $e)
+                    <small>Abonnement : {{count($e['user'])}}</small>
+                @endforeach
             </div>
             <form method="post" action="{{url('/groups/admin/')}}">
                 @csrf
@@ -308,6 +313,7 @@
                                     </small>
                                     <hr class="mx-4 my-1">
                                     <small>Participations : {{count($e['participations'])}}</small>
+
                                 </div>
                             </div>
                         </div>
@@ -315,6 +321,7 @@
                         <p class="display-4 justify-content-center align-content-center">Aucun événement</p>
                     @endforelse
                 </div>
+
             </div>
 
 

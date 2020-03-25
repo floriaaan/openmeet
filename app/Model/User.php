@@ -139,6 +139,8 @@ class User extends Authenticatable
         return $listUser;
     }
 
+
+
     public function remove($userID)
     {
 
@@ -175,6 +177,19 @@ class User extends Authenticatable
     {
         $query = DB::table('users')
             ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
+    public function getLimitGroupDesc($userID, $limit)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('id', $userID)
             ->limit($limit)
             ->orderByDesc('id')
             ->get();
@@ -251,5 +266,6 @@ class User extends Authenticatable
             ->where('id', $userID)
             ->update(['disabled' => !($user->disabled)]);
     }
+
 
 }
