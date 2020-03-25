@@ -103,27 +103,6 @@ class User extends Authenticatable
 
     }
 
-    public function getCountUserByGroup()
-    {
-        $query = DB::table('users')
-            ->select('*')
-            ->get();
-
-        return $query->count();
-
-    }
-
-    public function getLastSub($userID, $groupID)
-    {
-        $query = DB::table('subscriptions')
-            ->select('*')
-            ->where('user', "=", $userID)
-            ->where('group', '=', $groupID)
-            ->latest()
-            ->limit(1)
-            ->get();
-        return $query;
-    }
 
 
     public function getAll()
@@ -138,6 +117,7 @@ class User extends Authenticatable
         }
         return $listUser;
     }
+
 
 
 

@@ -13,9 +13,7 @@
                 <p class="lead">Gestion de {{$group->name}}</p>
             </div>
             <div class="mt-2">
-                @foreach($userList as $e)
-                    <small>Abonnement : {{count($e['user'])}}</small>
-                @endforeach
+
             </div>
             <form method="post" action="{{url('/groups/admin/')}}">
                 @csrf

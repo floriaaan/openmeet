@@ -48,13 +48,16 @@ class AdminGroupController extends Controller
 
         }
 
-        $rawListUser = (new User)->getLimitGroupDesc($groupChosen, 5);
+        $rawListUser = (new Subscription)->getLimitGroupDesc($groupChosen, 5);
         $listUser = [];
-        foreach ($rawListUser as $user) {
+        foreach ($rawListUser as $sub) {
             $listUser[] = [
-                'user' => (new Subscription)->getAllSub($user->id)
+
+                'user' => (new User)->getOne($sub->user),
+
             ];
         }
+
 
         $rawListBan = (new Ban)->getLimitGroupDesc($groupChosen,10);
         $listBan = [];
