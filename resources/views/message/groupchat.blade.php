@@ -244,7 +244,7 @@
                 <form action="/messages/create" method="post" class="bg-light">
                     @csrf
                     <div class="input-group">
-                        <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
+                        <a href="/messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
                         <input value="" type="text" name="mContent" placeholder="Envoyer un message"
                                aria-describedby="button-addon2"
                                class="form-control rounded-0 border-0 py-4 bg-light" required>

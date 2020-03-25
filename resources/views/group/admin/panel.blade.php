@@ -347,7 +347,7 @@
                                         <img
                                             alt="Photo"
                                             src="{{url('/storage/upload/image/'.$sub['user']->picrepo.'/'.$sub['user']->picname)}}"
-                                            class="mr-3 hvr-grow">
+                                            class="mr-3" width="40px" height="40px">
                                     </div>
                                 @endif
                                 <div class="media-body">
