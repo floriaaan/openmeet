@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
-        <div class="row justify-content-between mx-3" >
+        <div class="row justify-content-between mx-3">
 
             <div class="mx-1">
                 <p class="lead">Gestion de {{$group->name}}</p>
@@ -288,6 +288,10 @@
                         </svg>
                     </div>
                     <p class="text-center lead">Evenements du groupe</p>
+                    <a href="{{url('/events/create')}}"
+                       class="btn btn-primary ml-5 ">
+                        Créer un événement
+                    </a>
                 </div>
 
                 <div class="col-md-8">
@@ -362,7 +366,6 @@
                         </div>
                     @endif
                 </div>
-
 
             </div>
 
