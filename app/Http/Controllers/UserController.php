@@ -44,11 +44,16 @@ class UserController extends Controller
         foreach ($listParticipations as $participation) {
             $events[] = (new Event)->getOne($participation->event);
         }
+        $block = new Block();
+        $isBlocked = $block->isBlock($userID,auth()->id());
+
 
         return view('user.show', [
             'user' => (new User)->getOne(auth()->id()),
             'groups' => $groups,
             'events' => $events,
+            'isBlocked'=>$isBlocked
+
         ]);
     }
 
@@ -67,10 +72,15 @@ class UserController extends Controller
             $events[] = (new Event)->getOne($participation->event);
         }
 
+        $block = new Block();
+        $isBlocked = $block->isBlock($userID,auth()->id());
+
+
         return view('user.show', [
             'user' => (new User)->getOne($userID),
             'groups' => $groups,
             'events' => $events,
+            'isBlocked'=>$isBlocked
         ]);
     }
 
@@ -188,14 +198,14 @@ class UserController extends Controller
 
         $block->push();
 
-        return redirect('/');
+        return redirect('/user/show/'.$post['target']);
     }
 
 
     public function deleteBlock($userID)
     {
         (new Block)->removeBlock($userID);
-        return redirect('/');
+        return redirect('/user/show/'.$userID);
 
     }
 

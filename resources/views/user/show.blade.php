@@ -47,15 +47,18 @@
                                     <i class="fas fa-radiation"></i> Signaler
 
                                 </a>
-
-                                    <a href="{{url('/user/block/'.$user->id)}}" class="btn btn-danger mx-1">
+                                    @if($isBlocked == false)
+                                    <a href="{{url('/user/block/'.$user->id)}}" class="mt-1 btn btn-danger mx-1">
                                         <i class="fas fa-shield-alt"></i> Bloquer
                                     </a>
-
+                                        @else
                                     <a href="{{url('/user/block/delete/'.$user->id)}}"
-                                       class="btn btn-primary mx-1">
+                                       class="btn btn-primary mt-1 mx-1">
                                         <i class="fas fa-shield-alt"></i> Débloquer
                                     </a>
+                                    @endif
+
+
 
                             </div>
                         @endif
