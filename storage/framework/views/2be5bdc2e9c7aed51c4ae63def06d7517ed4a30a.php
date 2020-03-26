@@ -16,8 +16,13 @@
             <div class="row no-gutters">
                 <div class="col-md-4 m-auto" style="overflow: hidden;">
                     <?php if($group->picname != null): ?>
-                        <img src="<?php echo e(url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)); ?>"
-                             class="card-img hvr-grow" alt="Photo de <?php echo e($group->name); ?>">
+                        <?php if(strpos($group->picrepo, 'https://') !== false): ?>
+                            <img src="<?php echo e($group->picrepo.$group->picname); ?>"
+                                 class="card-img hvr-grow" alt="Photo de <?php echo e($group->name); ?>">
+                        <?php else: ?>
+                            <img src="<?php echo e(url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)); ?>"
+                                 class="card-img hvr-grow" alt="Photo de <?php echo e($group->name); ?>">
+                        <?php endif; ?>
                     <?php else: ?>
                         <small class="p-3 blockquote-footer">Pas de photo</small>
                     <?php endif; ?>

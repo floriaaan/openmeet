@@ -23,8 +23,14 @@
                                 <label class="custom-file-label mb-1" for="gPic">Photo du groupe</label>
                             </div>
                         </div>
+                        <hr class="mx-5 mt-1 my-0">
+                        <p class="mx-5 my-0" style="color: dimgrey;font-size: small">Ou entrez une url</p>
+                        <input class="mb-1 form-control form-control @error('gPhotoUrl') is-invalid @enderror" type="text" value="{{$groupPhotoUrl}}" placeholder="Entrez une url" name="gPhotoUrl">
 
-                        <hr class="m-5">
+
+
+
+                        <hr class="mx-5 mt-0">
 
 
                         <div class="input-group">

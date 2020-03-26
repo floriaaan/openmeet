@@ -51,6 +51,19 @@ class ScrapingController extends Controller
         //dump($groupTagsArray);
         //dump($groupTags);
         //==============================================================//
+        //========================Photo du groupe======================//
+        $regexGroupPhoto='#<div class="groupHomeHeader-banner keepAspect keepAspect--16-9" style="background-image:url\((.*?)\)">(.*?)<\/div>#';
+        preg_match($regexGroupPhoto,$pageContent,$scrapGroupPhoto);
+        //dump($scrapGroupPhoto);
+        if(isset($scrapGroupPhoto[1])){
+            $groupPhotoUrl = $scrapGroupPhoto[1];
+        }
+        else{
+            $groupPhotoUrl = "";
+        }
+
+
+
 
 
 
@@ -58,7 +71,8 @@ class ScrapingController extends Controller
             'url'=>$url,
             'groupName'=>$groupName,
             'groupDesc'=>$groupDesc,
-            'groupTags'=>$groupTags
+            'groupTags'=>$groupTags,
+            'groupPhotoUrl'=>$groupPhotoUrl
 
         ]);
     }

@@ -217,10 +217,12 @@
                                             </a>
 
                                                 <?php if($groupInfo->admin == auth()->id()): ?>
-                                                    <a href="<?php echo e(url('/user/ban/'.$userInfo->id)); ?>"
+
+                                                    <a href="<?php echo e(url('/user/ban/')); ?>/<?php echo e($groupInfo->id); ?>/<?php echo e($userInfo->id); ?>"
                                                        style="text-decoration: none;">
                                                         <i class="fas fa-ban"></i>
                                                     </a>
+
                                                 <?php endif; ?>
 
                                         </div>

@@ -410,7 +410,7 @@
                 datatype: 'json',
                 success: function (data) {
                     console.log('API.ip', data);
-                    getGroupAndCreateCard(data);
+                    getEventAndCreateCard(data);
                 },
                 error: function () {
                     console.log('Error')
