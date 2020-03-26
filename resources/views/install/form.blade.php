@@ -212,7 +212,7 @@
                         <div class="col-lg-6">
                             <label for="password-confirm">{{ __('Confirmer le mot de passe') }}</label>
 
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
+                            <input id="password-confirm" type="password" class="form-control" name="password-confirm"
                                    required autocomplete="new-password">
 
                             <div class="progress mt-1" style="height: 5px;">
