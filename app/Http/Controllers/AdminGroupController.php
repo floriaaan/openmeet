@@ -137,12 +137,18 @@ class AdminGroupController extends Controller
 
     public function transferRolesConfirm($groupID, $userID)
     {
+        $user = (new User)->getOne($userID);
+        $group = (new Group)->getOne($groupID);
 
-        return view('group.admin.transfer', [
-            'group' => (new Group)->getOne($groupID),
-            'user' => (new User)->getOne($userID)
-        ]);
-
+        if ($group->admin == auth()->id()) {
+            return view('group.admin.transfer', [
+                'group' => $group,
+                'user' => $user
+            ]);
+        } else {
+            Session()->flash('error', 'Vous n\'êtes pas administrateur de groupe.');
+            return redirect('/');
+        }
     }
 
     public function transferRolesPost(Request $request)
@@ -158,7 +164,6 @@ class AdminGroupController extends Controller
         (new Ban)->remove($banID);
         return redirect('/groups/admin');
     }
-
 
 
 }
