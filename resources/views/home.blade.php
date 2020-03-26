@@ -640,12 +640,12 @@
 
         function ipLocateAndCreateHomeCards() {
             $.ajax({
-                url: 'https://freegeoip.app/json',
+                url: 'https://freegeoip.app/json/',
                 type: 'GET',
                 datatype: 'json',
                 success: function (data) {
                     //console.log('API.ip', data);
-                    getEventAndCreateCard(data);
+                    getEventAndCreateCard(data.latitude, data.longitude);
                 },
                 error: function (data) {
                     console.log('Error', data)
@@ -653,11 +653,11 @@
             });
         }
 
-        function getEventAndCreateCard(datas) {
+        function getEventAndCreateCard(lat, lon) {
             $.ajax({
                 url: "{{url('/api/v1/events/location')}}",
                 type: 'POST',
-                data: {'lat': datas.latitude, 'lon': datas.longitude, 'limit': 6},
+                data: {'lat': lat, 'lon': lon, 'limit': 6},
                 datatype: 'json',
                 success: function (data) {
                     //console.log('API.self events', data);
@@ -665,7 +665,7 @@
                         if (data[i].picname != null) {
                             $('#listEvents').append(
                                 '<li class="media mt-2">\n' +
-                                '    <img src="{{url("/storage/upload/image/")}}' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" alt="Photo">\n' +
+                                '    <img src="{{url("/storage/upload/image/")}}/' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" alt="Photo">\n' +
                                 '    <div class="media-body">\n' +
                                 '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
                                 '      ' + data[i].description + '\n' +
