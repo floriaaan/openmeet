@@ -30,12 +30,10 @@ class MessageController extends Controller
         $message->content = $post['mContent'];
         $message->date = date('Y-m-d H:i:s');
         if (auth()->user()->isBlock(auth()->user()->id, $post['mReceiver'])) {
-            return view( 'user.block.blockshow');
-        }
-        elseif  (auth()->user()->isBan(auth()->user()->id, $post['mReceiver'])) {
-            return view( 'user.ban.banshow');
-        }
-        else {
+            return view('user.block.blockshow');
+        } elseif (auth()->user()->isBan(auth()->user()->id, $post['mReceiver'])) {
+            return view('user.ban.banshow');
+        } else {
             $message->push();
 
             //Envoi d'une notification
@@ -145,6 +143,7 @@ class MessageController extends Controller
         }
 
         $groupLastMessagesInfo = [];
+        $concernedNotifs = [];
         foreach ($groupLastMessages as $groupLastMessage) {
             try {
                 if ($groupLastMessage->sender != 0) {
@@ -154,16 +153,15 @@ class MessageController extends Controller
                 if ($groupLastMessage->sender != auth()->id()) {
                     $notif = new Notification();
                     $concernedNotifs [] = $notif->GetByConcernedMessage($groupLastMessage->id);
-                }
-                else{
+                } else {
                     $notif = new Notification();
                     $notif->concerned = $groupLastMessage->id;
-                    $concernedNotifs[]=$notif;
+                    $concernedNotifs[] = $notif;
                 }
             } catch (\Exception $e) {
                 $notif = new Notification();
                 $notif->concerned = $groupLastMessage->id;
-                $concernedNotifs[]=$notif;
+                $concernedNotifs[] = $notif;
 
             }
         }
@@ -194,7 +192,7 @@ class MessageController extends Controller
         if ($typeConversation == 'group') {
 
             if (auth()->user()->isBan(auth()->user()->id, $correspondant)) {
-                return view( 'user.ban.banshow');
+                return view('user.ban.banshow');
             }
 
             $group = new Group();
@@ -263,7 +261,7 @@ class MessageController extends Controller
         if ($typeConversation == 'user') {
 
             if (auth()->user()->isBlock(auth()->user()->id, $correspondant)) {
-                return view( 'user.block.blockshow');
+                return view('user.block.blockshow');
             }
             $message = new Message();
             $listMessages = $message->getPersonalChat($correspondant);
@@ -371,11 +369,10 @@ class MessageController extends Controller
                 if ($groupLastMessage->sender != auth()->id()) {
                     $notif = new Notification();
                     $concernedNotifs [] = $notif->GetByConcernedMessage($groupLastMessage->id);
-                }
-                else{
+                } else {
                     $notif = new Notification();
                     $notif->concerned = $groupLastMessage->id;
-                    $concernedNotifs[]=$notif;
+                    $concernedNotifs[] = $notif;
                 }
             } catch (\Exception $e) {
             }
