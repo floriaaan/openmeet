@@ -123,7 +123,10 @@ class Notification extends Model
                 $Notif=$query[0];
                 return $Notif;
             }else{
-                return null;
+                $fakenotif = new \stdClass();
+                $fakenotif->concerned = $concerned;
+                $fakenotif->isread=1;
+                return $fakenotif;
             }
     }
 
