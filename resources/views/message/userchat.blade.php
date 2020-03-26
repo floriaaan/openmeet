@@ -187,6 +187,7 @@
         @if($message->sender != auth()->id())
             <!-- Message Reçu-->
                 <div class="media w-50 mt-3">
+
                     <div class="mask"><a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;"
                                          class="no-hover">
                             @if($userInfo->picname != null & $userInfo->picname != '')
@@ -201,9 +202,18 @@
                     </div>
 
                     <div class="oneMessage media-body ml-3">
+
                         <a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;"
                            class="no-hover">
                             <p style="color: gray; font-weight: bold">{{$userInfo->fname}} {{$userInfo->lname}}</p>
+                        </a>
+                        <a href="{{url('/user/report/'.$userInfo->id)}}"
+                           style="text-decoration: none;">
+                            <i class="fas fa-radiation"></i>
+                        </a>
+                        <a href="{{url('/user/block/'.$userInfo->id)}}"
+                           style="text-decoration: none;">
+                            <i class="fas fa-shield-alt"></i>
                         </a>
                         <div class="bg-light rounded py-2 px-3 mb-2">
                             <p class="text-small mb-0 text-muted">{{$message->content}}</p>
@@ -215,6 +225,7 @@
             <!-- Messages envoyé -->
                 <div class="media w-50 ml-auto mt-3">
                     <div class="oneMessage media-body">
+
                         <div style="background-color: {{setting('openmeet.color')}}"
                              class="bg-fmm rounded py-2 px-3 mb-2">
                             <p class="text-small mb-0 text-white">{{$message->content}}</p>
