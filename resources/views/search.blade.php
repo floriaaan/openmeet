@@ -42,9 +42,13 @@
                                 <a href="{{url('/groups/show')}}/{{$sR['content']->id}}"
                                    style="text-decoration: none; color: inherit;">
                                     <div class="mask-search">
-                                        <img
-                                            src="{{url('/storage/upload/image/'.$sR['content']->picrepo.'/'.$sR['content']->picname)}}"
-                                            class="card-img" alt="Photo de {{$sR['content']->name}}">
+                                        @if(strpos($sR['content']->picrepo, 'https://') !== false)
+                                            <img src="{{$sR['content']->picrepo.$sR['content']->picname}}"
+                                                 class="card-img hvr-grow" alt="Photo de {{$sR['content']->name}}">
+                                        @else
+                                            <img src="{{url('/storage/upload/image/'.$sR['content']->picrepo.'/'.$sR['content']->picname)}}"
+                                                 class="card-img hvr-grow" alt="Photo de {{$sR['content']->name}}">
+                                        @endif
                                     </div>
 
                                 </a>

@@ -17,8 +17,13 @@
             <div class="row no-gutters">
                 <div class="col-md-4 m-auto" style="overflow: hidden;">
                     @if($group->picname != null)
-                        <img src="{{url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)}}"
-                             class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @if(strpos($group->picrepo, 'https://') !== false)
+                            <img src="{{$group->picrepo.$group->picname}}"
+                                 class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @else
+                            <img src="{{url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)}}"
+                                 class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @endif
                     @else
                         <small class="p-3 blockquote-footer">Pas de photo</small>
                     @endif

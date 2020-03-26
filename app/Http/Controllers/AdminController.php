@@ -33,7 +33,7 @@ class AdminController extends Controller
         $countUser = $user->getCount();
 
 
-        $message = (new Message);
+        /*$message = (new Message);
         $listMessage = [];
         $rawListMsg = $message->getLimitDesc(10);
 
@@ -53,7 +53,7 @@ class AdminController extends Controller
             }
 
         }
-        $countMessage = $message->getCount();
+        $countMessage = $message->getCount();*/
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
@@ -141,8 +141,6 @@ class AdminController extends Controller
         return view('admin.panel', [
             'userList' => $listUser,
             'userCount' => $countUser,
-            'messageList' => $listMessage,
-            'messageCount' => $countMessage,
             'groupList' => $listGroup,
             'groupCount' => $countGroup,
             'eventList' => $listEvent,
