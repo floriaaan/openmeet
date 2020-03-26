@@ -473,7 +473,7 @@
         .masthead .bg-circle-2 {
             width: 400px;
             height: 400px;
-            top: -130px;
+            top: -200px;
             right: 300px;
             animation: bounce 3s infinite alternate;
             -webkit-animation: bounce 3s infinite alternate;
@@ -491,7 +491,7 @@
         .masthead .bg-circle-4 {
             height: 500px;
             width: 500px;
-            top: 200px;
+            top: 50px;
             right: 10px;
             animation: bounce 8s infinite alternate;
             -webkit-animation: bounce 8s infinite alternate;
