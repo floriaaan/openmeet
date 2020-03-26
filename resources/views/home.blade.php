@@ -665,7 +665,7 @@
                         if (data[i].picname != null) {
                             $('#listEvents').append(
                                 '<li class="media mt-2">\n' +
-                                '    <img src="{{url("/storage/upload/image/")}}/' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" alt="Photo">\n' +
+                                '    <img src="{{url("/storage/upload/image/")}}/' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" height="70px" alt="Photo">\n' +
                                 '    <div class="media-body">\n' +
                                 '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
                                 '      ' + data[i].description + '\n' +
