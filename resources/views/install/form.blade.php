@@ -92,74 +92,7 @@
                     </div>
 
                     <hr class="mx-5 my-3">
-                <!--<div class="form-group">
-                        <label for="iDBHost" class="">Hôte de la base de données</label>
-                        <input class="form-control @error('iDBHost') is-invalid @enderror"
-                               name="iDBHost" type="text"
-                               value="{{ old('iDBHost') }}"
-                               placeholder="Adresse URL"
-                               required id="iDBHost"
-                               autocomplete="off">
-                        @error('iDBHost')
-                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <label for="iDBName" class="">Nom de la base de données</label>
-                        <input class="form-control @error('iDBName') is-invalid @enderror"
-                               name="iDBName" type="text"
-                               value="{{ old('iDBName') }}"
-                               placeholder="Database"
-                               required id="iDBName"
-                               autocomplete="off">
-                        @error('iDBName')
-                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="iDBUser" class="">Utilisateur de la base de données</label>
-                        <input class="form-control @error('iDBUser') is-invalid @enderror"
-                               name="iDBUser" type="text"
-                               value="{{ old('iDBUser') }}"
-                               placeholder="user"
-                               required id="iDBUser"
-                               autocomplete="off">
-                        @error('iDBUser')
-                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="iDBPass" class="">Mot de passe de l'utilisateur</label>
-                        <input class="form-control @error('iDBPass') is-invalid @enderror"
-                               name="iDBPass" type="password"
-                               value="{{ old('iDBUser') }}"
-                               placeholder="pass"
-                               id="iDBPass"
-                               autocomplete="off">
-                        @error('iDBPass')
-                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-
-                            <input type="checkbox" class="" name="iDBMigrate" id="iDBMigrate" checked>
-                            <label class="" for="iDBMigrate">Mettre à zéro la base de données <code>(artisan
-                                    migrate)</code></label>
-
-
-                    </div>-->
 
                     <p class="lead p-5">
                         N'oubliez pas de changer les paramètres liés à la base de données dans le

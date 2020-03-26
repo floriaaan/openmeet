@@ -26,15 +26,11 @@ class InstallRequest extends FormRequest
         return [
             'iName' => 'required|max:40|profanity|',
             'iSlogan' => 'max:40|profanity|',
-            /*'iDBHost' => 'required',
-            'iDBName' => 'required',
-            'iDBUser' => 'required',
-            'iDBPass' => '',*/
             'email' => 'required|email',
-            'password' => 'required|min:3',
-            'password-confirm' => 'required|same:password|min:3',
-            'fname' => 'required|alpha',
-            'lname' => 'required|alpha',
+            'password' => 'required|min:8',
+            'password-confirm' => 'required|same:password|min:8',
+            'fname' => 'required',
+            'lname' => 'required',
             'bdate' => 'required|date|before_or_equal:-18 years'
         ];
     }
