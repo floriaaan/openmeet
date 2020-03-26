@@ -640,7 +640,7 @@
 
         function ipLocateAndCreateHomeCards() {
             $.ajax({
-                url: 'http://ip-api.com/json',
+                url: 'https://freegeoip.app/json',
                 type: 'GET',
                 datatype: 'json',
                 success: function (data) {
@@ -657,7 +657,7 @@
             $.ajax({
                 url: "{{url('/api/v1/events/location')}}",
                 type: 'POST',
-                data: {'lat': datas.lat, 'lon': datas.lon, 'limit': 6},
+                data: {'lat': datas.latitude, 'lon': datas.longitude, 'limit': 6},
                 datatype: 'json',
                 success: function (data) {
                     //console.log('API.self events', data);
