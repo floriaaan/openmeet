@@ -64,6 +64,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="p-4">
+                            <div class="media">
+                                <i class="far fa-2x fa-user mr-3 text-primary"></i>
+                                <div class="media-body">
+                                    <a href="{{url('/groups/show/'.$event->group)}}">
+                                        <span class="mt-0 lead">
+                                            {{(new \App\Group)->getOne($event->group)->name}}
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
 
 
                     </div>

@@ -414,9 +414,11 @@ class AdminController extends Controller
 
     public function editViewsForm()
     {
+        $homeView = file_get_contents('./../resources/views/home.blade.php');
         $mailingView = file_get_contents('./../resources/views/emails/eventcreated.blade.php');
 
         return view('admin.views.edit', [
+            'home' => $homeView,
             'mail' => $mailingView
         ]);
     }
@@ -425,6 +427,7 @@ class AdminController extends Controller
     {
         $post = $request->input();
 
+        file_put_contents('./../resources/views/home.blade.php', $post['home']);
         file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);
 
         return redirect('/admin');
