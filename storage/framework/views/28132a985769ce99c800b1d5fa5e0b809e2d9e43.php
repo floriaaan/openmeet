@@ -337,6 +337,12 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('js'); ?>
+    <script>
+
+    </script>
+<?php $__env->stopSection(); ?>
+
 
 
 <?php echo $__env->make('layouts.index', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/layouts/nav.blade.php ENDPATH**/ ?>

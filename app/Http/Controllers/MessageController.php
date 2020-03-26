@@ -161,6 +161,10 @@ class MessageController extends Controller
                     $concernedNotifs[]=$notif;
                 }
             } catch (\Exception $e) {
+                $notif = new Notification();
+                $notif->concerned = $groupLastMessage->id;
+                $concernedNotifs[]=$notif;
+
             }
         }
 
