@@ -164,8 +164,8 @@ class UserController extends Controller
         $ban->push();
 
         return redirect('/');
-    }
 
+    }
 
 
         public function blockForm($userID)
@@ -189,6 +189,14 @@ class UserController extends Controller
         $block->push();
 
         return redirect('/');
+    }
+
+
+    public function deleteBlock($userID)
+    {
+        (new Block)->removeBlock($userID);
+        return redirect('/');
+
     }
 
 

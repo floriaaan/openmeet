@@ -48,12 +48,18 @@
 
                                 </a>
 
-                                <a href="{{url('/user/block/'.$user->id)}}" class="btn btn-danger mx-1">
-                                    <i class="fas fa-shield-alt"></i> Bloquer
-                                </a>
+                                    <a href="{{url('/user/block/'.$user->id)}}" class="btn btn-danger mx-1">
+                                        <i class="fas fa-shield-alt"></i> Bloquer
+                                    </a>
+
+                                    <a href="{{url('/user/block/delete/'.$user->id)}}"
+                                       class="btn btn-primary mx-1">
+                                        <i class="fas fa-shield-alt"></i> Débloquer
+                                    </a>
 
                             </div>
                         @endif
+
                     </div>
                 </div>
 
@@ -66,12 +72,12 @@
                         Editer mon profil
                     </a>
 
-                    @else
+                @else
                     <a href="{{url('/messages/user/'.$user->id)}}" class="btn btn-secondary mx-5 mt-2">
                         <i class="fas fa-envelope"></i> Messages
                     </a>
                 @endif
-                    <hr class="my-3 mx-5">
+                <hr class="my-3 mx-5">
                 <div class="p-3">
 
                     <div class="card shadow-sm p-3">
