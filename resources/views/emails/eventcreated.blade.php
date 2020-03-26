@@ -10,7 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>{{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+    <title>{{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
         de {{(new \App\Group)->getOne($event->group)->name}}</title>
 
     <style type="text/css">
@@ -172,7 +172,7 @@
         <td>
             <div
                 style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                {{Setting('openmeet.title', 'OpenMeet')}} - Nouvel événement
+                {{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
                 de {{(new \App\Group)->getOne($event->group)->name}}
             </div>
         </td>
@@ -369,7 +369,7 @@
                                         style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
                                         Contact: <br/> <a href="mailto:{{Setting('openmeet.admin.email', 'contact@openmeet.fr')}}"
-                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{(Setting('openmeet.title', 'OpenMeet'))}}</a>
+                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{(Setting('openmeet.name', 'OpenMeet'))}}</a>
 
                                     </div>
                                 </td>

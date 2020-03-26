@@ -60,7 +60,7 @@
                     <hr class="mx-5 my-4">
                     <button class="mb-2 ml-lg-2 btn btn-xl btn-primary rounded-pill"
                             id="pwa-btn">
-                        Installer <?php echo e(Setting('openmeet.title')); ?>
+                        Installer <?php echo e(Setting('openmeet.name')); ?>
 
                     </button>
                 </div>

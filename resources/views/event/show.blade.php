@@ -49,10 +49,10 @@
 
                     <div class="row justify-content-around">
                         <div id="socialshare" class="p-3 mx-5">
-                            {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
+                            {!! Share::page(url('/event/show'.'/'.$event->id), $event->name .' | Evenement '.Setting('openmeet.name', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
                                 ->facebook()
                                 ->twitter()
-                                ->linkedin('Extra linkedin summary can be passed here')
+                                ->linkedin()
                                 ->whatsapp() !!}
                         </div>
                         <div class="p-4">
