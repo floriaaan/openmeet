@@ -16,9 +16,15 @@
 
             <div class="mt-3 d-flex justify-content-end">
                 <div class="mx-2">
-                    <a class="btn btn-primary" href="{{url('/groups/show/'.$group->id)}}">
-                        <i class="fas fa-times"></i> Annuler
-                    </a>
+                    @if(auth()->user()->isadmin)
+                        <a class="btn btn-primary" href="{{url('/groups/show/'.$group->id)}}">
+                            <i class="fas fa-times"></i> Annuler
+                        </a>
+                    @else
+                        <a class="btn btn-primary" href="{{url('/groups/admin/')}}">
+                            <i class="fas fa-times"></i> Annuler
+                        </a>
+                    @endif
                 </div>
                 <div class="mx-2">
                     <a class="btn btn-danger" style="color: white"

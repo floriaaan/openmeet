@@ -15,7 +15,7 @@
             <form method="post" action="{{url('/groups/admin/')}}">
                 @csrf
 
-                <div class="input-group">
+                <div class="input-group ml-5">
 
                     <div class="input-group-prepend">
                         <span class="input-group-text">Groupe</span>
@@ -37,11 +37,17 @@
                 </div>
 
             </form>
+            <div class="row justify-content-end">
 
             <a class="btn btn-secondary mx-2"
                href="{{url('/groups/edit/'.$groupChosen)}}">
                 <i class="fas fa-pencil-alt"></i>
                 Editer {{(new \App\Group)->getOne($groupChosen)->name}}
+
+                <a href="{{url('/groups/delete/'.$group->id)}}" class="btn btn-danger m-1">
+                    <i class="fas fa-trash-alt mx-2"></i>
+                    Supprimer {{$group->name}}
+                </a>
             </a>
 
         </div>
