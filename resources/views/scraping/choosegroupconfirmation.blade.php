@@ -24,8 +24,9 @@
                             </div>
                         </div>
                         <hr class="mx-5 mt-1 my-0">
-                        <p class="mx-5 my-0" style="color: dimgrey;font-size: small">Ou entrez une url</p>
-                        <input class="mb-1 form-control form-control @error('gPhotoUrl') is-invalid @enderror" type="text" value="{{$groupPhotoUrl}}" placeholder="Entrez une url" name="gPhotoUrl">
+                        <p class="mx-5 my-0 ml-4" style="font-size: small">Ou entrez l'url d'une image <br> (vider le champs upload)</p>
+                        <hr class="mx-5 mt-0 my-0">
+                        <input class="mb-1 mt-1 form-control form-control @error('gPhotoUrl') is-invalid @enderror" type="text" value="{{$groupPhotoUrl}}" placeholder="Entrez une url" name="gPhotoUrl">
 
 
 

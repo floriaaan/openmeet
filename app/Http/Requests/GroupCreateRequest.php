@@ -21,14 +21,17 @@ class GroupCreateRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
+
         return [
+            'gPhotoUrl' => '',
             'gName' => 'required|min:1|profanity|max:100',
             'gPic' => '',
             'gTags' => '',
             'gDesc' => 'required',
-            'gAdminID' => 'required|numeric'
+            'gAdminID' => 'required|numeric',
         ];
     }
 }

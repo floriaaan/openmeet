@@ -370,13 +370,16 @@ class MessageController extends Controller
                     $notif = new Notification();
                     $concernedNotifs [] = $notif->GetByConcernedMessage($groupLastMessage->id);
                 } else {
-                    $notif = new Notification();
+                    $notif = new \stdClass();
                     $notif->concerned = $groupLastMessage->id;
                     $concernedNotifs[] = $notif;
                 }
             } catch (\Exception $e) {
             }
+
+
         }
+
         //Tri des tableaux des derniers messages de groupe par id<=>date d'envoi
         krsort($groupLastMessages);
 
@@ -393,6 +396,7 @@ class MessageController extends Controller
         var_dump($groupWithoutLastMessage);
         die;
         */
+
 
         return view('message.conversationslist',
             [

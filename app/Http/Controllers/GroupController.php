@@ -44,7 +44,7 @@ class GroupController extends Controller
             $group->tags = $post['gTags'];
         }
         $group->push();
-        if ($request->file('gPic') != null) {
+        if ($request->hasFile('gPic')) {
             if(Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
                 Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
             }
@@ -67,6 +67,15 @@ class GroupController extends Controller
 
             $group->picrepo = 'group/' . $group->id;
             $group->picname = $filename;
+        }else{
+            if($post['gPhotoUrl'] != null && $post['gPhotoUrl'] !=""){
+                $urlExploded = explode('/',$post['gPhotoUrl']);
+                for($i=0;$i<count($urlExploded)-2;$i++){
+                    $group->picrepo = $group->picrepo.$urlExploded[$i].'/';
+                }
+                $group->picname= $urlExploded[$i+1];
+            }
+            else{}
         }
         (new Group)->updateGroup($group);
 
