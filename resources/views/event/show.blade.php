@@ -27,7 +27,7 @@
                         <div class="media-body">
                             <h5 class="card-title display-4">{{$event->name}}</h5>
                             @if($event->description != null)
-                                <h5 class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>
+                                <h5 class="text-muted ml-3 blockquote-footer">{!! str_replace('\\n','<br>',$event->description) !!}</h5>
                             @endif
                         </div>
                     </div>
@@ -59,7 +59,8 @@
                             <div class="media">
                                 <i class="fas fa-2x fa-map-marked-alt mr-3 text-primary"></i>
                                 <div class="media-body">
-                                    <span class="mt-0 lead">{{$event->numstreet}} {{$event->street}} à {{$event->city}}</span>
+                                    <span
+                                        class="mt-0 lead">{{$event->numstreet}} {{$event->street}} à {{$event->city}}</span>
                                 </div>
                             </div>
                         </div>
@@ -148,10 +149,12 @@
 
     <script>
         displayMap();
+    </script>
+
+    <script>
         @if($event->posx != null && $event->posy != null)
         displayEvent({{$event->posx}}, {{$event->posy}});
         @endif
-
     </script>
 @endsection
 

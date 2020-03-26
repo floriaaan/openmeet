@@ -167,22 +167,13 @@ class Event extends Model
     {
         $query = DB::table('events')
             ->select('*')
-            ->where()
+            ->where('posx', '>=', $lon - 0.1)
+            ->where('posx', '<=', $lon + 0.1)
+            ->where('posy', '>=', $lat - 0.1)
+            ->where('posy', '<=', $lat + 0.1)
+            ->limit($limit)
             ->get();
-        /*SELECT
-          id, (
-            3959 * acos (
-              cos ( radians(78.3232) )
-              * cos( radians( lat ) )
-              * cos( radians( lng ) - radians(65.3234) )
-              + sin ( radians(78.3232) )
-              * sin( radians( lat ) )
-            )
-          ) AS distance
-        FROM markers
-        HAVING distance < 30
-        ORDER BY distance
-        LIMIT 0 , 20;*/
+
         return $query;
     }
 

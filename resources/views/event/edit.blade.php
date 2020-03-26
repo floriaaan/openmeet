@@ -213,7 +213,10 @@
         var inputPosx = document.getElementById('inputPosx');
         var inputPosy = document.getElementById('inputPosy');
         displayMap();
+
+        @if($event->posx != null && $event->posy != null)
         displayEvent({{$event->posx}}, {{$event->posy}});
+        @endif
         $(function () {
             console.log($('#title-group').text());
             $('#title-input').keyup(function () {
@@ -232,7 +235,7 @@
                 success: function (data) {
                     console.log(data)
                     mymap.eachLayer(function (layer) {
-                        if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                        if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                             mymap.removeLayer(layer);
                         }
                     })
@@ -276,7 +279,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -324,7 +327,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -372,7 +375,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })

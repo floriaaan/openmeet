@@ -186,6 +186,7 @@ class Group extends Model
     {
         $query = DB::table('groups')
             ->select('tags')
+            ->limit(5)
             ->get();
 
         $tags = [];

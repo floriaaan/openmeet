@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container position-relative" style="height: 100%">
-        <div class="row justify-content-between mx-3" >
+        <div class="row justify-content-between mx-3">
 
             <div class="mx-1">
                 <p class="lead">Gestion de {{$group->name}}</p>
@@ -288,6 +288,10 @@
                         </svg>
                     </div>
                     <p class="text-center lead">Evenements du groupe</p>
+                    <a href="{{url('/events/create')}}"
+                       class="btn btn-primary ml-5 ">
+                        Créer un événement
+                    </a>
                 </div>
 
                 <div class="col-md-8">
@@ -306,14 +310,12 @@
                                                         class="mr-3 hvr-grow" alt="Photo"
                                                         width="auto" height="30px">
                                                 @endif
-                                                <div class="media-body">
+                                                <div class="media-body ml-3">
                                                     <div class="row my-1 justify-content-between">
                                                         <h5 class=""
                                                             style="font-size: 1rem!important;">{{$e['event']->name}}</h5>
 
                                                     </div>
-
-                                                    <p>{!! str_replace('\\n','<br>',$e['event']->description) !!}</p>
                                                     <small class="text-muted">
                                                         aura lieu le
                                                         <cite>{{strftime("%A %d %b %Y",strtotime($e['event']->datefrom))}}
@@ -362,7 +364,6 @@
                         </div>
                     @endif
                 </div>
-
 
             </div>
 
