@@ -193,7 +193,7 @@
                             @if($userInfo->picname != null & $userInfo->picname != '')
                                 <img width="50" style="top:50%"
                                      alt="Photo de {{$userInfo->fname}} {{$userInfo->lname}}"
-                                     src="#">
+                                     src="{{url('/storage/upload/image/'.$userInfo->picrepo.'/'.$userInfo->picname)}}">
                             @else
                                 <i style="color: {{setting('openmeet.color')}}"
                                    class="fas fa-user fa-2x"></i>
