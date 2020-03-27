@@ -25,6 +25,8 @@ class Event extends Model
         'numstreet',
         'street',
         'description',
+        'picrepo',
+        'picname'
     ];
 
 
@@ -148,25 +150,30 @@ class Event extends Model
         return $query;
     }
 
+    public function getLimitGroupDesc($groupID, $limit)
+    {
+        $query = DB::table('events')
+            ->select('*')
+            ->where('group', $groupID)
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
     public function getByArea($lon, $lat, $limit)
     {
         $query = DB::table('events')
-                    ->select('*')
-                    ->where();
-        /*SELECT
-          id, (
-            3959 * acos (
-              cos ( radians(78.3232) )
-              * cos( radians( lat ) )
-              * cos( radians( lng ) - radians(65.3234) )
-              + sin ( radians(78.3232) )
-              * sin( radians( lat ) )
-            )
-          ) AS distance
-        FROM markers
-        HAVING distance < 30
-        ORDER BY distance
-        LIMIT 0 , 20;*/
+            ->select('*')
+            ->where('posx', '>=', $lon - 0.1)
+            ->where('posx', '<=', $lon + 0.1)
+            ->where('posy', '>=', $lat - 0.1)
+            ->where('posy', '<=', $lat + 0.1)
+            ->limit($limit)
+            ->get();
+
         return $query;
     }
 
@@ -217,11 +224,24 @@ class Event extends Model
             ->where('id', $event->id)
             ->update(['description' => $event->description]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picrepo' => $event->picrepo]);
 
+        DB::table('events')
+            ->where('id', $event->id)
+            ->update(['picname' => $event->picname]);
     }
 
     public function remove($eventID)
     {
+
+        $list = (new Participation)->getEvent($eventID);
+
+        foreach ($list as $participation) {
+            (new Participation)->remove($participation->id);
+        }
+
         try {
             $query = DB::table('events')
                 ->delete($eventID);

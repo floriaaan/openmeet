@@ -17,7 +17,7 @@ class Block extends Model
 
     public function getLimit($limit)
     {
-        $query=DB::table('blocks')
+        $query = DB::table('blocks')
             ->select('*')
             ->limit($limit)
             ->get();
@@ -62,5 +62,53 @@ class Block extends Model
 
         return $query;
     }
+
+    public function getOne($userId)
+    {
+        $query = DB::table('blocks')
+            ->select('*')
+            ->where('id', '=', $userId)
+            ->limit(1)
+            ->get();
+        return $query[0];
+    }
+
+    public function isBlock($userId, $blockId)
+    {
+
+        $query = DB::table('blocks')
+            ->select('*')
+            ->where('target', '=', $userId)
+            ->where('blocker', '=', $blockId)
+            ->get();
+        return $query->count() > 0;
+    }
+
+    public function remove($blockID)
+    {
+        try {
+            $query = DB::table('blocks')
+                ->delete($blockID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
+    public
+    function removeBlock($userID)
+    {
+        try {
+            $query = DB::table('blocks')
+                ->where('target', '=', $userID)
+                ->where('blocker', '=', auth()->id())
+                ->delete();
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+    }
+
 
 }

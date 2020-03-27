@@ -11,6 +11,7 @@ use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SearchRequest;
 use App\Message;
 use App\Signalement;
+use App\Subscription;
 use App\User;
 use DemeterChain\A;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class AdminController extends Controller
         $listUser = $user->getLimitDesc(5);
         $countUser = $user->getCount();
 
-        $message = (new Message);
+
+        /*$message = (new Message);
         $listMessage = [];
         $rawListMsg = $message->getLimitDesc(10);
 
@@ -51,7 +53,7 @@ class AdminController extends Controller
             }
 
         }
-        $countMessage = $message->getCount();
+        $countMessage = $message->getCount();*/
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
@@ -122,11 +124,23 @@ class AdminController extends Controller
 
         }
 
+        $subs = (new Subscription);
+        $countSub = $subs->getCount();
+        $rawListSub = $subs->getLimitDesc(10);
+
+        $listSub = [];
+        foreach ($rawListSub as $sub) {
+            $listSub[] = [
+                'sub' => $sub,
+                'user' => $user->getOne($sub->user),
+                'group' => $groups->getOne($sub->group),
+            ];
+
+        }
+
         return view('admin.panel', [
             'userList' => $listUser,
             'userCount' => $countUser,
-            'messageList' => $listMessage,
-            'messageCount' => $countMessage,
             'groupList' => $listGroup,
             'groupCount' => $countGroup,
             'eventList' => $listEvent,
@@ -136,7 +150,9 @@ class AdminController extends Controller
             'banList' => $listBan,
             'banCount' => $countBan,
             'blockList' => $listBlock,
-            'blockCount' => $countBlock
+            'blockCount' => $countBlock,
+            'subList' => $listSub,
+            'subCount' => $countSub
 
         ]);
 
@@ -179,6 +195,12 @@ class AdminController extends Controller
             Setting(['openmeet.robots' => false]);
         }
 
+        if (isset($post['apidoc']) && $post['apidoc'] == "on") {
+            Setting(['openmeet.apidoc' => true]);
+        } else {
+            Setting(['openmeet.apidoc' => false]);
+        }
+
         return redirect('/admin');
     }
 
@@ -211,7 +233,6 @@ class AdminController extends Controller
         $bans = (new Ban);
         $groups = (new Group);
         $rawListBan = $bans->getAll();
-
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
@@ -227,7 +248,8 @@ class AdminController extends Controller
     public function listBlock()
     {
         $user = (new User);
-        $rawlistBlock = (new Block)->getAll();
+        $block = (new Block);
+        $rawlistBlock = $block ->getAll();
 
         foreach ($rawlistBlock as $block) {
             $listBLock[] = [
@@ -235,7 +257,6 @@ class AdminController extends Controller
                 'blocker' => $user->getOne($block->blocker),
                 'target' => $user->getOne($block->target),
             ];
-
         }
         return view('admin.blocks.list', ['blockList' => $listBLock]);
     }
@@ -261,7 +282,7 @@ class AdminController extends Controller
         foreach ($listEvents as $event) {
             $events[] = [
                 'event' => $event,
-                'group' => (new Group)->getOne($event->id_group)];
+                'group' => (new Group)->getOne($event->group)];
         }
         return view('admin.events.list', ['events' => $events]);
     }
@@ -270,8 +291,8 @@ class AdminController extends Controller
     public function deleteUser($userID)
     {
         $user = (new User)->getOne($userID);
-        if ($user->isadmin) { //Proposer une passation de pouvoir
-            return view('admin.users.deleteadmin');
+        if ($user->isadmin) { //TODO:Proposer une passation de pouvoir
+            return view('admin.users.deleteadmin', ['user' => $user]);
         }
         return view('admin.users.deleteconfirmation', ['user' => $user]);
     }
@@ -279,7 +300,7 @@ class AdminController extends Controller
     public function deleteUserPost(DeleteUserRequest $request)
     {
         $post = $request->input();
-        (new User)->remove($post['user']);
+        (new User)->disable($post['user']);
 
 
         return redirect('/admin');
@@ -300,6 +321,40 @@ class AdminController extends Controller
     public function deleteReport($reportID)
     {
         (new Signalement)->remove($reportID);
+        return redirect('/admin');
+    }
+
+    public function showBlock($blockID)
+    {
+        $blocks= (new Block)->getOne($blockID);
+        $block = [
+            'block' => $blocks,
+            'blocker' => (new User)->getOne($blocks->blocker),
+            'target' => (new User)->getOne($blocks->target),
+        ];
+        return view('admin.blocks.show', ['block' => $block]);
+    }
+
+    public function deleteBlock($blockID)
+    {
+        (new Block)->remove($blockID);
+        return redirect('/admin');
+    }
+
+    public function showBan($banID)
+    {
+        $bans= (new Ban)->getOne($banID);
+        $ban = [
+            'ban' => $bans,
+            'banisher' => (new Group)->getOne($bans->banisher),
+            'banned' => (new User)->getOne($bans->banned),
+        ];
+        return view('admin.bans.show', ['ban' => $ban]);
+    }
+
+    public function deleteBan($banID)
+    {
+        (new Ban)->remove($banID);
         return redirect('/admin');
     }
 
@@ -324,7 +379,7 @@ class AdminController extends Controller
             $result[] = ['content' => $user, 'type' => 'user'];
         }
 
-        $listMessage = (new Message)->getLike($post['search']);
+        /*$listMessage = (new Message)->getLike($post['search']);
         foreach ($listMessage as $message) {
             if ($message->forgroup) {
                 $result[] = ['content' => $message, 'type' => 'message',
@@ -338,13 +393,13 @@ class AdminController extends Controller
                 ];
             }
 
-        }
+        }*/
 
         $listSignalement = (new Signalement)->getLike($post['search']);
         foreach ($listSignalement as $signalement) {
             $result[] = ['content' => $signalement, 'type' => 'signalement',
                 'sender' => (new User)->getOne($signalement->submitter),
-                'receiver' => (new User)->getOne($signalement->receiver),
+                'receiver' => (new User)->getOne($signalement->concerned),
             ];
         }
 
@@ -359,9 +414,11 @@ class AdminController extends Controller
 
     public function editViewsForm()
     {
+        $homeView = file_get_contents('./../resources/views/home.blade.php');
         $mailingView = file_get_contents('./../resources/views/emails/eventcreated.blade.php');
 
         return view('admin.views.edit', [
+            'home' => $homeView,
             'mail' => $mailingView
         ]);
     }
@@ -370,8 +427,23 @@ class AdminController extends Controller
     {
         $post = $request->input();
 
+        file_put_contents('./../resources/views/home.blade.php', $post['home']);
         file_put_contents('./../resources/views/emails/eventcreated.blade.php', $post['mail']);
 
         return redirect('/admin');
+    }
+
+    public function rolesForm($userID) {
+        return view('admin.users.roles', ['user' => (new User)->getOne($userID)]);
+    }
+
+    public function rolesPost(Request $request) {
+        $post = $request->input();
+
+        $admin = isset($post['admin']) && $post['admin'] == 'on' ? true : false;
+
+        (new User)->updateAdmin($post['user'], $admin);
+
+        return redirect('/admin/');
     }
 }

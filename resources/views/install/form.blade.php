@@ -8,14 +8,17 @@
     <form action="{{url('/install')}}" method="POST" id="form">
         @csrf
         <div class="max-height wall-white">
-            <div class="container-fluid h-100 p-5 position-relative">
+            <div class="container-fluid h-100 p-5 position-relative" >
                 <div class="card mx-auto shadow-lg p-5 w-75"
                      id="card-general">
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Paramètres généraux
+                        </h3>
+                    </div>
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Paramètres généraux
-                    </h3>
 
                     <hr class="mx-5 my-3">
                     <div class="form-group">
@@ -80,80 +83,23 @@
                 <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-database">
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Base de données
-                    </h3>
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Base de données
+                        </h3>
+                    </div>
 
                     <hr class="mx-5 my-3">
-                    <div class="form-group">
-                        <label for="iDBHost" class="">Hôte de la base de données</label>
-                        <input class="form-control @error('iDBHost') is-invalid @enderror"
-                               name="iDBHost" type="text"
-                               value="{{ old('iDBHost') }}"
-                               placeholder="Adresse URL"
-                               required id="iDBHost"
-                               autocomplete="off">
-                        @error('iDBHost')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <label for="iDBName" class="">Nom de la base de données</label>
-                        <input class="form-control @error('iDBName') is-invalid @enderror"
-                               name="iDBName" type="text"
-                               value="{{ old('iDBName') }}"
-                               placeholder="Database"
-                               required id="iDBName"
-                               autocomplete="off">
-                        @error('iDBName')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <label for="iDBUser" class="">Utilisateur de la base de données</label>
-                        <input class="form-control @error('iDBUser') is-invalid @enderror"
-                               name="iDBUser" type="text"
-                               value="{{ old('iDBUser') }}"
-                               placeholder="user"
-                               required id="iDBUser"
-                               autocomplete="off">
-                        @error('iDBUser')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="iDBPass" class="">Mot de passe de l'utilisateur</label>
-                        <input class="form-control @error('iDBPass') is-invalid @enderror"
-                               name="iDBPass" type="password"
-                               value="{{ old('iDBUser') }}"
-                               placeholder="pass"
-                               id="iDBPass"
-                               autocomplete="off">
-                        @error('iDBPass')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="iDBMigrate" id="iDBMigrate">
-                            <label class="custom-control-label" for="iDBMigrate">Mettre à zéro la base de données <code>(artisan
-                                    migrate)</code></label>
-                        </div>
-
-                    </div>
+                    <p class="lead p-5">
+                        N'oubliez pas de changer les paramètres liés à la base de données dans le
+                        fichier <code>.env</code>
+                        <br>
+                        Il faut aussi que vous executiez cette commande : <code>php artisan migrate:fresh</code>
+                    </p>
 
 
                     <hr class="mx-5 my-3">
@@ -180,10 +126,13 @@
                 <div class="card mx-auto shadow-lg p-5 w-75 d-none"
                      id="card-admin">
 
-                    <h3 class="openmeet-title text-center openmeet-install"
-                        style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
-                        OpenMeet - Administration
-                    </h3>
+                    <div class="row justify-content-between">
+                        <img src="/assets/logo.svg" width="50px" height="50px">
+                        <h3 class="openmeet-title text-center openmeet-install"
+                            style="color:#007BFF; text-shadow: 0 0 5px #d6d8d9;">
+                            OpenMeet - Administration
+                        </h3>
+                    </div>
 
                     <hr class="mx-5 my-3">
                     <div class="form-group row">
@@ -220,23 +169,7 @@
                     </div>
 
 
-                    <div class="form-group ">
-                        <label for="bdate">{{ __('Date de naissance') }}</label>
 
-
-                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror"
-                               name="bdate"
-                               value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
-                        <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
-                            &#128286;</small>
-
-                        @error('bdate')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-
-                    </div>
 
 
                     <div class="form-group ">
@@ -258,7 +191,16 @@
                             <label for="password">{{ __('Mot de passe') }}</label>
                             <input id="password" type="password"
                                    class="form-control @error('password') is-invalid @enderror"
-                                   name="password" required autocomplete="new-password">
+                                   name="password" required autocomplete="new-password" aria-describedby="passwordHelp">
+                            <div class="progress mt-1" style="height: 5px;">
+                                <div class="progress-bar bg-danger" role="progressbar"
+                                     style="width: 0%;" aria-valuenow="25"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     id="password-strenght"></div>
+                            </div>
+                            <small id="password-strenght-help" class="form-text text-muted">
+                                8 caractères minimum.
+                            </small>
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -272,14 +214,36 @@
 
                             <input id="password-confirm" type="password" class="form-control" name="password-confirm"
                                    required autocomplete="new-password">
-                            @error('password-confirm')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
+
+                            <div class="progress mt-1" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                     style="width: 0%;" aria-valuenow="25"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     id="password-same"></div>
+                            </div>
+                            <small id="password-same-text" class="form-text text-muted">
+                                Les mots de passe doivent être identiques.
+                            </small>
 
                         </div>
 
+
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="bdate">{{ __('Date de naissance') }}</label>
+
+
+                        <input id="bdate" type="date" class="form-control @error('bdate') is-invalid @enderror" name="bdate"
+                               value="{{ old('bdate') }}" required autocomplete="bdate" autofocus>
+                        <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
+                            &#128286;</small>
+
+                        @error('bdate')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
 
                     </div>
 
@@ -311,7 +275,83 @@
 
 @section('js')
 
+    <script src="{{url('/js/zxcvbn.js')}}"></script>
     <script>
+        $('#password').keyup(function () {
+            let score = zxcvbn($('#password').val()).score;
+            $('#password-strenght').width(score * 25 + '%');
+            if (score == 0) {
+
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+                $('#password-strenght').addClass('bg-danger');
+
+            } else if (score == 1) {
+
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+
+                $('#password-strenght').addClass('bg-danger');
+            } else if (score == 2) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-success')) {
+                    $('#password-strenght').removeClass('bg-success')
+                }
+
+                $('#password-strenght').addClass('bg-warning');
+
+            } else if (score == 3) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+
+                $('#password-strenght').addClass('bg-success');
+            } else if (score == 4) {
+
+                if ($('#password-strenght').hasClass('bg-danger')) {
+                    $('#password-strenght').removeClass('bg-danger')
+                }
+                if ($('#password-strenght').hasClass('bg-warning')) {
+                    $('#password-strenght').removeClass('bg-warning')
+                }
+
+                $('#password-strenght').addClass('bg-success');
+            }
+            if($('#password-confirm').val() !== '' && $('#password-confirm').val() === $('#password').val()) {
+                $('#password-same').width('100%');
+                $('#password-same-text').text("Identiques ✅");
+            } else {
+                $('#password-same').width('0%');
+                $('#password-same-text').text("Ne correspondent pas ❌");
+            }
+        });
+
+        $('#password-confirm').keyup(function() {
+            if($('#password-confirm').val() !== '' && $('#password-confirm').val() === $('#password').val()) {
+                $('#password-same').width('100%');
+                $('#password-same-text').text("Identiques ✅");
+            } else {
+                $('#password-same').width('0%');
+                $('#password-same-text').text("Ne correspondent pas ❌");
+            }
+
+        });
+
         $('#btn-general-next').click(function (e) {
             e.preventDefault();
 
@@ -350,7 +390,7 @@
 
         $('#btn-database-next').click(function (e) {
             e.preventDefault();
-            if ($('#iDBHost').val() !== '' && $('#iDBName').val() !== '' && $('#iDBUser').val() !== '') {
+            /*if ($('#iDBHost').val() !== '' && $('#iDBName').val() !== '' && $('#iDBUser').val() !== '') {
                 if ($('#iDBHost').hasClass('is-invalid')) {
                     $('#iDBHost').removeClass('is-invalid')
                 }
@@ -377,7 +417,11 @@
                 if ($('#iDBUser').val() === '') {
                     $('#iDBUser').toggleClass('is-invalid')
                 }
-            }
+            }*/
+            $('#card-database').fadeOut(500);
+            $('#card-database').toggleClass('d-none');
+            $('#card-admin').toggleClass('d-none');
+            $('#card-admin').fadeIn(500);
         });
 
         $('#btn-admin-previous').click(function (e) {
@@ -388,14 +432,14 @@
             $('#card-database').fadeIn(500);
         });
 
-        $('#btn-admin-next').click(function (e) {
+        /*$('#btn-admin-next').click(function (e) {
             e.preventDefault();
             $('#card-admin').animate({
                 top: '+=3000'
             }, 1000, function () {
                 $('#form').submit();
             })
-        });
+        });*/
 
 
         function shake(div) {

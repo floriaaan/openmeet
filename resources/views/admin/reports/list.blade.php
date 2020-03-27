@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Liste des signalements
+@endsection
+
 @section('content')
 
     <div class="container">

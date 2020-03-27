@@ -21,21 +21,24 @@ class Group extends Model
     ];
 
 
+
     public function getOne($groupId)
     {
         $query = DB::table('groups')
             ->select('*')
             ->where('id', '=', $groupId)
+            ->limit(1)
             ->get();
 
         return $query[0];
 
     }
 
-    public function getnameGroup()
+    public function getOneAdmin($adminID)
     {
         $query = DB::table('groups')
-            ->select('name')
+            ->select('*')
+            ->where('admin','=',$adminID)
             ->limit(1)
             ->get();
 
@@ -53,10 +56,25 @@ class Group extends Model
 
     }
 
-    public function delete()
+    public function remove($groupID)
     {
-        $query = DB::table('groups')
-            ->delete();
+        $listE = (new Event)->getByGroup($groupID);
+        foreach ($listE as $event) {
+            (new Event)->remove($event->id);
+        }
+
+        $listS = (new Subscription)->getGroup($groupID);
+        foreach ($listS as $sub) {
+            (new Subscription)->remove($sub->id);
+        }
+
+        try {
+            $query = DB::table('groups')
+                ->delete($groupID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function getLimit($limit)
@@ -168,6 +186,7 @@ class Group extends Model
     {
         $query = DB::table('groups')
             ->select('tags')
+            ->limit(5)
             ->get();
 
         $tags = [];

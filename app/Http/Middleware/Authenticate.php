@@ -2,8 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Message;
+use App\Notification;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 class Authenticate extends Middleware
 {
@@ -15,9 +19,11 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+
         if (!auth()->check()) {
-            Session::put('error','Vous n\'êtes pas connecté.');
+            $request->session()->flash('error','Vous n\'êtes pas connecté(e).');
             return route('home');
         }
+
     }
 }

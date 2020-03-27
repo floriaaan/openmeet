@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="{{url('/events/edit')}}" method="POST">
+        <form action="{{url('/events/edit')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card rounded shadow-lg mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
@@ -51,7 +51,7 @@
                                 </div>
                                 <input class="form-control @error('eDateFrom') is-invalid @enderror"
                                        name="eDateFrom" type="datetime-local"
-                                       value="{{ $event->datefrom }}"
+                                       value="{{ date_format(date_create($event->datefrom), 'Y-m-d\TH:i') }}"
                                        required>
                                 @error('eDateFrom')
                                 <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                                 </div>
                                 <input class="form-control @error('eDateTo') is-invalid @enderror"
                                        name="eDateTo" type="datetime-local"
-                                       value="{{ $event->dateto }}">
+                                       value="{{ date_format(date_create($event->dateto), 'Y-m-d\TH:i') }}">
                                 @error('eDateTo')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -76,16 +76,28 @@
                             </div>
 
                             <hr class="mx-3 my-4">
+                            <div class="input-group mt-2">
 
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-file-image"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="ePic" id="ePic" lang="fr">
+                                    <label class="custom-file-label mb-1" for="ePic">Photo de l'événement</label>
+                                </div>
+                            </div>
                             <div class="input-group mt-2">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Organisateur</span>
                                 </div>
-                                <input type="text" class="form-control" value="{{(new \App\Group)->getOne($event->group)->name}}">
+                                <input type="text" class="form-control"
+                                       value="{{(new \App\Group)->getOne($event->group)->name}}">
                                 <input type="hidden" name="eGroup" value="{{$event->group}}">
 
                             </div>
+
+
                         </div>
 
                     </div>
@@ -201,6 +213,10 @@
         var inputPosx = document.getElementById('inputPosx');
         var inputPosy = document.getElementById('inputPosy');
         displayMap();
+
+        @if($event->posx != null && $event->posy != null)
+        displayEvent({{$event->posx}}, {{$event->posy}});
+        @endif
         $(function () {
             console.log($('#title-group').text());
             $('#title-input').keyup(function () {
@@ -208,6 +224,7 @@
                 $('#title-group').text(input);
             });
         });
+
         function reverseLatLng(lat, lng) {
             inputPosx.value = lng;
             inputPosy.value = lat;
@@ -218,7 +235,7 @@
                 success: function (data) {
                     console.log(data)
                     mymap.eachLayer(function (layer) {
-                        if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                        if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                             mymap.removeLayer(layer);
                         }
                     })
@@ -262,7 +279,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -310,7 +327,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -358,7 +375,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -389,7 +406,6 @@
                     .openOn(mymap);
 
             });
-
 
 
         }

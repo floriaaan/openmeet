@@ -1,10 +1,15 @@
 @extends('layouts.nav')
 
+
+@section('title')
+    Bannissements
+@endsection
+
 @section('content')
 
     <div class="container">
 
-        <h4 id="bans" class="my-5">Bannissement des utilisateurs </h4>
+        <h4 id="bans" class="my-5">Bannissements des utilisateurs </h4>
 
         <a class="btn btn-link float-right mr-5"
            href="{{url('/admin')}}">
@@ -36,12 +41,12 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a class="btn btn-success"
-                                   href="/admin/ban/show/{{ $ban['ban']->id }}">
+                                   href="/admin/bans/show/{{ $ban['ban']->id }}">
                                     <i class="far fa-eye"></i>
                                 </a>
 
                                 <a class="btn btn-danger"
-                                   href="/admin/ban/delete/{{ $ban['ban']->id }}">
+                                   href="/admin/bans/delete/{{ $ban['ban']->id }}">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>

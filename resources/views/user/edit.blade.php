@@ -37,23 +37,18 @@
 
                                 <input type="email" readonly value="{{auth()->user()->email}}" class="form-control">
 
+                                <hr class="mx-5 my-1">
+                                <h6 class="text-muted">Token API:</h6>
+                                @if(auth()->user()->apitoken != null)
+                                    <input type="text" readonly value="{{auth()->user()->apitoken}}"
+                                           class="form-control my-1">
+                                @else
+                                    <a href="{{url('/user/generate/API/'.auth()->id())}}"
+                                       class="btn btn-secondary my-1">Générer un token</a>
+                                @endif
 
                             </div>
-                            <hr class="mx-5 my-3">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    Membre
-                                    de {{(new \App\Subscription)->countByUser(auth()->id())}}
-                                    {{str_plural('groupe', (new \App\Subscription)->countByUser(auth()->id()))}}
-                                </li>
-                                <li class="list-group-item">
-                                    <small class="blockquote-footer">Administrateur
-                                        de {{count((new \App\Group)->getByAdmin(auth()->id()))}}
-                                        {{str_plural('groupe', count((new \App\Group)->getByAdmin(auth()->id())))}}
-                                    </small>
-                                </li>
 
-                            </ul>
 
                             <hr class="my-4 mx-4">
                             <div class="form-group">
@@ -99,7 +94,17 @@
 
                 <div class="col-lg-9">
 
-                    <button type="submit" class="btn btn-primary mx-5 mt-2">Valider</button>
+                    <div class="row justify-content-end mx-1">
+                        <button type="submit" class="btn btn-primary mx-2 mt-2">
+                            <i class="fas fa-check"></i>
+                            Valider
+                        </button>
+                        <a href="{{url('/password/reset')}}" class="mx-2 mt-2 btn btn-secondary">
+                            <i class="fas fa-lock"></i>
+                            Modifier son mot de passe
+                        </a>
+                    </div>
+
                     <hr class="my-3 mx-5">
 
                     <div class="p-3">

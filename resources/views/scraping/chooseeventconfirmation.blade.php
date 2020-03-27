@@ -34,7 +34,7 @@
 
                             <textarea class="form-control @error('eDesc') is-invalid @enderror desc"
                                       name="eDesc" rows="8"
-                                      placeholder="Description du groupe">{{ $eventDesc }}</textarea>
+                                      placeholder="Description du groupe">{!! str_replace('<br>','<br>',$eventDesc) !!}</textarea>
                             @error('eDesc')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -110,7 +110,7 @@
                                 <input id="inputNumRue" class="form-control @error('eNumStreet') is-invalid @enderror"
                                        name="eNumStreet" type="text" value="{{ $eventNumRue }}"
                                        placeholder="Num"
-                                       required autocomplete="off">
+                                       autocomplete="off">
                                 @error('eNumStreet')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -124,7 +124,7 @@
                                 <input id="inputRue" class="form-control @error('eStreet') is-invalid @enderror"
                                        name="eStreet" type="text" value="{{$eventRue}}"
                                        placeholder="Rue"
-                                       required>
+                                       >
                                 @error('eStreet')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -140,7 +140,7 @@
                                 <input id="inputVille" class="form-control @error('eCity') is-invalid @enderror"
                                        name="eCity" type="text" value="{{$eventVille}}"
                                        placeholder="Ville"
-                                       required>
+                                       >
                                 @error('eCity')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -154,7 +154,7 @@
                                 <input id="inputCP" class="form-control @error('eZip') is-invalid @enderror"
                                        name="eZip" type="text" value=""
                                        placeholder="Code postal"
-                                       required>
+                                       >
                                 @error('eZip')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -166,8 +166,8 @@
 
                                 <input id="inputCountry" class="form-control @error('eCountry') is-invalid @enderror"
                                        name="eCountry" type="text" value=""
-                                       placeholder="Région"
-                                       required>
+                                       placeholder="Pays"
+                                       >
                                 @error('eCountry')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -230,7 +230,7 @@
             success: function (data) {
                 console.log(data)
                 mymap.eachLayer(function (layer) {
-                    if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                    if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                         mymap.removeLayer(layer);
                     }
                 })
@@ -273,7 +273,7 @@
                     console.log(data);
                     if (data.features[0] != undefined) {
                         mymap.eachLayer(function (layer) {
-                            if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                            if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                 mymap.removeLayer(layer);
                             }
                         })
@@ -317,7 +317,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -366,7 +366,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })
@@ -415,7 +415,7 @@
                         console.log(data);
                         if (data.features[0] != undefined) {
                             mymap.eachLayer(function (layer) {
-                                if ((layer._url) != ("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw")) {
+                                if ((layer._url) != ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")) {
                                     mymap.removeLayer(layer);
                                 }
                             })

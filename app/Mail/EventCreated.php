@@ -19,7 +19,7 @@ class EventCreated extends Mailable
      *
      * @param Event $event
      */
-    public function __construct(Event $event)
+    public function __construct($event)
     {
         $this->event = $event;
     }
@@ -31,7 +31,7 @@ class EventCreated extends Mailable
      */
     public function build()
     {
-        return $this->from('no-reply@'.strtolower(Setting('openmeet.title', 'openmeet')).'.fr')
+        return $this->from('no-reply@'.strtolower(Setting('openmeet.name', 'openmeet')).'.fr')
             ->view('emails.eventcreated');
     }
 }

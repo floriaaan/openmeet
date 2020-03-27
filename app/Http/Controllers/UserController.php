@@ -6,10 +6,13 @@ use App\Ban;
 use App\Block;
 use App\Event;
 use App\Group;
+use App\Http\Requests\BanRequest;
+use App\Http\Requests\BlockRequest;
 use App\Http\Requests\ReportRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Mail\EventCreated;
 use App\Message;
+use App\Notification;
 use App\Participation;
 use App\Signalement;
 use App\Subscription;
@@ -25,7 +28,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     public function index()
@@ -41,11 +44,16 @@ class UserController extends Controller
         foreach ($listParticipations as $participation) {
             $events[] = (new Event)->getOne($participation->event);
         }
+        $block = new Block();
+        $isBlocked = $block->isBlock(auth()->id(),auth()->id());
+
 
         return view('user.show', [
             'user' => (new User)->getOne(auth()->id()),
             'groups' => $groups,
             'events' => $events,
+            'isBlocked'=>$isBlocked
+
         ]);
     }
 
@@ -64,10 +72,15 @@ class UserController extends Controller
             $events[] = (new Event)->getOne($participation->event);
         }
 
+        $block = new Block();
+        $isBlocked = $block->isBlock($userID,auth()->id());
+
+
         return view('user.show', [
             'user' => (new User)->getOne($userID),
             'groups' => $groups,
             'events' => $events,
+            'isBlocked'=>$isBlocked
         ]);
     }
 
@@ -110,7 +123,15 @@ class UserController extends Controller
         }
 
         if ($request->file('uPic') != null) {
-            unlink('public/upload/image/' . $user->picrepo . '/' . $user->picname);
+            if(!Storage::exists('public/upload/image/' . $user->picrepo . '/' . $user->picname)) {
+                Storage::delete('public/upload/image/' . $user->picrepo . '/' . $user->picname);
+            }
+            if(!Storage::exists('public/upload/image/user')) {
+                Storage::makeDirectory('public/upload/image/user');
+            }
+            if(!Storage::exists('public/upload/image/user/'.$user->id)){
+                Storage::makeDirectory('public/upload/image/user/'.$user->id);
+            }
 
             $uploadedFile = $request->file('uPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
@@ -129,6 +150,72 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+
+    public function banForm($groupID,$userID)
+    {
+
+        return view('user.ban.form', [
+            'banisher' => (new Group)->getOne($groupID),
+            'banned' => (new User)->getOne($userID),
+            'auth' => auth()->id()
+        ]);
+    }
+
+    public function banPost(BanRequest $request)
+    {
+        $post = $request->input();
+
+
+        if($post['auth'] == (new Group)->getOne($post['banisher'])->admin
+            && !(new Ban)->isBan($post['banned'], $post['banisher'])) {
+            $ban = new Ban();
+            $ban->banisher = $post['banisher'];
+            $ban->banned = $post['banned'];
+            $ban->description = $post['description'];
+            $ban->date = date('Y-m-d H:m:s');
+
+            $ban->push();
+        }
+
+
+        return redirect('/');
+
+    }
+
+
+        public function blockForm($userID)
+    {
+        return view('user.block.form', [
+            'blocker' => auth()->id(),
+            'target' => (new User)->getOne($userID)
+        ]);
+    }
+
+    public function blockPost(BlockRequest $request)
+    {
+        $post = $request->input();
+
+        $block = new Block();
+        $block->blocker = $post['blocker'];
+        $block->target = $post['target'];
+        $block->description = $post['description'];
+        $block->date = date('Y-m-d H:m:s');
+
+        $block->push();
+
+        return redirect('/user/show/'.$post['target']);
+    }
+
+
+    public function deleteBlock($userID)
+    {
+        (new Block)->removeBlock($userID);
+        return redirect('/user/show/'.$userID);
+
+    }
+
+
 
     public function reportForm($userID)
     {
@@ -151,7 +238,37 @@ class UserController extends Controller
 
         $report->push();
 
+        $contentSplitted = mb_str_split($post['description']);
+        $contentExt = "";
+        $contentExtract = "";
+
+        if (count($contentSplitted) >= 50) {
+            for ($i = 0; $i < 50; $i++) {
+                {
+                    $contentExt = $contentExt . $contentSplitted[$i];
+                }
+                $contentExtract = $contentExt . ' ...';
+            }
+        } else {
+            $contentExtract = $post['description'];
+        }
+
+        foreach ((new User)->getAdmin() as $admin) {
+            (new Notification)->CreateNotification('rep',
+                'Signalement de ' . (new User)->getOne($post['concerned'])->fname . ' ' . (new User)->getOne($post['concerned'])->lname,
+                $admin->id,
+                'Contenu du signalement : ' .$contentExtract,
+                $report->id);
+        }
+
+
         return redirect('/');
 
+    }
+
+    public function generateAPIToken($userID)
+    {
+        (new User)->createApiToken($userID);
+        return redirect('/user/edit');
     }
 }

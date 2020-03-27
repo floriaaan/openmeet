@@ -34,7 +34,7 @@
                                 </span>
                             </div>
                             <input class="form-control @error('gTags') is-invalid @enderror"
-                                   name="gTags" type="text" value="{{ old('gTags') }}" placeholder="Tags du groupe"
+                                   name="gTags" type="text" value="{{ $group->tags }}" placeholder="Tags du groupe"
                                    id="gTags">
                         </div>
                         <label for="gTags"><small>Séparés par des points-virgules 🛑</small></label>
@@ -57,21 +57,18 @@
                                       name="gDesc" rows="8"
                                       placeholder="Description du groupe">{{nl2br($group->desc)}}</textarea>
 
-                            <div class="input-group mt-1">
 
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Administrateur</span>
-                                </div>
-                                <select class="form-control" name="gAdminID" required>
-                                    @foreach((new \App\Subscription)->getGroup($group->id) as $sub)
-                                        <option value="{{$sub->user}}">{{(new \App\User)->getOne($sub->user)->fname}} {{(new \App\User)->getOne($sub->user)->lname}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
 
                         <div class="row justify-content-end p-5">
-                            <button type="submit" class="btn btn-primary mr-3">
+                            <a class="btn btn-secondary float-right mx-4" style="color: white"
+                               onclick="event.preventDefault();document.getElementById('return').submit()">
+                                <i class="fas fa-tools"></i>
+                                Panneau de gestion
+                            </a>
+
+                            <button type="submit" class="btn btn-primary mx-4">
+                                <i class="fas fa-pencil-alt"></i>
                                 Modifier {{$group->name}}
                             </button>
                         </div>
@@ -82,9 +79,14 @@
             </div>
 
             <input type="hidden" name="groupID" value="{{$group->id}}">
+            <input type="hidden" name="gAdminID" value="{{$group->admin}}">
         </form>
     </div>
 
+    <form action="{{url('/groups/admin/')}}" method="POST" class="d-none" id="return">
+        @csrf
+        <input type="hidden" name="pGroup" value="{{$group->id}}">
+    </form>
 @endsection
 
 @section('js')

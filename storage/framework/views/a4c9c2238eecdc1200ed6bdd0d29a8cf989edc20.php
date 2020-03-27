@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<?php echo e(url('')); ?>/favicon.png"/>
-    <title><?php echo e(Setting('openmeet.title', 'OpenMeet')); ?> - <?php echo $__env->yieldContent('title'); ?></title>
+    <title><?php echo e(Setting('openmeet.name', 'OpenMeet')); ?> - <?php echo $__env->yieldContent('title'); ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
@@ -111,6 +111,23 @@
             border-color: var(--openmeet);
         }
 
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: <?php echo e(setting('openmeet.color')); ?>;
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
+
+
     </style>
 
     <?php if(Setting('openmeet.theme') == "night"): ?>
@@ -130,9 +147,11 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
 <script src="<?php echo e(asset('js/share.js')); ?>"></script>
+
 <script>
 
-    $('#alert-close').click(function () {
+
+    /*$('#alert-close').click(function () {
         $.ajax({
             url: '<?php echo e(url('/api/v1/session/unset/error')); ?>',
             type: 'post',
@@ -144,7 +163,7 @@
                 console.log('error')
             }
         })
-    });
+    });*/
 
 
     function displayForm() {

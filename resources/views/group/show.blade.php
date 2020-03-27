@@ -17,8 +17,13 @@
             <div class="row no-gutters">
                 <div class="col-md-4 m-auto" style="overflow: hidden;">
                     @if($group->picname != null)
-                        <img src="{{url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)}}"
-                             class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @if(strpos($group->picrepo, 'https://') !== false)
+                            <img src="{{$group->picrepo.$group->picname}}"
+                                 class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @else
+                            <img src="{{url('/storage/upload/image/'.$group->picrepo.'/'.$group->picname)}}"
+                                 class="card-img hvr-grow" alt="Photo de {{$group->name}}">
+                        @endif
                     @else
                         <small class="p-3 blockquote-footer">Pas de photo</small>
                     @endif
@@ -49,15 +54,18 @@
                             class="text-muted ml-3 blockquote-footer">{!! str_replace('\\n','<br>',$group->desc) !!}</p>@endif
                         <hr class="mx-4 my-4">
 
-                        <div class="h-50 p-3" style="height: 40vh!important; overflow-y: scroll!important;">
+                        <div class="h-50 p-3" style="height: 30vh!important; overflow-y: scroll!important;">
 
 
-                            @foreach($listEvent as $event)
+                            @forelse($listEvent as $event)
                                 <a href="{{url('/events/show')}}/{{$event->id}}"
                                    style="text-decoration: none; color: inherit;">
                                     <div class="p-4 shadow-sm mt-2">
                                         <h5>{{$event->name}}</h5>
                                         <p class="text-muted">{!!str_replace('\n','</p><p class="text-muted">',$event->description)!!}</p>
+                                        @if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s'))
+                                            <span class="badge badge-primary glow-primary">En cours</span>
+                                        @endif
                                         <p style="text-transform: capitalize">
                                             à {{$event->numstreet}} {{$event->street}}</p>
                                         <p>{{$event->zip}} - {{$event->city}}</p>
@@ -76,7 +84,27 @@
                                         @endif
                                     </div>
                                 </a>
-                            @endforeach
+                            @empty
+                                @if((new \App\Group)->getAdmin($group->id)->id == auth()->id())
+                                    <div class="p-3 shadow-sm mt-2">
+                                        <div class="card-body text-center">
+                                            <p class="lead">Il n'y a pas encore d'événements</p>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <a href="{{url('/events/create')}}"
+                                               class="btn btn-primary mx-auto">
+                                                Créer votre premier événement
+                                            </a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="p-1 shadow-sm mt-2">
+                                        <div class="card-body text-center lead">
+                                            Le groupe n'a pas encore d'événement.
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforelse
                         </div>
 
                         <hr class="mx-4 my-2">
@@ -89,23 +117,29 @@
                                     href="{{url('/user/show/'.$group->admin)}}">
                                     {{ (new \App\Group)->getAdmin($group->id)->fname }} {{ (new \App\Group)->getAdmin($group->id)->lname }}
                                 </a>
+                                <a href="{{url('/messages/user/'.$group->admin)}}">
+                                    <span class="badge badge-secondary">Contacter</span>
+                                </a>
                             </small>
                         </div>
 
 
-                        <div class="d-flex justify-content-between px-5 mt-4">
+                        <div class="row justify-content-between px-5 mt-4">
                             <p class="card-text"><small class="text-muted">Créé le {{$group->datecreate}}</small></p>
                             <div class="float-right mr-5">
                                 @if($group->admin == auth()->id())
                                     <div class="row justify-content-end">
-
+                                        <a href="{{url('/groups/delete/'.$group->id)}}" class="btn btn-danger m-1">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Supprimer {{$group->name}}
+                                        </a>
+                                        <a href="{{url('/groups/edit/'.$group->id)}}" class="btn btn-primary m-1">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Modifier {{$group->name}}
+                                        </a>
                                     </div>
-                                    <small class="text-muted blockquote-footer m-1">Vous êtes administrateur du
-                                        groupe.</small>
-                                    <a href="{{url('/groups/edit/'.$group->id)}}" class="btn btn-primary m-1">
-                                        Modifier {{$group->name}}
-                                    </a>
-                                @elseif($issubscribed != null && $issubscribed)
+
+                                @elseif($issubscribed ?? '' != null && $issubscribed ?? '')
                                     <a class="btn btn-danger" style="color: #fff"
                                        onclick="event.preventDefault();document.getElementById('toggleSubscription').submit();">
                                         <i class="fas fa-minus"></i> Se désabonner

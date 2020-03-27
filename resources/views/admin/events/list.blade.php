@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Liste des événements
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -41,7 +45,7 @@
                                 </a>
 
                                 <a class="btn btn-danger"
-                                   href="/admin/events/delete/{{ $event['event']->id }}">
+                                   href="/events/delete/{{ $event['event']->id }}">
                                     <i class="fas fa-skull-crossbones"></i>
                                 </a>
                             </div>

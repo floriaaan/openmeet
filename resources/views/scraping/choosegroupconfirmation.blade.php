@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="{{url('/groups/create')}}" method="POST">
+        <form action="{{url('/groups/create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card rounded shadow-lg mt-1 mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
@@ -23,8 +23,15 @@
                                 <label class="custom-file-label mb-1" for="gPic">Photo du groupe</label>
                             </div>
                         </div>
+                        <hr class="mx-5 mt-1 my-0">
+                        <p class="mx-5 my-0 ml-4" style="font-size: small">Ou entrez l'url d'une image <br> (vider le champs upload)</p>
+                        <hr class="mx-5 mt-0 my-0">
+                        <input class="mb-1 mt-1 form-control form-control @error('gPhotoUrl') is-invalid @enderror" type="text" value="{{$groupPhotoUrl}}" placeholder="Entrez une url" name="gPhotoUrl">
 
-                        <hr class="m-5">
+
+
+
+                        <hr class="mx-5 mt-0">
 
 
                         <div class="input-group">

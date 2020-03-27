@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id', 'fname', 'lname', 'bdate', 'email', 'country',
         'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
-        'defaultnotif', 'typenotif', 'password'
+        'defaultnotif', 'typenotif', 'password', 'apitoken', 'disabled'
     ];
 
     /**
@@ -58,29 +58,27 @@ class User extends Authenticatable
 
     }
 
-    public function isBan($userId,$groupId)
+    public function isBan($userId, $groupId)
     {
 
         $query = DB::table('bans')
             ->select('*')
-            ->where('banned', '=', $userId )
-            ->where('banisher','=',$groupId)
+            ->where('banned', '=', $userId)
+            ->where('banisher', '=', $groupId)
             ->get();
         return $query->count() > 0;
     }
 
-    public function isBlock($userId,$blockId)
+    public function isBlock($userId, $blockId)
     {
 
-        $query = DB::table('bans')
+        $query = DB::table('blocks')
             ->select('*')
-            ->where('target', '=', $userId )
-            ->where('blocker','=',$blockId)
+            ->where('target', '=', $userId)
+            ->where('blocker', '=', $blockId)
             ->get();
         return $query->count() > 0;
     }
-
-
 
 
     public function getLimit($limit)
@@ -105,15 +103,6 @@ class User extends Authenticatable
 
     }
 
-    public function getCountUserByGroup()
-    {
-        $query = DB::table('users')
-            ->select('*')
-            ->get();
-
-        return $query->count();
-
-    }
 
 
     public function getAll()
@@ -129,8 +118,13 @@ class User extends Authenticatable
         return $listUser;
     }
 
+
+
+
     public function remove($userID)
     {
+
+
         try {
             $query = DB::table('users')
                 ->delete($userID);
@@ -161,7 +155,7 @@ class User extends Authenticatable
 
     public function getLimitDesc($limit)
     {
-        $query=DB::table('users')
+        $query = DB::table('users')
             ->select('*')
             ->limit($limit)
             ->orderByDesc('id')
@@ -171,7 +165,21 @@ class User extends Authenticatable
         return $query;
     }
 
-    public function updateUser($user) {
+    public function getLimitGroupDesc($userID, $limit)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('id', $userID)
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+
+        return $query;
+    }
+
+    public function updateUser($user)
+    {
 
         DB::table('users')
             ->where('id', $user->id)
@@ -189,5 +197,55 @@ class User extends Authenticatable
             ->where('id', $user->id)
             ->update(['picrepo' => $user->picrepo]);
     }
+
+    public function createApiToken($userID)
+    {
+        $token = random_bytes(32);
+        $token = sha1($token);
+
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['apitoken' => $token]);
+
+    }
+
+    public function getToken($token)
+    {
+        $query = DB::table('users')
+            ->where('apitoken', $token)
+            ->get();
+        if ($query != null) {
+            if (!empty($query) && isset($query[0]->isadmin)) {
+                return $query[0];
+            }
+        }
+        return false;
+    }
+
+    public function getAdmin()
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('isadmin', '=', 1)
+            ->get();
+
+        return $query;
+    }
+
+    public function updateAdmin($userID, $param)
+    {
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['isadmin' => $param ? 1 : 0]);
+    }
+
+    public function disable($userID)
+    {
+        $user = (new User)->getOne($userID);
+        $query = DB::table('users')
+            ->where('id', $userID)
+            ->update(['disabled' => !($user->disabled)]);
+    }
+
 
 }

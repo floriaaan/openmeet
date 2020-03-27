@@ -8,7 +8,7 @@
 
     <div class="container p-5">
 
-        <div class="card shadow-lg p-3" style="opacity: 0.8">
+        <div class="card shadow-lg glow-danger p-3" style="opacity: 0.8">
 
             <h3 class="display-4 text-center mt-4">Voulez-vous vraiment supprimer <br> {{$event->name}} ?</h3>
             <hr class="mx-3 my-5">

@@ -15,6 +15,17 @@ class Ban extends Model
         'description'
     ];
 
+    public function isBan($userId, $groupId)
+    {
+
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banned', '=', $userId)
+            ->where('banisher', '=', $groupId)
+            ->get();
+        return $query->count() > 0;
+    }
+
 
     public function getAll()
     {
@@ -29,21 +40,10 @@ class Ban extends Model
         return $listBans;
     }
 
-    public function getLimit($limit)
-    {
-        $query = DB::table('bans')
-            ->select('*')
-            ->limit($limit)
-            ->get();
-
-
-        return $query;
-
-    }
 
     public function getCount()
     {
-        $query=DB::table('bans')
+        $query = DB::table('bans')
             ->select('*')
             ->get();
 
@@ -52,10 +52,59 @@ class Ban extends Model
 
     }
 
+    public function getCountGroup($groupId)
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banisher', $groupId)
+            ->get();
+
+
+        return $query->count();
+
+    }
+
+    public function getGroup($groupID)
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('banisher', $groupID)
+            ->get();
+        return $query;
+    }
+
+    public function remove($banID)
+    {
+        try {
+            $query = DB::table('bans')
+                ->delete($banID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+
+    }
+
     public function getLimitDesc($limit)
     {
-        $query=DB::table('bans')
+        {
+            $query = DB::table('bans')
+                ->select('*')
+                ->limit($limit)
+                ->orderByDesc('id')
+                ->get();
+
+
+            return $query;
+        }
+    }
+
+    public function getLimitGroupDesc($userID, $limit)
+    {
+        $query = DB::table('bans')
             ->select('*')
+            ->where('banisher', $userID)
             ->limit($limit)
             ->orderByDesc('id')
             ->get();
@@ -63,4 +112,15 @@ class Ban extends Model
 
         return $query;
     }
+
+    public function getOne($banID)
+    {
+        $query = DB::table('bans')
+            ->select('*')
+            ->where('id', '=', $banID)
+            ->limit(1)
+            ->get();
+        return $query[0];
+    }
+
 }

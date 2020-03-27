@@ -3,7 +3,7 @@
 }
 
 .openmeet-install {
-    font-size: 4em;
+    font-size: 2em;
 }
 
 .openmeet-nav {
@@ -75,7 +75,7 @@
 }
 
 .mt-nav {
-    margin-top: 4.5rem !important;
+    margin-top: 4.8rem !important;
 }
 
 @media (max-width: 991px) {
@@ -129,3 +129,24 @@
     font-weight: 300;
 }
 
+@keyframes glowing-primary {
+     0% { box-shadow: 0 0 -10px var(--openmeet); }
+     40% { box-shadow: 0 0 20px var(--openmeet); }
+     60% { box-shadow: 0 0 20px var(--openmeet); }
+     100% { box-shadow: 0 0 -10px var(--openmeet); }
+ }
+
+.glow-primary {
+    animation: glowing-primary 5000ms infinite;
+}
+
+@keyframes glowing-danger {
+    0% { box-shadow: 0 0 -10px #DC3545; }
+    40% { box-shadow: 0 0 20px #DC3545; }
+    60% { box-shadow: 0 0 20px #DC3545; }
+    100% { box-shadow: 0 0 -10px #DC3545; }
+}
+
+.glow-danger {
+    animation: glowing-danger 5000ms infinite;
+}

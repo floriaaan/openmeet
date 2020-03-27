@@ -40,6 +40,7 @@ class HomeController extends Controller
 
     public function install()
     {
+        Artisan::call('key:generate');
         return view('install.form');
     }
 
@@ -59,11 +60,13 @@ class HomeController extends Controller
 
 
 
-            Setting(['database.host' => $post['iDBHost']]);
+            /*Setting(['database.host' => $post['iDBHost']]);
             Setting(['database.user' => $post['iDBUser']]);
-            Setting(['database.pass' => $post['iDBPass']]);
+            Setting(['database.pass' => $post['iDBPass']]);*/
 
-            self::changeEnvironmentVariable('DB_HOST', $post['iDBHost']);
+            self::changeEnvironmentVariable('APP_NAME', $post['iName']);
+
+            /*self::changeEnvironmentVariable('DB_HOST', $post['iDBHost']);
             self::changeEnvironmentVariable('DB_DATABASE', $post['iDBName']);
             self::changeEnvironmentVariable('DB_USERNAME', $post['iDBUser']);
             $pass = isset($post['iDBPass']) ? $post['iDBPass'] : '';
@@ -74,8 +77,9 @@ class HomeController extends Controller
             if(isset($post['iDBMigrate']) && $post['iDBMigrate'] == 'on') {
                 DB::purge();
                 DB::connection();
+                Artisan::call('cache:clear');
                 Artisan::call('migrate:fresh');
-            }
+            }*/
 
             $user = new User();
             $user->fname = $post['fname'];

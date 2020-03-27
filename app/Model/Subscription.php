@@ -29,6 +29,19 @@ class Subscription extends Model
         var_dump($query);
     }
 
+    public function getAll()
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->get();
+
+        $listSub = [];
+        foreach ($query as $sub) {
+            $listSub[] = $sub;
+        }
+        return $listSub;
+    }
+
     public function getLimit($limit)
     {
         $query = DB::table('subscriptions')
@@ -50,8 +63,8 @@ class Subscription extends Model
             ->get();
 
         $listSubscription = [];
-        foreach ($query as $subcription) {
-            $listSubscription[] = $subcription;
+        foreach ($query as $subscription) {
+            $listSubscription[] = $subscription;
         }
         return $listSubscription;
     }
@@ -71,10 +84,9 @@ class Subscription extends Model
             ->select('*')
             ->where('user', "=", $userId)
             ->get();
-
         $listSubscription = [];
-        foreach ($query as $subcription) {
-            $listSubscription[] = $subcription;
+        foreach ($query as $subscription) {
+            $listSubscription[] = $subscription;
         }
         return $listSubscription;
     }
@@ -87,6 +99,7 @@ class Subscription extends Model
 
         return count($query);
     }
+
 
 
     public function updateAcceptNotif($subId, $value)
@@ -128,6 +141,56 @@ class Subscription extends Model
             ->get();
 
         return $query[0];
+    }
+
+    public function getCount()
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->get();
+
+        return $query->count();
+
+    }
+
+
+    public function getLimitDesc($limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+        return $query;
+    }
+
+    public function getLimitGroupDesc($groupID, $limit)
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('group', $groupID)
+            ->limit($limit)
+            ->orderByDesc('id')
+            ->get();
+
+        return $query;
+    }
+
+
+
+    public function getAllSub($id)
+
+    {
+        $query = DB::table('subscriptions')
+            ->select('*')
+            ->where('group','=',$id)
+            ->get();
+        $listSub = [];
+        foreach ($query as $sub) {
+            $listSub[] = $sub;
+        }
+        return $listSub;
     }
 
 }

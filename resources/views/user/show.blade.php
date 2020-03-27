@@ -43,11 +43,26 @@
                         </ul>
                         @if($user->id != auth()->id())
                             <div class="card-body">
-                                <a href="{{url('/user/report/'.$user->id)}}" class="btn btn-warning">
+                                <a href="{{url('/user/report/'.$user->id)}}" class="btn btn-warning mx-1">
                                     <i class="fas fa-radiation"></i> Signaler
+
                                 </a>
+                                    @if($isBlocked == false)
+                                    <a href="{{url('/user/block/'.$user->id)}}" class="mt-1 btn btn-danger mx-1">
+                                        <i class="fas fa-shield-alt"></i> Bloquer
+                                    </a>
+                                        @else
+                                    <a href="{{url('/user/block/delete/'.$user->id)}}"
+                                       class="btn btn-primary mt-1 mx-1">
+                                        <i class="fas fa-shield-alt"></i> Débloquer
+                                    </a>
+                                    @endif
+
+
+
                             </div>
                         @endif
+
                     </div>
                 </div>
 
@@ -55,14 +70,17 @@
 
             <div class="col-lg-9">
                 @if(auth()->id() == $user->id)
-                    <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5 mt-2">Editer mon profil</a>
+                    <a href="{{url('/user/edit')}}" class="btn btn-primary mx-5 mt-2">
+                        <i class="fas fa-pencil-alt"></i>
+                        Editer mon profil
+                    </a>
 
-                    @else
+                @else
                     <a href="{{url('/messages/user/'.$user->id)}}" class="btn btn-secondary mx-5 mt-2">
                         <i class="fas fa-envelope"></i> Messages
                     </a>
                 @endif
-                    <hr class="my-3 mx-5">
+                <hr class="my-3 mx-5">
                 <div class="p-3">
 
                     <div class="card shadow-sm p-3">

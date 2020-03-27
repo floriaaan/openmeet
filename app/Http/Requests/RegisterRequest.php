@@ -29,8 +29,8 @@ class RegisterRequest extends FormRequest
 
         return [
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3',
-            'password-confirm' => 'required|same:password|min:3',
+            'password' => 'required|min:8',
+            'password-confirm' => 'required|same:password|min:8',
             'fname' => 'required|alpha|min:1',
             'lname' => 'required|alpha|min:1',
             'bdate' => 'required|date|before_or_equal:-18 years'

@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -43,7 +44,17 @@ class GroupController extends Controller
             $group->tags = $post['gTags'];
         }
         $group->push();
-        if ($request->file('gPic') != null) {
+        if ($request->hasFile('gPic')) {
+            if(Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+                Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            }
+            if(!Storage::exists('public/upload/image/group')) {
+                Storage::makeDirectory('public/upload/image/group');
+            }
+            if(!Storage::exists('public/upload/image/group/'.$group->id)){
+                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            }
+
             $uploadedFile = $request->file('gPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
@@ -56,6 +67,15 @@ class GroupController extends Controller
 
             $group->picrepo = 'group/' . $group->id;
             $group->picname = $filename;
+        }else{
+            if($post['gPhotoUrl'] != null && $post['gPhotoUrl'] !=""){
+                $urlExploded = explode('/',$post['gPhotoUrl']);
+                for($i=0;$i<count($urlExploded)-2;$i++){
+                    $group->picrepo = $group->picrepo.$urlExploded[$i].'/';
+                }
+                $group->picname= $urlExploded[$i+1];
+            }
+            else{}
         }
         (new Group)->updateGroup($group);
 
@@ -73,15 +93,16 @@ class GroupController extends Controller
     public function deleteForm($groupID)
     {
         return view('group.delete', [
-            'groupID' => $groupID
+            'group' => (new Group)->getOne($groupID)
         ]);
     }
 
-    public function deletePost()
+    public function deletePost(Request $request)
     {
+        $post = $request->input();
+        (new Group)->remove($post['group']);
 
-        //ACTIONS
-        return redirect('/group/');
+        return redirect('/groups/list');
     }
 
     public function show($groupID)
@@ -100,7 +121,7 @@ class GroupController extends Controller
         if (auth()->check()) {
             $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
             if (auth()->user()->isBan(auth()->user()->id, $groupID)) {
-                return abort(403, 'BAN ACTIF');
+                return view('user.ban.banshow');
             }
         }
 
@@ -135,7 +156,16 @@ class GroupController extends Controller
         $group->admin = $post['gAdminID'];
 
         if ($request->file('gPic') != null) {
-            unlink('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            if(!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+                Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
+            }
+            if(!Storage::exists('public/upload/image/group')) {
+                Storage::makeDirectory('public/upload/image/group');
+            }
+            if(!Storage::exists('public/upload/image/group/'.$group->id)){
+                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            }
+
             $uploadedFile = $request->file('gPic');
             $filename = time() . md5($uploadedFile->getClientOriginalName()) . '.' . $uploadedFile->extension();
 
@@ -154,5 +184,7 @@ class GroupController extends Controller
 
         return redirect('/groups/show/' . $group->id);
     }
+
+
 
 }

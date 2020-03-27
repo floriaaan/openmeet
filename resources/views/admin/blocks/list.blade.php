@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <h4 id="events" class="my-5">Blocages des utilisateurs</h4>
+        <h4 id="bans" class="my-5">Blocage des utilisateurs </h4>
 
         <a class="btn btn-link float-right mr-5"
            href="{{url('/admin')}}">
@@ -18,7 +18,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Concerné</th>
-                    <th scope="col">Par</th>
+                    <th scope="col">Du groupe</th>
                     <th scope="col">Créé le</th>
                     <th scope="col">Actions</th>
 
@@ -36,12 +36,12 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a class="btn btn-success"
-                                   href="/admin/ban/show/{{ $block['block']->id }}">
+                                   href="/admin/blocks/show/{{ $block['block']->id }}">
                                     <i class="far fa-eye"></i>
                                 </a>
 
                                 <a class="btn btn-danger"
-                                   href="/admin/ban/delete/{{ $block['block']->id }}">
+                                   href="/admin/blocks/delete/{{ $block['block']->id }}">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
@@ -64,5 +64,6 @@
     </div>
 
 @endsection
+
 
 

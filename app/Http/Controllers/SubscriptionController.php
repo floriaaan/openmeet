@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\SubscriptionRequest;
+use App\Notification;
 use App\Participation;
 use App\Subscription;
 use App\User;
@@ -28,16 +29,24 @@ class SubscriptionController extends Controller
     {
         $post = $request->input();
         $userId = $post['user'];
-        $groupId = $post['group'];
-        if (!(new Subscription)->isSubscribed($userId, $groupId)) {
+        $group = (new Group)->getOne($post['group']);
+        if (!(new Subscription)->isSubscribed($userId, $group->id)) {
             $subscription = new Subscription();
             $subscription->user = $userId;
-            $subscription->group = $groupId;
+            $subscription->group = $group->id;
             $subscription->date = date('Y-m-d H:m:s');
             $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
             $subscription->push();
+
+            $user = (new User)->getOne($post['user']);
+
+            (new Notification)->CreateNotification('sub',
+                 'Nouvel abonné(e)',
+                $group->admin,
+                $user->fname . ' ' . $user->lname . ' s\'est abonné à ' . $group->name,
+                $group->id);
         } else {
-            Session()->put('errorSubscription', 'Vous êtes déjà abonné à ce groupe');
+            Session()->flash('error', 'Vous êtes déjà abonné à ce groupe');
         }
         return redirect('/user/groups');
 
@@ -51,7 +60,7 @@ class SubscriptionController extends Controller
         if ((new Subscription)->isSubscribed($userId, $groupId)) {
             (new Subscription)->remove((new Subscription)->getSubscribed($userId, $groupId)->id);
         } else {
-            Session()->put('errorParticipation', 'Vous ne participez pas à cet évenement');
+            Session()->flash('error', 'Vous ne participez pas à cet évenement');
         }
 
         return redirect('/user/groups');

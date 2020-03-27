@@ -17,9 +17,24 @@
             <div class="row no-gutters">
 
                 <div class="card-body">
-                    <h5 class="card-title display-4">{{$event->name}}</h5>
-                    @if($event->description != null)<h5
-                        class="text-muted ml-3 blockquote-footer">{{$event->description}}</h5>@endif
+                    <div class="media mb-3">
+                        @if($event->picname != null)
+                            <img
+                                src="{{url('/storage/upload/image/'.$event->picrepo.'/'.$event->picname)}}"
+                                class="mr-3 hvr-grow" alt="Photo"
+                                width="auto" height="100px">
+                        @endif
+                        <div class="media-body">
+                            <h5 class="card-title display-4">{{$event->name}}</h5>
+                            @if($event->description != null)
+                                <h5 class="text-muted ml-3 blockquote-footer">{!! str_replace('\\n','<br>',$event->description) !!}</h5>
+                            @endif
+                        </div>
+                    </div>
+
+                    @if($event->datefrom <= date('Y-m-d H:i:s') && $event->dateto > date('Y-m-d H:i:s'))
+                        <span class="badge badge-primary glow-primary">En cours</span>
+                    @endif
                     <small class="text-muted">
                         Participants : {{(new \App\Participation)->getCount($event->id)}}
                     </small>
@@ -31,14 +46,40 @@
 
                     </div>
 
-                    <div id="socialshare" class="p-3 mx-5">
-                        {!! Share::page(url('/event/show'.'/'.$event->id), 'Evenement '.Setting('openmeet.title', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
-                            ->facebook()
-                            ->twitter()
-                            ->linkedin('Extra linkedin summary can be passed here')
-                            ->whatsapp() !!}
-                    </div>
 
+                    <div class="row justify-content-around">
+                        <div id="socialshare" class="p-3 mx-5">
+                            {!! Share::page(url('/events/show'.'/'.$event->id), $event->name .' | Evenement '.Setting('openmeet.name', 'OpenMeet'), ['class' =>'list-group-item'], '<ul class="list-group list-group-horizontal">', '</ul>')
+                                ->facebook()
+                                ->twitter()
+                                ->linkedin()
+                                ->whatsapp() !!}
+                        </div>
+                        <div class="p-4">
+                            <div class="media">
+                                <i class="fas fa-2x fa-map-marked-alt mr-3 text-primary"></i>
+                                <div class="media-body">
+                                    <span
+                                        class="mt-0 lead">{{$event->numstreet}} {{$event->street}} à {{$event->city}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="media">
+                                <i class="far fa-2x fa-user mr-3 text-primary"></i>
+                                <div class="media-body">
+                                    <a href="{{url('/groups/show/'.$event->group)}}">
+                                        <span class="mt-0 lead">
+                                            {{(new \App\Group)->getOne($event->group)->name}}
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
                     <hr class="mx-5 my-2">
 
                     <div class="row mt-2">
@@ -64,15 +105,17 @@
                         <div class="col-lg-6">
                             <div class="row justify-content-end">
                                 @if((new \App\Group)->getAdmin($event->group)->id == auth()->id())
-                                    <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2">
+                                    <a href="{{url('/events/edit/'.$event->id)}}" class="btn btn-primary mx-2 my-2">
+                                        <i class="fas fa-pencil-alt"></i>
                                         Modifier l'évenement
                                     </a>
-                                    <a href="{{url('/events/delete/'.$event->id)}}" class="btn btn-danger mx-2">
+                                    <a href="{{url('/events/delete/'.$event->id)}}" class="btn btn-danger mx-2 my-2">
+                                        <i class="fas fa-trash-alt"></i>
                                         Supprimer l'évenement
                                     </a>
                                 @endif
-                                <div class="mx-2">
-                                    @if($isparticipating != null && $isparticipating)
+                                <div class="mx-2 my-2">
+                                    @if($isparticipating ?? '' != null && $isparticipating ?? '')
                                         <a class="btn btn-danger" style="color: #fff"
                                            onclick="event.preventDefault();document.getElementById('toggleParticipation').submit();">
                                             <i class="fas fa-times"></i> Ne participe plus
@@ -119,10 +162,12 @@
 
     <script>
         displayMap();
-        @if($event->posx != null && $event->posy != null)
-            displayEvent({{$event->posx}}, {{$event->posy}});
-        @endif
+    </script>
 
+    <script>
+        @if($event->posx != null && $event->posy != null)
+        displayEvent({{$event->posx}}, {{$event->posy}});
+        @endif
     </script>
 @endsection
 

@@ -72,6 +72,13 @@
       'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
+  'mpociot/laravel-apidoc-generator' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mpociot\\ApiDoc\\ApiDocGeneratorServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

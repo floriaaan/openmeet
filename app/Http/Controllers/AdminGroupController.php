@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Ban;
-use App\Block;
 use App\Event;
 use App\Group;
-use App\Http\Requests\AdminEditRequest;
-use App\Http\Requests\DeleteUserRequest;
-use App\Http\Requests\SearchRequest;
-use App\Message;
-use App\Signalement;
+use App\Http\Requests\GroupPanelChooseRequest;
+use App\Participation;
 use App\Subscription;
 use App\User;
+use Illuminate\Http\Request;
+
 
 class AdminGroupController extends Controller
 {
@@ -20,200 +19,151 @@ class AdminGroupController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
-    public function gestion()
+    public function chooseGroup()
     {
-        $user = (new User);
-        $listUser = $user->getLimit(5);
-        $countUser = $user->getCount();
 
-
-        $sub = (new Subscription);
-        $UserByGroup = $sub->countGroup(3);
-
-
-        $message = (new Message);
-        $listMessage = [];
-        $rawListMsg = $message->getLimit(10);
-
-        foreach ($rawListMsg as $msg) {
-            if ($msg->forgroup == 0) {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => $user->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            } else {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => (new Group)->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            }
-
-        }
-        $countMessage = $message->getCount();
-
-        $groups = (new Group);
-        $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimit(10);
-
-        $listGroup = [];
-
-        foreach ($rawListGroup as $group) {
-            $listGroup[] = [
-                'group' => $group,
-                'admin' => $user->getOne($group->admin),
-
-            ];
-
-        }
-
-        $events = (new Event);
-        $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimit(10);
-
-        $listEvent = [];
-        foreach ($rawListEvent as $event) {
-            $listEvent[] = [
-                'event' => $event,
-                'group' => $groups->getOne($event->group)
-            ];
-
-        }
-
-        $reports = (new Signalement);
-        $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimit(10);
-
-        $listReport = [];
-        foreach ($rawListReport as $report) {
-            $listReport[] = [
-                'report' => $report,
-                'sender' => $user->getOne($report->submitter),
-                'concerned' => $user->getOne($report->concerned),
-            ];
-
-        }
-
-        $bans = (new Ban);
-        $countBan = $bans->getCount();
-        $rawListBan = $bans->getLimit(10);
-
-        $listBan = [];
-        foreach ($rawListBan as $ban) {
-            $listBan[] = [
-                'ban' => $ban,
-                'banisher' => $groups->getOne($ban->banisher),
-                'banned' => $user->getOne($ban->banned),
-            ];
-
-        }
-
-        $blocks = (new Block);
-        $countBlock = $blocks->getCount();
-        $rawListBlock = $blocks->getLimit(10);
-
-        $listBlock = [];
-        foreach ($rawListBlock as $block) {
-            $listBlock[] = [
-                'block' => $block,
-                'blocker' => $user->getOne($block->blocker),
-                'target' => $user->getOne($block->target),
-            ];
-
-        }
-
-
-       /* $subs = (new Subscription);
-        $rawListSub = $subs->getLimit(10);
-        $NameGroupG = $subs->getnameGroup();
-        $listSubG = [];
-        foreach ($rawListSub as $sub) {
-            $listSubG[] = [
-                'lastsub' => $sub,
-                'group' => $user->getOne($sub->id_group),
-                'user' => $user->getOne($sub->id_user),
-            ];
-
-        }*/
-
-        return view('admingroup.panelgestion', [
-            'userList' => $listUser,
-            'userCount' => $countUser,
-            'messageList' => $listMessage,
-            'messageCount' => $countMessage,
-            'groupList' => $listGroup,
-            'groupCount' => $countGroup,
-            'eventList' => $listEvent,
-            'eventCount' => $countEvent,
-            'reportList' => $listReport,
-            'reportCount' => $countReport,
-            'banList' => $listBan,
-            'banCount' => $countBan,
-            'UserByGroup' => $UserByGroup
-
-
+        $listGroup = (new Group)->getByAdmin(auth()->user()->id);
+        return view('group.admin.choose', [
+            'groupList' => $listGroup
         ]);
 
 
     }
 
-    public function listSubscription()
+    public function showPanel(GroupPanelChooseRequest $request)
     {
-        return view('admingroup.users.list', ['users' => (new User)->getAll()]);
-    }
-    public function listEvent()
-    {
-        return view('admingroup.eventlist', ['users' => (new User)->getAll()]);
-    }
+        $post = $request->input();
+        $groupChosen = $post['pGroup'];
 
-    public function listReport()
-    {
-        $user = (new User);
-        $reports = (new Signalement);
-        $rawListReport = $reports->getAll();
+        $listGroup = (new Group)->getByAdmin(auth()->user()->id);
 
-        $listReport = [];
-        foreach ($rawListReport as $report) {
-            $listReport[] = [
-                'report' => $report,
-                'sender' => $user->getOne($report->submitter),
-                'concerned' => $user->getOne($report->concerned),
+
+        $rawListSub = (new Subscription)->getLimitGroupDesc($groupChosen, 5);
+        $listSub = [];
+        foreach ($rawListSub as $sub) {
+            $listSub[] = [
+                'user' => (new User)->getOne($sub->user),
+                'sub' => $sub
+            ];
+        }
+
+        $rawListEvent = (new Event)->getLimitGroupDesc($groupChosen, 5);
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'participations' => (new Participation)->getEvent($event->id)
             ];
 
         }
-        return view('group.admin.reports.list', ['reportList' => $listReport]);
-    }
 
-    public function listBan()
-    {
-        $user = (new User);
-        $bans = (new Ban);
-        $groups = (new Group);
-        $rawListBan = $bans->getAll();
-
+        $rawListBan = (new Ban)->getGroup($groupChosen);
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
                 'ban' => $ban,
-                'banisher' => $groups->getOne($ban->banisher),
-                'banned' => $user->getOne($ban->banned),
+                'banned' => (new User)->getOne($ban->banned)
+            ];
+        }
+
+        return view('group.admin.panel', [
+            'group' => (new Group)->getOne($groupChosen),
+            'groupList' => $listGroup,
+            'subList' => $listSub,
+            'eventList' => $listEvent,
+            'banList' => $listBan,
+            'groupChosen' => $groupChosen
+        ]);
+
+
+    }
+
+    public function listEvent(Request $request)
+    {
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
+
+        $rawListEvent = (new Event)->getByGroup($groupChosen);
+        $listEvent = [];
+        foreach ($rawListEvent as $event) {
+            $listEvent[] = [
+                'event' => $event,
+                'participations' => (new Participation)->getEvent($event->id),
             ];
 
         }
-        return view('admingroup.banlist', ['banList' => $listBan]);
+
+        return view('group.admin.event.list', ['list' => $listEvent, 'group' => $groupChosen]);
     }
 
-    public function listGroup()
+    public function listSub(Request $request)
     {
-        $groups = [];
-        $listGroups = (new Group)->getAll();
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
 
-        foreach ($listGroups as $group) {
-            $groups[] = ['group' => $group, 'admin' => (new User)->getOne($group->admin)];
+        $rawListSub = (new Subscription)->getGroup($groupChosen);
+        $listSub = [];
+        foreach ($rawListSub as $sub) {
+            $listSub[] = [
+                'user' => (new User)->getOne($sub->user),
+                'sub' => $sub
+            ];
         }
-        return view('admingroup.grouplist', ['groups' => $groups]);
+
+        return view('group.admin.subscription.list', ['list' => $listSub, 'group' => $groupChosen]);
+
     }
+
+    public function listBan(Request $request)
+    {
+        $post = $request->input();
+        $groupChosen = $post['groupChosen'];
+
+        $rawListBan = (new Ban)->getGroup($groupChosen);
+        $listBan = [];
+        foreach ($rawListBan as $ban) {
+            $listBan[] = [
+                'ban' => $ban,
+                'banned' => (new User)->getOne($ban->banned)
+            ];
+        }
+
+        return view('group.admin.ban.list', ['list' => $listBan, 'group' => $groupChosen]);
+
+    }
+
+    public function transferRolesConfirm($groupID, $userID)
+    {
+        $user = (new User)->getOne($userID);
+        $group = (new Group)->getOne($groupID);
+
+        if ($group->admin == auth()->id()) {
+            return view('group.admin.transfer', [
+                'group' => $group,
+                'user' => $user
+            ]);
+        } else {
+            Session()->flash('error', 'Vous n\'êtes pas administrateur de groupe.');
+            return redirect('/');
+        }
+    }
+
+    public function transferRolesPost(Request $request)
+    {
+        $post = $request->input();
+
+        (new Group)->updateAdmin($post['group'], $post['user']);
+        return redirect('/groups/show/' . $post['group']);
+    }
+
+    public function deleteBan($banID)
+    {
+        (new Ban)->remove($banID);
+        return redirect('/groups/admin');
+    }
+
+
 }

@@ -1,5 +1,9 @@
 @extends('layouts.nav')
 
+@section('title')
+    Liste des groupes
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -41,7 +45,7 @@
                                 </a>
 
                                 <a class="btn btn-danger"
-                                   href="/admin/groups/delete/{{ $group['group']->id }}">
+                                   href="/groups/delete/{{ $group['group']->id }}">
                                     <i class="fas fa-skull-crossbones"></i>
                                 </a>
                             </div>

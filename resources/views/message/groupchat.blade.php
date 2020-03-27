@@ -31,7 +31,7 @@
                                                    class="list-group-item list-group-item-action">
                                                     @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
                                                         <span
-                                                            class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
                                                     @endif
                                                     <div class="media">
                                                         <div class="mask">
@@ -68,64 +68,67 @@
                                     @endforeach
                                 @endforeach
                             <!-- Conversations de groupe -->
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Vos conversations de groupe</span>
                                 <hr class="mx-5 my-2">
-                                @foreach($groupLastMessages as $lastMessage)
-                                    @foreach($groupInfoConversations as $infoConversation)
-                                        @if($lastMessage->receiver == $infoConversation->id)
-                                            <div
-                                                @if($lastMessage->isread == 0 && $lastMessage->sender != auth()->id()) style="border-bottom-color: {{setting('openmeet.color')}};border-bottom-width: 2px;"
-                                                @endif class="card border-bottom-fmm mb-1">
+                                @foreach($groupConcernedNotifs as $concernedNotif)
+                                    @foreach($groupLastMessages as $lastMessage)
+                                        @foreach($groupInfoConversations as $infoConversation)
+                                            @if($lastMessage->id == $concernedNotif->concerned)
+                                                @if($lastMessage->receiver == $infoConversation->id)
+                                                    <div
+                                                        @if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0) style="border-bottom-color: {{setting('openmeet.color')}};border-bottom-width: 2px;"
+                                                        @endif class="card border-bottom-fmm mb-1">
 
-                                                <a href="/messages/group/{{$lastMessage->receiver}}"
-                                                   class="list-group-item list-group-item-action">
-                                                    @if($lastMessage->isread ==0 && $lastMessage->sender != auth()->id())
-                                                        <span
-                                                            class="badge badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
-                                                    @endif
-                                                    <div class="media">
-                                                        <div class="mask">
-                                                            @if($infoConversation->picname != null && $infoConversation->picname != '')
-                                                                <img width="50" style="top:50%"
-                                                                     alt="Photo du groupe : {{$infoConversation->name}}"
-                                                                     src="{{url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)}}">
-                                                            @else
-                                                                <i class="fas fa-users fa-2x"></i>
-                                                                <div class="textNoPhoto">
-                                                                    <small
-                                                                        style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
-                                                                        de photo</small>
+                                                        <a href="/messages/group/{{$lastMessage->receiver}}"
+                                                           class="list-group-item list-group-item-action">
+                                                            @if($lastMessage->sender != auth()->id() && $concernedNotif->isread == 0)
+                                                                <span
+                                                                    class="badge badge-mes badge-pill badge-danger openmeet-badge mr-2 mt-1">Nouveau message</span>
+                                                            @endif
+                                                            <div class="media">
+                                                                <div class="mask">
+                                                                    @if($infoConversation->picname != null && $infoConversation->picname != '')
+                                                                        <img width="50" style="top:50%"
+                                                                             alt="Photo du groupe : {{$infoConversation->name}}"
+                                                                             src="{{url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)}}">
+                                                                    @else
+                                                                        <i class="fas fa-users fa-2x"></i>
+                                                                        <div>
+                                                                            <small
+                                                                                style="text-align: center;margin-left: -15px;margin-right: 0px; color: dimgrey;font-size: smaller">pas
+                                                                                de photo</small>
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
-                                                            @endif
-                                                        </div>
 
-                                                        <div class="media-body ml-4">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between mb-1">
+                                                                <div class="media-body ml-4">
+                                                                    <div
+                                                                        class="d-flex align-items-center justify-content-between mb-1">
 
-                                                                <h6 class="mb-0">{{$infoConversation->name}} </h6>
+                                                                        <h6 class="mb-0">{{$infoConversation->name}} </h6>
 
-                                                            </div>
-                                                            @foreach($groupLastMessagesInfo as $lastMessageInfo)
-                                                                @if($lastMessageInfo->id == $lastMessage->sender)
-                                                                    <p style="height: 3vh; overflow: hidden"
-                                                                       class="font-italic mb-0 text-small lastMessageContent">
-                                                                        {{$lastMessage->content}}
+                                                                    </div>
+                                                                    <p class="font-italic mb-0 text-small">
+                                                                        @foreach($groupLastMessagesInfo as $lastMessageInfo)
+                                                                            @if($lastMessageInfo->id == $lastMessage->sender)
+                                                                                <span>{{$lastMessageInfo->fname}} {{$lastMessageInfo->lname}} : </span> {{ $lastMessage->content}}
+                                                                            @endif
+                                                                        @endforeach
                                                                     </p>
-                                                                @endif
-                                                            @endforeach
-                                                            @if($lastMessage->sender != 0)
-                                                                <small style="color: dimgrey"
-                                                                       class="small font-weight-lighter lastMessageDate"> {{$lastMessage->date}}</small>
-                                                            @endif
-                                                        </div>
+                                                                    @if($lastMessage->sender != 0)
+                                                                        <small style="color: dimgrey"
+                                                                               class="small font-weight-lighter"> {{$lastMessage->date}}</small>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-                                                </a>
-                                            </div>
-                                        @endif
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 @endforeach
-                                <span class="textTypeConversation" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
+                                <span class="textTypeConversation mt-2" style="margin-left: 2em; color: dimgrey">Autres groupes</span>
                                 <hr class="mx-5 my-2">
                                 @foreach($groupWithoutLastMessage as $withoutMessage)
                                     @foreach($groupInfoConversations as $infoConversation)
@@ -180,6 +183,7 @@
 
         @foreach($listMessages as $message)
             @foreach($usersInfos as $userInfo)
+
                 @if($message->sender == $userInfo->id)
                     @if($message->sender != auth()->id())
                         <!-- Message Reçu-->
@@ -197,8 +201,35 @@
                                 </div>
 
                                 <div class="oneMessage media-body ml-3">
-                                    <a href="#" style="text-decoration: none;" class="no-hover">
+                                    <a href="{{url('/user/show/'.$userInfo->id)}}" style="text-decoration: none;"
+                                       class="no-hover">
                                         <p style="color: gray; font-weight: bold">{{$userInfo->fname}} {{$userInfo->lname}}</p>
+
+                                        <div>
+                                            <a href="{{url('/user/report/'.$userInfo->id)}}"
+                                               style="text-decoration: none;">
+                                                <i class="fas fa-radiation"></i>
+                                                Signaler
+                                            </a>
+                                            <a href="{{url('/user/block/'.$userInfo->id)}}"
+                                               style="text-decoration: none;">
+                                                <i class="fas fa-shield-alt"></i>
+                                                Bloquer
+                                            </a>
+
+                                                @if($groupInfo->admin == auth()->id())
+
+                                                    <a href="{{url('/user/ban/')}}/{{$groupInfo->id}}/{{$userInfo->id}}"
+                                                       style="text-decoration: none;">
+                                                        <i class="fas fa-ban"></i>
+                                                        Bannir
+                                                    </a>
+
+                                                @endif
+
+                                        </div>
+
+
                                     </a>
                                     <div class="bg-light rounded py-2 px-3 mb-2">
                                         <p class="text-small mb-0 text-muted">{{$message->content}}</p>
@@ -229,7 +260,7 @@
                 <form action="/messages/create" method="post" class="bg-light">
                     @csrf
                     <div class="input-group">
-                        <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
+                        <a href="/messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
                         <input value="" type="text" name="mContent" placeholder="Envoyer un message"
                                aria-describedby="button-addon2"
                                class="form-control rounded-0 border-0 py-4 bg-light" required>
@@ -321,7 +352,7 @@
             color: #999;
         }
 
-        .badge {
+        .badge-mes {
             font-size: 0;
             width: 13px;
             height: 13px;
@@ -355,17 +386,18 @@
                 max-height: 10vh;
                 background-color: dimgrey;
             }
-            .extended{
+
+            .extended {
                 width: 80vw;
                 transition: all 0.5s;
             }
 
-            .unextended{
+            .unextended {
                 width: 20vw;
                 transition: all 0.5s;
             }
 
-            .badge {
+            .badge-mes {
                 font-size: 0;
                 width: 8px;
                 height: 8px;
