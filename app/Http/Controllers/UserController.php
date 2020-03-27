@@ -157,7 +157,8 @@ class UserController extends Controller
 
         return view('user.ban.form', [
             'banisher' => (new Group)->getOne($groupID),
-            'banned' => (new User)->getOne($userID)
+            'banned' => (new User)->getOne($userID),
+            'auth' => auth()->id()
         ]);
     }
 
@@ -165,13 +166,18 @@ class UserController extends Controller
     {
         $post = $request->input();
 
-        $ban = new Ban();
-        $ban->banisher = $post['banisher'];
-        $ban->banned = $post['banned'];
-        $ban->description = $post['description'];
-        $ban->date = date('Y-m-d H:m:s');
 
-        $ban->push();
+        if($post['auth'] == (new Group)->getOne($post['banisher'])->admin
+            && !(new Ban)->isBan($post['banned'], $post['banisher'])) {
+            $ban = new Ban();
+            $ban->banisher = $post['banisher'];
+            $ban->banned = $post['banned'];
+            $ban->description = $post['description'];
+            $ban->date = date('Y-m-d H:m:s');
+
+            $ban->push();
+        }
+
 
         return redirect('/');
 

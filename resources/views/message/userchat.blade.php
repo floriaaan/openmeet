@@ -210,10 +210,12 @@
                         <a href="{{url('/user/report/'.$userInfo->id)}}"
                            style="text-decoration: none;">
                             <i class="fas fa-radiation"></i>
+                            Signaler
                         </a>
                         <a href="{{url('/user/block/'.$userInfo->id)}}"
                            style="text-decoration: none;">
                             <i class="fas fa-shield-alt"></i>
+                            Bloquer
                         </a>
                         <div class="bg-light rounded py-2 px-3 mb-2">
                             <p class="text-small mb-0 text-muted">{{$message->content}}</p>

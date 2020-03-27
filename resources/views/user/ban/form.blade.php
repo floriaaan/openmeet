@@ -41,6 +41,7 @@
             </div>
             <input type="hidden" name="banisher" value="{{$banisher->id}}">
             <input type="hidden" name="banned" value="{{$banned->id}}">
+            <input type="hidden" name="auth" value="{{$auth}}">
         </form>
     </div>
 

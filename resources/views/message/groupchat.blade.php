@@ -209,10 +209,12 @@
                                             <a href="{{url('/user/report/'.$userInfo->id)}}"
                                                style="text-decoration: none;">
                                                 <i class="fas fa-radiation"></i>
+                                                Signaler
                                             </a>
                                             <a href="{{url('/user/block/'.$userInfo->id)}}"
                                                style="text-decoration: none;">
                                                 <i class="fas fa-shield-alt"></i>
+                                                Bloquer
                                             </a>
 
                                                 @if($groupInfo->admin == auth()->id())
@@ -220,6 +222,7 @@
                                                     <a href="{{url('/user/ban/')}}/{{$groupInfo->id}}/{{$userInfo->id}}"
                                                        style="text-decoration: none;">
                                                         <i class="fas fa-ban"></i>
+                                                        Bannir
                                                     </a>
 
                                                 @endif
