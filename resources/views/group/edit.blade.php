@@ -57,17 +57,7 @@
                                       name="gDesc" rows="8"
                                       placeholder="Description du groupe">{{nl2br($group->desc)}}</textarea>
 
-                            <div class="input-group mt-1">
 
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Administrateur</span>
-                                </div>
-                                <select class="form-control" name="gAdminID" required>
-                                    @foreach((new \App\Subscription)->getGroup($group->id) as $sub)
-                                        <option value="{{$sub->user}}">{{(new \App\User)->getOne($sub->user)->fname}} {{(new \App\User)->getOne($sub->user)->lname}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
 
                         <div class="row justify-content-end p-5">
@@ -89,6 +79,7 @@
             </div>
 
             <input type="hidden" name="groupID" value="{{$group->id}}">
+            <input type="hidden" name="gAdminID" value="{{$group->admin}}">
         </form>
     </div>
 
