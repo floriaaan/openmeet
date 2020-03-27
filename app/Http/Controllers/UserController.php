@@ -45,7 +45,7 @@ class UserController extends Controller
             $events[] = (new Event)->getOne($participation->event);
         }
         $block = new Block();
-        $isBlocked = $block->isBlock($userID,auth()->id());
+        $isBlocked = $block->isBlock(auth()->id(),auth()->id());
 
 
         return view('user.show', [
