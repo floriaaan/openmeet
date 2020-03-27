@@ -38,7 +38,7 @@
                                                             @if($infoConversation->picname != null & $infoConversation->picname != '')
                                                                 <img width="50" style="top:50%"
                                                                      alt="Photo de {{$infoConversation->fname}} {{$infoConversation->lname}}"
-                                                                     src="#">
+                                                                     src="{{url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)}}">
                                                             @else
                                                                 <i class="fas fa-user fa-2x"></i>
                                                                 <div class="textNoPhoto" style="margin-right: -5px;">
