@@ -10,7 +10,7 @@
 
         <div class="card shadow-lg glow-danger p-3" style="opacity: 0.8">
 
-            <h3 class="display-4 text-center mt-4">Vous est banni de ce groupe </h3>
+            <h3 class="display-4 text-center mt-4">Vous êtes banni de ce groupe </h3>
             <hr class="mx-3 my-5">
 
             <div class="row justify-content-center">
