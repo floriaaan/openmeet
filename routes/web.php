@@ -37,6 +37,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/user/ban/{groupID}/{userID}', 'UserController@banForm')->middleware('auth');
     Route::post('/user/ban/', 'UserController@banPost')->middleware('auth');
     Route::get('/user/block/{userID}', 'UserController@blockForm')->middleware('auth');
+    Route::get('/user/block/delete/{blockID}', 'UserController@deleteBlock');
     Route::post('/user/block/', 'UserController@blockPost')->middleware('auth');
     Route::get('/user/report/{userID}', 'UserController@reportForm')->middleware('auth');
     Route::post('/user/report/', 'UserController@reportPost')->middleware('auth');

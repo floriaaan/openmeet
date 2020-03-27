@@ -26,9 +26,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nom</th>
-
                     <th scope="col">Date d'abonnement</th>
                     <th scope="col">Lui transférer le groupe</th>
+                    <th scope="col">Action</th>
 
 
                 </tr>
@@ -45,6 +45,12 @@
                             <a href="{{url('/groups/admin/transfer')}}/{{$group}}/{{$sub['user']->id}}"
                                class="btn btn-success">
                                 <i class="fas fa-plus"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{url('/user/ban/')}}/{{$group}}/{{$sub['user']->id}}" class="btn btn-danger"
+                               style="text-decoration: none;">
+                                <i class="fas fa-ban"></i>
                             </a>
                         </td>
 

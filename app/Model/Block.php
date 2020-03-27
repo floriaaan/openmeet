@@ -93,7 +93,20 @@ class Block extends Model
         } catch (\Exception $e) {
             return $e;
         }
+    }
 
+    public
+    function removeBlock($userID)
+    {
+        try {
+            $query = DB::table('blocks')
+                ->where('target', '=', $userID)
+                ->where('blocker', '=', auth()->id())
+                ->delete();
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
 
     }
 

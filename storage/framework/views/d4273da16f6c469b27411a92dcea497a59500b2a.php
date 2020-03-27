@@ -178,7 +178,7 @@
     <div class="container-fluid mt-2" id="containerEvents">
         <div class="row p-lg-5" id="events">
             <div class="col-md-4">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center align-content-center">
                     <svg id="53917d2c-59b7-443c-9dc6-ca37ebed1a74" data-name="Layer 1"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300"
                          height="300" viewBox="0 0 965.64 800.81">
@@ -642,57 +642,64 @@
 
         function ipLocateAndCreateHomeCards() {
             $.ajax({
-                url: 'http://ip-api.com/json',
+                url: 'https://freegeoip.app/json/',
                 type: 'GET',
                 datatype: 'json',
                 success: function (data) {
                     //console.log('API.ip', data);
-                    getEventAndCreateCard(data);
+                    getEventAndCreateCard(data.latitude, data.longitude);
                 },
                 error: function (data) {
                     console.log('Error', data)
+                    $('#listEvents').append('<li><h4 class="lead text-center">Aucun événement à proximité</h4></li>')
                 }
             });
         }
 
-        function getEventAndCreateCard(datas) {
+        function getEventAndCreateCard(lat, lon) {
             $.ajax({
                 url: "<?php echo e(url('/api/v1/events/location')); ?>",
                 type: 'POST',
-                data: {'lat': datas.lat, 'lon': datas.lon, 'limit': 6},
+                data: {'lat': lat, 'lon': lon, 'limit': 6},
                 datatype: 'json',
                 success: function (data) {
                     //console.log('API.self events', data);
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].picname != null) {
-                            $('#listEvents').append(
-                                '<li class="media mt-2">\n' +
-                                '    <img src="<?php echo e(url("/storage/upload/image/")); ?>' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" alt="Photo">\n' +
-                                '    <div class="media-body">\n' +
-                                '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
-                                '      ' + data[i].description + '\n' +
-                                '    </div>\n' +
-                                '    <a href="<?php echo e(url("/events/show/")); ?>/' + data[i].id + '" class="btn btn-primary">Voir l\'événement</a>' +
-                                '  </li>' +
-                                '<hr class="mx-5 my-2">'
-                            )
-                        } else {
-                            $('#listEvents').append(
-                                '<li class="media mt-2">\n' +
-                                '    <div class="media-body">\n' +
-                                '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
-                                '      ' + data[i].description + '\n' +
-                                '    </div>\n' +
-                                '    <a href="<?php echo e(url("/events/show/")); ?>/' + data[i].id + '" class="btn btn-primary">Voir l\'événement</a>' +
-                                '  </li>' +
-                                '<hr class="mx-5 my-2">'
-                            )
-                        }
+                    if(data.length != 0) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].picname != null) {
+                                $('#listEvents').append(
+                                    '<li class="media my-3">\n' +
+                                    '    <img src="<?php echo e(url("/storage/upload/image/")); ?>/' + data[i].picrepo + '/' + data[i].picname + '" class="mr-3" height="70px" alt="Photo">\n' +
+                                    '    <div class="media-body">\n' +
+                                    '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
+                                    '      ' + data[i].description + '\n' +
+                                    '    </div>\n' +
+                                    '    <a href="<?php echo e(url("/events/show/")); ?>/' + data[i].id + '" class="btn btn-primary my-auto">Voir l\'événement</a>' +
+                                    '  </li>' +
+                                    '<hr class="mx-5 my-2">'
+                                )
+                            } else {
+                                $('#listEvents').append(
+                                    '<li class="media my-3">\n' +
+                                    '    <div class="media-body">\n' +
+                                    '      <h5 class="mt-0 mb-1">' + data[i].name + '</h5>\n' +
+                                    '      ' + data[i].description + '\n' +
+                                    '    </div>\n' +
+                                    '    <a href="<?php echo e(url("/events/show/")); ?>/' + data[i].id + '" class="btn btn-primary my-auto">Voir l\'événement</a>' +
+                                    '  </li>' +
+                                    '<hr class="mx-5 my-2">'
+                                )
+                            }
 
+                        }
+                    } else {
+                        $('#listEvents').append('<li><h4 class="lead text-center">Aucun événement à proximité</h4></li>')
                     }
+
                 },
                 error: function (data) {
                     console.log('Error', data)
+                    $('#listEvents').append('<li><h4 class="lead text-center">Aucun événement à proximité</h4></li>')
                 }
             })
         }
@@ -704,7 +711,7 @@
                 type: 'GET',
                 datatype: 'json',
                 success: function (data) {
-                    console.log('API.self tags', data);
+                    //console.log('API.self tags', data);
                     $('#containerTags').append('<hr class=" mx-5"><div class="card rounded mx-3 shadow-lg"><div class="card-columns p-5" id="locationCard"></div></div>');
                     for (let i = 0; i < data.length; i++) {
                         $('#locationCard').append(
@@ -732,5 +739,4 @@
         //getTags()
     </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\langl\Desktop\Cours\Projets\ProjetClient\OpenMeet\resources\views/home.blade.php ENDPATH**/ ?>
