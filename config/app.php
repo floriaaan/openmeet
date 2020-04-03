@@ -171,12 +171,13 @@ return [
         anlutro\LaravelSettings\ServiceProvider::class,
         Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
+        Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        \App\Providers\NotificationsServiceProvider::class,
+        App\Providers\NotificationsServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -235,6 +236,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Setting' => anlutro\LaravelSettings\Facade::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
 
     ],
 
