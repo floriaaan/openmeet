@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ParticipationRequest;
 use App\Participation;
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -37,6 +38,7 @@ class ParticipationController extends Controller
         return redirect('/user/events');
 
     }
+
     public function deleteParticipation(ParticipationRequest $request)
     {
         $post = $request->input();
