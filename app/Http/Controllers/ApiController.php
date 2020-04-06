@@ -67,7 +67,34 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json',json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return abort(404);
+        }
+
+    }
+
+    public function getGroupID($token, $id)
+    {
+        $user = (new User)->getToken($token);
+        if ($user != false) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Group-' . $id,
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return (new Group)->getOne($id);
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'Group-' . $id,
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
 
@@ -94,7 +121,34 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json',json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return abort(404);
+        }
+
+    }
+
+    public function getEventID($token, $id)
+    {
+        $user = (new User)->getToken($token);
+        if ($user != false) {
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Event-' . $id,
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+            return (new Event)->getOne($id);
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'Event-' . $id,
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
 
@@ -121,7 +175,7 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json',json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
 
             return abort(404);
         } else {
@@ -132,7 +186,7 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json', json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
 
@@ -150,7 +204,7 @@ class ApiController extends Controller
                 'Status' => 'granted'
             ];
 
-            Storage::append('api_logs.json', json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
 
             return (new User)->getAll();
         } else if ($user != false) {
@@ -162,7 +216,7 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json',json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
 
             return abort(404);
         } else {
@@ -173,7 +227,7 @@ class ApiController extends Controller
                 'Status' => 'denied'
             ];
 
-            Storage::append('api_logs.json',json_encode($request).',');
+            Storage::append('api_logs.json', json_encode($request) . ',');
 
             return abort(404);
         }
