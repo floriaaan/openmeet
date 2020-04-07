@@ -7,6 +7,7 @@ use App\Block;
 use App\Event;
 use App\Group;
 use App\Http\Requests\AdminEditRequest;
+use App\Http\Requests\AlertRequest;
 use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SearchRequest;
 use App\Message;
@@ -32,28 +33,6 @@ class AdminController extends Controller
         $listUser = $user->getLimitDesc(5);
         $countUser = $user->getCount();
 
-
-        /*$message = (new Message);
-        $listMessage = [];
-        $rawListMsg = $message->getLimitDesc(10);
-
-        foreach ($rawListMsg as $msg) {
-            if ($msg->forgroup == 0) {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => $user->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            } else {
-                $listMessage[] = [
-                    'sender' => $user->getOne($msg->sender),
-                    'receiver' => (new Group)->getOne($msg->receiver),
-                    'msg' => $msg
-                ];
-            }
-
-        }
-        $countMessage = $message->getCount();*/
 
         $groups = (new Group);
         $countGroup = $groups->getCount();
@@ -445,5 +424,14 @@ class AdminController extends Controller
         (new User)->updateAdmin($post['user'], $admin);
 
         return redirect('/admin/');
+    }
+
+    public function alertForm() {
+        return view('admin.alert.form');
+    }
+
+    public function alertPost(AlertRequest $request){
+        $post = $request->input();
+        var_dump($post);
     }
 }

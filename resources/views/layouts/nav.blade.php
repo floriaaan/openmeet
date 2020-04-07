@@ -316,13 +316,30 @@
     </div>
 
     @if(Session::has('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-nav">
             {{Session::get('error')}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     @endif
+
+    @if(Session::has('info'))
+        <div class="row">
+            <div class="alert alert-warning alert-nav" style="z-index: 2;" role="alert">
+                <h4 class="alert-heading">{{Session::get('info')['title']}}</h4>
+                <hr>
+                <p>{{Session::get('info')['text']}}</p>
+                @if(isset(Session::get('info')['link']))
+                    <a href="{{Session::get('info')['link']}}" target="_blank" class="alert-link">Voir plus</a>
+                @endif
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
+
     <div class="mt-nav">
         @yield('content')
     </div>

@@ -32,6 +32,11 @@ class HomeController extends Controller
         }
 
         if ($install != null && $install) {
+            Session()->flash('info', [
+                'title' => 'Avis COVID-19',
+                'text' => 'Pour la santé et la sécurité des communautés OpenMeet, nous vous conseillons d\'organiser tous les événements en ligne dans les prochaines semaines.',
+                'link' => 'https://www.gouvernement.fr/info-coronavirus'
+            ]);
             return $this->Home();
         }
 
@@ -57,7 +62,6 @@ class HomeController extends Controller
             Setting(['openmeet.robots' => true]);
 
             Setting()->save();
-
 
 
             /*Setting(['database.host' => $post['iDBHost']]);
@@ -126,24 +130,21 @@ class HomeController extends Controller
         ]);
     }
 
-    public static function changeEnvironmentVariable($key,$value)
+    public static function changeEnvironmentVariable($key, $value)
     {
         $path = base_path('.env');
 
-        if(is_bool(env($key)))
-        {
-            $old = env($key)? 'true' : 'false';
-        }
-        elseif(env($key)===null){
+        if (is_bool(env($key))) {
+            $old = env($key) ? 'true' : 'false';
+        } elseif (env($key) === null) {
             $old = 'null';
-        }
-        else{
+        } else {
             $old = env($key);
         }
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-                "$key=".$old, "$key=".$value, file_get_contents($path)
+                "$key=" . $old, "$key=" . $value, file_get_contents($path)
             ));
         }
     }
