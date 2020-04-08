@@ -15,7 +15,7 @@
                 <hr class="mx-5 my-3">
                 <div class="form-group mx-5">
                     <label for="description">
-                        Décrivez-nous pourquoi vous Bloquer cette personne :
+                        Décrivez-nous pourquoi vous bloquez cette personne :
                         <small>(30 caractères minimums)</small>
                     </label>
                     <textarea class="form-control @error('description') is-invalid @enderror"

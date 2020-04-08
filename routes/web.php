@@ -34,8 +34,8 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/user/show/{userID}', 'UserController@show');
     Route::get('/user/edit', 'UserController@editForm')->middleware('auth');
     Route::post('/user/edit', 'UserController@edit')->middleware('auth');
-    Route::get('/user/ban/{groupID}/{userID}', 'UserController@banForm')->middleware('auth');
-    Route::post('/user/ban/', 'UserController@banPost')->middleware('auth');
+    Route::get('/user/ban/{groupID}/{userID}', 'UserController@banForm')->middleware('groupadmin');
+    Route::post('/user/ban/', 'UserController@banPost')->middleware('groupadmin');
     Route::get('/user/block/{userID}', 'UserController@blockForm')->middleware('auth');
     Route::get('/user/block/delete/{blockID}', 'UserController@deleteBlock');
     Route::post('/user/block/', 'UserController@blockPost')->middleware('auth');
@@ -50,12 +50,14 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
 //ADMIN Routes
     Route::get('/admin', 'AdminController@index');
     Route::post('/admin/search', 'AdminController@search');
-    Route::get('/admin/v1', 'AdminController@oldindex');
     Route::post('/admin/edit/settings', 'AdminController@editSettings');
     Route::post('/admin/edit/theme', 'AdminController@editTheme');
     Route::get('/admin/edit/views', 'AdminController@editViewsForm');
     Route::post('/admin/edit/views', 'AdminController@editViews');
     Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
+    Route::get('/admin/alert', 'AdminController@alertForm');
+    Route::post('/admin/alert', 'AdminController@alertPost');
+    Route::post('/admin/alert/delete', 'AdminController@alertDelete');
     Route::get('/admin/users/', 'AdminController@listUser');
     Route::get('/admin/users/delete/{userID}', 'AdminController@deleteUser');
     Route::post('/admin/users/delete/', 'AdminController@deleteUserPost');
@@ -129,7 +131,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
 //Legal Routes
 Route::get('/legal/cgu', 'LegalController@cgu');
 
-
+/*
 Route::get('/debug/mail', function (){
    return view('emails.eventcreated', ['event' => (new \App\Event)->getOne(3)]);
 });
@@ -137,4 +139,4 @@ Route::get('/debug/mail', function (){
 Route::get('/debug/install', function (){
     return view('install.form');
 });
-
+*/

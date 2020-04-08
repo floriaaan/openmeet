@@ -2,6 +2,19 @@
 
 @section('body')
 
+    @if(Session::has('error'))
+        <div class="alert alert-danger alert-nav mx-3">
+            {{Session::get('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+
+
+
+
 
 
     <div class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top justify-content-between"
@@ -315,17 +328,29 @@
         </div>
     </div>
 
-    @if(Session::has('error'))
-        <div class="alert alert-danger">
-            {{Session::get('error')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+
+
     <div class="mt-nav">
         @yield('content')
     </div>
+
+    @if(Session::has('info'))
+
+        <nav class="navbar navbar-light bg-{{Session::get('info')['color']}} fixed-bottom" style="bottom: 56px!important;" role="alert" id="nav-alert">
+            <span class="navbar-brand mb-0 h1">{{Session::get('info')['title']}}</span>
+            <span>{{Session::get('info')['text']}}</span>
+            @if(isset(Session::get('info')['link']))
+                <span>
+                <a href="{{Session::get('info')['link']}}" target="_blank" class="alert-link">Voir plus</a>
+                </span>
+            @endif
+            <button type="button" class="close" onclick="$('#nav-alert').css('display', 'none')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </nav>
+
+
+    @endif
 
     <footer class="footer navbar-custom mt-auto py-3 fixed-bottom">
         <div class="container">

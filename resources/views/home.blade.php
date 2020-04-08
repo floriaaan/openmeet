@@ -45,12 +45,10 @@
 
     </div>
 
-
-
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5" id="pwa-card">
         <!--<div class="card rounded mx-3 shadow-lg" id="pwa-card">-->
         <hr class="my-4 mx-3">
-        <div class="row p-2" id="pwa-card">
+        <div class="row p-2" >
             <div class="col-md-8">
                 <div class="p-5">
                     <p class="display-4">Installer l'application</p>

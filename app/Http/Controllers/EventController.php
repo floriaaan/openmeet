@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\EventCreateRequest;
 use App\Mail\EventCreated;
+use App\Model\Alert;
 use App\Notification;
 use App\Participation;
 use App\Subscription;
@@ -95,7 +96,6 @@ class EventController extends Controller
                     //TODO:PUSH
                 }
 
-                //TODO:SEND NOTIFICATION
                 (new Notification)->CreateNotification('eve',
                     'Nouvel événement de ' . $group->name,
                     $userSub->user,
@@ -126,6 +126,17 @@ class EventController extends Controller
 
     public function show($eventID)
     {
+        $alerts = (new Alert)->getEvent();
+        if(count($alerts) >= 1) {
+            $alert = $alerts[count($alerts) - 1];
+            Session()->flash('info', [
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
+            ]);
+        }
+
         $datas = [
             'event' => (new Event)->getOne($eventID)
         ];

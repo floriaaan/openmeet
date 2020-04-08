@@ -38,7 +38,7 @@
                                                             @if($infoConversation->picname != null & $infoConversation->picname != '')
                                                                 <img width="50" style="top:50%"
                                                                      alt="Photo de {{$infoConversation->fname}} {{$infoConversation->lname}}"
-                                                                     src="#">
+                                                                     src="{{url('/storage/upload/image/'.$infoConversation->picrepo.'/'.$infoConversation->picname)}}">
                                                             @else
                                                                 <i class="fas fa-user fa-2x"></i>
                                                                 <div class="textNoPhoto" style="margin-right: -5px;">
@@ -193,7 +193,7 @@
                             @if($userInfo->picname != null & $userInfo->picname != '')
                                 <img width="50" style="top:50%"
                                      alt="Photo de {{$userInfo->fname}} {{$userInfo->lname}}"
-                                     src="#">
+                                     src="{{url('/storage/upload/image/'.$userInfo->picrepo.'/'.$userInfo->picname)}}">
                             @else
                                 <i style="color: {{setting('openmeet.color')}}"
                                    class="fas fa-user fa-2x"></i>
@@ -210,10 +210,12 @@
                         <a href="{{url('/user/report/'.$userInfo->id)}}"
                            style="text-decoration: none;">
                             <i class="fas fa-radiation"></i>
+                            Signaler
                         </a>
                         <a href="{{url('/user/block/'.$userInfo->id)}}"
                            style="text-decoration: none;">
                             <i class="fas fa-shield-alt"></i>
+                            Bloquer
                         </a>
                         <div class="bg-light rounded py-2 px-3 mb-2">
                             <p class="text-small mb-0 text-muted">{{$message->content}}</p>

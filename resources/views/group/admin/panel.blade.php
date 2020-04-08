@@ -960,11 +960,12 @@
 
             </div>
         </div>
-        @endsection
+    </div>
+@endsection
 
-        @section('css')
-            <style>
+@section('css')
+    <style>
 
-            </style>
+    </style>
 
 @endsection

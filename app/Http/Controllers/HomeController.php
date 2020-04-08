@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\InstallRequest;
 use App\Http\Requests\SearchRequest;
+use App\Model\Alert;
 use App\Notification;
 use App\Message;
 use App\User;
@@ -32,6 +33,25 @@ class HomeController extends Controller
         }
 
         if ($install != null && $install) {
+
+            $alerts = (new Alert)->getHome();
+            if(count($alerts) >= 1) {
+                $alert = $alerts[count($alerts) - 1];
+                Session()->flash('info', [
+                    'title' => $alert->title,
+                    'text' => $alert->content,
+                    'link' => $alert->link,
+                    'color' => $alert->color
+                ]);
+            }
+
+            Session()->flash('info', [
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
+            ]);
+
             return $this->Home();
         }
 
@@ -57,7 +77,6 @@ class HomeController extends Controller
             Setting(['openmeet.robots' => true]);
 
             Setting()->save();
-
 
 
             /*Setting(['database.host' => $post['iDBHost']]);
@@ -126,24 +145,21 @@ class HomeController extends Controller
         ]);
     }
 
-    public static function changeEnvironmentVariable($key,$value)
+    public static function changeEnvironmentVariable($key, $value)
     {
         $path = base_path('.env');
 
-        if(is_bool(env($key)))
-        {
-            $old = env($key)? 'true' : 'false';
-        }
-        elseif(env($key)===null){
+        if (is_bool(env($key))) {
+            $old = env($key) ? 'true' : 'false';
+        } elseif (env($key) === null) {
             $old = 'null';
-        }
-        else{
+        } else {
             $old = env($key);
         }
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-                "$key=".$old, "$key=".$value, file_get_contents($path)
+                "$key=" . $old, "$key=" . $value, file_get_contents($path)
             ));
         }
     }

@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <form action="{{url('/groups/create')}}" method="POST">
+        <form action="{{url('/groups/create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card rounded shadow-lg mt-1 mb-3 mx-auto h-100" style="width: 95%">
                 <div class="row no-gutters">
