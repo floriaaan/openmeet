@@ -172,6 +172,7 @@ return [
         Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
         Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -237,6 +238,7 @@ return [
         'Setting' => anlutro\LaravelSettings\Facade::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
     ],
 

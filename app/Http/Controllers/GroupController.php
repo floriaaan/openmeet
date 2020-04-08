@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Group;
 use App\Http\Requests\GroupCreateRequest;
+use App\Model\Alert;
 use App\Subscription;
 use App\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -118,6 +119,16 @@ class GroupController extends Controller
             'tags' => $tags
         ];
 
+        $alerts = (new Alert)->getGroup();
+        $alert = $alerts[count($alerts) - 1];
+
+        Session()->flash('info', [
+            'title' => $alert->title,
+            'text' => $alert->content,
+            'link' => $alert->link,
+            'color' => $alert->color
+        ]);
+
         if (auth()->check()) {
             $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
             if (auth()->user()->isBan(auth()->user()->id, $groupID)) {
@@ -131,6 +142,16 @@ class GroupController extends Controller
     public function showAll()
     {
         $listGroups = (new Group)->getAll();
+
+        $alerts = (new Alert)->getGroupList();
+        $alert = $alerts[count($alerts) - 1];
+
+        Session()->flash('info', [
+            'title' => $alert->title,
+            'text' => $alert->content,
+            'link' => $alert->link,
+            'color' => $alert->color
+        ]);
 
         return view('group.list', [
             'listGroups' => $listGroups

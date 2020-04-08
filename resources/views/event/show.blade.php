@@ -41,10 +41,17 @@
 
                     <hr class="mx-4 my-4">
 
-                    <div id="map" class="p-1">
+                    <div class="row">
+                        <div id="map" class="p-1">
 
 
+                        </div>
+
+                        <!--<div class="col-lg-6">
+                            {{--{!! QrCode::format('png')->size(200)->merge(url('/assets/icon.png'), .3, true)->generate(url('/events/show/').$event->id); !!}--}}
+                        </div>-->
                     </div>
+
 
 
                     <div class="row justify-content-around">

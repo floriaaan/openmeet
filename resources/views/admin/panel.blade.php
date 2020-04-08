@@ -315,9 +315,15 @@
                             {!! Form::text('uSlogan', $value = Setting('openmeet.slogan'), ['class' => 'form-control', 'placeholder' => 'Slogan']) !!}
                             {!! $errors->first('uSlogan', '<small class="text-danger">Le champ Slogan est incorrect.</small>') !!}
                         </div>
-                        {!! Form::submit('Valider les modifications', ['class' => 'btn btn-primary mt-4 pull-right'] ) !!}
+                        <div class="row justify-content-end mt-2">
+                            {!! Form::submit('Valider les Paramètres', ['class' => 'btn btn-primary'] ) !!}
+                        </div>
 
                         {!! Form::close()!!}
+                        <div class="row justify-content-end mt-2">
+                            <a href="{{url('/admin/alert')}}" class="btn btn-secondary mt-2">Gérer les alertes d'information</a>
+
+                        </div>
                     </div>
 
 
@@ -339,7 +345,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary ">Valider les modifications</button>
+                            <button type="submit" class="btn btn-primary ">Valider le Thème</button>
                         </div>
 
 
@@ -377,7 +383,7 @@
 
                         <div class="row justify-content-end mt-1">
                             <button type="submit" class="btn btn-primary">
-                                Valider les modifications
+                                Valider la Confidentialité
                             </button>
                         </div>
 
