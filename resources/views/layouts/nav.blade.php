@@ -326,7 +326,7 @@
 
     @if(Session::has('info'))
         <div class="row">
-            <div class="alert alert-warning alert-nav" style="z-index: 2;" role="alert">
+            <div class="alert alert-{{Session::get('info')['color']}} alert-nav" style="z-index: 2;" role="alert">
                 <h4 class="alert-heading">{{Session::get('info')['title']}}</h4>
                 <hr>
                 <p>{{Session::get('info')['text']}}</p>

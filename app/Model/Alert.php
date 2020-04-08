@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +12,7 @@ class Alert extends Model
         'title',
         'content',
         'link',
+        'color',
         'home',
         'group',
         'event',
@@ -24,6 +25,13 @@ class Alert extends Model
         $query = DB::table('alerts')
             ->select('*')
             ->where('id', $alertID)
+            ->get();
+        return $query;
+    }
+
+    public function getAll() {
+        $query = DB::table('alerts')
+            ->select('*')
             ->get();
         return $query;
     }
@@ -80,6 +88,19 @@ class Alert extends Model
                 ->where('id', $alertID)
                 ->update(['disabled' => 1]);
         }
+
+    }
+
+    public function remove($alertID)
+    {
+        try {
+            $query = DB::table('alerts')
+                ->delete($alertID);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
+
 
     }
 }

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Ban;
 use App\Block;
 use App\Event;
 use App\Group;
+use App\Model\Alert;
+use App\Signalement;
+use App\Subscription;
+use App\User;
 use App\Http\Requests\AdminEditRequest;
 use App\Http\Requests\AlertRequest;
 use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SearchRequest;
-use App\Message;
-use App\Signalement;
-use App\Subscription;
-use App\User;
-use DemeterChain\A;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -427,11 +427,34 @@ class AdminController extends Controller
     }
 
     public function alertForm() {
-        return view('admin.alert.form');
+
+
+        return view('admin.alerts', ['alerts' => (new Alert)->getAll()]);
     }
 
     public function alertPost(AlertRequest $request){
         $post = $request->input();
-        var_dump($post);
+        $alert = new Alert();
+
+
+        $alert->title = $post['title'];
+        $alert->content = $post['content'];
+        $alert->link = $post['link'];
+        $alert->color = $post['color'];
+        $alert->home = isset($post['home']) && $post['home'] == 'on';
+        $alert->group = isset($post['group']) && $post['group'] == 'on';
+        $alert->groupList = isset($post['groupList']) && $post['groupList'] == 'on';
+        $alert->event = isset($post['event']) && $post['event'] == 'on';
+
+        $alert->push();
+
+        return redirect('/admin/alert');
+    }
+
+    public function alertDelete(Request $request) {
+        $alertID = $request->alert;
+        (new Alert)->remove($alertID);
+
+        return redirect('/admin/alert');
     }
 }

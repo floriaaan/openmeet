@@ -6,6 +6,7 @@ use App\Event;
 use App\Group;
 use App\Http\Requests\InstallRequest;
 use App\Http\Requests\SearchRequest;
+use App\Model\Alert;
 use App\Notification;
 use App\Message;
 use App\User;
@@ -32,11 +33,17 @@ class HomeController extends Controller
         }
 
         if ($install != null && $install) {
+
+            $homeAlerts = (new Alert)->getHome();
+            $homeAlert = $homeAlerts[count($homeAlerts) - 1];
+
             Session()->flash('info', [
-                'title' => 'Avis COVID-19',
-                'text' => 'Pour la santé et la sécurité des communautés OpenMeet, nous vous conseillons d\'organiser tous les événements en ligne dans les prochaines semaines.',
-                'link' => 'https://www.gouvernement.fr/info-coronavirus'
+                'title' => $homeAlert->title,
+                'text' => $homeAlert->content,
+                'link' => $homeAlert->link,
+                'color' => $homeAlert->color
             ]);
+
             return $this->Home();
         }
 
