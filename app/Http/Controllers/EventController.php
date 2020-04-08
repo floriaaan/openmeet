@@ -127,14 +127,15 @@ class EventController extends Controller
     public function show($eventID)
     {
         $alerts = (new Alert)->getEvent();
-        $alert = $alerts[count($alerts) - 1];
-
-        Session()->flash('info', [
-            'title' => $alert->title,
-            'text' => $alert->content,
-            'link' => $alert->link,
-            'color' => $alert->color
-        ]);
+        if(count($alerts) >= 1) {
+            $alert = $alerts[count($alerts) - 1];
+            Session()->flash('info', [
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
+            ]);
+        }
 
         $datas = [
             'event' => (new Event)->getOne($eventID)

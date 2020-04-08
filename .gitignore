@@ -11,3 +11,5 @@ yarn-error.log
 /storage/logs/
 public/conf/
 /storage/logs/laravel.log
+/storage/settings.json
+/.idea/openmeet.iml
