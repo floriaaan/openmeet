@@ -37,6 +37,6 @@ class Update extends Command
      */
     public static function handle()
     {
-        return shell_exec('git status');
+        return shell_exec('git pull https://github.com/floriaaan/openmeet');
     }
 }
