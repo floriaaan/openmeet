@@ -21,7 +21,7 @@
             </kbd>
 
             <div class="row justify-content-end p-2 mr-1">
-                <button class="btn btn-outline-dark mt-2" onclick="postUpdate()">
+                <button class="btn btn-outline-dark mt-2" onclick="postUpdate()" id="btn-update">
                     <i class="fas fa-cloud-download-alt"></i>
                     Mettre à jour le système OpenMeet
                 </button>
@@ -85,29 +85,33 @@
 
 
         function postUpdate() {
-            $.ajax({
-                url: '{{url('/api/v1/admin/update')}}',
-                type: 'POST',
-                data: {'token': '{{auth()->user()->apitoken}}'},
-                success: function (data) {
+            if(!$('#btn-update').hasClass('disabled')) {
+                $.ajax({
+                    url: '{{url('/api/v1/admin/update')}}',
+                    type: 'POST',
+                    data: {'token': '{{auth()->user()->apitoken}}'},
+                    success: function (data) {
 
-                    let options = {
-                        strings: [data],
-                        typeSpeed: 5
-                    };
+                        let options = {
+                            strings: [data],
+                            typeSpeed: 5
+                        };
 
-                    let typed = new Typed('#console-log-update', options);
+                        let typed = new Typed('#console-log-update', options);
+                        $('#btn-update').addClass('disabled');
 
-                },
-                error: function (data) {
-                    let options = {
-                        strings: ['404 | ERROR'],
-                        typeSpeed: 100
-                    };
+                    },
+                    error: function (data) {
+                        let options = {
+                            strings: ['404 | ERROR'],
+                            typeSpeed: 100
+                        };
 
-                    let typed = new Typed('#console-log-update', options);
-                }
-            });
+                        let typed = new Typed('#console-log-update', options);
+                    }
+                });
+            }
+
         }
     </script>
 @endsection
