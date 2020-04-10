@@ -62,7 +62,7 @@ class MailReminder extends Command
                 $returnArray[] = $participant->user;
             }
         }
-
+        array_push($returnArray,'date: '.date('Y-m-d H:i:s'));
         if(!empty($returnArray)) {
             return json_encode($returnArray, true);
         } else {

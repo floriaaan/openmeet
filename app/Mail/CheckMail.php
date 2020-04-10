@@ -28,7 +28,4 @@ class CheckMail extends Mailable
         return $this->from('no-reply@' . strtolower(Setting('openmeet.name', 'openmeet')) . '.fr')
             ->view('emails.reminder');
     }
-
-
-
 }
