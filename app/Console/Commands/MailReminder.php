@@ -2,9 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Event;
+use App\Mail\CheckMail;
+use App\Participation;
 use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MailReminder extends Command
 {
@@ -41,29 +45,26 @@ class MailReminder extends Command
     {
         $eventsSoon = DB::table('events')
             ->select('*')
-            ->where('datefrom', '>', date('Y-m-d H:i:s'))
-            ->where('datefrom', '>', date('Y-m-d H:i:s', strtotime("+1 day")))
-            ->where('datefrom', '<', date('Y-m-d H:i:s', strtotime("+1 day +5minutes")))
+            ->whereBetween('datefrom', [date('Y-m-d H:i:s'), date('Y-m-d 23:59:59', strtotime("+1 day"))])
             ->get();
 
         $returnArray = [];
         foreach ($eventsSoon as $event) {
-            $participants = DB::table('participations')
-                ->select('*')
-                ->where('event', '=', $event->id)
-                ->get();
+
+            $participants = (new Participation)->getEvent($event->id);
 
             foreach ($participants as $participant) {
+
                 $user = (new User)->getOne($participant->user);
-                /*Mail::to($user->email)
-                    ->send(new CheckMail((new Event)->getOne($event->id), $user));*/
+                Mail::to($user->email)
+                    ->send(new CheckMail((new Event)->getOne($event->id), $user));
 
                 $returnArray[] = $participant->user;
             }
         }
 
         if(!empty($returnArray)) {
-            return $returnArray;
+            return json_encode($returnArray, true);
         } else {
             return 'Nobody to remind.';
         }
