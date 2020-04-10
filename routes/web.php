@@ -131,7 +131,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
 //Legal Routes
 Route::get('/legal/cgu', 'LegalController@cgu');
 
-
+/*
 Route::get('/debug/mail', function (){
    return view('emails.eventcreated', ['event' => (new \App\Event)->getOne(3)]);
 });
@@ -139,7 +139,7 @@ Route::get('/debug/mail/reminder', function (){
     return view('emails.reminder', ['event' => (new \App\Event)->getOne(3)]);
 });
 
-/*
+
 Route::get('/debug/install', function (){
     return view('install.form');
 });
