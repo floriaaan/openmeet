@@ -48,23 +48,25 @@ class MailReminder extends Command
             ->whereBetween('datefrom', [date('Y-m-d H:i:s'), date('Y-m-d 23:59:59', strtotime("+1 day"))])
             ->get();
 
-        $returnArray = [];
+        $comment = '[' . date('Y-m-d H:i:s') . '] check:mailreminder |';
         foreach ($eventsSoon as $event) {
 
             $participants = (new Participation)->getEvent($event->id);
 
-            foreach ($participants as $participant) {
+            if(!empty($participants)) {
+                $comment .= "\n\t".'EVENT : ' . $event->id . ' | USER(S): ';
+            }
 
+            foreach ($participants as $participant) {
+                $comment .=  $participant->user . ' ';
                 $user = (new User)->getOne($participant->user);
                 Mail::to($user->email)
                     ->send(new EventReminder((new Event)->getOne($event->id)));
 
-                $returnArray[] = $participant->user;
             }
         }
-        array_push($returnArray,'date: '.date('Y-m-d H:i:s'));
-        if(!empty($returnArray)) {
-            return json_encode($returnArray, true);
+        if (!empty($comment)) {
+            return $comment;
         } else {
             return 'Nobody to remind.';
         }
