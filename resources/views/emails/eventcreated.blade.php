@@ -1,1391 +1,498 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:v="urn:schemas-microsoft-com:vml">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
-      xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
-    <!--[if gte mso 9]>
-    <xml>
-        <o:OfficeDocumentSettings>
-            <o:AllowPNG/>
-            <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-    </xml><![endif]-->
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <meta content="width=device-width" name="viewport"/>
-    <!--[if !mso]><!-->
-    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-    <!--<![endif]-->
-    <title></title>
-    <!--[if !mso]><!-->
-    <!--<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+    <!--[if !mso]--><!-- -->
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700' rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
+    <!-- <![endif]-->
+
+    <title>{{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
+        de {{(new \App\Group)->getOne($event->group)->name}}</title>
+
     <style type="text/css">
         body {
+            width: 100%;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
+            mso-margin-top-alt: 0px;
+            mso-margin-bottom-alt: 0px;
+            mso-padding-alt: 0px 0px 0px 0px;
         }
 
-        table,
-        td,
-        tr {
-            vertical-align: top;
-            border-collapse: collapse;
+        .display-4 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
         }
 
-        * {
-            line-height: inherit;
+        p,
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
-        a[x-apple-data-detectors=true] {
-            color: inherit !important;
-            text-decoration: none !important;
+        span.preheader {
+            display: none;
+            font-size: 1px;
         }
-    </style>
-    <style id="media-query" type="text/css">
-        @media (max-width: 660px) {
 
-            .block-grid,
-            .col {
-                min-width: 320px !important;
-                max-width: 100% !important;
+        html {
+            width: 100%;
+        }
+
+        table {
+            font-size: 14px;
+            border: 0;
+        }
+
+        /* ----------- responsivity ----------- */
+
+        @media only screen and (max-width: 640px) {
+            /*------ top header ------ */
+            .main-header {
+                font-size: 20px !important;
+            }
+
+            .main-section-header {
+                font-size: 28px !important;
+            }
+
+            .show {
                 display: block !important;
             }
 
-            .block-grid {
+            .hide {
+                display: none !important;
+            }
+
+            .align-center {
+                text-align: center !important;
+            }
+
+            .no-bg {
+                background: none !important;
+            }
+
+            /*----- main image -------*/
+            .main-image img {
+                width: 440px !important;
+                height: auto !important;
+            }
+
+            /* ====== divider ====== */
+            .divider img {
+                width: 440px !important;
+            }
+
+            /*-------- container --------*/
+            .container590 {
+                width: 440px !important;
+            }
+
+            .container580 {
+                width: 400px !important;
+            }
+
+            .main-button {
+                width: 220px !important;
+            }
+
+            /*-------- secions ----------*/
+            .section-img img {
+                width: 320px !important;
+                height: auto !important;
+            }
+
+            .team-img img {
                 width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media only screen and (max-width: 479px) {
+            /*------ top header ------ */
+            .main-header {
+                font-size: 18px !important;
             }
 
-            .col {
-                width: 100% !important;
+            .main-section-header {
+                font-size: 26px !important;
             }
 
-            .col > div {
-                margin: 0 auto;
+            /* ====== divider ====== */
+            .divider img {
+                width: 280px !important;
             }
 
-            img.fullwidth,
-            img.fullwidthOnMobile {
-                max-width: 100% !important;
+            /*-------- container --------*/
+            .container590 {
+                width: 280px !important;
             }
 
-            .no-stack .col {
-                min-width: 0 !important;
-                display: table-cell !important;
+            .container590 {
+                width: 280px !important;
             }
 
-            .no-stack.two-up .col {
-                width: 50% !important;
+            .container580 {
+                width: 260px !important;
             }
 
-            .no-stack .col.num4 {
-                width: 33% !important;
-            }
-
-            .no-stack .col.num8 {
-                width: 66% !important;
-            }
-
-            .no-stack .col.num4 {
-                width: 33% !important;
-            }
-
-            .no-stack .col.num3 {
-                width: 25% !important;
-            }
-
-            .no-stack .col.num6 {
-                width: 50% !important;
-            }
-
-            .no-stack .col.num9 {
-                width: 75% !important;
-            }
-
-            .video-block {
-                max-width: none !important;
-            }
-
-            .mobile_hide {
-                min-height: 0px;
-                max-height: 0px;
-                max-width: 0px;
-                display: none;
-                overflow: hidden;
-                font-size: 0px;
-            }
-
-            .desktop_hide {
-                display: block !important;
-                max-height: none !important;
+            /*-------- secions ----------*/
+            .section-img img {
+                width: 280px !important;
+                height: auto !important;
             }
         }
     </style>
+    <!-- [if gte mso 9]>
+    <style type=”text/css”>
+        body {
+            font-family: arial, sans-serif !important;
+        }
+    </style>
+    <![endif]-->
 </head>
-<body class="clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #f3f2f3;">
-<!--[if IE]>
-<div class="ie-browser"><![endif]-->
-<table bgcolor="#f3f2f3" cellpadding="0" cellspacing="0" class="nl-container" role="presentation"
-       style="table-layout: fixed; vertical-align: top; min-width: 320px; Margin: 0 auto; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f3f2f3; width: 100%;"
-       valign="top" width="100%">
-    <tbody>
-    <tr style="vertical-align: top;" valign="top">
-        <td style="word-break: break-word; vertical-align: top;" valign="top">
-            <!--[if (mso)|(IE)]>
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td align="center" style="background-color:#f3f2f3"><![endif]-->
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 30px solid #F3F2F3; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
+
+
+<body class="respond" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<!-- pre-header -->
+<table style="display:none!important;">
+    <tr>
+        <td>
+            <div
+                style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
+                {{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
+                de {{(new \App\Group)->getOne($event->group)->name}}
             </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #ffffff;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:#ffffff;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:30px; padding-bottom:30px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:30px; padding-bottom:30px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div align="center" class="img-container center autowidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                        <![endif]--><img align="center" alt="I'm an image" border="0"
-                                                         class="center autowidth" src="https://floriaaan.alwaysdata.net/docs/openmeet.svg"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 154px; display: block;"
-                                                         title="I'm an image" width="154"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div
-                        style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;background-image:url('images/hero-invite-alt.png');background-position:center top;background-repeat:no-repeat">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:60px; padding-bottom:60px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:60px; padding-bottom:60px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 50px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 16px; line-height: 1.2; word-break: break-word; text-align: center; font-family: inherit; mso-line-height-alt: 19px; margin: 0;">
-                                                <span
-                                                    style="color: #004afd;"><strong>{{Setting('openmeet.name', 'OpenMeet')}}</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 28px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:28px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; font-family: inherit; mso-line-height-alt: 50px; margin: 0;">
-                                                <span
-                                                    style="font-size: 42px; color: #2a272b;"><strong>Vous êtes invité<br/></strong></span><span
-                                                    style="font-size: 42px; color: #2a272b;"><strong>à un évenement</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <div align="center" class="button-container"
-                                         style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                                               style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                            <tr>
-                                                <td style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px"
-                                                    align="center">
-                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
-                                                                 xmlns:w="urn:schemas-microsoft-com:office:word" href=""
-                                                                 style="height:45pt; width:200.25pt; v-text-anchor:middle;"
-                                                                 arcsize="100%" stroke="false" fillcolor="#004afd">
-                                                        <w:anchorlock/>
-                                                        <v:textbox inset="0,0,0,0">
-                                                            <center
-                                                                style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px">
-                                        <![endif]-->
-                                        <div
-                                            style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#004afd;border-radius:60px;-webkit-border-radius:60px;-moz-border-radius:60px;width:auto; width:auto;;border-top:1px solid #004afd;border-right:1px solid #004afd;border-bottom:1px solid #004afd;border-left:1px solid #004afd;padding-top:12px;padding-bottom:16px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
-                                            <span
-                                                style="padding-left:32px;padding-right:32px;font-size:16px;display:inline-block;"><span
-                                                    style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><strong>{{$event->name}}</strong></span></span>
-                                        </div>
-                                        <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
-                                    </div>
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 50px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid two-up"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #ffffff;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="320"
-                            style="background-color:#ffffff;width:320px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 32px; padding-left: 32px; padding-top:60px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num6"
-                             style="min-width: 320px; max-width: 320px; display: table-cell; vertical-align: top; width: 320px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:60px; padding-bottom:0px; padding-right: 32px; padding-left: 32px;">
-                                    <!--<![endif]-->
-                                    <div align="center" class="img-container center autowidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                        <![endif]--><img align="center" alt="I'm an image" border="0"
-                                                         class="center autowidth" src="https://floriaaan.alwaysdata.net/docs/mail/Time.png"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 96px; display: block;"
-                                                         title="I'm an image" width="96"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 10px; padding-left: 10px; padding-top: 18px; padding-bottom: 10px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:18px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; color: #555555; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 20px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 24px; margin: 0;">
-                                                <span
-                                                    style="font-size: 20px; color: #2a272b;"><strong>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                           role="presentation"
-                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                           valign="top" width="100%">
-                                        <tbody>
-                                        <tr style="vertical-align: top;" valign="top">
-                                            <td class="divider_inner"
-                                                style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 42px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                valign="top">
-                                                <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                       class="divider_content" role="presentation"
-                                                       style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                       valign="top" width="100%">
-                                                    <tbody>
-                                                    <tr style="vertical-align: top;" valign="top">
-                                                        <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                            valign="top"><span></span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div align="center" class="img-container center autowidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                        <![endif]--><img align="center" alt="I'm an image" border="0"
-                                                         class="center autowidth" src="https://floriaaan.alwaysdata.net/docs/mail/Location.png"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 96px; display: block;"
-                                                         title="I'm an image" width="96"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 10px; padding-left: 10px; padding-top: 18px; padding-bottom: 10px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:18px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; color: #555555; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 20px; line-height: 1.2; text-align: center; word-break: break-word; mso-line-height-alt: 24px; margin: 0;">
-                                                <span
-                                                    style="font-size: 20px; color: #2a272b;"><strong>{{$event->numstreet}} {{$event->street}}<br>{{$event->city}}</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td>
-                        <td align="center" width="320"
-                            style="background-color:#ffffff;width:320px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 32px; padding-left: 48px; padding-top:50px; padding-bottom:55px;">
-                        <![endif]-->
-                        <div class="col num6"
-                             style="min-width: 320px; max-width: 320px; display: table-cell; vertical-align: top; width: 320px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:50px; padding-bottom:55px; padding-right: 32px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 10px; padding-bottom: 10px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.5;padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.5; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 18px;">
-                                            <p style="line-height: 1.5; word-break: break-word; font-family: inherit; font-size: 16px; mso-line-height-alt: 24px; margin: 0;">
-                                                <span style="font-size: 16px; color: #2a272b;">Vous êtes invité à participer à l'événement du groupe : {{(new \App\Group)->getOne($event->group)->name}}</span>
-                                            </p>
-                                            <p style="line-height: 1.5; word-break: break-word; font-family: inherit; font-size: 16px; mso-line-height-alt: 24px; margin: 0;">
-                                                <span style="font-size: 16px; color: #2a272b;"> </span></p>
-                                            <p style="line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: NaNpx; margin: 0;">
-                                                <br/><span style="font-size: 20px; color: #2a272b;">{{$event->name}}</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div
-                        style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;background-image:url('images/guides-bg.png');background-position:top left;background-repeat:repeat">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 48px; padding-left: 48px; padding-top:40px; padding-bottom:35px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:40px; padding-bottom:35px; padding-right: 48px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 30px; line-height: 1.2; word-break: break-word; text-align: center; font-family: inherit; mso-line-height-alt: 36px; margin: 0;">
-                                                <span style="font-size: 30px; color: #2a272b;"><strong>Meet the Panelists</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid two-up"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div
-                        style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;background-image:url('images/guides-bg.png');background-position:top left;background-repeat:repeat">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="320"
-                            style="background-color:transparent;width:320px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 48px; padding-left: 48px; padding-top:5px; padding-bottom:5px;">
-                        <![endif]-->
-                        <div class="col num6"
-                             style="min-width: 320px; max-width: 320px; display: table-cell; vertical-align: top; width: 320px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 48px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <div align="left" class="img-container left fixedwidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="left">
-                                        <![endif]--><img alt="I'm an image" border="0" class="left fixedwidth"
-                                                         src="images/panelist1-ALT.jpg"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 224px; display: block;"
-                                                         title="I'm an image" width="224"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 15px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:15px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 18px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 22px; margin: 0;">
-                                                <span
-                                                    style="font-size: 18px; color: #2a272b;"><strong>Anderson Zaria</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 17px; margin: 0;">
-                                                <span style="color: #2a272b;">Senior Designer at<br/></span><span
-                                                    style="color: #2a272b;"><strong>MediaEvents Corp</strong></span></p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                           role="presentation"
-                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                           valign="top" width="100%">
-                                        <tbody>
-                                        <tr style="vertical-align: top;" valign="top">
-                                            <td class="divider_inner"
-                                                style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 60px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                valign="top">
-                                                <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                       class="divider_content" role="presentation"
-                                                       style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                       valign="top" width="100%">
-                                                    <tbody>
-                                                    <tr style="vertical-align: top;" valign="top">
-                                                        <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                            valign="top"><span></span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div align="left" class="img-container left fixedwidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="left">
-                                        <![endif]--><img alt="I'm an image" border="0" class="left fixedwidth"
-                                                         src="images/panelist3.jpg"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 224px; display: block;"
-                                                         title="I'm an image" width="224"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 15px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:15px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 18px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 22px; margin: 0;">
-                                                <span
-                                                    style="font-size: 18px; color: #2a272b;"><strong>Anderson Zaria</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 17px; margin: 0;">
-                                                <span style="color: #2a272b;">Senior Designer at<br/></span><span
-                                                    style="color: #2a272b;"><strong>MediaEvents Corp</strong></span></p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td>
-                        <td align="center" width="320"
-                            style="background-color:transparent;width:320px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 48px; padding-left: 48px; padding-top:5px; padding-bottom:60px;">
-                        <![endif]-->
-                        <div class="col num6"
-                             style="min-width: 320px; max-width: 320px; display: table-cell; vertical-align: top; width: 320px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:60px; padding-right: 48px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                           role="presentation"
-                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                           valign="top" width="100%">
-                                        <tbody>
-                                        <tr style="vertical-align: top;" valign="top">
-                                            <td class="divider_inner"
-                                                style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 56px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                valign="top">
-                                                <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                       class="divider_content" role="presentation"
-                                                       style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                       valign="top" width="100%">
-                                                    <tbody>
-                                                    <tr style="vertical-align: top;" valign="top">
-                                                        <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                            valign="top"><span></span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div align="left" class="img-container left fixedwidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="left">
-                                        <![endif]--><img alt="I'm an image" border="0" class="left fixedwidth"
-                                                         src="images/panelist2.jpg"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 224px; display: block;"
-                                                         title="I'm an image" width="224"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 15px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:15px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 18px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 22px; margin: 0;">
-                                                <span
-                                                    style="font-size: 18px; color: #2a272b;"><strong>Anderson Zaria</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 17px; margin: 0;">
-                                                <span style="color: #2a272b;">Senior Designer at<br/></span><span
-                                                    style="color: #2a272b;"><strong>MediaEvents Corp</strong></span></p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                           role="presentation"
-                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                           valign="top" width="100%">
-                                        <tbody>
-                                        <tr style="vertical-align: top;" valign="top">
-                                            <td class="divider_inner"
-                                                style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 60px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                valign="top">
-                                                <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                       class="divider_content" role="presentation"
-                                                       style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                       valign="top" width="100%">
-                                                    <tbody>
-                                                    <tr style="vertical-align: top;" valign="top">
-                                                        <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                            valign="top"><span></span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div align="left" class="img-container left fixedwidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="left">
-                                        <![endif]--><img alt="I'm an image" border="0" class="left fixedwidth"
-                                                         src="images/Panelist4-ALT.jpg"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 224px; display: block;"
-                                                         title="I'm an image" width="224"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 15px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:15px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 18px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 22px; margin: 0;">
-                                                <span
-                                                    style="font-size: 18px; color: #2a272b;"><strong>Anderson Zaria</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 17px; margin: 0;">
-                                                <span style="color: #2a272b;">Senior Designer at<br/></span><span
-                                                    style="color: #2a272b;"><strong>MediaEvents Corp</strong></span></p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div
-                        style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;background-image:url('images/final-cta-ALT.jpg');background-position:top center;background-repeat:no-repeat">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:60px; padding-bottom:60px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:60px; padding-bottom:60px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 35px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 16px; line-height: 1.2; word-break: break-word; text-align: center; font-family: inherit; mso-line-height-alt: 19px; margin: 0;">
-                                                <span
-                                                    style="color: #004afd;"><strong>MediaEvents presents</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 0px; padding-left: 0px; padding-top: 20px; padding-bottom: 28px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.2;padding-top:20px;padding-right:0px;padding-bottom:28px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.2; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 14px;">
-                                            <p style="font-size: 42px; line-height: 1.2; word-break: break-word; text-align: center; font-family: inherit; mso-line-height-alt: 50px; margin: 0;">
-                                                <span
-                                                    style="font-size: 42px; color: #2a272b;"><strong>Biggest Event<br/></strong></span><span
-                                                    style="font-size: 42px; color: #2a272b;"><strong>of the Year</strong></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <div align="center" class="button-container"
-                                         style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                                               style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                            <tr>
-                                                <td style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px"
-                                                    align="center">
-                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
-                                                                 xmlns:w="urn:schemas-microsoft-com:office:word" href=""
-                                                                 style="height:45pt; width:200.25pt; v-text-anchor:middle;"
-                                                                 arcsize="100%" stroke="false" fillcolor="#004afd">
-                                                        <w:anchorlock/>
-                                                        <v:textbox inset="0,0,0,0">
-                                                            <center
-                                                                style="color:#ffffff; font-family:Arial, sans-serif; font-size:16px">
-                                        <![endif]-->
-                                        <div
-                                            style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#004afd;border-radius:60px;-webkit-border-radius:60px;-moz-border-radius:60px;width:auto; width:auto;;border-top:1px solid #004afd;border-right:1px solid #004afd;border-bottom:1px solid #004afd;border-left:1px solid #004afd;padding-top:12px;padding-bottom:16px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;">
-                                            <span
-                                                style="padding-left:32px;padding-right:32px;font-size:16px;display:inline-block;"><span
-                                                    style="font-size: 16px; margin: 0; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;"><strong>Reserve your spot</strong></span></span>
-                                        </div>
-                                        <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
-                                    </div>
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 10px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div
-                        style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;background-image:url('images/guides-bg.png');background-position:top left;background-repeat:repeat">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                           role="presentation"
-                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                           valign="top" width="100%">
-                                        <tbody>
-                                        <tr style="vertical-align: top;" valign="top">
-                                            <td class="divider_inner"
-                                                style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 30px; padding-right: 10px; padding-bottom: 25px; padding-left: 10px;"
-                                                valign="top">
-                                                <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                       class="divider_content" role="presentation"
-                                                       style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                       valign="top" width="100%">
-                                                    <tbody>
-                                                    <tr style="vertical-align: top;" valign="top">
-                                                        <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                            valign="top"><span></span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid three-up"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #ffffff;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;background-color:#ffffff;">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:#ffffff"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="213"
-                            style="background-color:#ffffff;width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 48px; padding-top:33px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num4"
-                             style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:33px; padding-bottom:0px; padding-right: 0px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <div align="left" class="img-container left autowidth"
-                                         style="padding-right: 0px;padding-left: 0px;">
-                                        <!--[if mso]>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr style="line-height:0px">
-                                                <td style="padding-right: 0px;padding-left: 0px;" align="left">
-                                        <![endif]--><img alt="I'm an image" border="0" class="left autowidth"
-                                                         src="images/Logo.png"
-                                                         style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 154px; display: block;"
-                                                         title="I'm an image" width="154"/>
-                                        <!--[if mso]></td></tr></table><![endif]-->
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td>
-                        <td align="center" width="213"
-                            style="background-color:#ffffff;width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num4"
-                             style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div></div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td>
-                        <td align="center" width="213"
-                            style="background-color:#ffffff;width:213px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 48px; padding-top:5px; padding-bottom:5px;">
-                        <![endif]-->
-                        <div class="col num4"
-                             style="max-width: 320px; min-width: 213px; display: table-cell; vertical-align: top; width: 213px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 48px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 30px; padding-right: 10px; padding-bottom: 0px; padding-left: 10px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if mso]>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td style="padding-right: 48px; padding-left: 0px; padding-top: 0px; padding-bottom: 28px; font-family: Arial, sans-serif">
-                                    <![endif]-->
-                                    <div
-                                        style="color:#555555;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;line-height:1.5;padding-top:0px;padding-right:48px;padding-bottom:28px;padding-left:0px;">
-                                        <div
-                                            style="line-height: 1.5; font-size: 12px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color: #555555; mso-line-height-alt: 18px;">
-                                            <p style="font-size: 14px; line-height: 1.5; word-break: break-word; text-align: left; font-family: inherit; mso-line-height-alt: 21px; margin: 0;">
-                                                Copyright © 2020</p>
-                                        </div>
-                                    </div>
-                                    <!--[if mso]></td></tr></table><![endif]-->
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <div style="background-color:transparent;">
-                <div class="block-grid"
-                     style="Margin: 0 auto; min-width: 320px; max-width: 640px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
-                    <div style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
-                        <!--[if (mso)|(IE)]>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="background-color:transparent;">
-                            <tr>
-                                <td align="center">
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:640px">
-                                        <tr class="layout-full-width" style="background-color:transparent"><![endif]-->
-                        <!--[if (mso)|(IE)]>
-                        <td align="center" width="640"
-                            style="background-color:transparent;width:640px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;"
-                            valign="top">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;">
-                        <![endif]-->
-                        <div class="col num12"
-                             style="min-width: 320px; max-width: 640px; display: table-cell; vertical-align: top; width: 640px;">
-                            <div style="width:100% !important;">
-                                <!--[if (!mso)&(!IE)]><!-->
-                                <div
-                                    style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 0px; padding-left: 0px;">
-                                    <!--<![endif]-->
-                                    <div class="mobile_hide">
-                                        <table border="0" cellpadding="0" cellspacing="0" class="divider"
-                                               role="presentation"
-                                               style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                               valign="top" width="100%">
-                                            <tbody>
-                                            <tr style="vertical-align: top;" valign="top">
-                                                <td class="divider_inner"
-                                                    style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 15px; padding-right: 10px; padding-bottom: 15px; padding-left: 10px;"
-                                                    valign="top">
-                                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
-                                                           class="divider_content" role="presentation"
-                                                           style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-top: 0px solid #BBBBBB; width: 100%;"
-                                                           valign="top" width="100%">
-                                                        <tbody>
-                                                        <tr style="vertical-align: top;" valign="top">
-                                                            <td style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"
-                                                                valign="top"><span></span></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--[if (!mso)&(!IE)]><!-->
-                                </div>
-                                <!--<![endif]-->
-                            </div>
-                        </div>
-                        <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-                        <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-                    </div>
-                </div>
-            </div>
-            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
         </td>
     </tr>
-    </tbody>
 </table>
-<!--[if (IE)]></div><![endif]-->
+<!-- pre-header end -->
+<!-- header -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff">
+
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+
+                        <table border="0" align="center" width="590" cellpadding="0" cellspacing="0"
+                               class="container590">
+
+                            <tr>
+                                <td align="center" height="70" style="height:70px;">
+                                    <a href="{{url('/')}}"
+                                       style="display: block; border-style: none !important; border: 0 !important;"><img
+                                            width="100" border="0" style="display: block; width: 100px;"
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+<!-- end header -->
+
+<!-- big image section -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
+
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+                <tr>
+
+                    <td align="center" class="section-img">
+                        <div style="font-size: 25px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                            Un nouvel événement a été créé
+                        </div>
+                        <hr class="mx-5 my-3" style="color:#ddd">
+                        <div style="font-size: 18px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
+                            {{(new \App\Group)->getOne($event->group)->name}} vous invite à {{$event->name}}
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="color: #343434; font-size: 15px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 20px;"
+                        class="main-header">
+
+
+                        <div style="line-height: 35px">
+
+                            aura lieu le
+                            <cite>{{strftime("%A %d %b %Y",strtotime($event->datefrom))}}
+                                à {{strftime("%R",strtotime($event->datefrom))}}</cite>
+
+                            @if($event->dateto != null)
+                                <br>
+                                jusqu'au <cite>{{strftime("%A %d %b %Y",strtotime($event->dateto))}}
+                                    à {{strftime("%R",strtotime($event->dateto))}}</cite>
+                            @endif
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+                        <table border="0" width="40" align="center" cellpadding="0" cellspacing="0" bgcolor="eeeeee">
+                            <tr>
+                                <td height="2" style="font-size: 2px; line-height: 2px;">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                </tr>
+
+
+                <tr>
+                    <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td align="center">
+                        <table border="0" align="center" width="160" cellpadding="0" cellspacing="0"
+                               style="background-color: {{Setting('openmeet.color')}}">
+
+                            <tr>
+                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td align="center"
+                                    style="color: #ffffff; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;">
+
+
+                                    <div style="line-height: 26px;">
+                                        <a href="{{url('/events/show/'.$event->id)}}"
+                                           style="color: #ffffff; text-decoration: none;">Voir l'événement</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+
+            </table>
+
+        </td>
+    </tr>
+
+</table>
+<!-- end section -->
+
+<!-- contact section -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
+
+    <tr class="hide">
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td height="60" style="border-top: 1px solid #e0e0e0;font-size: 60px; line-height: 60px;">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td align="center">
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590 bg_color">
+
+                <tr>
+                    <td>
+                        <table border="0" width="300" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+
+                            <tr>
+                                <!-- logo -->
+                                <td align="left">
+                                    <a href=""
+                                       style="display: block; border-style: none !important; border: 0 !important;"><img
+                                            width="40" border="0" style="display: block; width: 40px;"
+                                            src="https://floriaaan.alwaysdata.net/docs/openmeet.svg" alt=""/></a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td align="left"
+                                    style="color: #888888; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 23px;"
+                                    class="text_color">
+                                    <div
+                                        style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
+
+                                        Contact: <br/> <a href="mailto:{{Setting('openmeet.admin.email', 'contact@openmeet.fr')}}"
+                                                          style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{(Setting('openmeet.name', 'OpenMeet'))}}</a>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <table border="0" width="2" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td width="2" height="10" style="font-size: 10px; line-height: 10px;"></td>
+                            </tr>
+                        </table>
+
+                        <table border="0" width="200" align="right" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+
+                            <tr>
+                                <td class="hide" height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                            </tr>
+
+
+                            <tr>
+                                <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table border="0" align="right" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <a href="https://www.facebook.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/Qc3zTxn.png" alt=""></a>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <a href="https://twitter.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/RBRORq1.png" alt=""></a>
+                                            </td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                            <td>
+                                                <a href="https://plus.google.com/"
+                                                   style="display: block; border-style: none !important; border: 0 !important;"><img
+                                                        width="24" border="0" style="display: block;"
+                                                        src="http://i.imgur.com/Wji3af6.png" alt=""></a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td>
+    </tr>
+
+</table>
+<!-- end section -->
+
+<!-- footer ====== -->
+<table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="f4f4f4">
+
+    <tr>
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td align="center">
+
+            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+
+                <tr>
+                    <td>
+                        <table border="0" align="left" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td align="left"
+                                    style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                    <div style="line-height: 24px;">
+
+                                        <span style="color: #333333;">OpenMeet - 2020</span>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table border="0" align="left" width="5" cellpadding="0" cellspacing="0"
+                               style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                               class="container590">
+                            <tr>
+                                <td height="20" width="5" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                            </tr>
+                        </table>
+
+
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
+    </tr>
+
+</table>
+<!-- end footer ====== -->
+
 </body>
+
 </html>

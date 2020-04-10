@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Event;
-use App\Mail\CheckMail;
+use App\Mail\EventReminder;
 use App\Participation;
 use App\User;
 use Illuminate\Console\Command;
@@ -57,7 +57,7 @@ class MailReminder extends Command
 
                 $user = (new User)->getOne($participant->user);
                 Mail::to($user->email)
-                    ->send(new CheckMail((new Event)->getOne($event->id), $user));
+                    ->send(new EventReminder((new Event)->getOne($event->id)));
 
                 $returnArray[] = $participant->user;
             }

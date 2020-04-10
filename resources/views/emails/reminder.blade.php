@@ -10,8 +10,8 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>{{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
-        de {{(new \App\Group)->getOne($event->group)->name}}</title>
+    <title>{{Setting('openmeet.name', 'OpenMeet')}} - Rappel
+        Vous participez à {{$event->name}}</title>
 
     <style type="text/css">
         body {
@@ -172,8 +172,8 @@
         <td>
             <div
                 style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                {{Setting('openmeet.name', 'OpenMeet')}} - Nouvel événement
-                de {{(new \App\Group)->getOne($event->group)->name}}
+                {{Setting('openmeet.name', 'OpenMeet')}} - Rappel
+                Vous participez à {{$event->name}}
             </div>
         </td>
     </tr>
@@ -228,11 +228,11 @@
 
                     <td align="center" class="section-img">
                         <div style="font-size: 25px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
-                            Un nouvel événement a été créé
+                            N'oubliez pas, vous avez un évenement prochainement
                         </div>
                         <hr class="mx-5 my-3" style="color:#ddd">
                         <div style="font-size: 18px; border-style: none !important; display: block; border: 0 !important; font-family: Quicksand, Calibri, sans-serif;">
-                            {{(new \App\Group)->getOne($event->group)->name}} vous invite à {{$event->name}}
+                            {{(new \App\Group)->getOne($event->group)->name}} organise {{$event->name}}
                         </div>
 
                     </td>

@@ -9,18 +9,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 
-class CheckMail extends Mailable
+class EventReminder extends Mailable
 {
 
     use Queueable, SerializesModels;
 
     public $event;
-    public $user;
 
-    public function __construct($event, $user)
+
+    public function __construct($event)
     {
         $this->event = $event;
-        $this->user = $user;
+        $this->subject(Setting('openmeet.name') . ' - Rappel d\'évenement');
+
     }
 
     public function build()
@@ -28,7 +29,6 @@ class CheckMail extends Mailable
         return $this->from('no-reply@' . strtolower(Setting('openmeet.name', 'openmeet')) . '.fr')
             ->view('emails.reminder');
     }
-
 
 
 }
