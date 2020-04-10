@@ -34,14 +34,22 @@ class HomeController extends Controller
 
         if ($install != null && $install) {
 
-            $homeAlerts = (new Alert)->getHome();
-            $homeAlert = $homeAlerts[count($homeAlerts) - 1];
+            $alerts = (new Alert)->getHome();
+            if(count($alerts) >= 1) {
+                $alert = $alerts[count($alerts) - 1];
+                Session()->flash('info', [
+                    'title' => $alert->title,
+                    'text' => $alert->content,
+                    'link' => $alert->link,
+                    'color' => $alert->color
+                ]);
+            }
 
             Session()->flash('info', [
-                'title' => $homeAlert->title,
-                'text' => $homeAlert->content,
-                'link' => $homeAlert->link,
-                'color' => $homeAlert->color
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
             ]);
 
             return $this->Home();

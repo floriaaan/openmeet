@@ -16,3 +16,7 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('check:mailreminder',function (){
+   $this->comment(\App\Console\Commands\MailReminder::handle());
+})->describe('Send an email to all participants of an event which is going to be tomorrow');

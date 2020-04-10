@@ -58,15 +58,15 @@
 
 
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-8">
+                                <div class="row justify-content-between">
+                                    <div class="col-lg-10">
                                         <a href="{{url('/groups/show')}}/{{$sR['content']->id}}"
                                            style="text-decoration: none; color: inherit;">
                                             <h5 class="card-title">{{$sR['content']->name}}</h5>
                                             <p class="card-text">{!! \Illuminate\Support\Str::limit(str_replace('\\n','<br>',$sR['content']->desc), 150, $end='...') !!}</p>
                                         </a>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-2">
 
                                         <div class="subscribe" id="subscribe-{{$sR['content']->id}}"></div>
                                         <!--<span class="text-danger">J'aime</span>-->

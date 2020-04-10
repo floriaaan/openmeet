@@ -22,6 +22,7 @@ class EventCreated extends Mailable
     public function __construct($event)
     {
         $this->event = $event;
+        $this->subject(Setting('openmeet.name') . ' - Invitation à un évenement');
     }
 
     /**

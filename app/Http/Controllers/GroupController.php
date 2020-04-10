@@ -120,14 +120,17 @@ class GroupController extends Controller
         ];
 
         $alerts = (new Alert)->getGroup();
-        $alert = $alerts[count($alerts) - 1];
+        if(count($alerts) >= 1) {
+            $alert = $alerts[count($alerts) - 1];
+            Session()->flash('info', [
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
+            ]);
+        }
 
-        Session()->flash('info', [
-            'title' => $alert->title,
-            'text' => $alert->content,
-            'link' => $alert->link,
-            'color' => $alert->color
-        ]);
+
 
         if (auth()->check()) {
             $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
@@ -144,14 +147,16 @@ class GroupController extends Controller
         $listGroups = (new Group)->getAll();
 
         $alerts = (new Alert)->getGroupList();
-        $alert = $alerts[count($alerts) - 1];
 
-        Session()->flash('info', [
-            'title' => $alert->title,
-            'text' => $alert->content,
-            'link' => $alert->link,
-            'color' => $alert->color
-        ]);
+        if(count($alerts) >= 1) {
+            $alert = $alerts[count($alerts) - 1];
+            Session()->flash('info', [
+                'title' => $alert->title,
+                'text' => $alert->content,
+                'link' => $alert->link,
+                'color' => $alert->color
+            ]);
+        }
 
         return view('group.list', [
             'listGroups' => $listGroups
