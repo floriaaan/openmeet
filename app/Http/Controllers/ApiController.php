@@ -8,6 +8,7 @@ use App\Subscription;
 use App\User;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
@@ -259,5 +260,51 @@ class ApiController extends Controller
         }
 
         return $result;
+    }
+
+    public function update(Request $request) {
+        $post = $request->input();
+        $token = (isset($post['token'])) ? $post['token'] : 'anon';
+
+        $user = (new User)->getToken($token);
+        if ($user != false && $user->isadmin == 1) {
+
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Update',
+                'Status' => 'granted'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+
+            Artisan::call('check:update');
+
+            return Artisan::output();
+        } else if ($user != false) {
+
+            $request = [
+                'USER' => $user->fname . ' ' . $user->lname,
+                'ID' => [$user->id, $token],
+                'AccessTo' => 'Update',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+
+            return abort(404);
+        } else {
+            $request = [
+                'USER' => 'anonymous',
+                'ID' => ['anonymous', $token],
+                'AccessTo' => 'Update',
+                'Status' => 'denied'
+            ];
+
+            Storage::append('api_logs.json', json_encode($request) . ',');
+
+            return abort(404);
+        }
+
     }
 }

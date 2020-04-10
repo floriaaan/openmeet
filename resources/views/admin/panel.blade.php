@@ -321,7 +321,15 @@
 
                         {!! Form::close()!!}
                         <div class="row justify-content-end mt-2">
-                            <a href="{{url('/admin/alert')}}" class="btn btn-secondary mt-2">Gérer les alertes d'information</a>
+                            <a href="{{url('/admin/alert')}}" class="btn btn-outline-warning mt-2 mx-1">
+                                <i class="fas fa-exclamation-circle"></i>
+                                Gérer les alertes d'information
+                            </a>
+
+                            <a href="{{url('/admin/update')}}" class="btn btn-outline-success mt-2 ml-1">
+                                <i class="fas fa-sync-alt"></i>
+                                Mettre à jour OpenMeet
+                            </a>
 
                         </div>
                     </div>
@@ -351,7 +359,10 @@
 
                     </form>
                     <div class="row justify-content-end mt-2">
-                        <a href="{{url('/admin/edit/views')}}" class="btn btn-secondary mt-2">Modifier les pages</a>
+                        <a href="{{url('/admin/edit/views')}}" class="btn btn-outline-secondary mt-2">
+                            <i class="fas fa-pencil-alt"></i>
+                            Modifier les pages
+                        </a>
 
                     </div>
 
