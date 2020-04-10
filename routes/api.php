@@ -9,10 +9,11 @@ Route::get('/v1/groups/subscribe/{userID}', 'ApiController@getSubscription');
 Route::post('/v1/groups/subscribe/', 'ApiController@toggleSubscription');
 Route::get('/v1/groups/tags/', 'ApiController@getTags');
 Route::post('/v1/events/location', 'ApiController@getELocation');
+Route::post('/v1/admin/update', 'ApiController@update');
 
 
 /*
- * NON ESSENTIALS (need ApiToken)
+ * NON ESSENTIALS (need ApiToken in URL)
  */
 
 /*

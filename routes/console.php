@@ -20,3 +20,7 @@ Artisan::command('inspire', function () {
 Artisan::command('check:mailreminder',function (){
    $this->comment(\App\Console\Commands\MailReminder::handle());
 })->describe('Send an email to all participants of an event which is going to be tomorrow');
+
+Artisan::command('check:update', function () {
+    $this->comment(\App\Console\Commands\Update::handle());
+})->describe('Check for an update and if there\'s one, doing it. (git pull)');

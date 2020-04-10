@@ -55,6 +55,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
     Route::get('/admin/edit/views', 'AdminController@editViewsForm');
     Route::post('/admin/edit/views', 'AdminController@editViews');
     Route::post('/admin/edit/privacy', 'AdminController@editPrivacy');
+    Route::get('/admin/update', 'AdminController@update');
     Route::get('/admin/alert', 'AdminController@alertForm');
     Route::post('/admin/alert', 'AdminController@alertPost');
     Route::post('/admin/alert/delete', 'AdminController@alertDelete');

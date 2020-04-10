@@ -457,4 +457,8 @@ class AdminController extends Controller
 
         return redirect('/admin/alert');
     }
+
+    public function update() {
+        return view('admin.update');
+    }
 }
