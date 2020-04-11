@@ -145,7 +145,7 @@
                             <h6 class="dropdown-header">Administration</h6>
                             <a class="dropdown-item" href="{{url('/admin/')}}">
                                 <i class="fas fa-tools"></i>
-                                Panneau d'administration
+                                Paramètres {{Setting('openmeet.name')}}
                             </a>
                         @endif
                     </div>
