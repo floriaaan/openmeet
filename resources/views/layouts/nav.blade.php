@@ -144,7 +144,7 @@
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Administration</h6>
                             <a class="dropdown-item" href="{{url('/admin/')}}">
-                                <i class="fas fa-tools"></i>
+                                <i class="fas fa-globe"></i>
                                 Paramètres {{Setting('openmeet.name')}}
                             </a>
                         @endif

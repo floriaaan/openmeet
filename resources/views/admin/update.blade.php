@@ -12,7 +12,7 @@
             <kbd>
                 <div class="container" id="console" style="height: 60vh">
                     <p id="console-log"></p>
-                    <hr class="mx-3 my-2">
+                    <hr class="mx-3 my-2" style="background-color:#777777">
                     <p id="console-log-update"></p>
                     <!--<span class="blinking">_</span>-->
                 </div>
@@ -26,6 +26,11 @@
                     Mettre à jour le système OpenMeet
                 </button>
 
+                <a href="{{url('/admin')}}" class="btn btn-secondary mt-2 mx-1">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour
+                </a>
+
             </div>
 
         </div>
@@ -36,6 +41,9 @@
 
 @section('css')
     <style>
+        #console-log {
+            height: 5vh;
+        }
 
         @keyframes blink {
             50% {
@@ -47,6 +55,10 @@
             width: 7px;
             height: 12px;
             animation: blink .5s step-end infinite alternate;
+        }
+
+        .typed-cursor {
+            display: none;
         }
     </style>
 @endsection
@@ -85,7 +97,7 @@
 
 
         function postUpdate() {
-            if(!$('#btn-update').hasClass('disabled')) {
+            if (!$('#btn-update').hasClass('disabled')) {
                 $.ajax({
                     url: '{{url('/api/v1/admin/update')}}',
                     type: 'POST',
