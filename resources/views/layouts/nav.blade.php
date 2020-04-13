@@ -336,7 +336,8 @@
 
     @if(Session::has('info'))
 
-        <nav class="navbar navbar-light bg-{{Session::get('info')['color']}} fixed-bottom" style="bottom: 56px!important;" role="alert" id="nav-alert">
+        <nav class="navbar navbar-light bg-{{Session::get('info')['color']}} fixed-bottom"
+             style="bottom: 56px!important;" role="alert" id="nav-alert">
             <span class="navbar-brand mb-0 h1">{{Session::get('info')['title']}}</span>
             <span>{{Session::get('info')['text']}}</span>
             @if(isset(Session::get('info')['link']))
@@ -354,8 +355,20 @@
 
     <footer class="footer navbar-custom mt-auto py-3 fixed-bottom" style="background-color: rgba(255, 255, 255)">
         <div class="container">
-            <span class="text-muted">
-                &copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}" class="btn-link">Conditions générales d'utilisation</a> | <a href="{{url('/openmeet')}}" class="btn-link">Télécharger OpenMeet</a>
+            <span>
+                &copy; OpenMeet - 2020 |
+                <span class="badge badge-primary">
+                    <a href="{{url('/legal/cgu')}}" class="no-hover" style="color: white;">
+                    Conditions générales d'utilisation
+                </a>
+                </span>
+
+                |
+                <span class="badge badge-primary">
+                <a href="{{url('/openmeet')}}" class="no-hover" style="color: white;">
+                    Télécharger OpenMeet
+                </a>
+                </span>
             </span>
         </div>
     </footer>

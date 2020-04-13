@@ -257,6 +257,11 @@
             max-width: 60%;
         }
 
+
+        .no-hover:hover {
+            text-decoration: none;
+        }
+
     </style>
 
 
@@ -440,9 +445,19 @@
 <footer class="py-3" style="background-color: rgba(0, 0, 0, 0.7);">
     <div class="container">
         <span style="color: #f5f5f5">
-            &copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}"
-                                        class="btn-link">Conditions générales d'utilisation</a> | <a
-                href="{{url('/openmeet')}}" class="btn-link">Télécharger OpenMeet</a>
+            &copy; OpenMeet - 2020 |
+            <span class="badge badge-primary">
+                <a href="{{url('/legal/cgu')}}" class="no-hover" style="color: white;">
+                Conditions générales d'utilisation
+            </a>
+            </span>
+
+            |
+            <span class="badge badge-primary">
+            <a href="{{url('/openmeet')}}" class="no-hover" style="color: white;">
+                Télécharger OpenMeet
+            </a>
+            </span>
         </span>
     </div>
 
