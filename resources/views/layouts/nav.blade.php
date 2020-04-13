@@ -354,7 +354,9 @@
 
     <footer class="footer navbar-custom mt-auto py-3 fixed-bottom" style="background-color: rgba(255, 255, 255)">
         <div class="container">
-            <span class="text-muted">&copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}" class="btn-link">Conditions générales d'utilisation</a></span>
+            <span class="text-muted">
+                &copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}" class="btn-link">Conditions générales d'utilisation</a> | <a href="{{url('/openmeet')}}" class="btn-link">Télécharger OpenMeet</a>
+            </span>
         </div>
     </footer>
     <div class="mt-nav"></div>

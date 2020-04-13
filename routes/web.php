@@ -131,6 +131,7 @@ Route::group(['middleware' => 'notifications', 'disable'], function () {
 });
 //Legal Routes
 Route::get('/legal/cgu', 'LegalController@cgu');
+Route::get('/openmeet', 'LegalController@openmeet');
 
 /*
 Route::get('/debug/mail', function (){
