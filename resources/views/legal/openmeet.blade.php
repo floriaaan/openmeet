@@ -3,15 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{url('/')}}/assets/icon.png"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>OpenMeet</title>
+    <title>OpenMeet</title>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -21,209 +22,209 @@
           integrity="sha256-c+C87jupO1otD1I5uyxV68WmSLCqtIoNlcHLXtzLCT0=" crossorigin="anonymous"/>
 
 
-  <style>
+    <style>
 
-    :root {
-        --openmeet: {{Setting('openmeet.color')}};
-        --openmeet-transparent: {{Setting('openmeet.color')}}77;
-    }
+        :root {
+            --openmeet: {{Setting('openmeet.color')}};
+            --openmeet-transparent: {{Setting('openmeet.color')}}77;
+        }
 
-    .btn-primary {
-        color: #fff;
-        background-color: var(--openmeet);
-        border-color: var(--openmeet);
-    }
+        .btn-primary {
+            color: #fff;
+            background-color: var(--openmeet);
+            border-color: var(--openmeet);
+        }
 
-    .btn-primary:hover {
-        color: #fff;
-        background-color: #222;
-        border-color: #333;
-    }
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #222;
+            border-color: #333;
+        }
 
-    .bg-primary {
-        background-color: var(--openmeet) !important;
-    }
+        .bg-primary {
+            background-color: var(--openmeet) !important;
+        }
 
-    .btn-primary:focus, .btn-primary.focus {
-        box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
-    }
+        .btn-primary:focus, .btn-primary.focus {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
 
-    .btn-primary.disabled, .btn-primary:disabled {
-        color: #fff;
-        background-color: var(--openmeet);
-        border-color: var(--openmeet);
-    }
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #fff;
+            background-color: var(--openmeet);
+            border-color: var(--openmeet);
+        }
 
-    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-    .show > .btn-primary.dropdown-toggle {
-        color: #fff;
-        background-color: calc(50% * var(--openmeet));
-        border-color: calc(40% * var(--openmeet));
-    }
+        .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+        .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: calc(50% * var(--openmeet));
+            border-color: calc(40% * var(--openmeet));
+        }
 
-    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-    .show > .btn-primary.dropdown-toggle:focus {
-        box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
-    }
+        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
 
-    .nav-link {
-        color: var(--openmeet) !important;
-    }
+        .nav-link {
+            color: var(--openmeet) !important;
+        }
 
-    .text-primary {
-        color: var(--openmeet) !important;
-    }
+        .text-primary {
+            color: var(--openmeet) !important;
+        }
 
-    .btn-link {
-        color: var(--openmeet) !important;
-    }
+        .btn-link {
+            color: var(--openmeet) !important;
+        }
 
-    .color {
-        color: var(--openmeet) !important;
-    }
+        .color {
+            color: var(--openmeet) !important;
+        }
 
-    .form-control:focus {
-        border-color: var(--openmeet-transparent) !important;
-        box-shadow: 0 0 0 0.2rem var(--openmeet-transparent) !important;
-    }
+        .form-control:focus {
+            border-color: var(--openmeet-transparent) !important;
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent) !important;
+        }
 
-    .dropdown-item:active {
-        color: var(--openmeet) !important;
-    }
+        .dropdown-item:active {
+            color: var(--openmeet) !important;
+        }
 
-    .badge-primary {
-        background-color: var(--openmeet) !important;
-    }
+        .badge-primary {
+            background-color: var(--openmeet) !important;
+        }
 
-    .custom-control-input:checked + .custom-control-label::before {
-        border-color: var(--openmeet);
-        background-color: var(--openmeet);
-    }
+        .custom-control-input:checked + .custom-control-label::before {
+            border-color: var(--openmeet);
+            background-color: var(--openmeet);
+        }
 
-    .custom-control-input:focus + .custom-control-label::before {
-        box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
-    }
+        .custom-control-input:focus + .custom-control-label::before {
+            box-shadow: 0 0 0 0.2rem var(--openmeet-transparent);
+        }
 
-    .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-        border-color: var(--openmeet);
-    }
+        .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+            border-color: var(--openmeet);
+        }
 
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
 
-    ::-webkit-scrollbar-track {
-        width: 5px;
-        background: #f5f5f5;
-    }
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
 
-    ::-webkit-scrollbar-thumb {
-        width: 1em;
-        background-color: {{setting('openmeet.color')}};
-        outline: 1px solid slategrey;
-        border-radius: 1rem;
-    }
-    .openmeet-title {
-    font-family: 'Baloo', serif;
-}
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: {{setting('openmeet.color')}};
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
 
-.openmeet-nav {
-    font-size: 1.5em;
-}
+        .openmeet-title {
+            font-family: 'Baloo', serif;
+        }
 
-    .btn-xl {
-  text-transform: uppercase;
-  padding: 1.5rem 3rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-}
+        .openmeet-nav {
+            font-size: 1.5em;
+        }
 
-.bg-black {
-  background-color: #000 !important;
-}
+        .btn-xl {
+            text-transform: uppercase;
+            padding: 1.5rem 3rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1rem;
+        }
 
-.rounded-pill {
-  border-radius: 5rem;
-}
+        .bg-black {
+            background-color: #000 !important;
+        }
 
-.navbar-custom {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background-color: rgba(0, 0, 0, 0.7);
-}
+        .rounded-pill {
+            border-radius: 5rem;
+        }
+
+        .navbar-custom {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
 
+        header.masthead {
+            position: relative;
+            overflow: hidden;
+            padding-top: calc(7rem + 72px);
+            padding-bottom: 7rem;
+            background-image: radial-gradient(circle, #051937, #004874, #007e9f, #00b6a9, #12eb94);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: scroll;
+            background-size: cover;
+        }
 
-header.masthead {
-  position: relative;
-  overflow: hidden;
-  padding-top: calc(7rem + 72px);
-  padding-bottom: 7rem;
-  background-image: radial-gradient(circle, #2b2a2a, var(--openmeet));
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-}
+        header.masthead .masthead-content {
+            z-index: 1;
+            position: relative;
+        }
 
-header.masthead .masthead-content {
-  z-index: 1;
-  position: relative;
-}
+        header.masthead .masthead-content .masthead-heading {
+            font-size: 4rem;
+        }
 
-header.masthead .masthead-content .masthead-heading {
-  font-size: 4rem;
-}
+        header.masthead .masthead-content .masthead-subheading {
+            font-size: 2rem;
+        }
 
-header.masthead .masthead-content .masthead-subheading {
-  font-size: 2rem;
-}
+        header.masthead .bg-circle {
+            z-index: 0;
+            position: absolute;
+            border-radius: 100%;
+            background: linear-gradient(0deg, #051937 0%, rgb(18, 156, 235) 100%);
+        }
 
-header.masthead .bg-circle {
-  z-index: 0;
-  position: absolute;
-  border-radius: 100%;
-  background: linear-gradient(0deg, #051937 0%, rgb(18, 156, 235) 100%);
-}
-
-header.masthead .bg-circle-1 {
-  height: 90rem;
-  width: 90rem;
-  bottom: -55rem;
-  left: -55rem;
-  animation: bounce 7s infinite alternate;
+        header.masthead .bg-circle-1 {
+            height: 90rem;
+            width: 90rem;
+            bottom: -55rem;
+            left: -55rem;
+            animation: bounce 7s infinite alternate;
             -webkit-animation: bounce 7s infinite alternate;
-}
+        }
 
-header.masthead .bg-circle-2 {
-  height: 50rem;
-  width: 50rem;
-  top: -25rem;
-  right: -25rem;
-  animation: bounce 3s infinite alternate;
+        header.masthead .bg-circle-2 {
+            height: 50rem;
+            width: 50rem;
+            top: -25rem;
+            right: -25rem;
+            animation: bounce 3s infinite alternate;
             -webkit-animation: bounce 3s infinite alternate;
-}
+        }
 
-header.masthead .bg-circle-3 {
-  height: 20rem;
-  width: 20rem;
-  bottom: -10rem;
-  right: 5%;
-  animation: bounce 4s infinite alternate;
+        header.masthead .bg-circle-3 {
+            height: 20rem;
+            width: 20rem;
+            bottom: -10rem;
+            right: 5%;
+            animation: bounce 4s infinite alternate;
             -webkit-animation: bounce 4s infinite alternate;
-}
+        }
 
-header.masthead .bg-circle-4 {
-  height: 30rem;
-  width: 30rem;
-  top: -5rem;
-  right: 35%;
-  animation: bounce 8s infinite alternate;
+        header.masthead .bg-circle-4 {
+            height: 30rem;
+            width: 30rem;
+            top: -5rem;
+            right: 35%;
+            animation: bounce 8s infinite alternate;
             -webkit-animation: bounce 8s infinite alternate;
-}
+        }
 
-@keyframes bounce {
+        @keyframes bounce {
             from {
                 transform: translateY(0px);
             }
@@ -241,29 +242,30 @@ header.masthead .bg-circle-4 {
             }
         }
 
-@media (min-width: 992px) {
-  header.masthead {
-    padding-top: calc(10rem + 55px);
-    padding-bottom: 10rem;
-  }
-  header.masthead .masthead-content .masthead-heading {
-    font-size: 6rem;
-  }
-}
+        @media (min-width: 992px) {
+            header.masthead {
+                padding-top: calc(10rem + 55px);
+                padding-bottom: 10rem;
+            }
 
-section .container img {
-    max-width: 60%;
-}
+            header.masthead .masthead-content .masthead-heading {
+                font-size: 6rem;
+            }
+        }
 
-</style>
+        section .container img {
+            max-width: 60%;
+        }
+
+    </style>
 
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 406.372 404.994"
@@ -332,139 +334,143 @@ section .container img {
             <span
                 class="ml-2 openmeet-title openmeet-nav text-center text-primary">{{ Setting('openmeet.name') }}</span>
         </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-          <a class="btn btn-primary rounded-pill" href="{{url('/')}}">
-            <i class="fas fa-arrow-right"></i>
-            Retour à {{Setting('openmeet.name')}}
-        </a>
-          </li>
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary rounded-pill" href="{{url('/')}}">
+                        <i class="fas fa-arrow-right"></i>
+                        Retour à {{Setting('openmeet.name')}}
+                    </a>
+                </li>
 
-  <header class="masthead text-center text-white" style="height: 100vh;">
-    <div class="masthead-content">
-      <div class="container">
-        <h1 class="masthead-heading">OpenMeet</h1>
-        <h2 class="masthead-subheading mb-0 lead">Une application pour créer et rassembler des communautés</h2>
-        <div class="row mx-auto justify-content-center mt-5">
-            <div class="col">
-                <a href="https://github.com/floriaaan/openmeet/releases"
-                 class="btn btn-primary btn-xl rounded-pill mx-1">Télécharger</a>
-                 <div id="stats">
-                <div class="row mx-auto justify-content-center mt-2">
-                    <i class="fas fa-star mt-2 mx-1"></i>
-                    <span class="lead">Star-gazers - </span>
-                    <span class="mx-1 mt-1" id="stars"></span>
-                </div>
-                <div class="row mx-auto justify-content-center mt-2">
-                    <i class="fas fa-eye mt-2 mx-1"></i>
-                    <span class="lead">Watchers - </span>
-                    <span class="mx-1 mt-1" id="watchers"></span>
-                </div>
-                <div class="row mx-auto justify-content-center mt-2">
-                    <i class="fas fa-code-branch mt-2 mx-1"></i>
-                    <span class="lead">Forks - </span>
-                    <span class="mx-1 mt-1" id="forks"></span>
-                </div>
-            </div>
-            </div>
-            
+            </ul>
         </div>
-        
-      </div>
+    </div>
+</nav>
+
+<header class="masthead text-center text-white" style="height: 100vh;">
+    <div class="masthead-content">
+        <div class="container">
+            <h1 class="masthead-heading">OpenMeet</h1>
+            <h2 class="masthead-subheading mb-0 lead">Une application pour créer et rassembler des communautés</h2>
+            <div class="row mx-auto justify-content-center mt-5">
+                <div class="col">
+                    <a href="https://github.com/floriaaan/openmeet/releases"
+                       class="btn btn-primary btn-xl rounded-pill mx-1">Télécharger</a>
+                    <div id="stats">
+                        <div class="row mx-auto justify-content-center mt-2">
+                            <i class="fas fa-star mt-2 mx-1"></i>
+                            <span class="lead">Star-gazers - </span>
+                            <span class="mx-1 mt-1" id="stars"></span>
+                        </div>
+                        <div class="row mx-auto justify-content-center mt-2">
+                            <i class="fas fa-eye mt-2 mx-1"></i>
+                            <span class="lead">Watchers - </span>
+                            <span class="mx-1 mt-1" id="watchers"></span>
+                        </div>
+                        <div class="row mx-auto justify-content-center mt-2">
+                            <i class="fas fa-code-branch mt-2 mx-1"></i>
+                            <span class="lead">Forks - </span>
+                            <span class="mx-1 mt-1" id="forks"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
     <div class="bg-circle-2 bg-circle"></div>
     <div class="bg-circle-3 bg-circle"></div>
     <div class="bg-circle-4 bg-circle"></div>
-  </header>
+</header>
 
-  <section>
+<section>
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2">
-          <div class="p-5 d-flex justify-content-center">
-            <img class="img-fluid" src="assets/openmeet-app1.png" alt="">
-          </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5 d-flex justify-content-center">
+                    <img class="img-fluid" src="assets/openmeet-app1.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">Prête à l'emploi</h2>
+                    <p>
+                        OpenMeet est une application prête dès son installation, utilisable depuis n'importe où.
+                        Responsive, fluide et personnalisable, OpenMeet est votre application.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6 order-lg-1">
-          <div class="p-5">
-            <h2 class="display-4">Prête à l'emploi</h2>
-            <p>
-                OpenMeet est une application prête dès son installation, utilisable depuis n'importe où.
-                Responsive, fluide et personnalisable, OpenMeet est votre application.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section class="mb-5">
+<section class="mb-5">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="p-5 d-flex justify-content-center">
-            <img class="img-fluid" src="assets/openmeet-app2.png" alt="">
-          </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5 d-flex justify-content-center">
+                    <img class="img-fluid" src="assets/openmeet-app2.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">Back-office complet</h2>
+                    <p>
+                        Grâce à une interface d'administration simple et complète, vous n'aurez aucun soucis pour
+                        customiser votre application.
+                        L'interface est conçue pour être intuitive et fluide, vous pourrez y accéder sur n'importe quel
+                        appareil.
+                        Vous pourrez mettre à jour le système OpenMeet depuis cette dernière.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-          <div class="p-5">
-            <h2 class="display-4">Back-office complet</h2>
-            <p>
-                Grâce à une interface d'administration simple et complète, vous n'aurez aucun soucis pour customiser votre application.
-                L'interface est conçue pour être intuitive et fluide, vous pourrez y accéder sur n'importe quel appareil.
-                Vous pourrez mettre à jour le système OpenMeet depuis cette dernière.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
- 
 
-  <!-- Footer -->
-  <footer class="py-3" style="background-color: rgba(0, 0, 0, 0.7);">
+<!-- Footer -->
+<footer class="py-3" style="background-color: rgba(0, 0, 0, 0.7);">
     <div class="container">
         <span style="color: #f5f5f5">
-            &copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}" class="btn-link">Conditions générales d'utilisation</a> | <a href="{{url('/openmeet')}}" class="btn-link">Télécharger OpenMeet</a>
+            &copy; OpenMeet - 2020 | <a href="{{url('/legal/cgu')}}"
+                                        class="btn-link">Conditions générales d'utilisation</a> | <a
+                href="{{url('/openmeet')}}" class="btn-link">Télécharger OpenMeet</a>
         </span>
     </div>
 
-  </footer>
+</footer>
 
-  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
-          integrity="sha256-eiohPQlDytO6qQO+k+xX6LyVgfXcTzlPCy9t/VjceYo=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-  <script>
-      $.ajax({
-          url:'https://api.github.com/repositories/242750043',
-          type:'GET',
-          dataType:'json',
-          success:function(data){
-            $('#watchers').text(data.watchers)
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
+        integrity="sha256-eiohPQlDytO6qQO+k+xX6LyVgfXcTzlPCy9t/VjceYo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+<script>
+    $.ajax({
+        url: 'https://api.github.com/repositories/242750043',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('#watchers').text(data.subscribers_count)
             $('#stars').text(data.stargazers_count)
             $('#forks').text(data.forks)
 
-          },
-          error:function(){
+        },
+        error: function () {
             $('#stats').hide();
-          }
-      });
-  </script>
+        }
+    });
+</script>
 
 
 </body>
