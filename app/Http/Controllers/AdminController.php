@@ -154,8 +154,17 @@ class AdminController extends Controller
     {
 
         $post = $request->input();
-        Setting(['openmeet.theme' => $post['theme']]);
+        $file = $request->hasFile('themefile') ? $request->file('themefile') : null;
 
+        var_dump($post);
+        if ($file != null && $file->getMimeType() == 'application/zip') {
+            var_dump($file);
+        } elseif ($file != null && $file->getMimeType() != 'application/zip') {
+            var_dump('bad input');
+        }
+
+        Setting(['openmeet.theme' => $post['theme']]);
+        die;
         return redirect('/admin');
     }
 
@@ -228,7 +237,7 @@ class AdminController extends Controller
     {
         $user = (new User);
         $block = (new Block);
-        $rawlistBlock = $block ->getAll();
+        $rawlistBlock = $block->getAll();
 
         foreach ($rawlistBlock as $block) {
             $listBLock[] = [
@@ -305,7 +314,7 @@ class AdminController extends Controller
 
     public function showBlock($blockID)
     {
-        $blocks= (new Block)->getOne($blockID);
+        $blocks = (new Block)->getOne($blockID);
         $block = [
             'block' => $blocks,
             'blocker' => (new User)->getOne($blocks->blocker),
@@ -322,7 +331,7 @@ class AdminController extends Controller
 
     public function showBan($banID)
     {
-        $bans= (new Ban)->getOne($banID);
+        $bans = (new Ban)->getOne($banID);
         $ban = [
             'ban' => $bans,
             'banisher' => (new Group)->getOne($bans->banisher),
@@ -412,11 +421,13 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    public function rolesForm($userID) {
+    public function rolesForm($userID)
+    {
         return view('admin.users.roles', ['user' => (new User)->getOne($userID)]);
     }
 
-    public function rolesPost(Request $request) {
+    public function rolesPost(Request $request)
+    {
         $post = $request->input();
 
         $admin = isset($post['admin']) && $post['admin'] == 'on' ? true : false;
@@ -426,13 +437,15 @@ class AdminController extends Controller
         return redirect('/admin/');
     }
 
-    public function alertForm() {
+    public function alertForm()
+    {
 
 
         return view('admin.alerts', ['alerts' => (new Alert)->getAll()]);
     }
 
-    public function alertPost(AlertRequest $request){
+    public function alertPost(AlertRequest $request)
+    {
         $post = $request->input();
         $alert = new Alert();
 
@@ -451,14 +464,16 @@ class AdminController extends Controller
         return redirect('/admin/alert');
     }
 
-    public function alertDelete(Request $request) {
+    public function alertDelete(Request $request)
+    {
         $alertID = $request->alert;
         (new Alert)->remove($alertID);
 
         return redirect('/admin/alert');
     }
 
-    public function update() {
+    public function update()
+    {
         return view('admin.update');
     }
 }

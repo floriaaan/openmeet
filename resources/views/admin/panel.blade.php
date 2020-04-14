@@ -336,24 +336,42 @@
 
 
                     <h4 id="theming" class="my-5">Thèmes</h4>
-                    <form method="POST" action="{{ url('/admin/edit/theme') }}">
+                    <form method="POST" action="{{ url('/admin/edit/theme') }}" enctype="multipart/form-data">
                         @csrf
-                        <div class="row justify-content-between">
-                            <div>
-                                <div class="btn-group btn-group-toggle mx-2" data-toggle="buttons">
-                                    <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
-                                        <input type="radio" name="theme" value="day" autocomplete="off"
-                                               @if(Setting('openmeet.theme') == "day")checked @endif>
-                                        <i class="fas fa-sun"></i> Jour
-                                    </label>
-                                    <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
-                                        <input type="radio" name="theme" value="night" autocomplete="off"
-                                               @if(Setting('openmeet.theme') == "night")checked @endif>
-                                        <i class="fas fa-moon"></i> Nuit
-                                    </label>
+                        <div class="row">
+
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-light @if(Setting('openmeet.theme') == "day")active @endif">
+                                    <input type="radio" name="theme" value="day" autocomplete="off"
+                                           @if(Setting('openmeet.theme') == "day")checked @endif>
+                                    <i class="fas fa-sun"></i> Jour
+                                </label>
+                                <label class="btn btn-dark @if(Setting('openmeet.theme') == "night")active @endif">
+                                    <input type="radio" name="theme" value="night" autocomplete="off"
+                                           @if(Setting('openmeet.theme') == "night")checked @endif>
+                                    <i class="fas fa-moon"></i> Nuit
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="form-group">
+                                <label for="file" class="sr-only">Thème (.zip)</label>
+                                <div class="input-group">
+                                    <input type="text" name="filename" class="form-control"
+                                           placeholder="Aucun fichier" readonly>
+                                    <span class="input-group-append">
+                                      <div class="btn btn-primary custom-file-uploader">
+                                        <input type="file" name="themefile"
+                                               onchange="this.form.filename.value = this.files.length ? this.files[0].name : ''"/>
+                                        Select a file
+                                      </div>
+                                    </span>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary ">Valider le Thème</button>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <button type="submit" class="btn btn-primary" onclick="" id="theme-btn">Valider le Thème</button>
                         </div>
 
 
@@ -755,6 +773,25 @@
             width: 100px;
             height: 100px;
         }
+
+        .custom-file-uploader {
+            position: relative;
+        }
+
+        .custom-file-uploader input[type='file'] {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: default;
+        }
+
 
     </style>
 
