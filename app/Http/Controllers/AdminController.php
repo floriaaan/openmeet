@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Alchemy\Zippy\Zippy;
 use App\Ban;
 use App\Block;
 use App\Event;
@@ -16,6 +17,7 @@ use App\Http\Requests\AlertRequest;
 use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -158,9 +160,27 @@ class AdminController extends Controller
 
         var_dump($post);
         if ($file != null && $file->getMimeType() == 'application/zip') {
-            var_dump($file);
-        } elseif ($file != null && $file->getMimeType() != 'application/zip') {
-            var_dump('bad input');
+            var_dump($file->move('theme', $post['filename']));
+            $z = new \ZipArchive();
+
+            // Open an archive
+            if ($z->open('theme/' . $post['filename'])) {
+
+                for($i = 0; $i < $z->numFiles; $i++) {
+                    var_dump('File : ' . $z->getNameIndex($i));
+                }
+
+                $z->close();
+                unlink('theme/' . $post['filename']);
+            }
+
+
+
+
+
+        } elseif ($file != null && $file->getMimeType() != 'application/zip'
+            || false) { // content verification
+            Session()->flash('error', 'Mauvais fichier!');
         }
 
         Setting(['openmeet.theme' => $post['theme']]);

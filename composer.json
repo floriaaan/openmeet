@@ -22,8 +22,9 @@
         "laravel/ui": "^1.2",
         "laravelcollective/html": "^6.0",
         "silviolleite/laravelpwa": "^1.0",
+        "simplesoftwareio/simple-qrcode": "~2",
         "spatie/laravel-google-calendar": "^2.5",
-        "simplesoftwareio/simple-qrcode": "~2"
+        "ext-zip": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
