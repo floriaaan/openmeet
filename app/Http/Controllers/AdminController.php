@@ -158,16 +158,16 @@ class AdminController extends Controller
         $post = $request->input();
         $file = $request->hasFile('themefile') ? $request->file('themefile') : null;
 
-        var_dump($post);
+        //var_dump($post);
         if ($file != null && $file->getMimeType() == 'application/zip') {
-            var_dump($file->move('theme', $post['filename']));
+            //var_dump($file->move('theme', $post['filename']));
             $z = new \ZipArchive();
 
             // Open an archive
             if ($z->open('theme/' . $post['filename'])) {
 
                 for($i = 0; $i < $z->numFiles; $i++) {
-                    var_dump('File : ' . $z->getNameIndex($i));
+                    //var_dump('File : ' . $z->getNameIndex($i));
                 }
 
                 $z->close();
@@ -184,7 +184,7 @@ class AdminController extends Controller
         }
 
         Setting(['openmeet.theme' => $post['theme']]);
-        die;
+        //die;
         return redirect('/admin');
     }
 
