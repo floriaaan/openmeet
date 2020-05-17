@@ -45,13 +45,6 @@ class HomeController extends Controller
                 ]);
             }
 
-            Session()->flash('info', [
-                'title' => $alert->title,
-                'text' => $alert->content,
-                'link' => $alert->link,
-                'color' => $alert->color
-            ]);
-
             return $this->Home();
         }
 
