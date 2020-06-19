@@ -4,9 +4,13 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Alert extends Model
 {
+
+    use SoftDeletes;
+    
     protected $fillable = [
         'id',
         'title',

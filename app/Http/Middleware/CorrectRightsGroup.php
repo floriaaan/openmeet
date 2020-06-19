@@ -27,7 +27,7 @@ class CorrectRightsGroup
         } elseif ($request->query('group_id') != null) {
             $group = $request->query('group_id');
         }
-        if (auth()->check() && !empty((new Group)->getByAdmin(auth()->id())) && (new Group)->getOne($group)) {
+        if (auth()->check() && !empty((new Group)->getByAdmin(auth()->id())) && Group::find($group)) {
             return $next($request);
         }
 

@@ -31,90 +31,82 @@ class AdminController extends Controller
 
     public function index()
     {
-        $user = (new User);
-        $listUser = $user->getLimitDesc(5);
-        $countUser = $user->getCount();
+        $listUser = User::orderBy('desc')->take(5)->get();
+        $countUser = User::all()->count();
 
-
-        $groups = (new Group);
-        $countGroup = $groups->getCount();
-        $rawListGroup = $groups->getLimitDesc(10);
+        $countGroup = Group::all()->count();
+        $rawListGroup = Group::orderBy('desc')->take(10)->get();
 
         $listGroup = [];
 
         foreach ($rawListGroup as $group) {
             $listGroup[] = [
                 'group' => $group,
-                'admin' => $user->getOne($group->admin)
+                'admin' => User::find($group->admin)
             ];
 
         }
 
-        $events = (new Event);
-        $countEvent = $events->getCount();
-        $rawListEvent = $events->getLimitDesc(10);
+        $countEvent = Event::all()->count();
+        $rawListEvent = Event::orderBy('desc')->take(10)->get();
 
         $listEvent = [];
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'group' => $groups->getOne($event->group)
+                'group' => Group::find($event->group)
             ];
 
         }
 
-        $reports = (new Signalement);
-        $countReport = $reports->getCount();
-        $rawListReport = $reports->getLimitDesc(10);
+        $countReport = Signalement::all()->count();
+        $rawListReport = Signalement::orderBy('desc')->take(10)->get();
 
         $listReport = [];
         foreach ($rawListReport as $report) {
             $listReport[] = [
                 'report' => $report,
-                'sender' => $user->getOne($report->submitter),
-                'concerned' => $user->getOne($report->concerned),
+                'sender' => User::find($report->submitter),
+                'concerned' => User::find($report->concerned),
             ];
 
         }
 
-        $bans = (new Ban);
-        $countBan = $bans->getCount();
-        $rawListBan = $bans->getLimitDesc(10);
+        $countBan = Ban::all()->count();
+        $rawListBan = Ban::orderBy('desc')->take(10)->get();
 
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
                 'ban' => $ban,
-                'banisher' => $groups->getOne($ban->banisher),
-                'banned' => $user->getOne($ban->banned),
+                'banisher' => Group::find($ban->banisher),
+                'banned' => User::find($ban->banned),
             ];
 
         }
 
-        $blocks = (new Block);
-        $countBlock = $blocks->getCount();
-        $rawListBlock = $blocks->getLimitDesc(10);
+        $countBlock = Block::all()->count();
+        $rawListBlock = Block::orderBy('desc')->take(10)->get();
 
         $listBlock = [];
         foreach ($rawListBlock as $block) {
             $listBlock[] = [
                 'block' => $block,
-                'blocker' => $user->getOne($block->blocker),
-                'target' => $user->getOne($block->target),
+                'blocker' => User::find($block->blocker),
+                'target' => User::find($block->target),
             ];
 
         }
 
-        $subs = (new Subscription);
-        $countSub = $subs->getCount();
-        $rawListSub = $subs->getLimitDesc(10);
+        $countSub = Subscription::all()->count();
+        $rawListSub = Subscription::orderBy('desc')->take(10)->get();
 
         $listSub = [];
         foreach ($rawListSub as $sub) {
             $listSub[] = [
                 'sub' => $sub,
-                'user' => $user->getOne($sub->user),
-                'group' => $groups->getOne($sub->group),
+                'user' => User::find($sub->user),
+                'group' => Group::find($sub->group),
             ];
 
         }
@@ -219,16 +211,14 @@ class AdminController extends Controller
 
     public function listReport()
     {
-        $user = (new User);
-        $reports = (new Signalement);
-        $rawListReport = $reports->getAll();
+        $rawListReport = Signalement::all();
 
         $listReport = [];
         foreach ($rawListReport as $report) {
             $listReport[] = [
                 'report' => $report,
-                'sender' => $user->getOne($report->submitter),
-                'concerned' => $user->getOne($report->concerned),
+                'sender' => User::find($report->submitter),
+                'concerned' => User::find($report->concerned),
             ];
 
         }
@@ -237,16 +227,13 @@ class AdminController extends Controller
 
     public function listBan()
     {
-        $user = (new User);
-        $bans = (new Ban);
-        $groups = (new Group);
-        $rawListBan = $bans->getAll();
+        $rawListBan = Ban::all();
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
                 'ban' => $ban,
-                'banisher' => $groups->getOne($ban->banisher),
-                'banned' => $user->getOne($ban->banned),
+                'banisher' => Group::find($ban->banisher),
+                'banned' => User::find($ban->banned),
             ];
 
         }
@@ -255,15 +242,13 @@ class AdminController extends Controller
 
     public function listBlock()
     {
-        $user = (new User);
-        $block = (new Block);
-        $rawlistBlock = $block->getAll();
+        $rawlistBlock = Block::all();
 
         foreach ($rawlistBlock as $block) {
             $listBLock[] = [
                 'block' => $block,
-                'blocker' => $user->getOne($block->blocker),
-                'target' => $user->getOne($block->target),
+                'blocker' => User::find($block->blocker),
+                'target' => User::find($block->target),
             ];
         }
         return view('admin.blocks.list', ['blockList' => $listBLock]);
@@ -272,12 +257,13 @@ class AdminController extends Controller
     public function listGroup()
     {
         $groups = [];
-        $listGroups = (new Group)->getAll();
+        $listGroups = Group::all();
 
         foreach ($listGroups as $group) {
             $groups[] = [
                 'group' => $group,
-                'admin' => (new User)->getOne($group->admin)];
+                'admin' => User::find($group->admin)
+            ];
         }
         return view('admin.groups.list', ['groups' => $groups]);
     }
@@ -285,12 +271,13 @@ class AdminController extends Controller
     public function listEvent()
     {
         $events = [];
-        $listEvents = (new Event)->getAll();
+        $listEvents = Event::all();
 
         foreach ($listEvents as $event) {
             $events[] = [
                 'event' => $event,
-                'group' => (new Group)->getOne($event->group)];
+                'group' => Group::find($event->group)
+            ];
         }
         return view('admin.events.list', ['events' => $events]);
     }
@@ -298,8 +285,8 @@ class AdminController extends Controller
 
     public function deleteUser($userID)
     {
-        $user = (new User)->getOne($userID);
-        if ($user->isadmin) { //TODO:Proposer une passation de pouvoir
+        $user = User::find($userID);
+        if ($user->isadmin) {
             return view('admin.users.deleteadmin', ['user' => $user]);
         }
         return view('admin.users.deleteconfirmation', ['user' => $user]);
@@ -308,7 +295,9 @@ class AdminController extends Controller
     public function deleteUserPost(DeleteUserRequest $request)
     {
         $post = $request->input();
-        (new User)->disable($post['user']);
+        $user = User::find($post['user']);
+        $user->disabled = !$user->disabled;
+        $user->save();
 
 
         return redirect('/admin');
@@ -316,53 +305,60 @@ class AdminController extends Controller
 
     public function showReport($reportID)
     {
-        $rpt = (new Signalement)->getOne($reportID);
+        $rpt = Signalement::find($reportID);
         $report = [
             'report' => $rpt,
-            'sender' => (new User)->getOne($rpt->submitter),
-            'concerned' => (new User)->getOne($rpt->concerned),
+            'sender' => User::find($rpt->submitter),
+            'concerned' => User::find($rpt->concerned),
         ];
-        (new Signalement)->read($reportID);
+        $rpt->isread = 1;
+        $rpt->save();
         return view('admin.reports.show', ['report' => $report]);
     }
 
     public function deleteReport($reportID)
     {
-        (new Signalement)->remove($reportID);
+        $signalement = Signalement::find($reportID);
+        $signalement->delete();
+        $signalement->save();
         return redirect('/admin');
     }
 
     public function showBlock($blockID)
     {
-        $blocks = (new Block)->getOne($blockID);
+        $blocks = Block::find($blockID);
         $block = [
             'block' => $blocks,
-            'blocker' => (new User)->getOne($blocks->blocker),
-            'target' => (new User)->getOne($blocks->target),
+            'blocker' => User::find($blocks->blocker),
+            'target' => User::find($blocks->target),
         ];
         return view('admin.blocks.show', ['block' => $block]);
     }
 
     public function deleteBlock($blockID)
     {
-        (new Block)->remove($blockID);
+        $block = Block::find($blockID);
+        $block->delete();
+        $block->save();
         return redirect('/admin');
     }
 
     public function showBan($banID)
     {
-        $bans = (new Ban)->getOne($banID);
+        $bans = Ban::find($banID);
         $ban = [
             'ban' => $bans,
-            'banisher' => (new Group)->getOne($bans->banisher),
-            'banned' => (new User)->getOne($bans->banned),
+            'banisher' => Group::find($bans->banisher),
+            'banned' => User::find($bans->banned),
         ];
         return view('admin.bans.show', ['ban' => $ban]);
     }
 
     public function deleteBan($banID)
     {
-        (new Ban)->remove($banID);
+        $ban = Ban::find($banID);
+        $ban->delete();
+        $ban->save();
         return redirect('/admin');
     }
 
@@ -372,17 +368,17 @@ class AdminController extends Controller
 
         $result = [];
 
-        $listGroup = (new Group)->getLike($post['search']);
+        $listGroup = Group::like($post['search']);
         foreach ($listGroup as $group) {
             $result[] = ['content' => $group, 'type' => 'group'];
         }
 
-        $listEvent = (new Event)->getLike($post['search']);
+        $listEvent = Event::like($post['search']);
         foreach ($listEvent as $event) {
             $result[] = ['content' => $event, 'type' => 'event'];
         }
 
-        $listUser = (new User)->getLike($post['search']);
+        $listUser = User::like($post['search']);
         foreach ($listUser as $user) {
             $result[] = ['content' => $user, 'type' => 'user'];
         }
@@ -391,23 +387,23 @@ class AdminController extends Controller
         foreach ($listMessage as $message) {
             if ($message->forgroup) {
                 $result[] = ['content' => $message, 'type' => 'message',
-                    'sender' => (new User)->getOne($message->sender),
-                    'receiver' => (new Group)->getOne($message->receiver)
+                    'sender' => User::find($message->sender),
+                    'receiver' => Group::find($message->receiver)
                 ];
             } else {
                 $result[] = ['content' => $message, 'type' => 'message',
-                    'sender' => (new User)->getOne($message->sender),
-                    'receiver' => (new User)->getOne($message->receiver)
+                    'sender' => User::find($message->sender),
+                    'receiver' => User::find($message->receiver)
                 ];
             }
 
         }*/
 
-        $listSignalement = (new Signalement)->getLike($post['search']);
+        $listSignalement = Signalement::where('description', 'LIKE', "%{$post['search']}%")->get();;
         foreach ($listSignalement as $signalement) {
             $result[] = ['content' => $signalement, 'type' => 'signalement',
-                'sender' => (new User)->getOne($signalement->submitter),
-                'receiver' => (new User)->getOne($signalement->concerned),
+                'sender' => User::find($signalement->submitter),
+                'receiver' => User::find($signalement->concerned),
             ];
         }
 
@@ -443,7 +439,7 @@ class AdminController extends Controller
 
     public function rolesForm($userID)
     {
-        return view('admin.users.roles', ['user' => (new User)->getOne($userID)]);
+        return view('admin.users.roles', ['user' => User::find($userID)]);
     }
 
     public function rolesPost(Request $request)
@@ -452,7 +448,9 @@ class AdminController extends Controller
 
         $admin = isset($post['admin']) && $post['admin'] == 'on' ? true : false;
 
-        (new User)->updateAdmin($post['user'], $admin);
+        $user = User::find($post['user']);
+        $user->isadmin = $admin;
+        $user->save();
 
         return redirect('/admin/');
     }
@@ -479,7 +477,7 @@ class AdminController extends Controller
         $alert->groupList = isset($post['groupList']) && $post['groupList'] == 'on';
         $alert->event = isset($post['event']) && $post['event'] == 'on';
 
-        $alert->push();
+        $alert->save();
 
         return redirect('/admin/alert');
     }
@@ -487,7 +485,9 @@ class AdminController extends Controller
     public function alertDelete(Request $request)
     {
         $alertID = $request->alert;
-        (new Alert)->remove($alertID);
+        $alert = Alert::find($alertID);
+        $alert->delete();
+        $alert->save();
 
         return redirect('/admin/alert');
     }

@@ -84,7 +84,7 @@ class GroupController extends Controller
         $adminSub->user = $post['gAdminID'];
         $adminSub->group = $group->id;
         $adminSub->date = date('Y-m-d H:i:s');
-        $adminSub->acceptnotif = (new User)->getOne($post['gAdminID'])->defaultnotif;
+        $adminSub->acceptnotif = User::find($post['gAdminID'])->defaultnotif;
 
         $adminSub->push();
 
@@ -94,7 +94,7 @@ class GroupController extends Controller
     public function deleteForm($groupID)
     {
         return view('group.delete', [
-            'group' => (new Group)->getOne($groupID)
+            'group' => Group::find($groupID)
         ]);
     }
 
@@ -110,7 +110,7 @@ class GroupController extends Controller
     {
 
 
-        $group = (new Group)->getOne($groupID);
+        $group = Group::find($groupID);
         $tags = explode(";", $group->tags);
 
         $datas = [
@@ -167,14 +167,14 @@ class GroupController extends Controller
     public function editForm($groupID)
     {
         return view('group.edit', [
-            'group' => (new Group)->getOne($groupID)
+            'group' => Group::find($groupID)
         ]);
     }
 
     public function editPost(GroupCreateRequest $request)
     {
         $post = $request->input();
-        $group = (new Group)->getOne($post['groupID']);
+        $group = Group::find($post['groupID']);
 
         $group->name = $post['gName'];
         $group->desc = $post['gDesc'];

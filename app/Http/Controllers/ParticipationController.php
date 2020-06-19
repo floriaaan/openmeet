@@ -59,7 +59,7 @@ class ParticipationController extends Controller
         $participations = (new Participation)->getUser(auth()->id());
         $events = [];
         foreach ($participations as $participation) {
-            $events[] = (new Event)->getOne($participation->event);
+            $events[] = Event::find($participation->event);
         }
 
         return view('participation.list', [

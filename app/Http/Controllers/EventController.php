@@ -85,13 +85,13 @@ class EventController extends Controller
 
         if ($event->push()) {
             $usersSub = (new Subscription)->getGroup($post['eGroup']);
-            $group = (new Group)->getOne($post['eGroup']);
+            $group = Group::find($post['eGroup']);
             foreach ($usersSub as $userSub) {
-                $user = (new User)->getOne($userSub->user);
+                $user = User::find($userSub->user);
 
                 if ($user->defaultnotif && ($user->typenotif == 2 || $user->typenotif == 3)) {
                     Mail::to($user->email)
-                        ->send(new EventCreated((new Event)->getOne($event->id)));
+                        ->send(new EventCreated(Event::find($event->id)));
                 } elseif ($user->defaultnotif && ($user->typenotif == 1 || $user->typenotif == 3)) {
                     //TODO:PUSH
                 }
@@ -112,7 +112,7 @@ class EventController extends Controller
 
     public function deleteForm($eventID)
     {
-        return view('event.delete', ['event' => (new Event)->getOne($eventID)]);
+        return view('event.delete', ['event' => Event::find($eventID)]);
     }
 
     public function deletePost(Request $request)
@@ -138,7 +138,7 @@ class EventController extends Controller
         }
 
         $datas = [
-            'event' => (new Event)->getOne($eventID)
+            'event' => Event::find($eventID)
         ];
 
         if (auth()->check()) {
@@ -159,13 +159,13 @@ class EventController extends Controller
 
     public function editForm($eventID)
     {
-        return view('event.edit', ['event' => (new Event)->getOne($eventID)]);
+        return view('event.edit', ['event' => Event::find($eventID)]);
     }
 
     public function editPost(Request $request)
     {
         $post = $request->input();
-        $event = (new Event)->getOne($post['eventID']);
+        $event = Event::find($post['eventID']);
 
         $event->name = $post['eName'];
         $event->dateFrom = $post['eDateFrom'];

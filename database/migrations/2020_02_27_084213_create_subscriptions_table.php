@@ -26,6 +26,7 @@ class CreateSubscriptionsTable extends Migration
             $table->dateTime('date');
             $table->boolean('acceptnotif');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

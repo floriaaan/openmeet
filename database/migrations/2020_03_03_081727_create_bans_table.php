@@ -26,6 +26,7 @@ class CreateBansTable extends Migration
             $table->dateTime('date');
             $table->string('description',64)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

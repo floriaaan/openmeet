@@ -26,6 +26,7 @@ class CreateMessagesTable extends Migration
             $table->boolean('forgroup');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

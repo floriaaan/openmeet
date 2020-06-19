@@ -29,16 +29,16 @@ class SubscriptionController extends Controller
     {
         $post = $request->input();
         $userId = $post['user'];
-        $group = (new Group)->getOne($post['group']);
+        $group = Group::find($post['group']);
         if (!(new Subscription)->isSubscribed($userId, $group->id)) {
             $subscription = new Subscription();
             $subscription->user = $userId;
             $subscription->group = $group->id;
             $subscription->date = date('Y-m-d H:m:s');
-            $subscription->acceptnotif = (new User)->getOne($userId)->defaultnotif;
+            $subscription->acceptnotif = User::find($userId)->defaultnotif;
             $subscription->push();
 
-            $user = (new User)->getOne($post['user']);
+            $user = User::find($post['user']);
 
             (new Notification)->CreateNotification('sub',
                  'Nouvel abonné(e)',
@@ -85,7 +85,7 @@ class SubscriptionController extends Controller
 
         $groups = [];
         foreach ($listgroups as $idGroup) {
-            $groups[] = (new Group)->getOne($idGroup);
+            $groups[] = Group::find($idGroup);
         }
 
         return view('subscription.list', [
@@ -113,7 +113,7 @@ class SubscriptionController extends Controller
         $listSub = (new Subscription)->getUser(auth()->id());
 
         foreach ($listSub as $sub) {
-            if((new Group)->getOne($sub->group)->admin != auth()->id()) {
+            if(Group::find($sub->group)->admin != auth()->id()) {
                 (new Subscription)->remove($sub->id);
             }
         }

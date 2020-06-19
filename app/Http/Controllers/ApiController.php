@@ -26,7 +26,7 @@ class ApiController extends Controller
             $subscription->user = $userID;
             $subscription->group = $groupID;
             $subscription->date = date('Y-m-d');
-            $subscription->acceptnotif = (new User)->getOne($userID)->defaultnotif;
+            $subscription->acceptnotif = User::find($userID)->defaultnotif;
             $subscription->push();
             return [200, 'Subscribed'];
 
@@ -86,7 +86,7 @@ class ApiController extends Controller
             ];
 
             Storage::append('api_logs.json', json_encode($request) . ',');
-            return (new Group)->getOne($id);
+            return Group::find($id);
         } else {
             $request = [
                 'USER' => 'anonymous',
@@ -140,7 +140,7 @@ class ApiController extends Controller
             ];
 
             Storage::append('api_logs.json', json_encode($request) . ',');
-            return (new Event)->getOne($id);
+            return Event::find($id);
         } else {
             $request = [
                 'USER' => 'anonymous',

@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Participation extends Model
 {
+
+    use SoftDeletes;
+
     protected $fillable = [
         'id',
         'user',

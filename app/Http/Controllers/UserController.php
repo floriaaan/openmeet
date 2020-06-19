@@ -36,20 +36,20 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->group);
+            $groups[] = Group::find($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());
         $events = [];
         foreach ($listParticipations as $participation) {
-            $events[] = (new Event)->getOne($participation->event);
+            $events[] = Event::find($participation->event);
         }
         $block = new Block();
         $isBlocked = $block->isBlock(auth()->id(),auth()->id());
 
 
         return view('user.show', [
-            'user' => (new User)->getOne(auth()->id()),
+            'user' => User::find(auth()->id()),
             'groups' => $groups,
             'events' => $events,
             'isBlocked'=>$isBlocked
@@ -63,13 +63,13 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser($userID);
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->group);
+            $groups[] = Group::find($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser($userID);
         $events = [];
         foreach ($listParticipations as $participation) {
-            $events[] = (new Event)->getOne($participation->event);
+            $events[] = Event::find($participation->event);
         }
 
         $block = new Block();
@@ -77,7 +77,7 @@ class UserController extends Controller
 
 
         return view('user.show', [
-            'user' => (new User)->getOne($userID),
+            'user' => User::find($userID),
             'groups' => $groups,
             'events' => $events,
             'isBlocked'=>$isBlocked
@@ -89,13 +89,13 @@ class UserController extends Controller
         $listSubscription = (new Subscription)->getUser(auth()->id());
         $groups = [];
         foreach ($listSubscription as $sub) {
-            $groups[] = (new Group)->getOne($sub->group);
+            $groups[] = Group::find($sub->group);
         }
 
         $listParticipations = (new Participation)->getUser(auth()->id());
         $events = [];
         foreach ($listParticipations as $participation) {
-            $events[] = (new Event)->getOne($participation->event);
+            $events[] = Event::find($participation->event);
         }
         return view('user.edit', [
             'groups' => $groups,
@@ -106,7 +106,7 @@ class UserController extends Controller
     public function edit(UserEditRequest $request)
     {
         $post = $request->input();
-        $user = (new User)->getOne(auth()->id());
+        $user = User::find(auth()->id());
 
         if (!($post['notifications'] == 'none')) {
             $user->defaultnotif = 1;
@@ -156,8 +156,8 @@ class UserController extends Controller
     {
 
         return view('user.ban.form', [
-            'banisher' => (new Group)->getOne($groupID),
-            'banned' => (new User)->getOne($userID),
+            'banisher' => Group::find($groupID),
+            'banned' => User::find($userID),
             'auth' => auth()->id()
         ]);
     }
@@ -167,7 +167,7 @@ class UserController extends Controller
         $post = $request->input();
 
 
-        if($post['auth'] == (new Group)->getOne($post['banisher'])->admin
+        if($post['auth'] == Group::find($post['banisher'])->admin
             && !(new Ban)->isBan($post['banned'], $post['banisher'])) {
             $ban = new Ban();
             $ban->banisher = $post['banisher'];
@@ -188,7 +188,7 @@ class UserController extends Controller
     {
         return view('user.block.form', [
             'blocker' => auth()->id(),
-            'target' => (new User)->getOne($userID)
+            'target' => User::find($userID)
         ]);
     }
 
@@ -221,7 +221,7 @@ class UserController extends Controller
     {
         return view('user.report.form', [
             'submitter' => auth()->id(),
-            'concerned' => (new User)->getOne($userID)
+            'concerned' => User::find($userID)
         ]);
     }
 
@@ -255,7 +255,7 @@ class UserController extends Controller
 
         foreach ((new User)->getAdmin() as $admin) {
             (new Notification)->CreateNotification('rep',
-                'Signalement de ' . (new User)->getOne($post['concerned'])->fname . ' ' . (new User)->getOne($post['concerned'])->lname,
+                'Signalement de ' . User::find($post['concerned'])->fname . ' ' . User::find($post['concerned'])->lname,
                 $admin->id,
                 'Contenu du signalement : ' .$contentExtract,
                 $report->id);

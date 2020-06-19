@@ -6,10 +6,14 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Event extends Model
 {
+
+    use SoftDeletes;
+
 
     protected $fillable = [
         'id',
@@ -250,5 +254,14 @@ class Event extends Model
             return $e;
         }
 
+    }
+
+    public static function like(){
+        return Event::where('fname', 'LIKE', "%{$str}%")
+            ->orWhere('lname', 'LIKE', "%{$str}%")
+            ->orWhere('email', 'LIKE', "%{$str}%")
+            ->orWhere('country', 'LIKE', "%{$str}%")
+            ->orWhere('city', 'LIKE', "%{$str}%")
+            ->get();
     }
 }

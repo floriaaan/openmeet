@@ -34,6 +34,7 @@ class CreateEventsTable extends Migration
             $table->string('picname', 255)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

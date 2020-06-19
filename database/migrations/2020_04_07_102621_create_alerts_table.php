@@ -25,6 +25,7 @@ class CreateAlertsTable extends Migration
             $table->boolean('disabled')->default(0);
             $table->string('color')->default('warning');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

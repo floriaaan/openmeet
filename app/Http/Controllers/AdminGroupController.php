@@ -19,18 +19,15 @@ class AdminGroupController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
     }
 
     public function chooseGroup()
     {
 
-        $listGroup = (new Group)->getByAdmin(auth()->user()->id);
+        $listGroup = Group::where('admin', '=', auth()->user()->id)->get();
         return view('group.admin.choose', [
             'groupList' => $listGroup
         ]);
-
-
     }
 
     public function showPanel(GroupPanelChooseRequest $request)
@@ -38,47 +35,50 @@ class AdminGroupController extends Controller
         $post = $request->input();
         $groupChosen = $post['pGroup'];
 
-        $listGroup = (new Group)->getByAdmin(auth()->user()->id);
+        $listGroup = Group::where('admin', '=', auth()->user()->id)->get();
 
 
-        $rawListSub = (new Subscription)->getLimitGroupDesc($groupChosen, 5);
+        $rawListSub = Subscription::where('group', '=', $groupChosen)
+            ->orderBy('desc')
+            ->take(5)
+            ->get();
         $listSub = [];
         foreach ($rawListSub as $sub) {
             $listSub[] = [
-                'user' => (new User)->getOne($sub->user),
+                'user' => User::find($sub->user),
                 'sub' => $sub
             ];
         }
 
-        $rawListEvent = (new Event)->getLimitGroupDesc($groupChosen, 5);
+        $rawListEvent = Event::where('group', '=', $groupChosen)
+            ->orderBy('desc')
+            ->take(5)
+            ->get();
         $listEvent = [];
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'participations' => (new Participation)->getEvent($event->id)
+                'participations' => Participation::where('event', "=", $event->id)->get()
             ];
-
         }
 
-        $rawListBan = (new Ban)->getGroup($groupChosen);
+        $rawListBan = Ban::where('banisher', $groupChosen)->get();
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
                 'ban' => $ban,
-                'banned' => (new User)->getOne($ban->banned)
+                'banned' => User::find($ban->banned)
             ];
         }
 
         return view('group.admin.panel', [
-            'group' => (new Group)->getOne($groupChosen),
+            'group' => Group::find($groupChosen),
             'groupList' => $listGroup,
             'subList' => $listSub,
             'eventList' => $listEvent,
             'banList' => $listBan,
             'groupChosen' => $groupChosen
         ]);
-
-
     }
 
     public function listEvent(Request $request)
@@ -86,14 +86,13 @@ class AdminGroupController extends Controller
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
-        $rawListEvent = (new Event)->getByGroup($groupChosen);
+        $rawListEvent = Event::where('group', '=', $groupChosen)->get();
         $listEvent = [];
         foreach ($rawListEvent as $event) {
             $listEvent[] = [
                 'event' => $event,
-                'participations' => (new Participation)->getEvent($event->id),
+                'participations' => Participation::where('event', '=', $event->id),
             ];
-
         }
 
         return view('group.admin.event.list', ['list' => $listEvent, 'group' => $groupChosen]);
@@ -104,17 +103,16 @@ class AdminGroupController extends Controller
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
-        $rawListSub = (new Subscription)->getGroup($groupChosen);
+        $rawListSub = Subscription::where('group', "=", $groupChosen)->get();
         $listSub = [];
         foreach ($rawListSub as $sub) {
             $listSub[] = [
-                'user' => (new User)->getOne($sub->user),
+                'user' => User::find($sub->user),
                 'sub' => $sub
             ];
         }
 
         return view('group.admin.subscription.list', ['list' => $listSub, 'group' => $groupChosen]);
-
     }
 
     public function listBan(Request $request)
@@ -122,23 +120,22 @@ class AdminGroupController extends Controller
         $post = $request->input();
         $groupChosen = $post['groupChosen'];
 
-        $rawListBan = (new Ban)->getGroup($groupChosen);
+        $rawListBan = Ban::where('group', "=", $groupChosen)->get();
         $listBan = [];
         foreach ($rawListBan as $ban) {
             $listBan[] = [
                 'ban' => $ban,
-                'banned' => (new User)->getOne($ban->banned)
+                'banned' => User::find($ban->banned)
             ];
         }
 
         return view('group.admin.ban.list', ['list' => $listBan, 'group' => $groupChosen]);
-
     }
 
     public function transferRolesConfirm($groupID, $userID)
     {
-        $user = (new User)->getOne($userID);
-        $group = (new Group)->getOne($groupID);
+        $user = User::find($userID);
+        $group = Group::find($groupID);
 
         if ($group->admin == auth()->id()) {
             return view('group.admin.transfer', [
@@ -155,15 +152,18 @@ class AdminGroupController extends Controller
     {
         $post = $request->input();
 
-        (new Group)->updateAdmin($post['group'], $post['user']);
+        $group = Group::find($post['group']);
+        $group->admin = $post['user'];
+        $group->save();
         return redirect('/groups/show/' . $post['group']);
     }
 
     public function deleteBan($banID)
     {
-        (new Ban)->remove($banID);
+        $ban = Ban::find($banID);
+        $ban->delete();
+        $ban->save();
+        
         return redirect('/groups/admin');
     }
-
-
 }

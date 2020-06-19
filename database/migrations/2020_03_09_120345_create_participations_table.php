@@ -25,6 +25,7 @@ class CreateParticipationsTable extends Migration
                 ->references('id')
                 ->on('events');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

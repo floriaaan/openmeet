@@ -353,9 +353,9 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="row my-2">
+                        <!--<div class="row my-2">
                             <div class="form-group">
-                                <label for="file" class="sr-only">Thème (.zip)</label>
+                                <label for="file">Thème (.zip)</label>
                                 <div class="input-group">
                                     <input type="text" name="filename" class="form-control"
                                            placeholder="Aucun fichier" readonly>
@@ -368,7 +368,7 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="row justify-content-end">
                             <button type="submit" class="btn btn-primary" onclick="" id="theme-btn">Valider le Thème</button>

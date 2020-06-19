@@ -106,7 +106,7 @@ class MessageController extends Controller
         $personalLastMessages = [];
         foreach ($personalConversations as $personalConversation) {
             $user = new User();
-            $personalInfoConversations[] = $user->getOne($personalConversation);
+            $personalInfoConversations[] = User::find($personalConversation);
             $message = new Message();
             $personalLastMessages[$message->getLastMessageForPersonalConv($userId, $personalConversation)->id] = $message->getLastMessageForPersonalConv($userId, $personalConversation);
         }
@@ -148,7 +148,7 @@ class MessageController extends Controller
             try {
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
-                    $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+                    $groupLastMessagesInfo[User::find($groupLastMessage->sender)->id] = User::find($groupLastMessage->sender);
                 }
                 if ($groupLastMessage->sender != auth()->id()) {
                     $notif = new Notification();
@@ -230,7 +230,7 @@ class MessageController extends Controller
             $usersInfos = [];
             foreach ($listUsers as $id) {
                 $user = new User();
-                $usersInfos[] = $user->getOne($id);
+                $usersInfos[] = User::find($id);
             }
 
             /*
@@ -266,7 +266,7 @@ class MessageController extends Controller
             $message = new Message();
             $listMessages = $message->getPersonalChat($correspondant);
             $user = new User();
-            $userInfo = $user->getOne($correspondant);
+            $userInfo = User::find($correspondant);
             $listNotifs = [];
             foreach ($listMessages as $mes) {
                 if ($mes->receiver == auth()->id()) {
@@ -319,7 +319,7 @@ class MessageController extends Controller
         foreach ($personalConversations as $personalConversation) {
 
             $user = new User();
-            $personalInfoConversations[] = $user->getOne($personalConversation);
+            $personalInfoConversations[] = User::find($personalConversation);
             $message = new Message();
 
             $personalLastMessages[$message->getLastMessageForPersonalConv($userId, $personalConversation)->id] = $message->getLastMessageForPersonalConv($userId, $personalConversation);
@@ -364,7 +364,7 @@ class MessageController extends Controller
             try {
                 if ($groupLastMessage->sender != 0) {
                     $user = new User();
-                    $groupLastMessagesInfo[$user->getOne($groupLastMessage->sender)->id] = $user->getOne($groupLastMessage->sender);
+                    $groupLastMessagesInfo[User::find($groupLastMessage->sender)->id] = User::find($groupLastMessage->sender);
                 }
                 if ($groupLastMessage->sender != auth()->id()) {
                     $notif = new Notification();

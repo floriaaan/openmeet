@@ -26,6 +26,7 @@ class CreateGroupsTable extends Migration
             $table->text('tags')->nullable();
             $table->date('datecreate');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

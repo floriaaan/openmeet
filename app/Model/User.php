@@ -23,8 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'fname', 'lname', 'bdate', 'email', 'country',
-        'city', 'zip', 'street', 'numstreet', 'phone', 'picrepo', 'picname',
+        'id', 'fname', 'lname', 'bdate', 'email', 'phone', 'picrepo', 'picname',
         'defaultnotif', 'typenotif', 'password', 'apitoken', 'disabled'
     ];
 
@@ -241,10 +240,19 @@ class User extends Authenticatable
 
     public function disable($userID)
     {
-        $user = (new User)->getOne($userID);
+        $user = User::find($userID);
         $query = DB::table('users')
             ->where('id', $userID)
             ->update(['disabled' => !($user->disabled)]);
+    }
+
+    public static function like($str) {
+        return User::where('fname', 'LIKE', "%{$str}%")
+            ->orWhere('lname', 'LIKE', "%{$str}%")
+            ->orWhere('email', 'LIKE', "%{$str}%")
+            ->orWhere('country', 'LIKE', "%{$str}%")
+            ->orWhere('city', 'LIKE', "%{$str}%")
+            ->get();
     }
 
 

@@ -11,9 +11,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
 use PhpParser\Node\Expr\Cast\Object_;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
+
+    use SoftDeletes;
+
     protected $fillable = [
         'id',
         'date',

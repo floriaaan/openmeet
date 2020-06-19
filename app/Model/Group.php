@@ -5,9 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
+
+    use SoftDeletes;
+
 
     protected $fillable = [
         'id',
@@ -150,7 +154,7 @@ class Group extends Model
             ->select('*')
             ->where('id', $groupID)
             ->get();
-        return (new User)->getOne($query[0]->admin);
+        return User::find($query[0]->admin);
     }
 
     public function getLastID()
@@ -178,7 +182,7 @@ class Group extends Model
 
     public function getTagsByGroup($groupID)
     {
-        $tags = (new Group)->getOne($groupID)->tags;
+        $tags = Group::find($groupID)->tags;
         return explode(";", $tags);
     }
 
@@ -231,6 +235,13 @@ class Group extends Model
             ->update(['picrepo' => $group->picrepo]);
 
 
+    }
+
+    public static function like($str) {
+        return Group::where('name', 'LIKE', "%{$str}")
+            ->orWhere('desc', 'LIKE', "%{$str}%")
+            ->orWhere('tags', 'LIKE', "%{$str}%")
+            ->get();
     }
 
 }

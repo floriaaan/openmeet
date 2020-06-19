@@ -28,6 +28,7 @@ class CreateSignalementsTable extends Migration
             $table->integer('importance')->default(500);
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -26,6 +26,7 @@ class CreateBlocksTable extends Migration
             $table->dateTime('date');
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

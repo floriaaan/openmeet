@@ -51,7 +51,7 @@ class MailReminder extends Command
         $comment = '[' . date('Y-m-d H:i:s') . '] check:mailreminder |';
         foreach ($eventsSoon as $event) {
 
-            $participants = (new Participation)->getEvent($event->id);
+            $participants = Participation::where('event', '=', $event->id);
 
             if(!empty($participants)) {
                 $comment .= "\n\t".'EVENT : ' . $event->id . ' | USER(S): ';
@@ -59,9 +59,9 @@ class MailReminder extends Command
 
             foreach ($participants as $participant) {
                 $comment .=  $participant->user . ' ';
-                $user = (new User)->getOne($participant->user);
+                $user = User::find($participant->user);
                 Mail::to($user->email)
-                    ->send(new EventReminder((new Event)->getOne($event->id)));
+                    ->send(new EventReminder(Event::find($event->id)));
 
             }
         }
