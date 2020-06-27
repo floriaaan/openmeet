@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         if ($install != null && $install) {
 
-            $alerts = (new Alert)->getHome();
+            $alerts = Alert::where('home', '=', 1)->where('disabled', '=', '0')->get();
             if(count($alerts) >= 1) {
                 $alert = $alerts[count($alerts) - 1];
                 Session()->flash('info', [
@@ -100,7 +100,7 @@ class HomeController extends Controller
             $user->bdate = $post['bdate'];
             $user->password = $post['password'];
             $user->isadmin = 1;
-            $user->push();
+            $user->save();
             config(['APP_NAME' => $post['iName']]);
         } catch (\Exception $e) {
             var_dump($e);
@@ -118,8 +118,8 @@ class HomeController extends Controller
     {
         $post = $request->input();
 
-        $listGroup = (new Group)->getLike($post['search']);
-        $listEvent = (new Event)->getLike($post['search']);
+        $listGroup = Group::like($post['search']);
+        $listEvent = Event::like($post['search']);
 
         $searchResult = [];
 

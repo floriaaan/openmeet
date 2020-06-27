@@ -44,16 +44,16 @@ class GroupController extends Controller
         if (isset($post['gTags'])) {
             $group->tags = $post['gTags'];
         }
-        $group->push();
+        $group->save();
         if ($request->hasFile('gPic')) {
-            if(Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+            if (Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
                 Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
             }
-            if(!Storage::exists('public/upload/image/group')) {
+            if (!Storage::exists('public/upload/image/group')) {
                 Storage::makeDirectory('public/upload/image/group');
             }
-            if(!Storage::exists('public/upload/image/group/'.$group->id)){
-                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            if (!Storage::exists('public/upload/image/group/' . $group->id)) {
+                Storage::makeDirectory('public/upload/image/group/' . $group->id);
             }
 
             $uploadedFile = $request->file('gPic');
@@ -68,17 +68,17 @@ class GroupController extends Controller
 
             $group->picrepo = 'group/' . $group->id;
             $group->picname = $filename;
-        }else{
-            if($post['gPhotoUrl'] != null && $post['gPhotoUrl'] !=""){
-                $urlExploded = explode('/',$post['gPhotoUrl']);
-                for($i=0;$i<count($urlExploded)-2;$i++){
-                    $group->picrepo = $group->picrepo.$urlExploded[$i].'/';
+        } else {
+            if ($post['gPhotoUrl'] != null && $post['gPhotoUrl'] != "") {
+                $urlExploded = explode('/', $post['gPhotoUrl']);
+                for ($i = 0; $i < count($urlExploded) - 2; $i++) {
+                    $group->picrepo = $group->picrepo . $urlExploded[$i] . '/';
                 }
-                $group->picname= $urlExploded[$i+1];
+                $group->picname = $urlExploded[$i + 1];
+            } else {
             }
-            else{}
         }
-        (new Group)->updateGroup($group);
+        $group->save();
 
         $adminSub = new Subscription();
         $adminSub->user = $post['gAdminID'];
@@ -86,7 +86,7 @@ class GroupController extends Controller
         $adminSub->date = date('Y-m-d H:i:s');
         $adminSub->acceptnotif = User::find($post['gAdminID'])->defaultnotif;
 
-        $adminSub->push();
+        $adminSub->save();
 
         return redirect('/groups/list');
     }
@@ -101,26 +101,29 @@ class GroupController extends Controller
     public function deletePost(Request $request)
     {
         $post = $request->input();
+        $group = Group::find($post['group']);
+        $group->delete();
+        $group->save();
         (new Group)->remove($post['group']);
 
         return redirect('/groups/list');
     }
 
-    public function show($groupID)
+    public function show($group)
     {
 
 
-        $group = Group::find($groupID);
+        $group = Group::find($group);
         $tags = explode(";", $group->tags);
 
         $datas = [
             'group' => $group,
-            'listEvent' => (new Event)->getByGroup($groupID),
+            'listEvent' => Event::where('group', '=', $group->id)->get(),
             'tags' => $tags
         ];
 
-        $alerts = (new Alert)->getGroup();
-        if(count($alerts) >= 1) {
+        $alerts = Alert::where('group', '=', 1)->where('disabled', '=', '0')->get();
+        if (count($alerts) >= 1) {
             $alert = $alerts[count($alerts) - 1];
             Session()->flash('info', [
                 'title' => $alert->title,
@@ -133,8 +136,8 @@ class GroupController extends Controller
 
 
         if (auth()->check()) {
-            $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $groupID);
-            if (auth()->user()->isBan(auth()->user()->id, $groupID)) {
+            $datas['issubscribed'] = (new Subscription)->isSubscribed(auth()->id(), $group->id);
+            if (auth()->user()->isBan(auth()->user()->id, $group->id)) {
                 return view('user.ban.banshow');
             }
         }
@@ -144,11 +147,11 @@ class GroupController extends Controller
 
     public function showAll()
     {
-        $listGroups = (new Group)->getAll();
+        $listGroups = Group::all();
 
-        $alerts = (new Alert)->getGroupList();
+        $alerts = Alert::where('groupList', '=', 1)->where('disabled', '=', '0')->get();
 
-        if(count($alerts) >= 1) {
+        if (count($alerts) >= 1) {
             $alert = $alerts[count($alerts) - 1];
             Session()->flash('info', [
                 'title' => $alert->title,
@@ -161,7 +164,6 @@ class GroupController extends Controller
         return view('group.list', [
             'listGroups' => $listGroups
         ]);
-
     }
 
     public function editForm($groupID)
@@ -182,14 +184,14 @@ class GroupController extends Controller
         $group->admin = $post['gAdminID'];
 
         if ($request->file('gPic') != null) {
-            if(!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
+            if (!Storage::exists('public/upload/image/' . $group->picrepo . '/' . $group->picname)) {
                 Storage::delete('public/upload/image/' . $group->picrepo . '/' . $group->picname);
             }
-            if(!Storage::exists('public/upload/image/group')) {
+            if (!Storage::exists('public/upload/image/group')) {
                 Storage::makeDirectory('public/upload/image/group');
             }
-            if(!Storage::exists('public/upload/image/group/'.$group->id)){
-                Storage::makeDirectory('public/upload/image/group/'.$group->id);
+            if (!Storage::exists('public/upload/image/group/' . $group->id)) {
+                Storage::makeDirectory('public/upload/image/group/' . $group->id);
             }
 
             $uploadedFile = $request->file('gPic');
@@ -205,12 +207,9 @@ class GroupController extends Controller
             $group->picrepo = 'group/' . $group->id;
             $group->picname = $filename;
         }
-        (new Group)->updateGroup($group);
+        $group->save();
 
 
         return redirect('/groups/show/' . $group->id);
     }
-
-
-
 }

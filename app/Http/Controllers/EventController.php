@@ -30,9 +30,9 @@ class EventController extends Controller
 
     public function addForm()
     {
-        $listGroup = (new Group)->getByAdmin(auth()->user()->id);
-        return view('event.create', ['listGroup' => $listGroup]);
-
+        return view('event.create', [
+            'listGroup' => Group::where('admin', '=', auth()->user()->id)
+        ]);
     }
 
     public function addPost(EventCreateRequest $request)
@@ -83,8 +83,8 @@ class EventController extends Controller
         }
 
 
-        if ($event->push()) {
-            $usersSub = (new Subscription)->getGroup($post['eGroup']);
+        if ($event->save()) {
+            $usersSub = Subscription::where('group', '=', $post['eGroup'])->get();
             $group = Group::find($post['eGroup']);
             foreach ($usersSub as $userSub) {
                 $user = User::find($userSub->user);
@@ -96,14 +96,16 @@ class EventController extends Controller
                     //TODO:PUSH
                 }
 
-                (new Notification)->CreateNotification('eve',
-                    'Nouvel événement de ' . $group->name,
-                    $userSub->user,
-                    $event->name,
-                    $event->id);
+                $notif = Notification::create([
+                    'type' => 'eve',
+                    'title' => 'Nouvel événement de ' . $group->name,
+                    'user' => $userSub->user,
+                    'content' => $event->name,
+                    'concerned' => $event->id
+                ]);
 
+                $notif->save();
             }
-
         }
 
         //notifications
@@ -118,16 +120,19 @@ class EventController extends Controller
     public function deletePost(Request $request)
     {
         $post = $request->input();
-
-        (new Event)->remove($post['event']);
+        $event = Event::find($post['event']);
+        $event->delete();
+        $event->save();
 
         return redirect('/');
     }
 
-    public function show($eventID)
+    public function show($event)
     {
-        $alerts = (new Alert)->getEvent();
-        if(count($alerts) >= 1) {
+        $alerts = Alert::where('event', '=', 1)
+            ->where('disabled', '=', '0')
+            ->get();
+        if (count($alerts) >= 1) {
             $alert = $alerts[count($alerts) - 1];
             Session()->flash('info', [
                 'title' => $alert->title,
@@ -138,23 +143,22 @@ class EventController extends Controller
         }
 
         $datas = [
-            'event' => Event::find($eventID)
+            'event' => Event::find($event)
         ];
 
         if (auth()->check()) {
-            $datas['isparticipating'] = (new Participation)->isParticipating(auth()->id(), $eventID);
+            $datas['isparticipating'] = Participation::isParticipating(auth()->id(), $event);
         }
         return view('event.show', $datas);
     }
 
     public function showAll()
     {
-        $listEvent = (new Event())->getAll();
+        $listEvent = Event::all();
 
         return view('event.list', [
             'listGroups' => $listEvent
         ]);
-
     }
 
     public function editForm($eventID)
@@ -203,10 +207,9 @@ class EventController extends Controller
             $event->picname = $filename;
         }
 
-        (new Event)->updateEvent($event);
+        $event->save();
 
 
         return redirect('/events/show/' . $post['eventID']);
     }
-
 }

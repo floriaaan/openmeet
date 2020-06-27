@@ -60,10 +60,9 @@ class MessageController extends Controller
                 (new Notification)->CreateNotification($notifType, $notifTitle, $message->receiver, $notifContent, $message->id);
             }
             if ($post['mForgroup'] == 1) {
-                $group = new Group();
-                $infoGroup = $group->getOne($post['mReceiver']);
-                $sub = new Subscription();
-                $listSubs = $sub->getGroup($post['mReceiver']);
+                $infoGroup = Group::find($post['mReceiver']);
+
+                $listSubs = Subscription::where('group', '=', ($post['mReceiver']))->get();
                 $listReceiver = [];
                 foreach ($listSubs as $oneSub) {
                     if ($oneSub->user != auth()->id()) {
@@ -130,7 +129,7 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->group);
+            $groupConversations[] = Group::find($subscription->group);
             $message = new Message();
             try {
                 if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {
@@ -196,7 +195,7 @@ class MessageController extends Controller
             }
 
             $group = new Group();
-            $groupInfo = $group->getOne($correspondant);
+            $groupInfo = Group::find($correspondant);
             $message = new Message();
             $listMessages = $message->getGroupChat($correspondant);
 
@@ -346,7 +345,7 @@ class MessageController extends Controller
         $groupWithoutLastMessage = [];
         foreach ($userSubscriptions as $subscription) {
             $group = new Group();
-            $groupConversations[] = $group->getOne($subscription->group);
+            $groupConversations[] = Group::find($subscription->group);
             $message = new Message();
             try {
                 if ($message->getLastMessageForGroupConv($subscription->group)->id != 0) {

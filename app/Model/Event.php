@@ -256,7 +256,7 @@ class Event extends Model
 
     }
 
-    public static function like(){
+    public static function like($str){
         return Event::where('fname', 'LIKE', "%{$str}%")
             ->orWhere('lname', 'LIKE', "%{$str}%")
             ->orWhere('email', 'LIKE', "%{$str}%")

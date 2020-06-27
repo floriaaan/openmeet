@@ -15,14 +15,14 @@ class BlockController extends Controller
         $post = $request->input();
         $userId = $post['target'];
         $blockId = $post['blocker'];
-        if (!(new Block)->isBlock($userId, $blockId)) {
+        if (!Block::isBlock($userId, $blockId)) {
             $ban = new Block();
             $ban->target = $userId;
             $ban->blocker = $blockId;
             $ban->date = date('Y-m-d H:m:s');
-            $ban->push();
+            $ban->save();
         } else {
-            Session()->put('errorSubscription', 'Vous avez déja Bloquer cet personne');
+            Session()->flash('error', 'Vous avez déja bloqué cet personne');
         }
         return redirect('/user/groups');
 

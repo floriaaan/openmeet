@@ -13,10 +13,11 @@ class BanishController extends Controller
 
     public function deleteAll()
     {
-        $listParticipation = (new Participation)->getUser(auth()->id());
+        $listParticipation = Participation::where('user', '=', auth()->id());
 
         foreach ($listParticipation as $part) {
-            (new Participation)->remove($part->id);
+            $part->delete();
+            $part->save();
         }
 
         return redirect('/user');
@@ -27,18 +28,18 @@ class BanishController extends Controller
     {
 
         $post = $request->input();
-        $userId = $post['user'];
-        $groupId = $post['group'];
-        if (!(new Ban)->isBan($userId, $groupId)) {
+        $user = $post['user'];
+        $group = $post['group'];
+        if (!Ban::isBan($user, $group)) {
             $ban = new Ban();
-            $ban->user = $userId;
-            $ban->group = $groupId;
+            $ban->user = $user;
+            $ban->group = $group;
             $ban->date = date('Y-m-d H:m:s');
-            $ban->push();
+            $ban->save();
 
 
         } else {
-            Session()->put('errorSubscription', 'Vous avez déja bannie cet personne');
+            Session()->flash('error', 'Vous avez déja banni cet personne');
         }
         return redirect('/user/groups');
 

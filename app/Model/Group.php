@@ -62,7 +62,7 @@ class Group extends Model
 
     public function remove($groupID)
     {
-        $listE = (new Event)->getByGroup($groupID);
+        $listE = Event::where('group', '=', $groupID)->get();
         foreach ($listE as $event) {
             (new Event)->remove($event->id);
         }

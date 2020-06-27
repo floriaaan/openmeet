@@ -208,15 +208,11 @@ class User extends Authenticatable
 
     }
 
-    public function getToken($token)
+    public static function token($token)
     {
-        $query = DB::table('users')
-            ->where('apitoken', $token)
-            ->get();
-        if ($query != null) {
-            if (!empty($query) && isset($query[0]->isadmin)) {
-                return $query[0];
-            }
+        $user = User::where('apitoken', '=', $token)->firstOrFail();
+        if ($user != null) {
+            return $user;
         }
         return false;
     }
@@ -253,6 +249,10 @@ class User extends Authenticatable
             ->orWhere('country', 'LIKE', "%{$str}%")
             ->orWhere('city', 'LIKE', "%{$str}%")
             ->get();
+    }
+
+    public function getFullNameAttribute() {
+        return ucwords(strtolower($this->fname . ' ' . $this->lname));
     }
 
 

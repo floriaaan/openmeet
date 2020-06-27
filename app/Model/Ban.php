@@ -10,7 +10,7 @@ class Ban extends Model
 {
 
     use SoftDeletes;
-    
+
     protected $fillable = [
         'id',
         'banned',
@@ -19,13 +19,10 @@ class Ban extends Model
         'description'
     ];
 
-    public function isBan($userId, $groupId)
+    public static function isBan($user, $group)
     {
-
-        $query = DB::table('bans')
-            ->select('*')
-            ->where('banned', '=', $userId)
-            ->where('banisher', '=', $groupId)
+        $query = Ban::where('banned', '=', $user)
+            ->where('banisher', '=', $group)
             ->get();
         return $query->count() > 0;
     }
@@ -53,7 +50,6 @@ class Ban extends Model
 
 
         return $query->count();
-
     }
 
     public function getCountGroup($groupId)
@@ -65,7 +61,6 @@ class Ban extends Model
 
 
         return $query->count();
-
     }
 
     public function getGroup($groupID)
@@ -86,13 +81,10 @@ class Ban extends Model
         } catch (\Exception $e) {
             return $e;
         }
-
-
     }
 
     public function getLimitDesc($limit)
-    {
-        {
+    { {
             $query = DB::table('bans')
                 ->select('*')
                 ->limit($limit)
@@ -126,5 +118,4 @@ class Ban extends Model
             ->get();
         return $query[0];
     }
-
 }

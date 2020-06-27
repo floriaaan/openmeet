@@ -15,51 +15,53 @@ class ApiController extends Controller
 {
     public function toggleSubscription(Request $request)
     {
-        $userID = $request['user'];
-        $groupID = $request['group'];
+        $user = $request['user'];
+        $group = $request['group'];
 
-        if ((new Subscription)->isSubscribed($userID, $groupID)) {
-            (new Subscription)->remove((new Subscription)->getSubscribed($userID, $groupID)->id);
+        if (Subscription::isSubscribed($user, $group)) {
+            $sub = Subscription::where('user', '=', $user)
+                ->where('group', '=', $group)
+                ->firstOrFail();
+            $sub->delete();
+            $sub->save();
+
             return [200, 'Unsubscribed'];
         } else {
             $subscription = new Subscription();
-            $subscription->user = $userID;
-            $subscription->group = $groupID;
+            $subscription->user = $user;
+            $subscription->group = $group;
             $subscription->date = date('Y-m-d');
-            $subscription->acceptnotif = User::find($userID)->defaultnotif;
-            $subscription->push();
+            $subscription->acceptnotif = User::find($user)->defaultnotif;
+            $subscription->save();
             return [200, 'Subscribed'];
-
         }
-
     }
 
-    public function getSubscription($userID)
+    public function getSubscription($user)
     {
-        $groups = (new Group)->getAll();
+        $groups = Group::all();
 
         $datas = [];
         foreach ($groups as $group) {
-            $datas[] = ['id' => $group->id, 'state' => (new Subscription)->isSubscribed($userID, $group->id)];
+            $datas[] = ['id' => $group->id, 'state' => Subscription::isSubscribed($user, $group->id)];
         }
 
         return $datas;
-
     }
 
     public function getGroups($token)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'GroupsList',
                 'Status' => 'granted'
             ];
 
             Storage::append('api_logs.json', json_encode($request) . ',');
-            return (new Group)->getAll();
+            return Group::all();
         } else {
             $request = [
                 'USER' => 'anonymous',
@@ -71,15 +73,14 @@ class ApiController extends Controller
             Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
-
     }
 
     public function getGroupID($token, $id)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Group-' . $id,
                 'Status' => 'granted'
@@ -98,22 +99,21 @@ class ApiController extends Controller
             Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
-
     }
 
     public function getEvents($token)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'EventsList',
                 'Status' => 'granted'
             ];
 
             Storage::append('api_logs.json', json_encode($request) . ',');
-            return (new Event)->getAll();
+            return Event::all();
         } else {
             $request = [
                 'USER' => 'anonymous',
@@ -125,15 +125,14 @@ class ApiController extends Controller
             Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
-
     }
 
     public function getEventID($token, $id)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Event-' . $id,
                 'Status' => 'granted'
@@ -152,15 +151,14 @@ class ApiController extends Controller
             Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
-
     }
 
     public function getSettings($token)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false && $user->isadmin == 1) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Settings',
                 'Status' => 'granted'
@@ -170,7 +168,7 @@ class ApiController extends Controller
             return Setting('');
         } elseif ($user != false) {
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Settings',
                 'Status' => 'denied'
@@ -190,16 +188,15 @@ class ApiController extends Controller
             Storage::append('api_logs.json', json_encode($request) . ',');
             return abort(404);
         }
-
     }
 
     public function getUsers($token)
     {
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false && $user->isadmin == 1) {
 
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'UsersList',
                 'Status' => 'granted'
@@ -207,11 +204,11 @@ class ApiController extends Controller
 
             Storage::append('api_logs.json', json_encode($request) . ',');
 
-            return (new User)->getAll();
+            return User::all();
         } else if ($user != false) {
 
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'UsersList',
                 'Status' => 'denied'
@@ -232,13 +229,17 @@ class ApiController extends Controller
 
             return abort(404);
         }
-
     }
 
     public function getELocation(Request $request)
     {
         $post = $request->input();
-        return (new Event)->getByArea($post['lon'], $post['lat'], $post['limit']);
+        return Event::where('posx', '>=', $post['lon'] - 0.1)
+            ->where('posx', '<=', $post['lon'] + 0.1)
+            ->where('posy', '>=', $post['lat'] - 0.1)
+            ->where('posy', '<=', $post['lat'] + 0.1)
+            ->limit($post['limit'])
+            ->get();
     }
 
     public function getTags()
@@ -262,15 +263,16 @@ class ApiController extends Controller
         return $result;
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $post = $request->input();
         $token = (isset($post['token'])) ? $post['token'] : 'anon';
 
-        $user = (new User)->getToken($token);
+        $user = User::token($token);
         if ($user != false && $user->isadmin == 1) {
 
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Update',
                 'Status' => 'granted'
@@ -284,7 +286,7 @@ class ApiController extends Controller
         } else if ($user != false) {
 
             $request = [
-                'USER' => $user->fname . ' ' . $user->lname,
+                'USER' => $user->getFullNameAttribute(),
                 'ID' => [$user->id, $token],
                 'AccessTo' => 'Update',
                 'Status' => 'denied'
@@ -305,6 +307,5 @@ class ApiController extends Controller
 
             return abort(404);
         }
-
     }
 }

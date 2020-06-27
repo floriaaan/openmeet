@@ -43,7 +43,7 @@ class SubscriptionController extends Controller
             (new Notification)->CreateNotification('sub',
                  'Nouvel abonné(e)',
                 $group->admin,
-                $user->fname . ' ' . $user->lname . ' s\'est abonné à ' . $group->name,
+                $user->getFullNameAttribute() . ' s\'est abonné à ' . $group->name,
                 $group->id);
         } else {
             Session()->flash('error', 'Vous êtes déjà abonné à ce groupe');

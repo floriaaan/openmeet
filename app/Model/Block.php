@@ -28,7 +28,6 @@ class Block extends Model
 
 
         return $query;
-
     }
 
     public function getCount()
@@ -39,7 +38,6 @@ class Block extends Model
 
 
         return $query->count();
-
     }
 
     public function getAll()
@@ -77,13 +75,10 @@ class Block extends Model
         return $query[0];
     }
 
-    public function isBlock($userId, $blockId)
+    public static function isBlock($user, $block)
     {
-
-        $query = DB::table('blocks')
-            ->select('*')
-            ->where('target', '=', $userId)
-            ->where('blocker', '=', $blockId)
+        $query = Block::where('target', '=', $user)
+            ->where('blocker', '=', $block)
             ->get();
         return $query->count() > 0;
     }
@@ -111,8 +106,5 @@ class Block extends Model
         } catch (\Exception $e) {
             return $e;
         }
-
     }
-
-
 }

@@ -77,15 +77,13 @@ class Participation extends Model
 
     }
 
-    public function isParticipating($userID, $eventID)
+    public static function isParticipating($user, $event)
     {
-        $query = DB::table('participations')
-            ->select('*')
-            ->where('user', '=', $userID)
-            ->where('event', '=', $eventID)
-            ->get();
+        $query = Participation::where('user', '=', $user)
+            ->where('event', '=', $event)
+            ->firstOrFail();
 
-        return !empty($query[0]);
+        return $query != null;
     }
 
     public function getParticipating($userID, $eventID)

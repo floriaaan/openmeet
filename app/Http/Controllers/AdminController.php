@@ -206,7 +206,7 @@ class AdminController extends Controller
 
     public function listUser()
     {
-        return view('admin.users.list', ['users' => (new User)->getAll()]);
+        return view('admin.users.list', ['users' => User::all()]);
     }
 
     public function listReport()

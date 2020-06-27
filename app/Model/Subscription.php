@@ -55,7 +55,6 @@ class Subscription extends Model
 
 
         return $query;
-
     }
 
 
@@ -73,7 +72,8 @@ class Subscription extends Model
         return $listSubscription;
     }
 
-    public function countGroup($groupId) {
+    public function countGroup($groupId)
+    {
         $query = DB::table('subscriptions')
             ->select('*')
             ->where('group', "=", $groupId)
@@ -95,7 +95,8 @@ class Subscription extends Model
         return $listSubscription;
     }
 
-    public function countByUser($userID) {
+    public function countByUser($userID)
+    {
         $query = DB::table('subscriptions')
             ->select('*')
             ->where('user', "=", $userID)
@@ -122,29 +123,15 @@ class Subscription extends Model
         } catch (\Exception $e) {
             return $e;
         }
-
     }
 
-    public function isSubscribed($userID, $groupID)
+    public static function isSubscribed($user, $group)
     {
-        $query = DB::table('subscriptions')
-            ->select('*')
-            ->where('user', '=', $userID)
-            ->where('group', '=', $groupID)
-            ->get();
+        $sub = Subscription::where('user', '=', $user)
+            ->where('group', '=', $group)
+            ->firstOrFail();
 
-        return !empty($query[0]);
-    }
-
-    public function getSubscribed($userID, $groupID)
-    {
-        $query = DB::table('subscriptions')
-            ->select('*')
-            ->where('user', '=', $userID)
-            ->where('group', '=', $groupID)
-            ->get();
-
-        return $query[0];
+        return $sub != null;
     }
 
     public function getCount()
@@ -154,7 +141,6 @@ class Subscription extends Model
             ->get();
 
         return $query->count();
-
     }
 
 
@@ -188,7 +174,7 @@ class Subscription extends Model
     {
         $query = DB::table('subscriptions')
             ->select('*')
-            ->where('group','=',$id)
+            ->where('group', '=', $id)
             ->get();
         $listSub = [];
         foreach ($query as $sub) {
@@ -196,5 +182,4 @@ class Subscription extends Model
         }
         return $listSub;
     }
-
 }
