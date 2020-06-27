@@ -39,7 +39,7 @@ class AdminGroupController extends Controller
 
 
         $rawListSub = Subscription::where('group', '=', $groupChosen)
-            ->orderBy('desc')
+            ->orderBy('id', 'desc')
             ->take(5)
             ->get();
         $listSub = [];
@@ -51,7 +51,7 @@ class AdminGroupController extends Controller
         }
 
         $rawListEvent = Event::where('group', '=', $groupChosen)
-            ->orderBy('desc')
+            ->orderBy('id', 'desc')
             ->take(5)
             ->get();
         $listEvent = [];

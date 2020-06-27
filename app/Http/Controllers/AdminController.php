@@ -31,11 +31,11 @@ class AdminController extends Controller
 
     public function index()
     {
-        $listUser = User::orderBy('desc')->take(5)->get();
+        $listUser = User::orderBy('id', 'desc')->take(5)->get();
         $countUser = User::all()->count();
 
         $countGroup = Group::all()->count();
-        $rawListGroup = Group::orderBy('desc')->take(10)->get();
+        $rawListGroup = Group::orderBy('id', 'desc')->take(10)->get();
 
         $listGroup = [];
 
@@ -48,7 +48,7 @@ class AdminController extends Controller
         }
 
         $countEvent = Event::all()->count();
-        $rawListEvent = Event::orderBy('desc')->take(10)->get();
+        $rawListEvent = Event::orderBy('id', 'desc')->take(10)->get();
 
         $listEvent = [];
         foreach ($rawListEvent as $event) {
@@ -60,7 +60,7 @@ class AdminController extends Controller
         }
 
         $countReport = Signalement::all()->count();
-        $rawListReport = Signalement::orderBy('desc')->take(10)->get();
+        $rawListReport = Signalement::orderBy('id', 'desc')->take(10)->get();
 
         $listReport = [];
         foreach ($rawListReport as $report) {
@@ -73,7 +73,7 @@ class AdminController extends Controller
         }
 
         $countBan = Ban::all()->count();
-        $rawListBan = Ban::orderBy('desc')->take(10)->get();
+        $rawListBan = Ban::orderBy('id', 'desc')->take(10)->get();
 
         $listBan = [];
         foreach ($rawListBan as $ban) {
@@ -86,7 +86,7 @@ class AdminController extends Controller
         }
 
         $countBlock = Block::all()->count();
-        $rawListBlock = Block::orderBy('desc')->take(10)->get();
+        $rawListBlock = Block::orderBy('id', 'desc')->take(10)->get();
 
         $listBlock = [];
         foreach ($rawListBlock as $block) {
@@ -99,7 +99,7 @@ class AdminController extends Controller
         }
 
         $countSub = Subscription::all()->count();
-        $rawListSub = Subscription::orderBy('desc')->take(10)->get();
+        $rawListSub = Subscription::orderBy('id', 'desc')->take(10)->get();
 
         $listSub = [];
         foreach ($rawListSub as $sub) {

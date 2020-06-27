@@ -94,6 +94,17 @@
         <div class="collapse navbar-collapse flex-row-reverse " id="navToggle">
 
             <div class="dropleft nav-responsive-patch ml-1">
+
+                <script>
+                    if (process.versions.hasOwnProperty('electron')) {
+                        document.write(`<a class="nav-link btn-primary rounded-pill" href="javascript:window.close();">
+                    <i class="fas fa-lg fa-user-circle"></i>
+                    Fermer l'application
+                </a>`);
+                    }
+                </script>
+                
+
                 @if (auth()->check())
                     @if(auth()->user()->picname != null)
                         <a class="nav-link" href="#" id="navDrop" role="button" data-toggle="dropdown"
@@ -131,7 +142,7 @@
                             {{ csrf_field() }}
                         </form>
 
-                        @if(!empty((new \App\Group)->getByAdmin(auth()->id())))
+                        @if(\App\Group::where('admin', auth()->id())->count() >= 1)
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Modération de groupe</h6>
                             <a class="dropdown-item" href="{{url('/groups/admin/')}}">
