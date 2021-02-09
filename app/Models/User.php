@@ -73,4 +73,12 @@ class User extends Authenticatable
         }
         return $groups;
     }
+
+    /**
+     * Get groups where the user is admin.
+     */
+    public function groups_admin()
+    {
+        return Group::where('admin_id', $this->id)->get();
+    }
 }

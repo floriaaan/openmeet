@@ -4,9 +4,9 @@
         
         <main
           aria-labelledby="pageTitle"
-          class="flex items-center justify-center h-screen bg-gray-100 dark:bg-dark dark:text-light"
+          class="flex items-center justify-center h-96 bg-gray-100 dark:bg-dark dark:text-light"
         >
-          <div class="p-4 space-y-4">
+          <div class="space-y-4">
             <div class="flex flex-col items-start space-y-3 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-3">
               <p class="font-semibold text-primary-500 text-9xl dark:text-primary-600">404</p>
               <div class="space-y-2">

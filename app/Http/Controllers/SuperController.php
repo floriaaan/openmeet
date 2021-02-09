@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\User;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class SuperController extends Controller
@@ -28,7 +31,10 @@ class SuperController extends Controller
         return view('super.index', [
             'hash' => $hash, 
             'remoteHash' => $remoteHash,
-            'https' => parent::isSecure()
+            'https' => parent::isSecure(),
+            'count_users' => User::count(),
+            'count_groups' => Group::count(),
+            'count_events' => Event::count(),
             ]);
     }
 }

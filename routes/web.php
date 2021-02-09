@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::resources([
     'group' => 'GroupController',
+    'event' => 'EventController',
 ]);
 
 

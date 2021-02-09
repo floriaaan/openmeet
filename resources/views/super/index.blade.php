@@ -61,14 +61,14 @@
         <div class="col-span-3 w-full md:px-8 lg:px-24 pt-5">
 
             <div class="min-h-full min-w-full">
-                <div class="bg-white rounded-lg shadow-sm duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
+                <div class="bg-white rounded-lg border border-gray-50 duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
                     <div class="grid grid-cols-12 gap-3">
                         <!-- Meta Column -->
                         <div class="col-span-0 sm:col-span-2 text-center hidden sm:block">
                             <!-- Vote Counts -->
                             <div class="grid grid-rows-2">
                                 <div class="inline-block font-medium text-xl">
-                                    21
+                                    {{$count_events}}
                                 </div>
 
                                 <div class="inline-block font-medium text-sm">
@@ -78,20 +78,18 @@
 
                             <!-- Answer Counts -->
                             <a href="#"
-                                class="grid grid-rows-2 mx-auto mb-3 py-1 w-4/5 2lg:w-3/5 rounded-md bg-green-400">
+                                class="grid grid-rows-2 mx-auto mb-3 py-1 w-4/5 xl:w-3/5 rounded-md bg-green-400">
                                 <div class="inline-block font-medium text-2xl text-white">
-                                    12
+                                    {{$count_groups}}
                                 </div>
 
-                                <div class="inline-block font-medium text-white mx-1 text-sm lg:text-md">
-                                    {{ __('messages.groups') }}
-                                </div>
+                                <div class="inline-block font-medium text-white mx-1 mb-0 text-sm lg:text-md">{{ __('messages.groups') }}</div>
                             </a>
 
                             <!-- View Counts -->
                             <div class="grid my-3">
                                 <span class="inline-block font-bold text-xs">
-                                    1213 {{ __('messages.users') }}
+                                    {{$count_users}} {{ __('messages.users') }}
                                 </span>
                             </div>
                         </div>
@@ -104,7 +102,7 @@
                                         <div class="inline-block font-light capitalize">
                                             <i class="uil uil-arrow-circle-up mr-1"></i>
                                             <span class="text-sm">
-                                                21 {{ __('messages.events') }}
+                                                {{$count_events}} {{ __('messages.events') }}
                                             </span>
                                         </div>
                                     </div>
@@ -112,7 +110,7 @@
                                         <div class="inline-block font-light capitalize">
                                             <i class="uil uil-check-circle mr-1"></i>
                                             <span class="text-sm">
-                                                21 {{ __('messages.groups') }}
+                                                {{$count_groups}} {{ __('messages.groups') }}
                                             </span>
                                         </div>
                                     </div>
@@ -120,7 +118,7 @@
                                         <div class="inline-block">
                                             <i class="uil uil-eye mr-1"></i>
                                             <span class="text-sm capitalize font-light">
-                                                21 {{ __('messages.users') }}
+                                                {{$count_users}} {{ __('messages.users') }}
                                             </span>
                                         </div>
                                     </div>

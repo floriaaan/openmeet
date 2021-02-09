@@ -41,6 +41,6 @@ class Group extends Model
      */
     public function events()
     {
-        return [];
+        return Event::where('group_id', $this->id)->get();
     }
 }
