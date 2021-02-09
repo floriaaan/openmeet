@@ -58,4 +58,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    /**
+     * Get the groups of the user.
+     */
+    public function groups()
+    {
+        $subs = Subscription::where('user_id', $this->id)->get();
+        $groups = [];
+        //  TODO : single request
+        foreach ($subs as $sub) {
+            $groups[] = Group::find($sub->group_id);
+        }
+        return $groups;
+    }
 }
