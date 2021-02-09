@@ -22,18 +22,12 @@
     <body class="font-sans antialiased">
         <x-jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
-            
-
-            <!-- Page Content -->
-            <main>
+        @livewire('navigation-menu')
+          <main class="pt-24">
                 {{ $slot }}
-            </main>
-        </div>
+          </main>
 
-        <footer class="text-gray-600 body-font px-10">
+        <footer class="bg-gray-50 text-gray-600 body-font px-10 w-full border-t-2 shadow-md border-gray-200" style="position:relative;bottom: 0">
             <div class="container px-5 pt-10 mx-auto hidden md:block lg:block xl:block">
                 <div class="flex flex-wrap md:text-left text-center order-first">
                   <div class="lg:w-1/4 md:w-1/2 w-full px-4">
