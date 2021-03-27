@@ -149,7 +149,7 @@ export const QuickSearch = ({ routes }) => {
             >
                 <div className="relative w-full my-6 mx-auto max-w-sm">
                     {/*content*/}
-                    <div className=" border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    <div className=" border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         {/*header*/}
                         <div className="flex items-start justify-between p-2 rounded-t">
                             <div className="relative w-full text-gray-600 focus-within:text-gray-400">
@@ -178,7 +178,7 @@ export const QuickSearch = ({ routes }) => {
                                     onChange={onInputChange}
                                     onFocus={(e) => setVisible(true)}
                                     type="search"
-                                    className="my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-full w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"
+                                    className="my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"
                                     placeholder="Spotlight"
                                     autoComplete="off"
                                 />
@@ -196,7 +196,7 @@ export const QuickSearch = ({ routes }) => {
                                     >
                                         <a
                                             id={`spotlight-${key}`}
-                                            className="flex flex-row p-3 items-center rounded text-gray-700 bg-gray-100 cursor-pointer focus:bg-gray-300 hover:bg-gray-200 space-x-4"
+                                            className="flex flex-row p-3 items-center rounded-xl text-gray-700 bg-gray-100 cursor-pointer focus:bg-gray-300 hover:bg-gray-200 space-x-4"
                                         >
                                             {el.icon}
                                             <div className="flex flex-col">

@@ -4139,7 +4139,7 @@ var QuickSearch = function QuickSearch(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "relative w-full my-6 mx-auto max-w-sm",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: " border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none",
+          className: " border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "flex items-start justify-between p-2 rounded-t",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -4172,7 +4172,7 @@ var QuickSearch = function QuickSearch(_ref) {
                 onFocus: function onFocus(e) {
                   return setVisible(true);
                 }
-              }, _defineProperty(_jsx2, "type", "search"), _defineProperty(_jsx2, "className", "my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-full w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"), _defineProperty(_jsx2, "placeholder", "Spotlight"), _defineProperty(_jsx2, "autoComplete", "off"), _jsx2))]
+              }, _defineProperty(_jsx2, "type", "search"), _defineProperty(_jsx2, "className", "my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"), _defineProperty(_jsx2, "placeholder", "Spotlight"), _defineProperty(_jsx2, "autoComplete", "off"), _jsx2))]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "relative p-2 space-y-1 flex-auto",
@@ -4183,7 +4183,7 @@ var QuickSearch = function QuickSearch(_ref) {
                 },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
                   id: "spotlight-".concat(key),
-                  className: "flex flex-row p-3 items-center rounded text-gray-700 bg-gray-100 cursor-pointer focus:bg-gray-300 hover:bg-gray-200 space-x-4",
+                  className: "flex flex-row p-3 items-center rounded-xl text-gray-700 bg-gray-100 cursor-pointer focus:bg-gray-300 hover:bg-gray-200 space-x-4",
                   children: [el.icon, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "flex flex-col",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
