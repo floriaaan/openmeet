@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ApplicationController@index')->name('index');
 
 Route::resources([
     'group' => 'GroupController',
@@ -29,3 +27,4 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
+

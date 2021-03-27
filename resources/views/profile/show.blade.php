@@ -1,45 +1,51 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+    <div class="bg-gray-50">
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Profile') }}
+            </h2>
+        </x-slot>
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
+        <div>
+            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 gap-4">
 
-                <x-jet-section-border />
-            @endif
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+                <div class="grid gap-4">
+
+                    <div class="mt-10 sm:mt-0 flex flex-row gap-4">
+                        <div class="w-1/3 h-full">
+                            <x-profile.show />
+                        </div>
+
+                        <div class="w-2/3">
+                            @livewire('profile.update-password-form')
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="mt-10 sm:mt-0 flex flex-row gap-4">
+                        <div class="w-2/3 h-full">
+                            @livewire('profile.logout-other-browser-sessions-form')
+                        </div>
+                        <div class="w-1/3 flex flex-col gap-4">
+                            <div class="col-span-2">
+                                @livewire('profile.delete-user-form')
+                            </div>
+
+                            <div class="col-span-2">
+                                @livewire('profile.two-factor-authentication-form')
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
-                <x-jet-section-border />
-            @endif
 
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-jet-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
             </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-jet-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
         </div>
     </div>
+
 </x-app-layout>

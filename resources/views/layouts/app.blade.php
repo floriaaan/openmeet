@@ -25,7 +25,6 @@
 
 <body class="font-sans antialiased">
     <x-jet-banner />
-    <div id="react_root"></div>
 
     @livewire('navigation-menu')
 
@@ -77,7 +76,7 @@
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">
                         </div>
                         <button
-                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-primary-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded">{{ __('messages.submit') }}</button>
+                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-primary-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition ease-in-out duration-150">{{ __('messages.submit') }}</button>
                     </div>
                     <p class="text-gray-500 text-sm mt-2 md:text-left text-center">
                         {{ __('messages.footerDescription') }}

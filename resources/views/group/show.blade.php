@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="lg:flex lg:items-center lg:justify-between sm:pt-24 md:pt-0 py-8 px-4  md:px-24">
+    <div class="lg:flex lg:items-center lg:justify-between sm:pt-24 md:pt-10 py-8 px-4  md:px-24">
         <div class="flex-1 min-w-0">
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
                 {{ $group->name }}
