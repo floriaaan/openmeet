@@ -18,6 +18,5 @@ export const spotlight = [
                 />
             </svg>
         ),
-        level: 0,
     },
 ];

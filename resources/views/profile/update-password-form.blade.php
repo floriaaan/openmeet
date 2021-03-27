@@ -9,7 +9,7 @@
 
     <x-slot name="form">
         <h3 class="text-lg font-medium mb-2 text-gray-900">
-            {{ __('messages.updatePassword') }}
+            {{ __('messages.password.update') }}
         </h3>
         <div class="flex flex-col">
             <div class="mb-3">

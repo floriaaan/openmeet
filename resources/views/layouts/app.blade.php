@@ -20,6 +20,9 @@
     @livewireStyles
 
     <!-- Scripts -->
+    <script>
+        var spotlight_token = "{{ Auth::user() != null && Auth::user()->spotlight_token != null ? Auth::user()->spotlight_token : null }}"
+    </script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
@@ -27,9 +30,11 @@
     <x-jet-banner />
 
     @livewire('navigation-menu')
+    <div id="react_root"></div>
 
-
-    <main class="pt-40 md:pt-20">
+    <main 
+    {{-- class="pt-40 md:pt-20" --}}
+    >
         {{ $slot }}
     </main>
 

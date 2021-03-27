@@ -9,9 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Faker\Generator;
+use Faker\Factory;
 
 class User extends Authenticatable
 {
+    
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -39,6 +42,7 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'spotlight_token'
     ];
 
     /**
@@ -58,6 +62,18 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function ($query) {
+            $faker = Factory::create();
+            $query->spotlight_token = $faker->word();
+        });
+    }
 
 
     /**

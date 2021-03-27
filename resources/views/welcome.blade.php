@@ -6,7 +6,7 @@
             <div class="bg-gray-50">
                 <div
                     class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-                    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <h2 class="text-xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                         <span class="block">{{ __('messages.openmeet.brief') }}</span>
                         <span class="block text-primary-600" style="font-family: system-ui;">{{ __('messages.openmeet.tagline') }}</span>
                     </h2>
@@ -14,13 +14,13 @@
                         <div class="inline-flex rounded-md shadow">
                             <a href="#"
                                 class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-                                {{__('messages.groups.create')}}
+                                {{__('messages.group.create')}}
                             </a>
                         </div>
                         <div class="ml-3 inline-flex rounded-md shadow">
                             <a href="#"
                                 class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50">
-                                {{__('messages.groups.list')}}
+                                {{__('messages.group.list')}}
                             </a>
                         </div>
                     </div>
@@ -48,9 +48,9 @@
             <div class="container px-5 pt-10 mx-auto">
                 <div class="flex flex-col text-center w-full mb-10">
                     <h3 class="text-xs text-primary-500 tracking-widest font-medium title-font mb-1">
-                        {{ __('messages.events.nearbyDesc') }}</h3>
+                        {{ __('messages.event.nearby.description') }}</h3>
                     <h2 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
-                        {{ __('messages.events.nearby') }}
+                        {{ __('messages.event.nearby') }}
                     </h2>
                 </div>
                 <div class="flex flex-wrap -m-4">

@@ -75,12 +75,10 @@ export const QuickSearch = ({ routes }) => {
 
     useEffect(() => {
         if (typeof window !== undefined && results.length >= focusedIndex) {
-            console.log("here")
             const focusedElement = window.document.getElementById(
                 `spotlight-${focusedIndex}`
             );
             if (focusedElement !== null) {
-                console.log(focusedElement)
                 focusedElement.focus();
             }
         }

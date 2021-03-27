@@ -1,20 +1,30 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 fixed" style="z-index: 10000">
+<nav x-data="{ open: false }"
+    class="text-gray-600 body-font w-full  z-50 top-0 shadow sticky bg-white md:bg-opacity-90 transition duration-300 ease-in-out blur">
 
-    <header class="bg-white text-gray-600 body-font w-screen md:block">
+    <header class="text-gray-600 body-font md:block">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <div class="hidden md:flex lg:w-2/5 pl-5 flex-wrap space-x-10 items-center text-base md:ml-auto">
-                <div class="relative text-gray-600 w-2/3">
+                <div class="relative text-gray-600 w-2/3 flex flex-row items-center">
                     <input type="search" name="serch" placeholder="{{ __('messages.search') }}"
-                        class="bg-gray-50 appearance-none border-2 border-gray-50 w-full py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out h-10 px-5 pr-10 rounded-full text-sm">
-                    <button type="submit" class="absolute right-0 top-0 mt-3 mr-4 hover:border-transparent">
-                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                            viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
-                            xml:space="preserve" width="512px" height="512px">
-                            <path
-                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                        </svg>
-                    </button>
+                        class="bg-gray-50 appearance-none border-2 border-gray-50 w-full py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out h-10 px-5 pr-28 rounded-full text-sm">
+                    <div
+                        class="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
+                        <span class="bg-gray-300 text-gray-600 rounded px-2 py-1 text-xs hidden lg:flex">
+                            <kbd>Ctrl</kbd>
+                            +
+                            <kbd>K</kbd>
+                        </span>
+                        <button type="submit">
+                            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                                xml:space="preserve" width="512px" height="512px">
+                                <path
+                                    d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                            </svg>
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -127,7 +137,7 @@
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                this.closest('form').submit();" class="hover:text-primary-500">
+                                                    this.closest('form').submit();" class="hover:text-primary-500">
                                     <i class="fas fa-lock mr-2"></i>
 
                                     {{ __('Logout') }}

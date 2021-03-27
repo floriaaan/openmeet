@@ -2,8 +2,17 @@
 
 
     <div class="flex flex-col justify-center items-center  text-white">
+        <div class="flex flex-row-reverse w-full items-center text-gray-400 mb-3">
+            <div class="flex flex-row items-center text-xs font-bold has-tooltip transition duration-300">
+                <span class='tooltip transition duration-300 rounded shadow-lg p-3 bg-gray-600 text-white -mt-12'>{{ Auth::user()->spotlight_token }}</span>
+                <i class="fas fa-link h-3 w-3 mr-1"></i>
+                {{__('messages.api.key')}}
+            </div>
+            
+
+        </div>
         <img class="h-32 w-32 rounded-full hover:shadow-lg transition duration-300 ease-in-out"
-            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&amp;color=EF4444&amp;background=FECACA"
+            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&amp;color=007bff&amp;background=054880"
             alt="{{ Auth::user()->name }}" />
 
         <div class="max-w-xl text-lg mt-4 font-bold uppercase tracking-widest ">
@@ -21,16 +30,7 @@
             {{ utf8_encode(strftime('%a %d %b %Y', strtotime(Auth::user()->created_at))) }}
         </div>
 
-        <div class="flex-row mt-2">
-            <span class="hidden sm:block">
-                <a href="#"
-                    class="inline-flex items-center px-4 py-2 bg-gray-50 border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-primary-500 hover:text-white active:bg-primary-900 focus:outline-none focus:border-primary-900  disabled:opacity-25 transition ease-in-out duration-150 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-
-                    <i class="fas flex fa-link mr-2 h-5 w-5 items-center"></i>
-                    {{ __('messages.api') }}
-                </a>
-            </span>
-        </div>
+        
     </div>
 
 

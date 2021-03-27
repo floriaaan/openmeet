@@ -5,10 +5,31 @@ return [
     'welcome' => 'Welcome to our application!',
     'subtitle' => 'subtitle!',
     'search' => 'Search',
+    'search.long' => 'Search a group/event near you',
     'events' => "events",
     'groups' => "groups",
     'users' => "users",
     'overview' => "Overview",
+
+    // API
+    'api.key' => "API key",
+
+    // Landing Page
+    'openmeet.brief' => env('APP_NAME', 'OpenMeet') . ", the app for your needs",
+    'openmeet.tagline' => "Meet the people interested in the subject you're into",
+
+    // Group
+    "group.create" => "Create a group",
+    "group.list" => "All groups",
+
+    // Event
+    "event.nearby" => "Nearby events",
+    "event.nearby.description" => "All the events near you",
+
+    // Profile Page
+    'memberSince' => "Member since ",
+    'password.update' => "Update your password",
+    'deleteAccount' => "Delete your account",
 
     // SuperController
     'super.header' => "OpenMeet Settings",
