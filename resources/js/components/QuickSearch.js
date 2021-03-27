@@ -180,6 +180,21 @@ export const QuickSearch = ({ routes }) => {
                                     placeholder="Spotlight"
                                     autoComplete="off"
                                 />
+                                <div className="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
+                                    <span
+                                        
+                                        className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 rounded-md bg-white"
+                                    >
+                                        <span className="sr-only">Press </span>
+                                        <kbd className="font-sans">
+                                            <abbr className="no-underline">
+                                                Esc
+                                            </abbr>
+                                        </kbd>
+                                        
+                                        <span className="sr-only"> to exit Spotlight</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         {/*body*/}

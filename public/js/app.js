@@ -4244,7 +4244,25 @@ var QuickSearch = function QuickSearch(_ref) {
                 onFocus: function onFocus(e) {
                   return setVisible(true);
                 }
-              }, _defineProperty(_jsx2, "type", "search"), _defineProperty(_jsx2, "className", "my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"), _defineProperty(_jsx2, "placeholder", "Spotlight"), _defineProperty(_jsx2, "autoComplete", "off"), _jsx2))]
+              }, _defineProperty(_jsx2, "type", "search"), _defineProperty(_jsx2, "className", "my-1 pl-10 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-50 focus:border-gray-200"), _defineProperty(_jsx2, "placeholder", "Spotlight"), _defineProperty(_jsx2, "autoComplete", "off"), _jsx2)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                  className: "hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 rounded-md bg-white",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                    className: "sr-only",
+                    children: "Press "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("kbd", {
+                    className: "font-sans",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("abbr", {
+                      className: "no-underline",
+                      children: "Esc"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                    className: "sr-only",
+                    children: " to exit Spotlight"
+                  })]
+                })
+              })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "relative p-2 space-y-1 flex-auto",

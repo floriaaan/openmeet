@@ -13,7 +13,7 @@
                     <div class="relative mb-4">
                         <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
                         <input type="text" id="name" name="name" value="{{ old('name') }}"
-                            class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">
+                            class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-100 transition-colors duration-200 ease-in-out">
                     </div>
                     <div class="relative mb-4">
                         <label for="group_id" class="leading-7 text-sm text-gray-600">Group</label>
@@ -27,10 +27,10 @@
                     <div class="relative mb-4">
                         <label for="description" class="leading-7 text-sm text-gray-600">Description</label>
                         <textarea id="description" name="description" rows="5"
-                            class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">{{ old('description') }}</textarea>
+                            class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-100 transition-colors duration-200 ease-in-out">{{ old('description') }}</textarea>
                     </div>
                     <button type="submit"
-                        class="text-white bg-primary-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded text-lg">{{ __('messages.create') }}</button>
+                        class="text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">{{ __('messages.create') }}</button>
                     <p class="text-xs text-gray-500 mt-3">Chicharrones blog helvetica normcore iceland tousled brook
                         viral
                         artisan.</p>
@@ -47,14 +47,14 @@
                             <div class="relative">
                                 <label for="date_start" class="leading-7 text-sm text-gray-600">Start date</label>
                                 <input type="date" id="date_start" name="date_start" value="{{ old('date_start') }}"
-                                    class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">
+                                    class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-100 transition-colors duration-200 ease-in-out">
                             </div>
                         </div>
                         <div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
                             <div class="relative">
                                 <label for="date_end" class="leading-7 text-sm text-gray-600">End date</label>
                                 <input type="date" id="date_end" name="date_end" value="{{ old('date_end') }}"
-                                    class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">
+                                    class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-100 transition-colors duration-200 ease-in-out">
                             </div>
                         </div>
                     </div>

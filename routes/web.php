@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ApplicationController@index')->name('index');
+Route::middleware(['app'])->group(function () {
+    Route::get('/', 'ApplicationController@index')->name('index');
 
-Route::resources([
-    'group' => 'GroupController',
-    'event' => 'EventController',
-]);
+    Route::resources([
+        'group' => 'GroupController',
+        'event' => 'EventController',
+    ]);
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/', 'SuperController@index')->name('admin.index');
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::get('/', 'SuperController@index')->name('admin.index');
+        });
     });
-
 });
-

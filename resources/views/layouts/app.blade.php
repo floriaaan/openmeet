@@ -16,10 +16,25 @@
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
         crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style>
+        :root {
+            @if (strpos(url()->current(), "group") !== false)
+            --openmeet-active: #10B981;
+            @elseif (strpos(url()->current(), "event") !== false)
+            --openmeet-active: #8B5CF6;
+            @elseif (strpos(url()->current(), "profile") !== false)
+            --openmeet-active: #ef4444;
+            @else
+            --openmeet-active: #007bff;
+            @endif
+        }
+    </style>
 
     @livewireStyles
 
     <!-- Scripts -->
+    
+
     <script>
         var spotlight_token = "{{ Auth::user() != null && Auth::user()->spotlight_token != null ? Auth::user()->spotlight_token : null }}"
     </script>
@@ -27,6 +42,7 @@
 </head>
 
 <body class="font-sans antialiased">
+    
     <x-jet-banner />
 
     @livewire('navigation-menu')

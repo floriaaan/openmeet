@@ -1,7 +1,7 @@
 <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 916 916" {{ $attributes }}>
   <defs>
       <style>
-          .cls-1{fill:#eefbff;}.cls-2{opacity:0.1;}.cls-3{fill:#007bea;}.cls-4{fill:#def2ff;}.cls-5{fill:#2ea6ff;}.cls-6{fill:none;}.cls-7{fill:#007bff;}.cls-8{fill:#afafef;}.cls-9{fill:#108eff;}.cls-10{fill:#38b0f9;}
+          .cls-1{fill:#eefbff;}.cls-2{opacity:0.1;}.cls-3{fill:var(--openmeet-active);}.cls-4{fill:#def2ff;}.cls-5{fill:var(--openmeet-active);}.cls-6{fill:none;}.cls-7{fill:var(--openmeet-active);}.cls-8{fill:#afafef;}.cls-9{fill:var(--openmeet-active);}.cls-10{fill:var(--openmeet-active);}
       </style>
   </defs>
   <title>logo-open</title>

@@ -5,7 +5,7 @@
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="bg-gray-50">
                 <div
-                    class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                    class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-32 lg:px-8 lg:flex lg:items-center lg:justify-between">
                     <h2 class="text-xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                         <span class="block">{{ __('messages.openmeet.brief') }}</span>
                         <span class="block text-primary-600" style="font-family: system-ui;">{{ __('messages.openmeet.tagline') }}</span>

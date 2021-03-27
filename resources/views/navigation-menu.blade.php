@@ -7,13 +7,12 @@
                 <div class="relative text-gray-600 w-2/3 flex flex-row items-center">
                     <input type="search" name="serch" placeholder="{{ __('messages.search') }}"
                         class="bg-gray-50 appearance-none border-2 border-gray-50 w-full py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out h-10 px-5 pr-28 rounded-full text-sm">
-                    <div
-                        class="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
-                        <span class="bg-gray-300 text-gray-600 rounded px-2 py-1 text-xs hidden lg:flex">
-                            <kbd>Ctrl</kbd>
-                            +
-                            <kbd>K</kbd>
-                        </span>
+                    <div class="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
+                        <span style="opacity: 1;"
+                            class="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 rounded-md bg-white"><span
+                                class="sr-only">Press </span><kbd class="font-sans"><abbr class="no-underline">Ctrl
+                                </abbr></kbd><span class="sr-only"> and </span><kbd class="font-sans">K</kbd><span
+                                class="sr-only"> to search</span></span>
                         <button type="submit">
                             <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -37,29 +36,165 @@
             </a>
 
 
-            <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 pr-5 space-x-10 lg:ml-0">
+            <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 pr-5 space-x-5 lg:space-x-8 lg:ml-0">
                 @auth
-                    <a href="#"
-                        class="h-8 w-8 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-yellow-400 bg-yellow-200 hover:bg-yellow-300 transition duration-150 ease-in-out"
-                        style="background-color: #fcf0cf;">
-                        <i class="fas fa-bell text-yellow-400"></i>
-                        @if (true)
-                            <span class="absolute rounded-full bg-red-600 h-2 w-2"
-                                style="margin-top: -28px; margin-right:-28px"></span>
-                        @endif
-                    </a>
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+
+                                <span
+                                    class="h-8 w-8 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-yellow-400 bg-yellow-200 hover:bg-yellow-300 transition duration-150 ease-in-out"
+                                    style="background-color: #fcf0cf;">
+                                    <i class="fas fa-bell text-yellow-400"></i>
+                                    @if (true)
+                                        <span class="absolute rounded-full bg-red-600 h-2 w-2"
+                                            style="margin-top: -28px; margin-right:-28px"></span>
+                                    @endif
+                                </span>
+                                {{-- <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg> --}}
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                        </x-slot>
+                    </x-jet-dropdown>
                 @else
 
                 @endauth
-                <a href="{{ route('group.index') }}"
-                    class="h-8 w-8 bg-green-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none  focus:ring-1 focus:ring-offset-1 focus:ring-green-400  transition duration-150 ease-in-out">
-                    <i class="fas fa-users text-green-500"></i>
-                </a>
 
-                <a href="#"
-                    class="h-8 w-8 bg-purple-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-purple-400 transition duration-150 ease-in-out">
-                    <i class="fas fa-calendar-alt text-purple-500"></i>
-                </a>
+                <x-jet-dropdown align="right" width="w-96">
+                    <x-slot name="trigger">
+
+                        <button
+                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <span
+                                class="h-8 w-8 bg-green-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none  focus:ring-1 focus:ring-offset-1 focus:ring-green-400  transition duration-150 ease-in-out">
+
+                                <i class="fas fa-users text-green-500"></i>
+                            </span>
+                            {{-- <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg> --}}
+
+                        </button>
+
+                    </x-slot>
+                    <x-slot name="content">
+
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('messages.group') }}
+                        </div>
+
+                        @if (count($nav_groups) > 0)
+                            <div class="space-y-2">
+                                @foreach ($nav_groups as $group)
+                                    <a href={{ route('group.show', ['group' => $group]) }}
+                                        class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-green-400 hover:bg-green-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
+                                        <span
+                                            class="w-16 h-16 flex items-center justify-center rounded text-green-500 bg-green-200 p-5"><i
+                                                class="fas fa-users text-2xl"></i></span>
+                                        <div class="flex flex-col ml-2">
+                                            <span class="text-green-700 font-bold">{{ $group->name }}</span>
+                                            <span class="text-gray-400 text-xs">{{ $group->description }}</span>
+                                        </div>
+
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="border-t border-gray-100"></div>
+
+                        @endif
+
+
+                        
+
+                        <x-jet-dropdown-link href="{{ route('group.create') }}"
+                            class="hover:text-green-400 hover:bg-green-50">
+                            <i class="fas fa-plus mr-2"></i>
+                            {{ __('messages.group.create') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('group.index') }}"
+                            class="hover:text-green-400 hover:bg-green-50">
+                            <i class="fas fa-users mr-2"></i>
+                            {{ __('messages.group.all') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('group.index') }}"
+                            class="hover:text-green-400 hover:bg-green-50">
+                            <i class="fas fa-cog mr-2"></i>
+                            {{ __('messages.group.manage') }}
+                        </x-jet-dropdown-link>
+                    </x-slot>
+                </x-jet-dropdown>
+
+                <x-jet-dropdown align="right" width="w-96">
+                    <x-slot name="trigger">
+
+                        <button
+                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <span
+                                class="h-8 w-8 bg-purple-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none  focus:ring-1 focus:ring-offset-1 focus:ring-green-400  transition duration-150 ease-in-out">
+
+                                <i class="fas fa-calendar-alt text-purple-500"></i>
+                            </span>
+                            {{-- <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg> --}}
+
+                        </button>
+
+                    </x-slot>
+                    <x-slot name="content">
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('messages.event') }}
+                        </div>
+
+                        @if (count($nav_events) > 0)
+                            <div class="space-y-2">
+                                @foreach ($nav_events as $event)
+                                    <a href={{ route('event.show', ['event' => $event]) }}
+                                        class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-purple-400 hover:bg-purple-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
+                                        <span
+                                            class="w-16 h-16 flex items-center justify-center rounded text-purple-500 bg-purple-200 p-5"><i
+                                                class="fas fa-calendar-alt text-2xl"></i></span>
+                                        <div class="flex flex-col ml-2">
+                                            <span class="text-purple-700 font-bold">{{ $event->name }}</span>
+                                            <span class="text-gray-400 text-xs">{{ __('messages.event.startAt') }}
+                                                {{ $event->date_start }}</span>
+                                        </div>
+
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="border-t border-gray-100"></div>
+
+                        @endif
+
+
+                        <x-jet-dropdown-link href="{{ route('event.create') }}"
+                            class="hover:text-purple-400 hover:bg-purple-50">
+                            <i class="fas fa-plus mr-2"></i>
+                            {{ __('messages.event.create') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('event.index') }}"
+                            class="hover:text-purple-400 hover:bg-purple-50">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            {{ __('messages.event.all') }}
+                        </x-jet-dropdown-link>
+                    </x-slot>
+                </x-jet-dropdown>
+
+
 
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -79,12 +214,12 @@
                                             src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&amp;color=EF4444&amp;background=FECACA"
                                             alt="{{ Auth::user()->name }}" />
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
+                                        {{-- <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                                 clip-rule="evenodd" />
-                                        </svg>
+                                        </svg> --}}
                                     </button>
                                 </span>
                             @endif
@@ -111,38 +246,39 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}" class="hover:text-primary-500">
+                            <x-jet-dropdown-link href="{{ route('profile.show') }}"
+                                class="hover:text-red-500 hover:bg-red-50">
                                 <i class="fas fa-user mr-2"></i>
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
-                            <div class="border-t border-gray-100"></div>
-
-                            <!-- Super Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('messages.super.header') }}
-                            </div>
-
-                            <x-jet-dropdown-link href="{{ route('admin.index') }}" class="hover:text-primary-500">
-                                <i class="fas fa-cog mr-2"></i>
-                                {{ __('messages.super.index') }}
-                            </x-jet-dropdown-link>
-
-
-
-                            <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    this.closest('form').submit();" class="hover:text-primary-500">
+                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                                                                    this.closest('form').submit();"
+                                    class="hover:text-red-500 hover:bg-red-50">
                                     <i class="fas fa-lock mr-2"></i>
 
                                     {{ __('Logout') }}
                                 </x-jet-dropdown-link>
                             </form>
+
+                            {{-- <div class="border-t border-gray-100"></div> --}}
+                            <!-- Super Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('messages.super.header') }}
+                            </div>
+
+                            <x-jet-dropdown-link href="{{ route('admin.index') }}"
+                                class="hover:text-red-500 hover:bg-red-50">
+                                <i class="fas fa-cog mr-2"></i>
+                                {{ __('messages.super.index') }}
+                            </x-jet-dropdown-link>
+
                         @else
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Connect') }}
