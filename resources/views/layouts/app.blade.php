@@ -25,6 +25,7 @@
 
 <body class="font-sans antialiased">
     <x-jet-banner />
+    <div id="react_root"></div>
 
     @livewire('navigation-menu')
 

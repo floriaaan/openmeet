@@ -13,9 +13,11 @@ return [
     // SuperController
     'super.header' => "OpenMeet Settings",
     'super.index' => "Settings",
+    'super.securitychecks' => "Security and privacy",
+    'super.appearence' => "Appearence and themes",
 
     'super.securitychecks.ok' => "All security checks have passed",
-    'super.securitychecks.notok' => "Security checks have failed",
+    'super.securitychecks.notok' => "Some of the security checks have failed",
     'super.update.ok' => "OpenMeet is up to date",
     'super.update.notok' => "OpenMeet is not up to date",
     'super.https.ok' => "HTTPS is enabled",

@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.13.13",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "alpinejs": "^2.7.3",
@@ -20,5 +21,10 @@
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.1"
+    },
+    "dependencies": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^5.2.0"
     }
 }

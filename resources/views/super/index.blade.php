@@ -5,8 +5,8 @@
             class="flex flex-col w-full md:w-64 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0 border-r border-gray-100"
             x-data="{ open: false }">
             <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
-                <a href="#"
-                    class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{{ __('messages.super.header') }}</a>
+                {{-- <a href="#"
+                    class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{{ __('messages.super.header') }}</a> --}}
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path x-show="!open" fill-rule="evenodd"
@@ -21,14 +21,15 @@
             <nav :class="{'block': open, 'hidden': !open}"
                 class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                    href="#">{{__('messages.overview')}}</a>
+                    href="#overview">{{ __('messages.overview') }}</a>
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                    href="#">Portfolio</a>
+                    href="#themes">{{ __('messages.super.appearence') }}</a>
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                    href="#">About</a>
+                    href="#security">{{ __('messages.super.securitychecks') }}</a>
+
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                     href="#">Contact</a>
-                <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         <span>Dropdown</span>
@@ -55,20 +56,21 @@
                                 href="#">Link #3</a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </nav>
         </div>
         <div class="col-span-3 w-full md:px-8 lg:px-24 pt-5">
 
             <div class="min-h-full min-w-full">
-                <div class="bg-white rounded-lg border border-gray-50 duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
+                <section id="overview"
+                    class="bg-white rounded-lg border-gray-100 border-2 duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
                     <div class="grid grid-cols-12 gap-3">
                         <!-- Meta Column -->
                         <div class="col-span-0 sm:col-span-2 text-center hidden sm:block">
                             <!-- Vote Counts -->
                             <div class="grid grid-rows-2">
                                 <div class="inline-block font-medium text-xl">
-                                    {{$count_events}}
+                                    {{ $count_events }}
                                 </div>
 
                                 <div class="inline-block font-medium text-sm">
@@ -80,16 +82,17 @@
                             <a href="#"
                                 class="grid grid-rows-2 mx-auto mb-3 py-1 w-4/5 xl:w-3/5 rounded-md bg-green-400">
                                 <div class="inline-block font-medium text-2xl text-white">
-                                    {{$count_groups}}
+                                    {{ $count_groups }}
                                 </div>
 
-                                <div class="inline-block font-medium text-white mx-1 mb-0 text-sm lg:text-md">{{ __('messages.groups') }}</div>
+                                <div class="inline-block font-medium text-white mx-1 mb-0 text-sm lg:text-md">
+                                    {{ __('messages.groups') }}</div>
                             </a>
 
                             <!-- View Counts -->
                             <div class="grid my-3">
                                 <span class="inline-block font-bold text-xs">
-                                    {{$count_users}} {{ __('messages.users') }}
+                                    {{ $count_users }} {{ __('messages.users') }}
                                 </span>
                             </div>
                         </div>
@@ -102,7 +105,7 @@
                                         <div class="inline-block font-light capitalize">
                                             <i class="uil uil-arrow-circle-up mr-1"></i>
                                             <span class="text-sm">
-                                                {{$count_events}} {{ __('messages.events') }}
+                                                {{ $count_events }} {{ __('messages.events') }}
                                             </span>
                                         </div>
                                     </div>
@@ -110,7 +113,7 @@
                                         <div class="inline-block font-light capitalize">
                                             <i class="uil uil-check-circle mr-1"></i>
                                             <span class="text-sm">
-                                                {{$count_groups}} {{ __('messages.groups') }}
+                                                {{ $count_groups }} {{ __('messages.groups') }}
                                             </span>
                                         </div>
                                     </div>
@@ -118,7 +121,7 @@
                                         <div class="inline-block">
                                             <i class="uil uil-eye mr-1"></i>
                                             <span class="text-sm capitalize font-light">
-                                                {{$count_users}} {{ __('messages.users') }}
+                                                {{ $count_users }} {{ __('messages.users') }}
                                             </span>
                                         </div>
                                     </div>
@@ -134,7 +137,8 @@
                             </div>
 
                             <div class="mt-2">
-                                <div class="sm:text-sm flex flex-row items-center md:text-md lg:text-lg text-gray-700 font-bold">
+                                <div
+                                    class="sm:text-sm flex flex-row items-center md:text-md lg:text-lg text-gray-700 font-bold">
                                     <x-jet-application-mark class="h-8 w-auto mr-3" />
                                     {{ env('APP_NAME') }} - OpenMeet
                                 </div>
@@ -159,14 +163,14 @@
                                         bg-red-400 hover:bg-red-500 duration-300 
                                         mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
                                         opacity-90 hover:opacity-100 text-xs">
-                                        Local : {{ $hash }}
+                                        Local Commit Hash : {{ $hash }}
                                     </div>
                                     <div href="#" class="inline-block rounded-full text-white 
                                         bg-yellow-400 hover:bg-yellow-500 duration-300 
                                         text-xs 
                                         mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
                                         opacity-90 hover:opacity-100">
-                                        Remote : {{ $remoteHash }}
+                                        Remote Commit Hash : {{ $remoteHash }}
                                     </div>
                                     {{-- <div href="#" class="inline-block rounded-full text-white 
                                         bg-green-400 hover:bg-green-500 duration-300 
@@ -175,7 +179,7 @@
                                         opacity-90 hover:opacity-100">
                                         Memcached
                                     </div> --}}
-                                    
+
                                 </div>
 
                                 <!-- User -->
@@ -192,23 +196,69 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <hr class="px-10 mb-5" />
-                <div class="flex flex-col  w-full bg-gray-700 md:rounded-md p-3">
-                    <h4 class="text-xl text-white font-semibold ml-5">
-                        {{ $remoteHash == $hash ? __('messages.super.securitychecks.ok') : __('messages.super.securitychecks.notok') }}
-                    </h4>
-                    <div class="flex p-1 mt-2 flex-row md:space-x-4 sm:space-y-1 md:space-y-0 flex-wrap">
-                        <div
-                            class="border text-xs px-2 {{ $remoteHash == $hash ? 'border-green-400 bg-green-100 text-green-600' : 'border-red-500 bg-red-100 text-red-700' }}  rounded-full">
-                            <?= $remoteHash == $hash ? '<i class="far fa-check-circle mr-2"></i>' . __('messages.super.update.ok') : '<i class="far fa-times-circle mr-2"></i>' . __('messages.super.update.notok') ?>
-                        </div>
-                        <div
-                            class="border text-xs px-2 {{ $https ? 'border-green-400 bg-green-100 text-green-600' : 'border-red-500 bg-red-100 text-red-700' }}  rounded-full">
-                            <?= $https ? '<i class="far fa-check-circle mr-2"></i>' . __('messages.super.https.ok') : '<i class="far fa-times-circle mr-2"></i>' . __('messages.super.https.notok') ?>
+                <section id="appearence" class="my-6">
+                    <h4 class="text-gray-700 font-semibold text-2xl tracking-wider pb-4">{{__('messages.super.appearence')}}</h4>
+
+                </section>
+                <hr class="px-10 mb-5" />
+                <section id="security" class="my-6">
+                    <h4 class="text-gray-700 font-semibold text-2xl tracking-wider pb-4">{{__('messages.super.securitychecks')}}</h4>
+
+                    <div class="flex flex-col  w-full bg-gray-700 md:rounded-md p-3">
+                            <h4 class="text-xl text-white font-semibold ml-5">
+                                {{ $remoteHash == $hash ? __('messages.super.securitychecks.ok') : __('messages.super.securitychecks.notok') }}
+                            </h4>
+                            <div class="flex p-1 mt-2 flex-row md:space-x-4 sm:space-y-1 md:space-y-0 flex-wrap">
+                                <div
+                                    class="border text-xs px-2 {{ $remoteHash == $hash ? 'border-green-400 bg-green-100 text-green-600' : 'border-red-500 bg-red-100 text-red-700' }}  rounded-full">
+                                    <?= $remoteHash == $hash ? '<i class="far fa-check-circle mr-2"></i>' . __('messages.super.update.ok') : '<i class="far fa-times-circle mr-2"></i>' . __('messages.super.update.notok') ?>
+                            </div>
+                            <div
+                                class="border text-xs px-2 {{ $https ? 'border-green-400 bg-green-100 text-green-600' : 'border-red-500 bg-red-100 text-red-700' }}  rounded-full">
+                                <?= $https ? '<i class="far fa-check-circle mr-2"></i>' . __('messages.super.https.ok') : '<i class="far fa-times-circle mr-2"></i>' . __('messages.super.https.notok') ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <hr class="px-10 mb-5" />
+                    <div class="space-y-2">
+                        
+                        <div class="flex flex-col border-2 w-full {{ $remoteHash == $hash ? 'border-green-100 bg-green-200 text-green-800' : 'border-red-100 bg-red-200 text-red-800' }}  md:rounded-md p-3">
+                            <h4 class="text-xl font-semibold ml-5 flex flex-row items-center">
+                                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                {{ $remoteHash == $hash ? __('messages.super.update.header.ok') : __('messages.super.update.header.notok') }}
+                            </h4>
+                            @if ($remoteHash != $hash)
+                            <hr class="my-2">
+                            <div class="flex p-1 mt-2 flex-row md:space-x-4 sm:space-y-1 md:space-y-0 flex-wrap">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut tempore nostrum cupiditate. Veritatis voluptatem ipsam quisquam tempora, necessitatibus explicabo repellat iste voluptas! Voluptate porro dolorem, officiis cum nam ullam praesentium!
+                            </div> 
+                            @endif
+                            
+                        </div>
+
+                        <div class="flex flex-col border-2 w-full {{ $https ? 'border-green-100 bg-green-200 text-green-800' : 'border-red-100 bg-red-200 text-red-800' }}  md:rounded-md p-3">
+                            <h4 class="text-xl font-semibold ml-5 flex flex-row items-center">
+                                @if ($https)
+                                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                @else
+                                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path></svg>
+                                @endif
+                                {{ $https ? __('messages.super.https.header.ok') : __('messages.super.https.header.notok') }}
+                            </h4>
+                            @if (!$https)
+                            <hr class="my-2 bg-red-800">
+
+                            <div class="flex p-1 mt-2 flex-row md:space-x-4 sm:space-y-1 md:space-y-0 flex-wrap">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut tempore nostrum cupiditate. Veritatis voluptatem ipsam quisquam tempora, necessitatibus explicabo repellat iste voluptas! Voluptate porro dolorem, officiis cum nam ullam praesentium!
+                            </div> 
+                            @endif
+                            
+                        </div>
+                    </div>
+                </section>
 
 
             </div>
