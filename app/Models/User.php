@@ -97,4 +97,13 @@ class User extends Authenticatable
     {
         return Group::where('admin_id', $this->id)->get();
     }
+
+    public function participating_events_incoming() {
+        $participations = Participation::where('user_id', $this->id)->get();
+
+        $incoming_events = [];
+        foreach($participations as $part) {
+            
+        }
+    }
 }

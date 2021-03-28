@@ -62,7 +62,7 @@
                         {{ __('messages.moreInfo') }}</h2>
                     <nav class="list-none mb-10">
                         <li>
-                            <a class="text-gray-600 hover:text-gray-800">{{ __('messages.devAPI') }}</a>
+                            <a class="text-gray-600 hover:text-gray-800">{{ __('messages.developers.api') }}</a>
                         </li>
                         <li>
                             <a class="text-gray-600 hover:text-gray-800">{{ __('messages.legals') }}</a>
@@ -87,20 +87,20 @@
 
                 <div class="lg:w-2/4 md:w-1/2 w-full px-4">
                     <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                        {{ __('messages.subscribe') }}</h2>
+                        {{ __('messages.newsletter') }}</h2>
                     <div
                         class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
                         <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
                             <label for="footer-field"
-                                class="leading-7 text-sm text-gray-600">{{ __('messages.footerField') }}</label>
+                                class="leading-7 text-sm text-gray-600">{{ __('messages.newsletter.label') }}</label>
                             <input type="text" id="footer-field" name="footer-field"
                                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out">
                         </div>
                         <button
-                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-primary-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition ease-in-out duration-150">{{ __('messages.submit') }}</button>
+                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-primary-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition ease-in-out duration-150">{{ __('messages.newsletter.submit') }}</button>
                     </div>
                     <p class="text-gray-500 text-sm mt-2 md:text-left text-center">
-                        {{ __('messages.footerDescription') }}
+                        {{ __('messages.newsletter.description') }}
                     </p>
                 </div>
             </div>

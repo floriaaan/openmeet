@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\Message;
 use Closure;
 use DateTime;
 use Illuminate\Http\Request;
@@ -35,15 +36,27 @@ class AppMiddleware
             ->orderBy('date_start', 'DESC')
             ->limit(3)
             ->get();
+        $groups = Group::inRandomOrder()->limit(2)->get();
 
-        $groups = auth()->user()->groups_admin();
-        if(count($groups) == 0) {
-            $groups = Group::inRandomOrder()->limit(3)->get();
+        $messages = [];
+
+        
+        if (auth()->check()) {
+            $events = Event::where('date_start', '>', new DateTime())
+                ->orderBy('date_start', 'DESC')
+                ->limit(3)
+                ->get();
+
+
+
+            $groups = auth()->user()->groups_admin();
+            $messages = Message::navbar();
         }
 
 
         View::share('nav_events', $events);
         View::share('nav_groups', $groups);
+        View::share('nav_messages', $messages);
         return $next($request);
     }
 }

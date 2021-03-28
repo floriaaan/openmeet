@@ -38,18 +38,22 @@
 
             <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 pr-5 space-x-5 lg:space-x-8 lg:ml-0">
                 @auth
-                    <x-jet-dropdown align="right" width="48">
+                    <x-jet-dropdown align="right" width="w-72">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 
                                 <span
                                     class="h-8 w-8 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-yellow-400 bg-yellow-200 hover:bg-yellow-300 transition duration-150 ease-in-out"
                                     style="background-color: #fcf0cf;">
                                     <i class="fas fa-bell text-yellow-400"></i>
                                     @if (true)
-                                        <span class="absolute rounded-full bg-red-600 h-2 w-2"
-                                            style="margin-top: -28px; margin-right:-28px"></span>
+                                        <span style="margin-top: -28px; margin-right:-28px" class="absolute flex justify-center items-center">
+                                            <span class="rounded-full animate-ping bg-red-400 opacity-75 h-3 w-3"></span>
+                                            <span class="rounded-full absolute bg-red-600 h-2 w-2"></span>
+                                        </span>
+
+
                                     @endif
                                 </span>
                                 {{-- <svg class="ml-1 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -61,6 +65,40 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('messages.message') }}
+                            </div>
+                            @forelse ($nav_messages as $message)
+                                <a {{-- href={{ route('message.show', ['message' => $message]) }} --}}
+                                    class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-yellow-400 hover:bg-yellow-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
+                                    <span
+                                        class="w-16 h-16 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
+                                            class="fas fa-users text-2xl"></i></span>
+                                    <div class="flex flex-col ml-2">
+                                        <span class="text-yellow-700 font-bold">{{ $message->content }}</span>
+                                        <span class="text-gray-400 text-xs">
+                                            @if ($message->sender_id == auth()->id())
+                                                {{ __('messages.message.to') }}
+                                                {{ \App\Models\User::find($message->receiver_id)->name }}
+                                            @else
+                                                {{ __('messages.message.from') }}
+                                                {{ \App\Models\User::find($message->sender_id)->name }}
+                                            @endif
+                                        </span>
+                                    </div>
+
+                                </a>
+                            @empty
+                                <div class="h-24 w-full flex justify-center items-center px-6">
+                                    {{ __('messages.message.empty') }}
+                                </div>
+
+
+                            @endforelse
+
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('messages.notification') }}
+                            </div>
                         </x-slot>
                     </x-jet-dropdown>
                 @else
@@ -71,7 +109,7 @@
                     <x-slot name="trigger">
 
                         <button
-                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <span
                                 class="h-8 w-8 bg-green-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none  focus:ring-1 focus:ring-offset-1 focus:ring-green-400  transition duration-150 ease-in-out">
 
@@ -114,7 +152,7 @@
                         @endif
 
 
-                        
+
 
                         <x-jet-dropdown-link href="{{ route('group.create') }}"
                             class="hover:text-green-400 hover:bg-green-50">
@@ -138,7 +176,7 @@
                     <x-slot name="trigger">
 
                         <button
-                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <span
                                 class="h-8 w-8 bg-purple-200 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none  focus:ring-1 focus:ring-offset-1 focus:ring-green-400  transition duration-150 ease-in-out">
 
@@ -259,7 +297,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                    this.closest('form').submit();"
+                                                                                                                        this.closest('form').submit();"
                                     class="hover:text-red-500 hover:bg-red-50">
                                     <i class="fas fa-lock mr-2"></i>
 

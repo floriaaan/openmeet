@@ -9,7 +9,16 @@ return [
     'events' => "events",
     'groups' => "groups",
     'users' => "users",
+    'members' => "members",
+    'participants' => "participants",
+
     'overview' => "Overview",
+
+    'create' => "Create",
+    'created' => "created at",
+
+    'edit' => "Edit",
+    'share' => "Share",
 
     // API
     'api.key' => "API key",
@@ -19,12 +28,21 @@ return [
     'openmeet.tagline' => "Meet the people interested in the subject you're into",
 
     // Group
+    "group" => "Group",
     "group.create" => "Create a group",
+    "group.create.description" => "Group together people who have the same interests as you",
+    "group.create.bonus" => "What an adventure that begins",
     "group.list" => "All groups",
+    "group.all" => "All groups",
+    "group.manage" => "Manage your groups",
+    "group.subscribed" => "Subscribed",
 
     // Event
+    "event." => "Events",
     "event.nearby" => "Nearby events",
     "event.nearby.description" => "All the events near you",
+    "event.create" => "Create an event",
+    "event.all" => "All events",
 
     // Profile Page
     'memberSince' => "Member since ",
@@ -45,5 +63,21 @@ return [
     'super.https.notok' => "HTTPS is not available",
 
     // OpenMeet
-    'openmeet.description' => "OpenMeet is the most powerful Content Management System for creating groups, it is focused on user experience and security."
+    'openmeet.description' => "OpenMeet is the most powerful Content Management System for creating groups, it is focused on user experience and security.",
+    
+    // Footer
+
+    "moreInfo" => "More informations",
+    "developers.api" => "API Documentation",
+    "legals" => "Terms & Legals",
+    "bug" => "Found a bug ?",
+
+    "about" => "About",
+    "repository" => "Github Repository",
+    "floriaaan" => "Floriaaan",
+    
+    "newsletter" => "Subscribe to the newsletter",
+    "newsletter.label" => "You will be informed of the latest information",
+    "newsletter.description" => "We promise not to spam you!",
+    "newsletter.submit" => "Submit",
 ];

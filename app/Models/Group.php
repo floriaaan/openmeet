@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,10 +38,22 @@ class Group extends Model
     }
 
     /**
-     * Get the events of the group
+     * Get the events of the group, sorted by incoming 
      */
     public function events()
     {
-        return Event::where('group_id', $this->id)->get();
+        $incoming = Event::where('group_id', $this->id)
+            ->where('date_start', ">=", new DateTime())->orderBy("date_start", "ASC")->get();
+
+        $past = Event::where('group_id', $this->id)
+            ->where('date_start', "<", new DateTime())->get();
+
+        $events = $incoming;
+
+        foreach ($past as $event) {
+            $events[] = $event;
+        }
+
+        return $events;
     }
 }
