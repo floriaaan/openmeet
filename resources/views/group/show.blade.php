@@ -216,6 +216,9 @@
 
 
                 </div>
+                <p class="border-t border-purple-200 mt-2 p-3 text-xs text-gray-600">
+                    {{ $event->description }}
+                </p>
             </div>
         @empty
 

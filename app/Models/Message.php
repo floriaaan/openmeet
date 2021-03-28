@@ -37,11 +37,11 @@ class Message extends Model
     }
 
 
-    public static function conversation($user)
+    public static function conversation($user_id)
     {
         return Message::where('sender_id', auth()->id())
-            ->where('receiver_id', $user->id)
-            ->orWhere('sender_id', $user->id)
+            ->where('receiver_id', $user_id)
+            ->orWhere('sender_id', $user_id)
             ->where('receiver_id', auth()->id())
             ->orderBy('id', 'ASC')
             ->get();
@@ -54,8 +54,7 @@ class Message extends Model
             ->orWhere('sender_id', $user_id)
             ->where('receiver_id', auth()->id())
             ->orderBy('id', 'DESC')
-            ->limit(1)
-            ->get();
+            ->firstOrFail();
     }
 
     public static function navbar()
@@ -65,10 +64,10 @@ class Message extends Model
 
         foreach ($users as $key => $user) {
             if ($key < 3) {
-                $last = Message::last($user);
-                foreach ($last as $message) {
-                    $messages[] = $message;
-                }
+                // $last = Message::last($user);
+                // foreach ($last as $message) {
+                    $messages[] = Message::last($user);
+                // }
             }
         }
         // var_dump($messages);
