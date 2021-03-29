@@ -47,8 +47,9 @@
                                     class="h-8 w-8 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-yellow-400 bg-yellow-200 hover:bg-yellow-300 transition duration-150 ease-in-out"
                                     style="background-color: #fcf0cf;">
                                     <i class="fas fa-bell text-yellow-400"></i>
-                                    @if (true)
-                                        <span style="margin-top: -28px; margin-right:-28px" class="absolute flex justify-center items-center">
+                                    @if ($nav_notifications_hasUnread)
+                                        <span style="margin-top: -28px; margin-right:-28px"
+                                            class="absolute flex justify-center items-center">
                                             <span class="rounded-full animate-ping bg-red-400 opacity-75 h-3 w-3"></span>
                                             <span class="rounded-full absolute bg-red-600 h-2 w-2"></span>
                                         </span>
@@ -69,7 +70,7 @@
                                 {{ __('messages.message') }}
                             </div>
                             @forelse ($nav_messages as $message)
-                                <a {{-- href={{ route('message.show', ['message' => $message]) }} --}}
+                                <a href={{ route('message.show', ['user_id' => $message->sender_id == auth()->id() ? $message->receiver_id : $message->sender_id]) }}
                                     class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-yellow-400 hover:bg-yellow-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
                                     <span
                                         class="w-16 h-16 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
@@ -297,7 +298,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                        this.closest('form').submit();"
+                                                                                                                            this.closest('form').submit();"
                                     class="hover:text-red-500 hover:bg-red-50">
                                     <i class="fas fa-lock mr-2"></i>
 

@@ -23,9 +23,10 @@ Route::middleware(['app'])->group(function () {
 
 
     Route::middleware(['auth'])->group(function () {
-        Route::prefix('message')->group(function() {
+        Route::prefix('message')->group(function () {
             Route::get('/', 'MessageController@index')->name('message.index');
             Route::get('/{user_id}', 'MessageController@show')->name('message.show');
+            Route::post('/', 'MessageController@store')->name('message.create');
         });
 
         Route::prefix('admin')->group(function () {

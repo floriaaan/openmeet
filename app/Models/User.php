@@ -14,7 +14,7 @@ use Faker\Factory;
 
 class User extends Authenticatable
 {
-    
+
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -75,6 +75,12 @@ class User extends Authenticatable
         });
     }
 
+    public function getAcronym()
+    {
+        $array = explode(' ', $this->name);
+        return $array[0][0] . $array[1][0];
+    }
+
 
     /**
      * Get the groups of the user.
@@ -98,12 +104,12 @@ class User extends Authenticatable
         return Group::where('admin_id', $this->id)->get();
     }
 
-    public function participating_events_incoming() {
+    public function participating_events_incoming()
+    {
         $participations = Participation::where('user_id', $this->id)->get();
 
         $incoming_events = [];
-        foreach($participations as $part) {
-            
+        foreach ($participations as $part) {
         }
     }
 }

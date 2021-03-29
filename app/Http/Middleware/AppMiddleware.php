@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Message;
+use App\Models\Notification;
 use Closure;
 use DateTime;
 use Illuminate\Http\Request;
@@ -39,6 +40,7 @@ class AppMiddleware
         $groups = Group::inRandomOrder()->limit(2)->get();
 
         $messages = [];
+        $hasUnread = false;
 
         
         if (auth()->check()) {
@@ -51,12 +53,15 @@ class AppMiddleware
 
             $groups = auth()->user()->groups_admin();
             $messages = Message::navbar();
+
+            $hasUnread = Notification::hasUnread();
         }
 
 
         View::share('nav_events', $events);
         View::share('nav_groups', $groups);
         View::share('nav_messages', $messages);
+        View::share('nav_notifications_hasUnread', $hasUnread);
         return $next($request);
     }
 }

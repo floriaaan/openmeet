@@ -10,6 +10,7 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'content', 'sender_id', 'receiver_id', 'is_read'
     ];
 
@@ -21,13 +22,14 @@ class Message extends Model
             ->orWhere('receiver_id', auth()->id())
             ->get();
 
+
         foreach ($messages as $message) {
             if ($message->sender_id == auth()->id()) {
-                if(!in_array($message->receiver_id, $users)) {
+                if (!in_array($message->receiver_id, $users)) {
                     $users[] = $message->receiver_id;
                 }
             } else {
-                if(!in_array($message->sender_id, $users)) {
+                if (!in_array($message->sender_id, $users)) {
                     $users[] = $message->sender_id;
                 }
             }
@@ -66,7 +68,7 @@ class Message extends Model
             if ($key < 3) {
                 // $last = Message::last($user);
                 // foreach ($last as $message) {
-                    $messages[] = Message::last($user);
+                $messages[] = Message::last($user);
                 // }
             }
         }

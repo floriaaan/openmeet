@@ -38,11 +38,28 @@ return [
     "group.subscribed" => "Subscribed",
 
     // Event
-    "event." => "Events",
+    "event" => "Events",
     "event.nearby" => "Nearby events",
     "event.nearby.description" => "All the events near you",
     "event.create" => "Create an event",
     "event.all" => "All events",
+
+    // Message
+    "message" => "Messages",
+    "message.to" => "to",
+    "message.from" => "from",
+    "message.you" => "You",
+    "message.send" => "Send",
+    "message.read" => "Read",
+    "message.read.not" => "Distributed",
+    "message.empty" => "No messages",
+    "message.conversation" => "Conversations",
+    "message.conversation.empty" => "No conversations",
+
+    // Notification
+    "notification" => "Notifications",
+    "notification.empty" => "No notifications",
+
 
     // Profile Page
     'memberSince' => "Member since ",
