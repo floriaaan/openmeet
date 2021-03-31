@@ -13,7 +13,7 @@ class SuperController extends Controller
     {
         $hash = [];
         exec("git log --pretty=format:'%h' -n 1 ..", $hash);
-        $hash = str_replace('\'', '', $hash[0]);
+        $hash = isset($hash[0]) ? str_replace('\'', '', $hash[0]) : "Can't retrieve hash";
         
         $api = json_decode(file_get_contents("https://api.github.com/repos/floriaaan/openmeet/commits/master", false, stream_context_create(array(
             'http' => array(
