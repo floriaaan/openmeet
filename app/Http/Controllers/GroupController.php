@@ -74,7 +74,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+        return view('group.create', ['group' => $group]);
     }
 
     /**
@@ -86,7 +86,19 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+        $request->validate([
+            'name' => "required",
+            'tags' => '',
+            'description' => 'required'
+        ]);
+
+        $group->name = $request->input('name');
+        $group->tags = ($request->input('tags') != null && $request->input('tags') != "") ? $request->input('tags') : $group->tags;
+        $group->description = $request->input('description');
+
+        $group->save();
+
+        return redirect(route('group.show', ['group' => $group]));
     }
 
     /**
