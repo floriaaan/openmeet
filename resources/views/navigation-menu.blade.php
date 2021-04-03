@@ -38,7 +38,7 @@
 
             <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 pr-5 space-x-5 lg:space-x-8 lg:ml-0">
                 @auth
-                    <x-jet-dropdown align="right" width="w-72">
+                    <x-jet-dropdown align="right" width="w-96">
                         <x-slot name="trigger">
                             <button
                                 class="inline-flex items-center  border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -66,8 +66,16 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <div class="block px-4 py-2 text-xs text-gray-400">
+                            <div class="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
                                 {{ __('messages.message') }}
+                                <a href="{{ route('message.index') }}" class="flex flex-row py-1 px-2 items-center text-yellow-300 hover:text-yellow-500 hover:bg-yellow-100 rounded transition duration-300">
+                                    <svg class="w-4 h-4 mr-1" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                    {{__('messages.more')}}
+                                </a>
                             </div>
                             @forelse ($nav_messages as $message)
                                 <a href={{ route('message.show', ['user_id' => $message->sender_id == auth()->id() ? $message->receiver_id : $message->sender_id]) }}
@@ -298,7 +306,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                            this.closest('form').submit();"
+                                                                                                                                    this.closest('form').submit();"
                                     class="hover:text-red-500 hover:bg-red-50">
                                     <i class="fas fa-lock mr-2"></i>
 

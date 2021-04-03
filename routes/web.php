@@ -13,24 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['app'])->group(function () {
-    Route::get('/', 'ApplicationController@index')->name('index');
+Route::get('/', 'ApplicationController@index')->name('index');
 
-    Route::resources([
-        'group' => 'GroupController',
-        'event' => 'EventController',
-    ]);
+Route::resources([
+    'group' => 'GroupController',
+    'event' => 'EventController',
+]);
 
 
-    Route::middleware(['auth'])->group(function () {
-        Route::prefix('message')->group(function () {
-            Route::get('/', 'MessageController@index')->name('message.index');
-            Route::get('/{user_id}', 'MessageController@show')->name('message.show');
-            Route::post('/', 'MessageController@store')->name('message.create');
-        });
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('message')->group(function () {
+        Route::get('/', 'MessageController@index')->name('message.index');
+        Route::get('/{user_id}', 'MessageController@show')->name('message.show');
+        Route::post('/', 'MessageController@store')->name('message.create');
+    });
 
-        Route::prefix('admin')->group(function () {
-            Route::get('/', 'SuperController@index')->name('admin.index');
-        });
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'SuperController@index')->name('admin.index');
     });
 });

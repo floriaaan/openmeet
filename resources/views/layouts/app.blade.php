@@ -23,7 +23,7 @@
             @elseif (strpos(url()->current(), "event") !== false)
             --openmeet-active: #8B5CF6;
             @elseif (strpos(url()->current(), "profile") !== false)
-            --openmeet-active: #ef4444;
+            --openmeet-active: #EF4444;
             @else
             --openmeet-active: #007bff;
             @endif

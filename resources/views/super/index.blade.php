@@ -59,11 +59,11 @@
                 </div> --}}
             </nav>
         </div>
-        <div class="col-span-3 w-full md:px-8 lg:px-24 pt-5">
+        <div class="col-span-3 w-full px-3 md:px-8 lg:px-24 md:pt-5">
 
             <div class="min-h-full min-w-full">
                 <section id="overview"
-                    class="bg-white rounded-lg border-gray-100 border-2 duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
+                    class="bg-white rounded-lg border-gray-100 border-2 duration-500 px-2 sm:px-6 md:px-2 py-4 md:my-6">
                     <div class="grid grid-cols-12 gap-3">
                         <!-- Meta Column -->
                         <div class="col-span-0 sm:col-span-2 text-center hidden sm:block">
@@ -228,7 +228,7 @@
                         <div class="flex flex-col border-2 w-full {{ $remoteHash == $hash ? 'border-green-100 bg-green-200 text-green-800' : 'border-red-100 bg-red-200 text-red-800' }}  md:rounded-md p-3">
                             <h4 class="text-xl font-semibold ml-5 flex flex-row items-center">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                {{ $remoteHash == $hash ? __('messages.super.update.header.ok') : __('messages.super.update.header.notok') }}
+                                {{ $remoteHash == $hash ? __('messages.super.update.ok') : __('messages.super.update.notok') }}
                             </h4>
                             @if ($remoteHash != $hash)
                             <hr class="my-2">
@@ -246,7 +246,7 @@
                                 @else
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01"></path></svg>
                                 @endif
-                                {{ $https ? __('messages.super.https.header.ok') : __('messages.super.https.header.notok') }}
+                                {{ $https ? __('messages.super.https.ok') : __('messages.super.https.notok') }}
                             </h4>
                             @if (!$https)
                             <hr class="my-2 bg-red-800">

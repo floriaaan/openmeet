@@ -60,6 +60,11 @@ return [
     "notification" => "Notifications",
     "notification.empty" => "No notifications",
 
+    // Authentication
+    'auth.login' => "Log in",
+    'auth.register' => "Register",
+    'auth.register.title' => "Doesn't have an account ?",
+    'auth.password.forgot' => "I have forgotten my password",
 
     // Profile Page
     'memberSince' => "Member since ",
