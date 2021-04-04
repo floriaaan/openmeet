@@ -18,13 +18,13 @@
                                     {{ $event->group()->name }}
                                 </h2>
                                 <div class="w-12 h-1 bg-green-500 rounded mt-2 mb-4"></div>
-                                <p class="text-base">{{ $event->group()->description }}</p>
+                                <p class="text-xs">{{ $event->group()->description }}</p>
                             </div>
                         </a>
                     </div>
                     <div
                         class="sm:w-2/3 sm:py-8 sm:border-l sm:pl-5 border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                        <p class="leading-relaxed text-lg mb-4">{{ $event->description }}</p>
+                        <p class="leading-relaxed text-sm mb-4">{{ $event->description }}</p>
                         <p class="inline-flex items-center">
                             <span class="border-r border-gray-300 pr-3">
                                 {{ __('messages.event.start') }} <span
@@ -51,8 +51,8 @@
                                             <path
                                                 d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                         </svg>
+                                        {{ __('messages.edit') }}
                                     </a>
-                                    {{ __('messages.edit') }}
                                 </span>
                             @endif
 
