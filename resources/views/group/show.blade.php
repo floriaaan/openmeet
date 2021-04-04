@@ -167,7 +167,7 @@
                     </div>
                     <div class="mt-5 flex lg:mt-0 lg:ml-4">
                         <span class="block">
-                            <a href="{{ route('event.show', ['event', $event]) }}"
+                            <a href="{{ route('event.show', ['event' => $event]) }}"
                                 class="inline-flex transition duration-300 items-center justify-center w-8 h-8 border border-purple-100 rounded-md text-sm font-medium text-white bg-purple-400 hover:bg-purple-600 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-purple-500">
                                 <i class="far fa-eye"></i>
                             </a>
@@ -200,16 +200,33 @@
                         </span>
 
                         <span class="ml-3">
-                            <a
-                                class="cursor-pointer transition duration-300 inline-flex items-center justify-center w-8 h-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-purple-500">
-                                <!-- Heroicon name: solid/check -->
-                                <svg class="h-4 w-4 -mt-1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
+                            <form method="POST" action="{{ route('event.participate') }}">
+                                @csrf
+                                <input hidden name="event" value="{{ $event->id }}" />
+                                @if ($event->is_auth_participating() != false)
+                                    <button type="submit"
+                                        class="cursor-pointer transition duration-300 inline-flex items-center justify-center w-8 h-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-purple-500">
+                                        <!-- Heroicon name: solid/check -->
+                                        <svg class="h-4 w-4 -mt-1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                @else
+                                    <button type="submit"
+                                        class="cursor-pointer transition duration-300 inline-flex items-center justify-center w-8 h-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-purple-500">
+                                        <!-- Heroicon name: solid/check -->
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                @endif
+                            </form>
                         </span>
 
                     </div>

@@ -22,6 +22,11 @@ Route::resources([
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('event')->group(function () {
+        Route::post('/participate', 'EventController@participate')->name('event.participate');
+    });
+
     Route::prefix('message')->group(function () {
         Route::get('/', 'MessageController@index')->name('message.index');
         Route::get('/{user_id}', 'MessageController@show')->name('message.show');

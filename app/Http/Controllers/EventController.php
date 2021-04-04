@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Participation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -60,7 +62,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        var_dump($event);
+        return view('event.show', ['event' => $event]);
     }
 
     /**
@@ -95,5 +97,26 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+
+    public function participate(Request $request)
+    {
+        $request->validate(['event' => 'exists:events,id']);
+        $event = Event::find($request->input('event'));
+
+        $flag = $event->is_auth_participating();
+
+        if ($flag != false) {
+            $participation = Participation::where('user_id', $flag)->firstOrFail();
+            $participation->delete();
+        } else {
+            $participation = Participation::create([
+                'event_id' => $event->id,
+                'user_id' => Auth::id()
+            ]);
+        }
+
+        return redirect(route('event.show', ['event' => $event]));
     }
 }
