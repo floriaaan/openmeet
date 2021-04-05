@@ -13,8 +13,20 @@ class ApplicationController extends Controller
             ->orderBy('date_start', 'ASC')
             ->take(3)->get();
 
-        return view('welcome', [
+        return view('index', [
             'nearby' => $nearby
         ]);
+    }
+
+    public function search_get()
+    {
+
+        return view('search');
+    }
+
+    public function search_post(Request $request)
+    {
+
+        return view('search', ['results' => [$request->input('query')]]);
     }
 }

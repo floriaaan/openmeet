@@ -133,7 +133,7 @@
                         <h2 class="text-xl font-bold leading-7 text-purple-400 sm:text-3xl sm:truncate">
                             {{ $event->name }}
                         </h2>
-                        <div class="mt-1 flex flex-col lg:flex-row lg:flex-wrap lg:mt-0 lg:space-x-6 ">
+                        <div class="mt-1 flex flex-col  lg:flex-wrap">
 
                             <div
                                 class="mt-2 flex items-center text-sm text-gray-500 hover:text-gray-700 duration-200 transition">

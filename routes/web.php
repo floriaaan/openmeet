@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'ApplicationController@index')->name('index');
+Route::get('/search', 'ApplicationController@search_get')->name('search.get');
+Route::post('/search', 'ApplicationController@search_post')->name('search.post');
 
 Route::resources([
     'group' => 'GroupController',
@@ -23,6 +25,9 @@ Route::resources([
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::prefix('group')->group(function () {
+        Route::post('/subscribe', 'GroupController@subscribe')->name('group.subscribe');
+    });
     Route::prefix('event')->group(function () {
         Route::post('/participate', 'EventController@participate')->name('event.participate');
     });

@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -111,4 +118,17 @@ class GroupController extends Controller
     {
         //
     }
+
+    /**
+     * Subscribe Auth user if not subscribe already and unsubscribe if already
+     * 
+     * @param $request
+     * @return
+     */
+    public function subscribe(Request $request)
+    {
+        return;
+    }
+
+    
 }

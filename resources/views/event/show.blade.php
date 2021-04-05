@@ -7,7 +7,7 @@
                         src="https://dummyimage.com/1200x500">
                 </div>
                 <div class="flex flex-col sm:flex-row mt-10">
-                    <div class="sm:w-1/3 mx-5 sm:pr-3 rounded bg-green-50 text-center sm:py-8">
+                    <div class="sm:w-1/3 mx-5 sm:px-5 rounded bg-green-50 text-center sm:py-8">
                         <a href="{{ route('group.show', ['group' => $event->group()]) }}">
                             <div
                                 class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-green-200 text-green-400">

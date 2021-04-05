@@ -23,15 +23,6 @@ class AppMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        // $notifications = [];
-        // if (auth()->check()) {
-
-        // }
-
-        // $messages = [];
-        // if (auth()->check()) {
-
-        // }
 
         $events = Event::where('date_start', '>', new DateTime())
             ->orderBy('date_start', 'DESC')

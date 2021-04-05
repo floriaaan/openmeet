@@ -4,27 +4,31 @@
     <header class="text-gray-600 body-font md:block">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <div class="hidden md:flex lg:w-2/5 pl-5 flex-wrap space-x-10 items-center text-base md:ml-auto">
-                <div class="relative text-gray-600 w-2/3 flex flex-row items-center">
-                    <input type="search" name="serch" placeholder="{{ __('messages.search') }}"
-                        class="bg-gray-50 appearance-none border-2 border-gray-50 w-full py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out h-10 px-5 pr-28 rounded-full text-sm">
-                    <div class="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
-                        <span style="opacity: 1;"
-                            class="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 rounded-md bg-white"><span
-                                class="sr-only">Press </span><kbd class="font-sans"><abbr class="no-underline">Ctrl
-                                </abbr></kbd><span class="sr-only"> and </span><kbd class="font-sans">K</kbd><span
-                                class="sr-only"> to search</span></span>
-                        <button type="submit">
-                            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
-                                xml:space="preserve" width="512px" height="512px">
-                                <path
-                                    d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                            </svg>
-                        </button>
-                    </div>
+                <form action="{{ route('search.post') }}" method="POST" class="w-full">
+                    @csrf
+                    <div class="relative text-gray-600 w-2/3 flex flex-row items-center">
+                        <input type="search" name="query" placeholder="{{ __('messages.search') }}"
+                            class="bg-gray-50 appearance-none border-2 border-gray-50 w-full py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-100 transition-colors duration-200 ease-in-out h-10 px-5 pr-28 rounded-full text-sm">
+                        <div
+                            class="absolute right-0 mr-4 hover:border-transparent flex flex-row items-center space-x-5">
+                            <span style="opacity: 1;"
+                                class="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 rounded-md bg-white"><span
+                                    class="sr-only">Press </span><kbd class="font-sans"><abbr class="no-underline">Ctrl
+                                    </abbr></kbd><span class="sr-only"> and </span><kbd class="font-sans">K</kbd><span
+                                    class="sr-only"> to search</span></span>
+                            <button type="submit">
+                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                                    xml:space="preserve" width="512px" height="512px">
+                                    <path
+                                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </button>
+                        </div>
 
-                </div>
+                    </div>
+                </form>
             </div>
 
 
@@ -47,7 +51,7 @@
                                     class="h-8 w-8 rounded-full flex items-center justify-center text-sm border-2 border-transparent focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-yellow-400 bg-yellow-200 hover:bg-yellow-300 transition duration-150 ease-in-out"
                                     style="background-color: #fcf0cf;">
                                     <i class="fas fa-bell text-yellow-400"></i>
-                                    @if ($nav_notifications_hasUnread)
+                                    @if (isset($nav_notifications_hasUnread) && $nav_notifications_hasUnread == true)
                                         <span style="margin-top: -28px; margin-right:-28px"
                                             class="absolute flex justify-center items-center">
                                             <span class="rounded-full animate-ping bg-red-400 opacity-75 h-3 w-3"></span>
@@ -68,42 +72,49 @@
                         <x-slot name="content">
                             <div class="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
                                 {{ __('messages.message') }}
-                                <a href="{{ route('message.index') }}" class="flex flex-row py-1 px-2 items-center text-yellow-300 hover:text-yellow-500 hover:bg-yellow-100 rounded transition duration-300">
-                                    <svg class="w-4 h-4 mr-1" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <a href="{{ route('message.index') }}"
+                                    class="flex flex-row py-1 px-2 items-center text-yellow-300 hover:text-yellow-500 hover:bg-yellow-100 rounded transition duration-300">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
-                                    {{__('messages.more')}}
+                                    {{ __('messages.more') }}
                                 </a>
                             </div>
-                            @forelse ($nav_messages as $message)
-                                <a href={{ route('message.show', ['user_id' => $message->sender_id == auth()->id() ? $message->receiver_id : $message->sender_id]) }}
-                                    class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-yellow-400 hover:bg-yellow-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
-                                    <span
-                                        class="w-16 h-16 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
-                                            class="fas fa-users text-2xl"></i></span>
-                                    <div class="flex flex-col ml-2">
-                                        <span class="text-yellow-700 font-bold">{{ $message->content }}</span>
-                                        <span class="text-gray-400 text-xs">
-                                            @if ($message->sender_id == auth()->id())
-                                                {{ __('messages.message.to') }}
-                                                {{ \App\Models\User::find($message->receiver_id)->name }}
-                                            @else
-                                                {{ __('messages.message.from') }}
-                                                {{ \App\Models\User::find($message->sender_id)->name }}
-                                            @endif
-                                        </span>
-                                    </div>
+                            @if (isset($nav_messages))
+                                @forelse ($nav_messages as $message)
+                                    <a href={{ route('message.show', ['user_id' => $message->sender_id == auth()->id() ? $message->receiver_id : $message->sender_id]) }}
+                                        class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-yellow-400 hover:bg-yellow-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
+                                        <span
+                                            class="w-16 h-16 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
+                                                class="fas fa-users text-2xl"></i></span>
+                                        <div class="flex flex-col ml-2">
+                                            <span class="text-yellow-700 font-bold">{{ $message->content }}</span>
+                                            <span class="text-gray-400 text-xs">
+                                                @if ($message->sender_id == auth()->id())
+                                                    {{ __('messages.message.to') }}
+                                                    {{ \App\Models\User::find($message->receiver_id)->name }}
+                                                @else
+                                                    {{ __('messages.message.from') }}
+                                                    {{ \App\Models\User::find($message->sender_id)->name }}
+                                                @endif
+                                            </span>
+                                        </div>
 
-                                </a>
-                            @empty
-                                <div class="h-24 w-full flex justify-center items-center px-6">
-                                    {{ __('messages.message.empty') }}
-                                </div>
+                                    </a>
+                                @empty
+                                    <div class="h-24 w-full flex justify-center items-center px-6">
+                                        {{ __('messages.message.empty') }}
+                                    </div>
 
 
                             @endforelse
+                        @else
+                            <div class="h-24 w-full flex justify-center items-center px-6">
+                                {{ __('messages.message.empty') }}
+                            </div>
+                            @endif
 
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('messages.notification') }}
@@ -140,7 +151,8 @@
                             {{ __('messages.group') }}
                         </div>
 
-                        @if (count($nav_groups) > 0)
+
+                        @if (isset($nav_groups) && count($nav_groups) > 0)
                             <div class="space-y-2">
                                 @foreach ($nav_groups as $group)
                                     <a href={{ route('group.show', ['group' => $group]) }}
@@ -206,7 +218,7 @@
                             {{ __('messages.event') }}
                         </div>
 
-                        @if (count($nav_events) > 0)
+                        @if (isset($nav_events) && count($nav_events) > 0)
                             <div class="space-y-2">
                                 @foreach ($nav_events as $event)
                                     <a href={{ route('event.show', ['event' => $event]) }}
@@ -306,7 +318,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                                                                                                    this.closest('form').submit();"
+                                                                                                                                                this.closest('form').submit();"
                                     class="hover:text-red-500 hover:bg-red-50">
                                     <i class="fas fa-lock mr-2"></i>
 
