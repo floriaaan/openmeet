@@ -87,8 +87,8 @@
                                     <a href={{ route('message.show', ['user_id' => $message->sender_id == auth()->id() ? $message->receiver_id : $message->sender_id]) }}
                                         class='flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 hover:text-yellow-400 hover:bg-yellow-50 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out'>
                                         <span
-                                            class="w-16 h-16 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
-                                                class="fas fa-users text-2xl"></i></span>
+                                            class="w-8 h-8 flex items-center justify-center rounded text-yellow-500 bg-yellow-200 p-5"><i
+                                                class="fas fa-users text-lg"></i></span>
                                         <div class="flex flex-col ml-2">
                                             <span class="text-yellow-700 font-bold">{{ $message->content }}</span>
                                             <span class="text-gray-400 text-xs">

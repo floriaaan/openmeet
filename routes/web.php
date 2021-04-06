@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('message')->group(function () {
         Route::get('/', 'MessageController@index')->name('message.index');
+        Route::get('/new', 'MessageController@new')->name('message.new');
         Route::get('/{user_id}', 'MessageController@show')->name('message.show');
         Route::post('/', 'MessageController@store')->name('message.create');
     });

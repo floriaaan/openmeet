@@ -15,6 +15,9 @@
             </section>
 
             <section class="mt-10">
+                @error('password', 'email')
+                    <div class="text-red-500 font-bold">{{ $message }}</div>
+                @enderror
                 <form class="flex flex-col" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-6 pt-3 ">

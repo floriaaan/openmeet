@@ -77,4 +77,10 @@ class MessageController extends Controller
 
         return redirect(route('message.show', ['user_id' => $request->input('receiver_id')]));
     }
+
+    public function new()
+    {
+        $this->addConversationList();
+        return view('message.new', ['users' => User::all()]);
+    }
 }

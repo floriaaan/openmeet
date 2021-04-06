@@ -38,4 +38,9 @@ class APIController extends Controller
             return response(json_encode(['error' => $e->getMessage()]), 500);
         }
     }
+
+    public function users()
+    {
+        return response(json_encode(User::all()), 200);
+    }
 }

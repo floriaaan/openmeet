@@ -43,6 +43,8 @@ return [
     "event.nearby.description" => "All the events near you",
     "event.create" => "Create an event",
     "event.all" => "All events",
+    "event.start" => "Starts at",
+    "event.end" => "Ends at",
 
     // Message
     "message" => "Messages",

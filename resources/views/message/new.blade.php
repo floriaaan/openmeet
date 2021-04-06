@@ -1,4 +1,6 @@
 <x-app-layout>
+
+
     <div class="flex h-screen antialiased text-gray-800">
         <div class="flex flex-col lg:flex-row h-full w-full overflow-x-hidden">
             <div class="hidden lg:flex flex-col lg:w-1/4 py-4 pl-6 pr-2 bg-white flex-shrink-0">
@@ -19,7 +21,7 @@
                         </span>
                     </div>
                     <div class="flex flex-col space-y-1 mt-4 -mx-2 max-h-96 overflow-y-auto">
-                        <a href="{{route('message.new')}}"
+                        <a href="{{ route('message.new') }}"
                             class="flex flex-row items-center hover:bg-gray-100 rounded-lg p-2 duration-200 transition">
                             <div
                                 class="flex items-center justify-center h-12 w-12 bg-yellow-200 text-yellow-600 font-semibold rounded-full">
@@ -66,80 +68,13 @@
                 <div class="flex flex-col flex-auto flex-shrink-0 rounded-lg bg-gray-100 h-full p-4">
                     <div class="flex flex-col h-full overflow-x-auto mb-4">
                         <div class="flex flex-col h-full">
-                            @if (isset($messages))
-                                <div class="grid grid-cols-12 gap-y-2">
-                                    @forelse ($messages as $message)
-
-                                        @if ($message->sender_id != auth()->id())
-                                            <div class="col-start-1 col-end-8 p-3 rounded-sm">
-                                                <div class="flex flex-row items-center">
-                                                    <div
-                                                        class="flex items-center justify-center h-10 w-10 rounded-full bg-yellow-200 text-yellow-600 font-bold flex-shrink-0">
-                                                        {{ \App\Models\User::find($message->sender_id)->getAcronym() }}
-                                                    </div>
-                                                    <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-lg">
-                                                        <div>{{ $message->content }}</div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="float-left my-1 text-xs text-gray-400">
-                                                    {{ $message->created_at }}
-                                                </div>
-                                            </div>
-
-                                        @else
-                                            <div class="col-start-6 col-end-13 p-3 rounded-sm">
-                                                <div class="flex items-center justify-start flex-row-reverse ">
-                                                    <div
-                                                        class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 text-gray-600 font-bold flex-shrink-0">
-                                                        {{ \App\Models\User::find($message->sender_id)->getAcronym() }}
-                                                    </div>
-                                                    <div class="relative mr-3 text-sm bg-white py-2 px-4 shadow rounded-lg">
-                                                        <div>{{ $message->content }}</div>
-
-                                                    </div>
-                                                </div>
-
-                                                @if ($loop->last)
-                                                    <div class="float-right flex flex-row my-1 text-xs text-gray-400">
-                                                        {{ $message->created_at }} <span class="mx-1">&bull;</span>
-                                                        @if (!$message->is_read)
-                                                            <div class="font-bold">
-                                                                {{ __('messages.message.read.not') }}</div>
-                                                        @else
-                                                            <div class="font-bold">
-                                                                {{ __('messages.message.read') }}</div>
-
-                                                        @endif
-                                                    </div>
-
-                                                @else
-                                                    <div class="float-right my-1 text-xs text-gray-400">
-                                                        {{ $message->created_at }}
-                                                    </div>
-                                                @endif
-
-                                            </div>
-
-                                        @endif
-
-
-
-
-                                    @empty
-                                        <p class="col-span-12 w-full flex justify-center items-center h-96">
-                                            {{ __('messages.message.conversation.empty') }}</p>
-                            @endforelse
+                            <div class="w-full">
+                                <select id="receiver_id" name="receiver_id" placeholder="..."></select>
+                            </div>
 
                         </div>
-                    @else
-                        <p class="w-full flex justify-center items-center h-96">
-                            {{ __('messages.message.conversation.empty') }}</p>
-                        @endif
-
                     </div>
-                </div>
-                @if (isset($messages) && $messages != null)
+
                     <form action="{{ route('message.create') }}" method="POST">
                         @csrf
                         <div class="flex flex-row items-center h-16 rounded-lg bg-white w-full px-4">
@@ -183,12 +118,50 @@
                                 </button>
                             </div>
                         </div>
-                        <input hidden name="receiver_id" value={{ $receiver_id }} />
                     </form>
-                @endif
+
+                </div>
             </div>
         </div>
     </div>
-    </div>
+
+    {{-- <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/js/tom-select.complete.min.js"></script>
+    <script>
+        // (async () => {
+        //     const res = await fetch("{{ route('api.user.all') }}");
+        //     const body = await res.json();
+        //     const select = document.getElementById('receiver_id');
+
+        //     body.forEach(element => {
+        //         select.innerHTML += `<option value="${element.id}">${element.name}</option>`
+        //     });
+        // })()
+
+        new TomSelect('#receiver-id', {
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            load: function(query, callback) {
+                var self = this;
+                if (self.loading > 1) {
+                    callback();
+                    return;
+                }
+
+                var url = "{{ route('api.user.all') }}";
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                        self.settings.load = null;
+                    }).catch(() => {
+                        callback();
+                    });
+
+            }
+        });
+
+    </script> --}}
 
 </x-app-layout>

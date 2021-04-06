@@ -20,4 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::get('/spotlight/{token}', 'APIController@spotlight')->name('api.spotlight');
+
+    Route::prefix('user')->group(function () {
+        Route::get('/', 'APIController@users')->name('api.user.all');
+    });
 });
