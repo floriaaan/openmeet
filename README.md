@@ -1,6 +1,26 @@
+# OpenMeet
+
+## Installation
+
+### LAMP stack
+
+Coming soon 
+
 ### Docker install
 
-Simply put in the .env DB_HOST to db.
+Set up the .env file
+
+```
+cp .env{.example,}
+```
+
+Replace environment variables
+```
+DB_HOST=db
+DB_DATABASE=openmeet_db
+DB_USERNAME=openmeet
+DB_PASSWORD=password
+```
 
 Build the Docker image
 
