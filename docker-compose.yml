@@ -43,6 +43,14 @@ services:
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - openmeet
+      
+  adminer:
+    image: adminer
+    #restart: always
+    ports:
+      - 8080:8080
+    links:
+      - db
 
 networks:
   openmeet:
