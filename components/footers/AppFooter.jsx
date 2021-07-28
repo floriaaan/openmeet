@@ -29,7 +29,7 @@ export const AppFooter = () => {
         .doc(user.uid)
         .set({
           uid: user.uid,
-          fullname: user.fullname,
+          fullName: user.fullName,
           email: user.email,
         });
       console.log(response);

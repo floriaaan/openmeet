@@ -38,13 +38,13 @@ export const UserDropdown = () => {
           {user ? (
             <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
               <img
-                alt={user?.fullname}
+                alt={user?.fullName}
                 className="w-full h-full align-middle border-none rounded-full "
                 src={
                   user?.photoUrl
                     ? user.photoUrl
                     : "https://ui-avatars.com/api/?name=" +
-                      user?.fullname +
+                      user?.fullName +
                       "&color=007bff&background=054880"
                 }
               />

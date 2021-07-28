@@ -14,7 +14,7 @@ export default function Index() {
           }}
         ></div>
         <main className="z-20 flex flex-col items-center justify-center w-full">
-          <div className="w-full px-4 py-16 mx-6 bg-gray-100 bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-30 max-w-7xl sm:px-6 lg:py-32 xl:py-48 lg:px-8 lg:flex lg:items-center lg:justify-between rounded-xl">
+          <div className="w-full px-4 py-16 mx-6 my-3 bg-gray-100 bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-30 max-w-7xl sm:px-6 lg:py-32 xl:py-48 lg:px-8 lg:flex lg:items-center lg:justify-between rounded-xl">
             <h2 className="font-extrabold tracking-tight text-gray-900 dark:text-gray-100 ">
               <span className="block text-xl sm:text-3xl">
                 OpenMeet, the app for your needs

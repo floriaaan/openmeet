@@ -31,7 +31,7 @@ export default function GroupPage({
         .doc(slug)
         .collection("subscribers")
         .doc(user.uid)
-        .set({ fullname: user.fullname, photoUrl: user.photoUrl });
+        .set({ fullName: user.fullName, photoUrl: user.photoUrl });
     }
   };
 

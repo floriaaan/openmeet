@@ -10,19 +10,19 @@ export const AvatarGroup = ({ users, limit }) => {
               href={"/profile/" + user.id}
             //   as={
             //     "/profile/" +
-            //     user.fullname.toLowerCase().replace(" ", "-").replace("'", "")
+            //     user.fullName.toLowerCase().replace(" ", "-").replace("'", "")
             //   }
             >
               <img
-                className="inline-block w-6 h-6 rounded-full cursor-pointer ring-2 ring-white"
+                className="inline-block w-6 h-6 rounded-full cursor-pointer ring-2 ring-white dark:ring-gray-900"
                 src={
                   user.photoUrl
                     ? user.photoUrl
                     : "https://ui-avatars.com/api/?name=" +
-                      user.fullname +
+                      user.fullName +
                       "&color=007bff&background=054880"
                 }
-                alt={user.fullname}
+                alt={user.fullName}
               />
             </Link>
           )

@@ -39,13 +39,13 @@ const ProfileOverview = ({ user, auth }) => {
             user.photoUrl
               ? user.photoUrl
               : "https://ui-avatars.com/api/?name=" +
-                user.fullname +
+                user.fullName +
                 "&color=007bff&background=054880"
           }
-          alt={user.fullname}
+          alt={user.fullName}
         />
         <div className="max-w-xl mt-4 text-lg font-bold tracking-widest uppercase ">
-          {user.fullname}
+          {user.fullName}
         </div>
         <div className="flex items-center text-sm tracking-wide">
           <svg

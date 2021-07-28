@@ -33,14 +33,14 @@ export default function GroupCreatePage() {
           tags: tags.split(";"),
           description,
           createdAt: new Date().toISOString(),
-          admin: { uid: user.uid, fullname: user.fullname },
+          admin: { uid: user.uid, fullName: user.fullName },
         });
       await firestore
         .collection("groups")
         .doc(slug)
         .collection("subscribers")
         .doc(user.uid)
-        .set({ fullname: user.fullname, photoUrl: user.photoUrl });
+        .set({ fullName: user.fullName, photoUrl: user.photoUrl });
       // if (response.ok) {
       Router.push("/group/" + slug);
       // }
