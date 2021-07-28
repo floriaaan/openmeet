@@ -1,13 +1,16 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
+import { firestore } from "@libs/firebase";
 import { formatDistance } from "date-fns";
 
-export default function ProfilePage() {
+export default function ProfilePage({ firebaseUser }) {
   const { user } = useAuth();
+
+  console.log({ user, firebaseUser });
   return (
     <AppLayout>
       <div className="grid grid-cols-3 gap-6 p-6">
-        <ProfileOverview user={user} />
+        <ProfileOverview user={firebaseUser} auth={user} />
         <div className="h-full col-span-2 bg-red-500"></div>
         <div className="h-full col-span-2 bg-green-500"></div>
       </div>
@@ -15,19 +18,21 @@ export default function ProfilePage() {
   );
 }
 
-const ProfileOverview = ({ user }) => {
+const ProfileOverview = ({ user, auth }) => {
   return (
     <div className="h-full row-span-2 px-4 py-5 bg-gray-800 shadow sm:p-6 rounded-xl">
       <div className="flex flex-col items-center justify-center text-white">
-        <div className="flex flex-row-reverse items-center w-full mb-3 text-gray-400">
-          <div className="flex flex-row items-center text-xs font-bold transition duration-300 group">
-            <span className="invisible p-3 -mt-12 text-white transition duration-300 bg-gray-600 shadow-lg rounded-xl group-hover:visible">
-              {user.uid}
-            </span>
-            <i className="w-3 h-3 mr-1 fas fa-link" />
-            API key
+        {user.uid === auth?.uid && (
+          <div className="flex flex-row-reverse items-center w-full mb-3 text-gray-400">
+            <div className="flex flex-row items-center text-xs font-bold transition duration-300 group">
+              <span className="invisible p-3 -mt-12 text-white transition duration-300 bg-gray-600 shadow-lg rounded-xl group-hover:visible">
+                {user?.uid}
+              </span>
+              <i className="w-3 h-3 mr-1 fas fa-link" />
+              API key
+            </div>
           </div>
-        </div>
+        )}
         <img
           className="w-32 h-32 transition duration-300 ease-in-out rounded-full hover:shadow-lg"
           src={
@@ -56,11 +61,25 @@ const ProfileOverview = ({ user }) => {
               clipRule="evenodd"
             />
           </svg>
-          Signed up {formatDistance(new Date(user.createdAt), new Date(), {
-            addSuffix: true,
-          })}
+          Signed up{" "}
+          {user?.createdAt &&
+            formatDistance(new Date(user.createdAt), new Date(), {
+              addSuffix: true,
+            })}
         </div>
       </div>
     </div>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  const { uid } = ctx.query;
+  const user = await firestore.collection("users").doc(uid).get();
+  return {
+    props: {
+      firebaseUser: JSON.parse(
+        JSON.stringify({ uid: user.id, ...user.data() })
+      ),
+    },
+  };
+}

@@ -35,10 +35,12 @@ export default function GroupCreatePage() {
           createdAt: new Date().toISOString(),
           admin: { uid: user.uid, fullname: user.fullname },
         });
-        await firestore
+      await firestore
         .collection("groups")
         .doc(slug)
-        .collection("subscribers");
+        .collection("subscribers")
+        .doc(user.uid)
+        .set({ fullname: user.fullname, photoUrl: user.photoUrl });
       // if (response.ok) {
       Router.push("/group/" + slug);
       // }

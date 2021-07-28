@@ -1,8 +1,10 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { firestore } from "@libs/firebase";
 import Link from "next/link";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance } from "date-fns";
 import { useAuth } from "@hooks/useAuth";
+import { useEffect, useState } from "react";
+import { AvatarGroup } from "@components/ui/AvatarGroup";
 
 export default function GroupPage({
   name,
@@ -11,13 +13,12 @@ export default function GroupPage({
   createdAt,
   admin,
   slug,
-  subscribers,
 }) {
+  const [subs, setSubs] = useState([]);
   const { user } = useAuth();
-  console.log(user)
 
   const toggleSubscription = async () => {
-    if (subscribers.find((subscriber) => subscriber.id === user.uid)) {
+    if (subs.find((subscriber) => subscriber.id === user.uid)) {
       await firestore
         .collection("groups")
         .doc(slug)
@@ -30,9 +31,23 @@ export default function GroupPage({
         .doc(slug)
         .collection("subscribers")
         .doc(user.uid)
-        .set({ fullname: user.fullname, photoURL: user.photoURL });
+        .set({ fullname: user.fullname, photoUrl: user.photoUrl });
     }
   };
+
+  useEffect(() => {
+    firestore
+      .collection("groups")
+      .doc(slug)
+      .collection("subscribers")
+      .onSnapshot((querySnapshot) => {
+        let subs = [];
+        querySnapshot.forEach((doc) => {
+          subs.push({ id: doc.id, ...doc.data() });
+        });
+        setSubs(subs);
+      });
+  }, []);
 
   return (
     <AppLayout>
@@ -45,14 +60,15 @@ export default function GroupPage({
             <h2 className="text-2xl font-bold leading-7 text-green-400 sm:text-3xl sm:truncate">
               {name}
             </h2>
-            <div className="inline-flex flex-col mt-1 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6 ">
+            <div className="inline-flex flex-col mt-1 space-y-2 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6 sm:space-y-0 ">
               <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
                 <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
                 Remote
               </div>
               <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-                <i className="flex items-center fas fa-users flex-shrink-0 mr-1.5 h-5 w-5 "></i>
-                1 members
+                <AvatarGroup users={subs} limit={4} />
+                <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+                {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
               </div>
               <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
                 <i className="flex items-center fas fa-calendar flex-shrink-0 mr-1.5 h-5 w-5 "></i>
@@ -83,7 +99,7 @@ export default function GroupPage({
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-300 bg-green-600 rounded-md shadow-sm cursor-pointer hover:bg-green-700 focus:outline-none"
                 onClick={toggleSubscription}
               >
-                {subscribers.find((sub) => sub.id === user.uid)
+                {subs?.find((sub) => sub.id === user?.uid)
                   ? "Unsubscribe"
                   : "Subscribe"}
               </a>
@@ -97,25 +113,17 @@ export default function GroupPage({
         </div>
         <div className="grid-cols-3 gap-4 space-y-2 md:grid md:space-y-0"></div>
       </section>
-      <pre>{JSON.stringify(subscribers, undefined, 2)}</pre>
     </AppLayout>
   );
 }
 
 export async function getServerSideProps(ctx) {
   const group = await firestore.collection("groups").doc(ctx.query.slug).get();
-  const subscribers = await firestore
-    .collection("groups")
-    .doc(ctx.query.slug)
-    .collection("subscribers")
-    .get();
 
   return {
     props: {
       ...group.data(),
-      subscribers: subscribers.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      }),
+
       slug: ctx.query.slug,
     },
   };

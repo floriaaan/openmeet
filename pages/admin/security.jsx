@@ -2,7 +2,7 @@ import { AdminLayout } from "@components/layouts/AdminLayout";
 import { useEffect, useState } from "react";
 
 import semver from "semver";
-import openmeet from "resources/openmeet"
+import openmeet from "resources/openmeet";
 
 export default function AdminSecurityPage() {
   return (
@@ -18,9 +18,23 @@ const Checklist = () => {
   const [security, setSecurity] = useState({ https: false, version: false });
 
   useEffect(() => {
+    const fetchVersion = async () => {
+      const res = await fetch(
+        "https://raw.githubusercontent.com/floriaaan/openmeet/main/resources/openmeet.json"
+      );
+      const body = await res.json();
+      console.log(body)
+      setSecurity({
+        ...security,
+        version: semver.gte(openmeet.version, body.version),
+      });
+    };
+
+    fetchVersion();
+
     setSecurity({
+      ...security,
       https: window.location.protocol === "https:",
-      version: semver.gte(openmeet.version, "1.0.0"),
     });
   }, []);
 

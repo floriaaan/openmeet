@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { NotificationDropdown } from "components/dropdowns/NotificationDropdown";
 import { UserDropdown } from "components/dropdowns/UserDropdown";
 
 export const Sidebar = () => {
@@ -97,8 +96,8 @@ export const Sidebar = () => {
                       className={
                         "fas fa-tv mr-2 text-sm " +
                         (router.pathname === "/admin"
-                          ? "opacity-75 text-gray-500"
-                          : "text-gray-300")
+                          ? "opacity-75"
+                          : "text-gray-500")
                       }
                     ></i>{" "}
                     Dashboard

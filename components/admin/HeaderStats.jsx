@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import semver from "semver";
-import openmeet from "resources/openmeet"
+import openmeet from "resources/openmeet";
 
 import CardStats from "@components/cards/CardStats";
 import { firestore } from "@libs/firebase";
@@ -13,9 +13,23 @@ export const HeaderStats = () => {
   const [groups, setGroups] = useState({ count: 0, stat: "" });
 
   useEffect(() => {
+    const fetchVersion = async () => {
+      const res = await fetch(
+        "https://raw.githubusercontent.com/floriaaan/openmeet/main/resources/openmeet.json"
+      );
+      const body = await res.json();
+      console.log(body);
+      setSecurity({
+        ...security,
+        version: semver.gte(openmeet.version, body.version),
+      });
+    };
+
+    fetchVersion();
+
     setSecurity({
+      ...security,
       https: window.location.protocol === "https:",
-      version: semver.gte(openmeet.version, "1.0.0"),
     });
 
     firestore

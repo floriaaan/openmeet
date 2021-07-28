@@ -38,9 +38,15 @@ export const UserDropdown = () => {
           {user ? (
             <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
               <img
-                alt={user?.displayName}
+                alt={user?.fullname}
                 className="w-full h-full align-middle border-none rounded-full "
-                src={user?.photoUrl}
+                src={
+                  user?.photoUrl
+                    ? user.photoUrl
+                    : "https://ui-avatars.com/api/?name=" +
+                      user?.fullname +
+                      "&color=007bff&background=054880"
+                }
               />
             </span>
           ) : (
@@ -62,7 +68,11 @@ export const UserDropdown = () => {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none focus:bg-gray-100 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
         >
-          {theme === "light" ? <i className="mr-2 fas fa-moon"></i> : <i className="mr-2 fas fa-sun"></i> }
+          {theme === "light" ? (
+            <i className="mr-2 fas fa-moon"></i>
+          ) : (
+            <i className="mr-2 fas fa-sun"></i>
+          )}
           Toggle Dark Mode
         </a>
 
@@ -72,7 +82,7 @@ export const UserDropdown = () => {
               Manage Account
             </div>
 
-            <Link href="/profile">
+            <Link href={"/profile/" + user.uid} >
               <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none focus:bg-gray-100 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                 <i className="mr-2 fas fa-user"></i>
                 Profile
@@ -91,9 +101,7 @@ export const UserDropdown = () => {
               OpenMeet Settings
             </div>
             <Link href="/admin">
-              <a
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
-              >
+              <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                 <i className="mr-2 fas fa-cog"></i>
                 Settings
               </a>
