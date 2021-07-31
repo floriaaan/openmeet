@@ -15,14 +15,17 @@ export const Sidebar = () => {
           <button
             className="px-3 py-1 text-xl leading-none text-black bg-transparent border border-transparent border-solid opacity-50 cursor-pointer rounded-xl md:hidden"
             type="button"
-            onClick={() => setCollapseShow("bg-white dark:bg-gray-900 m-2 py-3 px-6")}
+            onClick={() =>
+              setCollapseShow("bg-white dark:bg-gray-900 m-2 py-3 px-6")
+            }
           >
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
           <Link href="/">
-            <a className="inline-block p-4 px-0 mr-0 text-sm font-bold text-left text-gray-600 uppercase dark:text-gray-400 md:block md:pb-2 whitespace-nowrap">
-              OpenMeet
+            <a className="inline-flex items-center p-4 px-0 mr-0 text-sm font-bold text-left text-gray-600 uppercase dark:text-gray-400 md:pb-2 whitespace-nowrap">
+              <img src="/logo.svg" className="w-12 h-12"></img>
+              <span className="ml-3">Admin</span>
             </a>
           </Link>
           {/* User */}
@@ -111,8 +114,8 @@ export const Sidebar = () => {
                     className={
                       "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/settings") !== -1
-                      ? "bg-gray-300 dark:bg-gray-700"
-                      : "")
+                        ? "bg-gray-300 dark:bg-gray-700"
+                        : "")
                     }
                   >
                     <i
@@ -134,16 +137,16 @@ export const Sidebar = () => {
                     className={
                       "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/themes") !== -1
-                      ? "bg-gray-300 dark:bg-gray-700"
-                      : "")
+                        ? "bg-gray-300 dark:bg-gray-700"
+                        : "")
                     }
                   >
                     <i
                       className={
                         "fas fa-palette mr-2 text-sm " +
                         (router.pathname.indexOf("/admin/themes") !== -1
-                        ? "opacity-75"
-                        : "text-gray-500")
+                          ? "opacity-75"
+                          : "text-gray-500")
                       }
                     ></i>{" "}
                     Themes
@@ -157,16 +160,16 @@ export const Sidebar = () => {
                     className={
                       "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/security") !== -1
-                      ? "bg-gray-300 dark:bg-gray-700"
-                      : "")
+                        ? "bg-gray-300 dark:bg-gray-700"
+                        : "")
                     }
                   >
                     <i
                       className={
                         "fas fa-shield-alt mr-2 text-sm " +
                         (router.pathname.indexOf("/admin/security") !== -1
-                        ? "opacity-75"
-                        : "text-gray-500")
+                          ? "opacity-75"
+                          : "text-gray-500")
                       }
                     ></i>{" "}
                     Security and privacy
@@ -174,12 +177,6 @@ export const Sidebar = () => {
                 </Link>
               </li>
             </ul>
-
-            
-
-            
-
-            
           </div>
         </div>
       </nav>

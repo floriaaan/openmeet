@@ -4,6 +4,7 @@ import { Message } from "@components/chat/Message";
 import { useAuth } from "@hooks/useAuth";
 import Link from "next/link";
 import { AddDropdown } from "./AddDropdown";
+import { useRouter } from "next/router";
 
 export const Conversation = ({ id }, props) => {
   const { user } = useAuth();
@@ -34,7 +35,7 @@ export const Conversation = ({ id }, props) => {
   };
 
   useEffect(() => {
-    prepareDisplayableMsg(props.messages);
+    // prepareDisplayableMsg(props.messages);
 
     firestore
       .collection("chats")
@@ -87,16 +88,28 @@ export const Conversation = ({ id }, props) => {
     <div className="h-full m-6 space-y-6">
       <div className="inline-flex items-center justify-between w-full px-6 ">
         <Link href="/chat">
-          <div className="px-4 py-3 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
+          <div className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
             <i className="fas fa-arrow-left" />
           </div>
         </Link>
-        <h3 className="text-sm font-bold text-yellow-600 dark:text-yellow-500">
-          {chat?.members?.map(
-            (member, index) =>
-              member.fullName + (index === chat.members.length - 1 ? "" : ", ")
-          )}
-        </h3>
+        {chat?.members ? (
+          <>
+            <h3 className="hidden text-sm font-bold text-yellow-600 dark:text-yellow-500 lg:block">
+              {chat?.members?.length < 4
+                ? chat?.members?.map(
+                    (member, index) =>
+                      member.fullName +
+                      (index === chat.members.length - 1 ? "" : ", ")
+                  )
+                : chat?.members?.length + " members"}
+            </h3>
+            <h3 className="block text-sm font-bold text-yellow-600 dark:text-yellow-500 lg:hidden">
+              {chat?.members?.length + " members"}
+            </h3>
+          </>
+        ) : (
+          <div>Loading...</div>
+        )}
         <AddDropdown members={chat?.members} chatId={id} />
       </div>
       <div className="px-3 py-1 bg-gray-100 lg:p-6 dark:bg-gray-900 rounded-xl">
@@ -116,6 +129,93 @@ export const Conversation = ({ id }, props) => {
           );
         })}
         <div ref={bottomListRef} />
+      </div>
+      <form
+        onSubmit={handleOnSubmit}
+        className="inline-flex justify-between w-full px-4 py-3 bg-gray-200 rounded-xl dark:bg-gray-800 dark:text-white"
+      >
+        <input
+          ref={inputRef}
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type your message here..."
+          className="w-full bg-gray-200 outline-none dark:bg-gray-800"
+        />
+        <button
+          type="submit"
+          disabled={!newMessage}
+          className="text-sm font-semibold tracking-wider text-gray-400 uppercase transition-colors disabled:text-gray-500 hover:text-gray-900 dark:hover:text-white"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export const NewConversation = (props) => {
+  const { user } = useAuth();
+  const [selectedMembers, setSelectedMembers] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+
+  const router = useRouter();
+
+  const inputRef = useRef();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+
+    const trimmedMessage = newMessage.trim();
+    if (trimmedMessage && selectedMembers.length > 1) {
+      // Add new message in Firestore
+      firestore
+        .collection("chats")
+        .add({
+          members: selectedMembers,
+          messages: [
+            {
+              content: trimmedMessage,
+              createdAt: new Date().toISOString(),
+              sender: user.uid,
+            },
+          ],
+          lastMessageAt: new Date().toISOString(),
+        })
+        .then(function (docRef) {
+          router.push("/chat/" + docRef.id);
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+      
+    }
+  };
+
+  return (
+    <div className="h-full m-6 space-y-6">
+      <div className="inline-flex items-center justify-between w-full px-6 ">
+        <Link href="/chat">
+          <div className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
+            <i className="fas fa-arrow-left" />
+          </div>
+        </Link>
+
+        <h3 className="text-sm font-bold text-yellow-600 dark:text-yellow-500">
+          New chat
+        </h3>
+
+        <AddDropdown
+          members={[
+            { uid: user.uid, fullName: user.fullName, photoUrl: user.photoUrl },
+          ]}
+          setList={setSelectedMembers}
+        />
       </div>
       <form
         onSubmit={handleOnSubmit}

@@ -1,5 +1,12 @@
+import { Sidebar } from "@components/chat/Sidebar";
 import { AppLayout } from "@components/layouts/AppLayout";
 
 export default function ChatPage() {
-  return <AppLayout></AppLayout>;
+  return <AppLayout shadowOnNavbar>
+    <div className="inline-flex w-full h-full">
+        <Sidebar />
+        <div className="flex-col flex-grow">
+        </div>
+      </div>
+  </AppLayout>;
 }

@@ -19,7 +19,9 @@ export default function OpenMeetOverview() {
                 {openmeet.version}
               </span>
             </div>
-            <div className="relative flex-initial w-auto pl-4">logo</div>
+            <div className="relative flex-initial w-auto pl-4">
+              <img src="/logo.svg" className="w-12 h-12"></img>
+            </div>
           </div>
           <p className="mt-4 text-sm text-gray-400">
             Developped by Floriaaan

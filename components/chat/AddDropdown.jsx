@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { firestore } from "@libs/firebase";
 
-export const AddDropdown = ({ members, chatId }) => {
+export const AddDropdown = ({ members, chatId, setList }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = createRef();
@@ -41,12 +41,19 @@ export const AddDropdown = ({ members, chatId }) => {
   useEffect(() => {
     setSelectedUsers(members);
     getUsers();
+
   }, []);
+
+  useEffect(() => {
+    if(setList) {
+      setList(selectedUsers);
+    }
+  }, [selectedUsers]);
 
   return (
     <>
       <div
-        className="px-4 py-3 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500"
+        className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -64,16 +71,18 @@ export const AddDropdown = ({ members, chatId }) => {
       >
         <div className="inline-flex items-center justify-between w-full px-4 py-2 mb-2 text-xs text-gray-400 border-b border-gray-200 dark:border-gray-800">
           <span>Add to the Conversation</span>
-          <span
-            className="inline-flex items-center px-2 py-1 text-yellow-600 transition duration-300 cursor-pointer dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900"
-            onClick={handleAdd}
-          >
-            <i className="mr-1 fas fa-plus"></i>
-            Add
-          </span>
+          {!setList && (
+            <span
+              className="inline-flex items-center px-2 py-1 text-yellow-600 transition duration-300 cursor-pointer dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900"
+              onClick={handleAdd}
+            >
+              <i className="mr-1 fas fa-plus"></i>
+              Add
+            </span>
+          )}
         </div>
         <div className="flex flex-col px-2 space-y-1">
-          {users?.map((user) => (
+          {users?.map((user, index) => (
             <UserOverview
               {...user}
               selected={
@@ -95,15 +104,16 @@ export const AddDropdown = ({ members, chatId }) => {
                     (chatMember) => chatMember.uid === user.uid
                   ) === -1
                 ) {
-                  if (selectedUsers.indexOf(user) === -1) {
+                  if (selectedUsers?.indexOf(user) === -1) {
                     setSelectedUsers([...selectedUsers, user]);
                   } else {
                     setSelectedUsers(
-                      selectedUsers.filter((_user) => _user.uid !== user.uid)
+                      selectedUsers?.filter((_user) => _user.uid !== user.uid)
                     );
                   }
                 }
               }}
+              key={index}
             />
           ))}
         </div>

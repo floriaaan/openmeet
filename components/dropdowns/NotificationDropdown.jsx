@@ -116,6 +116,7 @@ const ChatOverview = (props) => {
               (props.messages?.[props.messages.length - 1]?.content.length > 29
                 ? " ..."
                 : "")}
+                
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-300">
             from{" "}

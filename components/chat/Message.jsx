@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Message = ({ list = [], sender }) => {
   return (
-    <div className="inline-flex w-full items-start px-4 py-3 min-h-[6rem] overflow-hidden transition duration-500 rounded-md ">
+    <div className="inline-flex w-full items-start px-2 py-1.5 md:px-4 md:py-3 min-h-[6rem] overflow-hidden transition duration-500 rounded-md ">
       {sender?.photoUrl ? (
         <Link href={"/profile/" + sender.uid}>
           <img
@@ -28,10 +28,10 @@ export const Message = ({ list = [], sender }) => {
             </span>
           ) : null}
         </div>
-        <div className="flex flex-col w-full space-y-1">
+        <div className="flex flex-col w-full space-y-0 md:space-y-1">
           {list.map((msg, index) => (
             <div className="inline-flex items-center justify-between w-full mt-3 -mx-10 rounded md:-mx-0 md:mt-0 md:px-3 group hover:bg-gray-50 dark:hover:bg-gray-800" key={index}>
-              <p className="text-gray-800 dark:text-gray-300">{msg.content}</p>
+              <p className="text-sm text-gray-800 dark:text-gray-300 md:text-base">{msg.content}</p>
               <span
                 className={
                   "text-xs transition duration-300 cursor-default dark:group-hover:text-gray-300 group-hover:text-gray-700 hidden md:block " +

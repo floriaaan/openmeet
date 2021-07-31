@@ -1,20 +1,19 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 
 import { useRouter } from "next/router";
-// import { firestore } from "@libs/firebase";
 import { Conversation } from "@components/chat/Conversation";
-import { useAuth } from "@hooks/useAuth";
+import { Sidebar } from "@components/chat/Sidebar";
+
 
 export default function ConversationPage() {
   const router = useRouter();
   const { id } = router.query;
 
   return (
-    <AppLayout>
+    <AppLayout shadowOnNavbar>
       <div className="inline-flex w-full h-full">
-        <div className="flex-col"></div>
+        <Sidebar />
         <div className="flex-col flex-grow">
-          
           <Conversation id={id} />
         </div>
       </div>

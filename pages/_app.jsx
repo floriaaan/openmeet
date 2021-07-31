@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>OpenMeet</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon"  href="/logo.svg" />
       </Head>
       <ThemeProvider attribute="class">
         <AuthProvider>

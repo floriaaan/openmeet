@@ -2,29 +2,33 @@ import React from "react";
 import Link from "next/link";
 // components
 
-import { AppDropdown } from "@components/dropdowns/AppDropdown";
 import { useAuth } from "@hooks/useAuth";
 import { EventDropdown } from "@components/dropdowns/EventDropdown";
 import { UserDropdown } from "@components/dropdowns/UserDropdown";
 import { NotificationDropdown } from "@components/dropdowns/NotificationDropdown";
 import { GroupDropdown } from "@components/dropdowns/GroupDropdown";
 
-export const AppNavbar = () => {
+export const AppNavbar = ({ shadowOnNavbar }) => {
   const { user } = useAuth();
 
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-gray-900 dark:text-gray-300 navbar-expand-lg">
-        <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
-          <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
+      <nav
+        className={
+          "top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-gray-900 dark:text-gray-300 navbar-expand-lg" +
+          (shadowOnNavbar && " shadow-md")
+        }
+      >
+        <div className="container inline-flex flex-wrap items-center justify-between px-4 mx-auto">
+          <div className="relative flex items-center justify-between w-full h-12 lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
-              <a className="inline-block py-2 mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                OpenMeet
+              <a className="inline-block mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                <img src="/logo.svg" className="w-12 h-12"></img>
               </a>
             </Link>
             <button
-              className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid outline-none cursor-pointer rounded-xl lg:hidden focus:outline-none"
+              className="flex items-center justify-center w-12 h-12 text-xl leading-none transition duration-300 border-solid outline-none cursor-pointer rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 lg:hidden focus:outline-none dark:focus:bg-gray-700 focus:bg-gray-200"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
@@ -33,12 +37,12 @@ export const AppNavbar = () => {
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center bg-white dark:bg-gray-900 lg:bg-opacity-0 lg:shadow-none" +
+              "lg:flex flex-grow items-center bg-white dark:bg-gray-900 lg:bg-opacity-0 mt-3 lg:mt-0 lg:shadow-none" +
               (navbarOpen ? " block" : " hidden")
             }
             id="example-navbar-warning"
           >
-            <ul className="flex flex-row mt-3 mr-auto list-none lg:mt-0">
+            <ul className="flex flex-row mr-auto list-none ">
               <div className="relative flex flex-row items-center w-full text-gray-600">
                 <input
                   type="search"
@@ -48,7 +52,7 @@ export const AppNavbar = () => {
                 />
                 <div className="absolute right-0 flex flex-row items-center mr-4 space-x-5 hover:border-transparent">
                   <span
-                    style={{opacity: 1}}
+                    style={{ opacity: 1 }}
                     className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 dark:border-gray-800 rounded-md bg-white dark:bg-gray-900"
                   >
                     <span className="sr-only">Press </span>
@@ -62,7 +66,6 @@ export const AppNavbar = () => {
                   <button type="submit" className="text-gray-500">
                     <svg
                       className="w-4 h-4 fill-current"
-                      
                       x="0px"
                       y="0px"
                       viewBox="0 0 56.966 56.966"
