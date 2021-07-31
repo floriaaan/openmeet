@@ -48,13 +48,13 @@ export const EventDropdown = () => {
         <div className="border-t border-gray-100 dark:border-gray-800"></div>
 
         <Link href="/event/create">
-          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none focus:bg-gray-100 hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none  hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
             <i className="mr-2 fas fa-plus"></i>
             Create an event
           </a>
         </Link>
         <Link href="/event/all">
-          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none focus:bg-gray-100 hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none  hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
             <i className="mr-2 fas fa-calendar-alt"></i>
             All events
           </a>

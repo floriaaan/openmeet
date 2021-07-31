@@ -108,7 +108,7 @@ export const GroupDropdown = () => {
 
 const GroupOverview = (props) => (
   <Link href={"/group/" + props.slug}>
-    <a className="flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 focus:outline-none focus:bg-gray-100">
+    <a className="flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 focus:outline-none ">
       <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded dark:bg-green-700">
         <i className="text-2xl fas fa-users" />
       </span>
