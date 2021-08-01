@@ -62,12 +62,26 @@ export const Conversation = ({ id }, props) => {
         createdAt: new Date().toISOString(),
         sender: user.uid,
       });
+      data.lastMessageAt = new Date().toISOString();
 
       await firestore.collection("chats").doc(id).update(data);
-      await firestore
-        .collection("chats")
-        .doc(id)
-        .set({ lastMessageAt: new Date().toISOString() }, { merge: true });
+      
+
+      chat?.members?.forEach(async (member) => {
+        if (member?.uid !== user?.uid) {
+          await firestore.collection("notifications").add({
+            uid: member?.uid,
+            type: "chat",
+            data: {
+              id,
+              type: "chat",
+              action: "new_message",
+              message: trimmedMessage,
+            },
+            createdAt: new Date().toISOString(),
+          });
+        }
+      });
 
       // Clear input field
       setNewMessage("");
@@ -96,11 +110,12 @@ export const Conversation = ({ id }, props) => {
           <>
             <h3 className="hidden text-sm font-bold text-yellow-600 dark:text-yellow-500 lg:block">
               {chat?.members?.length < 4
-                ? chat?.members?.map(
-                    (member, index) =>
-                      member.fullName +
-                      (index === chat.members.length - 1 ? "" : ", ")
-                  )
+                ? chat?.members?.map((member, index) => {
+                    return member.uid !== user.uid
+                      ? member.fullName +
+                          (index === chat.members.length - 1 ? "" : ", ")
+                      : null;
+                  })
                 : chat?.members?.length + " members"}
             </h3>
             <h3 className="block text-sm font-bold text-yellow-600 dark:text-yellow-500 lg:hidden">
@@ -172,28 +187,55 @@ export const NewConversation = (props) => {
     e.preventDefault();
 
     const trimmedMessage = newMessage.trim();
-    if (trimmedMessage && selectedMembers.length > 1) {
+    if (trimmedMessage) {
       // Add new message in Firestore
+      let members = [...selectedMembers];
+      if (members.findIndex((member) => member.uid === user.uid) === -1) {
+        members = [
+          ...members,
+          {
+            uid: user.uid,
+            fullName: user.fullName,
+            photoUrl: user.photoUrl, 
+          },
+        ];
+      }
+
       firestore
         .collection("chats")
         .add({
-          members: selectedMembers,
+          members,
           messages: [
             {
               content: trimmedMessage,
               createdAt: new Date().toISOString(),
-              sender: user.uid,
+              sender: user?.uid,
             },
           ],
           lastMessageAt: new Date().toISOString(),
         })
         .then(function (docRef) {
+          selectedMembers.forEach(async (member) => {
+            if (member?.uid !== user?.uid) {
+              await firestore.collection("notifications").add({
+                uid: member?.uid,
+                type: "chat",
+                data: {
+                  id: docRef.id,
+                  type: "chat",
+                  action: "new_message",
+                  message: trimmedMessage,
+                },
+                createdAt: new Date().toISOString(),
+              });
+            }
+          });
+
           router.push("/chat/" + docRef.id);
         })
         .catch(function (error) {
           console.error("Error adding document: ", error);
         });
-      
     }
   };
 
@@ -211,9 +253,17 @@ export const NewConversation = (props) => {
         </h3>
 
         <AddDropdown
-          members={[
-            { uid: user.uid, fullName: user.fullName, photoUrl: user.photoUrl },
-          ]}
+          members={
+            user?.uid && user?.fullName && user?.photoUrl
+              ? [
+                  {
+                    uid: user.uid,
+                    fullName: user.fullName,
+                    photoUrl: user.photoUrl,
+                  },
+                ]
+              : []
+          }
           setList={setSelectedMembers}
         />
       </div>

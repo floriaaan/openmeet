@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { formatDistance } from "date-fns";
+import { user } from "firebase-functions/lib/providers/auth";
 
 export const Sidebar = (props) => {
   const { user } = useAuth();
@@ -28,7 +29,12 @@ export const Sidebar = (props) => {
   }, [user]);
 
   return (
-    <div className="flex-col hidden bg-gray-100 shadow-lg dark:bg-gray-900 w-96 lg:flex">
+    <div
+      className={
+        "flex-col  bg-gray-100 shadow-lg dark:bg-gray-900  " +
+        (props.display ? " w-full lg:w-96 " : " hidden lg:flex w-96")
+      }
+    >
       <div className="inline-flex items-center justify-between w-full px-3 py-6 mb-3 text-xl text-gray-600 border-b border-gray-300 dark:text-gray-400 dark:border-gray-700">
         <span className="w-12"></span>
         <span>
@@ -52,6 +58,7 @@ export const Sidebar = (props) => {
             key={key}
             isFirst={key === 0}
             isLast={key === chats.length - 1}
+            auth={user}
           />
         ))}
       </div>
@@ -68,7 +75,8 @@ const ChatOverview = (props) => {
     <Link href={"/chat/" + props.id}>
       <a
         className={
-          "flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none" + rounded
+          "flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none" +
+          rounded
         }
       >
         <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
@@ -77,11 +85,12 @@ const ChatOverview = (props) => {
         <div className="flex flex-col ml-2">
           <span className="text-sm font-bold text-yellow-700 dark:text-yellow-400">
             {props?.members?.length < 4
-              ? props?.members?.map(
-                  (member, index) =>
-                    member.fullName +
-                    (index === props.members.length - 1 ? "" : ", ")
-                )
+              ? props?.members?.map((member, index) => {
+                  return member.uid !== props.auth.uid
+                    ? member.fullName +
+                        (index === props.members.length - 1 ? "" : ", ")
+                    : null;
+                })
               : props?.members?.length + " members"}
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-300">

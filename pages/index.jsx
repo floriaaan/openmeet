@@ -20,24 +20,38 @@ export default function Index() {
                 OpenMeet, the app for your needs
               </span>
               <span
-                className="block text-blue-600 dark:text-blue-300"
+                className="block text-gray-500 dark:text-gray-400"
                 style={{ fontFamily: "system-ui" }}
               >
                 Meet the people interested in the subject you're into
               </span>
             </h2>
-            <div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
-              <div className="inline-flex rounded-md shadow">
+            <div className="grid grid-cols-3 gap-3 mt-8 lg:mt-0 lg:flex-shrink-0">
+              <div className="inline-flex col-span-2 shadow rounded-xl">
                 <Link href="/group/create">
-                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white transition-colors duration-300 bg-green-600 rounded-md hover:bg-green-700">
+                  <a className="inline-flex items-center justify-center w-48 py-3 text-base font-medium text-white transition-colors duration-300 bg-green-600 rounded-md hover:bg-green-700">
                     Create a group
                   </a>
                 </Link>
               </div>
-              <div className="inline-flex ml-3 rounded-md shadow">
+              <div className="inline-flex shadow rounded-xl">
                 <Link href="/group/all">
-                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-green-600 transition-colors duration-300 bg-white rounded-md hover:bg-green-100">
-                    All groups
+                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-green-600 transition-colors duration-300 bg-white rounded-md dark:bg-black hover:bg-green-100 dark:hover:bg-green-900 dark:hover:text-green-300">
+                    All
+                  </a>
+                </Link>
+              </div>
+              <div className="inline-flex col-span-2 shadow rounded-xl">
+                <Link href="/event/create">
+                  <a className="inline-flex items-center justify-center w-48 py-3 text-base font-medium text-white transition-colors duration-300 bg-purple-600 rounded-md hover:bg-purple-700">
+                    Create an event
+                  </a>
+                </Link>
+              </div>
+              <div className="inline-flex shadow rounded-xl">
+                <Link href="/event/all">
+                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-purple-600 transition-colors duration-300 bg-white rounded-md dark:bg-black hover:bg-purple-100 dark:hover:bg-purple-900 dark:hover:text-purple-300">
+                    All
                   </a>
                 </Link>
               </div>

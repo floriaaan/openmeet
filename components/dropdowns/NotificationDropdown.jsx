@@ -23,6 +23,7 @@ export const NotificationDropdown = () => {
   const { user } = useAuth();
 
   const [chats, setChats] = React.useState([]);
+  const [notifications, setNotifications] = React.useState([]);
 
   const getChats = async () => {
     firestore
@@ -44,12 +45,24 @@ export const NotificationDropdown = () => {
 
   React.useEffect(() => {
     getChats();
+
+    firestore
+      .collection("notifications")
+      .where("uid", "==", user.uid)
+      .onSnapshot((querySnapshot) => {
+        const list = [];
+
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setNotifications(list);
+      });
   }, []);
 
   return (
     <>
       <a
-        className="cursor-pointer"
+        className="flex cursor-pointer"
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
@@ -58,6 +71,15 @@ export const NotificationDropdown = () => {
       >
         <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-yellow-100 rounded-full dark:bg-yellow-800 focus:outline-none ">
           <i className="text-yellow-400 fas fa-bell"></i>
+          {notifications?.length > 0 && (
+            <span
+              style={{ marginTop: "-22px", marginRight: "-22px" }}
+              className="absolute flex items-center justify-center"
+            >
+              <span className="w-3 h-3 bg-red-400 rounded-full opacity-75 animate-ping" />
+              <span className="absolute w-2 h-2 bg-red-600 rounded-full" />
+            </span>
+          )}
         </span>
       </a>
       <div
@@ -91,12 +113,22 @@ export const NotificationDropdown = () => {
         </div>
         <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
           {chats.length > 0
-            ? chats.map((chat, index) => <ChatOverview {...chat} key={index} />)
+            ? chats.map(
+                (chat, index) =>
+                  index < 2 && <ChatOverview {...chat} key={index} />
+              )
             : "No messages yet"}
         </div>
 
         <div className="block px-4 py-2 text-xs text-gray-400">
           Notifications
+        </div>
+        <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
+          {notifications.length > 0
+            ? notifications.map((notification, index) => (
+                <NotificationOverview {...notification} key={index} />
+              ))
+            : "No notifications yet"}
         </div>
       </div>
     </>
@@ -116,7 +148,6 @@ const ChatOverview = (props) => {
               (props.messages?.[props.messages.length - 1]?.content.length > 29
                 ? " ..."
                 : "")}
-                
           </span>
           <span className="text-xs text-gray-400 dark:text-gray-300">
             from{" "}
@@ -137,6 +168,36 @@ const ChatOverview = (props) => {
                 addSuffix: true,
               }
             )}
+          </span>
+        </div>
+      </a>
+    </Link>
+  );
+};
+
+const NotificationOverview = (props) => {
+  return (
+    <Link href={"/" + props?.type + "/" + props?.id}>
+      <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
+        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded dark:bg-yellow-700">
+          {props?.data?.action === "new_message" ? (
+            <i className="text-2xl fas fa-envelope" />
+          ) : (
+            <i className="text-2xl fas fa-bell" />
+          )}
+        </span>
+        <div className="flex flex-col ml-2">
+          <span className="font-bold text-yellow-700 dark:text-yellow-400">
+            {props?.data?.action === "new_message"
+              ? "New message"
+              : "New notification"}
+          </span>
+
+          <span className="text-xs text-gray-400 dark:text-gray-300">
+            sent{" "}
+            {formatDistance(new Date(props?.createdAt), new Date(), {
+              addSuffix: true,
+            })}
           </span>
         </div>
       </a>
