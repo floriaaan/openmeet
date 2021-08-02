@@ -6,13 +6,12 @@ import { formatDistance } from "date-fns";
 export default function ProfilePage({ firebaseUser }) {
   const { user } = useAuth();
 
-  console.log({ user, firebaseUser });
   return (
     <AppLayout>
-      <div className="grid grid-cols-3 gap-6 p-6">
+      <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
         <ProfileOverview user={firebaseUser} auth={user} />
-        <div className="h-full col-span-2 bg-red-500"></div>
-        <div className="h-full col-span-2 bg-green-500"></div>
+        <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">e</div>
+        <div className="w-full h-full bg-green-500 lg:col-span-2">e</div>
       </div>
     </AppLayout>
   );

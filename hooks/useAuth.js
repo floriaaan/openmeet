@@ -16,7 +16,7 @@ const formatUser = async (user) => {
   return {
     uid: user.uid,
     email: user.email,
-    fullName: user.displayName,
+    fullName: user.displayName || "Name not provided",
     provider: user.providerData[0].providerId,
     photoUrl: user.photoURL,
     lastSignedIn: user.metadata.lastSignInTime,

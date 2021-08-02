@@ -37,7 +37,7 @@ export const AppFooter = () => {
   };
 
   return (
-    <footer className="bottom-0 w-full px-10 text-gray-600 border-t-2 border-gray-200 shadow-md dark:text-gray-400 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 body-font">
+    <footer className="z-50 w-full px-10 text-gray-600 border-t-2 border-gray-200 shadow-md dark:text-gray-400 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 body-font">
       {/* <div className="container hidden px-5 pt-10 mx-auto md:block lg:block xl:block">
         <div className="flex flex-wrap order-first text-center md:text-left">
           <div className="w-full px-4 lg:w-1/4 md:w-1/2">
