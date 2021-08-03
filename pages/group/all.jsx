@@ -27,7 +27,7 @@ export default function GroupAllPage({ groups }) {
 
   return (
     <AppLayout>
-      <div className="flex flex-col w-full h-full p-6 space-y-3 bg-gray-100 lg:px-12">
+      <div className="flex flex-col w-full h-full p-6 space-y-3 bg-gray-100 dark:bg-gray-900 lg:px-12">
         <h3 className="mb-6 text-xl font-medium text-gray-600 dark:text-gray-300 md:font-bold md:text-3xl lg:text-6xl">Find a <span className="underline">group</span></h3>
 
         <div className="flex flex-col items-center divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
@@ -91,64 +91,15 @@ export default function GroupAllPage({ groups }) {
 }
 
 export async function getServerSideProps() {
-  const groups = [
-    {
-      slug: "marvel-fans",
-      admin: {
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-        fullName: "Florian Leroux",
-      },
-      tags: ["marvel", "ironman", "captain"],
-      createdAt: "2021-07-26T17:11:44.367Z",
-      description: "On aime Marvel",
-      name: "Marvel Fans",
-    },
-    {
-      slug: "test",
-      description: "test",
-      name: "test",
-      admin: {
-        fullName: "Florian Leroux",
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-      },
-      createdAt: "2021-07-28T11:51:14.705Z",
-      tags: ["test"],
-    },
-    {
-      slug: "test-de-location",
-      name: "Test de location",
-      location: {
-        location: "Val-de-Reuil, France",
-        position: { lat: 49.27071680843916, lng: 1.2134313583374023 },
-      },
-      tags: ["location", "opéla"],
-      createdAt: "2021-08-03T09:54:40.695Z",
-      admin: {
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-        fullName: "Florian Leroux",
-      },
-      description: "Coucou",
-    },
-    {
-      slug: "test2",
-      tags: ["efeg"],
-      admin: {
-        fullName: "Florian Leroux",
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-      },
-      createdAt: "2021-07-28T16:43:30.307Z",
-      description: "e",
-      name: "test-2",
-    },
-  ];
-  // await firestore
-  //   .collection("groups")
-  //   .get()
-  //   .then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-  //       groups.push({ slug: doc.id, ...doc.data() });
-  //     });
-  //   });
+  const groups = [];
+  await firestore
+    .collection("groups")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        groups.push({ slug: doc.id, ...doc.data() });
+      });
+    });
 
   return {
     props: { groups },

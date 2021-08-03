@@ -117,7 +117,7 @@ const GroupOverview = (props) => (
           {props.name}
         </span>
         <span className="text-xs text-gray-400 dark:text-gray-300">
-          {props.description}
+        {props.description.length < 100 ? props.description : props.description.slice(0, 100) + ' ...'}
         </span>
       </div>
     </a>

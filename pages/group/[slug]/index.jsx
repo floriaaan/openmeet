@@ -13,6 +13,7 @@ export default function GroupPage({
   createdAt,
   admin,
   slug,
+  location,
 }) {
   const [subs, setSubs] = useState([]);
   const { user } = useAuth();
@@ -31,7 +32,11 @@ export default function GroupPage({
         .doc(slug)
         .collection("subscribers")
         .doc(user.uid)
-        .set({ fullName: user.fullName, photoUrl: user.photoUrl, uid: user.uid });
+        .set({
+          fullName: user.fullName,
+          photoUrl: user.photoUrl,
+          uid: user.uid,
+        });
     }
   };
 
@@ -60,10 +65,10 @@ export default function GroupPage({
             <h2 className="text-2xl font-bold leading-7 text-green-400 sm:text-3xl sm:truncate">
               {name}
             </h2>
-            <div className="inline-flex flex-col mt-1 space-y-2 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6 sm:space-y-0 ">
+            <div className="inline-flex flex-col h-12 mt-1 space-y-2 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6 sm:space-y-0 ">
               <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
                 <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
-                Remote
+                {location?.location || "Remote"}
               </div>
               <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
                 <AvatarGroup users={subs} limit={4} />
@@ -82,6 +87,7 @@ export default function GroupPage({
             <span className="block">
               <Link href={"/group/" + slug + "/edit"}>
                 <a className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md dark:border-gray-900 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none ">
+                  <i className="mr-2 fas fa-pencil-alt"></i>
                   Edit
                 </a>
               </Link>
@@ -91,18 +97,30 @@ export default function GroupPage({
                 type="button"
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md dark:border-gray-900 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none"
               >
+                <i className="mr-2 fas fa-share-alt"></i>
                 Share
               </button>
             </span>
             <span className="ml-3">
-              <a
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-300 bg-green-600 rounded-md shadow-sm cursor-pointer hover:bg-green-700 focus:outline-none"
+              {subs?.find((sub) => sub.id === user?.uid) ? (
+                <a
+                  className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-500 bg-green-600 rounded-md shadow-sm cursor-pointer hover:bg-red-700 focus:outline-none group"
+                  onClick={toggleSubscription}
+                >
+                  <i className="hidden mr-2 fas fa-times group-hover:block"></i>
+                  <span className="hidden group-hover:block">Unsubscribe</span>
+                  <i className="block mr-2 fas fa-check group-hover:hidden"></i>
+                  <span className="block group-hover:hidden">Subscribed</span>
+                </a>
+              ) : (
+                <a
+                className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-300 bg-gray-600 rounded-md shadow-sm cursor-pointer hover:bg-gray-700 focus:outline-none"
                 onClick={toggleSubscription}
-              >
-                {subs?.find((sub) => sub.id === user?.uid)
-                  ? "Unsubscribe"
-                  : "Subscribe"}
-              </a>
+                >
+                  <i className="mr-2 fas fa-plus"></i>
+                <span className="">Subscribe</span>
+                </a>
+              )}
             </span>
           </div>
         </div>

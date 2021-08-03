@@ -92,7 +92,7 @@ export const GroupOverview = (props) => {
           </div>
         </Link>
       </div>
-      <p className="text-sm font-normal overflow-ellipsis">{props.description}</p>
+      <p className="text-sm font-normal overflow-ellipsis">{props.description.length < 100 ? props.description : props.description.slice(0, 100) + ' ...'}</p>
     </div>
   );
 };
