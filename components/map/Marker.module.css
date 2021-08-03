@@ -1,0 +1,7 @@
+.marker-nonactive-zindex {
+  z-index: 4990 !important;
+}
+
+.marker-active-zindex {
+    z-index: 4991 !important;
+}

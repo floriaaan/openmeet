@@ -37,19 +37,29 @@ export const EventOverview = (props) => {
         <Link href="/">
           <div className="relative w-full cursor-pointer ">
             <img
-              src="https://secure-content.meetupstatic.com/images/classic-events/497370926/265x149.jpg"
+              src={
+                "https://picsum.photos/id/" +
+                Math.floor(Math.random() * 200) +
+                "/500/500"
+              }
               alt="Neural Search and Benchmarking Information Retrieval"
-              className="object-cover w-full rounded-lg max-h-32 lg:max-h-full"
+              className="object-cover w-full rounded-lg max-h-32 lg:max-h-64"
             />
             <div
               className="absolute p-4 top-2 left-2"
-              role="status"
-              aria-label="Online Event"
-              data-testid="online-indicator"
             >
               <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
-                <i className="mr-1 fas fa-video"></i>
-                <span className="truncate">Online Event</span>
+                {Math.random() < 0.5 ? (
+                  <>
+                    <i className="mr-1 fas fa-video"></i>
+                    <span className="truncate">Online Event</span>
+                  </>
+                ) : (
+                  <>
+                    <i className="mr-1 fas fa-map-marker"></i>
+                    <span className="truncate">Rouen, France</span>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -71,15 +81,12 @@ export const EventOverview = (props) => {
             <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
               <AvatarGroup users={temp} limit={4} />
               <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
-              {temp?.length || 0} {temp?.length > 1 ? "participants" : "participant"}
+              {temp?.length || 0}{" "}
+              {temp?.length > 1 ? "participants" : "participant"}
             </div>
             <div className="flex">
               <button
-                aria-label="Share event"
-                tabIndex={0}
-                data-element-name="shelfEvent-share-click"
-                data-event-label="Share icon"
-                data-testid="share-btn"
+                
                 className="text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400"
               >
                 <div className="flex items-center">

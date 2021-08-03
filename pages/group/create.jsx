@@ -2,12 +2,44 @@ import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { makeRequest } from "@libs/asyncXHR";
+
+const Map = dynamic(import("@components/map/Map"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
+      Chargement de la carte…
+    </div>
+  ),
+});
 
 export default function GroupCreatePage() {
   const [name, setName] = useState("");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
+
+  const [position, setPosition] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [map, setMap] = useState(null);
+
+  const fetchLocation = async () => {
+    setLocation(null);
+    const response = await makeRequest(
+      "GET",
+      `https://api-adresse.data.gouv.fr/reverse/?lat=${position.lat}&lon=${position.lng}`
+    );
+    let json = JSON.parse(response);
+    if (json?.features[0] != null)
+      setLocation(json?.features?.[0].properties.city + ", France");
+    else setLocation(null);
+  };
+
+  useEffect(() => {
+    if (position !== null) fetchLocation();
+    else setLocation(null);
+  }, [position]);
 
   const Router = useRouter();
 
@@ -21,6 +53,18 @@ export default function GroupCreatePage() {
     const groupRef = firestore.collection("groups").doc(slug).get();
 
     if (user && !groupRef.exists) {
+      console.log({
+        name,
+        tags: tags.split(";"),
+        description,
+        createdAt: new Date().toISOString(),
+        admin: { uid: user.uid, fullName: user.fullName },
+        location: {
+          location: location || "Remote",
+          position: {...position} || { lat: null, lng: null },
+        },
+      });
+
       const slug = name
         .toLowerCase()
         .replace(/[^\w ]+/g, "")
@@ -34,13 +78,21 @@ export default function GroupCreatePage() {
           description,
           createdAt: new Date().toISOString(),
           admin: { uid: user.uid, fullName: user.fullName },
+          location: {
+            location: location || "Remote",
+            position: {...position} || { lat: null, lng: null },
+          },
         });
       await firestore
         .collection("groups")
         .doc(slug)
         .collection("subscribers")
         .doc(user.uid)
-        .set({ fullName: user.fullName, photoUrl: user.photoUrl });
+        .set({
+          fullName: user.fullName,
+          photoUrl: user.photoUrl,
+          uid: user.uid,
+        });
       // if (response.ok) {
       Router.push("/group/" + slug);
       // }
@@ -50,21 +102,14 @@ export default function GroupCreatePage() {
   return (
     <AppLayout>
       <section className="relative h-full text-gray-600 bg-gray-100 dark:bg-black body-font">
-        <div className="container flex flex-wrap px-5 py-5 mx-auto sm:flex-nowrap">
-          <div className="relative items-end justify-start hidden p-10 overflow-hidden rounded-xl lg:w-1/3 md:w-1/2 sm:mr-10 md:flex">
-            <iframe
-              width="100%"
-              height="100%"
-              className="absolute inset-0"
-              frameBorder={0}
-              title="map"
-              marginHeight={0}
-              marginWidth={0}
-              scrolling="no"
-              src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=Rouen&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+        <div className="container flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
+          <div className="relative items-end justify-start hidden overflow-hidden rounded-xl lg:w-1/3 md:w-1/2 sm:mr-10 md:flex">
+            <Map
+              setMap={setMap}
+              mapEventHandler={{ click: (e) => setPosition(e.latlng) }}
             />
           </div>
-          <div className="flex flex-col w-full mt-8 lg:w-2/3 md:w-1/2 md:ml-auto md:py-8 md:mt-0">
+          <div className="flex flex-col justify-center w-full mt-8 lg:w-2/3 md:w-1/2 md:ml-auto md:py-8 md:mt-0">
             <h2 className="mb-1 text-2xl font-bold text-green-500 title-font">
               Create a group
             </h2>
@@ -95,6 +140,25 @@ export default function GroupCreatePage() {
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+              />
+            </div>
+            <div className="relative mb-4">
+              <label
+                htmlFor="location"
+                className="text-sm leading-7 text-gray-600"
+              >
+                Location
+              </label>
+              <p className="flex md:hidden">
+                Location disabled on mobile devices.
+              </p>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={location}
+                disabled
+                className="hidden w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none md:block rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
               />
             </div>
             <div className="relative mb-4">

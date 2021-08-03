@@ -2,4 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+.leaflet-popup-content {
+  margin: 0 !important;
+}
 
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: none !important;
+}
+
+.leaflet-control-container {
+  display: none;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
