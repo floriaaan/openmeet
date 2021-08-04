@@ -1,6 +1,6 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
+import { FieldValue, firestore } from "@libs/firebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -94,6 +94,7 @@ export default function GroupCreatePage() {
         .collection("events")
         .doc(slug)
         .set({
+          slug,
           name,
           description,
           createdAt: new Date().toISOString(),
@@ -108,24 +109,24 @@ export default function GroupCreatePage() {
           location: {
             location: location || "Remote",
             position: { ...position } || { lat: null, lng: null },
-            details,
+            details: locationDetails || null,
           },
         })
         .then(async function (docRef) {
-          let events = group?.events || [];
-
-          events.push({
-            slug,
-            finished: new Date() > new Date(endDate),
-            inProgress:
-              new Date() > new Date(startDate) &&
-              new Date() < new Date(endDate),
-          });
-
           await firestore
             .collection("groups")
             .doc(group.slug)
-            .set({ events }, { merge: true });
+            .update({
+              events: FieldValue.arrayUnion({
+                slug,
+                finished: new Date() > new Date(endDate),
+                inProgress:
+                  new Date() > new Date(startDate) &&
+                  new Date() < new Date(endDate),
+                startDate,
+                endDate,
+              }),
+            });
 
           router.push("/event/" + slug);
         });

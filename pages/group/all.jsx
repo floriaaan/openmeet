@@ -71,65 +71,66 @@ export default function GroupAllPage({ groups }) {
 }
 
 export async function getServerSideProps() {
-  const groups = [
-    {
-      slug: "marvel-fans",
-      description: "On aime Marvel",
-      createdAt: "2021-07-26T17:11:44.367Z",
-      admin: {
-        fullName: "Florian Leroux",
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-      },
-      name: "Marvel Fans",
-      tags: ["marvel", "ironman", "captain"],
-    },
-    {
-      slug: "test",
-      name: "test",
-      tags: ["test"],
-      createdAt: "2021-07-28T11:51:14.705Z",
-      description: "test",
-      admin: {
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-        fullName: "Florian Leroux",
-      },
-    },
-    {
-      slug: "test-de-location",
-      name: "Test de location",
-      createdAt: "2021-08-03T09:54:40.695Z",
-      location: {
-        position: { lat: 49.27071680843916, lng: 1.2134313583374023 },
-        location: "Val-de-Reuil, France",
-      },
-      tags: ["location", "opéla"],
-      admin: {
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-        fullName: "Florian Leroux",
-      },
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at leo in turpis posuere efficitur at non nulla. Fusce condimentum ultrices lectus eu venenatis. Suspendisse semper accumsan nisi at gravida. Nulla at tellus lobortis, sollicitudin ante nec, dapibus metus. Nunc finibus mauris tellus, id tristique lectus consequat quis. Nullam imperdiet mi non commodo sollicitudin. Phasellus aliquam finibus mauris ac tristique. Ut turpis nisl, volutpat id nibh eget, pellentesque efficitur enim. Sed pellentesque aliquet turpis a tincidunt. Etiam ornare ornare neque, sit amet accumsan justo egestas ut. Maecenas blandit magna eu massa posuere tempus.  In maximus orci nec commodo congue. Praesent malesuada, lectus ac elementum euismod, turpis orci congue ex, sed porttitor augue magna eget leo. Maecenas vitae facilisis justo. Praesent sed dui dui. Maecenas at purus odio. Sed tempor mauris a felis rutrum posuere. Nulla feugiat dolor metus. Sed feugiat dolor vel placerat facilisis. Praesent suscipit justo id ante consequat finibus. Suspendisse vehicula dapibus dolor sed varius. Quisque vestibulum, erat et sodales malesuada, ex mauris pretium lacus, in porttitor tellus elit rutrum est.",
-    },
-    {
-      slug: "test2",
-      createdAt: "2021-07-28T16:43:30.307Z",
-      description: "e",
-      name: "test-2",
-      admin: {
-        fullName: "Florian Leroux",
-        uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-      },
-      tags: ["efeg"],
-    },
-  ];
-  // await firestore
-  //   .collection("groups")
-  //   .get()
-  //   .then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-  //       groups.push({ slug: doc.id, ...doc.data() });
-  //     });
-  //   });
+  // const groups = [
+  //   {
+  //     slug: "marvel-fans",
+  //     description: "On aime Marvel",
+  //     createdAt: "2021-07-26T17:11:44.367Z",
+  //     admin: {
+  //       fullName: "Florian Leroux",
+  //       uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
+  //     },
+  //     name: "Marvel Fans",
+  //     tags: ["marvel", "ironman", "captain"],
+  //   },
+  //   {
+  //     slug: "test",
+  //     name: "test",
+  //     tags: ["test"],
+  //     createdAt: "2021-07-28T11:51:14.705Z",
+  //     description: "test",
+  //     admin: {
+  //       uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
+  //       fullName: "Florian Leroux",
+  //     },
+  //   },
+  //   {
+  //     slug: "test-de-location",
+  //     name: "Test de location",
+  //     createdAt: "2021-08-03T09:54:40.695Z",
+  //     location: {
+  //       position: { lat: 49.27071680843916, lng: 1.2134313583374023 },
+  //       location: "Val-de-Reuil, France",
+  //     },
+  //     tags: ["location", "opéla"],
+  //     admin: {
+  //       uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
+  //       fullName: "Florian Leroux",
+  //     },
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at leo in turpis posuere efficitur at non nulla. Fusce condimentum ultrices lectus eu venenatis. Suspendisse semper accumsan nisi at gravida. Nulla at tellus lobortis, sollicitudin ante nec, dapibus metus. Nunc finibus mauris tellus, id tristique lectus consequat quis. Nullam imperdiet mi non commodo sollicitudin. Phasellus aliquam finibus mauris ac tristique. Ut turpis nisl, volutpat id nibh eget, pellentesque efficitur enim. Sed pellentesque aliquet turpis a tincidunt. Etiam ornare ornare neque, sit amet accumsan justo egestas ut. Maecenas blandit magna eu massa posuere tempus.  In maximus orci nec commodo congue. Praesent malesuada, lectus ac elementum euismod, turpis orci congue ex, sed porttitor augue magna eget leo. Maecenas vitae facilisis justo. Praesent sed dui dui. Maecenas at purus odio. Sed tempor mauris a felis rutrum posuere. Nulla feugiat dolor metus. Sed feugiat dolor vel placerat facilisis. Praesent suscipit justo id ante consequat finibus. Suspendisse vehicula dapibus dolor sed varius. Quisque vestibulum, erat et sodales malesuada, ex mauris pretium lacus, in porttitor tellus elit rutrum est.",
+  //   },
+  //   {
+  //     slug: "test2",
+  //     createdAt: "2021-07-28T16:43:30.307Z",
+  //     description: "e",
+  //     name: "test-2",
+  //     admin: {
+  //       fullName: "Florian Leroux",
+  //       uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
+  //     },
+  //     tags: ["efeg"],
+  //   },
+  // ];
+  const groups = [];
+  await firestore
+    .collection("groups")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        groups.push({ slug: doc.id, ...doc.data() });
+      });
+    });
 
   return {
     props: { groups },

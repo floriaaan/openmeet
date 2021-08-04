@@ -1,6 +1,6 @@
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
-import { formatDistance } from "date-fns";
+import { formatDistance, formatDistanceToNow } from "date-fns";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
@@ -9,6 +9,8 @@ import { AvatarGroup } from "@components/ui/AvatarGroup";
 export const GroupOverview = (props) => {
   const { user } = useAuth();
   const [subs, setSubs] = useState([]);
+  const [lastEvent, setLastEvent] = useState(null);
+
   useEffect(() => {
     firestore
       .collection("groups")
@@ -21,6 +23,21 @@ export const GroupOverview = (props) => {
         });
         setSubs(subs);
       });
+
+    if (props?.events?.length >= 1) {
+      let sortedEvents = props.events;
+      sortedEvents.sort((a, b) => {
+        return new Date(b.startDate) > new Date(a.startDate);
+      });
+      console.log(sortedEvents);
+      firestore
+        .collection("events")
+        .doc(sortedEvents[0].slug)
+        .get()
+        .then((snapshot) => {
+          setLastEvent({ slug: snapshot.id, ...snapshot.data() });
+        });
+    }
   }, []);
 
   const toggleSubscription = async () => {
@@ -71,7 +88,7 @@ export const GroupOverview = (props) => {
         )}
       </div>
 
-      <div className="inline-flex flex-col pb-3 mb-3 pt-1.5 space-y-2 border-b border-gray-200 sm:flex-row sm:flex-wrap sm:space-x-6 sm:space-y-0 dark:border-gray-700 ">
+      <div className="inline-flex flex-col pb-2 mb-2 pt-1.5 space-y-2 border-b border-gray-200 sm:flex-row sm:flex-wrap sm:space-x-6 sm:space-y-0 dark:border-gray-700 ">
         <Link href={"/group/" + props.slug}>
           <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
             <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
@@ -92,7 +109,67 @@ export const GroupOverview = (props) => {
           </div>
         </Link>
       </div>
-      <p className="text-sm font-normal overflow-ellipsis">{props.description.length < 100 ? props.description : props.description.slice(0, 100) + ' ...'}</p>
+      <p className="text-sm font-normal overflow-ellipsis">
+        {props.description.length < 100
+          ? props.description
+          : props.description.slice(0, 100) + " ..."}
+      </p>
+      <div className="w-full mt-4 transition duration-300 bg-gray-100 rounded-xl dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800">
+        {lastEvent ? (
+          <div className="inline-flex w-full">
+            <TinyEvent {...lastEvent} />
+          </div>
+        ) : (
+          <div className="flex items-center justify-center py-4 text-sm text-gray-500 dark:text-gray-300">
+            No event planned ❌
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const TinyEvent = (props) => {
+  return (
+    <div className="flex flex-row justify-between w-full px-6 py-2 text-gray-600 dark:text-gray-400">
+      <div className="flex flex-col flex-grow w-full">
+        <h3 className="text-xs">
+          <i className="w-6 fas fa-calendar "></i>
+          Next event:
+          <span className="ml-1 text-sm font-bold text-purple-500">
+            {props.name}
+          </span>
+        </h3>
+        <div className="inline-flex items-center text-xs">
+          {props?.location?.location === "Remote" ? (
+            <>
+              <i className="w-6 fas fa-video"></i>
+              <span className="truncate">Online Event</span>
+            </>
+          ) : (
+            <>
+              <i className="w-6 fas fa-map-marker"></i>
+              <span className="truncate">
+                {props?.location?.details
+                  ? props.location.details.city +
+                    ", " +
+                    props.location.details.country
+                  : props?.location?.location}
+              </span>
+            </>
+          )}
+        </div>
+        <div className="inline-flex items-center text-xs">
+          <i className="w-6 fas fa-clock"></i>
+          starts{" "}
+          {formatDistanceToNow(new Date(props.startDate), { addSuffix: true })}
+        </div>
+      </div>
+      <Link href={"/event/" + props.slug}>
+        <a className="rounded-xl text-xs px-3 py-1.5 hover:bg-purple-200 text-purple-700 dark:text-purple-400 dark:hover:bg-purple-800 duration-300 transition inline-flex items-center">
+          See more <i className="ml-1 fas fa-arrow-right"></i>
+        </a>
+      </Link>
     </div>
   );
 };

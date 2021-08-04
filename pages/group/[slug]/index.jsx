@@ -5,6 +5,7 @@ import { formatDistance } from "date-fns";
 import { useAuth } from "@hooks/useAuth";
 import { useEffect, useState } from "react";
 import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { EventOverview } from "@components/cards/CardEventOverview";
 
 export default function GroupPage({
   name,
@@ -14,8 +15,10 @@ export default function GroupPage({
   admin,
   slug,
   location,
+  events = [],
 }) {
   const [subs, setSubs] = useState([]);
+  const [eventsState, setEventsState] = useState([]);
   const { user } = useAuth();
 
   const toggleSubscription = async () => {
@@ -52,6 +55,11 @@ export default function GroupPage({
         });
         setSubs(subs);
       });
+
+    events.forEach(async (el) => {
+      const doc = await firestore.collection("events").doc(el.slug).get();
+      setEventsState([...eventsState, { slug: doc.id, ...doc.data() }]);
+    });
   }, []);
 
   return (
@@ -114,11 +122,11 @@ export default function GroupPage({
                 </a>
               ) : (
                 <a
-                className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-300 bg-gray-600 rounded-md shadow-sm cursor-pointer hover:bg-gray-700 focus:outline-none"
-                onClick={toggleSubscription}
+                  className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-300 bg-gray-600 rounded-md shadow-sm cursor-pointer hover:bg-gray-700 focus:outline-none"
+                  onClick={toggleSubscription}
                 >
                   <i className="mr-2 fas fa-plus"></i>
-                <span className="">Subscribe</span>
+                  <span className="">Subscribe</span>
                 </a>
               )}
             </span>
@@ -129,7 +137,11 @@ export default function GroupPage({
             {description}
           </p>
         </div>
-        <div className="grid-cols-3 gap-4 space-y-2 md:grid md:space-y-0"></div>
+        <div className="grid-cols-3 gap-4 space-y-2 md:grid md:space-y-0">
+          {eventsState.map((el, index) => (
+            <EventOverview {...el} key={index} />
+          ))}
+        </div>
       </section>
     </AppLayout>
   );

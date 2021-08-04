@@ -19,6 +19,8 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+const FieldValue = firebase.firestore.FieldValue;
+
 export async function createUser(uid, data) {
   return await firestore
     .collection("users")
@@ -29,4 +31,4 @@ export async function createUser(uid, data) {
     );
 }
 
-export { firebase, auth, firestore };
+export { firebase, auth, firestore, FieldValue };
