@@ -11,11 +11,11 @@ export const AdminLayout = ({ children, pageTitle }) => {
   return (
     <>
       <Sidebar />
-      <div className="relative bg-gray-100 dark:bg-gray-700 md:ml-64">
+      <div className="relative bg-gray-100 dark:bg-gray-800 md:ml-64">
         <AdminNavbar title={pageTitle} />
         {/* Header */}
         <HeaderStats />
-        <div className="w-full px-4 mx-auto -m-24 md:px-10 ">
+        <div className="w-full px-4 pt-6 mx-auto md:px-10">
           {children}
           <FooterAdmin />
         </div>

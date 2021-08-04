@@ -53,18 +53,6 @@ export default function GroupCreatePage() {
     const groupRef = firestore.collection("groups").doc(slug).get();
 
     if (user && !groupRef.exists) {
-      console.log({
-        name,
-        tags: tags.split(";"),
-        description,
-        createdAt: new Date().toISOString(),
-        admin: { uid: user.uid, fullName: user.fullName },
-        location: {
-          location: location || "Remote",
-          position: {...position} || { lat: null, lng: null },
-        },
-      });
-
       const slug = name
         .toLowerCase()
         .replace(/[^\w ]+/g, "")
@@ -80,8 +68,9 @@ export default function GroupCreatePage() {
           admin: { uid: user.uid, fullName: user.fullName },
           location: {
             location: location || "Remote",
-            position: {...position} || { lat: null, lng: null },
+            position: { ...position } || { lat: null, lng: null },
           },
+          events: [],
         });
       await firestore
         .collection("groups")
@@ -126,7 +115,7 @@ export default function GroupCreatePage() {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+                className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
               />
             </div>
             <div className="relative mb-4">
@@ -139,7 +128,7 @@ export default function GroupCreatePage() {
                 name="tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+                className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
               />
             </div>
             <div className="relative mb-4">
@@ -158,7 +147,7 @@ export default function GroupCreatePage() {
                 name="location"
                 value={location}
                 disabled
-                className="hidden w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none md:block rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+                className="hidden w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none md:block rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
               />
             </div>
             <div className="relative mb-4">
@@ -172,7 +161,7 @@ export default function GroupCreatePage() {
                 id="description"
                 name="description"
                 rows={7}
-                className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+                className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                 defaultValue={""}
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -195,7 +184,7 @@ export default function GroupCreatePage() {
               </button>
             </div>
             <p className="text-xs text-gray-500">
-              What an adventure that begins
+              What an adventure that begins! 🎉
             </p>
           </div>
         </div>

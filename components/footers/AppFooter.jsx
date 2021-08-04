@@ -22,7 +22,7 @@ export const AppFooter = () => {
   }, [user]);
 
   const sendSubscription = async () => {
-    console.log(user);
+    // console.log(user);
     if (user) {
       const response = await firestore
         .collection("newsletter_subscriptions")
@@ -32,7 +32,7 @@ export const AppFooter = () => {
           fullName: user.fullName,
           email: user.email,
         });
-      console.log(response);
+      // console.log(response);
     }
   };
 

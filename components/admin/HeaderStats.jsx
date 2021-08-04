@@ -18,7 +18,7 @@ export const HeaderStats = () => {
         "https://raw.githubusercontent.com/floriaaan/openmeet/main/resources/openmeet.json"
       );
       const body = await res.json();
-      console.log(body);
+      // console.log(body);
       setSecurity({
         ...security,
         version: semver.gte(openmeet.version, body.version),
@@ -82,11 +82,11 @@ export const HeaderStats = () => {
   return (
     <>
       {/* Header */}
-      <div className="relative pt-12 pb-32 bg-gray-800 md:pt-32">
+      <div className="relative hidden pt-12 pb-32 bg-gray-800 dark:bg-black md:flex md:pt-32">
         <div className="w-full px-4 mx-auto md:px-10">
           <div>
             {/* Card stats */}
-            <div className="flex flex-wrap grid-cols-2 gap-6 xl:grid-cols-4 md:grid">
+            <div className="flex flex-wrap grid-cols-2 gap-3 lg:gap-6 xl:grid-cols-4 md:grid">
               <div className="w-full">
                 <OpenMeetOverview />
               </div>

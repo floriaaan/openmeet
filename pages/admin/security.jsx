@@ -23,7 +23,7 @@ const Checklist = () => {
         "https://raw.githubusercontent.com/floriaaan/openmeet/main/resources/openmeet.json"
       );
       const body = await res.json();
-      console.log(body)
+      // console.log(body)
       setSecurity({
         ...security,
         version: semver.gte(openmeet.version, body.version),

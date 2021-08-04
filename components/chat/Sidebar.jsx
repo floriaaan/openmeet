@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { formatDistance } from "date-fns";
-import { user } from "firebase-functions/lib/providers/auth";
+
 
 export const Sidebar = (props) => {
   const { user } = useAuth();

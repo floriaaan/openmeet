@@ -1,10 +1,8 @@
 import { EventOverview } from "@components/cards/CardEventOverview";
 import { GroupOverview } from "@components/cards/CardGroupOverview";
 import { AppLayout } from "@components/layouts/AppLayout";
-import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
-import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -81,6 +79,7 @@ const GroupsSection = () => {
         querySnapshot.forEach((doc) => {
           _tmp.push({ slug: doc.id, ...doc.data() });
         });
+        // console.log(JSON.stringify(_tmp))
         setGroups(_tmp);
       })
       .catch((error) => {
@@ -95,8 +94,9 @@ const GroupsSection = () => {
           Popular groups
         </span>
         <Link href="/group/all">
-          <a className="flex text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
+        <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
             Explore more groups
+            <i className="ml-2 fas fa-arrow-right"></i>
           </a>
         </Link>
       </div>
@@ -104,28 +104,35 @@ const GroupsSection = () => {
         {groups.map(
           (el, index) => index < 3 && <GroupOverview {...el} key={index} />
         )}
+        {groups.length < 3 && (
+            <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+              <Link href="/group/create">
+                <a className="flex items-center justify-center w-24 h-24 text-green-700 transition duration-300 bg-green-200 border border-green-500 rounded-full cursor-pointer dark:border-green-500 dark:bg-opacity-50 dark:bg-green-700 dark:text-green-200 hover:bg-green-300 dark:hover:bg-green-800">
+                  <i className="text-xl fas fa-plus"></i>
+                </a>
+              </Link>
+            </div>
+          )}
       </div>
     </div>
   );
 };
 
 const EventSection = () => {
-  // const [groups, setGroups] = useState([]);
-  // useEffect(() => {
-  //   firestore
-  //     .collection("groups")
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       let _tmp = [];
-  //       querySnapshot.forEach((doc) => {
-  //         _tmp.push({ slug: doc.id, ...doc.data() });
-  //       });
-  //       setGroups(_tmp);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    firestore
+      .collection("events")
+      // .where("startDate", ">", new Date().toISOString())
+      .onSnapshot((querySnapshot) => {
+        let _tmp = [];
+        querySnapshot.forEach((doc) => {
+          if (_tmp.length < 4 && new Date(doc.data().startDate) > new Date())
+            _tmp.push({ slug: doc.id, ...doc.data() });
+        });
+        setEvents(_tmp);
+      });
+  }, []);
 
   return (
     <div className="flex flex-col w-full ">
@@ -134,18 +141,32 @@ const EventSection = () => {
           Upcoming events
         </span>
         <Link href="/event/all">
-          <a className="flex text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
+          <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-purple-500">
             Explore more events
+            <i className="ml-2 fas fa-arrow-right"></i>
           </a>
         </Link>
       </div>
-      <div className="grid gap-3 lg:grid-cols-4 sm:grid-cols-2 lg:px-12 lg:py-6">
-        {new Array(4)
-          .fill(0)
-          .map(
+      {events.length !== 0 ? (
+        <div className="grid gap-3 lg:grid-cols-4 sm:grid-cols-2 lg:px-12 lg:py-6">
+          {events.map(
             (el, index) => index < 4 && <EventOverview {...el} key={index} />
           )}
-      </div>
+          {events.length < 4 && (
+            <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+              <Link href="/event/create">
+                <a className="flex items-center justify-center w-24 h-24 text-purple-700 transition duration-300 bg-purple-200 border border-purple-500 rounded-full cursor-pointer dark:border-purple-500 dark:bg-opacity-50 dark:bg-purple-700 dark:text-purple-200 hover:bg-purple-300 dark:hover:bg-purple-800">
+                  <i className="text-xl fas fa-plus"></i>
+                </a>
+              </Link>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="inline-flex items-center justify-center w-full h-48">
+          No upcoming events yet... 😢
+        </div>
+      )}
     </div>
   );
 };

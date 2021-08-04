@@ -16,7 +16,7 @@ export default function CardStats({
     <>
       <div
         className={
-          "relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-lg dark:bg-gray-900 rounded-xl xl:mb-0" +
+          "relative flex flex-col min-w-0 break-words bg-white shadow-lg dark:bg-gray-900 rounded-xl" +
           (isLink ? " cursor-pointer hover:bg-gray-100 hover:shadow-xl transition duration-500 dark:hover:bg-gray-700" : "")
         }
       >

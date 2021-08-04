@@ -7,7 +7,7 @@ import ThemeOverview from "@components/admin/ThemeOverview";
 export default function Dashboard() {
   return (
     <AdminLayout pageTitle="Dashboard">
-      <div className="flex flex-wrap grid-cols-2 gap-6 lg:grid min-h-[52vh]">
+      <div className="flex flex-wrap grid-cols-2 gap-6 lg:grid min-h-[50vh]">
         <div className="w-full">
           <ThemeOverview />
         </div>

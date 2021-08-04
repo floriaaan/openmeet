@@ -6,7 +6,7 @@ export default function OpenMeetOverview() {
     <>
       <div
         className={
-          "relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-lg dark:bg-gray-900 rounded-xl xl:mb-0"
+          "relative flex flex-col min-w-0 break-words bg-white shadow-lg dark:bg-gray-900 rounded-xl "
         }
       >
         <div className="flex-auto p-4">
