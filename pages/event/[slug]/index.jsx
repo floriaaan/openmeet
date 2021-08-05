@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function EventPage(props) {
   return (
     <AppLayout>
-      <div className="flex flex-col w-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
+      <div className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
         <div className="xl:sticky xl:top-0 z-[47] flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
           <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
             {format(new Date(props.startDate), "PPPPp")}
@@ -35,7 +35,7 @@ export default function EventPage(props) {
             </a>
           </Link>
         </div>
-        <div className="flex flex-col-reverse h-full px-6 py-6 pb-16 lg:pb-24 lg:px-32 xl:px-48 md:flex-row ">
+        <div className="flex flex-col-reverse flex-grow h-full px-6 py-6 pb-16 lg:pb-24 lg:px-32 xl:px-48 md:flex-row ">
           <div className="flex flex-col w-full mt-6 md:w-2/3 md:pr-5 md:mt-0">
             <div className="relative w-full pb-6 mb-6 border-b border-gray-300 dark:border-gray-700 ">
               <img
