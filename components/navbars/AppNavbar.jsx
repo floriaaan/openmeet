@@ -16,8 +16,10 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
     <>
       <nav
         className={
-          "top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-gray-900 dark:text-gray-300 navbar-expand-lg" +
-          (shadowOnNavbar && " shadow-md")
+          "top-0 z-[48] flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-gray-900 dark:text-gray-300 navbar-expand-lg " +
+          // "md:bg-opacity-75 md:dark:bg-opacity-50 md:backdrop-blur sticky" +
+
+          (shadowOnNavbar ? " shadow-md" : " ")
         }
       >
         <div className="container inline-flex flex-wrap items-center justify-between px-4 mx-auto">
@@ -37,7 +39,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center bg-white dark:bg-gray-900 lg:bg-opacity-0 mt-3 lg:mt-0 lg:shadow-none" +
+              "lg:flex flex-grow items-center  lg:bg-opacity-0 mt-3 lg:mt-0 lg:shadow-none" +
               (navbarOpen ? " block" : " hidden")
             }
             id="example-navbar-warning"
@@ -48,7 +50,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
                   type="search"
                   name="query"
                   placeholder="Search"
-                  className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 rounded-full appearance-none dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 pr-28"
+                  className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-opacity-75 rounded-full appearance-none dark:text-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:bg-white pr-28 dark:bg-opacity-50 backdrop-blur"
                 />
                 <div className="absolute right-0 flex flex-row items-center mr-4 space-x-5 hover:border-transparent">
                   <span

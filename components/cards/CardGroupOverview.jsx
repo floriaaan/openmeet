@@ -29,7 +29,7 @@ export const GroupOverview = (props) => {
       sortedEvents.sort((a, b) => {
         return new Date(b.startDate) > new Date(a.startDate);
       });
-      console.log(sortedEvents);
+      // console.log(sortedEvents);
       firestore
         .collection("events")
         .doc(sortedEvents[0].slug)
@@ -88,7 +88,7 @@ export const GroupOverview = (props) => {
         )}
       </div>
 
-      <div className="inline-flex flex-col pb-2 mb-2 pt-1.5 space-y-2 border-b border-gray-200 sm:flex-row sm:flex-wrap sm:space-x-6 sm:space-y-0 dark:border-gray-700 ">
+      <div className="flex flex-col pb-2 mb-2 pt-1.5 space-y-2 border-b border-gray-200  dark:border-gray-700 ">
         <Link href={"/group/" + props.slug}>
           <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
             <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
@@ -100,14 +100,14 @@ export const GroupOverview = (props) => {
           <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
           {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
         </div>
-        <Link href={"/group/" + props.slug}>
+        {/* <Link href={"/group/" + props.slug}>
           <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
             <i className="flex items-center fas fa-calendar flex-shrink-0 mr-1.5 h-5 w-5 "></i>
             {formatDistance(new Date(props.createdAt), new Date(), {
               addSuffix: true,
             })}
           </div>
-        </Link>
+        </Link> */}
       </div>
       <p className="text-sm font-normal overflow-ellipsis">
         {props.description.length < 100

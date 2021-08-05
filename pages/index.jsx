@@ -73,6 +73,7 @@ const GroupsSection = () => {
   useEffect(() => {
     firestore
       .collection("groups")
+      .orderBy('createdAt', "desc")
       .get()
       .then((querySnapshot) => {
         let _tmp = [];
@@ -91,7 +92,7 @@ const GroupsSection = () => {
     <div className="flex flex-col w-full">
       <div className="inline-flex items-end justify-between p-3">
         <span className="text-xl font-medium text-gray-600 dark:text-gray-300 md:font-bold md:text-3xl lg:text-4xl">
-          Popular groups
+          Latest groups
         </span>
         <Link href="/group/all">
         <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">

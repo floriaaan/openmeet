@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { useAuth } from "@hooks/useAuth";
 import Link from "next/link";
+import { firestore } from "@libs/firebase";
 
 export const EventDropdown = () => {
   // dropdown props
@@ -19,6 +20,37 @@ export const EventDropdown = () => {
   };
 
   const { user } = useAuth();
+
+  const [events, setEvents] = useState([]);
+
+  const getEvents = async () => {
+    firestore
+      .collection("events")
+      .get()
+      .then((querySnapshot) => {
+        const list = [];
+
+        querySnapshot.forEach((doc) => {
+          list.push({ slug: doc.id, ...doc.data() });
+        });
+        const events = [];
+        for (let i = 0; i < 3; i++) {
+          const randomIndex = Math.floor(Math.random() * list.length);
+          const randomEvent = list[randomIndex];
+          if (
+            events.findIndex((group) => group.slug === randomEvent.slug) === -1
+          ) {
+            events.push(randomEvent);
+          }
+        }
+
+        setEvents(events);
+      });
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
 
   return (
     <>
@@ -48,13 +80,13 @@ export const EventDropdown = () => {
         <div className="border-t border-gray-100 dark:border-gray-800"></div>
 
         <Link href="/event/create">
-          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none  hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
             <i className="mr-2 fas fa-plus"></i>
             Create an event
           </a>
         </Link>
         <Link href="/event/all">
-          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none  hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+          <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
             <i className="mr-2 fas fa-calendar-alt"></i>
             All events
           </a>
