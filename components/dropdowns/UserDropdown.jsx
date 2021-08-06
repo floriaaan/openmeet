@@ -39,7 +39,7 @@ export const UserDropdown = () => {
             <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
               <img
                 alt={user?.fullName}
-                className="w-full h-full align-middle border-none rounded-full "
+                className="w-full h-full align-middle border-none rounded-full select-none "
                 src={
                   user?.photoUrl
                     ? user.photoUrl
@@ -66,7 +66,7 @@ export const UserDropdown = () => {
         <div className="block px-4 py-2 text-xs text-gray-400">Dark Mode</div>
         <a
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none  hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
+          className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
         >
           {theme === "light" ? (
             <i className="mr-2 fas fa-moon"></i>
@@ -83,7 +83,7 @@ export const UserDropdown = () => {
             </div>
 
             <Link href={"/profile/" + user.uid} >
-              <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none  hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
+              <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                 <i className="mr-2 fas fa-user"></i>
                 Profile
               </a>

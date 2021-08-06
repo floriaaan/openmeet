@@ -1,10 +1,77 @@
 import { AppLayout } from "@components/layouts/AppLayout";
+import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function EventPage(props) {
+  const [participants, setParticipants] = useState([]);
+  const { user } = useAuth();
+
+  const toggleParticipation = async () => {
+    if (participants.find((participant) => participant.uid === user.uid)) {
+      await firestore
+        .collection("events")
+        .doc(props.slug)
+        .collection("participants")
+        .doc(user.uid)
+        .delete();
+
+      firestore
+        .collection("notifications")
+        .where("uid", "==", props.host.uid)
+        .where("data.id", "==", props.slug)
+        .where("data.participant.uid", "==", user.uid)
+        .get()
+        .then((snapshot) => snapshot.forEach((el) => el.ref.delete()));
+    } else {
+      await firestore
+        .collection("events")
+        .doc(props.slug)
+        .collection("participants")
+        .doc(user.uid)
+        .set({
+          fullName: user.fullName,
+          photoUrl: user.photoUrl,
+          uid: user.uid,
+        });
+
+      await firestore.collection("notifications").add({
+        createdAt: new Date().toISOString(),
+        type: "event",
+        uid: props.host.uid,
+        data: {
+          action: "new_participant",
+          id: props.slug,
+          message: `${user.fullName} will participate on ${props.name}`,
+          type: "event",
+          participant: {
+            uid: user.uid,
+            photoUrl: user.photoUrl,
+            fullName: user.fullName,
+          },
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    firestore
+      .collection("events")
+      .doc(props.slug)
+      .collection("participants")
+      .onSnapshot((querySnapshot) => {
+        let participants = [];
+        querySnapshot.forEach((doc) => {
+          participants.push({ id: doc.id, ...doc.data() });
+        });
+        setParticipants(participants);
+      });
+  }, []);
+
   return (
     <AppLayout>
       <div className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
@@ -15,25 +82,65 @@ export default function EventPage(props) {
           <h2 className="mb-2 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
             {props.name}
           </h2>
-          <Link href={"/profile/" + props.host.uid}>
-            <a className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition duration-300 bg-red-100 rounded-full cursor-pointer hover:bg-red-200 max-w-max dark:bg-red-900 dark:hover:bg-opacity-60 dark:bg-opacity-30">
-              {props.host.photoUrl && (
-                <img
-                  src={props.host.photoUrl}
-                  alt={props.host.fullName}
-                  className="w-12 h-12 rounded-full"
-                ></img>
+          <div className="flex flex-col space-y-2 md:items-center md:flex-row md:space-y-0 md:space-x-3">
+            <Link href={"/profile/" + props.host.uid}>
+              <a className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition duration-300 bg-red-100 rounded-full cursor-pointer hover:bg-red-200 max-w-max dark:bg-red-900 dark:hover:bg-opacity-60 dark:bg-opacity-30">
+                {props.host.photoUrl && (
+                  <img
+                    src={props.host.photoUrl}
+                    alt={props.host.fullName}
+                    className="w-12 h-12 rounded-full select-none"
+                  ></img>
+                )}
+                <div className="flex flex-col">
+                  <p className="text-xs text-gray-600 select-none dark:text-gray-500">
+                    Hosted by
+                  </p>
+                  <p className="text-sm font-extrabold text-red-700 select-none dark:text-red-300">
+                    {props.host.fullName}
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <button
+              onClick={toggleParticipation}
+              className={
+                "inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-purple-100 rounded-full cursor-pointer group  max-w-max dark:bg-purple-900  dark:bg-opacity-30 " +
+                (participants.find(
+                  (participant) => participant.uid === user.uid
+                )
+                  ? "hover:bg-red-200 dark:hover:bg-red-900 duration-500"
+                  : "hover:bg-purple-200 dark:hover:bg-opacity-60 duration-300")
+              }
+            >
+              {participants.find(
+                (participant) => participant.uid === user.uid
+              ) ? (
+                <div className="inline-flex items-center space-x-3">
+                  <span className="flex items-center justify-center w-8 h-8 transition duration-500 bg-purple-300 rounded-full group-hover:bg-red-300 dark:group-hover:bg-red-800 md:w-12 md:h-12 dark:bg-purple-800 dark:bg-opacity-30">
+                    <i className="text-purple-700 select-none fas fa-check dark:text-purple-300 group-hover:hidden"></i>
+                    <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
+                  </span>
+                  <p className="text-sm font-extrabold text-purple-700 select-none dark:text-purple-300 group-hover:hidden">
+                    You're in !
+                  </p>
+                  <p className="hidden text-sm font-extrabold text-red-700 select-none dark:text-red-300 group-hover:block">
+                    Wanna leave ? 😢
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <span className="flex items-center justify-center w-8 h-8 bg-purple-300 rounded-full md:w-12 md:h-12 dark:bg-purple-800 dark:bg-opacity-30">
+                    <i className="text-purple-700 select-none fas fa-plus dark:text-purple-300 "></i>
+                  </span>
+                  <p className="text-sm font-extrabold text-purple-700 select-none dark:text-purple-300">
+                    Participate
+                  </p>
+                </>
               )}
-              <div className="flex flex-col">
-                <p className="text-xs text-gray-600 select-none dark:text-gray-500">
-                  Hosted by
-                </p>
-                <p className="text-sm font-extrabold text-red-700 select-none dark:text-red-300">
-                  {props.host.fullName}
-                </p>
-              </div>
-            </a>
-          </Link>
+            </button>
+            <AvatarGroup users={participants} xl />
+          </div>
         </div>
         <div className="flex flex-col-reverse flex-grow h-full px-6 py-6 pb-16 lg:pb-24 lg:px-32 xl:px-48 md:flex-row ">
           <div className="flex flex-col w-full mt-6 md:w-2/3 md:pr-5 md:mt-0">
@@ -180,7 +287,7 @@ export default function EventPage(props) {
                     {props.location.location === "Remote" ? (
                       <i className="w-6 ml-4 text-lg text-center fas fa-video" />
                     ) : (
-                      <i className="w-6 ml-4 text-lg text-center far fa-map-marker-alt" />
+                      <i className="w-6 ml-4 text-lg text-center fas fa-map-marker-alt" />
                     )}
                     {props.location.location === "Remote" ? (
                       <div className="flex flex-col">
@@ -217,6 +324,17 @@ export default function EventPage(props) {
                   )}
                 </div>
               </div>
+
+                      {/* TODO: file support and more like gcalendar and gmaps card */}
+              {/* <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-900 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
+                <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
+                  <i className="text-2xl fas fa-file" />
+                </span>
+                <div className="flex flex-col">
+                  <h4 className="text-base font-bold">file</h4>
+                  <p className="text-xs">file</p>
+                </div>
+              </a> */}
             </div>
           </div>
         </div>

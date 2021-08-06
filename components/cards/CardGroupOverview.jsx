@@ -1,6 +1,6 @@
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
-import { formatDistance, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";

@@ -120,8 +120,12 @@ export const NotificationDropdown = () => {
             : "No messages yet"}
         </div>
 
-        <div className="block px-4 py-2 text-xs text-gray-400">
+        <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
           Notifications
+          <button className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900">
+              
+              Read all
+            </button>
         </div>
         <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
           {notifications.length > 0
@@ -139,7 +143,7 @@ const ChatOverview = (props) => {
   return (
     <Link href={"/chat/" + props.id}>
       <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
-        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded dark:bg-yellow-700">
+        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
           <i className="text-2xl fas fa-users" />
         </span>
         <div className="flex flex-col ml-2">
@@ -177,9 +181,9 @@ const ChatOverview = (props) => {
 
 const NotificationOverview = (props) => {
   return (
-    <Link href={"/" + props?.type + "/" + props?.id}>
+    <Link href={"/" + props?.type + "/" + props?.data?.id}>
       <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
-        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded dark:bg-yellow-700">
+        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
           {props?.data?.action === "new_message" ? (
             <i className="text-2xl fas fa-envelope" />
           ) : (
@@ -190,7 +194,7 @@ const NotificationOverview = (props) => {
           <span className="font-bold text-yellow-700 dark:text-yellow-400">
             {props?.data?.action === "new_message"
               ? "New message"
-              : "New notification"}
+              : props?.data?.action === "new_participant" ? props.data.message : "New notification"}
           </span>
 
           <span className="text-xs text-gray-400 dark:text-gray-300">

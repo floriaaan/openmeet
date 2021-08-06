@@ -26,7 +26,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
           <div className="relative flex items-center justify-between w-full h-12 lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
               <a className="inline-block mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                <img src="/logo.svg" className="w-12 h-12"></img>
+                <img src="/logo.svg" className="w-12 h-12 select-none"></img>
               </a>
             </Link>
             <button
@@ -55,7 +55,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
                 <div className="absolute right-0 flex flex-row items-center mr-4 space-x-5 hover:border-transparent">
                   <span
                     style={{ opacity: 1 }}
-                    className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 dark:border-gray-800 rounded-md bg-white dark:bg-gray-900"
+                    className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 dark:border-gray-800 rounded-md bg-white select-none dark:bg-gray-900"
                   >
                     <span className="sr-only">Press </span>
                     <kbd className="font-sans">

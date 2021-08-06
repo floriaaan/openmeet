@@ -27,39 +27,41 @@ export default function GroupAllPage({ groups }) {
 
   return (
     <AppLayout>
-      <div className="flex flex-col w-full h-full p-6 space-y-3 bg-gray-100 dark:bg-gray-900 lg:px-12">
-        <h3 className="mb-6 text-xl font-medium text-gray-600 dark:text-gray-300 md:font-bold md:text-3xl lg:text-6xl">
-          Find a <span className="underline">group</span>
-        </h3>
+      <div className="flex flex-col w-full h-full space-y-3 bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col xl:sticky xl:top-0 z-[47] w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
+          <h3 className="mb-2 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
+            Find a <span className="text-green-600 dark:text-green-400">group</span>
+          </h3>
 
-        <div className="flex flex-col items-center divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
-          <div className="inline-flex items-center pb-3 lg:pr-3 md:pb-0">
-            <div className="flex items-center overflow-x-auto sm:overflow-x-visible">
-              <DistanceSelect distance={distance} setDistance={setDistance} />
-              <CategorySelect category={category} setCategory={setCategory} />
-              <div className="flex items-center mr-4">
-                <button
-                  className="flex text-sm font-medium transition duration-300 hover:text-green-500"
-                  onClick={() => {
-                    setSelected([]);
-                    setDistance(null);
-                    setCategory(null);
-                  }}
-                >
-                  Reset filters
-                </button>
+          <div className="flex flex-col items-center divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
+            <div className="inline-flex items-center pb-3 lg:pr-3 md:pb-0">
+              <div className="flex items-center overflow-x-auto sm:overflow-x-visible">
+                <DistanceSelect distance={distance} setDistance={setDistance} />
+                <CategorySelect category={category} setCategory={setCategory} />
+                <div className="flex items-center mr-4">
+                  <button
+                    className="flex text-sm font-medium transition duration-300 hover:text-green-500"
+                    onClick={() => {
+                      setSelected([]);
+                      setDistance(null);
+                      setCategory(null);
+                    }}
+                  >
+                    Reset filters
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="inline-flex flex-grow pt-3 md:pt-0 md:pl-3">
-            <ChipList
-              list={["Rouen, France", "Val-de-Reuil, France", "Remote"]}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <div className="inline-flex flex-grow pt-3 md:pt-0 md:pl-3">
+              <ChipList
+                list={["Rouen, France", "Val-de-Reuil, France", "Remote"]}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 lg:gap-6">
+        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 lg:gap-6 lg:px-32">
           {displayables.map((el, index) => (
             <GroupOverview {...el} key={index} />
           ))}
