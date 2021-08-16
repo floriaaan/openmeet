@@ -41,10 +41,10 @@ export const AppFooter = () => {
 
   return (
     <footer className="z-50 w-full px-10 text-gray-600 border-t-2 border-gray-200 shadow-md dark:text-gray-400 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 body-font">
-      <div className="container flex flex-col items-center justify-between px-5 py-8 mx-auto sm:items-start sm:flex-row ">
-        <div className="flex flex-col sm:flex-row">
+      <div className="container flex flex-row items-center justify-between px-5 py-3 mx-auto md:py-8 md:items-start ">
+        <div className="flex flex-row">
           <a className="flex items-center justify-center font-medium text-gray-900 dark:text-gray-200 title-font md:justify-start">
-            <span className="ml-3 text-xl">OpenMeet</span>
+            <span className="ml-3 text-sm lg:text-xl">OpenMeet</span>
           </a>
           <p className="hidden mt-4 text-sm text-gray-500 lg:block sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 dark:border-gray-800 sm:py-2 sm:mt-0">
             © 2021 Floriaaan —
@@ -84,7 +84,7 @@ export const AppFooter = () => {
             </div>
           </div>
         )}
-        <span className="inline-flex justify-center mt-4 space-x-5 sm:mt-0 sm:justify-start">
+        <span className="inline-flex justify-center space-x-5 sm:mt-0 sm:justify-start">
           <a
             href="https://twitter.com/t3tra_"
             className="text-gray-600 transition duration-300 dark:text-gray-400 hover:text-blue-600"
