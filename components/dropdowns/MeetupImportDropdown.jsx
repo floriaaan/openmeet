@@ -1,8 +1,9 @@
 import React from "react";
-import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
-export const MeetupImportDropdown = () => {
+const cheerio = require('cheerio');
+
+export const MeetupImportDropdown = ({ setScrap }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -18,6 +19,19 @@ export const MeetupImportDropdown = () => {
   };
 
   const [url, setUrl] = React.useState("");
+
+  React.useEffect(() => {
+    console.log(url);
+  }, [url]);
+
+  const scrap = async () => {
+    const response = await fetch(url);
+    const text = await response.text();
+    const dom = cheerio.load(response.body);
+
+
+    console.log(dom);
+  };
 
   return (
     <>
@@ -39,23 +53,37 @@ export const MeetupImportDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-gray-900 text-base z-50 float-left p-3 list-none text-left rounded-xl shadow-lg min-w-96"
+          "bg-white dark:bg-gray-900 text-base z-50 float-left px-4 list-none text-left rounded-xl shadow-lg min-w-[400px]"
         }
       >
-        <label
-                    htmlFor="url"
-                    className="text-sm leading-7 text-gray-600 dark:text-gray-400"
-                  >
-                    Meetup Url
-                  </label>
-        <input
-          type="text"
-          id="url"
-          name="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
-        />
+        <div className="relative flex flex-col pt-2 pb-3">
+          <label
+            htmlFor="url"
+            style={{ fontSize: "0.6rem" }}
+            className="font-bold leading-7 text-gray-600 uppercase dark:text-gray-400"
+          >
+            Meetup Url
+          </label>
+          <div className="inline-flex items-center space-x-2">
+            <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-200 rounded-lg dark:bg-red-900">
+              <i className="text-red-700 dark:text-red-400 fab fa-meetup" />
+            </span>
+            <input
+              type="text"
+              id="url"
+              name="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="flex-grow w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+            />
+            <button
+              onClick={scrap}
+              className="flex items-center justify-center flex-shrink-0 w-10 h-10 duration-300 bg-green-200 rounded-lg dark:bg-green-900 hover:bg-green-300 dark:hover:bg-green-800"
+            >
+              <i className="text-green-700 dark:text-green-400 fas fa-check" />
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

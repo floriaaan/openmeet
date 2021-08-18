@@ -283,7 +283,7 @@ export default function EventPage(props) {
                 <div
                   className={
                     props.location.location === "Remote"
-                      ? "inline-flex items-center space-x-4 pb-2 pt-4"
+                      ? "inline-flex items-center space-x-4 py-4"
                       : "inline-flex items-center space-x-4 w-full justify-between pb-2 pt-4 border-t border-gray-200 dark:border-gray-600"
                   }
                 >
@@ -306,7 +306,7 @@ export default function EventPage(props) {
                       </div>
                     )}
                   </span>
-                  {props.location.location !== "Remote" && (
+                  {props.location.location !== "Remote" ? (
                     <a
                       rel="noreferrer"
                       href={
@@ -326,20 +326,37 @@ export default function EventPage(props) {
                         alt="GMaps"
                       ></img>
                     </a>
-                  )}
+                  ) : props.externalLink ? (
+                    <a
+                      rel="noreferrer"
+                      href={props.externalLink}
+                      target="_blank"
+                    >
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Google_Meet_icon_%282020%29.svg/2491px-Google_Meet_icon_%282020%29.svg.png"
+                        className="h-5 px-3 text-center"
+                        alt="GMeet"
+                      ></img>
+                    </a>
+                  ) : null}
                 </div>
-              </div>
+                {props.attachment && (
+                  <a href={props.attachment.url} target="_blank" rel="noreferrer">
+                    <div className="inline-flex items-center justify-between w-full pt-4 pb-2 space-x-4 ">
+                      <span className="inline-flex items-center flex-grow space-x-4">
+                        <i className="w-6 ml-4 text-lg text-center fas fa-paperclip" />
 
-              {/* TODO: file support and more like gcalendar and gmaps card */}
-              {/* <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-900 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
-                <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
-                  <i className="text-2xl fas fa-file" />
-                </span>
-                <div className="flex flex-col">
-                  <h4 className="text-base font-bold">file</h4>
-                  <p className="text-xs">file</p>
-                </div>
-              </a> */}
+                        <div className="flex flex-col">
+                          <p className="text-xs">Attachment</p>
+                          <p className="text-sm font-bold">
+                            {props.attachment.name}
+                          </p>
+                        </div>
+                      </span>
+                    </div>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

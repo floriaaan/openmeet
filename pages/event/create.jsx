@@ -1,10 +1,6 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
-import {
-  FieldValue,
-  firestore,
-  uploadInFirebaseStorage,
-} from "@libs/firebase";
+import { FieldValue, firestore, uploadInFirebaseStorage } from "@libs/firebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -47,6 +43,12 @@ export default function GroupCreatePage() {
 
   const [group, setGroup] = useState(null);
   const [groupsWhereAdmin, setGroupsWhereAdmin] = useState([]);
+
+  const [scrapResult, setScrapResult] = useState(null);
+  useEffect(() => {
+    if (scrapResult) {
+    }
+  }, [scrapResult]);
 
   const fetchLocation = async () => {
     setLocation(null);
@@ -118,7 +120,7 @@ export default function GroupCreatePage() {
       if (attachment) {
         attachmentInStorage = await uploadInFirebaseStorage(
           attachment,
-          `events/${slug}/attachment`
+          `events/${slug}/attachment_${slug}_${attachment.name}`
         );
       }
 
@@ -145,7 +147,9 @@ export default function GroupCreatePage() {
           },
           externalLink: externalLink || null,
           picture: pictureInStorage,
-          attachment: attachmentInStorage,
+          attachment: attachment
+            ? { url: attachmentInStorage, name: attachment.name }
+            : null,
         })
         .then(async function (docRef) {
           await firestore
@@ -329,7 +333,7 @@ export default function GroupCreatePage() {
                   </label>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-file" />
+                      <i className="text-purple-700 dark:text-purple-400 fas fa-paperclip" />
                     </span>
                     <input
                       type="file"
@@ -448,7 +452,7 @@ export default function GroupCreatePage() {
                       type="text"
                       id="externalLink"
                       name="externalLink"
-                      placeholder="Google Meet conference link"
+                      placeholder="eg. Google Meet conference link"
                       value={externalLink}
                       onChange={(e) => setExternalLink(e.target.value)}
                       // disabled
