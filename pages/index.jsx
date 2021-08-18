@@ -18,19 +18,22 @@ export default function Index() {
             }}
             className="z-20 flex flex-col items-center justify-center object-cover w-full h-full bg-gray-100 bg-no-repeat dark:bg-black bg-full"
           >
-            <div className="w-full px-4 py-6 mx-6 my-12 bg-gray-100 bg-opacity-80 dark:bg-black dark:bg-opacity-80 max-w-7xl sm:px-6 lg:py-16 xl:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between rounded-xl">
+            <div className="flex items-center w-full h-full px-4 py-6 mx-6 bg-black bg-opacity-5 backdrop-filter backdrop-blur-md dark:bg-opacity-80 sm:px-6 lg:py-16 xl:py-32 lg:px-8 lg:justify-between ">
               <h2 className="font-extrabold tracking-tight text-gray-700 dark:text-gray-100 ">
-                <span className="block text-xl sm:text-3xl">
-                  OpenMeet, the app for your needs
+                <span className="inline-flex items-center text-xl sm:text-3xl">
+                  OpenMeet, the app for your{" "}
+                  <span className="ml-2 text-blue-600 dark:text-blue-400">
+                    needs
+                  </span>
                 </span>
                 <span
                   className="block text-gray-500 dark:text-gray-400"
                   style={{ fontFamily: "system-ui" }}
                 >
-                  Meet the people interested in the subject you're into
+                  {"Meet the people interested in the subject you're into"}
                 </span>
               </h2>
-              <div className="grid grid-cols-3 gap-3 mt-8 lg:mt-0 lg:flex-shrink-0">
+              {/* <div className="grid grid-cols-3 gap-3 mt-8 lg:mt-0 lg:flex-shrink-0">
                 <div className="col-span-2">
                   <Link href="/group/create">
                     <a className="inline-flex items-center justify-center w-full p-3 px-5 text-base font-medium text-white transition-colors duration-300 bg-green-600 shadow rounded-xl hover:bg-green-700">
@@ -55,11 +58,11 @@ export default function Index() {
                     All
                   </a>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </main>
         </section>
-        <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 border-t border-gray-300 dark:bg-gray-900 lg:px-24 dark:border-gray-800">
+        <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-24 ">
           <EventSection />
           <GroupsSection />
         </section>
@@ -73,7 +76,7 @@ const GroupsSection = () => {
   useEffect(() => {
     firestore
       .collection("groups")
-      .orderBy('createdAt', "desc")
+      .orderBy("createdAt", "desc")
       .get()
       .then((querySnapshot) => {
         let _tmp = [];
@@ -95,7 +98,7 @@ const GroupsSection = () => {
           Latest groups
         </span>
         <Link href="/group/all">
-        <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
+          <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
             Explore more groups
             <i className="ml-2 fas fa-arrow-right"></i>
           </a>
@@ -106,14 +109,14 @@ const GroupsSection = () => {
           (el, index) => index < 3 && <GroupOverview {...el} key={index} />
         )}
         {groups.length < 3 && (
-            <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
-              <Link href="/group/create">
-                <a className="flex items-center justify-center w-24 h-24 text-green-700 transition duration-300 bg-green-200 border border-green-500 rounded-full cursor-pointer dark:border-green-500 dark:bg-opacity-50 dark:bg-green-700 dark:text-green-200 hover:bg-green-300 dark:hover:bg-green-800">
-                  <i className="text-xl fas fa-plus"></i>
-                </a>
-              </Link>
-            </div>
-          )}
+          <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+            <Link href="/group/create">
+              <a className="flex items-center justify-center w-24 h-24 text-green-700 transition duration-300 bg-green-200 border border-green-500 rounded-full cursor-pointer dark:border-green-500 dark:bg-opacity-50 dark:bg-green-700 dark:text-green-200 hover:bg-green-300 dark:hover:bg-green-800">
+                <i className="text-xl fas fa-plus"></i>
+              </a>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

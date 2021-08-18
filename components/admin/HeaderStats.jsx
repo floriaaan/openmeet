@@ -51,7 +51,7 @@ export const HeaderStats = () => {
         });
         setUsers({
           count: snap.size,
-          stat: Math.floor((lastLastWeek / lastWeek) * 100).toString(),
+          stat: Math.floor((lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100).toString(),
         });
       });
 
@@ -74,9 +74,10 @@ export const HeaderStats = () => {
         });
         setGroups({
           count: snap.size,
-          stat: Math.floor((lastLastWeek / lastWeek) * 100).toString(),
+          stat: Math.floor((lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100).toString(),
         });
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

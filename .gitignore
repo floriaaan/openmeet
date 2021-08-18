@@ -32,3 +32,8 @@ yarn-error.log*
 
 #firebase
 .firebase
+
+# pwa cache
+**/public/workbox-*.js
+**/public/sw.js
+**/public/fallback-*.js

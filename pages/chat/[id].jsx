@@ -13,18 +13,19 @@ export default function ConversationPage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    firestore
-      .collection("notifications")
-      .where("uid", "==", user.uid)
-      .where("type", "==", "chat")
-      .where("data.id", "==", id)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          doc.ref.delete();
+    if (user?.uid)
+      firestore
+        .collection("notifications")
+        .where("uid", "==", user.uid)
+        .where("type", "==", "chat")
+        .where("data.id", "==", id)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            doc.ref.delete();
+          });
         });
-      });
-  }, [id]);
+  }, [user, id]);
 
   return (
     <AppLayout shadowOnNavbar>

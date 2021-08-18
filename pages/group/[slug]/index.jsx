@@ -19,7 +19,10 @@ export default function GroupPage({
   events = [],
 }) {
   const [subs, setSubs] = useState([]);
+
+  const [eventsFromFirebase, setEventsFromFirebase] = useState([]);
   const [eventsState, setEventsState] = useState([]);
+  const [eventsFilters, setEventsFilters] = useState([]);
   const { user } = useAuth();
 
   const toggleSubscription = async () => {
@@ -44,6 +47,23 @@ export default function GroupPage({
     }
   };
 
+  const prepareDisplayable = async () => {
+    if (eventsFilters.length > 0) {
+    } else {
+      let tmp = [];
+      events.forEach(async (el) => {
+        const doc = await firestore.collection("events").doc(el.slug).get();
+        tmp.push({
+          ...doc.data(),
+          slug: doc.id,
+        });
+      });
+      console.log(tmp);
+      setEventsFromFirebase(tmp);
+      setEventsState(tmp);
+    }
+  };
+
   useEffect(() => {
     firestore
       .collection("groups")
@@ -56,17 +76,16 @@ export default function GroupPage({
         });
         setSubs(subs);
       });
+  }, [slug]);
 
-    events.forEach(async (el) => {
-      const doc = await firestore.collection("events").doc(el.slug).get();
-      setEventsState([...eventsState, { slug: doc.id, ...doc.data() }]);
-    });
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => prepareDisplayable(), [eventsFilters]);
 
   return (
     <AppLayout>
       <section className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
-        <div className="xl:sticky xl:top-0 z-[47] flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
+        {/* 2xl:sticky 2xl:top-0 z-[47] */}
+        <div className="flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
           <div className="inline-flex items-center h-10 space-x-6">
             <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
               <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
@@ -142,15 +161,25 @@ export default function GroupPage({
           <p className="w-full pt-4 pb-2 text-justify text-gray-500 dark:text-gray-400">
             {description}
           </p>
-          <div className="w-full pb-2">
-            <ChipList list={tags} />
+          <div className="w-full ">
+            <ChipList list={tags}/>
           </div>
-          
         </div>
-        <div className="flex-grow h-full grid-cols-3 gap-4 px-6 py-6 pb-16 space-y-2 lg:px-32 xl:px-48 md:grid md:space-y-0 lg:pb-24">
-          {eventsState.map((el, index) => (
-            <EventOverview {...el} key={index} />
-          ))}
+        <div className="flex flex-col w-full px-6 pt-3 pb-16 space-y-6 lg:px-32 xl:px-48 lg:pb-24">
+          <div className="flex justify-center w-full h-12">
+            <ChipList
+              list={["Upcoming", "In progress", "Finished"]}
+              selected={eventsFilters}
+              setSelected={setEventsFilters}
+              color="purple"
+            />
+          </div>
+
+          <div className="grid flex-grow h-full grid-cols-1 gap-4 md:grid-cols-3 ">
+            {eventsState.map((el, index) => (
+              <EventOverview {...el} key={index} />
+            ))}
+          </div>
         </div>
       </section>
     </AppLayout>

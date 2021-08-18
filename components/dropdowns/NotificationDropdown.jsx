@@ -5,6 +5,7 @@ import { firestore } from "@libs/firebase";
 
 import Link from "next/link";
 import { formatDistance } from "date-fns";
+import Router from "next/router";
 
 export const NotificationDropdown = () => {
   // dropdown props
@@ -45,19 +46,33 @@ export const NotificationDropdown = () => {
 
   React.useEffect(() => {
     getChats();
+    if (user?.uid)
+      firestore
+        .collection("notifications")
+        .where("uid", "==", user.uid)
+        .onSnapshot((querySnapshot) => {
+          const list = [];
 
-    firestore
-      .collection("notifications")
-      .where("uid", "==", user.uid)
-      .onSnapshot((querySnapshot) => {
-        const list = [];
-
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          querySnapshot.forEach((doc) => {
+            list.push({ id: doc.id, ...doc.data() });
+          });
+          setNotifications(list);
         });
-        setNotifications(list);
-      });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
+
+  const readAllNotifications = async () => {
+    if (user?.uid)
+      firestore
+        .collection("notifications")
+        .where("uid", "==", user.uid)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            doc.ref.delete();
+          });
+        });
+  };
 
   return (
     <>
@@ -86,28 +101,15 @@ export const NotificationDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-black text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
+          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
         }
       >
         <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
           Messages
           <Link href="/chat">
-            <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900">
-              <svg
-                className="w-4 h-4 mr-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
+            <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900">
               See more
+              <i className="mt-0.5 ml-2 fas fa-arrow-right" />
             </a>
           </Link>
         </div>
@@ -122,10 +124,13 @@ export const NotificationDropdown = () => {
 
         <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
           Notifications
-          <button className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900">
-              
-              Read all
-            </button>
+          <button
+            onClick={readAllNotifications}
+            className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900"
+          >
+            Read all
+            <i className="mt-0.5 ml-2 fas fa-check" />
+          </button>
         </div>
         <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
           {notifications.length > 0
@@ -147,7 +152,7 @@ const ChatOverview = (props) => {
           <i className="text-2xl fas fa-users" />
         </span>
         <div className="flex flex-col ml-2">
-          <span className="font-bold text-yellow-700 dark:text-yellow-400">
+          <span className="font-bold text-yellow-600 dark:text-yellow-400">
             {props.messages?.[props.messages.length - 1]?.content.slice(0, 30) +
               (props.messages?.[props.messages.length - 1]?.content.length > 29
                 ? " ..."
@@ -180,31 +185,39 @@ const ChatOverview = (props) => {
 };
 
 const NotificationOverview = (props) => {
-  return (
-    <Link href={"/" + props?.type + "/" + props?.data?.id}>
-      <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
-        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
-          {props?.data?.action === "new_message" ? (
-            <i className="text-2xl fas fa-envelope" />
-          ) : (
-            <i className="text-2xl fas fa-bell" />
-          )}
-        </span>
-        <div className="flex flex-col ml-2">
-          <span className="font-bold text-yellow-700 dark:text-yellow-400">
-            {props?.data?.action === "new_message"
-              ? "New message"
-              : props?.data?.action === "new_participant" ? props.data.message : "New notification"}
-          </span>
+  const url = "/" + props?.type + "/" + props?.data?.id;
 
-          <span className="text-xs text-gray-400 dark:text-gray-300">
-            sent{" "}
-            {formatDistance(new Date(props?.createdAt), new Date(), {
-              addSuffix: true,
-            })}
-          </span>
-        </div>
-      </a>
-    </Link>
+  return (
+    <div
+      onClick={() => {
+        //todo: remove notification
+        Router.push(url);
+      }}
+      className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none "
+    >
+      <span className="flex items-center justify-center w-8 h-8 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
+        {props?.data?.action === "new_message" ? (
+          <i className="text-lg fas fa-envelope" />
+        ) : (
+          <i className="text-lg fas fa-bell" />
+        )}
+      </span>
+      <div className="flex flex-col ml-2">
+        <span className="font-bold text-yellow-600 dark:text-yellow-400">
+          {props?.data?.action === "new_message"
+            ? "New message"
+            : props?.data?.action === "new_participant"
+            ? props.data.message
+            : "New notification"}
+        </span>
+
+        <span className="text-xs text-gray-400 dark:text-gray-300">
+          sent{" "}
+          {formatDistance(new Date(props?.createdAt), new Date(), {
+            addSuffix: true,
+          })}
+        </span>
+      </div>
+    </div>
   );
 };

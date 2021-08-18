@@ -6,13 +6,15 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
 
+const LoadingDynamic = () => (
+  <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
+    Chargement de la carte…
+  </div>
+);
+
 const Map = dynamic(import("@components/map/Map"), {
   ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
-      Chargement de la carte…
-    </div>
-  ),
+  loading: LoadingDynamic,
 });
 
 export default function GroupCreatePage() {
@@ -39,6 +41,7 @@ export default function GroupCreatePage() {
   useEffect(() => {
     if (position !== null) fetchLocation();
     else setLocation(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   const Router = useRouter();

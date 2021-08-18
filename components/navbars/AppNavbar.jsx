@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 // components
 
 import { useAuth } from "@hooks/useAuth";
@@ -16,7 +17,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
     <>
       <nav
         className={
-          "top-0 z-[48] flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-gray-900 dark:text-gray-300 navbar-expand-lg " +
+          "top-0 z-[48] flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-black dark:text-gray-300 navbar-expand-lg " +
           // "md:bg-opacity-75 md:dark:bg-opacity-50 md:backdrop-blur sticky" +
 
           (shadowOnNavbar ? " shadow-md" : " ")
@@ -26,7 +27,8 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
           <div className="relative flex items-center justify-between w-full h-12 lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
               <a className="inline-block mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                <img src="/logo.svg" className="w-12 h-12 select-none"></img>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.svg" alt="OpenMeet" className="w-12 h-12 select-none"></img>
               </a>
             </Link>
             <button

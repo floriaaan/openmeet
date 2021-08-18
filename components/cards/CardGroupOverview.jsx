@@ -38,7 +38,8 @@ export const GroupOverview = (props) => {
           setLastEvent({ slug: snapshot.id, ...snapshot.data() });
         });
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.slug]);
 
   const toggleSubscription = async () => {
     if (subs.find((subscriber) => subscriber.id === user.uid)) {
@@ -66,21 +67,21 @@ export const GroupOverview = (props) => {
     <div className="flex flex-col p-6 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900">
       <div className="inline-flex items-center">
         <Link href={"/group/" + props.slug}>
-          <h3 className="flex-grow w-full mr-12 text-2xl font-bold leading-7 text-green-400 cursor-pointer sm:text-3xl sm:truncate">
+          <a className="flex-grow w-full mr-12 text-2xl font-bold leading-7 text-green-400 cursor-pointer sm:text-3xl sm:truncate">
             {props.name}
-          </h3>
+          </a>
         </Link>
         {subs.findIndex((sub) => sub.id === user.uid) === -1 ? (
           <button
             onClick={toggleSubscription}
-            className="flex items-center justify-center w-8 h-[1.75rem] transition duration-300 text-white bg-gray-500 rounded-md shadow hover:bg-gray-700"
+            className="flex items-center justify-center px-3 py-1.5 text-white transition duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-700"
           >
             <i className="text-xs fas fa-plus"></i>
           </button>
         ) : (
           <button
             onClick={toggleSubscription}
-            className="flex items-center justify-center w-8 h-[1.75rem] transition duration-500 text-white bg-green-500 hover:bg-red-700 rounded-md shadow group "
+            className="flex items-center justify-center px-3 py-1.5 text-white transition duration-500 bg-green-500 rounded-md shadow hover:bg-red-700 group "
           >
             <i className="hidden text-xs fas fa-times group-hover:block"></i>
             <i className="block text-xs fas fa-check group-hover:hidden"></i>
@@ -90,10 +91,10 @@ export const GroupOverview = (props) => {
 
       <div className="flex flex-col pb-2 mb-2 pt-1.5 space-y-2 border-b border-gray-200  dark:border-gray-700 ">
         <Link href={"/group/" + props.slug}>
-          <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
+          <a className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
             <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
             {props?.location?.location || "Remote"}
-          </div>
+          </a>
         </Link>
         <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
           <AvatarGroup users={subs} limit={4} />

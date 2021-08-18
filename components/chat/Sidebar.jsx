@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 
-
 export const Sidebar = (props) => {
   const { user } = useAuth();
 
@@ -31,35 +30,37 @@ export const Sidebar = (props) => {
   return (
     <div
       className={
-        "flex-col  bg-gray-100 shadow-lg dark:bg-gray-900  " +
+        "flex-col  bg-gray-100 shadow-lg sticky top-0 bottom-0 left-0 h-screen dark:bg-gray-900  " +
         (props.display ? " w-full lg:w-96 " : " hidden lg:flex w-96")
       }
     >
-      <div className="inline-flex items-center justify-between w-full px-3 py-6 mb-3 text-xl text-gray-600 border-b border-gray-300 dark:text-gray-400 dark:border-gray-700">
-        <span className="w-12"></span>
-        <span>
-          <i className="mr-3 fas fa-comments "></i>
-          <span className="antialiased font-bold tracking-widest uppercase">
-            Chat
-          </span>
+      <div className="inline-flex items-center justify-between w-full px-3 py-6 text-xl text-gray-800 dark:text-gray-400">
+        <span className="inline-flex items-center">
+          {/* <i className="mx-2 fas fa-comments "></i> */}
+          <h3 className="pl-3 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
+            Start a{" "}
+            <span className="text-yellow-500 dark:text-yellow-400">chat</span>
+          </h3>
         </span>
         <span>
           <Link href="/chat/new">
-            <div className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
+            <a className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
               <i className="fas fa-plus" />
-            </div>
+            </a>
           </Link>
         </span>
       </div>
-      <div className="p-3 m-3 bg-gray-300 shadow-inner rounded-xl dark:bg-gray-800">
+      <div className="p-3 m-3 max-h-[80vh] overflow-y-scroll shadow-inner bg-gray-50 rounded-xl dark:bg-gray-800">
         {chats.map((el, key) => (
-          <ChatOverview
-            {...el}
-            key={key}
-            isFirst={key === 0}
-            isLast={key === chats.length - 1}
-            auth={user}
-          />
+          <>
+            <ChatOverview
+              {...el}
+              key={key}
+              isFirst={key === 0}
+              isLast={key === chats.length - 1}
+              auth={user}
+            />
+          </>
         ))}
       </div>
     </div>
@@ -75,7 +76,7 @@ const ChatOverview = (props) => {
     <Link href={"/chat/" + props.id}>
       <a
         className={
-          "flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none" +
+          "flex flex-row items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none" +
           rounded
         }
       >
@@ -93,7 +94,7 @@ const ChatOverview = (props) => {
                 })
               : props?.members?.length + " members"}
           </span>
-          <span className="text-xs text-gray-400 dark:text-gray-300">
+          {/* <span className="text-xs text-gray-400 dark:text-gray-300">
             from{" "}
             {
               props.members.find(
@@ -102,7 +103,7 @@ const ChatOverview = (props) => {
                   props.messages?.[props.messages.length - 1]?.sender
               )?.fullName
             }
-          </span>
+          </span> */}
           <span className="text-xs text-gray-400 dark:text-gray-300">
             sent{" "}
             {formatDistance(

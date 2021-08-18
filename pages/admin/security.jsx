@@ -36,6 +36,7 @@ const Checklist = () => {
       ...security,
       https: window.location.protocol === "https:",
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

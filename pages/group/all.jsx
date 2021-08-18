@@ -23,6 +23,7 @@ export default function GroupAllPage({ groups }) {
     } else setDisplayables(groups);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => prepareDisplayable(), [selected]);
 
   return (
@@ -61,7 +62,7 @@ export default function GroupAllPage({ groups }) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 lg:gap-6 lg:px-32">
+        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 md:grid-cols-2 lg:gap-6 lg:px-32">
           {displayables.map((el, index) => (
             <GroupOverview {...el} key={index} />
           ))}
@@ -180,7 +181,7 @@ const DistanceSelect = ({ distance, setDistance }) => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-black text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
+          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
         }
       >
         <button
@@ -258,7 +259,7 @@ const CategorySelect = ({ category, setCategory }) => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-black text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
+          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
         }
       >
         <button

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { AppLayout } from "@components/layouts/AppLayout";
 import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { useAuth } from "@hooks/useAuth";
@@ -70,7 +71,7 @@ export default function EventPage(props) {
         });
         setParticipants(participants);
       });
-  }, []);
+  }, [props.slug]);
 
   return (
     <AppLayout>
@@ -122,7 +123,7 @@ export default function EventPage(props) {
                     <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
                   </span>
                   <p className="text-sm font-extrabold text-purple-700 select-none dark:text-purple-300 group-hover:hidden">
-                    You're in !
+                    {"You're in !"}
                   </p>
                   <p className="hidden text-sm font-extrabold text-red-700 select-none dark:text-red-300 group-hover:block">
                     Wanna leave ? 😢
@@ -224,6 +225,7 @@ export default function EventPage(props) {
                       </div>
                     </span>
                     <a
+                      rel="noreferrer"
                       href={
                         "https://calendar.google.com/calendar/render?action=TEMPLATE&" +
                         `dates=${format(
@@ -304,6 +306,7 @@ export default function EventPage(props) {
                   </span>
                   {props.location.location !== "Remote" && (
                     <a
+                      rel="noreferrer"
                       href={
                         "https://www.google.com/maps/place/" +
                         encodeURIComponent(
@@ -325,7 +328,7 @@ export default function EventPage(props) {
                 </div>
               </div>
 
-                      {/* TODO: file support and more like gcalendar and gmaps card */}
+              {/* TODO: file support and more like gcalendar and gmaps card */}
               {/* <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-900 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
                 <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
                   <i className="text-2xl fas fa-file" />

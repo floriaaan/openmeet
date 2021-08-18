@@ -15,7 +15,7 @@ export const Alert = ({ content, link = null, color = "amber", id = "", details 
 
   useEffect(() => {
     sessionStorage.setItem("alert-" + id, JSON.stringify(showAlert));
-  }, [showAlert]);
+  }, [showAlert, id]);
 
   return (
     <>
@@ -47,7 +47,7 @@ export const Alert = ({ content, link = null, color = "amber", id = "", details 
 
             <span className="inline-flex items-center space-x-3 ">
               {link && (
-                <a href={link} target="_blank">
+                <a href={link} target="_blank" rel="noreferrer noopener">
                   <i className="fas fa-external-link-alt"></i>
                 </a>
               )}

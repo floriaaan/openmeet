@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -98,7 +99,7 @@ export default function CardTable({ color }) {
                 <th className="flex items-center p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                   <img
                     src="/img/bootstrap.jpg"
-                    className="w-12 h-12 bg-white dark:bg-gray-900 border rounded-full"
+                    className="w-12 h-12 bg-white border rounded-full dark:bg-gray-900"
                     alt="..."
                   ></img>{" "}
                   <span
@@ -161,7 +162,7 @@ export default function CardTable({ color }) {
                 <th className="flex items-center p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                   <img
                     src="/img/angular.jpg"
-                    className="w-12 h-12 bg-white dark:bg-gray-900 border rounded-full"
+                    className="w-12 h-12 bg-white border rounded-full dark:bg-gray-900"
                     alt="..."
                   ></img>{" "}
                   <span
@@ -225,7 +226,7 @@ export default function CardTable({ color }) {
                 <th className="flex items-center p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                   <img
                     src="/img/sketch.jpg"
-                    className="w-12 h-12 bg-white dark:bg-gray-900 border rounded-full"
+                    className="w-12 h-12 bg-white border rounded-full dark:bg-gray-900"
                     alt="..."
                   ></img>{" "}
                   <span
@@ -288,7 +289,7 @@ export default function CardTable({ color }) {
                 <th className="flex items-center p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                   <img
                     src="/img/react.jpg"
-                    className="w-12 h-12 bg-white dark:bg-gray-900 border rounded-full"
+                    className="w-12 h-12 bg-white border rounded-full dark:bg-gray-900"
                     alt="..."
                   ></img>{" "}
                   <span
@@ -352,7 +353,7 @@ export default function CardTable({ color }) {
                 <th className="flex items-center p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                   <img
                     src="/img/vue.jpg"
-                    className="w-12 h-12 bg-white dark:bg-gray-900 border rounded-full"
+                    className="w-12 h-12 bg-white border rounded-full dark:bg-gray-900"
                     alt="..."
                   ></img>{" "}
                   <span

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { createRef, useEffect, useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { firestore } from "@libs/firebase";
@@ -42,12 +43,13 @@ export const AddDropdown = ({ members, chatId, setList }) => {
     setSelectedUsers(members);
     getUsers();
 
-  }, []);
+  }, [members]);
 
   useEffect(() => {
     if(setList) {
       setList(selectedUsers);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedUsers]);
 
   return (

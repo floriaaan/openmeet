@@ -1,5 +1,6 @@
 import React from "react";
-import openmeet from "resources/openmeet"
+import openmeet from "resources/openmeet";
+import Image from "next/image";
 
 export default function OpenMeetOverview() {
   return (
@@ -20,7 +21,12 @@ export default function OpenMeetOverview() {
               </span>
             </div>
             <div className="relative flex-initial w-auto pl-4">
-              <img src="/logo.svg" className="w-12 h-12"></img>
+              <Image
+                src="/logo.svg"
+                alt="OpenMeet"
+                width={48}
+                height={48}
+              ></Image>
             </div>
           </div>
           <p className="mt-4 text-sm text-gray-400">

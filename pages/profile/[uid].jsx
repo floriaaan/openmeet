@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";

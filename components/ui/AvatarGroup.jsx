@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/link-passhref */
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
 export const AvatarGroup = ({ users, limit = 5, xl = false }) => {

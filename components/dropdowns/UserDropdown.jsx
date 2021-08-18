@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import { useAuth } from "@hooks/useAuth";
@@ -60,7 +61,7 @@ export const UserDropdown = () => {
         ref={popoverDropdownRef}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-black text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-48"
+          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-48"
         }
       >
         <div className="block px-4 py-2 text-xs text-gray-400">Dark Mode</div>

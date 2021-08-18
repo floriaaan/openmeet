@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { UserDropdown } from "components/dropdowns/UserDropdown";
@@ -24,7 +25,12 @@ export const Sidebar = () => {
           {/* Brand */}
           <Link href="/">
             <a className="inline-flex items-center p-4 px-0 mr-0 text-sm font-bold text-left text-gray-600 uppercase dark:text-gray-400 md:pb-2 whitespace-nowrap">
-              <img src="/logo.svg" className="w-12 h-12"></img>
+              <Image
+                src="/logo.svg"
+                alt="OpenMeet"
+                width={48}
+                height={48}
+              ></Image>{" "}
               <span className="ml-3">Admin</span>
             </a>
           </Link>

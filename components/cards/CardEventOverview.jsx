@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -36,7 +37,7 @@ export const EventOverview = (props) => {
     <>
       <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 group hover:bg-gray-100 dark:hover:bg-gray-900">
         <Link href={"/event/" + props.slug}>
-          <div className="relative w-full cursor-pointer ">
+          <a className="relative w-full cursor-pointer ">
             <img
               src={
                 "https://picsum.photos/id/" +
@@ -44,7 +45,7 @@ export const EventOverview = (props) => {
                 "/500/500"
               }
               alt="Neural Search and Benchmarking Information Retrieval"
-              className="object-cover w-full rounded-lg max-h-32 lg:max-h-64"
+              className="object-cover w-full rounded-lg max-h-32 lg:max-h-48"
             />
             <div className="absolute p-4 top-2 left-2">
               <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
@@ -67,18 +68,18 @@ export const EventOverview = (props) => {
                 )}
               </div>
             </div>
-          </div>
+          </a>
         </Link>
         <div className="flex flex-col justify-between w-full h-full p-3">
           <Link href={"/event/" + props.slug}>
-            <div className="overflow-hidden cursor-pointer ">
+            <a className="overflow-hidden cursor-pointer ">
               <div className="flex flex-col pt-1 pb-1 text-sm font-bold leading-5 tracking-tight text-gray-800 uppercase dark:text-gray-300">
                 {format(new Date(props.startDate), "eee, LLL L @ p")}
               </div>
               <p className="pt-0 text-base font-medium text-gray-700 dark:text-gray-200 line-clamp-3 xs:h-auto">
                 {props.name}
               </p>
-            </div>
+            </a>
           </Link>
           <hr className="mx-6 my-3 border-gray-200 dark:border-gray-700" />
 

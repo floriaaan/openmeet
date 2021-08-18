@@ -5,14 +5,17 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
+import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
+
+const LoadingDynamic = () => (
+  <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
+    Chargement de la carte…
+  </div>
+);
 
 const Map = dynamic(import("@components/map/Map"), {
   ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
-      Chargement de la carte…
-    </div>
-  ),
+  loading: LoadingDynamic,
 });
 
 export default function GroupCreatePage() {
@@ -61,6 +64,7 @@ export default function GroupCreatePage() {
   useEffect(() => {
     if (position !== null) fetchLocation();
     else setLocation(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   useEffect(() => {
@@ -135,7 +139,7 @@ export default function GroupCreatePage() {
 
   return (
     <AppLayout>
-      <section className="relative h-full text-gray-600 bg-gray-100 dark:bg-black body-font">
+      <section className="relative h-full pb-6 text-gray-600 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10 body-font">
         <div className="container flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
           <div className="relative items-end justify-start hidden overflow-hidden rounded-xl lg:w-1/3 md:w-1/2 sm:mr-10 md:flex">
             <Map
@@ -144,13 +148,16 @@ export default function GroupCreatePage() {
             />
           </div>
           <div className="flex flex-col flex-grow w-full h-full lg:w-2/3 md:w-1/2">
-            <h2 className="mt-8 mb-1 text-2xl font-bold text-purple-500 title-font">
-              Create an event
-            </h2>
+            <h3 className="mt-4 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
+              Create an{" "}
+              <span className="text-purple-500 dark:text-purple-400">
+                event
+              </span>
+            </h3>
             <p className="mb-5 leading-relaxed text-gray-400">
               Share a moment with all the people that match your interests.
             </p>
-            <div className="flex flex-col w-full h-full lg:flex-row">
+            <div className="flex flex-col w-full h-full xl:flex-row">
               <div className="flex flex-col w-full mt-8 md:ml-auto md:py-8 md:mt-0 lg:pr-3">
                 <div className="relative flex flex-col mb-4">
                   <label
@@ -318,14 +325,7 @@ export default function GroupCreatePage() {
                 >
                   Create
                 </button>
-                <button
-                  id="meetup-display-btn"
-                  type="button"
-                  className="flex-shrink px-6 py-2 text-lg text-white bg-red-600 border-0 rounded-xl focus:outline-none hover:bg-red-700"
-                >
-                  <i className="mr-2 fab fa-meetup" />
-                  Import from meetup.com
-                </button>
+                <MeetupImportDropdown />
               </div>
               <p className="text-xs text-gray-500">Cheers! 🍻</p>
             </div>
