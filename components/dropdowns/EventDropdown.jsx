@@ -76,7 +76,11 @@ export const EventDropdown = () => {
         }
       >
         <div className="block px-4 py-2 text-xs text-gray-400">Events</div>
-        <div className="space-y-2"></div>
+        <div className="space-y-2">
+          {events?.map((el, key) => (
+            <EventOverview {...el} key={key} />
+          ))}
+        </div>
         <div className="border-t border-gray-100 dark:border-gray-800"></div>
 
         <Link href="/event/create">
@@ -95,3 +99,23 @@ export const EventDropdown = () => {
     </>
   );
 };
+
+const EventOverview = (props) => (
+  <Link href={"/event/" + props.slug}>
+    <a className="flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900 focus:outline-none ">
+      <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-xl dark:bg-purple-700">
+        <i className="text-2xl fas fa-calendar" />
+      </span>
+      <div className="flex flex-col ml-2">
+        <span className="font-bold text-purple-700 dark:text-purple-400">
+          {props.name}
+        </span>
+        <span className="text-xs text-gray-400 dark:text-gray-300">
+          {props.description.length < 100
+            ? props.description
+            : props.description.slice(0, 100) + " ..."}
+        </span>
+      </div>
+    </a>
+  </Link>
+);

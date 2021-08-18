@@ -38,16 +38,18 @@ export const EventOverview = (props) => {
       <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 group hover:bg-gray-100 dark:hover:bg-gray-900">
         <Link href={"/event/" + props.slug}>
           <a className="relative w-full cursor-pointer ">
-            <img
-              src={
-                "https://picsum.photos/id/" +
-                Math.floor(Math.random() * 200) +
-                "/500/500"
-              }
-              alt="Neural Search and Benchmarking Information Retrieval"
-              className="object-cover w-full rounded-lg max-h-32 lg:max-h-48"
-            />
-            <div className="absolute p-4 top-2 left-2">
+            {props.picture ? (
+              <img
+                src={props.picture}
+                alt={props.name}
+                className="object-cover w-full rounded-lg max-h-32 lg:max-h-48"
+              />
+            ) : (
+              <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg lg:h-32 xl:h-48 dark:bg-purple-900">
+                <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+              </span>
+            )}
+            <div className="absolute top-2 left-2">
               <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
                 {props?.location?.location === "Remote" ? (
                   <>

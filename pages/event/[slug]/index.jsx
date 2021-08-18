@@ -146,15 +146,17 @@ export default function EventPage(props) {
         <div className="flex flex-col-reverse flex-grow h-full px-6 py-6 pb-16 lg:pb-24 lg:px-32 xl:px-48 md:flex-row ">
           <div className="flex flex-col w-full mt-6 md:w-2/3 md:pr-5 md:mt-0">
             <div className="relative w-full pb-6 mb-6 border-b border-gray-300 dark:border-gray-700 ">
-              <img
-                src={
-                  "https://picsum.photos/id/" +
-                  Math.floor(Math.random() * 200) +
-                  "/500/500"
-                }
-                alt="Neural Search and Benchmarking Information Retrieval"
-                className="object-cover w-full rounded-lg max-h-32 lg:max-h-80"
-              />
+              {props.picture ? (
+                <img
+                  src={props.picture}
+                  alt={props.name}
+                  className="object-cover w-full transition duration-500 rounded-lg max-h-32 lg:max-h-80 grayscale-[0.85] hover:grayscale-0"
+                />
+              ) : (
+                <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg lg:h-64 dark:bg-purple-900">
+                  <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+                </span>
+              )}
               <div className="absolute p-4 top-2 left-2">
                 <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
                   {props?.location?.location === "Remote" ? (

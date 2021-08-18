@@ -1,6 +1,10 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
-import { FieldValue, firestore } from "@libs/firebase";
+import {
+  FieldValue,
+  firestore,
+  uploadInFirebaseStorage,
+} from "@libs/firebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -33,6 +37,14 @@ export default function GroupCreatePage() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  const [picture, setPicture] = useState(null);
+  const [pictureUrl, setPictureUrl] = useState(null);
+
+  const [attachment, setAttachment] = useState(null);
+  const [attachmentError, setAttachmentError] = useState(null);
+
+  const [externalLink, setExternalLink] = useState(null);
+
   const [group, setGroup] = useState(null);
   const [groupsWhereAdmin, setGroupsWhereAdmin] = useState([]);
 
@@ -64,7 +76,7 @@ export default function GroupCreatePage() {
   useEffect(() => {
     if (position !== null) fetchLocation();
     else setLocation(null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   useEffect(() => {
@@ -82,7 +94,7 @@ export default function GroupCreatePage() {
           setGroup(tmp[0]);
         })
         .catch((error) => {
-          console.log("Error getting documents: ", error);
+          console.warn("Error getting documents: ", error);
         });
   }, [user]);
 
@@ -94,6 +106,22 @@ export default function GroupCreatePage() {
     const eventRef = firestore.collection("events").doc(slug).get();
 
     if (user && group && startDate && !eventRef.exists) {
+      let pictureInStorage = null;
+      if (picture) {
+        pictureInStorage = await uploadInFirebaseStorage(
+          picture,
+          `events/${slug}/picture`
+        );
+      }
+
+      let attachmentInStorage = null;
+      if (attachment) {
+        attachmentInStorage = await uploadInFirebaseStorage(
+          attachment,
+          `events/${slug}/attachment`
+        );
+      }
+
       await firestore
         .collection("events")
         .doc(slug)
@@ -115,6 +143,9 @@ export default function GroupCreatePage() {
             position: { ...position } || { lat: null, lng: null },
             details: locationDetails || null,
           },
+          externalLink: externalLink || null,
+          picture: pictureInStorage,
+          attachment: attachmentInStorage,
         })
         .then(async function (docRef) {
           await firestore
@@ -150,7 +181,7 @@ export default function GroupCreatePage() {
           <div className="flex flex-col flex-grow w-full h-full lg:w-2/3 md:w-1/2">
             <h3 className="mt-4 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
               Create an{" "}
-              <span className="text-purple-500 dark:text-purple-400">
+              <span className="text-purple-500 dark:text-purple-600">
                 event
               </span>
             </h3>
@@ -158,7 +189,52 @@ export default function GroupCreatePage() {
               Share a moment with all the people that match your interests.
             </p>
             <div className="flex flex-col w-full h-full xl:flex-row">
-              <div className="flex flex-col w-full mt-8 md:ml-auto md:py-8 md:mt-0 lg:pr-3">
+              <div className="flex flex-col w-full mt-8 md:ml-auto lg:py-2 xl:py-8 xl:mt-0 xl:pr-3">
+                <div className="relative flex flex-col mb-4">
+                  {pictureUrl && (
+                    <div className="relative w-full">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={pictureUrl}
+                        className="object-cover object-center w-full rounded-lg max-h-52"
+                        alt="Event picture"
+                      ></img>
+                      <div
+                        className="absolute top-0 right-0 flex items-center justify-center w-6 h-6 -mt-1 -mr-1 transition duration-300 bg-red-600 rounded-full cursor-pointer hover:bg-red-800"
+                        onClick={() => {
+                          setPictureUrl(null);
+                          setPicture(null);
+                        }}
+                      >
+                        <i className="text-xs text-white fas fa-times"></i>
+                      </div>
+                    </div>
+                  )}
+                  {!pictureUrl && (
+                    <div className="w-full">
+                      <input
+                        id="filePicture"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          let file = e.target.files[0];
+                          setPictureUrl(URL.createObjectURL(e.target.files[0]));
+                          setPicture(file);
+                        }}
+                        className="hidden"
+                      ></input>
+                      <label
+                        htmlFor="filePicture"
+                        className="inline-flex items-center w-full text-2xl font-extrabold"
+                      >
+                        <div className="flex items-center justify-center w-full h-48 p-3 leading-tight text-gray-700 bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white rounded-xl">
+                          <i className="w-4 h-4 mr-3 fas fa-plus"></i>
+                          Ajouter une photo
+                        </div>
+                      </label>
+                    </div>
+                  )}
+                </div>
                 <div className="relative flex flex-col mb-4">
                   <label
                     htmlFor="name"
@@ -172,7 +248,7 @@ export default function GroupCreatePage() {
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
+                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
                   />
                 </div>
                 <div className="relative flex flex-col mb-4">
@@ -197,7 +273,7 @@ export default function GroupCreatePage() {
                         //   console.log(changeGroup);
                         setGroup(changeGroup);
                       }}
-                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
+                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
                     >
                       {groupsWhereAdmin.map((el, index) => (
                         <option value={el.slug} key={index}>
@@ -230,12 +306,86 @@ export default function GroupCreatePage() {
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                       // disabled
-                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                     />
                   </div>
-                  <p className="flex mt-1 text-xs md:hidden">
-                    Map autocompletion unavailable on mobile devices
+                  <p className="flex mt-1 text-xs">
+                    If no location is provided, the event will be set in Remote.
                   </p>
+                  <p className="flex mt-1 text-xs md:hidden">
+                    Map autocompletion unavailable on mobile devices.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col w-full md:ml-auto lg:py-2 xl:py-8 md:mt-0 xl:pl-3">
+                <div className="relative flex flex-col mb-4">
+                  <label
+                    htmlFor="file"
+                    className="inline-flex items-center text-sm leading-7 text-gray-600 dark:text-gray-400"
+                  >
+                    Attachment
+                    <span className="ml-2 text-xs">(optional)</span>
+                  </label>
+                  <div className="inline-flex items-center space-x-2">
+                    <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                      <i className="text-purple-700 dark:text-purple-400 fas fa-file" />
+                    </span>
+                    <input
+                      type="file"
+                      id="file"
+                      name="file"
+                      placeholder="Add an attachment"
+                      onChange={(e) => {
+                        if (e.target.files[0].size > 2097152) {
+                          setAttachmentError("File too big (max 2MB)");
+                          setAttachment(null);
+                        } else if (e.target.files[0] === undefined) {
+                          setAttachmentError("No file selected");
+                          setAttachment(null);
+                        } else {
+                          setAttachment(e.target.files[0]);
+                          setAttachmentError(null);
+                        }
+                      }}
+                      // disabled
+                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                    />
+                  </div>
+                  {attachmentError ? (
+                    <p className="flex mt-1 text-xs font-bold text-red-600">
+                      {attachmentError}
+                    </p>
+                  ) : (
+                    <>
+                      {attachmentError === null && attachment !== null ? (
+                        <p className="flex mt-1 text-xs font-bold text-green-600">
+                          {"All's good!"}
+                        </p>
+                      ) : (
+                        <p className="flex mt-1 text-xs font-bold">
+                          Max size is 2MB.
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
+
+                <div className="relative flex flex-col mb-4">
+                  <label
+                    htmlFor="description"
+                    className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows={7}
+                    className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                    defaultValue={""}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
                 </div>
                 <div className="relative flex flex-col mb-4">
                   <p className="text-sm leading-7 text-gray-600 dark:text-gray-400">
@@ -261,7 +411,7 @@ export default function GroupCreatePage() {
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                         // disabled
-                        className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                        className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                       />
                     </div>
                     <div className="w-full mb-2 lg:w-1/2 lg:mb-0 lg:pl-2">
@@ -278,41 +428,33 @@ export default function GroupCreatePage() {
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                         // disabled
-                        className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                        className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="flex flex-col w-full md:ml-auto md:py-8 md:mt-0 lg:pl-3">
                 <div className="relative flex flex-col mb-4">
                   <label
-                    htmlFor="fileInput"
-                    className="flex items-center text-sm leading-7 text-gray-600 dark:text-gray-400"
-                  >
-                    File{" "}
-                    <span className="ml-1 text-xs text-red-400">
-                      (optional)
-                    </span>
-                  </label>
-                </div>
-
-                <div className="relative flex flex-col mb-4">
-                  <label
-                    htmlFor="description"
+                    htmlFor="externalLink"
                     className="text-sm leading-7 text-gray-600 dark:text-gray-400"
                   >
-                    Description
+                    External link
                   </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    rows={7}
-                    className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
-                    defaultValue={""}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
+                  <div className="inline-flex items-center space-x-2">
+                    <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                      <i className="text-purple-700 dark:text-purple-400 fas fa-external-link-alt" />
+                    </span>
+                    <input
+                      type="text"
+                      id="externalLink"
+                      name="externalLink"
+                      placeholder="Google Meet conference link"
+                      value={externalLink}
+                      onChange={(e) => setExternalLink(e.target.value)}
+                      // disabled
+                      className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
