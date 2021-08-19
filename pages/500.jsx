@@ -1,8 +1,8 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import Lottie from "react-lottie";
-import animationData from "resources/lotties/404.json";
+import animationData from "resources/lotties/500.json";
 
-export default function Custom404() {
+export default function Custom500() {
   return (
     <AppLayout>
       <main className="flex flex-col items-center justify-center w-full h-full">
@@ -23,8 +23,8 @@ export default function Custom404() {
           />
         </div>
         <h3 className="mb-2 text-3xl font-extrabold text-center text-gray-800 dark:text-gray-200">
-          It seems that you are
-          <span className="mx-2 text-blue-600 dark:text-blue-400">lost</span>
+          It seems that you might have broke the
+          <span className="mx-2 text-blue-600 dark:text-blue-400">internet</span>
           ...
         </h3>
       </main>
