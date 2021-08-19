@@ -10,9 +10,9 @@ module.exports = withPWA({
   },
   reactStrictMode: true,
 
-  // This is not required to make it into a PWA, but is a nice way to clean up your imports
-  webpack: (config) => {
-    config.resolve.modules.push(path.resolve("./"));
-    return config;
-  },
+  // // This is not required to make it into a PWA, but is a nice way to clean up your imports
+  // webpack: (config) => {
+  //   config.resolve.modules.push(path.resolve("./"));
+  //   return config;
+  // },
 });

@@ -27,7 +27,7 @@ class MyDocument extends Document {
             sizes="32x32"
           />
           <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#000000" />
           <link rel="apple-touch-icon" href="icons/apple-icon-180.png" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <link

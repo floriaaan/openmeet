@@ -174,8 +174,8 @@ export default function GroupCreatePage() {
 
   return (
     <AppLayout>
-      <section className="relative h-full pb-6 text-gray-600 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10 body-font">
-        <div className="container flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
+      <section className="relative w-full h-full pb-6 text-gray-600 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10 body-font">
+        <div className="flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
           <div className="relative items-end justify-start hidden overflow-hidden rounded-xl lg:w-1/3 md:w-1/2 sm:mr-10 md:flex">
             <Map
               setMap={setMap}
@@ -263,7 +263,7 @@ export default function GroupCreatePage() {
                     Group
                   </label>
                   <div className="inline-flex items-center space-x-2">
-                    <span className="flex items-center justify-center w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                    <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
                       <i className="text-green-700 dark:text-green-400 fas fa-users" />
                     </span>
                     <select
@@ -299,7 +299,7 @@ export default function GroupCreatePage() {
                     Location
                   </label>
                   <div className="inline-flex items-center space-x-2">
-                    <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                    <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
                       <i className="text-purple-700 dark:text-purple-400 fas fa-map-marker-alt" />
                     </span>
                     <input
@@ -332,7 +332,7 @@ export default function GroupCreatePage() {
                     <span className="ml-2 text-xs">(optional)</span>
                   </label>
                   <div className="inline-flex items-center space-x-2">
-                    <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                    <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
                       <i className="text-purple-700 dark:text-purple-400 fas fa-paperclip" />
                     </span>
                     <input
@@ -399,7 +399,7 @@ export default function GroupCreatePage() {
                 Location disabled on mobile devices.
               </p> */}
                   <div className="flex flex-col items-center lg:flex-row">
-                    <span className="items-center justify-center hidden w-10 h-10 mt-[25px] mr-2 bg-purple-200 dark:bg-purple-900 rounded-lg lg:flex">
+                    <span className="items-center flex-shrink-0 justify-center hidden w-10 h-10 mt-[25px] mr-2 bg-purple-200 dark:bg-purple-900 rounded-lg lg:flex">
                       <i className="text-purple-700 dark:text-purple-400 fas fa-calendar-alt" />
                     </span>
                     <div className="w-full mb-2 lg:w-1/2 lg:mb-0 lg:pr-2">
@@ -445,7 +445,7 @@ export default function GroupCreatePage() {
                     External link
                   </label>
                   <div className="inline-flex items-center space-x-2">
-                    <span className="flex items-center justify-center w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                    <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
                       <i className="text-purple-700 dark:text-purple-400 fas fa-external-link-alt" />
                     </span>
                     <input

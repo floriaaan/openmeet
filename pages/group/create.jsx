@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
+import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -41,7 +42,7 @@ export default function GroupCreatePage() {
   useEffect(() => {
     if (position !== null) fetchLocation();
     else setLocation(null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   const Router = useRouter();
@@ -65,7 +66,10 @@ export default function GroupCreatePage() {
         .doc(slug)
         .set({
           name,
-          tags: tags.split(";"),
+          tags: tags
+            .split(";")
+            .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
+            .filter((e) => e != null),
           description,
           createdAt: new Date().toISOString(),
           admin: { uid: user.uid, fullName: user.fullName },
@@ -94,7 +98,7 @@ export default function GroupCreatePage() {
   return (
     <AppLayout>
       <section className="relative h-full text-gray-600 bg-gray-100 dark:bg-black body-font">
-        <div className="container flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
+        <div className="flex flex-wrap h-full px-5 py-5 mx-auto sm:flex-nowrap">
           <div className="relative items-end justify-start hidden overflow-hidden rounded-xl lg:w-1/3 md:w-1/2 sm:mr-10 md:flex">
             <Map
               setMap={setMap}
@@ -102,14 +106,18 @@ export default function GroupCreatePage() {
             />
           </div>
           <div className="flex flex-col justify-center w-full mt-8 lg:w-2/3 md:w-1/2 md:ml-auto md:py-8 md:mt-0">
-            <h2 className="mb-1 text-2xl font-bold text-green-500 title-font">
-              Create a group
-            </h2>
+            <h3 className="mt-4 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
+              Create a{" "}
+              <span className="text-green-500 dark:text-green-600">group</span>
+            </h3>
             <p className="mb-5 leading-relaxed text-gray-400">
               Group together people who have the same interests as you
             </p>
-            <div className="relative mb-4">
-              <label htmlFor="name" className="text-sm leading-7 text-gray-600">
+            <div className="relative flex flex-col mb-4">
+              <label
+                htmlFor="name"
+                className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+              >
                 Name
               </label>
               <input
@@ -118,45 +126,68 @@ export default function GroupCreatePage() {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
               />
             </div>
-            <div className="relative mb-4">
-              <label htmlFor="tags" className="text-sm leading-7 text-gray-600">
-                Tags
-              </label>
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-                className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
-              />
-            </div>
-            <div className="relative mb-4">
+            <div className="relative flex flex-col mb-4">
               <label
                 htmlFor="location"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+              >
+                Tags
+              </label>
+              <div className="inline-flex items-center space-x-2">
+                <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                  <i className="text-green-700 dark:text-green-400 fas fa-tags" />
+                </span>
+                <input
+                  type="text"
+                  id="tags"
+                  name="tags"
+                  placeholder="javascript; css; java; nosql; bigdata; .net; azure; agile; uxdesign;"
+                  value={tags}
+                  onChange={(e) => setTags(e.target.value)}
+                  // disabled
+                  className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                />
+              </div>
+              <p className="flex mt-1 text-xs">
+                Please separate tags with semi-colons.
+              </p>
+            </div>
+            <div className="relative flex flex-col mb-4">
+              <label
+                htmlFor="location"
+                className="text-sm leading-7 text-gray-600 dark:text-gray-400"
               >
                 Location
               </label>
-              <p className="flex md:hidden">
-                Location disabled on mobile devices.
+              <div className="inline-flex items-center space-x-2">
+                <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                  <i className="text-green-700 dark:text-green-400 fas fa-map-marker-alt" />
+                </span>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Click on the map (disabled on mobile devices)"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  // disabled
+                  className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                />
+              </div>
+              <p className="flex mt-1 text-xs">
+                If no location is provided, the event will be set in Remote.
               </p>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={location}
-                disabled
-                className="hidden w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none md:block rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
-              />
+              <p className="flex mt-1 text-xs md:hidden">
+                Map autocompletion unavailable on mobile devices.
+              </p>
             </div>
-            <div className="relative mb-4">
+            <div className="relative flex flex-col mb-4">
               <label
                 htmlFor="description"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-600 dark:text-gray-400"
               >
                 Description
               </label>
@@ -164,7 +195,7 @@ export default function GroupCreatePage() {
                 id="description"
                 name="description"
                 rows={7}
-                className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-2 appearance-none rounded-xl dark:text-gray-300 bg-gray-50 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                 defaultValue={""}
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -177,14 +208,7 @@ export default function GroupCreatePage() {
               >
                 Create
               </button>
-              <button
-                id="meetup-display-btn"
-                type="button"
-                className="flex-shrink px-6 py-2 text-lg text-white bg-red-600 border-0 rounded-xl focus:outline-none hover:bg-red-700"
-              >
-                <i className="mr-2 fab fa-meetup" />
-                Import from meetup.com
-              </button>
+              <MeetupImportDropdown />
             </div>
             <p className="text-xs text-gray-500">
               What an adventure that begins! 🎉

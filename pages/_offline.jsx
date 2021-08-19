@@ -3,7 +3,6 @@ import Lottie from "react-lottie";
 import animationData from "resources/lotties/offline.json";
 
 import Link from "next/link";
-import Image from "next/image";
 
 export default function OfflinePage() {
   return (
@@ -11,7 +10,8 @@ export default function OfflinePage() {
       <div className="flex flex-col items-center flex-grow h-full pt-32 bg-gray-100 dark:bg-gray-900 backdrop-filter backdrop-blur-lg bg-opacity-10 dark:bg-opacity-10">
         <Link href="/">
           <a>
-            <Image src="/logo.svg" alt="OpenMeet" width={64} height={64} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="OpenMeet" width={64} height={64} />
           </a>
         </Link>
         <div className="w-72 h-72">

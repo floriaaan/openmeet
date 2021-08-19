@@ -8,6 +8,9 @@ import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { EventOverview } from "@components/cards/CardEventOverview";
 import { ChipList } from "@components/ui/ChipList";
 
+import Lottie from "react-lottie";
+import animationData from "resources/lotties/nothing_search.json";
+
 export default function GroupPage({
   name,
   tags,
@@ -20,8 +23,7 @@ export default function GroupPage({
 }) {
   const [subs, setSubs] = useState([]);
 
-  const [eventsFromFirebase, setEventsFromFirebase] = useState([]);
-  const [eventsState, setEventsState] = useState([]);
+  const [displayables, setDisplayables] = useState([]);
   const [eventsFilters, setEventsFilters] = useState([]);
   const { user } = useAuth();
 
@@ -48,20 +50,11 @@ export default function GroupPage({
   };
 
   const prepareDisplayable = async () => {
-    if (eventsFilters.length > 0) {
-    } else {
-      let tmp = [];
-      events.forEach(async (el) => {
-        const doc = await firestore.collection("events").doc(el.slug).get();
-        tmp.push({
-          ...doc.data(),
-          slug: doc.id,
-        });
-      });
-      console.log(tmp);
-      setEventsFromFirebase(tmp);
-      setEventsState(tmp);
-    }
+    // if (eventsFilters.length > 0) {
+    // } else {
+
+    // }
+    setDisplayables(events);
   };
 
   useEffect(() => {
@@ -115,70 +108,118 @@ export default function GroupPage({
             </h2>
             <div className="flex mt-5 space-x-3 lg:mt-0 lg:ml-4">
               {admin.uid === user?.uid && (
-                <span className="block">
-                  <Link href={"/group/" + slug + "/edit"}>
-                    <a className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-xl dark:border-none dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none ">
-                      <i className="mr-2 fas fa-pencil-alt"></i>
-                      Edit
-                    </a>
-                  </Link>
-                </span>
-              )}
-              <span className="block">
-                <button
-                  type="button"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-xl dark:border-none dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none"
-                >
-                  <i className="mr-2 fas fa-share-alt"></i>
-                  Share
-                </button>
-              </span>
-              <span className="">
-                {subs?.find((sub) => sub.id === user?.uid) ? (
-                  <a
-                    className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-500 bg-green-600 shadow-sm cursor-pointer rounded-xl hover:bg-red-700 focus:outline-none group"
-                    onClick={toggleSubscription}
-                  >
-                    <i className="hidden mr-2 fas fa-times group-hover:block"></i>
-                    <span className="hidden group-hover:block">
-                      Unsubscribe
+                <Link href={"/group/" + slug + "/edit"}>
+                  <a className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-gray-100 rounded-full cursor-pointer group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
+                    <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
+                      <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
                     </span>
-                    <i className="block mr-2 fas fa-check group-hover:hidden"></i>
-                    <span className="block group-hover:hidden">Subscribed</span>
+                    <p className="text-sm font-extrabold text-gray-700 select-none dark:text-gray-300">
+                      Edit
+                    </p>
                   </a>
+                </Link>
+              )}
+              <button
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator
+                      .share({
+                        title: `${name} - OpenMeet`,
+                        text: "Check out this group on OpenMeet.",
+                        url: document.location.href,
+                      })
+                      .then(() => console.log("Successful share"))
+                      .catch((error) => console.log("Error sharing", error));
+                  }
+                }}
+                className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-gray-100 rounded-full cursor-pointer focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+              >
+                <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
+                  <i className="text-gray-700 select-none fas fa-share-alt dark:text-gray-300 "></i>
+                </span>
+                <p className="text-sm font-extrabold text-gray-700 select-none dark:text-gray-300">
+                  Share
+                </p>
+              </button>
+
+              <button
+                onClick={toggleSubscription}
+                className={
+                  "inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-green-100 rounded-full cursor-pointer group  max-w-max dark:bg-green-900  dark:bg-opacity-30 " +
+                  (subs?.find((sub) => sub.id === user?.uid)
+                    ? "hover:bg-red-200 dark:hover:bg-red-900 duration-500"
+                    : "hover:bg-green-200 dark:hover:bg-opacity-60 duration-300")
+                }
+              >
+                {subs?.find((sub) => sub.id === user?.uid) ? (
+                  <div className="inline-flex items-center space-x-3">
+                    <span className="flex items-center justify-center w-8 h-8 transition duration-500 bg-green-300 rounded-full group-hover:bg-red-300 dark:group-hover:bg-red-800 dark:bg-green-800 dark:bg-opacity-30">
+                      <i className="text-green-700 select-none fas fa-check dark:text-green-300 group-hover:hidden"></i>
+                      <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
+                    </span>
+                    <p className="text-sm font-extrabold text-green-700 select-none dark:text-green-300 group-hover:hidden">
+                      Subscribed
+                    </p>
+                    <p className="hidden text-sm font-extrabold text-red-700 select-none dark:text-red-300 group-hover:block">
+                      Wanna leave ? 😢
+                    </p>
+                  </div>
                 ) : (
-                  <a
-                    className="inline-flex items-center justify-center w-32 px-4 py-2 text-sm font-medium text-white transition duration-300 bg-gray-600 shadow-sm cursor-pointer rounded-xl hover:bg-gray-700 focus:outline-none"
-                    onClick={toggleSubscription}
-                  >
-                    <i className="mr-2 fas fa-plus"></i>
-                    <span className="">Subscribe</span>
-                  </a>
+                  <>
+                    <span className="flex items-center justify-center w-8 h-8 bg-green-300 rounded-full dark:bg-green-800 dark:bg-opacity-30">
+                      <i className="text-green-700 select-none fas fa-plus dark:text-green-300 "></i>
+                    </span>
+                    <p className="text-sm font-extrabold text-green-700 select-none dark:text-green-300">
+                      Subscribe
+                    </p>
+                  </>
                 )}
-              </span>
+              </button>
             </div>
           </div>
           <p className="w-full pt-4 pb-2 text-justify text-gray-500 dark:text-gray-400">
             {description}
           </p>
           <div className="w-full ">
-            <ChipList list={tags}/>
+            <ChipList list={tags} />
           </div>
         </div>
         <div className="flex flex-col w-full px-6 pt-3 pb-16 space-y-6 lg:px-32 xl:px-48 lg:pb-24">
-          <div className="flex justify-center w-full h-12">
+          {/* <div className="flex justify-center w-full h-12">
             <ChipList
               list={["Upcoming", "In progress", "Finished"]}
               selected={eventsFilters}
               setSelected={setEventsFilters}
-              color="purple"
+              color="gray"
             />
-          </div>
+          </div> */}
 
           <div className="grid flex-grow h-full grid-cols-1 gap-4 md:grid-cols-3 ">
-            {eventsState.map((el, index) => (
-              <EventOverview {...el} key={index} />
-            ))}
+            {events.length > 0 ? (
+              <>
+                {displayables.map((el, index) => (
+                  <EventOverview {...el} key={index} />
+                ))}
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center w-full px-6 pb-6 text-4xl font-bold text-gray-400 uppercase dark:text-gray-600 h-96 md:col-span-3">
+                <div className="w-72 h-72">
+                  <Lottie
+                    isClickToPauseDisabled
+                    options={{
+                      loop: true,
+                      autoplay: true,
+                      animationData: animationData,
+
+                      rendererSettings: {
+                        preserveAspectRatio: "xMidYMid slice",
+                      },
+                    }}
+                  />
+                </div>
+                {"No events yet... 📅"}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -189,33 +230,21 @@ export default function GroupPage({
 export async function getServerSideProps(ctx) {
   const group = await firestore.collection("groups").doc(ctx.query.slug).get();
 
-  // const group = {
-  //   data: () => {
-  //     return {
-  //       slug: "test-de-location",
-  //       location: {
-  //         position: {
-  //           lat: 49.27071680843916,
-  //           lng: 1.2134313583374023,
-  //         },
-  //         location: "Val-de-Reuil, France",
-  //       },
-  //       tags: ["location", "opéla"],
-  //       admin: {
-  //         uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-  //         fullName: "Florian Leroux",
-  //       },
-  //       createdAt: "2021-08-03T09:54:40.695Z",
-  //       name: "Test de location",
-  //       description:
-  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at leo in turpis posuere efficitur at non nulla. Fusce condimentum ultrices lectus eu venenatis. Suspendisse semper accumsan nisi at gravida. Nulla at tellus lobortis, sollicitudin ante nec, dapibus metus. Nunc finibus mauris tellus, id tristique lectus consequat quis. Nullam imperdiet mi non commodo sollicitudin. Phasellus aliquam finibus mauris ac tristique. Ut turpis nisl, volutpat id nibh eget, pellentesque efficitur enim. Sed pellentesque aliquet turpis a tincidunt. Etiam ornare ornare neque, sit amet accumsan justo egestas ut. Maecenas blandit magna eu massa posuere tempus.  In maximus orci nec commodo congue. Praesent malesuada, lectus ac elementum euismod, turpis orci congue ex, sed porttitor augue magna eget leo. Maecenas vitae facilisis justo. Praesent sed dui dui. Maecenas at purus odio. Sed tempor mauris a felis rutrum posuere. Nulla feugiat dolor metus. Sed feugiat dolor vel placerat facilisis. Praesent suscipit justo id ante consequat finibus. Suspendisse vehicula dapibus dolor sed varius. Quisque vestibulum, erat et sodales malesuada, ex mauris pretium lacus, in porttitor tellus elit rutrum est.",
-  //     };
-  //   },
-  // };
+  let events = [];
+  await Promise.all(
+    group.data().events?.map(async (el) => {
+      const doc = await firestore.collection("events").doc(el.slug).get();
+      events.push({
+        ...doc.data(),
+        slug: doc.id,
+      });
+    })
+  );
 
   return {
     props: {
       ...group.data(),
+      events,
 
       slug: ctx.query.slug,
     },
