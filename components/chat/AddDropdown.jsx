@@ -3,7 +3,7 @@ import React, { createRef, useEffect, useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { firestore } from "@libs/firebase";
 
-export const AddDropdown = ({ members, chatId, setList }) => {
+export const AddDropdown = ({ members, chatId, list, setList }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = createRef();
@@ -42,15 +42,13 @@ export const AddDropdown = ({ members, chatId, setList }) => {
   useEffect(() => {
     setSelectedUsers(members);
     getUsers();
-
   }, [members]);
 
-  useEffect(() => {
-    if(setList) {
-      setList(selectedUsers);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedUsers]);
+  // useEffect(() => {
+  //   if (setList) {
+  //     setList(selectedUsers);
+  //   }
+  // }, [selectedUsers, setList]);
 
   return (
     <>

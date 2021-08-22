@@ -47,7 +47,10 @@ export const Conversation = ({ id }, props) => {
         if (data) {
           setChat(data);
           prepareDisplayableMsg(data?.messages);
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
+          // setLoading(false);
         }
       });
   }, [id]);
@@ -288,6 +291,7 @@ export const NewConversation = (props) => {
                 ]
               : []
           }
+          list={selectedMembers}
           setList={setSelectedMembers}
         />
       </div>

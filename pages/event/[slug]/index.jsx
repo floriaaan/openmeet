@@ -293,16 +293,22 @@ export default function EventPage(props) {
                     ) : (
                       <i className="w-6 ml-4 text-lg text-center fas fa-map-marker-alt" />
                     )}
-                    {props.location.location === "Remote" ? (
+                    {props.location.location === "Remote" ||
+                    !props.location.location ? (
                       <div className="flex flex-col">
                         <p className="text-sm font-bold">Remote</p>
                       </div>
                     ) : (
                       <div className="flex flex-col">
-                        <p className="text-xs">{props.location.details.name}</p>
-                        <p className="text-sm font-bold">
-                          {props.location.details.city}, France
+                        <p className="text-xs">
+                          {props.location?.details?.name ||
+                            props.location.location}
                         </p>
+                        {props.location?.details?.city && (
+                          <p className="text-sm font-bold">
+                            {props.location.details.city}, France
+                          </p>
+                        )}
                       </div>
                     )}
                   </span>
@@ -312,10 +318,12 @@ export default function EventPage(props) {
                       href={
                         "https://www.google.com/maps/place/" +
                         encodeURIComponent(
-                          props.location.details.name +
-                            " " +
-                            props.location.details.city +
-                            ", France"
+                          props.location?.details
+                            ? props.location.details.name +
+                                " " +
+                                props.location.details.city +
+                                ", France"
+                            : props.location.location
                         )
                       }
                       target="_blank"
@@ -341,7 +349,11 @@ export default function EventPage(props) {
                   ) : null}
                 </div>
                 {props.attachment && (
-                  <a href={props.attachment.url} target="_blank" rel="noreferrer">
+                  <a
+                    href={props.attachment.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <div className="inline-flex items-center justify-between w-full pt-4 pb-2 space-x-4 ">
                       <span className="inline-flex items-center flex-grow space-x-4">
                         <i className="w-6 ml-4 text-lg text-center fas fa-paperclip" />

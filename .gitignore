@@ -32,6 +32,7 @@ yarn-error.log*
 
 #firebase
 .firebase
+firestore.rules
 
 # pwa cache
 **/public/workbox-*.js

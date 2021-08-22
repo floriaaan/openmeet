@@ -76,6 +76,7 @@ const GroupsSection = () => {
   useEffect(() => {
     firestore
       .collection("groups")
+      .where("private", "==", false)
       .orderBy("createdAt", "desc")
       .get()
       .then((querySnapshot) => {

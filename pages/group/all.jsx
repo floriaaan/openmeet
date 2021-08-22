@@ -31,7 +31,8 @@ export default function GroupAllPage({ groups }) {
       <div className="flex flex-col w-full h-full space-y-3 bg-gray-100 dark:bg-gray-900">
         <div className="flex flex-col xl:sticky xl:top-0 z-[47] w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
           <h3 className="mb-2 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
-            Find a <span className="text-green-600 dark:text-green-400">group</span>
+            Find a{" "}
+            <span className="text-green-600 dark:text-green-400">group</span>
           </h3>
 
           <div className="flex flex-col items-center divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
@@ -128,6 +129,8 @@ export async function getServerSideProps() {
   const groups = [];
   await firestore
     .collection("groups")
+    .where("private", "==", false)
+
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {

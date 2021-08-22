@@ -23,6 +23,8 @@ export default function GroupCreatePage() {
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
 
+  const [privateGroup, setPrivateGroup] = useState(false);
+
   const [position, setPosition] = useState(null);
   const [location, setLocation] = useState(null);
   const [map, setMap] = useState(null);
@@ -57,41 +59,74 @@ export default function GroupCreatePage() {
     const groupRef = firestore.collection("groups").doc(slug).get();
 
     if (user && !groupRef.exists) {
-      const slug = name
-        .toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-");
-      const response = await firestore
-        .collection("groups")
-        .doc(slug)
-        .set({
-          name,
-          tags: tags
-            .split(";")
-            .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
-            .filter((e) => e != null),
-          description,
-          createdAt: new Date().toISOString(),
-          admin: { uid: user.uid, fullName: user.fullName },
-          location: {
-            location: location || "Remote",
-            position: { ...position } || { lat: null, lng: null },
-          },
-          events: [],
-        });
-      await firestore
-        .collection("groups")
-        .doc(slug)
-        .collection("subscribers")
-        .doc(user.uid)
-        .set({
-          fullName: user.fullName,
-          photoUrl: user.photoUrl,
-          uid: user.uid,
-        });
-      // if (response.ok) {
-      Router.push("/group/" + slug);
-      // }
+      if (!privateGroup) {
+        const slug = name
+          .toLowerCase()
+          .replace(/[^\w ]+/g, "")
+          .replace(/ +/g, "-");
+        const response = await firestore
+          .collection("groups")
+          .doc(slug)
+          .set({
+            name,
+            tags: tags
+              .split(";")
+              .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
+              .filter((e) => e != null),
+            description,
+            createdAt: new Date().toISOString(),
+            admin: { uid: user.uid, fullName: user.fullName },
+            location: {
+              location: location || "Remote",
+              position: { ...position } || { lat: null, lng: null },
+            },
+            events: [],
+            private: false,
+          });
+        await firestore
+          .collection("groups")
+          .doc(slug)
+          .collection("subscribers")
+          .doc(user.uid)
+          .set({
+            fullName: user.fullName,
+            photoUrl: user.photoUrl,
+            uid: user.uid,
+          });
+        Router.push("/group/" + slug);
+      } else {
+        firestore
+          .collection("groups")
+          .add({
+            name,
+            tags: tags
+              .split(";")
+              .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
+              .filter((e) => e != null),
+            description,
+            createdAt: new Date().toISOString(),
+            admin: { uid: user.uid, fullName: user.fullName },
+            location: {
+              location: location || "Remote",
+              position: { ...position } || { lat: null, lng: null },
+            },
+            events: [],
+            private: true,
+          })
+          .then(async (docRef) => {
+            await firestore
+              .collection("groups")
+              .doc(docRef.id)
+              .collection("subscribers")
+              .doc(user.uid)
+              .set({
+                fullName: user.fullName,
+                photoUrl: user.photoUrl,
+                uid: user.uid,
+              });
+            Router.push("/group/" + docRef.id);
+          });
+      }
     }
   };
 
@@ -199,6 +234,23 @@ export default function GroupCreatePage() {
                 defaultValue={""}
                 onChange={(e) => setDescription(e.target.value)}
               />
+            </div>
+            <div className="relative flex flex-col mb-4">
+              <p className="text-sm leading-7 text-gray-600 dark:text-gray-400">
+                Preferences
+              </p>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="privateGroup"
+                  value={privateGroup}
+                  onChange={(e) => setPrivateGroup(e.target.checked)}
+                  className="w-4 h-4 duration-200 bg-green-200 border-0 rounded-md appearance-none form-checkbox hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-700 checked:bg-green-600 checked:border-transparent focus:outline-none focus:bg-green-400 dark:focus:bg-green-900 ring-green-500"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  Make the group private
+                </span>
+              </label>
             </div>
             <div className="flex flex-row mb-3 space-x-2">
               <button

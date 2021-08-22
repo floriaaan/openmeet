@@ -52,15 +52,13 @@ export const Sidebar = (props) => {
       </div>
       <div className="p-3 m-3 max-h-[80vh] overflow-y-scroll shadow-inner bg-gray-50 rounded-xl dark:bg-gray-800">
         {chats.map((el, key) => (
-          <>
-            <ChatOverview
-              {...el}
-              key={key}
-              isFirst={key === 0}
-              isLast={key === chats.length - 1}
-              auth={user}
-            />
-          </>
+          <ChatOverview
+            {...el}
+            key={key}
+            isFirst={key === 0}
+            isLast={key === chats.length - 1}
+            auth={user}
+          />
         ))}
       </div>
     </div>

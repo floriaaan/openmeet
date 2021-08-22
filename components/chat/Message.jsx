@@ -6,12 +6,14 @@ export const Message = ({ list = [], sender }) => {
   return (
     <div className="inline-flex w-full items-start px-2 py-1.5 md:px-4 md:py-3 min-h-[6rem] overflow-hidden transition duration-500 rounded-md ">
       {sender?.photoUrl ? (
-        <Link passHref={"/profile/" + sender.uid}>
-          <img
-            src={sender.photoUrl}
-            alt="Avatar"
-            className="w-8 h-8 mr-4 rounded-full cursor-pointer md:w-16 md:h-16"
-          />
+        <Link href={"/profile/" + sender.uid}>
+          <a>
+            <img
+              src={sender.photoUrl}
+              alt="Avatar"
+              className="w-8 h-8 mr-4 rounded-full cursor-pointer md:w-16 md:h-16"
+            />
+          </a>
         </Link>
       ) : null}
       <div className="w-full">
