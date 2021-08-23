@@ -30,7 +30,7 @@ export const GroupDropdown = () => {
         const list = [];
 
         querySnapshot.forEach((doc) => {
-          list.push({ slug: doc.id, ...doc.data() });
+          if (!doc.data().private) list.push({ slug: doc.id, ...doc.data() });
         });
         const groups = [];
         for (let i = 0; i < 3; i++) {
@@ -117,7 +117,9 @@ const GroupOverview = (props) => (
           {props.name}
         </span>
         <span className="text-xs text-gray-400 dark:text-gray-300">
-        {props.description.length < 100 ? props.description : props.description.slice(0, 100) + ' ...'}
+          {props.description.length < 100
+            ? props.description
+            : props.description.slice(0, 100) + " ..."}
         </span>
       </div>
     </a>

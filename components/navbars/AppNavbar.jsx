@@ -17,7 +17,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
     <>
       <nav
         className={
-          "top-0 z-[48] flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-black dark:text-gray-300 navbar-expand-lg " +
+          "top-0 z-[48] sticky flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-black dark:text-gray-300 navbar-expand-lg " +
           // "md:bg-opacity-75 md:dark:bg-opacity-50 md:backdrop-blur sticky" +
 
           (shadowOnNavbar ? " shadow-md" : " ")

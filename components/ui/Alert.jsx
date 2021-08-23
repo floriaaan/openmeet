@@ -24,7 +24,7 @@ export const Alert = ({ content, link = null, color = "amber", id = "", details 
       {showAlert ? (
         <div
           className={
-            "flex flex-col justify-between items-center text-white px-6 py-4 border-0 rounded-xl  mb-4 bg-" +
+            "flex flex-col justify-between items-center text-white bg-opacity-60 motion-safe:backdrop-filter motion-safe:backdrop-blur-md px-6 py-4 border-0 rounded-xl  mb-4 bg-" +
             color +
             "-500"
           }

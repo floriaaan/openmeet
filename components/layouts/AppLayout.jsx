@@ -29,10 +29,10 @@ const AlertProvider = () => {
   }, []);
 
   return (
-    <div className="absolute right-0 z-[47] top-[96px] flex flex-col justify-end p-3 md:p-6 space-y-1 w-full md:w-[30rem]">
-      {alerts.map((el, key) => (
-        <Alert {...el} key={key} />
-      ))}
-    </div>
+      <div className="absolute right-0 z-[47] top-[96px] flex flex-col justify-end p-3 md:p-6 space-y-1 w-full md:w-[30rem]">
+        {alerts.map((el, key) => (
+          <Alert {...el} key={key} />
+        ))}
+      </div>
   );
 };

@@ -20,10 +20,12 @@ export default function GroupPage({
   admin,
   slug,
   location,
-  events = [],
+  events_raw = [],
   exists,
 }) {
   const [subs, setSubs] = useState([]);
+
+  const [events, setEvents] = useState([]);
 
   const [displayables, setDisplayables] = useState([]);
   const [eventsFilters, setEventsFilters] = useState([]);
@@ -52,11 +54,11 @@ export default function GroupPage({
   };
 
   const prepareDisplayable = async () => {
-    // if (eventsFilters.length > 0) {
-    // } else {
-
-    // }
-    setDisplayables(events);
+    if (eventsFilters.length > 0) {
+      let displayables = [];
+    } else {
+      setDisplayables(events);
+    }
   };
 
   useEffect(() => {
@@ -71,7 +73,19 @@ export default function GroupPage({
         });
         setSubs(subs);
       });
-  }, [slug]);
+
+    let events = [];
+    events_raw.forEach(async (e) => {
+      const eventDoc = await firestore.collection("events").doc(e.slug).get();
+      const eventData = eventDoc.data();
+      if (!eventData.private)
+        events.push({
+          ...eventData,
+          ...e,
+        });
+    });
+    setEvents(events);
+  }, [events_raw, slug]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => prepareDisplayable(), [eventsFilters]);
@@ -198,7 +212,7 @@ export default function GroupPage({
           </div> */}
 
             <div className="grid flex-grow h-full grid-cols-1 gap-4 md:grid-cols-3 ">
-              {events.length > 0 ? (
+              {displayables.length > 0 ? (
                 <>
                   {displayables.map((el, index) => (
                     <EventOverview {...el} key={index} />
@@ -260,23 +274,13 @@ export default function GroupPage({
 export async function getServerSideProps(ctx) {
   const group = await firestore.collection("groups").doc(ctx.query.slug).get();
 
-  let events = [];
-  if (group.exists && group.data().events) {
-    await Promise.all(
-      group.data()?.events?.map(async (el) => {
-        const doc = await firestore.collection("events").doc(el.slug).get();
-        events.push({
-          ...doc.data(),
-          slug: doc.id,
-        });
-      })
-    );
-  }
+  let data = group.data();
+  data.events_raw = data.events || [];
+  delete data.events;
 
   return {
     props: {
-      ...group.data(),
-      events,
+      ...data,
 
       slug: ctx.query.slug,
       exists: group.exists,

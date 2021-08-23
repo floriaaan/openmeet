@@ -2,6 +2,7 @@
 import React, { createRef, useEffect, useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { firestore } from "@libs/firebase";
+import { imgErrorFallback } from "@libs/imgOnError";
 
 export const AddDropdown = ({ members, chatId, list, setList }) => {
   // dropdown props
@@ -139,7 +140,7 @@ const UserOverview = ({
       }
     >
       <div className="inline-flex items-center">
-        <img src={photoUrl} alt={fullName} className="w-8 rounded-full" />
+        <img src={photoUrl} alt={fullName} className="w-8 rounded-full" onError={(e) => imgErrorFallback(e, user.fullName)} />
         <div className="ml-3 text-sm text-gray-700 dark:text-gray-300">
           {fullName}
         </div>

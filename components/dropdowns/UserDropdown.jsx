@@ -5,6 +5,7 @@ import { useAuth } from "@hooks/useAuth";
 import { useTheme } from "next-themes";
 
 import Link from "next/link";
+import { imgErrorFallback } from "@libs/imgOnError";
 
 export const UserDropdown = () => {
   // dropdown props
@@ -40,6 +41,7 @@ export const UserDropdown = () => {
             <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
               <img
                 alt={user?.fullName}
+                onError={(e) => imgErrorFallback(e, user.fullName)}
                 className="w-full h-full align-middle border-none rounded-full select-none "
                 src={
                   user?.photoUrl
