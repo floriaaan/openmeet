@@ -1,10 +1,21 @@
 import { AuthProvider } from "@hooks/useAuth";
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
+import "../styles/nprogress.css";
 import Head from 'next/head'
+import dynamic from "next/dynamic";
 
 
 function MyApp({ Component, pageProps }) {
+
+  const Loader = dynamic(
+    () => {
+      return import("@components/ui/TopLoader");
+    },
+    { ssr: false }
+  );
+
+
   return (
     <>
       <Head>

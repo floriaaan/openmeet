@@ -70,6 +70,7 @@ export const EventDropdown = () => {
       </a>
       <div
         ref={popoverDropdownRef}
+        onMouseLeave={closeDropdownPopover}
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
           "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"

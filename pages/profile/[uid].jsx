@@ -1,36 +1,71 @@
 /* eslint-disable @next/next/no-img-element */
 import { AppLayout } from "@components/layouts/AppLayout";
+import { ApiKey } from "@components/profile/ApiKey";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { formatDistance } from "date-fns";
+import Lottie from "react-lottie";
+import notExisting from "resources/lotties/404.json";
 
-export default function ProfilePage({ firebaseUser }) {
-  const { user } = useAuth();
+export default function ProfilePage({ user, uid }) {
+  const { user: auth } = useAuth();
 
   return (
     <AppLayout>
-      <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
-        <ProfileOverview user={firebaseUser} auth={user} />
-        <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">e</div>
-        <div className="w-full h-full bg-green-500 lg:col-span-2">e</div>
-      </div>
+      {user ? (
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
+          <ProfileOverview user={user} />
+          <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">
+            e
+          </div>
+          <div className="w-full h-full bg-green-500 lg:col-span-2">e</div>
+        </div>
+      ) : auth?.uid === uid ? (
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
+          <ProfileOverview user={auth} />
+          <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">
+            e
+          </div>
+          <div className="w-full h-full bg-green-500 lg:col-span-2">e</div>
+        </div>
+      ) : (
+        <main className="flex flex-col items-center justify-center w-full h-full">
+          <div className="w-72 h-72">
+            <Lottie
+              isClickToPauseDisabled
+              options={{
+                loop: true,
+                autoplay: true,
+                animationData: notExisting,
+
+                rendererSettings: {
+                  preserveAspectRatio: "xMidYMid slice",
+                },
+              }}
+              // height={"8rem"}
+              // width={"8rem"}
+            />
+          </div>
+          <h3 className="mb-2 text-3xl font-extrabold text-center text-gray-800 dark:text-gray-200">
+            {"There's no profile at this"}
+            <span className="mx-2 text-red-600 dark:text-red-500">address</span>
+            ...
+          </h3>
+        </main>
+      )}
     </AppLayout>
   );
 }
 
-const ProfileOverview = ({ user, auth }) => {
+const ProfileOverview = ({ user }) => {
+  const { user: auth } = useAuth();
+
   return (
     <div className="h-full row-span-2 px-4 py-5 bg-gray-800 shadow sm:p-6 rounded-xl">
       <div className="flex flex-col items-center justify-center text-white">
         {user.uid === auth?.uid && (
           <div className="flex flex-row-reverse items-center w-full mb-3 text-gray-400">
-            <div className="flex flex-row items-center text-xs font-bold transition duration-300 group">
-              <span className="invisible p-3 -mt-12 text-white transition duration-300 bg-gray-600 shadow-lg rounded-xl group-hover:visible">
-                {user?.uid}
-              </span>
-              <i className="w-3 h-3 mr-1 fas fa-link" />
-              API key
-            </div>
+            <ApiKey apikey={auth?.uid} />
           </div>
         )}
         <img
@@ -74,12 +109,21 @@ const ProfileOverview = ({ user, auth }) => {
 
 export async function getServerSideProps(ctx) {
   const { uid } = ctx.query;
-  const user = await firestore.collection("users").doc(uid).get();
-  return {
-    props: {
-      firebaseUser: JSON.parse(
-        JSON.stringify({ uid: user.id, ...user.data() })
-      ),
-    },
-  };
+  try {
+    const user = await firestore.collection("users").doc(uid).get();
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify({ uid: user.id, ...user.data() })),
+        uid,
+      },
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      props: {
+        user: false,
+        uid,
+      },
+    };
+  }
 }
