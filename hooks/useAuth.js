@@ -32,10 +32,7 @@ function useFirebaseAuth() {
 
   const handleUser = async (rawUser) => {
     if (rawUser) {
-      const user = await formatUser(rawUser);
-
-      createUser(user.uid, user);
-
+      const user = await createUser(await formatUser(rawUser));
       setUser(user);
 
       return user;

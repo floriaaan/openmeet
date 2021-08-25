@@ -64,16 +64,16 @@ export default function TestBlurryPage() {
 
   return (
     <AppLayout>
-      <div className="flex items-center justify-center h-full px-16 bg-gray-50 dark:bg-gray-900">
+      <div className="flex items-center justify-center h-full px-16 bg-gray-50 dark:bg-black">
         <div className="relative w-full max-w-lg">
-          <div className="absolute top-0 bg-purple-300 rounded-full dark:bg-purple-700 animate-blob filter blur-xl mix-blend-multiply -left-1 w-72 h-72"></div>
-          <div className="absolute top-0 bg-yellow-300 rounded-full dark:bg-yellow-700 animate-blob filter blur-xl mix-blend-multiply -right-4 w-72 h-72 animation-delay-2000"></div>
-          <div className="absolute bg-green-300 rounded-full dark:bg-green-700 w-72 h-72 animate-blob filter blur-xl mix-blend-multiply -bottom-8 -right-16 animation-delay-4000"></div>
-          <div className="absolute bg-red-300 rounded-full dark:bg-red-700 w-72 h-72 animate-blob filter blur-xl mix-blend-multiply -bottom-16 -left-1 animation-delay-4000"></div>
+          <div className="absolute top-0 bg-purple-300 rounded-full dark:bg-purple-700 animate-blob filter blur-xl dark:blur-sm mix-blend-multiply -left-1 w-72 h-72"></div>
+          <div className="absolute top-0 bg-yellow-300 rounded-full dark:bg-yellow-700 animate-blob filter blur-xl dark:blur-sm mix-blend-multiply -right-4 w-72 h-72 animation-delay-2000"></div>
+          <div className="absolute bg-green-300 rounded-full dark:bg-green-700 w-72 h-72 animate-blob filter blur-xl dark:blur-sm mix-blend-multiply -bottom-8 -right-16 animation-delay-4000"></div>
+          <div className="absolute bg-red-300 rounded-full dark:bg-red-700 w-72 h-72 animate-blob filter blur-xl dark:blur-sm mix-blend-multiply -bottom-16 -left-1 animation-delay-4000"></div>
 
           <div className="relative w-full m-8">
-            <EventOverview {...event.data()} />
-            {/* <div className="w-full mx-auto text-center md:text-left lg:p-20">
+            {/* <EventOverview {...event.data()} /> */}
+            <div className="w-full mx-auto text-center md:text-left lg:p-20">
             <RoughNotationGroup show={true}>
             <RainbowHighlight color={colors[0]}>
               <h1 className="my-2 text-4xl font-bold text-green-700 dark:text-green-200">
@@ -96,7 +96,7 @@ export default function TestBlurryPage() {
               </h1>
             </RainbowHighlight>
           </RoughNotationGroup> 
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

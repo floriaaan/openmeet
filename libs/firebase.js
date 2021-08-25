@@ -1,3 +1,4 @@
+import { user } from "firebase-functions/lib/providers/auth";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -23,36 +24,20 @@ const storage = firebase.storage();
 
 const FieldValue = firebase.firestore.FieldValue;
 
-export async function createUser(uid, data) {
-  return await firestore
+/**
+ *
+ * TODO: refactor (1 read/write access instead of 2)
+ */
+export async function createUser(data) {
+  const userRef = await firestore
     .collection("users")
-    .doc(uid)
-    .set({ uid, ...data }, { merge: true });
+    .doc(data.uid)
+    .set({ ...data }, { merge: true });
+
+  const user = await firestore.collection("users").doc(data.uid).get();
+
+  return { ...user.data() };
 }
-
-// export async function upload(file, url) {
-//   const storageRef = storage.ref(url);
-//   const task = storageRef.put(file);
-
-//   task.on(
-//     "state_changed",
-//     function progress(snapshot) {
-//       console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-//     },
-//     function error(err) {
-//       console.error(err);
-//       return Promise.reject(null);
-//     },
-
-//     function complete(event) {
-//       console.log("Upload complete: ", event);
-//       storageRef.getDownloadURL().then((url) => {
-//         console.log(url);
-//         return Promise.resolve(url);
-//       });
-//     }
-//   );
-// }
 
 export async function uploadInFirebaseStorage(file, url) {
   return new Promise((resolve, reject) => {
@@ -63,7 +48,8 @@ export async function uploadInFirebaseStorage(file, url) {
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
       },
       (error) => {

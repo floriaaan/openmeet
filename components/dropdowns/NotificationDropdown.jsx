@@ -1,5 +1,4 @@
 import React from "react";
-import { createPopper } from "@popperjs/core";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 
@@ -7,20 +6,9 @@ import Link from "next/link";
 import { formatDistance } from "date-fns";
 import Router from "next/router";
 
+import { Menu, Transition } from "@headlessui/react";
+
 export const NotificationDropdown = () => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-end",
-    });
-    setDropdownPopoverShow(true);
-  };
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
   const { user } = useAuth();
 
   const [chats, setChats] = React.useState([]);
@@ -75,73 +63,78 @@ export const NotificationDropdown = () => {
   };
 
   return (
-    <>
-      <a
-        className="flex cursor-pointer"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-yellow-100 rounded-full dark:bg-yellow-800 focus:outline-none ">
-          <i className="text-yellow-400 fas fa-bell"></i>
-          {notifications?.length > 0 && (
-            <span
-              style={{ marginTop: "-22px", marginRight: "-22px" }}
-              className="absolute flex items-center justify-center"
-            >
-              <span className="w-3 h-3 bg-red-400 rounded-full opacity-75 animate-ping" />
-              <span className="absolute w-2 h-2 bg-red-600 rounded-full" />
+    <Menu as="div" className="relative flex items-center h-full">
+      {({ open }) => (
+        <>
+          <Menu.Button>
+            <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-yellow-100 rounded-full dark:bg-yellow-800 focus:outline-none ">
+              <i className="text-yellow-400 fas fa-bell"></i>
+              {notifications?.length > 0 && (
+                <span
+                  style={{ marginTop: "-22px", marginRight: "-22px" }}
+                  className="absolute flex items-center justify-center"
+                >
+                  <span className="w-3 h-3 bg-red-400 rounded-full opacity-75 animate-ping" />
+                  <span className="absolute w-2 h-2 bg-red-600 rounded-full" />
+                </span>
+              )}
             </span>
-          )}
-        </span>
-      </a>
-      <div
-        ref={popoverDropdownRef}
-        onMouseLeave={closeDropdownPopover}
-        className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
-        }
-      >
-        <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
-          Messages
-          <Link href="/chat">
-            <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900">
-              See more
-              <i className="mt-0.5 ml-2 fas fa-arrow-right" />
-            </a>
-          </Link>
-        </div>
-        <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
-          {chats.length > 0
-            ? chats.map(
-                (chat, index) =>
-                  index < 2 && <ChatOverview {...chat} key={index} />
-              )
-            : "No messages yet"}
-        </div>
-
-        <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
-          Notifications
-          <button
-            onClick={readAllNotifications}
-            className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900"
+          </Menu.Button>
+          <Transition
+            show={open}
+            enter="transform transition duration-100 ease-in"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="transform transition duration-75 ease-out"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
-            Read all
-            <i className="mt-0.5 ml-2 fas fa-check" />
-          </button>
-        </div>
-        <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
-          {notifications.length > 0
-            ? notifications.map((notification, index) => (
-                <NotificationOverview {...notification} key={index} />
-              ))
-            : "No notifications yet"}
-        </div>
-      </div>
-    </>
+            <Menu.Items
+              static
+              className={
+                "bg-white origin-top-right absolute right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
+              }
+            >
+              <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
+                Messages
+                <Link href="/chat">
+                  <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900">
+                    See more
+                    <i className="mt-0.5 ml-2 fas fa-arrow-right" />
+                  </a>
+                </Link>
+              </div>
+              <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
+                {chats.length > 0
+                  ? chats.map(
+                      (chat, index) =>
+                        index < 2 && <ChatOverview {...chat} key={index} />
+                    )
+                  : "No messages yet"}
+              </div>
+
+              <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
+                Notifications
+                <button
+                  onClick={readAllNotifications}
+                  className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900"
+                >
+                  Read all
+                  <i className="mt-0.5 ml-2 fas fa-check" />
+                </button>
+              </div>
+              <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
+                {notifications.length > 0
+                  ? notifications.map((notification, index) => (
+                      <NotificationOverview {...notification} key={index} />
+                    ))
+                  : "No notifications yet"}
+              </div>
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
+    </Menu>
   );
 };
 

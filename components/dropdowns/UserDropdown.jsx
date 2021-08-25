@@ -40,13 +40,14 @@ export const UserDropdown = () => {
               )}
             </div>
           </Menu.Button>
-          <Transition show={open}
-          enter="transform transition duration-100 ease-in"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transform transition duration-75 ease-out"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+          <Transition
+            show={open}
+            enter="transform transition duration-100 ease-in"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="transform transition duration-75 ease-out"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
             <Menu.Items
               static
@@ -90,15 +91,19 @@ export const UserDropdown = () => {
                     Logout
                   </a>
 
-                  <div className="block px-4 py-2 text-xs text-gray-400">
-                    OpenMeet Settings
-                  </div>
-                  <Link href="/admin">
-                    <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                      <i className="mr-2 fas fa-cog"></i>
-                      Settings
-                    </a>
-                  </Link>
+                  {user.superuser && (
+                    <>
+                      <div className="block px-4 py-2 text-xs text-gray-400">
+                        OpenMeet Settings
+                      </div>
+                      <Link href="/admin">
+                        <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
+                          <i className="mr-2 fas fa-cog"></i>
+                          Settings
+                        </a>
+                      </Link>
+                    </>
+                  )}
                 </>
               ) : (
                 <>
