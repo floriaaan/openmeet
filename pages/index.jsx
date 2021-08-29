@@ -17,7 +17,7 @@ export default function Index() {
       <div className="">
         <div className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center w-full px-8 lg:text-left md:px-12 lg:w-1/2">
-            <div className="w-full lg:w-[32rem]">
+            <div className="w-full">
               
               <RoughNotationGroup show={true}>
                 <RainbowHighlight color={colors[0]}>
@@ -44,7 +44,7 @@ export default function Index() {
             </div>
           </div>
           <div
-            className="hidden lg:block lg:w-1/2"
+            className="hidden lg:block lg:w-1/2 z-[20]"
             style={{ clipPath: "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)" }}
           >
             <div

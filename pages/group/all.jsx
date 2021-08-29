@@ -144,174 +144,152 @@ export async function getServerSideProps() {
 }
 
 import { createPopper } from "@popperjs/core";
+import { Menu, Transition } from "@headlessui/react";
 
 const DistanceSelect = ({ distance, setDistance }) => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
-  const btnDropdownRef = createRef();
-  const popoverDropdownRef = createRef();
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
-  };
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
   return (
-    <>
-      <div
-        className="mr-4"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        <div className="relative">
-          <div className="relative">
-            <button className="flex items-center justify-between px-4 py-2 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
-              {distance?.label || "Any distance"}
-              <span className="ml-2">
-                <i className="text-xs fas fa-chevron-down"></i>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        ref={popoverDropdownRef}
-        className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
-        }
-      >
-        <button
-          onClick={() => {
-            setDistance(null);
-            closeDropdownPopover();
-          }}
-          className={
-            "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
-          }
-        >
-          Any distance
-        </button>
-        {[
-          { label: "< 5 km", value: "5km" },
-          { label: "10 km", value: "10km" },
-          { label: "20 km", value: "20km" },
-          { label: "50 km", value: "50km" },
-          { label: "100 km", value: "100km" },
-        ].map((el, key) => (
-          <button
-            key={key}
-            onClick={() => {
-              setDistance(el);
-              closeDropdownPopover();
-            }}
-            className={
-              "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
-            }
+    <Menu as="div" className="relative flex items-center h-full">
+      {({ open }) => (
+        <>
+          <Menu.Button className="flex items-center justify-between px-4 py-2 mr-4 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
+            {distance?.label || "Any distance"}
+            <span className="ml-2">
+              <i className="text-xs fas fa-chevron-down"></i>
+            </span>
+          </Menu.Button>
+          <Transition
+            show={open}
+            enter="transform transition duration-100 ease-in"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="transform transition duration-75 ease-out"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
-            {el.label}
-          </button>
-        ))}
-      </div>
-    </>
+            <Menu.Items
+              static
+              className={
+                "bg-white md:origin-top-left absolute left-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
+              }
+            >
+              <button
+                onClick={() => {
+                  setDistance(null);
+                  // closeDropdownPopover();
+                }}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
+                }
+              >
+                Any distance
+              </button>
+              {[
+                { label: "< 5 km", value: "5km" },
+                { label: "10 km", value: "10km" },
+                { label: "20 km", value: "20km" },
+                { label: "50 km", value: "50km" },
+                { label: "100 km", value: "100km" },
+              ].map((el, key) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setDistance(el);
+                    // closeDropdownPopover();
+                  }}
+                  className={
+                    "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
+                  }
+                >
+                  {el.label}
+                </button>
+              ))}
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
+    </Menu>
   );
 };
 
 const CategorySelect = ({ category, setCategory }) => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
-  const btnDropdownRef = createRef();
-  const popoverDropdownRef = createRef();
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
-  };
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
   return (
-    <>
-      <div
-        className="mr-4"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        <div className="relative">
-          <div className="relative">
-            <button className="flex items-center justify-between px-4 py-2 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
-              {category?.label || "Any category"}
-              <span className="ml-2">
-                <i className="text-xs fas fa-chevron-down"></i>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        ref={popoverDropdownRef}
-        className={
-          (dropdownPopoverShow ? "block " : "hidden ") +
-          "bg-white dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
-        }
-      >
-        <button
-          onClick={() => {
-            setCategory(null);
-            closeDropdownPopover();
-          }}
-          className={
-            "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
-          }
-        >
-          Any category
-        </button>
-        {[
-          { label: "Art & Culture", value: "art_culture" },
-          { label: "Career & Business", value: "career_business" },
-          { label: "Community & Environment", value: "community_environment" },
-          // { label: "Dancing", value: "dancing" },
-          { label: "Games", value: "games" },
-          // { label: "Health & Wellbeing", value: "health_wellbeing" },
-          { label: "Hobbies & Passions", value: "hobbies_passions" },
-          // { label: "Identity & Language", value: "identity_language" },
-          { label: "Movements & Politics", value: "movements_politics" },
-          { label: "Music", value: "music" },
-          // { label: "Parents & Family", value: "parents_family" },
-          { label: "Pets & Animals", value: "pets_animals" },
-          // { label: "Religion & Spirituality", value: "religion_spirituality" },
-          { label: "Science & Education", value: "science_education" },
-          { label: "Social Activities", value: "socialactivities" },
-          { label: "Sports & Fitness", value: "sports_fitness" },
-          // { label: "Support & Coaching", value: "support_coaching" },
-          { label: "Technology", value: "technology" },
-          { label: "Travel & Outdoor", value: "travel_outdoor" },
-          // { label: "Writing", value: "writing" },
-        ].map((el, key) => (
-          <button
-            key={key}
-            onClick={() => {
-              setCategory(el);
-              closeDropdownPopover();
-            }}
-            className={
-              "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
-            }
+    <Menu as="div" className="relative flex items-center h-full">
+      {({ open }) => (
+        <>
+          <Menu.Button className="flex items-center justify-between px-4 py-2 mr-4 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
+            {category?.label || "Any category"}
+            <span className="ml-2">
+              <i className="text-xs fas fa-chevron-down"></i>
+            </span>
+          </Menu.Button>
+          <Transition
+            show={open}
+            enter="transform transition duration-100 ease-in"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="transform transition duration-75 ease-out"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
-            {el.label}
-          </button>
-        ))}
-      </div>
-    </>
+            <Menu.Items
+              static
+              className={
+                "bg-white origin-top-left absolute left-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg min-w-48"
+              }
+            >
+              <button
+                onClick={() => {
+                  setCategory(null);
+                  // closeDropdownPopover();
+                }}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
+                }
+              >
+                Any category
+              </button>
+              {[
+                { label: "Art & Culture", value: "art_culture" },
+                { label: "Career & Business", value: "career_business" },
+                {
+                  label: "Community & Environment",
+                  value: "community_environment",
+                },
+                // { label: "Dancing", value: "dancing" },
+                { label: "Games", value: "games" },
+                // { label: "Health & Wellbeing", value: "health_wellbeing" },
+                { label: "Hobbies & Passions", value: "hobbies_passions" },
+                // { label: "Identity & Language", value: "identity_language" },
+                { label: "Movements & Politics", value: "movements_politics" },
+                { label: "Music", value: "music" },
+                // { label: "Parents & Family", value: "parents_family" },
+                { label: "Pets & Animals", value: "pets_animals" },
+                // { label: "Religion & Spirituality", value: "religion_spirituality" },
+                { label: "Science & Education", value: "science_education" },
+                { label: "Social Activities", value: "socialactivities" },
+                { label: "Sports & Fitness", value: "sports_fitness" },
+                // { label: "Support & Coaching", value: "support_coaching" },
+                { label: "Technology", value: "technology" },
+                { label: "Travel & Outdoor", value: "travel_outdoor" },
+                // { label: "Writing", value: "writing" },
+              ].map((el, key) => (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setCategory(el);
+                    // closeDropdownPopover();
+                  }}
+                  className={
+                    "text-sm py-2 px-4 font-normal block w-full text-center whitespace-nowrap hover:text-green-500 dark:hover:text-green-500 transition duration-300 text-gray-700 dark:text-gray-300"
+                  }
+                >
+                  {el.label}
+                </button>
+              ))}
+            </Menu.Items>
+          </Transition>
+        </>
+      )}
+    </Menu>
   );
 };

@@ -52,34 +52,27 @@ export const UserDropdown = () => {
             <Menu.Items
               static
               className={
-                "bg-white md:origin-top-right fixed md:absolute left-0 md:left-auto md:right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-full md:w-96"
+                "bg-white md:origin-top-right fixed md:absolute left-0 md:left-auto md:right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left pb-2 list-none text-left rounded-xl shadow-lg w-full md:w-96"
               }
             >
-              <div className="block px-4 py-2 text-xs text-gray-400">
-                Dark Mode
-              </div>
-              <a
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
-              >
-                {theme === "light" ? (
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
-                ) : (
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
-                )}
-                Toggle Dark Mode
-              </a>
-
               {user ? (
                 <>
-                  <div className="block px-4 py-2 text-xs text-gray-400">
-                    Manage Account
-                  </div>
-
-                  <Link href={"/profile/" + user.uid}>
-                    <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                      <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-user"></i>
-                      Profile
+                  <Link href={"/profile/" + user?.uid}>
+                    <a className="flex flex-col items-center justify-center w-full min-h-[6rem] px-2 py-4 duration-300 rounded-t-xl hover:bg-red-50 dark:hover:bg-red-900">
+                      <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          className="object-cover h-full rounded-full"
+                          alt={user.fullName}
+                          src={user.photoUrl}
+                          onError={(e) => imgErrorFallback(e, user?.fullName)}
+                        />
+                      </div>
+                      <div className="flex flex-col items-center justify-center w-full px-1">
+                        <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
+                          {user?.fullName || "Name not provided"}
+                        </span>
+                      </div>
                     </a>
                   </Link>
 
@@ -107,7 +100,7 @@ export const UserDropdown = () => {
                 </>
               ) : (
                 <>
-                  <div className="block px-4 py-2 text-xs text-gray-400">
+                  <div className="block px-4 py-2 pt-4 text-xs text-gray-400">
                     Connect
                   </div>
                   <Link href="/auth">
@@ -122,6 +115,20 @@ export const UserDropdown = () => {
             </Link> */}
                 </>
               )}
+              <div className="block px-4 py-2 text-xs text-gray-400">
+                Dark Mode
+              </div>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center justify-start w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
+              >
+                {theme === "light" ? (
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
+                ) : (
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
+                )}
+                Toggle Dark Mode
+              </button>
             </Menu.Items>
           </Transition>
         </>

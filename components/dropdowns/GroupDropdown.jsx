@@ -10,6 +10,8 @@ export const GroupDropdown = () => {
   const { user } = useAuth();
   const [groups, setGroups] = useState([]);
 
+  const [isGroupAdmin, setIsGroupAdmin] = useState(false);
+
   const getGroups = async () => {
     firestore
       .collection("groups")
@@ -35,9 +37,27 @@ export const GroupDropdown = () => {
       });
   };
 
+  const getIsGroupAdmin = async () => {
+    if (user) {
+      firestore
+        .collection("groups")
+        .where("admin.uid", "==", user.uid)
+        .get()
+        .then((querySnapshot) => {
+          const groups = [];
+          querySnapshot.forEach((doc) => {
+            groups.push({ slug: doc.id, ...doc.data() });
+          });
+          setIsGroupAdmin(groups.length > 0);
+        });
+    }
+  };
+
   useEffect(() => {
     getGroups();
-  }, []);
+    getIsGroupAdmin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <Menu as="div" className="relative flex items-center h-full">
@@ -86,12 +106,14 @@ export const GroupDropdown = () => {
                   All groups
                 </a>
               </Link>
-              <Link href="/group/settings">
-                <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-cog"></i>
-                  Manage your groups
-                </a>
-              </Link>
+              {isGroupAdmin && (
+                <Link href="/group/settings">
+                  <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
+                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-cog"></i>
+                    Manage your groups
+                  </a>
+                </Link>
+              )}
             </Menu.Items>
           </Transition>
         </>

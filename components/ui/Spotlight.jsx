@@ -74,7 +74,7 @@ export const Spotlight = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="z-[51] inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="z-[51] inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-900 shadow-xl rounded-2xl">
                 
                 <div className="flex flex-row">
                     
@@ -83,7 +83,7 @@ export const Spotlight = () => {
                 <div className="inline-flex justify-end w-full mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-900 duration-300 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-900 duration-300 bg-gray-100 rounded-md dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 dark:bg-gray-800 focus:outline-none "
                     onClick={closeModal}
                   >
                     Close

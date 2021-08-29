@@ -42,7 +42,7 @@ export default function GroupCreatePage() {
 
   const [externalLink, setExternalLink] = useState(null);
 
-  const [privateEvent, setPrivateEvent] = useState(null);
+  const [privateEvent, setPrivateEvent] = useState(false);
 
   const [group, setGroup] = useState(null);
   const [groupsWhereAdmin, setGroupsWhereAdmin] = useState([]);
@@ -281,21 +281,27 @@ export default function GroupCreatePage() {
                         let changeGroup = groupsWhereAdmin.find(
                           (group) => group.slug === e.target.value
                         );
-                        //   console.log(changeGroup);
+                        setPrivateEvent(changeGroup.private);
                         setGroup(changeGroup);
                       }}
                       className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
                     >
                       {groupsWhereAdmin.map((el, index) => (
                         <option value={el.slug} key={index}>
-                          {el.name} -{" "}
-                          {el.description.length > 20
+                          {el.name}
+                          {" - "}
+                          {el.private ? "Private" : "Public"}
+                          {/* {el.description.length > 20
                             ? el.description.slice(0, 20) + " ..."
-                            : el.description}
+                            : el.description} */}
                         </option>
                       ))}
                     </select>
                   </div>
+                  <p className="flex mt-1 text-xs">
+                    If you choose a private group, the event will automatically
+                    be private.
+                  </p>
                 </div>
 
                 <div className="relative flex flex-col mb-4">
