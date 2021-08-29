@@ -94,7 +94,7 @@ export const NotificationDropdown = () => {
             <Menu.Items
               static
               className={
-                "bg-white origin-top-right absolute right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
+                "bg-white md:origin-top-right fixed md:absolute left-0 md:left-auto md:right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-full md:w-96"
               }
             >
               <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
@@ -186,7 +186,7 @@ const ChatOverview = (props) => {
           {props.members?.map((e, key) => (
             <Fragment key={key}>
               {e.uid !== user?.uid && (
-                <span className="text-[0.65rem] text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
+                <span className="text-xs text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
                   {e.fullName || "Name not provided"}
                 </span>
               )}

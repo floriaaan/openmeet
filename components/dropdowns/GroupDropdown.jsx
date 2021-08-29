@@ -62,7 +62,7 @@ export const GroupDropdown = () => {
             <Menu.Items
               static
               className={
-                "bg-white origin-top-right absolute right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-96"
+                "bg-white md:origin-top-right fixed md:absolute left-0 md:left-auto md:right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-full md:w-96"
               }
             >
               <div className="block px-4 py-2 text-xs text-gray-400">Group</div>

@@ -16,8 +16,9 @@ export default function Index() {
     <AppLayout>
       <div className="">
         <div className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
-          <div className="flex items-center px-8 text-center lg:text-left md:px-12 lg:w-1/2">
-            <div className="w-[32rem]">
+          <div className="flex items-center w-full px-8 lg:text-left md:px-12 lg:w-1/2">
+            <div className="w-full lg:w-[32rem]">
+              
               <RoughNotationGroup show={true}>
                 <RainbowHighlight color={colors[0]}>
                   <h1 className="my-2 text-4xl font-bold text-green-700 ">
