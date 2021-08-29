@@ -21,14 +21,18 @@ export const EventDropdown = () => {
           list.push({ slug: doc.id, ...doc.data() });
         });
         const events = [];
-        for (let i = 0; i < 3; i++) {
+        let i = 0;
+        while (events.length < 3 && i < list.length) {
           const randomIndex = Math.floor(Math.random() * list.length);
           const randomEvent = list[randomIndex];
           if (
-            events.findIndex((group) => group.slug === randomEvent.slug) === -1
+            events.findIndex((group) => group.slug === randomEvent.slug) ===
+              -1 &&
+            !randomEvent.private
           ) {
             events.push(randomEvent);
           }
+          i++;
         }
 
         setEvents(events);
