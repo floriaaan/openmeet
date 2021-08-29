@@ -69,10 +69,10 @@ export const GroupOverview = (props) => {
   };
 
   return (
-    <div className="flex flex-col p-6 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900">
+    <div className="flex flex-col p-6 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
       <div className="inline-flex items-center">
         <Link href={"/group/" + props.slug}>
-          <a className="flex-grow w-full mr-12 text-2xl font-bold leading-7 text-green-400 cursor-pointer sm:text-3xl sm:truncate">
+          <a className="flex-grow w-full mr-12 text-2xl font-extrabold leading-7 text-green-400 cursor-pointer sm:text-3xl sm:truncate">
             {props.name}
           </a>
         </Link>
@@ -103,7 +103,11 @@ export const GroupOverview = (props) => {
         </Link>
         <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
           <AvatarGroup users={subs} limit={4} />
-          <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+          <i
+            className={`flex items-center fas fa-users flex-shrink-0  h-5 w-5 ${
+              subs.length === 0 ? "mr-1.5" : "mx-1.5"
+            } `}
+          ></i>
           {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
         </div>
         {/* <Link href={"/group/" + props.slug}>
@@ -115,12 +119,12 @@ export const GroupOverview = (props) => {
           </div>
         </Link> */}
       </div>
-      <p className="text-sm font-normal overflow-ellipsis">
+      {/* <p className="text-sm font-normal overflow-ellipsis">
         {props.description.length < 100
           ? props.description
           : props.description.slice(0, 100) + " ..."}
-      </p>
-      <div className="w-full mt-4 transition duration-300 bg-gray-100 rounded-xl dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800">
+      </p> */}
+      <div className="w-full mt-4 transition duration-300 bg-gray-100 rounded-xl dark:bg-gray-700 ">
         {lastEvent ? (
           <div className="inline-flex w-full">
             <TinyEvent {...lastEvent} />
@@ -137,45 +141,54 @@ export const GroupOverview = (props) => {
 
 const TinyEvent = (props) => {
   return (
-    <div className="flex flex-row justify-between w-full px-6 py-2 text-gray-600 dark:text-gray-400">
-      <div className="flex flex-col flex-grow w-full">
-        <h3 className="text-xs">
-          <i className="w-6 fas fa-calendar "></i>
-          Next event:
-          <span className="ml-1 text-sm font-bold text-purple-500">
-            {props.name}
-          </span>
-        </h3>
-        <div className="inline-flex items-center text-xs">
-          {props?.location?.location === "Remote" ? (
-            <>
-              <i className="w-6 fas fa-video"></i>
-              <span className="truncate">Online Event</span>
-            </>
-          ) : (
-            <>
-              <i className="w-6 fas fa-map-marker"></i>
-              <span className="truncate">
-                {props?.location?.details
-                  ? props.location.details.city +
-                    ", " +
-                    props.location.details.country
-                  : props?.location?.location}
-              </span>
-            </>
-          )}
+    <div className="flex flex-col w-full px-6 py-3">
+      <h3 className="pb-1 mb-1 text-lg font-extrabold text-gray-800 border-b border-gray-300 dark:text-gray-200 dark:border-gray-800">
+        Next
+        <span className="ml-2 text-green-600 dark:text-purple-400 ">event</span>
+      </h3>
+      <div className="flex flex-row justify-between w-full text-gray-600 dark:text-gray-400">
+        <div className="flex flex-col flex-grow w-full space-y-1">
+          <h3 className="text-xs">
+            <i className="w-6 text-center fas fa-calendar "></i>
+
+            <span className="ml-2 text-sm font-bold text-purple-500">
+              {props.name}
+            </span>
+          </h3>
+          <div className="inline-flex items-center text-xs">
+            {props?.location?.location === "Remote" ? (
+              <>
+                <i className="w-6 text-center fas fa-video"></i>
+                <span className="ml-2 truncate">Online Event</span>
+              </>
+            ) : (
+              <>
+                <i className="w-6 text-center fas fa-map-marker"></i>
+                <span className="ml-2 truncate">
+                  {props?.location?.details
+                    ? props.location.details.city +
+                      ", " +
+                      props.location.details.country
+                    : props?.location?.location}
+                </span>
+              </>
+            )}
+          </div>
+          <div className="inline-flex items-center text-xs">
+            <i className="w-6 mr-2 text-center fas fa-clock"></i>
+            starts{" "}
+            {formatDistanceToNow(new Date(props.startDate), {
+              addSuffix: true,
+            })}
+          </div>
         </div>
-        <div className="inline-flex items-center text-xs">
-          <i className="w-6 fas fa-clock"></i>
-          starts{" "}
-          {formatDistanceToNow(new Date(props.startDate), { addSuffix: true })}
-        </div>
+        <Link href={"/event/" + props.slug}>
+          <a className="rounded-xl max-w-max text-xs px-3 py-1.5 hover:bg-purple-200 text-purple-700 dark:text-purple-400 dark:hover:bg-purple-800 duration-300 transition inline-flex items-center">
+            <span className="w-full ">See more</span>{" "}
+            <i className="ml-2 fas fa-arrow-right"></i>
+          </a>
+        </Link>
       </div>
-      <Link href={"/event/" + props.slug}>
-        <a className="rounded-xl text-xs px-3 py-1.5 hover:bg-purple-200 text-purple-700 dark:text-purple-400 dark:hover:bg-purple-800 duration-300 transition inline-flex items-center">
-          See more <i className="ml-1 fas fa-arrow-right"></i>
-        </a>
-      </Link>
     </div>
   );
 };

@@ -35,7 +35,7 @@ export const EventOverview = (props) => {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 group hover:bg-gray-100 dark:hover:bg-gray-900">
+      <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
         <Link href={"/event/" + props.slug}>
           <a className="relative w-full cursor-pointer ">
             {props.picture ? (
@@ -93,10 +93,29 @@ export const EventOverview = (props) => {
               {temp?.length > 1 ? "participants" : "participant"}
             </div>
             <div className="flex">
-              <button className="text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-                <div className="flex items-center">
-                  <i className="fas fa-share-square"></i>
-                </div>
+              <button
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator
+                      .share({
+                        title: `${props.name} - OpenMeet`,
+                        text: "Check out this event on OpenMeet.",
+                        url:
+                          document.location.protocol +
+                          "//" +
+                          document.location.host +
+                          "/event/" +
+                          props.slug,
+                      })
+                      .then(() => console.log("Successful share"))
+                      .catch((error) => console.log("Error sharing", error));
+                  }
+                }}
+                className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+              >
+                <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-purple-300 dark:hover:bg-purple-700 dark:bg-opacity-30">
+                  <i className="text-gray-700 duration-300 select-none fas fa-share-alt dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400"></i>
+                </span>
               </button>
             </div>
           </div>

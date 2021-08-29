@@ -72,8 +72,8 @@ const GroupsSection = () => {
   useEffect(() => {
     firestore
       .collection("groups")
-      // .where("private", "==", false)
       .orderBy("createdAt", "desc")
+      .where("private", "==", false)
       .get()
       .then((querySnapshot) => {
         let _tmp = [];
@@ -106,7 +106,7 @@ const GroupsSection = () => {
           (el, index) => index < 3 && <GroupOverview {...el} key={index} />
         )}
         {groups.length < 3 && (
-          <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+          <div className="flex items-center justify-center w-full py-6 min-h-[5rem] lg:min-h-[20rem] bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
             <Link href="/group/create">
               <a className="flex items-center justify-center w-24 h-24 text-green-700 transition duration-300 bg-green-200 border border-green-500 rounded-full cursor-pointer dark:border-green-500 dark:bg-opacity-50 dark:bg-green-700 dark:text-green-200 hover:bg-green-300 dark:hover:bg-green-800">
                 <i className="text-xl fas fa-plus"></i>
@@ -154,7 +154,7 @@ const EventSection = () => {
             (el, index) => index < 4 && <EventOverview {...el} key={index} />
           )}
           {events.length < 4 && (
-            <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+            <div className="flex items-center justify-center w-full h-full py-6 min-h-[5rem] lg:min-h-[20rem]  bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
               <Link href="/event/create">
                 <a className="flex items-center justify-center w-24 h-24 text-purple-700 transition duration-300 bg-purple-200 border border-purple-500 rounded-full cursor-pointer dark:border-purple-500 dark:bg-opacity-50 dark:bg-purple-700 dark:text-purple-200 hover:bg-purple-300 dark:hover:bg-purple-800">
                   <i className="text-xl fas fa-plus"></i>
