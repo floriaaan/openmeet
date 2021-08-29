@@ -4,6 +4,7 @@ import Link from "next/link";
 import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
+import { format } from "date-fns";
 
 export const EventDropdown = () => {
   const { user } = useAuth();
@@ -72,7 +73,7 @@ export const EventDropdown = () => {
               <div className="block px-4 py-2 text-xs text-gray-400">
                 Events
               </div>
-              <div className="space-y-2">
+              <div className="grid grid-cols-3 gap-3 px-4 mb-3 w-full mx-auto min-h-[6rem]">
                 {events?.map((el, key) => (
                   <EventOverview {...el} key={key} />
                 ))}
@@ -81,13 +82,13 @@ export const EventDropdown = () => {
 
               <Link href="/event/create">
                 <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
-                  <i className="mr-2 fas fa-plus"></i>
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-plus"></i>
                   Create an event
                 </a>
               </Link>
               <Link href="/event/all">
                 <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
-                  <i className="mr-2 fas fa-calendar-alt"></i>
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-calendar-alt"></i>
                   All events
                 </a>
               </Link>
@@ -99,22 +100,54 @@ export const EventDropdown = () => {
   );
 };
 
-const EventOverview = (props) => (
-  <Link href={"/event/" + props.slug}>
-    <a className="flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900 focus:outline-none ">
-      <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-xl dark:bg-purple-700">
-        <i className="text-2xl fas fa-calendar" />
-      </span>
-      <div className="flex flex-col ml-2">
-        <span className="font-bold text-purple-700 dark:text-purple-400">
-          {props.name}
+const EventOverview = (props) => {
+  /**
+   * <a className="flex flex-row px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900 focus:outline-none ">
+        <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-xl dark:bg-purple-700">
+          <i className="text-2xl fas fa-calendar" />
         </span>
-        <span className="text-xs text-gray-400 dark:text-gray-300">
-          {props.description.length < 100
-            ? props.description
-            : props.description.slice(0, 100) + " ..."}
-        </span>
-      </div>
-    </a>
-  </Link>
-);
+        <div className="flex flex-col ml-2">
+          <span className="font-bold text-purple-700 dark:text-purple-400">
+            {props.name}
+          </span>
+          <span className="text-xs text-gray-400 dark:text-gray-300">
+            {props.description.length < 100
+              ? props.description
+              : props.description.slice(0, 100) + " ..."}
+          </span>
+        </div>
+      </a>
+   */
+  return (
+    <Link href={"/event/" + props.slug}>
+      <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900">
+        <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
+          {props.picture ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="object-cover h-full rounded-full"
+                alt={props.name}
+                src={props.picture}
+                // onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
+              />
+            </>
+          ) : (
+            <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-full dark:bg-purple-700">
+              <i className="text-2xl fas fa-calendar-alt" />
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-center w-full px-1">
+          <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
+            {props.name || "Name not provided"}
+          </span>
+          {/* <span className="text-[0.6rem] leading-4">
+            from {format(new Date(props.startDate), "Pp")} to{" "}
+            {format(new Date(props.endDate), "Pp")}
+          </span> */}
+        </div>
+      </a>
+    </Link>
+  );
+};

@@ -63,9 +63,9 @@ export const UserDropdown = () => {
                 className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
               >
                 {theme === "light" ? (
-                  <i className="mr-2 fas fa-moon"></i>
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
                 ) : (
-                  <i className="mr-2 fas fa-sun"></i>
+                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
                 )}
                 Toggle Dark Mode
               </a>
@@ -78,7 +78,7 @@ export const UserDropdown = () => {
 
                   <Link href={"/profile/" + user.uid}>
                     <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                      <i className="mr-2 fas fa-user"></i>
+                      <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-user"></i>
                       Profile
                     </a>
                   </Link>
@@ -87,7 +87,7 @@ export const UserDropdown = () => {
                     className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
                     onClick={signout}
                   >
-                    <i className="mr-2 fas fa-lock"></i>
+                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-lock"></i>
                     Logout
                   </a>
 
@@ -98,7 +98,7 @@ export const UserDropdown = () => {
                       </div>
                       <Link href="/admin">
                         <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                          <i className="mr-2 fas fa-cog"></i>
+                          <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-cog"></i>
                           Settings
                         </a>
                       </Link>
