@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
 import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
+import { createUID } from "@libs/createUID";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -40,6 +41,8 @@ export default function GroupCreatePage() {
   const [attachmentError, setAttachmentError] = useState(null);
 
   const [externalLink, setExternalLink] = useState(null);
+
+  const [privateEvent, setPrivateEvent] = useState(null);
 
   const [group, setGroup] = useState(null);
   const [groupsWhereAdmin, setGroupsWhereAdmin] = useState([]);
@@ -101,10 +104,12 @@ export default function GroupCreatePage() {
   }, [user]);
 
   const createEvent = async () => {
-    const slug = name
-      .toLowerCase()
-      .replace(/[^\w ]+/g, "")
-      .replace(/ +/g, "-");
+    const slug = privateEvent
+      ? createUID()
+      : name
+          .toLowerCase()
+          .replace(/[^\w ]+/g, "")
+          .replace(/ +/g, "-");
     const eventRef = firestore.collection("events").doc(slug).get();
 
     if (user && group && startDate && !eventRef.exists) {
@@ -124,7 +129,7 @@ export default function GroupCreatePage() {
         );
       }
 
-      await firestore
+      firestore
         .collection("events")
         .doc(slug)
         .set({
@@ -150,6 +155,7 @@ export default function GroupCreatePage() {
           attachment: attachment
             ? { url: attachmentInStorage, name: attachment.name }
             : null,
+          private: privateEvent,
         })
         .then(async function (docRef) {
           await firestore
@@ -164,6 +170,7 @@ export default function GroupCreatePage() {
                   new Date() < new Date(endDate),
                 startDate,
                 endDate,
+                private: privateEvent,
               }),
             });
 
@@ -385,7 +392,7 @@ export default function GroupCreatePage() {
                   <textarea
                     id="description"
                     name="description"
-                    rows={7}
+                    rows={5}
                     className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                     defaultValue={""}
                     onChange={(e) => setDescription(e.target.value)}
@@ -458,6 +465,28 @@ export default function GroupCreatePage() {
                       // disabled
                       className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                     />
+                  </div>
+                </div>
+                <div className="relative flex flex-col mb-4">
+                  <p className="text-sm leading-7 text-gray-600 dark:text-gray-400">
+                    Preferences
+                  </p>
+                  <div className="inline-flex items-center space-x-2">
+                    <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
+                      <i className="text-purple-700 dark:text-purple-400 fas fa-lock" />
+                    </span>
+                    <label className="flex items-center space-x-3">
+                      <input
+                        type="checkbox"
+                        name="privateEvent"
+                        value={privateEvent}
+                        onChange={(e) => setPrivateEvent(e.target.checked)}
+                        className="w-4 h-4 duration-200 bg-purple-200 border-0 rounded-md appearance-none form-checkbox hover:bg-purple-400 dark:bg-purple-800 dark:hover:bg-purple-700 checked:bg-purple-600 checked:border-transparent focus:outline-none focus:bg-purple-400 dark:focus:bg-purple-900 ring-purple-500"
+                      />
+                      <span className="text-sm text-gray-700 dark:text-gray-300">
+                        Make the event private
+                      </span>
+                    </label>
                   </div>
                 </div>
               </div>

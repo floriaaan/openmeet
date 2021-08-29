@@ -1,67 +1,62 @@
 import { EventOverview } from "@components/cards/CardEventOverview";
 import { GroupOverview } from "@components/cards/CardGroupOverview";
 import { AppLayout } from "@components/layouts/AppLayout";
-import { useAuth } from "@hooks/useAuth";
+import { RainbowHighlight } from "@components/ui/RainbowHighlight";
+// import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { RoughNotationGroup } from "react-rough-notation";
 
 export default function Index() {
-  const { user, signout } = useAuth();
+  // const { user, signout } = useAuth();
+  const colors = ["#bbf7d0", "#e9d5ff", "#fef9c3", "#BFDBFE"];
+
   return (
     <AppLayout>
       <div className="">
-        <section className=" flex flex-col items-center w-full h-[60vh]">
-          <main
-            style={{
-              backgroundImage: "url('/img/register_bg_2.png')",
-            }}
-            className="z-20 flex flex-col items-center justify-center object-cover w-full h-full bg-gray-100 bg-no-repeat dark:bg-black bg-full"
-          >
-            <div className="flex items-center w-full h-full px-4 py-6 mx-6 bg-black bg-opacity-5 backdrop-filter backdrop-blur-md dark:bg-opacity-80 sm:px-6 lg:py-16 xl:py-32 lg:px-8 lg:justify-between ">
-              <h2 className="font-extrabold tracking-tight text-gray-700 dark:text-gray-100 ">
-                <span className="inline-flex items-center text-xl sm:text-3xl">
-                  OpenMeet, the app for your{" "}
-                  <span className="ml-2 text-blue-600 dark:text-blue-400">
-                    needs
-                  </span>
-                </span>
-                <span
-                  className="block text-gray-500 dark:text-gray-400"
-                  style={{ fontFamily: "system-ui" }}
-                >
-                  {"Meet the people interested in the subject you're into"}
-                </span>
-              </h2>
-              {/* <div className="grid grid-cols-3 gap-3 mt-8 lg:mt-0 lg:flex-shrink-0">
-                <div className="col-span-2">
-                  <Link href="/group/create">
-                    <a className="inline-flex items-center justify-center w-full p-3 px-5 text-base font-medium text-white transition-colors duration-300 bg-green-600 shadow rounded-xl hover:bg-green-700">
-                      Create a group
-                    </a>
-                  </Link>
-                </div>
-                <Link href="/group/all">
-                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-green-600 transition-colors duration-300 bg-white shadow rounded-xl dark:bg-black hover:bg-green-100 dark:hover:bg-green-900 dark:hover:text-green-300">
-                    All
-                  </a>
-                </Link>
-                <div className="col-span-2">
-                  <Link href="/event/create">
-                    <a className="inline-flex items-center justify-center w-full p-3 px-5 text-base font-medium text-white transition-colors duration-300 bg-purple-600 shadow rounded-xl hover:bg-purple-700">
-                      Create an event
-                    </a>
-                  </Link>
-                </div>
-                <Link href="/event/all">
-                  <a className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-purple-600 transition-colors duration-300 bg-white shadow rounded-xl dark:bg-black hover:bg-purple-100 dark:hover:bg-purple-900 dark:hover:text-purple-300">
-                    All
-                  </a>
-                </Link>
-              </div> */}
+        <div className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
+          <div className="flex items-center px-8 text-center lg:text-left md:px-12 lg:w-1/2">
+            <div className="w-[32rem]">
+              <RoughNotationGroup show={true}>
+                <RainbowHighlight color={colors[0]}>
+                  <h1 className="my-2 text-4xl font-bold text-green-700 ">
+                    Your groups
+                  </h1>
+                </RainbowHighlight>
+                <RainbowHighlight color={colors[1]}>
+                  <h1 className="my-2 text-4xl font-bold text-purple-700 ">
+                    Your events
+                  </h1>
+                </RainbowHighlight>
+                <RainbowHighlight color={colors[2]}>
+                  <h1 className="my-2 text-4xl font-bold text-yellow-600 ">
+                    at the same place.
+                  </h1>
+                </RainbowHighlight>
+                <RainbowHighlight color={colors[3]}>
+                  <h1 className="my-2 text-4xl font-bold text-blue-700 ">
+                    OpenMeet.
+                  </h1>
+                </RainbowHighlight>
+              </RoughNotationGroup>
             </div>
-          </main>
-        </section>
+          </div>
+          <div
+            className="hidden lg:block lg:w-1/2"
+            style={{ clipPath: "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)" }}
+          >
+            <div
+              className="object-cover h-full"
+              style={{
+                backgroundImage:
+                  "url(https://images.unsplash.com/photo-1576085898323-218337e3e43c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=33)",
+              }}
+            >
+              <div className="h-full bg-black opacity-25" />
+            </div>
+          </div>
+        </div>
         <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-24 ">
           <EventSection />
           <GroupsSection />

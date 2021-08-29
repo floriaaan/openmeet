@@ -30,15 +30,20 @@ export const GroupOverview = (props) => {
         return new Date(b.startDate) > new Date(a.startDate);
       });
       // console.log(sortedEvents);
-      firestore
-        .collection("events")
-        .doc(sortedEvents[0].slug)
-        .get()
-        .then((snapshot) => {
-          setLastEvent({ slug: snapshot.id, ...snapshot.data() });
-        });
+      sortedEvents.some((event) => {
+        if (!event.private) {
+          firestore
+            .collection("events")
+            .doc(sortedEvents[0].slug)
+            .get()
+            .then((snapshot) => {
+              setLastEvent({ slug: snapshot.id, ...snapshot.data() });
+            });
+        }
+        return event.private;
+      });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.slug]);
 
   const toggleSubscription = async () => {
@@ -71,7 +76,7 @@ export const GroupOverview = (props) => {
             {props.name}
           </a>
         </Link>
-        {subs.findIndex((sub) => sub.id === user.uid) === -1 ? (
+        {/* {subs.findIndex((sub) => sub.id === user?.uid) === -1 ? (
           <button
             onClick={toggleSubscription}
             className="flex items-center justify-center px-3 py-1.5 text-white transition duration-300 bg-gray-500 rounded-md shadow hover:bg-gray-700"
@@ -86,7 +91,7 @@ export const GroupOverview = (props) => {
             <i className="hidden text-xs fas fa-times group-hover:block"></i>
             <i className="block text-xs fas fa-check group-hover:hidden"></i>
           </button>
-        )}
+        )} */}
       </div>
 
       <div className="flex flex-col pb-2 mb-2 pt-1.5 space-y-2 border-b border-gray-200  dark:border-gray-700 ">

@@ -64,6 +64,7 @@ export default function GroupCreatePage() {
           .toLowerCase()
           .replace(/[^\w ]+/g, "")
           .replace(/ +/g, "-");
+
         const response = await firestore
           .collection("groups")
           .doc(slug)
@@ -239,18 +240,23 @@ export default function GroupCreatePage() {
               <p className="text-sm leading-7 text-gray-600 dark:text-gray-400">
                 Preferences
               </p>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="privateGroup"
-                  value={privateGroup}
-                  onChange={(e) => setPrivateGroup(e.target.checked)}
-                  className="w-4 h-4 duration-200 bg-green-200 border-0 rounded-md appearance-none form-checkbox hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-700 checked:bg-green-600 checked:border-transparent focus:outline-none focus:bg-green-400 dark:focus:bg-green-900 ring-green-500"
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  Make the group private
+              <div className="inline-flex items-center space-x-2">
+                <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                  <i className="text-green-700 dark:text-green-400 fas fa-lock" />
                 </span>
-              </label>
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    name="privateGroup"
+                    value={privateGroup}
+                    onChange={(e) => setPrivateGroup(e.target.checked)}
+                    className="w-4 h-4 duration-200 bg-green-200 border-0 rounded-md appearance-none form-checkbox hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-700 checked:bg-green-600 checked:border-transparent focus:outline-none focus:bg-green-400 dark:focus:bg-green-900 ring-green-500"
+                  />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                    Make the group private
+                  </span>
+                </label>
+              </div>
             </div>
             <div className="flex flex-row mb-3 space-x-2">
               <button
