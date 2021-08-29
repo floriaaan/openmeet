@@ -118,7 +118,7 @@ export const Conversation = ({ id }, props) => {
                 <h3 className="hidden text-sm font-bold text-yellow-600 dark:text-yellow-500 lg:block">
                   {chat?.members?.length < 4
                     ? chat?.members?.map((member, index) => {
-                        return member.uid !== user.uid
+                        return member.uid !== user?.uid
                           ? member.fullName +
                               (index === chat.members.length - 1 ? "" : ", ")
                           : null;

@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { Fragment, useEffect, useState } from "react";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 
@@ -7,6 +8,7 @@ import { formatDistance } from "date-fns";
 import Router from "next/router";
 
 import { Menu, Transition } from "@headlessui/react";
+import { imgErrorFallback } from "@libs/imgOnError";
 
 export const NotificationDropdown = () => {
   const { user } = useAuth();
@@ -104,11 +106,21 @@ export const NotificationDropdown = () => {
                   </a>
                 </Link>
               </div>
-              <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
+              <div className="grid grid-cols-3 gap-3 px-4 w-full mx-auto min-h-[6rem]">
                 {chats.length > 0
                   ? chats.map(
                       (chat, index) =>
-                        index < 2 && <ChatOverview {...chat} key={index} />
+                        index < 3 && (
+                          <ChatOverview
+                            {...chat}
+                            key={index}
+                            isUnread={
+                              notifications.findIndex(
+                                (e) => e.data.id === chat.id
+                              ) !== -1
+                            }
+                          />
+                        )
                     )
                   : "No messages yet"}
               </div>
@@ -139,9 +151,63 @@ export const NotificationDropdown = () => {
 };
 
 const ChatOverview = (props) => {
+  const [displayableUser, setDisplayableUser] = useState(null);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (props.members) {
+      const displayable = props.members.find(
+        (member) => member.uid !== user?.uid
+      );
+      setDisplayableUser(displayable);
+    }
+  }, [props.members, user?.uid]);
+
   return (
     <Link href={"/chat/" + props.id}>
-      <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
+      <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-yellow-50 dark:hover:bg-yellow-900">
+        <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
+          <img
+            className="rounded-full"
+            alt={displayableUser?.displayName?.[0] || "?"}
+            src={displayableUser?.photoUrl}
+            onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
+          />
+          {props.isUnread && (
+            <span
+              className="absolute bottom-0 right-0 flex items-center justify-center"
+            >
+              <span className="w-4 h-4 bg-red-400 rounded-full opacity-75 animate-ping" />
+              <span className="absolute w-3 h-3 bg-red-600 rounded-full" />
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-center w-full px-1">
+          {props.members?.map((e, key) => (
+            <Fragment key={key}>
+              {e.uid !== user?.uid && (
+                <span className="text-[0.65rem] text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
+                  {e.fullName || "Name not provided"}
+                </span>
+              )}
+            </Fragment>
+          )) || "No members"}
+          <span className="text-[0.55rem] leading-4">
+            {formatDistance(
+              new Date(props.messages?.[props.messages.length - 1]?.createdAt),
+              new Date(),
+              {
+                addSuffix: true,
+              }
+            )}
+          </span>
+        </div>
+      </a>
+    </Link>
+  );
+
+  /**
+   * <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
         <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
           <i className="text-2xl fas fa-users" />
         </span>
@@ -174,8 +240,7 @@ const ChatOverview = (props) => {
           </span>
         </div>
       </a>
-    </Link>
-  );
+   */
 };
 
 const NotificationOverview = (props) => {

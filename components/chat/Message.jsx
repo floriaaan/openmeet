@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { imgErrorFallback } from "@libs/imgOnError";
 import { format, formatRelative } from "date-fns";
 import Link from "next/link";
 
@@ -12,6 +13,8 @@ export const Message = ({ list = [], sender }) => {
               src={sender.photoUrl}
               alt="Avatar"
               className="w-8 h-8 mr-4 rounded-full cursor-pointer md:w-16 md:h-16"
+              onError={(e) => imgErrorFallback(e, sender.fullName)}
+
             />
           </a>
         </Link>

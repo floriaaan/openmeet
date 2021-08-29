@@ -70,6 +70,14 @@ const ChatOverview = (props) => {
   if (props.isFirst) rounded += "rounded-t-xl rounded-b";
   if (props.isLast) rounded += "rounded-b-xl rounded-t";
   if (!props.isFirst && !props.isLast) rounded += "rounded";
+
+  const lastSender =
+    props.messages[props.messages.length - 1].sender !== props.auth?.uid
+      ? props.members.find(
+          (el) => el.uid === props.messages[props.messages.length - 1].sender
+        )
+      : props.members.find((el) => el.uid !== props.auth?.uid);
+
   return (
     <Link href={"/chat/" + props.id}>
       <a
@@ -78,19 +86,28 @@ const ChatOverview = (props) => {
           rounded
         }
       >
-        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
-          <i className="text-2xl fas fa-users" />
-        </span>
+        {props.members.length > 2 ? (
+          <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
+            <i className="text-2xl fas fa-users" />
+          </span>
+        ) : (
+          <div className="relative flex items-center justify-center w-16 h-16 text-xl text-white bg-white rounded-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="rounded-full"
+              alt={lastSender?.displayName?.[0] || "?"}
+              src={lastSender?.photoUrl}
+              onError={(e) => imgErrorFallback(e, lastSender?.fullName)}
+            />
+          </div>
+        )}
         <div className="flex flex-col ml-2">
           <span className="text-sm font-bold text-yellow-700 dark:text-yellow-400">
-            {props?.members?.length < 4
-              ? props?.members?.map((member, index) => {
-                  return member.uid !== props.auth.uid
-                    ? member.fullName +
-                        (index === props.members.length - 1 ? "" : ", ")
-                    : null;
-                })
-              : props?.members?.length + " members"}
+            {props.messages?.[props.messages.length - 1].content.length > 100
+              ? props.messages?.[props.messages.length - 1].content
+                  .slice()
+                  .substring(0, 100) + "..."
+              : props.messages?.[props.messages.length - 1].content}
           </span>
           {/* <span className="text-xs text-gray-400 dark:text-gray-300">
             from{" "}
@@ -102,8 +119,11 @@ const ChatOverview = (props) => {
               )?.fullName
             }
           </span> */}
-          <span className="text-xs text-gray-400 dark:text-gray-300">
-            sent{" "}
+          <span className="text-[0.65rem] text-gray-400 dark:text-gray-300">
+            {props.members.length > 2
+              ? "Chatroom - " + lastSender?.fullName || "Name not provided"
+              : lastSender?.fullName || "Name not provided"}{" "}
+            -{" "}
             {formatDistance(
               new Date(props.messages?.[props.messages.length - 1]?.createdAt),
               new Date(),
