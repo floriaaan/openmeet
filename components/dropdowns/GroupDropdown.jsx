@@ -39,7 +39,7 @@ export const GroupDropdown = () => {
     if (user) {
       getDocs(
         query(
-          collection(firestore, "events"),
+          collection(firestore, "groups"),
           where("admin.uid", "==", user.uid)
         )
       ).then((querySnapshot) => {

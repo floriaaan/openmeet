@@ -92,7 +92,7 @@ export default function GroupSettingsPage() {
                         className="flex flex-col cursor-pointer items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900"
                       >
                         <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white rounded-full">
-                          {selected.slug === el.slug ? (
+                          {selected?.slug === el.slug ? (
                             <span className="flex items-center justify-center w-16 h-16 p-5 text-green-700 bg-green-400 rounded-full dark:bg-green-900">
                               <i className="text-2xl fas fa-check" />
                             </span>

@@ -1,5 +1,11 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, updateDoc, getDoc } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -21,6 +27,7 @@ if (!apps.length) {
 }
 
 const firestore = getFirestore();
+const storage = getStorage();
 
 export { firebase, firestore };
 
@@ -37,9 +44,8 @@ export async function createUser(data) {
 }
 
 /**
- * TODO: migrate to firebase 9.x
- * 
  * Uploads image to firebase storage and returns the url
+ * 
  * @param {File} file
  * @param {string} url
  * @returns {Promise<string>}
@@ -47,28 +53,38 @@ export async function createUser(data) {
  *
  */
 export async function uploadInFirebaseStorage(file, url) {
-  // return new Promise((resolve, reject) => {
-  //   // console.log("Uploading image ...");
-  //   const storageRef = firebase.storage().ref();
-  //   const uploadTask = storageRef.child(url).put(file);
+  return new Promise((resolve, reject) => {
+    const storageRef = ref(storage, url);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-  //   uploadTask.on(
-  //     firebase.storage.TaskEvent.STATE_CHANGED,
-  //     (snapshot) => {
-  //       const progress =
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //       console.log("Upload is " + progress + "% done");
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       reject(error);
-  //     },
-  //     async () => {
-  //       const imgURL = await uploadTask.snapshot.ref.getDownloadURL();
-  //       resolve(imgURL);
-  //     }
-  //   );
-  // });
-  return null
-  // throw new Error("Not migrated to Firebase 9.x");
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+
+          // ...
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+        reject(error);
+      },
+      async () => {
+        const imgURL = await getDownloadURL(uploadTask.snapshot.ref);
+        resolve(imgURL);
+      }
+    );
+  });
 }
