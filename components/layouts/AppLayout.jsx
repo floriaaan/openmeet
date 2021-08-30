@@ -2,6 +2,7 @@ import { AppFooter } from "@components/footers/AppFooter";
 import { AppNavbar } from "@components/navbars/AppNavbar";
 import { Alert } from "@components/ui/Alert";
 import { firestore } from "@libs/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export const AppLayout = ({ children, shadowOnNavbar, noFooter = false }) => (
@@ -19,13 +20,17 @@ const AlertProvider = () => {
   const [alerts, setAlerts] = useState([]);
 
   useEffect(() => {
-    firestore.collection("alerts").onSnapshot(async (snapshot) => {
-      setAlerts(
-        snapshot.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id };
-        })
-      );
-    });
+    const unsub = onSnapshot(
+      collection(firestore, "alerts"),
+      async (snapshot) => {
+        setAlerts(
+          snapshot.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id };
+          })
+        );
+      }
+    );
+    return () => unsub();
   }, []);
 
   return (

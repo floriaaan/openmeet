@@ -4,6 +4,18 @@ import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -13,34 +25,29 @@ export default function EventPage(props) {
   const { user } = useAuth();
 
   const toggleParticipation = async () => {
+    const eventParticipantRef = doc(
+      firestore,
+      `events/${props.slug}/participants/${user.uid}`
+    );
+
     if (participants.find((participant) => participant.uid === user.uid)) {
-      await firestore
-        .collection("events")
-        .doc(props.slug)
-        .collection("participants")
-        .doc(user.uid)
-        .delete();
-
-      firestore
-        .collection("notifications")
-        .where("uid", "==", props.host.uid)
-        .where("data.id", "==", props.slug)
-        .where("data.participant.uid", "==", user.uid)
-        .get()
-        .then((snapshot) => snapshot.forEach((el) => el.ref.delete()));
+      await deleteDoc(eventParticipantRef);
+      getDocs(
+        query(
+          collection(firestore, "notifications"),
+          where("uid", "==", props.host.uid),
+          where("data.id", "==", props.slug),
+          where("data.participant.uid", "==", user.uid)
+        )
+      ).then((snapshot) => snapshot.forEach((doc) => deleteDoc(doc.ref)));
     } else {
-      await firestore
-        .collection("events")
-        .doc(props.slug)
-        .collection("participants")
-        .doc(user.uid)
-        .set({
-          fullName: user.fullName,
-          photoUrl: user.photoUrl,
-          uid: user.uid,
-        });
+      await setDoc(eventParticipantRef, {
+        fullName: user.fullName,
+        photoUrl: user.photoUrl,
+        uid: user.uid,
+      });
 
-      await firestore.collection("notifications").add({
+      await addDoc(collection(firestore, "notifications"), {
         createdAt: new Date().toISOString(),
         type: "event",
         uid: props.host.uid,
@@ -60,17 +67,20 @@ export default function EventPage(props) {
   };
 
   useEffect(() => {
-    firestore
-      .collection("events")
-      .doc(props.slug)
-      .collection("participants")
-      .onSnapshot((querySnapshot) => {
+    const unsub = onSnapshot(
+      collection(firestore, `events/${props.slug}/participants`),
+      (querySnapshot) => {
         let participants = [];
         querySnapshot.forEach((doc) => {
           participants.push({ id: doc.id, ...doc.data() });
         });
         setParticipants(participants);
-      });
+      }
+    );
+
+    return () => {
+      unsub();
+    };
   }, [props.slug]);
 
   return (
@@ -378,8 +388,8 @@ export default function EventPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const event = await firestore.collection("events").doc(ctx.query.slug).get();
-
+  const event = await getDoc(doc(firestore, "events", ctx.query.slug));
+  
   // const event = {
   //   data: () => {
   //     return {

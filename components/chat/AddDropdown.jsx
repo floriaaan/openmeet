@@ -1,26 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { firestore } from "@libs/firebase";
 import { imgErrorFallback } from "@libs/imgOnError";
 import { Menu, Transition } from "@headlessui/react";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 export const AddDropdown = ({ members, chatId, list, setList }) => {
-
-
   const handleAdd = async (e) => {
-    await firestore
-      .collection("chats")
-      .doc(chatId)
-      .set({ members: selectedUsers }, { merge: true });
+    await updateDoc(
+      doc(firestore, `chats/${chatId}`),
+      { ...data },
+      { merge: true }
+    );
   };
 
   const getUsers = async () => {
-    const users = await firestore.collection("users").get();
-    let _tmp =
-      users.docs.map((user) => {
-        let tmp = user.data();
-        return { photoUrl: tmp.photoUrl, fullName: tmp.fullName, uid: user.id };
-      }) || [];
+    const snap = await getDocs(collection(firestore, "users"));
+    let _tmp = [];
+    snap.forEach((user) => {
+      let tmp = user.data();
+      _tmp.push({
+        photoUrl: tmp.photoUrl,
+        fullName: tmp.fullName,
+        uid: user.id,
+      });
+    });
 
     setUsers(_tmp);
   };

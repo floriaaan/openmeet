@@ -6,6 +6,7 @@ import openmeet from "resources/openmeet";
 import CardStats from "@components/cards/CardStats";
 import { firestore } from "@libs/firebase";
 import OpenMeetOverview from "./OpenMeetOverview";
+import { collection, getDocs } from "firebase/firestore";
 
 export const HeaderStats = () => {
   const [security, setSecurity] = useState({ https: false, version: false });
@@ -32,32 +33,28 @@ export const HeaderStats = () => {
       https: window.location.protocol === "https:",
     });
 
-    firestore
-      .collection("users")
-      .get()
-      .then((snap) => {
-        let lastLastWeek = 0;
-        let lastWeek = 0;
-        snap.docs.forEach((doc) => {
-          lastLastWeek +=
-            new Date(doc.data().createdAt) <
-              new Date() - 7 * 24 * 60 * 60 * 1000 &&
-            new Date(doc.data().createdAt) >
-              new Date() - 14 * 24 * 60 * 60 * 1000;
+    getDocs(collection(firestore, "users")).then((snap) => {
+      let lastLastWeek = 0;
+      let lastWeek = 0;
+      snap.docs.forEach((doc) => {
+        lastLastWeek +=
+          new Date(doc.data().createdAt) <
+            new Date() - 7 * 24 * 60 * 60 * 1000 &&
+          new Date(doc.data().createdAt) >
+            new Date() - 14 * 24 * 60 * 60 * 1000;
 
-          lastWeek +=
-            new Date(doc.data().createdAt) >
-            new Date() - 7 * 24 * 60 * 60 * 1000;
-        });
-        setUsers({
-          count: snap.size,
-          stat: Math.floor((lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100).toString(),
-        });
+        lastWeek +=
+          new Date(doc.data().createdAt) > new Date() - 7 * 24 * 60 * 60 * 1000;
       });
+      setUsers({
+        count: snap.size,
+        stat: Math.floor(
+          (lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100
+        ).toString(),
+      });
+    });
 
-    firestore
-      .collection("groups")
-      .get()
+    getDocs(collection(firestore, "groups"))
       .then((snap) => {
         let lastLastWeek = 0;
         let lastWeek = 0;
@@ -74,10 +71,12 @@ export const HeaderStats = () => {
         });
         setGroups({
           count: snap.size,
-          stat: Math.floor((lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100).toString(),
+          stat: Math.floor(
+            (lastLastWeek / (lastWeek !== 0 ? lastWeek : 1)) * 100
+          ).toString(),
         });
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

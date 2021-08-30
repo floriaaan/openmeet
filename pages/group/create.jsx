@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
 import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -56,77 +57,65 @@ export default function GroupCreatePage() {
       .toLowerCase()
       .replace(/[^\w ]+/g, "")
       .replace(/ +/g, "-");
-    const groupRef = firestore.collection("groups").doc(slug).get();
+    const groupRef = doc(firestore, `groups/${slug}`);
+    const groupSnap = await getDoc(groupRef);
 
-    if (user && !groupRef.exists) {
+    if (user && !groupSnap.exists()) {
       if (!privateGroup) {
         const slug = name
           .toLowerCase()
           .replace(/[^\w ]+/g, "")
           .replace(/ +/g, "-");
 
-        const response = await firestore
-          .collection("groups")
-          .doc(slug)
-          .set({
-            name,
-            tags: tags
-              .split(";")
-              .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
-              .filter((e) => e != null),
-            description,
-            createdAt: new Date().toISOString(),
-            admin: { uid: user.uid, fullName: user.fullName },
-            location: {
-              location: location || "Remote",
-              position: { ...position } || { lat: null, lng: null },
-            },
-            events: [],
-            private: false,
-          });
-        await firestore
-          .collection("groups")
-          .doc(slug)
-          .collection("subscribers")
-          .doc(user.uid)
-          .set({
-            fullName: user.fullName,
-            photoUrl: user.photoUrl,
-            uid: user.uid,
-          });
+        await setDoc(groupRef, {
+          name,
+          tags: tags
+            .split(";")
+            .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
+            .filter((e) => e != null),
+          description,
+          createdAt: new Date().toISOString(),
+          admin: { uid: user.uid, fullName: user.fullName },
+          location: {
+            location: location || "Remote",
+            position: { ...position } || { lat: null, lng: null },
+          },
+          events: [],
+          private: false,
+        });
+        await setDoc(doc(firestore, `groups/${slug}/subscribers/${user.uid}`), {
+          fullName: user.fullName,
+          photoUrl: user.photoUrl,
+          uid: user.uid,
+        });
         Router.push("/group/" + slug);
       } else {
-        firestore
-          .collection("groups")
-          .add({
-            name,
-            tags: tags
-              .split(";")
-              .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
-              .filter((e) => e != null),
-            description,
-            createdAt: new Date().toISOString(),
-            admin: { uid: user.uid, fullName: user.fullName },
-            location: {
-              location: location || "Remote",
-              position: { ...position } || { lat: null, lng: null },
-            },
-            events: [],
-            private: true,
-          })
-          .then(async (docRef) => {
-            await firestore
-              .collection("groups")
-              .doc(docRef.id)
-              .collection("subscribers")
-              .doc(user.uid)
-              .set({
-                fullName: user.fullName,
-                photoUrl: user.photoUrl,
-                uid: user.uid,
-              });
-            Router.push("/group/" + docRef.id);
-          });
+        addDoc(collection(firestore, "groups"), {
+          name,
+          tags: tags
+            .split(";")
+            .map((tag) => (tag.trim().length > 0 ? tag.trim() : null))
+            .filter((e) => e != null),
+          description,
+          createdAt: new Date().toISOString(),
+          admin: { uid: user.uid, fullName: user.fullName },
+          location: {
+            location: location || "Remote",
+            position: { ...position } || { lat: null, lng: null },
+          },
+          events: [],
+          private: true,
+        }).then(async (docRef) => {
+          await setDoc(
+            doc(firestore, `groups/${slug}/subscribers/${user.uid}`),
+            {
+              fullName: user.fullName,
+              photoUrl: user.photoUrl,
+              uid: user.uid,
+            }
+          );
+          Router.push("/group/" + docRef.id);
+        });
       }
     }
   };

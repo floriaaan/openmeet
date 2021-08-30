@@ -4,6 +4,14 @@ import { AppLayout } from "@components/layouts/AppLayout";
 import { RainbowHighlight } from "@components/ui/RainbowHighlight";
 // import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { RoughNotationGroup } from "react-rough-notation";
@@ -18,7 +26,6 @@ export default function Index() {
         <div className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center w-full px-8 lg:text-left md:px-12 lg:w-1/2">
             <div className="w-full">
-              
               <RoughNotationGroup show={true}>
                 <RainbowHighlight color={colors[0]}>
                   <h1 className="my-2 text-4xl font-bold text-green-700 ">
@@ -70,11 +77,13 @@ export default function Index() {
 const GroupsSection = () => {
   const [groups, setGroups] = useState([]);
   useEffect(() => {
-    firestore
-      .collection("groups")
-      .orderBy("createdAt", "desc")
-      .where("private", "==", false)
-      .get()
+    getDocs(
+      query(
+        collection(firestore, "groups"),
+        orderBy("createdAt", "desc"),
+        where("private", "==", false)
+      )
+    )
       .then((querySnapshot) => {
         let _tmp = [];
         querySnapshot.forEach((doc) => {
@@ -122,17 +131,21 @@ const GroupsSection = () => {
 const EventSection = () => {
   const [events, setEvents] = useState([]);
   useEffect(() => {
-    firestore
-      .collection("events")
-      // .where("startDate", ">", new Date().toISOString())
-      .onSnapshot((querySnapshot) => {
+    const unsub = onSnapshot(
+      collection(firestore, "events"),
+      (querySnapshot) => {
         let _tmp = [];
         querySnapshot.forEach((doc) => {
           if (_tmp.length < 4 && new Date(doc.data().startDate) > new Date())
             _tmp.push({ slug: doc.id, ...doc.data() });
         });
         setEvents(_tmp);
-      });
+      }
+    );
+
+    return () => {
+      unsub();
+    };
   }, []);
 
   return (

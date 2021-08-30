@@ -4,6 +4,7 @@ import { ApiKey } from "@components/profile/ApiKey";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { formatDistance } from "date-fns";
+import { doc, getDoc } from "firebase/firestore";
 import Lottie from "react-lottie";
 import notExisting from "resources/lotties/404.json";
 
@@ -110,7 +111,7 @@ const ProfileOverview = ({ user }) => {
 export async function getServerSideProps(ctx) {
   const { uid } = ctx.query;
   try {
-    const user = await firestore.collection("users").doc(uid).get();
+    const user = await getDoc(doc(firestore, "users", uid));
     return {
       props: {
         user: JSON.parse(JSON.stringify({ uid: user.id, ...user.data() })),

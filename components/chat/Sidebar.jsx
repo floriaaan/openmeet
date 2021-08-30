@@ -4,27 +4,35 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { formatDistance } from "date-fns";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 export const Sidebar = (props) => {
   const { user } = useAuth();
 
   const [chats, setChats] = useState([]);
   useEffect(() => {
-    if (user)
-      firestore
-        .collection("chats")
-        .where("members", "array-contains", {
-          fullName: user.fullName,
-          uid: user.uid,
-          photoUrl: user.photoUrl,
-        })
-        .onSnapshot((snapshot) => {
+    if (user) {
+      const unsub = onSnapshot(
+        query(
+          collection(firestore, "chats"),
+          where("members", "array-contains", {
+            fullName: user.fullName,
+            uid: user.uid,
+            photoUrl: user.photoUrl,
+          })
+        ),
+        (snapshot) => {
           setChats(
             snapshot.docs.map((doc) => {
               return { ...doc.data(), id: doc.id };
             })
           );
-        });
+        }
+      );
+      return () => {
+        unsub();
+      };
+    }
   }, [user]);
 
   return (

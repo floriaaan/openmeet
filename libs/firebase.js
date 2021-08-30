@@ -1,8 +1,5 @@
-import { user } from "firebase-functions/lib/providers/auth";
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore, doc, updateDoc, getDoc } from "firebase/firestore";
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,53 +12,63 @@ const clientCredentials = {
   //   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(clientCredentials);
+const apps = getApps();
+let firebase;
+if (!apps.length) {
+  firebase = initializeApp(clientCredentials);
+} else {
+  firebase = apps[0];
 }
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const storage = firebase.storage();
 
-const FieldValue = firebase.firestore.FieldValue;
+const firestore = getFirestore();
+
+export { firebase, firestore };
 
 /**
  *
  * TODO: refactor (1 read/write access instead of 2)
  */
 export async function createUser(data) {
-  const userRef = await firestore
-    .collection("users")
-    .doc(data.uid)
-    .set({ ...data }, { merge: true });
+  const userRef = doc(firestore, `users/${data.uid}`);
 
-  const user = await firestore.collection("users").doc(data.uid).get();
-
-  return { ...user.data() };
+  await updateDoc(userRef, { ...data }, { merge: true });
+  const userSnap = await getDoc(userRef);
+  return { ...userSnap.data() };
 }
 
+/**
+ * TODO: migrate to firebase 9.x
+ * 
+ * Uploads image to firebase storage and returns the url
+ * @param {File} file
+ * @param {string} url
+ * @returns {Promise<string>}
+ * @throws {Error}
+ *
+ */
 export async function uploadInFirebaseStorage(file, url) {
-  return new Promise((resolve, reject) => {
-    // console.log("Uploading image ...");
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(url).put(file);
+  // return new Promise((resolve, reject) => {
+  //   // console.log("Uploading image ...");
+  //   const storageRef = firebase.storage().ref();
+  //   const uploadTask = storageRef.child(url).put(file);
 
-    uploadTask.on(
-      firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-      },
-      (error) => {
-        console.log(error);
-        reject(error);
-      },
-      async () => {
-        const imgURL = await uploadTask.snapshot.ref.getDownloadURL();
-        resolve(imgURL);
-      }
-    );
-  });
+  //   uploadTask.on(
+  //     firebase.storage.TaskEvent.STATE_CHANGED,
+  //     (snapshot) => {
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       console.log("Upload is " + progress + "% done");
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       reject(error);
+  //     },
+  //     async () => {
+  //       const imgURL = await uploadTask.snapshot.ref.getDownloadURL();
+  //       resolve(imgURL);
+  //     }
+  //   );
+  // });
+  return null
+  // throw new Error("Not migrated to Firebase 9.x");
 }
-
-export { firebase, auth, firestore, storage, FieldValue };

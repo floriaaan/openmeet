@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 
 export const GroupOverview = (props) => {
   const { user } = useAuth();
@@ -12,17 +13,16 @@ export const GroupOverview = (props) => {
   const [lastEvent, setLastEvent] = useState(null);
 
   useEffect(() => {
-    firestore
-      .collection("groups")
-      .doc(props.slug)
-      .collection("subscribers")
-      .onSnapshot((querySnapshot) => {
+    const unsub = onSnapshot(
+      collection(firestore, `groups/${props.slug}/subscribers`),
+      (querySnapshot) => {
         let subs = [];
         querySnapshot.forEach((doc) => {
           subs.push({ id: doc.id, ...doc.data() });
         });
         setSubs(subs);
-      });
+      }
+    );
 
     if (props?.events?.length >= 1) {
       let sortedEvents = props.events;
@@ -32,41 +32,43 @@ export const GroupOverview = (props) => {
       // console.log(sortedEvents);
       sortedEvents.some((event) => {
         if (!event.private) {
-          firestore
-            .collection("events")
-            .doc(sortedEvents[0].slug)
-            .get()
-            .then((snapshot) => {
+          getDoc(doc(firestore, `events/${sortedEvents[0].slug}`)).then(
+            (snapshot) => {
               setLastEvent({ slug: snapshot.id, ...snapshot.data() });
-            });
+            }
+          );
         }
         return event.private;
       });
     }
+
+    return () => {
+      unsub();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.slug]);
 
-  const toggleSubscription = async () => {
-    if (subs.find((subscriber) => subscriber.id === user.uid)) {
-      await firestore
-        .collection("groups")
-        .doc(props.slug)
-        .collection("subscribers")
-        .doc(user.uid)
-        .delete();
-    } else {
-      await firestore
-        .collection("groups")
-        .doc(props.slug)
-        .collection("subscribers")
-        .doc(user.uid)
-        .set({
-          fullName: user.fullName,
-          photoUrl: user.photoUrl,
-          uid: user.uid,
-        });
-    }
-  };
+  // const toggleSubscription = async () => {
+  //   if (subs.find((subscriber) => subscriber.id === user.uid)) {
+  //     await firestore
+  //       .collection("groups")
+  //       .doc(props.slug)
+  //       .collection("subscribers")
+  //       .doc(user.uid)
+  //       .delete();
+  //   } else {
+  //     await firestore
+  //       .collection("groups")
+  //       .doc(props.slug)
+  //       .collection("subscribers")
+  //       .doc(user.uid)
+  //       .set({
+  //         fullName: user.fullName,
+  //         photoUrl: user.photoUrl,
+  //         uid: user.uid,
+  //       });
+  //   }
+  // };
 
   return (
     <div className="flex flex-col p-6 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
