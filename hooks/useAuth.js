@@ -1,11 +1,26 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
-import { firebase, createUser, auth } from "@libs/firebase";
+import { firebase, createUser } from "@libs/firebase";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  OAuthProvider,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 
+const auth = getAuth(firebase);
+
 function AuthProvider({ children }) {
-  const auth = useFirebaseAuth();
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+  const firebaseAuth = useFirebaseAuth();
+  return (
+    <AuthContext.Provider value={firebaseAuth}>{children}</AuthContext.Provider>
+  );
 }
 
 const useAuth = () => useContext(AuthContext);
@@ -44,7 +59,7 @@ function useFirebaseAuth() {
 
   const signin = async (email, password, redirect) => {
     try {
-      const response = await auth.signInWithEmailAndPassword(email, password);
+      const response = await signInWithEmailAndPassword(auth, email, password);
       handleUser(response.user);
     } catch (err) {
       return err;
@@ -57,7 +72,11 @@ function useFirebaseAuth() {
   };
 
   const register = async (email, password, pseudo, redirect) => {
-    const response = await auth.createUserWithEmailAndPassword(email, password);
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     handleUser({ ...response.user, displayName: pseudo });
     if (redirect) {
       Router.push(redirect);
@@ -67,9 +86,8 @@ function useFirebaseAuth() {
   };
 
   const signinWithGoogle = async (redirect) => {
-    const response = await auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    );
+    const response = await signInWithPopup(auth, new GoogleAuthProvider());
+    handleUser(response.user);
     handleUser(response.user);
     if (redirect) {
       Router.push(redirect);
@@ -79,9 +97,7 @@ function useFirebaseAuth() {
   };
 
   const signinWithGitHub = async (redirect) => {
-    const response = await auth.signInWithPopup(
-      new firebase.auth.GithubAuthProvider()
-    );
+    const response = await signInWithPopup(auth, new GithubAuthProvider());
     handleUser(response.user);
     if (redirect) {
       Router.push(redirect);
@@ -91,8 +107,9 @@ function useFirebaseAuth() {
   };
 
   const signinWithMicrosoft = async (redirect) => {
-    const response = await auth.signInWithPopup(
-      new firebase.auth.OAuthProvider("microsoft.com")
+    const response = await signInWithPopup(
+      auth,
+      new OAuthProvider("microsoft.com")
     );
     handleUser(response.user);
     if (redirect) {
@@ -103,13 +120,12 @@ function useFirebaseAuth() {
   };
 
   const signout = async () => {
-    await auth.signOut();
+    await signOut(auth);
     return await handleUser(false);
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onIdTokenChanged(handleUser);
-
+    const unsubscribe = onAuthStateChanged(auth, handleUser);
     return () => unsubscribe();
   }, []);
 

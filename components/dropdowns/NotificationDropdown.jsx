@@ -9,6 +9,14 @@ import Router from "next/router";
 
 import { Menu, Transition } from "@headlessui/react";
 import { imgErrorFallback } from "@libs/imgOnError";
+import {
+  collection,
+  deleteDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 
 export const NotificationDropdown = () => {
   const { user } = useAuth();
@@ -17,51 +25,60 @@ export const NotificationDropdown = () => {
   const [notifications, setNotifications] = React.useState([]);
 
   const getChats = async () => {
-    firestore
-      .collection("chats")
-      .get()
-      .then((querySnapshot) => {
-        const list = [];
+    getDocs(
+      query(
+        collection(firestore, "chats"),
+        where("members", "array-contains", {
+          fullName: user.fullName,
+          uid: user.uid,
+          photoUrl: user.photoUrl,
+        })
+      )
+    ).then((querySnapshot) => {
+      const list = [];
 
-        querySnapshot.forEach((doc) => {
-          let data = doc.data();
-          if (data.members.find((member) => member.uid === user.uid)) {
-            list.push({ id: doc.id, ...doc.data() });
-          }
-        });
-
-        setChats(list);
+      querySnapshot.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() });
       });
+
+      setChats(list);
+    });
   };
 
   React.useEffect(() => {
     getChats();
-    if (user?.uid)
-      firestore
-        .collection("notifications")
-        .where("uid", "==", user.uid)
-        .onSnapshot((querySnapshot) => {
+    if (user?.uid) {
+      const unsub = onSnapshot(
+        query(
+          collection(firestore, "notifications"),
+          where("uid", "==", user.uid)
+        ),
+        (querySnapshot) => {
           const list = [];
 
           querySnapshot.forEach((doc) => {
             list.push({ id: doc.id, ...doc.data() });
           });
           setNotifications(list);
-        });
+        }
+      );
+      return () => unsub();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid]);
 
   const readAllNotifications = async () => {
     if (user?.uid)
-      firestore
-        .collection("notifications")
-        .where("uid", "==", user.uid)
-        .get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            doc.ref.delete();
-          });
+      getDocs(
+        query(
+          collection(firestore, "notifications"),
+          where("uid", "==", user.uid)
+        )
+      ).then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          deleteDoc(doc);
         });
+      });
   };
 
   return (
@@ -174,9 +191,7 @@ const ChatOverview = (props) => {
             onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
           />
           {props.isUnread && (
-            <span
-              className="absolute bottom-0 right-0 flex items-center justify-center"
-            >
+            <span className="absolute bottom-0 right-0 flex items-center justify-center">
               <span className="w-4 h-4 bg-red-400 rounded-full opacity-75 animate-ping" />
               <span className="absolute w-3 h-3 bg-red-600 rounded-full" />
             </span>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const GroupDropdown = () => {
   const { user } = useAuth();
@@ -13,43 +14,41 @@ export const GroupDropdown = () => {
   const [isGroupAdmin, setIsGroupAdmin] = useState(false);
 
   const getGroups = async () => {
-    firestore
-      .collection("groups")
-      .get()
-      .then((querySnapshot) => {
-        const list = [];
+    getDocs(collection(firestore, "groups")).then((querySnapshot) => {
+      const list = [];
 
-        querySnapshot.forEach((doc) => {
-          if (!doc.data().private) list.push({ slug: doc.id, ...doc.data() });
-        });
-        const groups = [];
-        for (let i = 0; i < 3; i++) {
-          const randomIndex = Math.floor(Math.random() * list.length);
-          const randomGroup = list[randomIndex];
-          if (
-            groups.findIndex((group) => group.slug === randomGroup.slug) === -1
-          ) {
-            groups.push(randomGroup);
-          }
-        }
-
-        setGroups(groups);
+      querySnapshot.forEach((doc) => {
+        if (!doc.data().private) list.push({ slug: doc.id, ...doc.data() });
       });
+      const groups = [];
+      for (let i = 0; i < 3; i++) {
+        const randomIndex = Math.floor(Math.random() * list.length);
+        const randomGroup = list[randomIndex];
+        if (
+          groups.findIndex((group) => group.slug === randomGroup.slug) === -1
+        ) {
+          groups.push(randomGroup);
+        }
+      }
+
+      setGroups(groups);
+    });
   };
 
   const getIsGroupAdmin = async () => {
     if (user) {
-      firestore
-        .collection("groups")
-        .where("admin.uid", "==", user.uid)
-        .get()
-        .then((querySnapshot) => {
-          const groups = [];
-          querySnapshot.forEach((doc) => {
-            groups.push({ slug: doc.id, ...doc.data() });
-          });
-          setIsGroupAdmin(groups.length > 0);
+      getDocs(
+        query(
+          collection(firestore, "events"),
+          where("admin.uid", "==", user.uid)
+        )
+      ).then((querySnapshot) => {
+        const groups = [];
+        querySnapshot.forEach((doc) => {
+          groups.push({ slug: doc.id, ...doc.data() });
         });
+        setIsGroupAdmin(groups.length > 0);
+      });
     }
   };
 

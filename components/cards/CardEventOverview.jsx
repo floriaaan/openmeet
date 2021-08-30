@@ -1,37 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
 import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
+import { collection } from "firebase/firestore";
 import Link from "next/link";
 
 export const EventOverview = (props) => {
-  // const [subs, setSubs] = useState([]);
-  // useEffect(() => {
-  //   firestore
-  //     .collection("events")
-  //     .doc(props.slug)
-  //     .collection("subscribers")
-  //     .onSnapshot((querySnapshot) => {
-  //       let subs = [];
-  //       querySnapshot.forEach((doc) => {
-  //         subs.push({ id: doc.id, ...doc.data() });
-  //       });
-  //       setSubs(subs);
-  //     });
-  // }, []);
+  const [subs, setSubs] = useState([]);
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(firestore, `events/${props.slug}/subscribers`),
+      (querySnapshot) => {
+        let subs = [];
+        querySnapshot.forEach((doc) => {
+          subs.push({ id: doc.id, ...doc.data() });
+        });
+        setSubs(subs);
+      }
+    );
 
-  let temp = [
-    {
-      id: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-      fullName: "Florian Leroux",
-      photoUrl:
-        "https://lh3.googleusercontent.com/a-/AOh14GgSJjELDsgk7Q16h6hQ7HTUQoscGUGg0CJFcucbkQ=s96-c",
-    },
-    {
-      id: "pfPXuxzgMgZsiFH09L78zZzPxjV2",
-      photoUrl: "https://avatars.githubusercontent.com/u/10078837?v=4",
-      fullName: "Florian Leroux",
-    },
-  ];
+    return () => unsub();
+  }, [props.slug]);
+
+  // let temp = [
+  //   {
+  //     id: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
+  //     fullName: "Florian Leroux",
+  //     photoUrl:
+  //       "https://lh3.googleusercontent.com/a-/AOh14GgSJjELDsgk7Q16h6hQ7HTUQoscGUGg0CJFcucbkQ=s96-c",
+  //   },
+  //   {
+  //     id: "pfPXuxzgMgZsiFH09L78zZzPxjV2",
+  //     photoUrl: "https://avatars.githubusercontent.com/u/10078837?v=4",
+  //     fullName: "Florian Leroux",
+  //   },
+  // ];
 
   return (
     <>

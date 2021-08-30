@@ -5,6 +5,7 @@ import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
 import { format } from "date-fns";
+import { collection, getDocs } from "firebase/firestore";
 
 export const EventDropdown = () => {
   const { user } = useAuth();
@@ -12,32 +13,28 @@ export const EventDropdown = () => {
   const [events, setEvents] = useState([]);
 
   const getEvents = async () => {
-    firestore
-      .collection("events")
-      .get()
-      .then((querySnapshot) => {
-        const list = [];
+    getDocs(collection(firestore, "events")).then((querySnapshot) => {
+      const list = [];
 
-        querySnapshot.forEach((doc) => {
-          list.push({ slug: doc.id, ...doc.data() });
-        });
-        const events = [];
-        let i = 0;
-        while (events.length < 3 && i < list.length) {
-          const randomIndex = Math.floor(Math.random() * list.length);
-          const randomEvent = list[randomIndex];
-          if (
-            events.findIndex((group) => group.slug === randomEvent.slug) ===
-              -1 &&
-            !randomEvent.private
-          ) {
-            events.push(randomEvent);
-          }
-          i++;
-        }
-
-        setEvents(events);
+      querySnapshot.forEach((doc) => {
+        list.push({ slug: doc.id, ...doc.data() });
       });
+      const events = [];
+      let i = 0;
+      while (events.length < 3 && i < list.length) {
+        const randomIndex = Math.floor(Math.random() * list.length);
+        const randomEvent = list[randomIndex];
+        if (
+          events.findIndex((group) => group.slug === randomEvent.slug) === -1 &&
+          !randomEvent.private
+        ) {
+          events.push(randomEvent);
+        }
+        i++;
+      }
+
+      setEvents(events);
+    });
   };
 
   useEffect(() => {

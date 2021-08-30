@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { firestore } from "@libs/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 // components
 
@@ -7,9 +8,9 @@ export default function CardSocialTraffic() {
   const [providers, setProviders] = React.useState(null);
 
   useEffect(() => {
-    firestore
-      .collection("users")
-      .onSnapshot((querySnapshot) => {
+    const unsub = onSnapshot(
+      collection(firestore, "users"),
+      (querySnapshot) => {
         let _tmp = {
           google: [],
           github: [],
@@ -38,7 +39,10 @@ export default function CardSocialTraffic() {
           }
         });
         setProviders(_tmp);
-      });
+      }
+    );
+
+    return () => unsub();
   }, []);
   return (
     <>
@@ -46,7 +50,7 @@ export default function CardSocialTraffic() {
         <div className="px-4 py-3 mb-0 border-0 rounded-t-xl">
           <div className="flex flex-wrap items-center">
             <div className="relative flex-1 flex-grow w-full max-w-full px-4">
-            <h3 className="flex items-center justify-start pt-2 text-xs font-bold text-gray-400 uppercase dark:text-gray-300">
+              <h3 className="flex items-center justify-start pt-2 text-xs font-bold text-gray-400 uppercase dark:text-gray-300">
                 Authentications by providers
               </h3>
             </div>
@@ -91,7 +95,6 @@ export default function CardSocialTraffic() {
                   ></Line>
                 </>
               )}
-              
             </tbody>
           </table>
         </div>
@@ -139,8 +142,9 @@ const Line = (props) => {
               <div
                 style={{
                   width:
-                  Math.floor((props?.data?.length / props?.total) * 100).toString() +
-                    "%",
+                    Math.floor(
+                      (props?.data?.length / props?.total) * 100
+                    ).toString() + "%",
                 }}
                 className={
                   "flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap " +

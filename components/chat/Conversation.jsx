@@ -6,6 +6,14 @@ import Link from "next/link";
 import { AddDropdown } from "./AddDropdown";
 import { useRouter } from "next/router";
 import { MessageSkeleton } from "./Message";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 export const Conversation = ({ id }, props) => {
   const { user } = useAuth();
@@ -39,10 +47,10 @@ export const Conversation = ({ id }, props) => {
   useEffect(() => {
     // prepareDisplayableMsg(props.messages);
     setLoading(true);
-    firestore
-      .collection("chats")
-      .doc(id)
-      .onSnapshot(async (snapshot) => {
+
+    const unsub = onSnapshot(
+      doc(firestore, `chats/${id}`),
+      async (snapshot) => {
         const data = snapshot.data();
         if (data) {
           setChat(data);
@@ -52,7 +60,12 @@ export const Conversation = ({ id }, props) => {
           }, 500);
           // setLoading(false);
         }
-      });
+      }
+    );
+
+    return () => {
+      unsub();
+    };
   }, [id]);
 
   const handleOnSubmit = async (e) => {
@@ -61,8 +74,10 @@ export const Conversation = ({ id }, props) => {
     const trimmedMessage = newMessage.trim();
     if (trimmedMessage) {
       // Add new message in Firestore
-      const doc = await firestore.collection("chats").doc(id).get();
-      const data = doc.data();
+      const docRef = doc(firestore, `chats/${id}`);
+      const docSnap = getDoc(docRef);
+      const data = docSnap.data();
+
       data.messages.push({
         content: trimmedMessage,
         createdAt: new Date().toISOString(),
@@ -70,11 +85,11 @@ export const Conversation = ({ id }, props) => {
       });
       data.lastMessageAt = new Date().toISOString();
 
-      await firestore.collection("chats").doc(id).update(data);
+      await updateDoc(docRef, data);
 
       chat?.members?.forEach(async (member) => {
         if (member?.uid !== user?.uid) {
-          await firestore.collection("notifications").add({
+          await addDoc(collection(firestore, `notifications`), {
             uid: member?.uid,
             type: "chat",
             data: {
@@ -183,7 +198,6 @@ export const Conversation = ({ id }, props) => {
             </Link>
             <span className="w-1/2 h-6 bg-gray-500 rounded-md animate-pulse"></span>
             <span className="w-12 h-12 bg-gray-200 animate-pulse rounded-xl dark:bg-gray-800"></span>
-
           </div>
           <div className="max-h-full px-3 py-1 bg-gray-100 lg:p-6 dark:bg-gray-900 rounded-xl">
             <MessageSkeleton />
@@ -228,27 +242,25 @@ export const NewConversation = (props) => {
         ];
       }
 
-      firestore
-        .collection("chats")
-        .add({
-          members,
-          messages: [
-            {
-              content: trimmedMessage,
-              createdAt: new Date().toISOString(),
-              sender: user?.uid,
-            },
-          ],
-          lastMessageAt: new Date().toISOString(),
-        })
+      addDoc(collection(firestore, "chats"), {
+        members,
+        messages: [
+          {
+            content: trimmedMessage,
+            createdAt: new Date().toISOString(),
+            sender: user?.uid,
+          },
+        ],
+        lastMessageAt: new Date().toISOString(),
+      })
         .then(function (docRef) {
           selectedMembers.forEach(async (member) => {
             if (member?.uid !== user?.uid) {
-              await firestore.collection("notifications").add({
+              await addDoc(collection(firestore, `notifications`), {
                 uid: member?.uid,
                 type: "chat",
                 data: {
-                  id: docRef.id,
+                  id,
                   type: "chat",
                   action: "new_message",
                   message: trimmedMessage,

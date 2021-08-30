@@ -19,7 +19,7 @@
     "chart.js": "^3.5.0",
     "cheerio": "^1.0.0-rc.10",
     "date-fns": "^2.23.0",
-    "firebase": "^8.7.0",
+    "firebase": "^9.0.0",
     "firebase-admin": "^9.11.0",
     "firebase-functions": "^3.15.4",
     "leaflet": "^1.7.1",
