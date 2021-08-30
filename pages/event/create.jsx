@@ -1,12 +1,23 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { useAuth } from "@hooks/useAuth";
-import { FieldValue, firestore, uploadInFirebaseStorage } from "@libs/firebase";
+import { firestore, uploadInFirebaseStorage } from "@libs/firebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
 import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
 import { createUID } from "@libs/createUID";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -86,10 +97,12 @@ export default function GroupCreatePage() {
 
   useEffect(() => {
     if (user)
-      firestore
-        .collection("groups")
-        .where("admin.uid", "==", user.uid)
-        .get()
+      getDocs(
+        query(
+          collection(firestore, "groups"),
+          where("admin.uid", "==", user.uid)
+        )
+      )
         .then((querySnapshot) => {
           let tmp = [];
           querySnapshot.forEach((doc) => {
@@ -110,9 +123,10 @@ export default function GroupCreatePage() {
           .toLowerCase()
           .replace(/[^\w ]+/g, "")
           .replace(/ +/g, "-");
-    const eventRef = firestore.collection("events").doc(slug).get();
+    const eventRef = doc(firestore, `events/${slug}`);
+    const eventSnap = await getDoc(eventRef);
 
-    if (user && group && startDate && !eventRef.exists) {
+    if (user && group && startDate && !eventSnap.exists()) {
       let pictureInStorage = null;
       if (picture) {
         pictureInStorage = await uploadInFirebaseStorage(
@@ -129,53 +143,47 @@ export default function GroupCreatePage() {
         );
       }
 
-      firestore
-        .collection("events")
-        .doc(slug)
-        .set({
-          slug,
-          name,
-          description,
-          createdAt: new Date().toISOString(),
-          group: { slug: group.slug, name: group.name },
-          host: {
-            uid: user.uid,
-            photoUrl: user.photoUrl,
-            fullName: user.fullName,
-          },
-          startDate,
-          endDate: endDate || null,
-          location: {
-            location: location || "Remote",
-            position: { ...position } || { lat: null, lng: null },
-            details: locationDetails || null,
-          },
-          externalLink: externalLink || null,
-          picture: pictureInStorage,
-          attachment: attachment
-            ? { url: attachmentInStorage, name: attachment.name }
-            : null,
-          private: privateEvent,
-        })
-        .then(async function (docRef) {
-          await firestore
-            .collection("groups")
-            .doc(group.slug)
-            .update({
-              events: FieldValue.arrayUnion({
-                slug,
-                finished: new Date() > new Date(endDate),
-                inProgress:
-                  new Date() > new Date(startDate) &&
-                  new Date() < new Date(endDate),
-                startDate,
-                endDate,
-                private: privateEvent,
-              }),
-            });
+      setDoc(eventRef, {
+        slug,
+        name,
+        description,
+        createdAt: new Date().toISOString(),
+        group: { slug: group.slug, name: group.name },
+        host: {
+          uid: user.uid,
+          photoUrl: user.photoUrl,
+          fullName: user.fullName,
+        },
+        startDate,
+        endDate: endDate || null,
+        location: {
+          location: location || "Remote",
+          position: { ...position } || { lat: null, lng: null },
+          details: locationDetails || null,
+        },
+        externalLink: externalLink || null,
+        picture: pictureInStorage,
+        attachment: attachment
+          ? { url: attachmentInStorage, name: attachment.name }
+          : null,
+        private: privateEvent,
+      }).then(async function (docRef) {
 
-          router.push("/event/" + slug);
+        await updateDoc(doc(firestore, `groups/${group.slug}`), {
+          events: arrayUnion({
+            slug,
+            finished: new Date() > new Date(endDate),
+            inProgress:
+              new Date() > new Date(startDate) &&
+              new Date() < new Date(endDate),
+            startDate,
+            endDate,
+            private: privateEvent,
+          }),
         });
+
+        router.push("/event/" + slug);
+      });
     }
   };
 

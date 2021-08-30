@@ -76,7 +76,7 @@ export const NotificationDropdown = () => {
         )
       ).then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          deleteDoc(doc);
+          deleteDoc(doc.ref);
         });
       });
   };

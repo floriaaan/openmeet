@@ -6,6 +6,13 @@ import { Sidebar } from "@components/chat/Sidebar";
 import { useEffect } from "react";
 import { firestore } from "@libs/firebase";
 import { useAuth } from "@hooks/useAuth";
+import {
+  collection,
+  deleteDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 export default function ConversationPage() {
   const router = useRouter();
@@ -14,17 +21,18 @@ export default function ConversationPage() {
 
   useEffect(() => {
     if (user?.uid)
-      firestore
-        .collection("notifications")
-        .where("uid", "==", user.uid)
-        .where("type", "==", "chat")
-        .where("data.id", "==", id)
-        .get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            doc.ref.delete();
-          });
+      getDocs(
+        query(
+          collection(firestore, "notifications"),
+          where("uid", "==", user.uid),
+          where("type", "==", "chat"),
+          where("data.id", "==", id)
+        )
+      ).then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          deleteDoc(doc.ref);
         });
+      });
   }, [user, id]);
 
   return (

@@ -2,7 +2,10 @@ import { GroupOverview } from "@components/cards/CardGroupOverview";
 import { AppLayout } from "@components/layouts/AppLayout";
 import { ChipList } from "@components/ui/ChipList";
 import { firestore } from "@libs/firebase";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Menu, Transition } from "@headlessui/react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function GroupAllPage({ groups }) {
   const [displayables, setDisplayables] = useState(groups);
@@ -127,24 +130,19 @@ export async function getServerSideProps() {
   //   },
   // ];
   const groups = [];
-  await firestore
-    .collection("groups")
-    .where("private", "==", false)
 
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        groups.push({ slug: doc.id, ...doc.data() });
-      });
+  getDocs(
+    query(collection(firestore, "groups"), where("private", "==", false))
+  ).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      groups.push({ slug: doc.id, ...doc.data() });
     });
+  });
 
   return {
     props: { groups },
   };
 }
-
-import { createPopper } from "@popperjs/core";
-import { Menu, Transition } from "@headlessui/react";
 
 const DistanceSelect = ({ distance, setDistance }) => {
   return (

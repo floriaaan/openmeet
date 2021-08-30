@@ -2,6 +2,7 @@ import { AppLayout } from "@components/layouts/AppLayout";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 export default function GroupSettingsPage() {
@@ -12,18 +13,19 @@ export default function GroupSettingsPage() {
 
   useEffect(() => {
     if (user) {
-      firestore
-        .collection("groups")
-        .where("admin.uid", "==", user.uid)
-        .get()
-        .then((querySnapshot) => {
-          const groups = [];
-          querySnapshot.forEach((doc) => {
-            groups.push({ slug: doc.id, ...doc.data() });
-          });
-          setGroups(groups);
-          setSelected(groups[0]);
+      getDocs(
+        query(
+          collection(firestore, "groups"),
+          where("admin.uid", "==", user.uid)
+        )
+      ).then((querySnapshot) => {
+        const groups = [];
+        querySnapshot.forEach((doc) => {
+          groups.push({ slug: doc.id, ...doc.data() });
         });
+        setGroups(groups);
+        setSelected(groups[0]);
+      });
     }
   }, [user]);
 

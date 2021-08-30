@@ -15,7 +15,7 @@ const clientCredentials = {
 const apps = getApps();
 let firebase;
 if (!apps.length) {
-  firebaseApp = initializeApp(clientCredentials);
+  firebase = initializeApp(clientCredentials);
 } else {
   firebase = apps[0];
 }
@@ -69,5 +69,6 @@ export async function uploadInFirebaseStorage(file, url) {
   //     }
   //   );
   // });
-  throw new Error("Not migrated to Firebase 9.x");
+  return null
+  // throw new Error("Not migrated to Firebase 9.x");
 }

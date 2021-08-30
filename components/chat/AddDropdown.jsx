@@ -16,6 +16,7 @@ export const AddDropdown = ({ members, chatId, list, setList }) => {
 
   const getUsers = async () => {
     const snap = await getDocs(collection(firestore, "users"));
+    let _tmp = [];
     snap.forEach((user) => {
       let tmp = user.data();
       _tmp.push({

@@ -1,5 +1,12 @@
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export const AppFooter = () => {
@@ -7,34 +14,32 @@ export const AppFooter = () => {
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
 
   useEffect(() => {
-    if (user)
-      firestore
-        .collection("newsletter_subscriptions")
-        .onSnapshot((snapshot) => {
+    if (user) {
+      const unsub = onSnapshot(
+        collection(firestore, "newsletter_subscriptions"),
+        (snapshot) => {
           let exists = false;
           snapshot.forEach((doc) => {
             if (doc.id === user.uid) exists = true;
           });
-          setAlreadySubscribed(exists)
-        });
+          setAlreadySubscribed(exists);
+        }
+      );
+      return () => unsub();
+    }
   }, [user]);
 
   const toggleSubscription = async () => {
     if (user) {
+      const docRef = doc(firestore, `newsletter_subscriptions/${user.uid}`);
       if (!alreadySubscribed) {
-        await firestore
-          .collection("newsletter_subscriptions")
-          .doc(user.uid)
-          .set({
-            uid: user.uid,
-            fullName: user.fullName,
-            email: user.email,
-          });
+        await setDoc(docRef, {
+          uid: user.uid,
+          fullName: user.fullName,
+          email: user.email,
+        });
       } else {
-        await firestore
-          .collection("newsletter_subscriptions")
-          .doc(user.uid)
-          .delete();
+        await deleteDoc(docRef);
       }
     }
   };

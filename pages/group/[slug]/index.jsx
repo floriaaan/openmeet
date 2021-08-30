@@ -11,6 +11,14 @@ import { ChipList } from "@components/ui/ChipList";
 import Lottie from "react-lottie";
 import noEvents from "resources/lotties/nothing_search.json";
 import notExisting from "resources/lotties/404.json";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 
 export default function GroupPage({
   name,
@@ -32,24 +40,18 @@ export default function GroupPage({
   const { user } = useAuth();
 
   const toggleSubscription = async () => {
+    const groupSubscriberRef = doc(
+      firestore,
+      `groups/${slug}/subscribers/${user.uid}`
+    );
     if (subs.find((subscriber) => subscriber.id === user.uid)) {
-      await firestore
-        .collection("groups")
-        .doc(slug)
-        .collection("subscribers")
-        .doc(user.uid)
-        .delete();
+      await deleteDoc(groupSubscriberRef);
     } else {
-      await firestore
-        .collection("groups")
-        .doc(slug)
-        .collection("subscribers")
-        .doc(user.uid)
-        .set({
-          fullName: user.fullName,
-          photoUrl: user.photoUrl,
-          uid: user.uid,
-        });
+      await setDoc(groupSubscriberRef, {
+        fullName: user.fullName,
+        photoUrl: user.photoUrl,
+        uid: user.uid,
+      });
     }
   };
 
@@ -62,29 +64,31 @@ export default function GroupPage({
   };
 
   useEffect(() => {
-    firestore
-      .collection("groups")
-      .doc(slug)
-      .collection("subscribers")
-      .onSnapshot((querySnapshot) => {
+    const unsub = onSnapshot(
+      collection(firestore, `groups/${slug}/subscribers`),
+      (querySnapshot) => {
         let subs = [];
         querySnapshot.forEach((doc) => {
           subs.push({ id: doc.id, ...doc.data() });
         });
         setSubs(subs);
-      });
+      }
+    );
 
     let events = [];
     events_raw.forEach(async (e) => {
-      const eventDoc = await firestore.collection("events").doc(e.slug).get();
-      const eventData = eventDoc.data();
-      if (!eventData.private)
+      const eventDoc = await getDoc(doc(firestore, `events/${e.slug}`));
+      if (!eventDoc.data().private)
         events.push({
-          ...eventData,
+          ...eventDoc.data(),
           ...e,
         });
     });
     setEvents(events);
+
+    return () => {
+      unsub();
+    };
   }, [events_raw, slug]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -272,7 +276,8 @@ export default function GroupPage({
 }
 
 export async function getServerSideProps(ctx) {
-  const group = await firestore.collection("groups").doc(ctx.query.slug).get();
+  const group = await getDoc(doc(firestore, "groups", ctx.query.slug));
+
 
   let data = group.data();
   data.events_raw = data.events || [];
@@ -283,7 +288,7 @@ export async function getServerSideProps(ctx) {
       ...data,
 
       slug: ctx.query.slug,
-      exists: group.exists,
+      exists: group.exists(),
     },
   };
 }

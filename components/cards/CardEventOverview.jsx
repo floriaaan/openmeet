@@ -2,14 +2,15 @@
 import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
-import { collection } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const EventOverview = (props) => {
   const [subs, setSubs] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(
-      collection(firestore, `events/${props.slug}/subscribers`),
+      collection(firestore, `events/${props.slug}/participants`),
       (querySnapshot) => {
         let subs = [];
         querySnapshot.forEach((doc) => {
@@ -90,10 +91,10 @@ export const EventOverview = (props) => {
 
           <div className="flex justify-between w-full">
             <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-              <AvatarGroup users={temp} limit={4} />
+              <AvatarGroup users={subs} limit={4} />
               <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
-              {temp?.length || 0}{" "}
-              {temp?.length > 1 ? "participants" : "participant"}
+              {subs?.length || 0}{" "}
+              {subs?.length > 1 ? "participants" : "participant"}
             </div>
             <div className="flex">
               <button
