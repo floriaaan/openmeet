@@ -9,7 +9,10 @@
     "start": "next start",
     "export": "next export",
     "lint": "next lint",
-    "deploy": "next build && firebase deploy"
+    "deploy": "next build && firebase deploy",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.0",
@@ -24,6 +27,7 @@
     "firebase-functions": "^3.15.4",
     "leaflet": "^1.7.1",
     "next": "11.1.0",
+    "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.3.1",
     "next-themes": "^0.0.15",
     "nprogress": "^0.2.0",
@@ -36,7 +40,9 @@
     "semver": "^7.3.5"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^11.1.1",
     "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
     "postcss": "^8.3.5",
