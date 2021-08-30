@@ -167,21 +167,19 @@ export const NotificationDropdown = () => {
   );
 };
 
-const ChatOverview = (props) => {
+const ChatOverview = ({ members, id, isUnread, messages }) => {
   const [displayableUser, setDisplayableUser] = useState(null);
   const { user } = useAuth();
 
   useEffect(() => {
-    if (props.members) {
-      const displayable = props.members.find(
-        (member) => member.uid !== user?.uid
-      );
+    if (members) {
+      const displayable = members.find((member) => member.uid !== user?.uid);
       setDisplayableUser(displayable);
     }
-  }, [props.members, user?.uid]);
+  }, [members, user?.uid]);
 
   return (
-    <Link href={"/chat/" + props.id}>
+    <Link href={"/chat/" + id}>
       <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-yellow-50 dark:hover:bg-yellow-900">
         <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
           <img
@@ -190,7 +188,7 @@ const ChatOverview = (props) => {
             src={displayableUser?.photoUrl}
             onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
           />
-          {props.isUnread && (
+          {isUnread && (
             <span className="absolute bottom-0 right-0 flex items-center justify-center">
               <span className="w-4 h-4 bg-red-400 rounded-full opacity-75 animate-ping" />
               <span className="absolute w-3 h-3 bg-red-600 rounded-full" />
@@ -198,7 +196,7 @@ const ChatOverview = (props) => {
           )}
         </div>
         <div className="flex flex-col items-center justify-center w-full px-1">
-          {props.members?.map((e, key) => (
+          {members?.map((e, key) => (
             <Fragment key={key}>
               {e.uid !== user?.uid && (
                 <span className="text-xs text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
@@ -209,7 +207,7 @@ const ChatOverview = (props) => {
           )) || "No members"}
           <span className="text-[0.55rem] leading-4">
             {formatDistance(
-              new Date(props.messages?.[props.messages.length - 1]?.createdAt),
+              new Date(messages?.[messages.length - 1]?.createdAt),
               new Date(),
               {
                 addSuffix: true,
@@ -220,46 +218,10 @@ const ChatOverview = (props) => {
       </a>
     </Link>
   );
-
-  /**
-   * <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none ">
-        <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
-          <i className="text-2xl fas fa-users" />
-        </span>
-        <div className="flex flex-col ml-2">
-          <span className="font-bold text-yellow-600 dark:text-yellow-400">
-            {props.messages?.[props.messages.length - 1]?.content.slice(0, 30) +
-              (props.messages?.[props.messages.length - 1]?.content.length > 29
-                ? " ..."
-                : "")}
-          </span>
-          <span className="text-xs text-gray-400 dark:text-gray-300">
-            from{" "}
-            {
-              props.members.find(
-                (member) =>
-                  member.uid ===
-                  props.messages?.[props.messages.length - 1]?.sender
-              )?.fullName
-            }
-          </span>
-          <span className="text-xs text-gray-400 dark:text-gray-300">
-            sent{" "}
-            {formatDistance(
-              new Date(props.messages?.[props.messages.length - 1]?.createdAt),
-              new Date(),
-              {
-                addSuffix: true,
-              }
-            )}
-          </span>
-        </div>
-      </a>
-   */
 };
 
-const NotificationOverview = (props) => {
-  const url = "/" + props?.type + "/" + props?.data?.id;
+const NotificationOverview = ({ type, data, createdAt }) => {
+  const url = "/" + type + "/" + data?.id;
 
   return (
     <div
@@ -270,7 +232,7 @@ const NotificationOverview = (props) => {
       className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none "
     >
       <span className="flex items-center justify-center w-8 h-8 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
-        {props?.data?.action === "new_message" ? (
+        {data?.action === "new_message" ? (
           <i className="text-lg fas fa-envelope" />
         ) : (
           <i className="text-lg fas fa-bell" />
@@ -278,16 +240,16 @@ const NotificationOverview = (props) => {
       </span>
       <div className="flex flex-col ml-2">
         <span className="font-bold text-yellow-600 dark:text-yellow-400">
-          {props?.data?.action === "new_message"
+          {data?.action === "new_message"
             ? "New message"
-            : props?.data?.action === "new_participant"
-            ? props.data.message
+            : data?.action === "new_participant"
+            ? data.message
             : "New notification"}
         </span>
 
         <span className="text-xs text-gray-400 dark:text-gray-300">
           sent{" "}
-          {formatDistance(new Date(props?.createdAt), new Date(), {
+          {formatDistance(new Date(createdAt), new Date(), {
             addSuffix: true,
           })}
         </span>

@@ -1,6 +1,6 @@
 import { AppLayout } from "@components/layouts/AppLayout";
-import { useEffect, useState } from "react";
-import { getLocalStream, servers } from "resources/webrtc";
+// import { useEffect, useState } from "react";
+// import { getLocalStream, servers } from "resources/webrtc";
 
 export default function EventRemoteMeetPage() {
   //   const [participants, setParticipants] = useState([, ,]);

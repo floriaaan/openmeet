@@ -121,8 +121,8 @@ export const GroupDropdown = () => {
   );
 };
 
-const GroupOverview = (props) => (
-  <Link href={"/group/" + props.slug}>
+const GroupOverview = ({ slug, name }) => (
+  <Link href={"/group/" + slug}>
     <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900">
       <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
         <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-full dark:bg-green-700">
@@ -131,7 +131,7 @@ const GroupOverview = (props) => (
       </div>
       <div className="flex flex-col items-center justify-center w-full px-1">
         <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-          {props.name || "Name not provided"}
+          {name || "Name not provided"}
         </span>
         {/* <span className="text-[0.6rem] leading-4">
             from {format(new Date(props.startDate), "Pp")} to{" "}

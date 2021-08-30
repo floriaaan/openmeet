@@ -15,7 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-export const Conversation = ({ id }, props) => {
+export const Conversation = ({ id }) => {
   const { user } = useAuth();
 
   const [chat, setChat] = useState();
@@ -45,7 +45,6 @@ export const Conversation = ({ id }, props) => {
   };
 
   useEffect(() => {
-    // prepareDisplayableMsg(props.messages);
     setLoading(true);
 
     const unsub = onSnapshot(
@@ -210,7 +209,7 @@ export const Conversation = ({ id }, props) => {
   );
 };
 
-export const NewConversation = (props) => {
+export const NewConversation = () => {
   const { user } = useAuth();
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [newMessage, setNewMessage] = useState("");
