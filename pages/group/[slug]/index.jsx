@@ -78,14 +78,15 @@ export default function GroupPage({
 
     let events = [];
     events_raw.forEach(async (e) => {
-      const eventDoc = await getDoc(doc(firestore, `events/${e.slug}`));
-      if (!eventDoc.data().private)
+      const eventSnap = await getDoc(doc(firestore, `events/${e.slug}`));
+      if (!eventSnap.data().private)
         events.push({
-          ...eventDoc.data(),
+          ...eventSnap.data(),
           ...e,
         });
     });
     setEvents(events);
+    setDisplayables(events);
 
     return () => {
       unsub();
@@ -130,7 +131,7 @@ export default function GroupPage({
               </h2>
               <div className="flex mt-5 space-x-3 lg:mt-0 lg:ml-4">
                 {admin.uid === user?.uid && (
-                  <Link href={"/group/" + slug + "/edit"}>
+                  <Link href={"/group/settings/?slug=" + slug}>
                     <a className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-gray-100 rounded-full cursor-pointer group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
                       <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
                         <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
@@ -281,6 +282,7 @@ export async function getServerSideProps(ctx) {
 
   let data = group.data();
   data.events_raw = data.events || [];
+
   delete data.events;
 
   return {

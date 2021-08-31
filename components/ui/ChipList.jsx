@@ -20,7 +20,7 @@ export const ChipList = ({
                   selected.findIndex((chip) => chip === el) === -1
                     ? setSelected([...selected, el])
                     : setSelected(selected.filter((chip) => chip !== el))
-              : () => {}
+              : null
           }
         />
       ))}

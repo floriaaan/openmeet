@@ -13,6 +13,7 @@ import {
   doc,
 } from "firebase/firestore";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import { Line } from "react-chartjs-2";
@@ -27,6 +28,7 @@ export default function GroupSettingsPage() {
   const [seeMoreModalOpen, setSeeMoreModalOpen] = useState(false);
 
   const [selectedSubscribers, setSelectedSubscribers] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     if (user) {
@@ -48,10 +50,13 @@ export default function GroupSettingsPage() {
           groups.push({ slug: groupSnap.id, ...groupData, events });
         });
         setGroups(groups);
-        setSelected(groups[0]);
+        if (router.query.slug) {
+          let selectedGroup = groups.find((g) => g.slug === router.query.slug);
+          selectedGroup ? setSelected(selectedGroup) : setSelected(groups[0]);
+        } else setSelected(groups[0]);
       });
     }
-  }, [user]);
+  }, [router.query.slug, user]);
 
   useEffect(() => {
     if (selected) {
@@ -182,19 +187,21 @@ export default function GroupSettingsPage() {
               {selected?.name}
             </span>
           </h3>
-          <span className="inline-flex space-x-2">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer focus:outline-none group max-w-max dark:bg-gray-900 hover:bg-green-100 dark:hover:bg-green-800 dark:bg-opacity-30 "
-            >
-              <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 dark:group-hover:bg-green-700 group-hover:bg-green-200 dark:bg-opacity-30">
-                <i className="text-gray-700 duration-300 select-none fas fa-cog dark:text-gray-300 dark:group-hover:text-green-400 group-hover:text-green-600"></i>
-              </span>
-              <p className="text-sm font-extrabold text-gray-700 duration-300 select-none dark:text-gray-300 dark:group-hover:text-green-200 group-hover:text-green-600">
-                Another group
-              </p>
-            </button>
-          </span>
+          {groups.length > 1 && (
+            <span className="inline-flex space-x-2">
+              <button
+                onClick={() => setModalOpen(true)}
+                className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer focus:outline-none group max-w-max dark:bg-gray-900 hover:bg-green-100 dark:hover:bg-green-800 dark:bg-opacity-30 "
+              >
+                <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 dark:group-hover:bg-green-700 group-hover:bg-green-200 dark:bg-opacity-30">
+                  <i className="text-gray-700 duration-300 select-none fas fa-cog dark:text-gray-300 dark:group-hover:text-green-400 group-hover:text-green-600"></i>
+                </span>
+                <p className="text-sm font-extrabold text-gray-700 duration-300 select-none dark:text-gray-300 dark:group-hover:text-green-200 group-hover:text-green-600">
+                  Another group
+                </p>
+              </button>
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col px-6 pt-3 lg:px-32 lg:flex-row">
@@ -239,34 +246,56 @@ export default function GroupSettingsPage() {
                             <Line
                               data={{
                                 labels: (() => {
-                                  selectedSubscribers.sort(
-                                    (a, b) =>
-                                      new Date(a.createdAt) -
-                                      new Date(b.createdAt)
-                                  );
-
-                                  const data = Array(
-                                    differenceInDays(
-                                      new Date(
-                                        selectedSubscribers[
-                                          selectedSubscribers.length - 1
-                                        ].createdAt
-                                      ),
-                                      new Date(selected.createdAt)
-                                    )
-                                  ).fill(0);
-
-                                  data[0] = 1;
-
-                                  selectedSubscribers.forEach((subscriber) => {
-                                    const index = differenceInDays(
-                                      new Date(subscriber.createdAt),
-                                      new Date(selected.createdAt)
+                                  if (
+                                    selected?.createdAt &&
+                                    selectedSubscribers.length > 0
+                                  ) {
+                                    selectedSubscribers.sort(
+                                      (a, b) =>
+                                        new Date(a.createdAt) -
+                                        new Date(b.createdAt)
                                     );
-                                    data[index] = data[index] + 1;
-                                  });
 
-                                  return data;
+                                    let data = [];
+
+                                    if (
+                                      differenceInDays(
+                                        new Date(
+                                          selectedSubscribers[
+                                            selectedSubscribers.length - 1
+                                          ]?.createdAt
+                                        ),
+                                        new Date(selected.createdAt)
+                                      ) === NaN
+                                    ) {
+                                      data = Array(
+                                        differenceInDays(
+                                          new Date(
+                                            selectedSubscribers[
+                                              selectedSubscribers.length - 1
+                                            ]?.createdAt
+                                          ),
+                                          new Date(selected.createdAt)
+                                        )
+                                      ).fill(0);
+
+                                      data[0] = 1;
+
+                                      selectedSubscribers.forEach(
+                                        (subscriber) => {
+                                          const index = differenceInDays(
+                                            new Date(subscriber.createdAt),
+                                            new Date(selected.createdAt)
+                                          );
+                                          data[index] = data[index] + 1;
+                                        }
+                                      );
+                                    }
+
+                                    return data;
+                                  } else {
+                                    return [];
+                                  }
                                 })(),
                                 datasets: [
                                   {
@@ -274,34 +303,56 @@ export default function GroupSettingsPage() {
                                     borderColor: "rgba(34, 197, 94, 0.8)",
                                     borderWidth: 3,
                                     data: (() => {
-                                      selectedSubscribers.sort(
-                                        (a, b) =>
-                                          new Date(a.createdAt) -
-                                          new Date(b.createdAt)
-                                      );
-    
-                                      const data = Array(
-                                        differenceInDays(
-                                          new Date(
-                                            selectedSubscribers[
-                                              selectedSubscribers.length - 1
-                                            ].createdAt
-                                          ),
-                                          new Date(selected.createdAt)
-                                        )
-                                      ).fill(0);
-    
-                                      data[0] = 1;
-    
-                                      selectedSubscribers.forEach((subscriber) => {
-                                        const index = differenceInDays(
-                                          new Date(subscriber.createdAt),
-                                          new Date(selected.createdAt)
+                                      if (
+                                        selected?.createdAt &&
+                                        selectedSubscribers.length > 0
+                                      ) {
+                                        selectedSubscribers.sort(
+                                          (a, b) =>
+                                            new Date(a.createdAt) -
+                                            new Date(b.createdAt)
                                         );
-                                        data[index] = data[index] + 1;
-                                      });
-    
-                                      return data;
+
+                                        let data = [];
+
+                                        if (
+                                          differenceInDays(
+                                            new Date(
+                                              selectedSubscribers[
+                                                selectedSubscribers.length - 1
+                                              ]?.createdAt
+                                            ),
+                                            new Date(selected.createdAt)
+                                          ) === NaN
+                                        ) {
+                                          data = Array(
+                                            differenceInDays(
+                                              new Date(
+                                                selectedSubscribers[
+                                                  selectedSubscribers.length - 1
+                                                ]?.createdAt
+                                              ),
+                                              new Date(selected.createdAt)
+                                            )
+                                          ).fill(0);
+
+                                          data[0] = 1;
+
+                                          selectedSubscribers.forEach(
+                                            (subscriber) => {
+                                              const index = differenceInDays(
+                                                new Date(subscriber.createdAt),
+                                                new Date(selected.createdAt)
+                                              );
+                                              data[index] = data[index] + 1;
+                                            }
+                                          );
+                                        }
+
+                                        return data;
+                                      } else {
+                                        return [];
+                                      }
                                     })(),
                                     fill: true,
                                   },

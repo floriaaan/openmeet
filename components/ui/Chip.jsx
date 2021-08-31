@@ -3,7 +3,7 @@ export const Chip = ({ onClick, color, checked, name }) => {
     <div
       onClick={onClick}
       className={
-        "inline-flex justify-center cursor-pointer hover:bg-" +
+        "inline-flex justify-center hover:bg-" +
         color +
         "-300 dark:hover:bg-" +
         color +
@@ -14,7 +14,7 @@ export const Chip = ({ onClick, color, checked, name }) => {
         "-300 select-none " +
         (checked
           ? "bg-" + color + "-400 dark:bg-" + color + "-700"
-          : "bg-" + color + "-200 dark:bg-" + color + "-900")
+          : "bg-" + color + "-200 dark:bg-" + color + "-900") + (onClick ? " cursor-pointer" : "")
       }
     >
       <div className="inline-flex items-center text-sm font-semibold leading-none select-none min-w-max ">
