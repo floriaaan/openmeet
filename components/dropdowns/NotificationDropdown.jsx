@@ -181,7 +181,7 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
   return (
     <Link href={"/chat/" + id}>
       <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-yellow-50 dark:hover:bg-yellow-900">
-        <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
+        <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white rounded-full">
           <img
             className="rounded-full"
             alt={displayableUser?.displayName?.[0] || "?"}

@@ -51,6 +51,7 @@ export default function GroupPage({
         fullName: user.fullName,
         photoUrl: user.photoUrl,
         uid: user.uid,
+        createdAt: new Date().toISOString(),
       });
     }
   };
@@ -277,7 +278,6 @@ export default function GroupPage({
 
 export async function getServerSideProps(ctx) {
   const group = await getDoc(doc(firestore, "groups", ctx.query.slug));
-
 
   let data = group.data();
   data.events_raw = data.events || [];

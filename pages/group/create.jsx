@@ -87,6 +87,7 @@ export default function GroupCreatePage() {
           fullName: user.fullName,
           photoUrl: user.photoUrl,
           uid: user.uid,
+          createdAt: new Date().toISOString(),
         });
         Router.push("/group/" + slug);
       } else {
@@ -112,6 +113,7 @@ export default function GroupCreatePage() {
               fullName: user.fullName,
               photoUrl: user.photoUrl,
               uid: user.uid,
+              createdAt: new Date().toISOString(),
             }
           );
           Router.push("/group/" + docRef.id);

@@ -73,28 +73,28 @@ export const Sidebar = (props) => {
   );
 };
 
-const ChatOverview = (props) => {
+const ChatOverview = ({isFirst, isLast, id, messages, members, auth}) => {
   let rounded = " ";
-  if (props.isFirst) rounded += "rounded-t-xl rounded-b";
-  if (props.isLast) rounded += "rounded-b-xl rounded-t";
-  if (!props.isFirst && !props.isLast) rounded += "rounded";
+  if (isFirst) rounded += "rounded-t-xl rounded-b";
+  if (isLast) rounded += "rounded-b-xl rounded-t";
+  if (!isFirst && !isLast) rounded += "rounded";
 
   const lastSender =
-    props.messages[props.messages.length - 1].sender !== props.auth?.uid
-      ? props.members.find(
-          (el) => el.uid === props.messages[props.messages.length - 1].sender
+    messages[messages.length - 1].sender !== auth?.uid
+      ? members.find(
+          (el) => el.uid === messages[props.messages.length - 1].sender
         )
-      : props.members.find((el) => el.uid !== props.auth?.uid);
+      : members.find((el) => el.uid !== auth?.uid);
 
   return (
-    <Link href={"/chat/" + props.id}>
+    <Link href={"/chat/" + id}>
       <a
         className={
           "flex flex-row items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-200 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900 focus:outline-none" +
           rounded
         }
       >
-        {props.members.length > 2 ? (
+        {members.length > 2 ? (
           <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
             <i className="text-2xl fas fa-users" />
           </span>
@@ -111,11 +111,11 @@ const ChatOverview = (props) => {
         )}
         <div className="flex flex-col ml-2">
           <span className="text-sm font-bold text-yellow-700 dark:text-yellow-400">
-            {props.messages?.[props.messages.length - 1].content.length > 100
-              ? props.messages?.[props.messages.length - 1].content
+            {messages?.[messages.length - 1].content.length > 100
+              ? messages?.[messages.length - 1].content
                   .slice()
                   .substring(0, 100) + "..."
-              : props.messages?.[props.messages.length - 1].content}
+              : messages?.[messages.length - 1].content}
           </span>
           {/* <span className="text-xs text-gray-400 dark:text-gray-300">
             from{" "}
@@ -128,12 +128,12 @@ const ChatOverview = (props) => {
             }
           </span> */}
           <span className="text-[0.65rem] text-gray-400 dark:text-gray-300">
-            {props.members.length > 2
+            {members.length > 2
               ? "Chatroom - " + lastSender?.fullName || "Name not provided"
               : lastSender?.fullName || "Name not provided"}{" "}
             -{" "}
             {formatDistance(
-              new Date(props.messages?.[props.messages.length - 1]?.createdAt),
+              new Date(messages?.[messages.length - 1]?.createdAt),
               new Date(),
               {
                 addSuffix: true,

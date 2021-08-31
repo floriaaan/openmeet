@@ -45,6 +45,7 @@ export default function EventPage(props) {
         fullName: user.fullName,
         photoUrl: user.photoUrl,
         uid: user.uid,
+        createdAt: new Date().toISOString(),
       });
 
       await addDoc(collection(firestore, "notifications"), {
@@ -207,7 +208,7 @@ export default function EventPage(props) {
                   </span>
                   <div className="flex flex-col">
                     <h4 className="text-base font-bold">{props.group.name}</h4>
-                    <p className="text-xs">Public group</p>
+                    <p className="text-xs">{props.group.private ? "Private group" : "Public group"}</p>
                   </div>
                 </a>
               </Link>
@@ -389,7 +390,7 @@ export default function EventPage(props) {
 
 export async function getServerSideProps(ctx) {
   const event = await getDoc(doc(firestore, "events", ctx.query.slug));
-  
+
   // const event = {
   //   data: () => {
   //     return {

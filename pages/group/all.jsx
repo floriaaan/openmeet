@@ -131,7 +131,7 @@ export async function getServerSideProps() {
   // ];
   const groups = [];
 
-  getDocs(
+  await getDocs(
     query(collection(firestore, "groups"), where("private", "==", false))
   ).then((querySnapshot) => {
     querySnapshot.forEach((doc) => {

@@ -81,7 +81,7 @@ export default function EventAllPage({ events }) {
 export async function getServerSideProps() {
   const events = [];
 
-  getDocs(
+  await getDocs(
     query(collection(firestore, "events"), where("private", "==", false))
   ).then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
