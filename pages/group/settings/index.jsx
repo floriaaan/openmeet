@@ -2,7 +2,7 @@ import { AppLayout } from "@components/layouts/AppLayout";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
-import { imgErrorFallback } from "@libs/imgOnError";
+import { eventImgFallback, userImgFallback } from "@libs/imgOnError";
 import { differenceInDays } from "date-fns";
 import {
   collection,
@@ -17,17 +17,24 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import { Line } from "react-chartjs-2";
+import { options } from "resources/chart.config";
 
 export default function GroupSettingsPage() {
   const [groups, setGroups] = useState([]);
   const { user } = useAuth();
-  const [selected, setSelected] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
 
+  const [modalOpen, setModalOpen] = useState(false);
   const [seeMoreModal, setSeeMoreModal] = useState(<></>);
   const [seeMoreModalOpen, setSeeMoreModalOpen] = useState(false);
 
+  const [selected, setSelected] = useState(null);
   const [selectedSubscribers, setSelectedSubscribers] = useState([]);
+  const [name, setName] = useState("");
+  const [tags, setTags] = useState("");
+  const [description, setDescription] = useState("");
+  const [privateGroup, setPrivateGroup] = useState(false);
+  const [location, setLocation] = useState(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -60,6 +67,12 @@ export default function GroupSettingsPage() {
 
   useEffect(() => {
     if (selected) {
+      setName(selected.name);
+      setTags(selected.tags);
+      setDescription(selected.description);
+      setPrivateGroup(selected.privateGroup);
+      setLocation(selected.location);
+
       getDocs(
         collection(firestore, "groups/" + selected.slug + "/subscribers")
       ).then((querySnapshot) => {
@@ -204,317 +217,329 @@ export default function GroupSettingsPage() {
           )}
         </div>
 
-        <div className="flex flex-col px-6 pt-3 lg:px-32 lg:flex-row">
-          <div className="flex flex-col w-full p-4 lg:pr-2 lg:w-2/3">
-            <Disclosure defaultOpen>
-              {({ open }) => (
-                <>
-                  <Disclosure.Button className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-800 duration-300 bg-white dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-800 rounded-xl hover:bg-green-200 focus:outline-none ">
-                    <span className="font-bold">Statistics</span>
-                    <i
-                      className={`fas fa-chevron-down ${
-                        open ? "transform rotate-180" : ""
-                      } text-gray-800 dark:text-gray-200`}
-                    />
-                  </Disclosure.Button>
-                  <Transition
-                    enter="transition duration-100 ease-out"
-                    enterFrom="transform scale-95 opacity-0"
-                    enterTo="transform scale-100 opacity-100"
-                    leave="transition duration-75 ease-out"
-                    leaveFrom="transform scale-100 opacity-100"
-                    leaveTo="transform scale-95 opacity-0"
-                  >
-                    <Disclosure.Panel className="pt-4 pb-2 text-sm text-gray-500">
-                      <div className="rounded-xl">
-                        <div className="relative overflow-hidden transition duration-500 bg-white h-72 dark:bg-gray-800 rounded-xl">
-                          <div className="relative z-10 px-3 pt-8 pb-10 ">
-                            <h4 className="text-sm leading-tight text-gray-500 dark:text-gray-400">
-                              Engagement rate
-                            </h4>
-                            <h3 className="mb-1 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
-                              {selectedSubscribers.length +
-                                (selectedSubscribers.length > 1
-                                  ? " subscribers"
-                                  : " subscriber")}
-                            </h3>
-                            {/* <p className="text-xs leading-tight text-gray-500">
-                              
-                            </p> */}
-                          </div>
-                          <div className="absolute inset-x-0 bottom-0">
-                            <Line
-                              data={{
-                                labels: (() => {
-                                  if (
-                                    selected?.createdAt &&
-                                    selectedSubscribers.length > 0
-                                  ) {
-                                    selectedSubscribers.sort(
-                                      (a, b) =>
-                                        new Date(a.createdAt) -
-                                        new Date(b.createdAt)
-                                    );
-
-                                    let data = [];
-
-                                    if (
-                                      differenceInDays(
-                                        new Date(
-                                          selectedSubscribers[
-                                            selectedSubscribers.length - 1
-                                          ]?.createdAt
-                                        ),
-                                        new Date(selected.createdAt)
-                                      ) === NaN
-                                    ) {
-                                      data = Array(
-                                        differenceInDays(
-                                          new Date(
-                                            selectedSubscribers[
-                                              selectedSubscribers.length - 1
-                                            ]?.createdAt
-                                          ),
-                                          new Date(selected.createdAt)
-                                        )
-                                      ).fill(0);
-
-                                      data[0] = 1;
-
-                                      selectedSubscribers.forEach(
-                                        (subscriber) => {
-                                          const index = differenceInDays(
-                                            new Date(subscriber.createdAt),
-                                            new Date(selected.createdAt)
-                                          );
-                                          data[index] = data[index] + 1;
-                                        }
-                                      );
-                                    }
-
-                                    return data;
-                                  } else {
-                                    return [];
-                                  }
-                                })(),
-                                datasets: [
-                                  {
-                                    backgroundColor: "rgba(34, 197, 94, 0.1)",
-                                    borderColor: "rgba(34, 197, 94, 0.8)",
-                                    borderWidth: 3,
-                                    data: (() => {
-                                      if (
-                                        selected?.createdAt &&
-                                        selectedSubscribers.length > 0
-                                      ) {
-                                        selectedSubscribers.sort(
-                                          (a, b) =>
-                                            new Date(a.createdAt) -
-                                            new Date(b.createdAt)
-                                        );
-
-                                        let data = [];
-
-                                        if (
-                                          differenceInDays(
-                                            new Date(
-                                              selectedSubscribers[
-                                                selectedSubscribers.length - 1
-                                              ]?.createdAt
-                                            ),
-                                            new Date(selected.createdAt)
-                                          ) === NaN
-                                        ) {
-                                          data = Array(
-                                            differenceInDays(
-                                              new Date(
-                                                selectedSubscribers[
-                                                  selectedSubscribers.length - 1
-                                                ]?.createdAt
-                                              ),
-                                              new Date(selected.createdAt)
-                                            )
-                                          ).fill(0);
-
-                                          data[0] = 1;
-
-                                          selectedSubscribers.forEach(
-                                            (subscriber) => {
-                                              const index = differenceInDays(
-                                                new Date(subscriber.createdAt),
-                                                new Date(selected.createdAt)
-                                              );
-                                              data[index] = data[index] + 1;
-                                            }
-                                          );
-                                        }
-
-                                        return data;
-                                      } else {
-                                        return [];
-                                      }
-                                    })(),
-                                    fill: true,
-                                  },
-                                ],
-                              }}
-                              options={{
-                                tension: 0.3,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                  legend: {
-                                    display: false,
-                                  },
-                                  tooltips: {
-                                    enabled: false,
-                                  },
-                                },
-                                elements: {
-                                  point: {
-                                    radius: 0,
-                                  },
-                                },
-                                scales: {
-                                  x: {
-                                    display: false,
-
-                                    grid: { display: false },
-                                    ticks: { display: false },
-                                  },
-                                  y: {
-                                    display: false,
-                                    grid: {
-                                      display: false,
-                                      suggestedMin: 0,
-                                      suggestedMax: 10,
-                                    },
-
-                                    ticks: { display: false },
-                                  },
-                                },
-                              }}
+        {selected ? (
+          <div className="flex flex-col px-6 pt-3 lg:px-32 lg:flex-row">
+            <div className="flex flex-col w-full p-4 space-y-4 lg:pr-2 lg:w-2/3">
+              <Disclosure defaultOpen={false}>
+                {({ open }) => (
+                  <>
+                    <Disclosure.Button className="flex items-center justify-between w-full px-4 py-2 text-lg text-left text-gray-800 duration-300 bg-white dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-800 rounded-xl hover:bg-green-200 focus:outline-none ">
+                      <span className="font-extrabold">
+                        Edit {selected?.name}
+                      </span>
+                      <i
+                        className={`fas fa-chevron-down ${
+                          open ? "transform rotate-180" : ""
+                        } text-gray-800 dark:text-gray-200`}
+                      />
+                    </Disclosure.Button>
+                    <Transition
+                      enter="transition duration-100 ease-out"
+                      enterFrom="transform scale-95 opacity-0"
+                      enterTo="transform scale-100 opacity-100"
+                      leave="transition duration-75 ease-out"
+                      leaveFrom="transform scale-100 opacity-100"
+                      leaveTo="transform scale-95 opacity-0"
+                    >
+                      <Disclosure.Panel className="pt-4 pb-2">
+                        <div className="flex flex-col p-6 bg-white dark:bg-gray-800 rounded-xl">
+                          <div className="relative flex flex-col mb-4">
+                            <label
+                              htmlFor="name"
+                              className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+                            >
+                              Name
+                            </label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              // value={name}
+                              // onChange={(e) => setName(e.target.value)}
+                              className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
                             />
                           </div>
+                          <div className="relative flex flex-col mb-4">
+                            <label
+                              htmlFor="location"
+                              className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+                            >
+                              Tags
+                            </label>
+                            <div className="inline-flex items-center space-x-2">
+                              <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                                <i className="text-green-700 dark:text-green-400 fas fa-tags" />
+                              </span>
+                              <input
+                                type="text"
+                                id="tags"
+                                name="tags"
+                                placeholder="javascript; css; java; nosql; bigdata; .net; azure; agile; uxdesign;"
+                                // value={tags}
+                                // onChange={(e) => setTags(e.target.value)}
+                                // disabled
+                                className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                              />
+                            </div>
+                            <p className="flex mt-1 text-xs">
+                              Please separate tags with semi-colons.
+                            </p>
+                          </div>
+                          <div className="relative flex flex-col mb-4">
+                            <label
+                              htmlFor="location"
+                              className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+                            >
+                              Location
+                            </label>
+                            <div className="inline-flex items-center space-x-2">
+                              <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                                <i className="text-green-700 dark:text-green-400 fas fa-map-marker-alt" />
+                              </span>
+                              <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="Location"
+                                // value={location}
+                                // onChange={(e) => setLocation(e.target.value)}
+                                // disabled
+                                className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                              />
+                            </div>
+                            <p className="flex mt-1 text-xs">
+                              If no location is provided, the event will be set
+                              in Remote.
+                            </p>
+                          </div>
+                          <div className="relative flex flex-col mb-4">
+                            <label
+                              htmlFor="description"
+                              className="text-sm leading-7 text-gray-600 dark:text-gray-400"
+                            >
+                              Description
+                            </label>
+                            <textarea
+                              id="description"
+                              name="description"
+                              rows={7}
+                              className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
+                              // defaultValue={""}
+                              // onChange={(e) => setDescription(e.target.value)}
+                            />
+                          </div>
+                          <div className="relative flex flex-col mb-4">
+                            <p className="text-sm leading-7 text-gray-600 dark:text-gray-400">
+                              Preferences
+                            </p>
+                            <div className="inline-flex items-center space-x-2">
+                              <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
+                                <i className="text-green-700 dark:text-green-400 fas fa-lock" />
+                              </span>
+                              <label className="flex items-center space-x-3">
+                                <input
+                                  type="checkbox"
+                                  name="privateGroup"
+                                  // value={privateGroup}
+                                  // onChange={(e) =>
+                                  //   setPrivateGroup(e.target.checked)
+                                  // }
+                                  className="w-4 h-4 duration-200 bg-green-200 border-0 rounded-md appearance-none form-checkbox hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-700 checked:bg-green-600 checked:border-transparent focus:outline-none focus:bg-green-400 dark:focus:bg-green-900 ring-green-500"
+                                />
+                                <span className="text-sm text-gray-700 dark:text-gray-300">
+                                  Make the group private
+                                </span>
+                              </label>
+                            </div>
+                          </div>
                         </div>
+                      </Disclosure.Panel>
+                    </Transition>
+                  </>
+                )}
+              </Disclosure>
+              <Disclosure defaultOpen={true}>
+                {({ open }) => (
+                  <>
+                    <Disclosure.Button className="flex items-center justify-between w-full px-4 py-2 text-lg text-left text-gray-800 duration-300 bg-white dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-800 rounded-xl hover:bg-green-200 focus:outline-none ">
+                      <span className="font-extrabold">Statistics 📊</span>
+                      <i
+                        className={`fas fa-chevron-down ${
+                          open ? "transform rotate-180" : ""
+                        } text-gray-800 dark:text-gray-200`}
+                      />
+                    </Disclosure.Button>
+                    <Transition
+                      enter="transition duration-100 ease-out"
+                      enterFrom="transform scale-95 opacity-0"
+                      enterTo="transform scale-100 opacity-100"
+                      leave="transition duration-75 ease-out"
+                      leaveFrom="transform scale-100 opacity-100"
+                      leaveTo="transform scale-95 opacity-0"
+                    >
+                      <Disclosure.Panel className="pb-2 text-sm text-gray-500 ">
+                        <div className="rounded-xl">
+                          <div className="relative overflow-hidden transition duration-500 bg-white h-72 dark:bg-gray-800 rounded-xl">
+                            <div className="relative z-10 px-3 pt-8 pb-10 ">
+                              <h4 className="text-sm leading-tight text-gray-500 dark:text-gray-400">
+                                Engagement rate
+                              </h4>
+                              <h3 className="mb-1 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
+                                {selectedSubscribers.length +
+                                  (selectedSubscribers.length > 1
+                                    ? " subscribers"
+                                    : " subscriber")}
+                              </h3>
+                              {/* <p className="text-xs leading-tight text-gray-500">
+                              
+                            </p> */}
+                            </div>
+                            <div className="absolute inset-x-0 bottom-0">
+                              <Line
+                                data={{
+                                  labels: getChartData(
+                                    selected,
+                                    selectedSubscribers
+                                  ),
+                                  datasets: [
+                                    {
+                                      backgroundColor: "rgba(34, 197, 94, 0.1)",
+                                      borderColor: "rgba(34, 197, 94, 0.8)",
+                                      borderWidth: 3,
+                                      data: getChartData(
+                                        selected,
+                                        selectedSubscribers
+                                      ),
+                                      fill: true,
+                                    },
+                                  ],
+                                }}
+                                options={options}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </Disclosure.Panel>
+                    </Transition>
+                  </>
+                )}
+              </Disclosure>
+            </div>
+            <div className="flex flex-col w-full lg:w-1/3">
+              <div className="flex flex-col p-4 pt-0 space-y-4 lg:pt-4 lg:pl-2">
+                {selected && (
+                  <Link href={"/group/" + selected.slug}>
+                    <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-800 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
+                      <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
+                        <i className="text-2xl fas fa-users" />
+                      </span>
+                      <div className="flex flex-col">
+                        <h4 className="text-base font-extrabold">
+                          {selected.name}
+                        </h4>
+                        <p className="text-xs">
+                          {selected.private ? "Private group" : "Public group"}
+                        </p>
                       </div>
-                    </Disclosure.Panel>
-                  </Transition>
-                </>
-              )}
-            </Disclosure>
-          </div>
-          <div className="flex flex-col w-full lg:w-1/3">
-            <div className="flex flex-col p-4 pt-0 space-y-4 lg:pt-4 lg:pl-2">
-              {selected && (
-                <Link href={"/group/" + selected.slug}>
-                  <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-800 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
-                    <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
-                      <i className="text-2xl fas fa-users" />
-                    </span>
-                    <div className="flex flex-col">
-                      <h4 className="text-base font-extrabold">
-                        {selected.name}
-                      </h4>
-                      <p className="text-xs">
-                        {selected.private ? "Private group" : "Public group"}
-                      </p>
-                    </div>
-                  </a>
-                </Link>
-              )}
-              <div className="flex flex-col p-4 bg-white dark:bg-gray-800 rounded-xl">
-                <h3 className="inline-flex items-center justify-between px-3 mb-2 text-lg font-extrabold text-center text-gray-800 dark:text-gray-200">
-                  Subscribers
-                  {selectedSubscribers.length <= 8 ? (
-                    <span className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
-                      <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-                        <p className="text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400">
-                          {selectedSubscribers.length}
-                        </p>
+                    </a>
+                  </Link>
+                )}
+                <div className="flex flex-col p-4 bg-white dark:bg-gray-800 rounded-xl">
+                  <h3 className="inline-flex items-center justify-between px-3 mb-2 text-lg font-extrabold text-center text-gray-800 dark:text-gray-200">
+                    Subscribers
+                    {selectedSubscribers.length <= 8 ? (
+                      <span className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-red-200 dark:hover:bg-red-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
+                        <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-red-300 dark:hover:bg-red-700 dark:bg-opacity-30">
+                          <p className="text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400">
+                            {selectedSubscribers.length}
+                          </p>
+                        </span>
                       </span>
-                    </span>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setSeeMoreModal(
-                          <>
-                            <Dialog.Title
-                              as="h3"
-                              className="text-lg font-extrabold leading-6 text-gray-900 dark:text-gray-200 "
-                            >
-                              Subscribers
-                            </Dialog.Title>
-                            <div className="grid grid-cols-3 xl:grid-cols-5 gap-3 px-4 mt-3 w-full mx-auto min-h-[6rem]">
-                              {selectedSubscribers.map((e, key) => (
-                                <UserOverview {...e} key={key} />
-                              ))}
-                            </div>
-                          </>
-                        );
-                        setSeeMoreModalOpen(true);
-                      }}
-                      className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
-                    >
-                      <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-                        <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
-                      </span>
-                    </button>
-                  )}
-                </h3>
-                <div className="grid grid-cols-3 gap-3">
-                  {selectedSubscribers.map(
-                    (e, key) => key < 8 && <UserOverview {...e} key={key} />
-                  )}
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSeeMoreModal(
+                            <>
+                              <Dialog.Title
+                                as="h3"
+                                className="text-lg font-extrabold leading-6 text-gray-900 dark:text-gray-200 "
+                              >
+                                Subscribers
+                              </Dialog.Title>
+                              <div className="grid grid-cols-3 xl:grid-cols-5 gap-3 px-4 mt-3 w-full mx-auto min-h-[6rem]">
+                                {selectedSubscribers.map((e, key) => (
+                                  <UserOverview {...e} key={key} />
+                                ))}
+                              </div>
+                            </>
+                          );
+                          setSeeMoreModalOpen(true);
+                        }}
+                        className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-red-200 dark:hover:bg-red-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+                      >
+                        <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-red-300 dark:hover:bg-red-700 dark:bg-opacity-30">
+                          <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400"></i>
+                        </span>
+                      </button>
+                    )}
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3 xl:grid-cols-3 2xl:grid-cols-4">
+                    {selectedSubscribers.map(
+                      (e, key) => key < 8 && <UserOverview {...e} key={key} />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col p-4 bg-white dark:bg-gray-800 rounded-xl">
-                <h3 className="inline-flex items-center justify-between px-3 mb-2 text-lg font-extrabold text-center text-gray-800 dark:text-gray-200">
-                  Events
-                  {selectedSubscribers.length <= 8 ? (
-                    <span className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
-                      <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-purple-300 dark:hover:bg-purple-700 dark:bg-opacity-30">
-                        <p className="text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                          {selected?.events?.length}
-                        </p>
+                <div className="flex flex-col p-4 bg-white dark:bg-gray-800 rounded-xl">
+                  <h3 className="inline-flex items-center justify-between px-3 mb-2 text-lg font-extrabold text-center text-gray-800 dark:text-gray-200">
+                    Events
+                    {selectedSubscribers.length <= 8 ? (
+                      <span className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
+                        <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-purple-300 dark:hover:bg-purple-700 dark:bg-opacity-30">
+                          <p className="text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                            {selected?.events?.length}
+                          </p>
+                        </span>
                       </span>
-                    </span>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setSeeMoreModal(
-                          <>
-                            <Dialog.Title
-                              as="h3"
-                              className="text-lg font-extrabold leading-6 text-gray-900 dark:text-gray-200 "
-                            >
-                              Events
-                            </Dialog.Title>
-                            <div className="grid grid-cols-3 xl:grid-cols-5 gap-3 px-4 mt-3 w-full mx-auto min-h-[6rem]">
-                              {selected?.events?.map((e, key) => (
-                                <EventOverview {...e} key={key} />
-                              ))}
-                            </div>
-                          </>
-                        );
-                        setSeeMoreModalOpen(true);
-                      }}
-                      className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
-                    >
-                      <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-                        <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
-                      </span>
-                    </button>
-                  )}
-                </h3>
-                <div className="grid grid-cols-3 gap-3">
-                  {selected?.events?.map(
-                    (e, key) => key < 8 && <EventOverview {...e} key={key} />
-                  )}
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSeeMoreModal(
+                            <>
+                              <Dialog.Title
+                                as="h3"
+                                className="text-lg font-extrabold leading-6 text-gray-900 dark:text-gray-200 "
+                              >
+                                Events
+                              </Dialog.Title>
+                              <div className="grid grid-cols-3 xl:grid-cols-5 gap-3 px-4 mt-3 w-full mx-auto min-h-[6rem]">
+                                {selected?.events?.map((e, key) => (
+                                  <EventOverview {...e} key={key} />
+                                ))}
+                              </div>
+                            </>
+                          );
+                          setSeeMoreModalOpen(true);
+                        }}
+                        className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+                      >
+                        <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
+                          <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+                        </span>
+                      </button>
+                    )}
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3 xl:grid-cols-3 2xl:grid-cols-4">
+                    {selected?.events?.map(
+                      (e, key) => key < 8 && <EventOverview {...e} key={key} />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <>Loading...</>
+        )}
       </div>
       <Modal isOpen={modalOpen} setIsOpen={setModalOpen} />
       {selected?.events?.length > 8 && selectedSubscribers.length > 8 && (
@@ -538,7 +563,7 @@ const UserOverview = ({ uid, fullName, photoUrl }) => {
             className="rounded-full"
             alt={fullName || "?"}
             src={photoUrl}
-            onError={(e) => imgErrorFallback(e, fullName)}
+            onError={(e) => userImgFallback(e, fullName)}
           />
         </div>
         <div className="flex flex-col items-center justify-center w-full px-1">
@@ -569,7 +594,7 @@ const EventOverview = ({
               className="object-cover h-full rounded-full"
               alt={name}
               src={picture}
-              onError={(e) => imgErrorFallback(e, name)}
+              onError={(e) => eventImgFallback(e, name)}
             />
           </>
         ) : (
@@ -658,4 +683,48 @@ const SeeMoreModal = ({ isOpen, setIsOpen, content }) => {
       </Transition>
     </>
   );
+};
+
+const getChartData = (selected, selectedSubscribers) => {
+  // if (selected?.createdAt && selectedSubscribers.length > 0) {
+  //   selectedSubscribers.sort(
+  //     (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  //   );
+
+  //   let data = [];
+
+  //   if (
+  //     differenceInDays(
+  //       new Date(
+  //         selectedSubscribers[selectedSubscribers.length - 1]?.createdAt
+  //       ),
+  //       new Date(selected.createdAt)
+  //     ) !== NaN
+  //   ) {
+  //     data = Array(
+  //       differenceInDays(
+  //         new Date(
+  //           selectedSubscribers[selectedSubscribers.length - 1]?.createdAt
+  //         ),
+  //         new Date(selected.createdAt)
+  //       )
+  //     ).fill(0);
+
+  //     data[0] = 1;
+
+  //     selectedSubscribers.forEach((subscriber) => {
+  //       const index = differenceInDays(
+  //         new Date(subscriber.createdAt),
+  //         new Date(selected.createdAt)
+  //       );
+  //       data[index] = data[index] + 1;
+  //     });
+  //   }
+
+  //   return data;
+  // } else {
+  //   return [];
+  // }
+
+  return [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610];
 };

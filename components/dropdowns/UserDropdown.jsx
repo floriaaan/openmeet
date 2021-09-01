@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { Menu, Transition } from "@headlessui/react";
 
 import Link from "next/link";
-import { imgErrorFallback } from "@libs/imgOnError";
+import { userImgFallback } from "@libs/imgOnError";
 
 export const UserDropdown = () => {
   const { user, signout } = useAuth();
@@ -22,7 +22,7 @@ export const UserDropdown = () => {
                 <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
                   <img
                     alt={user?.fullName}
-                    onError={(e) => imgErrorFallback(e, user.fullName)}
+                    onError={(e) => userImgFallback(e, user.fullName)}
                     className="w-full h-full align-middle border-none rounded-full select-none "
                     src={
                       user?.photoUrl
@@ -65,7 +65,7 @@ export const UserDropdown = () => {
                           className="object-cover h-full rounded-full"
                           alt={user.fullName}
                           src={user.photoUrl}
-                          onError={(e) => imgErrorFallback(e, user?.fullName)}
+                          onError={(e) => userImgFallback(e, user?.fullName)}
                         />
                       </div>
                       <div className="flex flex-col items-center justify-center w-full px-1">

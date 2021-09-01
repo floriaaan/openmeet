@@ -8,7 +8,7 @@ import { formatDistance } from "date-fns";
 import Router from "next/router";
 
 import { Menu, Transition } from "@headlessui/react";
-import { imgErrorFallback } from "@libs/imgOnError";
+import { userImgFallback } from "@libs/imgOnError";
 import {
   collection,
   deleteDoc,
@@ -186,7 +186,7 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
             className="rounded-full"
             alt={displayableUser?.displayName?.[0] || "?"}
             src={displayableUser?.photoUrl}
-            onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
+            onError={(e) => userImgFallback(e, displayableUser?.fullName)}
           />
           {isUnread && (
             <span className="absolute bottom-0 right-0 flex items-center justify-center">

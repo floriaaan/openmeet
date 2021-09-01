@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { imgErrorFallback } from "../../libs/imgOnError";
+import { userImgFallback } from "../../libs/imgOnError";
 
 export const AvatarGroup = ({ users, limit = 5, xl = false }) => {
   return (
@@ -30,7 +30,7 @@ export const AvatarGroup = ({ users, limit = 5, xl = false }) => {
                       "&color=007bff&background=054880"
                 }
                 alt={user.fullName}
-                onError={(e) => imgErrorFallback(e, user.fullName)}
+                onError={(e) => userImgFallback(e, user.fullName)}
               />
             </Link>
           )

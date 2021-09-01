@@ -6,6 +6,7 @@ import { firestore } from "@libs/firebase";
 import { Menu, Transition } from "@headlessui/react";
 import { format } from "date-fns";
 import { collection, getDocs } from "firebase/firestore";
+import { eventImgFallback } from "@libs/imgOnError";
 
 export const EventDropdown = () => {
   const { user } = useAuth();
@@ -115,7 +116,7 @@ const EventOverview = ({
               className="object-cover h-full rounded-full"
               alt={name}
               src={picture}
-              // onError={(e) => imgErrorFallback(e, displayableUser?.fullName)}
+              onError={(e) => eventImgFallback(e, displayableUser?.fullName)}
             />
           </>
         ) : (

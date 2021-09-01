@@ -105,7 +105,7 @@ const ChatOverview = ({isFirst, isLast, id, messages, members, auth}) => {
               className="rounded-full"
               alt={lastSender?.displayName?.[0] || "?"}
               src={lastSender?.photoUrl}
-              onError={(e) => imgErrorFallback(e, lastSender?.fullName)}
+              onError={(e) => userImgFallback(e, lastSender?.fullName)}
             />
           </div>
         )}

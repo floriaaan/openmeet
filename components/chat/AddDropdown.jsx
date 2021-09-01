@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { firestore } from "@libs/firebase";
-import { imgErrorFallback } from "@libs/imgOnError";
+import { userImgFallback } from "@libs/imgOnError";
 import { Menu, Transition } from "@headlessui/react";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
@@ -144,7 +144,7 @@ const UserOverview = ({
           src={photoUrl}
           alt={fullName}
           className="w-8 rounded-full"
-          onError={(e) => imgErrorFallback(e, fullName)}
+          onError={(e) => userImgFallback(e, fullName)}
         />
         <div className="ml-3 text-sm text-gray-700 dark:text-gray-300">
           {fullName || "Name not provided"}

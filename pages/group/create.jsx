@@ -23,11 +23,10 @@ export default function GroupCreatePage() {
   const [name, setName] = useState("");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
-
   const [privateGroup, setPrivateGroup] = useState(false);
+  const [location, setLocation] = useState(null);
 
   const [position, setPosition] = useState(null);
-  const [location, setLocation] = useState(null);
   const [map, setMap] = useState(null);
 
   const fetchLocation = async () => {
