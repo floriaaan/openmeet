@@ -1,6 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { useEventListener } from "@hooks/useEventListener";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+
+import algoliasearch from "algoliasearch/lite";
+const searchClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
+);
+
+import { InstantSearch } from "react-instantsearch-dom";
+import CustomSearchBox from "./CustomSearchBox";
+import CustomHits from "./CustomHits";
 
 export const Spotlight = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -36,6 +46,8 @@ export const Spotlight = () => {
       }
     }
   });
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -74,11 +86,11 @@ export const Spotlight = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="z-[51] inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-900 shadow-xl rounded-2xl">
-                
-                <div className="flex flex-row">
-                    
-                </div>
+              <div className="z-[51] inline-block w-full max-w-md p-4 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-900 shadow-xl rounded-2xl">
+                <InstantSearch searchClient={searchClient} indexName="group">
+                  <CustomSearchBox />
+                  <CustomHits />
+                </InstantSearch>
 
                 <div className="inline-flex justify-end w-full mt-4">
                   <button

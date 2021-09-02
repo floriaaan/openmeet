@@ -1,4 +1,12 @@
 const functions = require("firebase-functions");
+const {
+  addGroup,
+  updateGroup,
+  deleteGroup,
+  addEvent,
+  updateEvent,
+  deleteEvent,
+} = require("./functions/algolia");
 const { default: next } = require("next");
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -16,3 +24,9 @@ exports.nextServer = functions
     return await nextjsHandle(req, res);
   });
 
+exports.addGroup = addGroup;
+exports.updateGroup = updateGroup;
+exports.deleteGroup = deleteGroup;
+exports.addEvent = addEvent;
+exports.updateEvent = updateEvent;
+exports.deleteEvent = deleteEvent;

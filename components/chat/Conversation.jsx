@@ -74,7 +74,7 @@ export const Conversation = ({ id }) => {
     if (trimmedMessage) {
       // Add new message in Firestore
       const docRef = doc(firestore, `chats/${id}`);
-      const docSnap = getDoc(docRef);
+      const docSnap = await getDoc(docRef);
       const data = docSnap.data();
 
       data.messages.push({

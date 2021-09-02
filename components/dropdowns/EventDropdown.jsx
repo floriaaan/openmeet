@@ -26,6 +26,7 @@ export const EventDropdown = () => {
         const randomIndex = Math.floor(Math.random() * list.length);
         const randomEvent = list[randomIndex];
         if (
+          list.length > 0 &&
           events.findIndex((group) => group.slug === randomEvent.slug) === -1 &&
           !randomEvent.private
         ) {

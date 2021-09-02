@@ -25,7 +25,8 @@ export const GroupDropdown = () => {
         const randomIndex = Math.floor(Math.random() * list.length);
         const randomGroup = list[randomIndex];
         if (
-          groups.findIndex((group) => group.slug === randomGroup.slug) === -1
+          list.length > 0 &&
+          groups.findIndex((group) => group.slug === randomGroup.slug) === -1 && !randomGroup.private
         ) {
           groups.push(randomGroup);
         }
