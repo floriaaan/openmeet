@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Spotlight } from "@components/ui/Spotlight";
+import { DarkModeToggler } from "@components/helpers/DarkMode";
 
 function MyApp({ Component, pageProps }) {
   const Loader = dynamic(
@@ -27,6 +28,8 @@ function MyApp({ Component, pageProps }) {
         <AuthProvider>
           <Component {...pageProps} />
           <Spotlight />
+          <DarkModeToggler />
+          <Loader />
         </AuthProvider>
       </ThemeProvider>
     </>

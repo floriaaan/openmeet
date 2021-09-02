@@ -5,8 +5,6 @@ import { connectStateResults } from "react-instantsearch-dom";
 function Hits({ searchState, searchResults }) {
   const validQuery = searchState.query?.length >= 2;
 
-  console.log({ searchResults, validQuery });
-
   return (
     <>
       {validQuery && (
@@ -34,7 +32,7 @@ function Hits({ searchState, searchResults }) {
                 index < 3 && <GroupOverview key={hit.objectID} {...hit} />
             )}
           </div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 overflow-y-auto max-h-72">
             {searchResults.hits.map(
               (hit, index) =>
                 index >= 3 && <GroupOverviewList key={hit.objectID} {...hit} />

@@ -57,7 +57,7 @@ export default function EventAllPage({ events }) {
                 </div>
               </div>
             </div>
-            <div className="inline-flex flex-grow pt-3 md:pt-0 md:pl-3">
+            <div className="inline-flex pt-3 overflow-x-hidden md:pt-0 md:pl-3">
               <ChipList
                 list={["Rouen, France", "Val-de-Reuil, France", "Remote"]}
                 selected={selected}
@@ -67,7 +67,7 @@ export default function EventAllPage({ events }) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 md:grid-cols-2 lg:gap-6 lg:px-32">
+        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 md:grid-cols-2 2xl:grid-cols-4 lg:gap-6 lg:px-32">
           {displayables.map((el, index) => (
             <EventOverview {...el} key={index} />
           ))}

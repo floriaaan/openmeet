@@ -120,14 +120,28 @@ export const UserDropdown = () => {
               </div>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex items-center justify-start w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
+                className="flex items-center justify-between w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 focus:outline-none hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
               >
-                {theme === "light" ? (
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
-                ) : (
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
-                )}
-                Toggle Dark Mode
+                <span className="inline-flex items-center">
+                  {theme === "light" ? (
+                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
+                  ) : (
+                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
+                  )}
+                  Toggle Dark Mode
+                </span>
+                <span
+                  style={{ opacity: 1 }}
+                  className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 dark:border-gray-800 rounded-md bg-white select-none dark:bg-gray-900"
+                >
+                  <span className="sr-only">Press </span>
+                  <kbd className="font-sans">
+                    <abbr className="no-underline">Ctrl</abbr>
+                  </kbd>
+                  <span className="sr-only"> and </span>
+                  <kbd className="font-sans"> + D</kbd>
+                  <span className="sr-only"> to toggle dark mode</span>
+                </span>
               </button>
             </Menu.Items>
           </Transition>

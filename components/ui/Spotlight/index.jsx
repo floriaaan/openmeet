@@ -86,7 +86,7 @@ export const Spotlight = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="z-[51] inline-block w-full max-w-md p-4 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-900 shadow-xl rounded-2xl">
+              <div className="z-[51] inline-block w-full max-w-md p-4 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-900 shadow-xl rounded-2xl max-h-[60vh]">
                 <InstantSearch searchClient={searchClient} indexName="group">
                   <CustomSearchBox />
                   <CustomHits />

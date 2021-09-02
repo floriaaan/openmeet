@@ -38,7 +38,7 @@ export default function GroupAllPage({ groups }) {
             <span className="text-green-600 dark:text-green-400">group</span>
           </h3>
 
-          <div className="flex flex-col items-center divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
+          <div className="flex flex-col items-center w-full divide-y divide-gray-300 md:flex-row md:divide-y-0 md:divide-x dark:divide-gray-700">
             <div className="inline-flex items-center pb-3 lg:pr-3 md:pb-0">
               <div className="flex items-center overflow-x-auto sm:overflow-x-visible">
                 <DistanceSelect distance={distance} setDistance={setDistance} />
@@ -57,16 +57,16 @@ export default function GroupAllPage({ groups }) {
                 </div>
               </div>
             </div>
-            <div className="inline-flex flex-grow pt-3 md:pt-0 md:pl-3">
+            <div className="inline-flex pt-3 overflow-x-hidden md:pt-0 md:pl-3">
               <ChipList
-                list={["Rouen, France", "Val-de-Reuil, France", "Remote"]}
+                list={groups.map((g) => g.location?.location)}
                 selected={selected}
                 setSelected={setSelected}
               />
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 md:grid-cols-2 lg:gap-6 lg:px-32">
+        <div className="grid grid-cols-1 gap-3 p-6 lg:grid-cols-3 2xl:grid-cols-4 md:grid-cols-2 lg:gap-6 lg:px-32">
           {displayables.map((el, index) => (
             <GroupOverview {...el} key={index} />
           ))}

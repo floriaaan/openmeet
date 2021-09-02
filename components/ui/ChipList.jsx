@@ -7,7 +7,7 @@ export const ChipList = ({
   color = "green",
 }) => {
   return (
-    <div className="inline-flex items-center w-full space-x-3 overflow-x-auto p-1.5">
+    <div className="inline-flex items-center max-w-max space-x-3 overflow-x-auto p-1.5">
       {list.map((el, index) => (
         <Chip
           color={color}
