@@ -25,6 +25,9 @@
       "**/node_modules/**",
       "**/public/**",
       "**/.next/cache/**"
+    ],
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
     ]
   }
 }

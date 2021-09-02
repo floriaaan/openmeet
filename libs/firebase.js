@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getFirestore, doc, updateDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -38,7 +38,7 @@ export { firebase, firestore };
 export async function createUser(data) {
   const userRef = doc(firestore, `users/${data.uid}`);
 
-  await updateDoc(userRef, { ...data }, { merge: true });
+  await setDoc(userRef, { ...data }, { merge: true });
   const userSnap = await getDoc(userRef);
   return { ...userSnap.data() };
 }

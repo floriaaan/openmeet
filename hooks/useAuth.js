@@ -11,6 +11,8 @@ import {
   createUserWithEmailAndPassword,
   GithubAuthProvider,
   OAuthProvider,
+  TwitterAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { useRouter } from "next/router";
 
@@ -88,7 +90,30 @@ function useFirebaseAuth() {
   const signinWithGoogle = async (redirect) => {
     const response = await signInWithPopup(auth, new GoogleAuthProvider());
     handleUser(response.user);
+    if (redirect) {
+      Router.push(redirect);
+    } else {
+      Router.push("/");
+    }
+  };
+
+  const signinWithFacebook = async (redirect) => {
+    const response = await signInWithPopup(auth, new FacebookAuthProvider());
     handleUser(response.user);
+
+    console.log(response)
+    if (redirect) {
+      Router.push(redirect);
+    } else {
+      Router.push("/");
+    }
+  };
+
+  const signinWithTwitter = async (redirect) => {
+    const response = await signInWithPopup(auth, new TwitterAuthProvider());
+    handleUser(response.user);
+
+    console.log(response)
     if (redirect) {
       Router.push(redirect);
     } else {
@@ -135,6 +160,8 @@ function useFirebaseAuth() {
     signinWithGoogle,
     signinWithGitHub,
     signinWithMicrosoft,
+    signinWithFacebook,
+    signinWithTwitter,
     signout,
     register,
   };

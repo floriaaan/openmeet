@@ -4,18 +4,27 @@ import Image from "next/image";
 import { GuestLayout } from "@components/layouts/GuestLayout";
 import { useAuth } from "@hooks/useAuth";
 
-
 // layout for page
 
 export default function Login() {
-  const { signinWithGoogle, signinWithGitHub, signinWithMicrosoft } = useAuth();
+  const {
+    signinWithGoogle,
+    signinWithGitHub,
+    signinWithMicrosoft,
+    signinWithFacebook,
+    signinWithTwitter,
+  } = useAuth();
   return (
     <GuestLayout>
       <div className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900">
         <div className="flex flex-col md:flex-row items-center md:items-start xl:sticky xl:top-0 z-[47] w-full px-6 py-16 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
           <Link href="/">
             <a>
-              <img src="/logo.svg" alt="OpenMeet" className="w-12 h-12 mb-3 md:mb-0" />
+              <img
+                src="/logo.svg"
+                alt="OpenMeet"
+                className="w-12 h-12 mb-3 md:mb-0"
+              />
             </a>
           </Link>
           <h3 className="inline-flex items-center ml-6 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
@@ -60,6 +69,29 @@ export default function Login() {
                 src="/img/brand/microsoft.png"
               />
               <span className="ml-1">Microsoft</span>
+            </button>
+            <button
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+              type="button"
+              onClick={() => signinWithFacebook()}
+            >
+              <img
+                alt="Facebook"
+                className="w-4 h-4 mr-1"
+                src="/img/brand/facebook.svg"
+              />
+              <span className="ml-1">Facebook</span>
+            </button><button
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+              type="button"
+              onClick={() => signinWithTwitter()}
+            >
+              <img
+                alt="Twitter"
+                className="w-4 h-4 mr-1"
+                src="/img/brand/twitter.svg"
+              />
+              <span className="ml-1">Twitter</span>
             </button>
           </div>
         </div>

@@ -67,6 +67,7 @@ export default function GroupSettingsPage() {
 
   useEffect(() => {
     if (selected) {
+      console.log(selected)
       setName(selected.name);
       setTags(selected.tags);
       setDescription(selected.description);
