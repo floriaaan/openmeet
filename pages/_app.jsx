@@ -1,7 +1,9 @@
-import { AuthProvider } from "@hooks/useAuth";
-import { ThemeProvider } from "next-themes";
 import "../styles/globals.css";
 import "../styles/nprogress.css";
+import "leaflet/dist/leaflet.css";
+
+import { AuthProvider } from "@hooks/useAuth";
+import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { Spotlight } from "@components/ui/Spotlight";

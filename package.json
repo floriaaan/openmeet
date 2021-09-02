@@ -2,7 +2,7 @@
   "name": "openmeet-next",
   "version": "0.1.0",
   "private": true,
-  "main": "functions.js",
+  "main": "function.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +19,6 @@
     "@heroicons/react": "^1.0.2",
     "@popperjs/core": "^2.9.2",
     "@tailwindcss/forms": "^0.3.3",
-    "algoliasearch": "^4.10.5",
     "chart.js": "^3.5.1",
     "cheerio": "^1.0.0-rc.10",
     "date-fns": "^2.23.0",
@@ -27,7 +26,7 @@
     "firebase-admin": "^9.11.0",
     "firebase-functions": "^3.15.5",
     "leaflet": "^1.7.1",
-    "next": "11.1.1",
+    "next": "^11.1.2",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.3.1",
     "next-themes": "^0.0.15",
@@ -48,6 +47,6 @@
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.9"
   }
 }
