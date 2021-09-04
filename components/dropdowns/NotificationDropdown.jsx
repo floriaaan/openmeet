@@ -124,22 +124,24 @@ export const NotificationDropdown = () => {
                 </Link>
               </div>
               <div className="grid grid-cols-3 gap-3 px-4 w-full mx-auto min-h-[6rem]">
-                {chats.length > 0
-                  ? chats.map(
-                      (chat, index) =>
-                        index < 3 && (
-                          <ChatOverview
-                            {...chat}
-                            key={index}
-                            isUnread={
-                              notifications.findIndex(
-                                (e) => e.data.id === chat.id
-                              ) !== -1
-                            }
-                          />
-                        )
-                    )
-                  : "No messages yet"}
+                {chats.length > 0 ? (
+                  chats.map(
+                    (chat, index) =>
+                      index < 3 && (
+                        <ChatOverview
+                          {...chat}
+                          key={index}
+                          isUnread={
+                            notifications.findIndex(
+                              (e) => e.data.id === chat.id
+                            ) !== -1
+                          }
+                        />
+                      )
+                  )
+                ) : (
+                  <div className="flex items-center justify-center w-full h-full col-span-3">No messages yet</div>
+                )}
               </div>
 
               <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">

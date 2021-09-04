@@ -35,3 +35,7 @@
   height: 100%;
   width: 100%;
 }
+
+.leaflet-pane {
+  z-index: 0 !important;
+}

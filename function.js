@@ -18,7 +18,7 @@ const server = next({
 
 const nextjsHandle = server.getRequestHandler();
 exports.nextServer = functions
-  .region("europe-west1")
+  // .region("europe-west1")
   .https.onRequest(async (req, res) => {
     await server.prepare();
     return await nextjsHandle(req, res);

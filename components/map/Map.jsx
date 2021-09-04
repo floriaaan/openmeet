@@ -57,7 +57,7 @@ const LeafletMap = ({
 
   return (
     <MapContainer
-      className={className}
+      className={className + "z-[45]"}
       center={position}
       zoom={zoom}
       onClick={() => {}}
