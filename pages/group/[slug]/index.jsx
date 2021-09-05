@@ -102,41 +102,44 @@ export default function GroupPage({
         <section className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
           {/* 2xl:sticky 2xl:top-0 z-[47] */}
           <div className="flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
-            <div className="inline-flex items-center h-10 space-x-6">
+            <div className="flex flex-col lg:h-10 lg:items-center lg:flex-row lg:space-x-6">
               <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-                <i className="flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
+                <i className="hidden lg:flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
                 {location?.location || "Remote"}
               </div>
 
-              <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
+              <div className="items-center hidden text-sm text-gray-500 transition duration-200 lg:inline-flex hover:text-gray-700 dark:text-gray-400">
                 <i className="flex items-center flex-shrink-0 w-5 h-5 mr-1 fas fa-calendar "></i>
                 {formatDistance(new Date(createdAt), new Date(), {
                   addSuffix: true,
                 })}
               </div>
-              <div className="items-center hidden text-sm text-gray-500 transition duration-200 lg:inline-flex hover:text-gray-700 dark:text-gray-400">
-                <AvatarGroup users={subs} limit={4} />
-                <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+              {subs.length ? (
+                <div className="items-center hidden text-sm text-gray-500 transition duration-200 lg:inline-flex hover:text-gray-700 dark:text-gray-400">
+                  <AvatarGroup users={subs} limit={4} />
+                  <i className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+                  {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
+                </div>
+              ) : null}
+            </div>
+            {subs.length ? (
+              <div className="inline-flex items-center mb-2 text-sm text-gray-500 transition duration-200 lg:hidden hover:text-gray-700 dark:text-gray-400">
+                <i className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
                 {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
               </div>
-            </div>
-            <div className="inline-flex items-center mb-2 text-sm text-gray-500 transition duration-200 lg:hidden hover:text-gray-700 dark:text-gray-400">
-              <AvatarGroup users={subs} limit={4} />
-              <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
-              {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
-            </div>
+            ) : null}
             <div className="lg:flex lg:items-center lg:justify-between">
               <h2 className="mb-2 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
                 {name}
               </h2>
-              <div className="flex mt-5 space-x-3 lg:mt-0 lg:ml-4">
+              <div className="flex mt-2 space-x-3 lg:mt-0 lg:ml-4">
                 {admin.uid === user?.uid && (
                   <Link href={"/group/settings/?slug=" + slug}>
-                    <a className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-gray-100 rounded-full cursor-pointer group max-w-max dark:bg-gray-900 dark:bg-opacity-30 ">
+                    <a className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 ">
                       <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
                         <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
                       </span>
-                      <p className="text-sm font-extrabold text-gray-700 select-none dark:text-gray-300">
+                      <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
                         Edit
                       </p>
                     </a>
@@ -155,12 +158,12 @@ export default function GroupPage({
                         .catch((error) => console.log("Error sharing", error));
                     }
                   }}
-                  className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-gray-100 rounded-full cursor-pointer focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+                  className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 "
                 >
                   <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
                     <i className="text-gray-700 select-none fas fa-share-alt dark:text-gray-300 "></i>
                   </span>
-                  <p className="text-sm font-extrabold text-gray-700 select-none dark:text-gray-300">
+                  <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
                     Share
                   </p>
                 </button>
@@ -168,7 +171,7 @@ export default function GroupPage({
                 <button
                   onClick={toggleSubscription}
                   className={
-                    "inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-green-100 rounded-full cursor-pointer group  max-w-max dark:bg-green-900  dark:bg-opacity-30 " +
+                    "inline-flex items-center px-1 py-1 lg:pr-6 space-x-3 transition bg-green-100 rounded-full cursor-pointer group  max-w-max dark:bg-green-900  dark:bg-opacity-30 " +
                     (subs?.find((sub) => sub.id === user?.uid)
                       ? "hover:bg-red-200 dark:hover:bg-red-900 duration-500"
                       : "hover:bg-green-200 dark:hover:bg-opacity-60 duration-300")
@@ -180,10 +183,10 @@ export default function GroupPage({
                         <i className="text-green-700 select-none fas fa-check dark:text-green-300 group-hover:hidden"></i>
                         <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
                       </span>
-                      <p className="text-sm font-extrabold text-green-700 select-none dark:text-green-300 group-hover:hidden">
+                      <p className="hidden text-sm font-extrabold text-green-700 select-none lg:flex dark:text-green-300 lg:group-hover:hidden">
                         Subscribed
                       </p>
-                      <p className="hidden text-sm font-extrabold text-red-700 select-none dark:text-red-300 group-hover:block">
+                      <p className="hidden text-sm font-extrabold text-red-700 select-none dark:text-red-300 lg:group-hover:block">
                         Wanna leave ? 😢
                       </p>
                     </div>
@@ -192,7 +195,7 @@ export default function GroupPage({
                       <span className="flex items-center justify-center w-8 h-8 bg-green-300 rounded-full dark:bg-green-800 dark:bg-opacity-30">
                         <i className="text-green-700 select-none fas fa-plus dark:text-green-300 "></i>
                       </span>
-                      <p className="text-sm font-extrabold text-green-700 select-none dark:text-green-300">
+                      <p className="hidden text-sm font-extrabold text-green-700 select-none lg:flex dark:text-green-300">
                         Subscribe
                       </p>
                     </>
@@ -203,7 +206,7 @@ export default function GroupPage({
             <p className="w-full pt-4 pb-2 text-justify text-gray-500 dark:text-gray-400">
               {description}
             </p>
-            <div className="w-full ">
+            <div className="inline-flex pt-3 overflow-x-hidden md:pt-0">
               <ChipList list={tags} />
             </div>
           </div>
@@ -225,7 +228,7 @@ export default function GroupPage({
                   ))}
                 </>
               ) : (
-                <div className="flex flex-col items-center justify-center w-full px-6 pb-6 text-4xl font-bold text-gray-400 uppercase dark:text-gray-600 h-96 md:col-span-3">
+                <div className="flex flex-col items-center justify-center w-full px-6 pb-6 h-96 md:col-span-3">
                   <div className="w-72 h-72">
                     <Lottie
                       isClickToPauseDisabled
@@ -240,7 +243,9 @@ export default function GroupPage({
                       }}
                     />
                   </div>
-                  {"No events yet... 📅"}
+                  <span className="text-xl font-extrabold text-gray-400 md:text-2xl lg:text-4xl dark:text-gray-600">
+                    {"No events yet... 📅"}
+                  </span>
                 </div>
               )}
             </div>
