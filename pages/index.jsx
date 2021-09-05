@@ -1,4 +1,6 @@
+import { EventSkeleton } from "@components/cards/CardEventOverview";
 import { EventOverview } from "@components/cards/CardEventOverview";
+import { GroupSkeleton } from "@components/cards/CardGroupOverview";
 import { GroupOverview } from "@components/cards/CardGroupOverview";
 import { AppLayout } from "@components/layouts/AppLayout";
 import { RainbowHighlight } from "@components/ui/RainbowHighlight";
@@ -58,7 +60,7 @@ export default function Index() {
               className="object-cover h-full"
               style={{
                 backgroundImage:
-                  "url(https://images.unsplash.com/photo-1576085898323-218337e3e43c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=33)",
+                  "url(https://images.unsplash.com/photo-1532635241-17e820acc59f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=703&q=80)",
               }}
             >
               <div className="h-full bg-black opacity-25" />
@@ -69,6 +71,7 @@ export default function Index() {
           <EventSection />
           <GroupsSection />
         </section>
+        
       </div>
     </AppLayout>
   );
@@ -76,6 +79,7 @@ export default function Index() {
 
 const GroupsSection = () => {
   const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getDocs(
       query(
@@ -91,6 +95,7 @@ const GroupsSection = () => {
         });
         // console.log(JSON.stringify(_tmp))
         setGroups(_tmp);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -100,9 +105,10 @@ const GroupsSection = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="inline-flex items-end justify-between p-3">
-        <span className="text-xl font-medium text-gray-600 dark:text-gray-300 md:font-bold md:text-3xl lg:text-4xl">
-          Latest groups
-        </span>
+        <h3 className="text-xl font-extrabold text-gray-800 md:text-2xl lg:text-3xl xl:text-4xl dark:text-gray-200">
+          Latest{" "}
+          <span className="text-green-600 dark:text-green-400">groups</span>
+        </h3>
         <Link href="/group/all">
           <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-green-500">
             Explore more groups
@@ -111,8 +117,20 @@ const GroupsSection = () => {
         </Link>
       </div>
       <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 lg:px-12 lg:py-6">
-        {groups.map(
-          (el, index) => index < 3 && <GroupOverview {...el} key={index} />
+        {!loading ? (
+          <>
+            {groups.map(
+              (el, index) => index < 3 && <GroupOverview {...el} key={index} />
+            )}
+          </>
+        ) : (
+          <>
+            {Array(3)
+              .fill(0)
+              .map((_, key) => (
+                <GroupSkeleton key={key} />
+              ))}
+          </>
         )}
         {groups.length < 3 && (
           <div className="flex items-center justify-center w-full py-6 min-h-[5rem] lg:min-h-[20rem] bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
@@ -130,9 +148,10 @@ const GroupsSection = () => {
 
 const EventSection = () => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const unsub = onSnapshot(
-      collection(firestore, "events"),
+      query(collection(firestore, "events"), where("private", "==", false)),
       (querySnapshot) => {
         let _tmp = [];
         querySnapshot.forEach((doc) => {
@@ -140,6 +159,7 @@ const EventSection = () => {
             _tmp.push({ slug: doc.id, ...doc.data() });
         });
         setEvents(_tmp);
+        setLoading(false);
       }
     );
 
@@ -151,9 +171,10 @@ const EventSection = () => {
   return (
     <div className="flex flex-col w-full ">
       <div className="inline-flex items-end justify-between p-3">
-        <span className="text-xl font-medium text-gray-600 dark:text-gray-300 md:font-bold md:text-3xl lg:text-4xl">
-          Upcoming events
-        </span>
+        <h3 className="text-xl font-extrabold text-gray-800 md:text-2xl lg:text-3xl xl:text-4xl dark:text-gray-200">
+          Upcoming{" "}
+          <span className="text-purple-600 dark:text-purple-400">events</span>
+        </h3>
         <Link href="/event/all">
           <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer hover:text-purple-500">
             Explore more events
@@ -161,24 +182,37 @@ const EventSection = () => {
           </a>
         </Link>
       </div>
-      {events.length !== 0 ? (
+      {!loading ? (
         <div className="grid gap-3 lg:grid-cols-4 sm:grid-cols-2 lg:px-12 lg:py-6">
-          {events.map(
-            (el, index) => index < 4 && <EventOverview {...el} key={index} />
-          )}
-          {events.length < 4 && (
-            <div className="flex items-center justify-center w-full h-full py-6 min-h-[5rem] lg:min-h-[20rem]  bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
-              <Link href="/event/create">
-                <a className="flex items-center justify-center w-24 h-24 text-purple-700 transition duration-300 bg-purple-200 border border-purple-500 rounded-full cursor-pointer dark:border-purple-500 dark:bg-opacity-50 dark:bg-purple-700 dark:text-purple-200 hover:bg-purple-300 dark:hover:bg-purple-800">
-                  <i className="text-xl fas fa-plus"></i>
-                </a>
-              </Link>
+          {events.length !== 0 ? (
+            <>
+              {events.map(
+                (el, index) =>
+                  index < 4 && <EventOverview {...el} key={index} />
+              )}
+              {events.length < 4 && (
+                <div className="flex items-center justify-center w-full h-full py-6 min-h-[5rem] lg:min-h-[20rem]  bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
+                  <Link href="/event/create">
+                    <a className="flex items-center justify-center w-24 h-24 text-purple-700 transition duration-300 bg-purple-200 border border-purple-500 rounded-full cursor-pointer dark:border-purple-500 dark:bg-opacity-50 dark:bg-purple-700 dark:text-purple-200 hover:bg-purple-300 dark:hover:bg-purple-800">
+                      <i className="text-xl fas fa-plus"></i>
+                    </a>
+                  </Link>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="inline-flex items-center justify-center w-full h-48">
+              No upcoming events yet... 😢
             </div>
           )}
         </div>
       ) : (
-        <div className="inline-flex items-center justify-center w-full h-48">
-          No upcoming events yet... 😢
+        <div className="grid gap-3 lg:grid-cols-4 sm:grid-cols-2 lg:px-12 lg:py-6">
+          {Array(4)
+            .fill(0)
+            .map((_, key) => (
+              <EventSkeleton key={key} />
+            ))}
         </div>
       )}
     </div>

@@ -10,8 +10,8 @@ const db = admin.firestore();
 const fresh = async () => {
   const collections = await db.listCollections();
 
-  return Promise.all(
-    collections.map(async (collection) => {
+  return Promise.all([
+    ...collections.map(async (collection) => {
       return db
         .collection(collection.id)
         .get()
@@ -20,8 +20,9 @@ const fresh = async () => {
             await db.collection(collection.id).doc(doc.id).delete();
           });
         });
-    })
-  );
+    }),
+    // TODO: storage
+  ]);
 };
 
 const populate = async () => {
