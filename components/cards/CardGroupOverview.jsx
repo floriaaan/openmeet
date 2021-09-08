@@ -1,12 +1,14 @@
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
-import { formatDistanceToNow } from "date-fns";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { ChipList } from "@components/ui/ChipList";
+import { ContextMenu, ContextMenuTrigger } from "react-contextmenu";
+import { GroupContextMenu } from "@components/contextmenus/GroupContextMenu";
+import { formatDistanceToNow } from "date-fns";
 
 export const GroupOverview = (props) => {
   const { user } = useAuth();
@@ -50,78 +52,86 @@ export const GroupOverview = (props) => {
   }, [props.slug]);
 
   return (
-    <div className="flex flex-col w-full p-2 duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
-      <Link href={"/group/" + props.slug}>
-        <a>
+    <>
+      <ContextMenuTrigger id={props.slug}>
+        <div className="flex flex-col w-full p-2 duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
           {!lastEvent ? (
             <span className="flex items-center justify-center w-full h-32 bg-green-200 rounded-lg dark:bg-green-900">
               <i className="text-green-700 dark:text-green-400 fas fa-calendar" />
+              <span className="ml-4 text-sm text-green-700 dark:text-green-400">No next event</span>
             </span>
           ) : (
-            <span className="flex items-center justify-center w-full h-32 p-3 bg-purple-200 rounded-lg dark:bg-purple-900">
+            <span className="flex items-center justify-center w-full h-32 p-4 bg-purple-200 rounded-lg dark:bg-purple-900">
               <TinyEvent {...lastEvent} />
             </span>
           )}
-          <div className="flex flex-col p-3">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex flex-col">
-                <h3 className="font-extrabold">{props.name}</h3>
-                <p className="text-xs">{props.location.location}</p>
+          <Link href={"/group/" + props.slug}>
+            <a>
+              <div className="flex flex-col p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex flex-col">
+                    <h3 className="font-extrabold">{props.name}</h3>
+                    <p className="text-xs">{props.location.location}</p>
+                  </div>
+                  {subs.length ? (
+                    <AvatarGroup users={subs} limit={4} />
+                  ) : (
+                    <p className="text-xs text-gray-500">No subscribers</p>
+                  )}
+                </div>
+                <hr className="mx-6 mt-4 border-gray-200 dark:border-gray-700" />
               </div>
-              {subs.length ? (
-                <AvatarGroup users={subs} limit={4} />
-              ) : (
-                <p className="text-xs text-gray-500">No subscribers</p>
-              )}
+            </a>
+          </Link>
+          <div className="inline-flex p-3">
+            <div className="inline-flex flex-grow overflow-x-hidden">
+              <ChipList list={[props.tags?.[0], props.tags?.[1]]} />
             </div>
-            <hr className="mx-6 mt-4 border-gray-200 dark:border-gray-700" />
+            <button
+              onClick={() => {
+                if (navigator.share) {
+                  navigator
+                    .share({
+                      title: `${props.name} - OpenMeet`,
+                      text: "Check out this group on OpenMeet.",
+                      url:
+                        document.location.protocol +
+                        "//" +
+                        document.location.host +
+                        "/group/" +
+                        props.slug,
+                    })
+                    .then(() => console.log("Successful share"))
+                    .catch((error) => console.log("Error sharing", error));
+                }
+              }}
+              className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
+            >
+              <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
+                <i className="text-gray-700 duration-300 select-none fas fa-share-alt dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+              </span>
+            </button>
           </div>
-        </a>
-      </Link>
-      <div className="inline-flex p-3">
-        <div className="inline-flex flex-grow overflow-x-hidden">
-          <ChipList list={[props.tags?.[0], props.tags?.[1]]} />
         </div>
-        <button
-          onClick={() => {
-            if (navigator.share) {
-              navigator
-                .share({
-                  title: `${props.name} - OpenMeet`,
-                  text: "Check out this group on OpenMeet.",
-                  url:
-                    document.location.protocol +
-                    "//" +
-                    document.location.host +
-                    "/group/" +
-                    props.slug,
-                })
-                .then(() => console.log("Successful share"))
-                .catch((error) => console.log("Error sharing", error));
-            }
-          }}
-          className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
-        >
-          <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-            <i className="text-gray-700 duration-300 select-none fas fa-share-alt dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
-          </span>
-        </button>
-      </div>
-    </div>
+      </ContextMenuTrigger>
+      <ContextMenu id={props.slug}>
+        <GroupContextMenu {...props} />
+      </ContextMenu>
+    </>
   );
 };
 
 const TinyEvent = (props) => {
   return (
-    <div className="flex flex-col w-full px-6 py-3">
-      <h3 className="pb-1 mb-1 text-lg font-extrabold text-gray-800 border-b border-gray-300 dark:text-gray-200 dark:border-gray-800">
+    <div className="flex flex-col w-full p-2 bg-white rounded-lg dark:bg-black">
+      {/* <h3 className="pb-1 mb-1 text-lg font-extrabold text-gray-800 border-b border-gray-300 dark:text-gray-200 dark:border-gray-800">
         Next
         <span className="ml-2 text-green-600 dark:text-green-400 ">event</span>
-      </h3>
-      <div className="flex flex-row justify-between w-full text-gray-600 dark:text-gray-400">
+      </h3> */}
+      <div className="flex flex-row justify-between w-full text-gray-600 overflow-ellipsis dark:text-gray-400">
         <div className="flex flex-col flex-grow w-full space-y-1">
           <h3 className="text-xs">
-            <i className="w-6 text-center fas fa-calendar "></i>
+            {/* <i className="w-6 text-center fas fa-calendar "></i> */}
 
             <span className="ml-2 text-sm font-bold text-green-500">
               {props.name}
@@ -149,10 +159,10 @@ const TinyEvent = (props) => {
           <div className="inline-flex items-center text-xs">
             <i className="w-6 mr-2 text-center fas fa-clock"></i>
             starts{" "}
-            {/* {formatDistanceToNow(new Date(props.startDate), {
+            {formatDistanceToNow(new Date(props.startDate), {
               addSuffix: true,
-            })} */}
-            {props.startDate}
+            })}
+            {/* {props.startDate} */}
           </div>
         </div>
         <Link href={"/event/" + props.slug}>

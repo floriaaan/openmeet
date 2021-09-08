@@ -14,7 +14,7 @@ export default function ProfilePage({ user, uid }) {
   return (
     <AppLayout>
       {user ? (
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 p-6 lg:px-24 xl:px-32 2xl:px-64 md:grid-cols-2 lg:grid-cols-3">
           <ProfileOverview user={user} />
           <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">
             e
@@ -22,7 +22,7 @@ export default function ProfilePage({ user, uid }) {
           <div className="w-full h-full bg-green-500 lg:col-span-2">e</div>
         </div>
       ) : auth?.uid === uid ? (
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 p-6 lg:px-24 xl:px-32 2xl:px-64 md:grid-cols-2 lg:grid-cols-3">
           <ProfileOverview user={auth} />
           <div className="w-full h-full bg-red-500 lg:col-span-2 md:row-span-2 lg:row-span-1">
             e

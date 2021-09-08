@@ -1,4 +1,12 @@
-const faker = require("faker");
+const faker = require("faker/locale/fr");
+const admin = require("firebase-admin");
+const serviceAccount = require("../../resources/firebase_admin.json");
+if (admin.apps.length === 0) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
+const db = admin.firestore();
 
 const fakeUsers = (number) => {
   if (number < 1 || typeof number !== "number")
@@ -144,9 +152,30 @@ const fakeChats = (number, users) => {
     });
 };
 
+const randomExistantUsers = async (number) => {
+  const users = await db.collection("users").get();
+
+  if ((number < 1 || typeof number !== "number") && users.size < number)
+    throw new Error("Invalid param");
+
+  let usersData = [];
+  users.forEach((user) => {
+    usersData.push({
+      fullName: user.data().fullName,
+      uid: user.id,
+      photoUrl: user.data().photoUrl,
+    });
+  });
+
+  return Promise.resolve(
+    Array(number).fill(faker.random.arrayElement(usersData))
+  );
+};
+
 module.exports = {
   fakeChats,
   fakeEvents,
   fakeGroups,
   fakeUsers,
+  randomExistantUsers,
 };

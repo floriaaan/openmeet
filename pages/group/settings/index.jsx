@@ -67,12 +67,12 @@ export default function GroupSettingsPage() {
 
   useEffect(() => {
     if (selected) {
-      console.log(selected)
+      console.log(selected);
       setName(selected.name);
       setTags(selected.tags);
       setDescription(selected.description);
       setPrivateGroup(selected.privateGroup);
-      setLocation(selected.location);
+      setLocation(selected.location.location);
 
       getDocs(
         collection(firestore, "groups/" + selected.slug + "/subscribers")
@@ -242,7 +242,7 @@ export default function GroupSettingsPage() {
                       leaveFrom="transform scale-100 opacity-100"
                       leaveTo="transform scale-95 opacity-0"
                     >
-                      <Disclosure.Panel className="pt-4 pb-2">
+                      <Disclosure.Panel className="">
                         <div className="flex flex-col p-6 bg-white dark:bg-gray-800 rounded-xl">
                           <div className="relative flex flex-col mb-4">
                             <label
@@ -255,8 +255,8 @@ export default function GroupSettingsPage() {
                               type="text"
                               id="name"
                               name="name"
-                              // value={name}
-                              // onChange={(e) => setName(e.target.value)}
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
                               className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100 "
                             />
                           </div>
@@ -276,8 +276,8 @@ export default function GroupSettingsPage() {
                                 id="tags"
                                 name="tags"
                                 placeholder="javascript; css; java; nosql; bigdata; .net; azure; agile; uxdesign;"
-                                // value={tags}
-                                // onChange={(e) => setTags(e.target.value)}
+                                value={tags}
+                                onChange={(e) => setTags(e.target.value)}
                                 // disabled
                                 className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                               />
@@ -302,8 +302,8 @@ export default function GroupSettingsPage() {
                                 id="location"
                                 name="location"
                                 placeholder="Location"
-                                // value={location}
-                                // onChange={(e) => setLocation(e.target.value)}
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
                                 // disabled
                                 className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                               />
@@ -325,8 +325,8 @@ export default function GroupSettingsPage() {
                               name="description"
                               rows={7}
                               className="w-full px-2 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border appearance-none rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
-                              // defaultValue={""}
-                              // onChange={(e) => setDescription(e.target.value)}
+                              defaultValue={description}
+                              onChange={(e) => setDescription(e.target.value)}
                             />
                           </div>
                           <div className="relative flex flex-col mb-4">
@@ -341,10 +341,10 @@ export default function GroupSettingsPage() {
                                 <input
                                   type="checkbox"
                                   name="privateGroup"
-                                  // value={privateGroup}
-                                  // onChange={(e) =>
-                                  //   setPrivateGroup(e.target.checked)
-                                  // }
+                                  value={privateGroup}
+                                  onChange={(e) =>
+                                    setPrivateGroup(e.target.checked)
+                                  }
                                   className="w-4 h-4 duration-200 bg-green-200 border-0 rounded-md appearance-none form-checkbox hover:bg-green-400 dark:bg-green-800 dark:hover:bg-green-700 checked:bg-green-600 checked:border-transparent focus:outline-none focus:bg-green-400 dark:focus:bg-green-900 ring-green-500"
                                 />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">
@@ -352,6 +352,20 @@ export default function GroupSettingsPage() {
                                 </span>
                               </label>
                             </div>
+                          </div>
+
+                          <div className="relative flex flex-col items-end mb-4">
+                            <button
+                              onClick={() => {}}
+                              className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 "
+                            >
+                              <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
+                                <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
+                              </span>
+                              <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
+                                Update
+                              </p>
+                            </button>
                           </div>
                         </div>
                       </Disclosure.Panel>

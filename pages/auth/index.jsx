@@ -33,9 +33,9 @@ export default function Login() {
         </div>
 
         <div className="flex items-center justify-center flex-grow h-full bg-gray-100 dark:bg-gray-900 backdrop-filter backdrop-blur-lg bg-opacity-10 dark:bg-opacity-10">
-          <div className="inline-flex p-6 space-x-3 rounded-xl bg-gray-50 dark:bg-gray-900">
+          <div className="flex flex-col p-6 space-y-3 lg:space-y-0 lg:space-x-3 lg:flex-row rounded-xl bg-gray-50 dark:bg-gray-900">
             <button
-              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-xl active:bg-gray-50 focus:outline-none hover:shadow-md"
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-xl active:bg-gray-50 focus:outline-none hover:shadow-md"
               type="button"
               onClick={() => signinWithGitHub()}
             >
@@ -44,10 +44,11 @@ export default function Login() {
                 className="w-5 h-5 mr-1"
                 src="/img/brand/github.svg"
               />
+              <span className="flex ml-1 lg:hidden">Sign in with</span>
               <span className="ml-1">Github</span>
             </button>
             <button
-              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
               type="button"
               onClick={() => signinWithGoogle()}
             >
@@ -56,10 +57,11 @@ export default function Login() {
                 className="w-5 h-5 mr-1 "
                 src="/img/brand/google.svg"
               />
+              <span className="flex ml-1 lg:hidden">Sign in with</span>
               <span className="ml-1">Google</span>
             </button>
             <button
-              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
               type="button"
               onClick={() => signinWithMicrosoft()}
             >
@@ -68,10 +70,11 @@ export default function Login() {
                 className="w-4 h-4 mr-1"
                 src="/img/brand/microsoft.png"
               />
+              <span className="flex ml-1 lg:hidden">Sign in with</span>
               <span className="ml-1">Microsoft</span>
             </button>
             <button
-              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
               type="button"
               onClick={() => signinWithFacebook()}
             >
@@ -80,9 +83,11 @@ export default function Login() {
                 className="w-4 h-4 mr-1"
                 src="/img/brand/facebook.svg"
               />
+              <span className="flex ml-1 lg:hidden">Sign in with</span>
               <span className="ml-1">Facebook</span>
-            </button><button
-              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 uppercase transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
+            </button>
+            <button
+              className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl dark:text-gray-200 active:bg-gray-50 focus:outline-none hover:shadow-md"
               type="button"
               onClick={() => signinWithTwitter()}
             >
@@ -91,6 +96,7 @@ export default function Login() {
                 className="w-4 h-4 mr-1"
                 src="/img/brand/twitter.svg"
               />
+              <span className="flex ml-1 lg:hidden">Sign in with</span>
               <span className="ml-1">Twitter</span>
             </button>
           </div>

@@ -67,11 +67,10 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-24 ">
+        <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-12 2xl:px-32">
           <EventSection />
           <GroupsSection />
         </section>
-        
       </div>
     </AppLayout>
   );
@@ -90,10 +89,10 @@ const GroupsSection = () => {
     )
       .then((querySnapshot) => {
         let _tmp = [];
-        querySnapshot.forEach((doc) => {
-          _tmp.push({ slug: doc.id, ...doc.data() });
-        });
-        // console.log(JSON.stringify(_tmp))
+        querySnapshot.forEach((doc) =>
+          _tmp.push({ slug: doc.id, ...doc.data() })
+        );
+
         setGroups(_tmp);
         setLoading(false);
       })
@@ -125,7 +124,7 @@ const GroupsSection = () => {
           </>
         ) : (
           <>
-            {Array(3)
+            {Array(2)
               .fill(0)
               .map((_, key) => (
                 <GroupSkeleton key={key} />

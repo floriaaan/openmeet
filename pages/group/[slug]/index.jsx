@@ -8,6 +8,7 @@ import { AvatarGroup } from "@components/ui/AvatarGroup";
 import { EventOverview } from "@components/cards/CardEventOverview";
 import { ChipList } from "@components/ui/ChipList";
 
+import ReactMarkdown from "react-markdown";
 import Lottie from "react-lottie";
 import noEvents from "resources/lotties/nothing_search.json";
 import notExisting from "resources/lotties/404.json";
@@ -19,6 +20,11 @@ import {
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
+import { Tab } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function GroupPage({
   name,
@@ -204,7 +210,7 @@ export default function GroupPage({
               </div>
             </div>
             <p className="w-full pt-4 pb-2 text-justify text-gray-500 dark:text-gray-400">
-              {description}
+              <ReactMarkdown>{description}</ReactMarkdown>
             </p>
             <div className="inline-flex pt-3 overflow-x-hidden md:pt-0">
               <ChipList list={tags} />
@@ -220,35 +226,70 @@ export default function GroupPage({
             />
           </div> */}
 
-            <div className="grid flex-grow h-full grid-cols-1 gap-4 md:grid-cols-3 ">
-              {displayables.length > 0 ? (
-                <>
-                  {displayables.map((el, index) => (
-                    <EventOverview {...el} key={index} />
-                  ))}
-                </>
-              ) : (
-                <div className="flex flex-col items-center justify-center w-full px-6 pb-6 h-96 md:col-span-3">
-                  <div className="w-72 h-72">
-                    <Lottie
-                      isClickToPauseDisabled
-                      options={{
-                        loop: true,
-                        autoplay: true,
-                        animationData: noEvents,
+            <Tab.Group>
+              <Tab.List className="inline-flex space-x-3">
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      "w-full py-2.5 text-sm leading-5 font-medium select-none",
+                      "focus:outline-none duration-300 hover:rounded-md hover:bg-green-500 hover:text-white",
+                      selected
+                        ? "border-b-2 border-green-500 text-green-500"
+                        : "text-gray-500"
+                    )
+                  }
+                >
+                  Events
+                </Tab>
+                <Tab
+                  className={({ selected }) =>
+                    classNames(
+                      "w-full py-2.5 text-sm leading-5 font-medium select-none",
+                      "focus:outline-none duration-300 hover:rounded-md hover:bg-green-500 hover:text-white",
+                      selected
+                        ? "border-b-2 border-green-500 text-green-500"
+                        : "text-gray-500"
+                    )
+                  }
+                >
+                  Subscribers
+                </Tab>
+              </Tab.List>
+              <Tab.Panels className="p-3 mt-2 bg-white dark:bg-black rounded-xl focus:outline-none">
+                <Tab.Panel>
+                  <div className="grid flex-grow h-full grid-cols-1 gap-4 md:grid-cols-3 ">
+                    {events.length > 0 ? (
+                      <>
+                        {events.map((el, index) => (
+                          <EventOverview {...el} key={index} />
+                        ))}
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center w-full px-6 pb-6 h-96 md:col-span-3">
+                        <div className="w-72 h-72">
+                          <Lottie
+                            isClickToPauseDisabled
+                            options={{
+                              loop: true,
+                              autoplay: true,
+                              animationData: noEvents,
 
-                        rendererSettings: {
-                          preserveAspectRatio: "xMidYMid slice",
-                        },
-                      }}
-                    />
+                              rendererSettings: {
+                                preserveAspectRatio: "xMidYMid slice",
+                              },
+                            }}
+                          />
+                        </div>
+                        <span className="text-xl font-extrabold text-gray-400 md:text-2xl lg:text-4xl dark:text-gray-500">
+                          {"No events yet... 📅"}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                  <span className="text-xl font-extrabold text-gray-400 md:text-2xl lg:text-4xl dark:text-gray-600">
-                    {"No events yet... 📅"}
-                  </span>
-                </div>
-              )}
-            </div>
+                </Tab.Panel>
+                <Tab.Panel></Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
           </div>
         </section>
       ) : (

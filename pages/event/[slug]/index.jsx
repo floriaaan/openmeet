@@ -17,6 +17,7 @@ import {
   where,
 } from "firebase/firestore";
 
+import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -195,7 +196,7 @@ export default function EventPage(props) {
               Details
             </h4>
             <p className="text-lg text-justify text-gray-800 dark:text-gray-200 ">
-              {props.description}
+              <ReactMarkdown>{props.description}</ReactMarkdown>
             </p>
           </div>
 
@@ -208,7 +209,9 @@ export default function EventPage(props) {
                   </span>
                   <div className="flex flex-col">
                     <h4 className="text-base font-bold">{props.group.name}</h4>
-                    <p className="text-xs">{props.group.private ? "Private group" : "Public group"}</p>
+                    <p className="text-xs">
+                      {props.group.private ? "Private group" : "Public group"}
+                    </p>
                   </div>
                 </a>
               </Link>
