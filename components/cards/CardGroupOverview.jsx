@@ -54,7 +54,7 @@ export const GroupOverview = (props) => {
   return (
     <>
       <ContextMenuTrigger id={props.slug}>
-        <div className="flex flex-col w-full p-2 duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
+        <div className="flex flex-col w-full p-2 duration-300 bg-white rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
           {!lastEvent ? (
             <span className="flex items-center justify-center w-full h-32 bg-green-200 rounded-lg dark:bg-green-900">
               <i className="text-green-700 dark:text-green-400 fas fa-calendar" />

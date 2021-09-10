@@ -25,7 +25,7 @@ export default function Index() {
   return (
     <AppLayout>
       <div className="">
-        <div className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
+        <section className="flex w-full h-[500px] bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center w-full px-8 lg:text-left md:px-12 lg:w-1/2">
             <div className="w-full">
               <RoughNotationGroup show={true}>
@@ -66,10 +66,40 @@ export default function Index() {
               <div className="h-full bg-black opacity-25" />
             </div>
           </div>
-        </div>
-        <section className="flex flex-col h-full px-6 pt-6 pb-24 mt-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-12 2xl:px-32">
+        </section>
+        <section className="flex flex-col h-full px-6 pt-6 pb-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-24 2xl:px-32">
           <EventSection />
           <GroupsSection />
+        </section>
+        <section className="flex flex-col h-full px-6 py-12 bg-white dark:bg-black lg:px-24 2xl:px-32">
+          <div className="overflow-hidden shadow-xl bg-gradient-to-tr from-blue-600 to-green-500 lg:mx-12 rounded-xl lg:grid lg:grid-cols-2 lg:gap-4">
+            <div className="px-6 pt-10 pb-12 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+              <div className="flex-col justify-center h-full lg:flex">
+                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+                  <span className="block">Ready to dive in?</span>
+                  <span className="block">Install OpenMeet on your phone.</span>
+                </h2>
+                <p className="mt-4 text-lg leading-6 text-indigo-200">
+                  Ac euismod vel sit maecenas id pellentesque eu sed
+                  consectetur. Malesuada adipiscing sagittis vel nulla nec.
+                </p>
+                <a
+                  href="#"
+                  className="inline-flex items-center px-5 py-3 mt-8 text-base font-medium text-blue-600 bg-white border border-transparent rounded-md shadow max-w-max hover:bg-indigo-50"
+                >
+                  Install for free
+                </a>
+              </div>
+            </div>
+            <div className="inline-flex justify-end w-full -mt-6 md:hidden lg:inline-flex">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="object-cover object-right-top w-[80%] transform translate-x-6 translate-y-6 rounded-xl sm:translate-x-16 lg:translate-y-20"
+                src="/img/install2.png"
+                alt="App screenshot"
+              />
+            </div>
+          </div>
         </section>
       </div>
     </AppLayout>

@@ -1,6 +1,26 @@
 import { useAuth } from "@hooks/useAuth";
+import useFirestoreToggle from "@hooks/useFirestoreToggle";
+
 export const GroupContextMenu = ({ slug, name, admin }, props) => {
   const { user } = useAuth();
+  const [isFavorite, toggleFav] = useFirestoreToggle(
+    `users/${user?.uid}/favoritesGroups/${slug}`,
+    {
+      slug,
+      name,
+    }
+  );
+
+  const [isSubscribed, toggleSub] = useFirestoreToggle(
+    `groups/${slug}/subscribers/${user?.uid}`,
+    {
+      fullName: user?.fullName,
+      photoUrl: user?.photoUrl,
+      uid: user?.uid,
+      createdAt: new Date().toISOString(),
+    }
+  );
+
   return (
     <div className="z-[70] w-full h-auto py-3 bg-white dark:bg-black rounded-lg shadow-lg lg:w-96">
       <div className="inline-flex items-center w-full px-3 pb-3 mb-3 border-b dark:border-gray-800">
@@ -50,12 +70,38 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
           <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-share-alt"></i>
           Share
         </button>
+
         <button
-          onClick={() => {}}
+          onClick={toggleSub}
           className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
         >
-          <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-star"></i>
-          Add to favorites
+          {!isSubscribed ? (
+            <>
+              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-plus"></i>
+              Subscribe
+            </>
+          ) : (
+            <>
+              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-times"></i>
+              Unsubscribe
+            </>
+          )}
+        </button>
+        <button
+          onClick={toggleFav}
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+        >
+          {!isFavorite ? (
+            <>
+              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-star"></i>
+              Add to favorites
+            </>
+          ) : (
+            <>
+              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-star"></i>
+              Remove from favorites
+            </>
+          )}
         </button>
       </div>
     </div>

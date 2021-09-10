@@ -140,7 +140,9 @@ export const NotificationDropdown = () => {
                       )
                   )
                 ) : (
-                  <div className="flex items-center justify-center w-full h-full col-span-3">No messages yet</div>
+                  <div className="flex items-center justify-center w-full h-full col-span-3">
+                    No messages yet
+                  </div>
                 )}
               </div>
 
@@ -184,12 +186,18 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
     <Link href={"/chat/" + id}>
       <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-yellow-50 dark:hover:bg-yellow-900">
         <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white rounded-full">
-          <img
-            className="rounded-full"
-            alt={displayableUser?.displayName?.[0] || "?"}
-            src={displayableUser?.photoUrl}
-            onError={(e) => userImgFallback(e, displayableUser?.fullName)}
-          />
+          {displayableUser ? (
+            <img
+              className="rounded-full"
+              alt={displayableUser?.displayName?.[0] || "?"}
+              src={displayableUser?.photoUrl}
+              onError={(e) => userImgFallback(e, displayableUser?.fullName)}
+            />
+          ) : (
+            <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
+              <i className="text-2xl fas fa-comments" />
+            </span>
+          )}
           {isUnread && (
             <span className="absolute bottom-0 right-0 flex items-center justify-center">
               <span className="w-4 h-4 bg-red-400 rounded-full opacity-75 animate-ping" />
@@ -200,11 +208,11 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
         <div className="flex flex-col items-center justify-center w-full px-1">
           {members?.map((e, key) => (
             <Fragment key={key}>
-              {e.uid !== user?.uid && (
-                <span className="text-xs text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-                  {e.fullName || "Name not provided"}
-                </span>
-              )}
+              {/* {e.uid !== user?.uid && ( */}
+              <span className="text-xs text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
+                {e.fullName || "Name not provided"}
+              </span>
+              {/* )} */}
             </Fragment>
           )) || "No members"}
           <span className="text-[0.55rem] leading-4">

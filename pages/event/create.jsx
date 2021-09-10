@@ -168,7 +168,6 @@ export default function GroupCreatePage() {
           : null,
         private: privateEvent,
       }).then(async function (docRef) {
-
         await updateDoc(doc(firestore, `groups/${group.slug}`), {
           events: arrayUnion({
             slug,
@@ -215,7 +214,7 @@ export default function GroupCreatePage() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={pictureUrl}
-                        className="object-cover object-center w-full rounded-lg max-h-52"
+                        className="object-cover object-center w-full rounded-lg max-h-48"
                         alt="Event picture"
                       ></img>
                       <div
@@ -244,12 +243,13 @@ export default function GroupCreatePage() {
                       ></input>
                       <label
                         htmlFor="filePicture"
-                        className="inline-flex items-center w-full text-2xl font-extrabold"
+                        className="relative block w-full p-12 text-center duration-300 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
-                        <div className="flex items-center justify-center w-full h-48 p-3 leading-tight text-gray-700 bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white rounded-xl">
-                          <i className="w-4 h-4 mr-3 fas fa-plus"></i>
-                          Ajouter une photo
-                        </div>
+                        <svg className="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+
+                        <span className="block mt-2 text-sm font-medium text-gray-900">
+                          Add a photo
+                        </span>
                       </label>
                     </div>
                   )}

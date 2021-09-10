@@ -192,12 +192,12 @@ export default function EventPage(props) {
               </div>
             </div>
 
-            <h4 className="text-xl font-bold text-gray-600 dark:text-gray-400">
+            <h4 className="text-lg font-bold text-gray-600 dark:text-gray-400">
               Details
             </h4>
-            <p className="text-lg text-justify text-gray-800 dark:text-gray-200 ">
+            <div className="text-sm text-justify text-gray-800 dark:text-gray-200 ">
               <ReactMarkdown>{props.description}</ReactMarkdown>
-            </p>
+            </div>
           </div>
 
           <div className="w-full md:w-1/3 md:pl-5">
