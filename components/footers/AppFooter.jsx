@@ -1,48 +1,18 @@
 import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  setDoc,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
+import useFirestoreToggle from "@hooks/useFirestoreToggle";
 
 export const AppFooter = () => {
   const { user } = useAuth();
-  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      const unsub = onSnapshot(
-        collection(firestore, "newsletter_subscriptions"),
-        (snapshot) => {
-          let exists = false;
-          snapshot.forEach((doc) => {
-            if (doc.id === user.uid) exists = true;
-          });
-          setAlreadySubscribed(exists);
-        }
-      );
-      return () => unsub();
+  const [alreadySubscribed, toggleSubscription] = useFirestoreToggle(
+    `newsletter_subscriptions/${user?.uid}`,
+    {
+      uid: user?.uid,
+      fullName: user?.fullName,
+      email: user?.email,
+      verified: true
     }
-  }, [user]);
+  );
 
-  const toggleSubscription = async () => {
-    if (user) {
-      const docRef = doc(firestore, `newsletter_subscriptions/${user.uid}`);
-      if (!alreadySubscribed) {
-        await setDoc(docRef, {
-          uid: user.uid,
-          fullName: user.fullName,
-          email: user.email,
-        });
-      } else {
-        await deleteDoc(docRef);
-      }
-    }
-  };
 
   return (
     <footer className="z-[48] w-full px-10 text-gray-600 border-t-2 border-gray-200 shadow-md dark:text-gray-400 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 body-font">

@@ -7,6 +7,7 @@ const {
   updateEvent,
   deleteEvent,
 } = require("./functions/algolia");
+const { sendVerificationEmail } = require("./functions/newsletter/verifyEmail");
 const { default: next } = require("next");
 
 const isDev = process.env.NODE_ENV !== "production";
@@ -30,3 +31,4 @@ exports.deleteGroup = deleteGroup;
 exports.addEvent = addEvent;
 exports.updateEvent = updateEvent;
 exports.deleteEvent = deleteEvent;
+exports.sendVerificationEmail = sendVerificationEmail;

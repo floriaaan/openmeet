@@ -1,7 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-// components
 
 import { useAuth } from "@hooks/useAuth";
 import { EventDropdown } from "@components/dropdowns/EventDropdown";
@@ -23,8 +21,6 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
   const { user } = useAuth();
 
   const navbarSearchRef = React.useRef(null);
-  const [focused, setFocused] = React.useState(false);
-
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -32,7 +28,6 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
         className={
           "top-0 z-[48] sticky flex flex-wrap items-center justify-between w-full px-2 py-6 bg-white dark:bg-black dark:text-gray-300 navbar-expand-lg " +
           // "md:bg-opacity-75 md:dark:bg-opacity-50 md:backdrop-blur sticky" +
-
           (shadowOnNavbar ? " shadow-md" : " ")
         }
       >
@@ -72,7 +67,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
                     name="query"
                     autoComplete="off"
                     placeholder="Search"
-                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out border-gray-300 rounded-full appearance-none bg-gray-50 form-input dark:text-gray-300 dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 pr-28 dark:bg-opacity-50 backdrop-blur"
+                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition duration-300 ease-in-out border-gray-300 rounded-full appearance-none bg-gray-50 form-input dark:text-gray-300 dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 pr-28 dark:bg-opacity-50 backdrop-blur focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700"
                   />
                   <div className="absolute right-0 flex flex-row items-center mr-4 space-x-5 hover:border-transparent">
                     <span

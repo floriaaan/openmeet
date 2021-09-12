@@ -10,6 +10,7 @@
     "export": "next export",
     "lint": "next lint",
     "deploy": "next build && firebase deploy",
+    "deploy:server": "next build && firebase deploy --only functions:nextServer",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
@@ -31,6 +32,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.3.1",
     "next-themes": "^0.0.15",
+    "nodemailer": "^6.6.3",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
