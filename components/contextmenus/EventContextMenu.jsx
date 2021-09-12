@@ -31,7 +31,7 @@ export const EventContextMenu = ({ slug, name }) => {
       <div className="flex flex-col space-y-2">
         <a
           href={`/event/${slug}`}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-eye"></i>
           See more
@@ -55,14 +55,14 @@ export const EventContextMenu = ({ slug, name }) => {
                 .catch((error) => console.log("Error sharing", error));
             }
           }}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-share-alt"></i>
           Share
         </button>
         <button
           onClick={togglePart}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isParticipant ? (
             <>
@@ -78,7 +78,7 @@ export const EventContextMenu = ({ slug, name }) => {
         </button>
         <button
           onClick={toggleFav}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isFavorite ? (
             <>

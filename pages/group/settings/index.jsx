@@ -282,7 +282,7 @@ export default function GroupSettingsPage() {
                                 className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                               />
                             </div>
-                            <p className="flex mt-1 text-xs">
+                            <p className="flex mt-1 text-xs dark:text-gray-400">
                               Please separate tags with semi-colons.
                             </p>
                           </div>
@@ -308,7 +308,7 @@ export default function GroupSettingsPage() {
                                 className="w-full h-10 p-2 text-sm leading-tight text-gray-700 transition-colors duration-200 ease-in-out bg-gray-200 border rounded-xl dark:text-gray-300 dark:bg-gray-700 dark:focus:border-gray-600 dark:bg-opacity-75 border-gray-50 dark:border-gray-900 focus:outline-none focus:bg-white focus:border-primary-100"
                               />
                             </div>
-                            <p className="flex mt-1 text-xs">
+                            <p className="flex mt-1 text-xs dark:text-gray-400">
                               If no location is provided, the event will be set
                               in Remote.
                             </p>
@@ -448,11 +448,11 @@ export default function GroupSettingsPage() {
                       <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
                         <i className="text-2xl fas fa-users" />
                       </span>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col dark:text-gray-200">
                         <h4 className="text-base font-extrabold">
                           {selected.name}
                         </h4>
-                        <p className="text-xs">
+                        <p className="text-xs dark:text-gray-400">
                           {selected.private ? "Private group" : "Public group"}
                         </p>
                       </div>

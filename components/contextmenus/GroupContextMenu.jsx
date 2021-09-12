@@ -32,7 +32,7 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
       <div className="flex flex-col space-y-2">
         <a
           href={`/group/${slug}`}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300"
         >
           <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-eye"></i>
           See more
@@ -40,7 +40,7 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
         {admin.uid === user?.uid && (
           <a
             href={`/group/settings?slug=${slug}`}
-            className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+            className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300"
           >
             <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-pencil-alt"></i>
             Edit
@@ -65,7 +65,7 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
                 .catch((error) => console.log("Error sharing", error));
             }
           }}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-share-alt"></i>
           Share
@@ -73,7 +73,7 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
 
         <button
           onClick={toggleSub}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isSubscribed ? (
             <>
@@ -89,7 +89,7 @@ export const GroupContextMenu = ({ slug, name, admin }, props) => {
         </button>
         <button
           onClick={toggleFav}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isFavorite ? (
             <>

@@ -67,12 +67,55 @@ export default function Index() {
             </div>
           </div>
         </section>
-        <section className="flex flex-col h-full px-6 pt-6 pb-6 space-y-6 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-5 lg:px-24 2xl:px-32">
+        <section className="flex flex-col h-full px-6 pt-6 pb-6 space-y-6 bg-gray-100 dark:bg-gray-900 lg:px-24 2xl:px-32">
           <EventSection />
+          <section className="lg:px-12">
+            <div className="px-6 py-6 rounded-lg bg-gradient-to-bl from-purple-600 to-indigo-500 md:py-12 md:px-12 lg:py-16 lg:px-16 xl:flex xl:items-center">
+              <div className="xl:w-0 xl:flex-1">
+                <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                  Want product news and updates?
+                </h2>
+                <p className="max-w-3xl mt-3 text-lg leading-6 text-indigo-200">
+                  Sign up for our newsletter to stay up to date.
+                </p>
+              </div>
+              <div className="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
+                <form className="sm:flex">
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email-address"
+                    name="email-address"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="w-full px-5 py-3 placeholder-gray-500 border-white rounded-md form-input focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white"
+                    placeholder="Enter your email"
+                  />
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center w-full px-5 py-3 mt-3 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md shadow hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                  >
+                    Notify me
+                  </button>
+                </form>
+                <p className="mt-3 text-sm text-indigo-200">
+                  We care about the protection of your data. Read our{" "}
+                  <Link href="/privacy-policy">
+                    <a className="font-medium text-white underline">
+                      Privacy Policy.
+                    </a>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </section>
+
           <GroupsSection />
         </section>
         <section className="flex flex-col h-full px-6 py-12 bg-white dark:bg-black lg:px-24 2xl:px-32">
-          <div className="overflow-hidden shadow-xl bg-gradient-to-tr from-blue-600 to-green-500 lg:mx-12 rounded-xl lg:grid lg:grid-cols-2 lg:gap-4">
+          <div className="flex flex-col overflow-hidden shadow-xl lg:flex-row bg-gradient-to-tr from-blue-600 to-green-500 lg:mx-12 rounded-xl ">
             <div className="px-6 pt-10 pb-12 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
               <div className="flex-col justify-center h-full lg:flex">
                 <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
@@ -94,7 +137,7 @@ export default function Index() {
             <div className="inline-flex justify-end w-full -mt-6 md:hidden lg:inline-flex">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                className="object-cover object-right-top w-[80%] transform translate-x-6 translate-y-6 rounded-xl sm:translate-x-16 lg:translate-y-20"
+                className="object-cover object-right-top w-[32rem] transform translate-x-6 translate-y-6 rounded-xl sm:translate-x-16 lg:translate-y-20"
                 src="/img/install2.png"
                 alt="App screenshot"
               />

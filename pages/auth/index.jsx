@@ -32,7 +32,7 @@ export default function Login() {
           </h3>
         </div>
 
-        <div className="flex items-center justify-center flex-grow h-full bg-gray-100 dark:bg-gray-900 backdrop-filter backdrop-blur-lg bg-opacity-10 dark:bg-opacity-10">
+        <div className="z-50 flex items-center justify-center flex-grow h-full bg-gray-100 dark:bg-gray-900 backdrop-filter backdrop-blur-lg bg-opacity-10 dark:bg-opacity-10">
           <div className="flex flex-col p-6 space-y-3 lg:space-y-0 lg:space-x-3 lg:flex-row rounded-xl bg-gray-50 dark:bg-gray-900">
             <button
               className="inline-flex items-center h-12 px-4 py-2 text-xs font-normal text-gray-700 transition-all duration-150 ease-linear bg-white shadow outline-none dark:hover:bg-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-xl active:bg-gray-50 focus:outline-none hover:shadow-md"

@@ -70,8 +70,8 @@ export const GroupOverview = (props) => {
               <div className="flex flex-col p-3">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex flex-col">
-                    <h3 className="font-extrabold">{props.name}</h3>
-                    <p className="text-xs">{props.location.location}</p>
+                    <h3 className="font-extrabold dark:text-gray-200">{props.name}</h3>
+                    <p className="text-xs dark:text-gray-400">{props.location.location}</p>
                   </div>
                   {subs.length ? (
                     <AvatarGroup users={subs} limit={4} />

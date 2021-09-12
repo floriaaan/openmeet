@@ -87,8 +87,8 @@ export default function EventPage(props) {
 
   return (
     <AppLayout>
-      <div className="flex flex-col w-full h-full bg-gray-100 dark:bg-gray-900 dark:bg-opacity-10">
-        <div className="xl:sticky xl:top-0 z-[47] flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
+      <div className="flex flex-col w-full h-full bg-gray-100 dark:bg-black">
+        <div className="md:sticky  md:top-24 z-[47] flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
           <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
             {format(new Date(props.startDate), "PPPPp")}
           </p>
@@ -120,14 +120,14 @@ export default function EventPage(props) {
               className={
                 "inline-flex items-center px-1 py-1 pr-6 space-x-3 transition bg-purple-100 rounded-full cursor-pointer group  max-w-max dark:bg-purple-900  dark:bg-opacity-30 " +
                 (participants.find(
-                  (participant) => participant.uid === user.uid
+                  (participant) => participant.uid === user?.uid
                 )
                   ? "hover:bg-red-200 dark:hover:bg-red-900 duration-500"
                   : "hover:bg-purple-200 dark:hover:bg-opacity-60 duration-300")
               }
             >
               {participants.find(
-                (participant) => participant.uid === user.uid
+                (participant) => participant.uid === user?.uid
               ) ? (
                 <div className="inline-flex items-center space-x-3">
                   <span className="flex items-center justify-center w-8 h-8 transition duration-500 bg-purple-300 rounded-full group-hover:bg-red-300 dark:group-hover:bg-red-800 md:w-12 md:h-12 dark:bg-purple-800 dark:bg-opacity-30">
@@ -201,7 +201,7 @@ export default function EventPage(props) {
           </div>
 
           <div className="w-full md:w-1/3 md:pl-5">
-            <div className="sticky flex flex-col space-y-6 md:top-6 xl:top-48">
+            <div className="sticky flex flex-col space-y-6 md:top-72 dark:text-gray-200">
               <Link href={"/group/" + props.group.slug}>
                 <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-900 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
                   <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">

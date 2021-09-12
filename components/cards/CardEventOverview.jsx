@@ -31,12 +31,12 @@ export const EventOverview = (props) => {
       <ContextMenuTrigger id={props.slug}>
         <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
           <Link href={"/event/" + props.slug}>
-            <a className="relative w-full cursor-pointer ">
+            <a className="relative w-full cursor-pointer">
               {props.picture ? (
                 <img
                   src={props.picture}
                   alt={props.name}
-                  className="object-cover w-full rounded-lg max-h-32 lg:max-h-48"
+                  className="z-10 object-cover w-full rounded-lg max-h-32 lg:max-h-48"
                 />
               ) : (
                 <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg lg:h-32 xl:h-48 dark:bg-purple-900">
