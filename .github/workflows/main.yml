@@ -1,0 +1,22 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        npm install
+        npm run build
+    - name: Firebase Deploy (with Linter enforcement)
+      run: |
+        sudo npm install -g firebase-tools
+        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
