@@ -30,19 +30,17 @@ export const GroupOverview = (props) => {
     if (props?.events?.length >= 1) {
       let sortedEvents = props.events;
       sortedEvents.sort((a, b) => {
-        return new Date(b.startDate) > new Date(a.startDate);
+        return new Date(a.startDate) - new Date(b.startDate);
       });
-      // console.log(sortedEvents);
-      sortedEvents.some((event) => {
-        if (!event.private) {
-          getDoc(doc(firestore, `events/${sortedEvents[0].slug}`)).then(
-            (snapshot) => {
-              setLastEvent({ slug: snapshot.id, ...snapshot.data() });
-            }
-          );
-        }
-        return event.private;
-      });
+
+      let lastEvent = sortedEvents.find(
+        (event) => !event.private && new Date() < new Date(event.startDate)
+      );
+
+      if (lastEvent)
+        getDoc(doc(firestore, `events/${lastEvent.slug}`)).then((snapshot) =>
+          setLastEvent({ ...snapshot.data(), slug: lastEvent.slug })
+        );
     }
 
     return () => {
@@ -58,7 +56,9 @@ export const GroupOverview = (props) => {
           {!lastEvent ? (
             <span className="flex items-center justify-center w-full h-32 bg-green-200 rounded-lg dark:bg-green-900">
               <i className="text-green-700 dark:text-green-400 fas fa-calendar" />
-              <span className="ml-4 text-sm text-green-700 dark:text-green-400">No next event</span>
+              <span className="ml-4 text-sm text-green-700 dark:text-green-400">
+                No next event
+              </span>
             </span>
           ) : (
             <span className="flex items-center justify-center w-full h-32 p-4 bg-purple-200 rounded-lg dark:bg-purple-900">
@@ -70,8 +70,12 @@ export const GroupOverview = (props) => {
               <div className="flex flex-col p-3">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex flex-col">
-                    <h3 className="font-extrabold dark:text-gray-200">{props.name}</h3>
-                    <p className="text-xs dark:text-gray-400">{props.location.location}</p>
+                    <h3 className="font-extrabold dark:text-gray-200">
+                      {props.name}
+                    </h3>
+                    <p className="text-xs dark:text-gray-400">
+                      {props.location.location}
+                    </p>
                   </div>
                   {subs.length ? (
                     <AvatarGroup users={subs} limit={4} />
@@ -123,7 +127,7 @@ export const GroupOverview = (props) => {
 
 const TinyEvent = (props) => {
   return (
-    <div className="flex flex-col w-full p-2 bg-white rounded-lg dark:bg-black">
+    <div className="flex flex-col p-2 bg-white rounded-xl max-w-max dark:bg-black">
       {/* <h3 className="pb-1 mb-1 text-lg font-extrabold text-gray-800 border-b border-gray-300 dark:text-gray-200 dark:border-gray-800">
         Next
         <span className="ml-2 text-green-600 dark:text-green-400 ">event</span>
@@ -166,9 +170,9 @@ const TinyEvent = (props) => {
           </div>
         </div>
         <Link href={"/event/" + props.slug}>
-          <a className="rounded-xl max-w-max text-xs px-3 py-1.5 hover:bg-green-200 text-green-700 dark:text-green-400 dark:hover:bg-green-800 duration-300 transition inline-flex items-center">
-            <span className="w-full ">See more</span>{" "}
-            <i className="ml-2 fas fa-arrow-right"></i>
+          <a className="rounded-xl  w-1/3 text-xs px-3 ml-2 py-1.5 my-3 hover:bg-green-200 text-green-700 dark:text-green-400 dark:hover:bg-green-800 duration-300 transition inline-flex items-center">
+            {/* <span className="hidden w-full sm:block">See more</span>{" "} */}
+            <i className=" fas fa-arrow-right"></i>
           </a>
         </Link>
       </div>

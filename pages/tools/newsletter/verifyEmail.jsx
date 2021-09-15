@@ -1,8 +1,11 @@
 import { AppLayout } from "@components/layouts/AppLayout";
+import { GuestLayout } from "@components/layouts/GuestLayout";
 import { firestore } from "@libs/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
+import Link from "next/link"
 
 const VerifyEmail = () => {
   const router = useRouter();
@@ -23,15 +26,21 @@ const VerifyEmail = () => {
   };
 
   return (
-    <AppLayout>
-      <div className="flex flex-col justify-center h-full p-12">
-        <div className="inline-flex justify-center w-full">
-          <h3 className="inline-flex items-center mb-4 text-3xl font-extrabold text-center text-gray-800 dark:text-gray-200">
-            One more <span className="ml-2 text-green-600">step!</span>
-          </h3>
-        </div>
-        <div className="mx-auto bg-white shadow max-w-max dark:bg-black rounded-xl">
-          <div className="px-4 py-5 sm:p-6">
+    <GuestLayout>
+      <div className="w-full max-w-sm mx-auto lg:w-96">
+          <div>
+            <Link href="/">
+              <a>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="w-auto h-12" src="/logo.svg" alt="OpenMeet" />
+              </a>
+            </Link>
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+              One more step!
+            </h2>
+          </div>
+        <div className="w-full mt-8">
+          <div className="py-5">
             <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
               Tell us your name
             </h3>
@@ -66,7 +75,7 @@ const VerifyEmail = () => {
           </div>
         </div>
       </div>
-    </AppLayout>
+    </GuestLayout>
   );
 };
 

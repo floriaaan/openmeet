@@ -72,7 +72,7 @@ export const NewsletterSection = () => {
           )}
           <p className="mt-3 text-sm text-gray-200">
             We care about the protection of your data. Read our{" "}
-            <Link href="/privacy-policy">
+            <Link href="/legal/privacy-policy">
               <a className="font-medium text-white underline">
                 Privacy Policy.
               </a>

@@ -16,6 +16,8 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/router";
 
+
+
 const auth = getAuth(firebase);
 
 function AuthProvider({ children }) {
@@ -46,6 +48,15 @@ function useFirebaseAuth() {
   const [user, setUser] = useState(null);
 
   const Router = useRouter();
+  
+  const redirectAfterAuth = (path) => {
+    if (path && typeof path === "string") {
+      Router.push(path);
+    } else {
+      Router.push("/");
+    }
+  };
+  
 
   const handleUser = async (rawUser) => {
     if (rawUser) {
@@ -66,11 +77,7 @@ function useFirebaseAuth() {
     } catch (err) {
       return err;
     }
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
   };
 
   const register = async (email, password, pseudo, redirect) => {
@@ -80,55 +87,34 @@ function useFirebaseAuth() {
       password
     );
     handleUser({ ...response.user, displayName: pseudo });
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
   };
 
   const signinWithGoogle = async (redirect) => {
     const response = await signInWithPopup(auth, new GoogleAuthProvider());
     handleUser(response.user);
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
+
   };
 
   const signinWithFacebook = async (redirect) => {
     const response = await signInWithPopup(auth, new FacebookAuthProvider());
     handleUser(response.user);
-
-    console.log(response)
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
+    
   };
 
   const signinWithTwitter = async (redirect) => {
     const response = await signInWithPopup(auth, new TwitterAuthProvider());
     handleUser(response.user);
-
-    console.log(response)
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
   };
 
   const signinWithGitHub = async (redirect) => {
     const response = await signInWithPopup(auth, new GithubAuthProvider());
     handleUser(response.user);
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
+
   };
 
   const signinWithMicrosoft = async (redirect) => {
@@ -137,11 +123,7 @@ function useFirebaseAuth() {
       new OAuthProvider("microsoft.com")
     );
     handleUser(response.user);
-    if (redirect) {
-      Router.push(redirect);
-    } else {
-      Router.push("/");
-    }
+    redirectAfterAuth(redirect);
   };
 
   const signout = async () => {
@@ -166,3 +148,4 @@ function useFirebaseAuth() {
     register,
   };
 }
+

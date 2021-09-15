@@ -7,6 +7,7 @@ import { Menu, Transition } from "@headlessui/react";
 
 import Link from "next/link";
 import { userImgFallback } from "@libs/imgOnError";
+import { UserIcon } from "@heroicons/react/outline";
 
 export const UserDropdown = () => {
   const { user, signout } = useAuth();
@@ -35,7 +36,7 @@ export const UserDropdown = () => {
                 </span>
               ) : (
                 <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-red-200 rounded-full dark:bg-red-800 focus:outline-none focus:border-gray-300 dark:border-gray-800">
-                  <i className="text-red-500 fas fa-user"></i>
+                  <UserIcon className="w-4 h-4 text-red-500" />
                 </span>
               )}
             </div>

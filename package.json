@@ -27,6 +27,7 @@
     "firebase": "^9.0.0",
     "firebase-admin": "^9.11.1",
     "firebase-functions": "^3.15.5",
+    "gray-matter": "^4.0.3",
     "leaflet": "^1.7.1",
     "next": "^11.1.2",
     "next-compose-plugins": "^2.2.1",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.1.1",
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.2.6",
     "cross-env": "^7.0.3",
     "eslint": "7.30.0",

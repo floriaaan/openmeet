@@ -4,9 +4,9 @@ import Link from "next/link";
 import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
-import { format } from "date-fns";
 import { collection, getDocs } from "firebase/firestore";
 import { eventImgFallback } from "@libs/imgOnError";
+import { CalendarIcon } from "@heroicons/react/outline";
 
 export const EventDropdown = () => {
   const { user } = useAuth();
@@ -50,7 +50,7 @@ export const EventDropdown = () => {
           <Menu.Button>
             <div className="flex items-center">
               <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-purple-200 rounded-full dark:bg-purple-800">
-                <i className="text-purple-500 dark:text-purple-400 fas fa-calendar-alt"></i>
+                <CalendarIcon className="w-4 h-4 text-purple-500 dark:text-purple-400"/>
               </span>
             </div>
           </Menu.Button>

@@ -67,7 +67,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
                     name="query"
                     autoComplete="off"
                     placeholder="Search"
-                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition duration-300 ease-in-out border-gray-300 rounded-full appearance-none bg-gray-50 form-input dark:text-gray-300 dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 pr-28 dark:bg-opacity-50 backdrop-blur focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700"
+                    className="w-full h-10 px-5 py-2 text-sm leading-tight text-gray-700 transition duration-300 ease-in-out border-gray-300 rounded-full appearance-none bg-gray-50 form-input dark:text-gray-300 dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:ring-blue-300 focus:border-blue-500 pr-28 dark:bg-opacity-50 backdrop-blur focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-500"
                   />
                   <div className="absolute right-0 flex flex-row items-center mr-4 space-x-5 hover:border-transparent">
                     <span

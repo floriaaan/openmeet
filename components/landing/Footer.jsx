@@ -2,6 +2,8 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useAuth } from "@hooks/useAuth";
 import useFirestoreToggle from "@hooks/useFirestoreToggle";
 
+import Link from "next/link";
+
 const navigation = {
   solutions: [
     { name: "Marketing", href: "#" },
@@ -24,7 +26,7 @@ const navigation = {
   ],
   legal: [
     { name: "Claim", href: "#" },
-    { name: "Privacy", href: "#" },
+    { name: "Privacy", href: "/legal/privacy-policy" },
     { name: "Terms", href: "#" },
   ],
   social: [
@@ -76,7 +78,6 @@ const navigation = {
         </svg>
       ),
     },
-    
   ],
 };
 
@@ -111,12 +112,11 @@ export const Footer = () => {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                      >
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300">
+                          {item.name}
+                        </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -128,12 +128,11 @@ export const Footer = () => {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                      >
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300">
+                          {item.name}
+                        </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -147,12 +146,11 @@ export const Footer = () => {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                      >
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300">
+                          {item.name}
+                        </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -164,12 +162,11 @@ export const Footer = () => {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
-                      <a
-                        href={item.href}
-                        className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                      >
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300">
+                          {item.name}
+                        </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -210,14 +207,15 @@ export const Footer = () => {
                 key={item.name}
                 href={item.href}
                 className="text-base text-gray-500 duration-300 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                >
+              >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="w-6 h-6" aria-hidden="true" />
               </a>
             ))}
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-            &copy; {new Date().getFullYear()} OpenMeet - Floriaaan. All rights reserved.
+            &copy; {new Date().getFullYear()} OpenMeet - Floriaaan. All rights
+            reserved.
           </p>
         </div>
       </div>

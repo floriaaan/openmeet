@@ -17,6 +17,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { BellIcon } from "@heroicons/react/outline";
 
 export const NotificationDropdown = () => {
   const { user } = useAuth();
@@ -87,7 +88,7 @@ export const NotificationDropdown = () => {
         <>
           <Menu.Button>
             <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-yellow-100 rounded-full dark:bg-yellow-800 focus:outline-none ">
-              <i className="text-yellow-400 fas fa-bell"></i>
+              <BellIcon className="w-4 h-4 text-yellow-400" />
               {notifications?.length > 0 && (
                 <span
                   style={{ marginTop: "-22px", marginRight: "-22px" }}

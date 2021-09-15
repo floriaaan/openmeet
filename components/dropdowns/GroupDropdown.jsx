@@ -6,6 +6,7 @@ import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { UserGroupIcon } from "@heroicons/react/outline";
 
 export const GroupDropdown = () => {
   const { user } = useAuth();
@@ -66,7 +67,7 @@ export const GroupDropdown = () => {
           <Menu.Button>
             <div className="flex items-center">
               <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-green-200 rounded-full dark:bg-green-800">
-                <i className="text-green-500 fas fa-users"></i>
+                <UserGroupIcon className="w-4 h-4 text-green-500"/>
               </span>
             </div>
           </Menu.Button>
