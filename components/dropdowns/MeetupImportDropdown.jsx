@@ -1,6 +1,8 @@
 import React from "react";
 
 import { Menu, Transition } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/outline";
+import { MeetupIcon } from "@components/SocialIcon";
 
 const cheerio = require("cheerio");
 
@@ -25,9 +27,9 @@ export const MeetupImportDropdown = ({ setScrap }) => {
         <>
           <Menu.Button
             id="meetup-display-btn"
-            className="flex-shrink px-6 py-2 text-sm text-white bg-red-600 border-0 rounded-xl focus:outline-none hover:bg-red-700"
+            className="inline-flex items-center flex-shrink px-6 py-3 text-sm text-white bg-red-600 border-0 rounded-xl focus:outline-none hover:bg-red-700"
           >
-            <i className="mr-2 fab fa-meetup" />
+            <MeetupIcon className="w-5 h-5 mr-2 fill-current" />
             Import from meetup.com
           </Menu.Button>
 
@@ -56,7 +58,7 @@ export const MeetupImportDropdown = ({ setScrap }) => {
                 </label>
                 <div className="inline-flex items-center space-x-2">
                   <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-200 rounded-lg dark:bg-red-900">
-                    <i className="text-red-700 dark:text-red-400 fab fa-meetup" />
+                    <MeetupIcon className="w-5 h-5 text-red-700 dark:text-red-400" />
                   </span>
                   <input
                     type="text"
@@ -70,7 +72,7 @@ export const MeetupImportDropdown = ({ setScrap }) => {
                     onClick={scrap}
                     className="flex items-center justify-center flex-shrink-0 w-10 h-10 duration-300 bg-green-200 rounded-lg dark:bg-green-900 hover:bg-green-300 dark:hover:bg-green-800"
                   >
-                    <i className="text-green-700 dark:text-green-400 fas fa-check" />
+                    <CheckIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                   </button>
                 </div>
               </div>

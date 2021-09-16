@@ -14,6 +14,7 @@ import {
   onSnapshot,
   updateDoc,
 } from "firebase/firestore";
+import { ArrowLeftIcon } from "@heroicons/react/solid";
 
 export const Conversation = ({ id }) => {
   const { user } = useAuth();
@@ -124,7 +125,7 @@ export const Conversation = ({ id }) => {
           <div className="inline-flex items-center justify-between w-full px-6 ">
             <Link href="/chat">
               <a className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
-                <i className="fas fa-arrow-left" />
+                <ArrowLeftIcon className="w-6 h-6" />
               </a>
             </Link>
             {chat?.members ? (
@@ -192,7 +193,7 @@ export const Conversation = ({ id }) => {
           <div className="inline-flex items-center justify-between w-full px-6 ">
             <Link href="/chat">
               <a className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
-                <i className="fas fa-arrow-left" />
+              <ArrowLeftIcon className="w-6 h-6" />
               </a>
             </Link>
             <span className="w-1/2 h-6 bg-gray-500 rounded-md animate-pulse"></span>
@@ -282,7 +283,7 @@ export const NewConversation = () => {
       <div className="inline-flex items-center justify-between w-full px-6 ">
         <Link href="/chat">
           <a className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
-            <i className="fas fa-arrow-left" />
+          <ArrowLeftIcon className="w-6 h-6" />
           </a>
         </Link>
 

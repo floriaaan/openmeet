@@ -1,5 +1,6 @@
 import { GroupOverview } from "@components/cards/CardGroupOverview";
 import { GroupSkeleton } from "@components/cards/CardGroupOverview";
+import { ChevronRightIcon, PlusIcon } from "@heroicons/react/outline";
 import { firestore } from "@libs/firebase";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import Link from "next/link";
@@ -40,7 +41,7 @@ export const GroupsSection = () => {
         <Link href="/group/all">
           <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer dark:text-gray-300 dark:hover:text-green-500 hover:text-green-500">
             Explore more groups
-            <i className="ml-2 fas fa-arrow-right"></i>
+            <ChevronRightIcon className="w-4 h-4 ml-2"/>
           </a>
         </Link>
       </div>
@@ -64,7 +65,7 @@ export const GroupsSection = () => {
           <div className="flex items-center justify-center w-full py-6 min-h-[5rem] lg:min-h-[20rem] bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
             <Link href="/group/create">
               <a className="flex items-center justify-center w-24 h-24 text-green-700 transition duration-300 bg-green-200 border border-green-500 rounded-full cursor-pointer dark:border-green-500 dark:bg-opacity-50 dark:bg-green-700 dark:text-green-200 hover:bg-green-300 dark:hover:bg-green-800">
-                <i className="text-xl fas fa-plus"></i>
+              <PlusIcon className="w-12 h-12"/>
               </a>
             </Link>
           </div>

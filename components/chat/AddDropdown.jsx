@@ -4,6 +4,7 @@ import { firestore } from "@libs/firebase";
 import { userImgFallback } from "@libs/imgOnError";
 import { Menu, Transition } from "@headlessui/react";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { PlusIcon } from "@heroicons/react/solid";
 
 export const AddDropdown = ({ members, chatId, list, setList }) => {
   const handleAdd = async (e) => {
@@ -48,7 +49,7 @@ export const AddDropdown = ({ members, chatId, list, setList }) => {
       {({ open }) => (
         <>
           <Menu.Button className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
-            <i className="fas fa-plus" />
+            <PlusIcon className="w-6 h-6" />
           </Menu.Button>
           <Transition
             show={open}
@@ -72,7 +73,7 @@ export const AddDropdown = ({ members, chatId, list, setList }) => {
                     className="inline-flex items-center px-2 py-1 text-yellow-600 transition duration-300 cursor-pointer dark:text-yellow-300 rounded-xl hover:text-yellow-500 hover:bg-yellow-100 dark:hover:bg-yellow-900"
                     onClick={handleAdd}
                   >
-                    <i className="mr-1 fas fa-plus"></i>
+                    <PlusIcon className="w-3 h-3 mr-1" />
                     Add
                   </span>
                 )}

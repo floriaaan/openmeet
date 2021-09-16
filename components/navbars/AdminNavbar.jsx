@@ -1,6 +1,7 @@
 import React from "react";
 
 import {UserDropdown} from "@components/dropdowns/UserDropdown";
+import { SearchIcon } from "@heroicons/react/outline";
 
 export const AdminNavbar = ({title}) => {
   return (
@@ -20,7 +21,7 @@ export const AdminNavbar = ({title}) => {
           <form className="flex-row flex-wrap items-center hidden mr-3 md:flex lg:ml-auto">
             <div className="relative flex flex-wrap items-stretch w-full">
               <span className="absolute z-10 items-center justify-center w-8 h-full py-2 pl-3 text-base font-normal leading-snug text-center text-gray-300 bg-transparent rounded-xl">
-                <i className="fas fa-search"></i>
+                <SearchIcon className="w-4 h-4"/>
               </span>
               <input
                 type="text"

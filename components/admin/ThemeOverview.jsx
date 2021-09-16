@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { ExternalLinkIcon } from "@heroicons/react/outline";
 
 export default function ThemeOverview() {
   return (
@@ -11,7 +12,7 @@ export default function ThemeOverview() {
               <a>
                 <h3 className="flex items-center justify-start pt-2 text-xs font-bold text-gray-400 uppercase dark:text-gray-300">
                   Themes
-                  <i className="w-3 h-3 ml-2 fas fa-external-link-alt"></i>
+                  <ExternalLinkIcon className="w-3 h-3 ml-2 " />
                 </h3>
               </a>
             </Link>

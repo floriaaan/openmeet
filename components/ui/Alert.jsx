@@ -1,3 +1,4 @@
+import { BellIcon, ExternalLinkIcon, XIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 
 function getSessionStorageOrDefault(key, defaultValue) {
@@ -39,7 +40,7 @@ export const Alert = ({ content, link = null, color = "amber", id = "", details 
             }
           >
             <span className="inline-flex items-center text-xl">
-              <i className="mr-5 fas fa-bell" />
+              <BellIcon className="w-5 h-5 mr-5" />
               <span className="inline-block mr-8 text-base align-middle">
                 {content}
               </span>
@@ -48,14 +49,14 @@ export const Alert = ({ content, link = null, color = "amber", id = "", details 
             <span className="inline-flex items-center space-x-3 ">
               {link && (
                 <a href={link} target="_blank" rel="noreferrer noopener">
-                  <i className="fas fa-external-link-alt"></i>
+                  <ExternalLinkIcon className="w-4 h-4"/>
                 </a>
               )}
               <button
                 className="font-semibold leading-none bg-transparent outline-none focus:outline-none"
                 onClick={() => setShowAlert(false)}
               >
-                <i className="fa-times fas"></i>
+                <XIcon className="w-4 h-4"></XIcon>
               </button>
             </span>
           </div>

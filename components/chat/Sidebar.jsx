@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { PlusIcon } from "@heroicons/react/solid";
+import { UserGroupIcon } from "@heroicons/react/outline";
 
 export const Sidebar = (props) => {
   const { user } = useAuth();
@@ -44,7 +46,6 @@ export const Sidebar = (props) => {
     >
       <div className="inline-flex items-center justify-between w-full px-3 py-6 text-xl text-gray-800 dark:text-gray-400">
         <span className="inline-flex items-center">
-          {/* <i className="mx-2 fas fa-comments "></i> */}
           <h3 className="pl-3 text-3xl font-extrabold text-gray-800 dark:text-gray-200">
             Start a{" "}
             <span className="text-yellow-500 dark:text-yellow-400">chat</span>
@@ -53,7 +54,7 @@ export const Sidebar = (props) => {
         <span>
           <Link href="/chat/new">
             <a className="flex items-center justify-center w-12 h-12 transition duration-500 bg-gray-200 cursor-pointer rounded-xl dark:bg-gray-800 dark:text-white hover:bg-yellow-500 dark:hover:text-yellow-500">
-              <i className="fas fa-plus" />
+              <PlusIcon className="w-6 h-6" />
             </a>
           </Link>
         </span>
@@ -73,14 +74,16 @@ export const Sidebar = (props) => {
   );
 };
 
-const ChatOverview = ({isFirst, isLast, id, messages, members, auth}) => {
+const ChatOverview = ({ isFirst, isLast, id, messages, members, auth }) => {
   let rounded = " ";
   if (isFirst) rounded += "rounded-t-xl rounded-b";
   if (isLast) rounded += "rounded-b-xl rounded-t";
   if (!isFirst && !isLast) rounded += "rounded";
 
   const lastSender =
-    messages[messages.length - 1].sender !== auth?.uid
+    members.length === 1
+      ? members[0]
+      : messages[messages.length - 1].sender !== auth?.uid
       ? members.find(
           (el) => el.uid === messages[props.messages.length - 1].sender
         )
@@ -96,7 +99,7 @@ const ChatOverview = ({isFirst, isLast, id, messages, members, auth}) => {
       >
         {members.length > 2 ? (
           <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
-            <i className="text-2xl fas fa-users" />
+            <UserGroupIcon className="w-8 h-8" />
           </span>
         ) : (
           <div className="relative flex items-center justify-center w-16 h-16 text-xl text-white bg-white rounded-full">

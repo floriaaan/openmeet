@@ -1,5 +1,6 @@
 import { AppLayout } from "@components/layouts/AppLayout";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
+import { CalendarIcon, CheckIcon, ChevronDownIcon, CogIcon, EyeIcon, LocationMarkerIcon, LockClosedIcon, PencilAltIcon, TagIcon, UserGroupIcon } from "@heroicons/react/outline";
 import { useAuth } from "@hooks/useAuth";
 import { firestore } from "@libs/firebase";
 import { eventImgFallback, userImgFallback } from "@libs/imgOnError";
@@ -151,11 +152,11 @@ export default function GroupSettingsPage() {
                         <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white rounded-full">
                           {selected?.slug === el.slug ? (
                             <span className="flex items-center justify-center w-16 h-16 p-5 text-green-700 bg-green-400 rounded-full dark:bg-green-900">
-                              <i className="text-2xl fas fa-check" />
+                              <CheckIcon className="w-8 h-8" />
                             </span>
                           ) : (
                             <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-full dark:bg-green-700">
-                              <i className="text-2xl fas fa-users" />
+                              <UserGroupIcon className="w-8 h-8" />
                             </span>
                           )}
                         </div>
@@ -208,7 +209,7 @@ export default function GroupSettingsPage() {
                 className="inline-flex items-center px-1 py-1 pr-6 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer focus:outline-none group max-w-max dark:bg-gray-900 hover:bg-green-100 dark:hover:bg-green-800 dark:bg-opacity-30 "
               >
                 <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 dark:group-hover:bg-green-700 group-hover:bg-green-200 dark:bg-opacity-30">
-                  <i className="text-gray-700 duration-300 select-none fas fa-cog dark:text-gray-300 dark:group-hover:text-green-400 group-hover:text-green-600"></i>
+                  <CogIcon className="w-4 h-4 text-gray-700 duration-300 select-none dark:text-gray-300 dark:group-hover:text-green-400 group-hover:text-green-600"/>
                 </span>
                 <p className="text-sm font-extrabold text-gray-700 duration-300 select-none dark:text-gray-300 dark:group-hover:text-green-200 group-hover:text-green-600">
                   Another group
@@ -228,8 +229,8 @@ export default function GroupSettingsPage() {
                       <span className="font-extrabold">
                         Edit {selected?.name}
                       </span>
-                      <i
-                        className={`fas fa-chevron-down ${
+                      <ChevronDownIcon
+                        className={`w-5 h-5 ${
                           open ? "transform rotate-180" : ""
                         } text-gray-800 dark:text-gray-200`}
                       />
@@ -269,7 +270,7 @@ export default function GroupSettingsPage() {
                             </label>
                             <div className="inline-flex items-center space-x-2">
                               <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                                <i className="text-green-700 dark:text-green-400 fas fa-tags" />
+                                <TagIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                               </span>
                               <input
                                 type="text"
@@ -295,7 +296,7 @@ export default function GroupSettingsPage() {
                             </label>
                             <div className="inline-flex items-center space-x-2">
                               <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                                <i className="text-green-700 dark:text-green-400 fas fa-map-marker-alt" />
+                                <LocationMarkerIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                               </span>
                               <input
                                 type="text"
@@ -335,7 +336,7 @@ export default function GroupSettingsPage() {
                             </p>
                             <div className="inline-flex items-center space-x-2">
                               <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                                <i className="text-green-700 dark:text-green-400 fas fa-lock" />
+                                <LockClosedIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                               </span>
                               <label className="flex items-center space-x-3">
                                 <input
@@ -360,7 +361,7 @@ export default function GroupSettingsPage() {
                               className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 "
                             >
                               <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
-                                <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
+                                <PencilAltIcon className="w-4 h-4 text-gray-700 select-none dark:text-gray-300 " />
                               </span>
                               <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
                                 Update
@@ -378,8 +379,8 @@ export default function GroupSettingsPage() {
                   <>
                     <Disclosure.Button className="flex items-center justify-between w-full px-4 py-2 text-lg text-left text-gray-800 duration-300 bg-white dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-800 rounded-xl hover:bg-green-200 focus:outline-none ">
                       <span className="font-extrabold">Statistics 📊</span>
-                      <i
-                        className={`fas fa-chevron-down ${
+                      <ChevronDownIcon
+                        className={`w-5 h-5 ${
                           open ? "transform rotate-180" : ""
                         } text-gray-800 dark:text-gray-200`}
                       />
@@ -446,7 +447,7 @@ export default function GroupSettingsPage() {
                   <Link href={"/group/" + selected.slug}>
                     <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-800 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
                       <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
-                        <i className="text-2xl fas fa-users" />
+                        <UserGroupIcon className="w-8 h-8" />
                       </span>
                       <div className="flex flex-col dark:text-gray-200">
                         <h4 className="text-base font-extrabold">
@@ -493,7 +494,7 @@ export default function GroupSettingsPage() {
                         className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-red-200 dark:hover:bg-red-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
                       >
                         <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-red-300 dark:hover:bg-red-700 dark:bg-opacity-30">
-                          <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400"></i>
+                          <EyeIcon className="w-3 h-3 text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400"/>
                         </span>
                       </button>
                     )}
@@ -538,7 +539,7 @@ export default function GroupSettingsPage() {
                         className="inline-flex items-center px-1 py-1 text-xs transition duration-300 bg-gray-100 rounded-full hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
                       >
                         <span className="flex items-center justify-center w-4 h-4 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-                          <i className="text-gray-700 duration-300 select-none far fa-eye dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></i>
+                        <EyeIcon className="w-3 h-3 text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"/>
                         </span>
                       </button>
                     )}
@@ -614,7 +615,7 @@ const EventOverview = ({
           </>
         ) : (
           <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-full dark:bg-purple-700">
-            <i className="text-2xl fas fa-calendar-alt" />
+            <CalendarIcon className="w-8 h-8" />
           </span>
         )}
       </div>

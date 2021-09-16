@@ -1,3 +1,4 @@
+import { UserGroupIcon } from "@heroicons/react/outline";
 import { formatDistance } from "date-fns";
 import Link from "next/link";
 import { connectStateResults } from "react-instantsearch-dom";
@@ -51,7 +52,7 @@ const GroupOverview = ({ objectID, name }) => (
     <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900">
       <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
         <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-full dark:bg-green-700">
-          <i className="text-2xl fas fa-users" />
+          <UserGroupIcon className="w-8 h-8" />
         </span>
       </div>
       <div className="flex flex-col items-center justify-center w-full px-1">
@@ -71,7 +72,7 @@ const GroupOverviewList = ({ objectID, name, createdAt }) => (
   <Link href={"/group/" + objectID}>
     <a className="flex flex-row w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out rounded-md cursor-pointer dark:text-gray-200 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900 focus:outline-none ">
       <span className="flex items-center justify-center w-8 h-8 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
-        <i className="text-lg fas fa-users" />
+      <UserGroupIcon className="w-4 h-4" />
       </span>
       <div className="flex flex-col ml-2">
         <span className="font-bold text-green-600 dark:text-green-400">

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { MenuIcon } from "@heroicons/react/outline";
 // components
 
 export const Navbar = (props) => {
@@ -11,18 +12,18 @@ export const Navbar = (props) => {
           <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
               <a
-                className="inline-block py-2 mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-gray-300 dark:text-white whitespace-nowrap"
+                className="inline-block py-2 mr-4 text-sm font-bold leading-relaxed text-gray-700 dark:text-white whitespace-nowrap"
                 href="#"
               >
                 OpenMeet
               </a>
             </Link>
             <button
-              className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded-xl outline-none cursor-pointer lg:hidden focus:outline-none"
+              className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid outline-none cursor-pointer rounded-xl lg:hidden focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              <i className="text-white fas fa-bars"></i>
+              <MenuIcon className="w-6 h-6"/>
             </button>
           </div>
           <div

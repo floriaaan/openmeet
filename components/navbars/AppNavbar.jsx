@@ -16,6 +16,7 @@ const searchClient = algoliasearch(
 
 import { InstantSearch } from "react-instantsearch-dom";
 import CustomHits from "@components/ui/Spotlight/CustomHits";
+import { MenuIcon } from "@heroicons/react/outline";
 
 export const AppNavbar = ({ shadowOnNavbar }) => {
   const { user } = useAuth();
@@ -48,7 +49,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              <i className="fas fa-bars"></i>
+              <MenuIcon className="w-6 h-6"/>
             </button>
           </div>
           <div

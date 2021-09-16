@@ -17,7 +17,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { BellIcon } from "@heroicons/react/outline";
+import { BellIcon, ChatAlt2Icon, CheckIcon, ChevronRightIcon, MailIcon } from "@heroicons/react/outline";
 
 export const NotificationDropdown = () => {
   const { user } = useAuth();
@@ -120,7 +120,7 @@ export const NotificationDropdown = () => {
                 <Link href="/chat">
                   <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900">
                     See more
-                    <i className="mt-0.5 ml-2 fas fa-arrow-right" />
+                    <ChevronRightIcon className="mt-0.5 ml-2 w-4 h-4" />
                   </a>
                 </Link>
               </div>
@@ -154,7 +154,7 @@ export const NotificationDropdown = () => {
                   className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900"
                 >
                   Read all
-                  <i className="mt-0.5 ml-2 fas fa-check" />
+                  <CheckIcon className="mt-0.5 ml-2 w-4 h-4" />
                 </button>
               </div>
               <div className="flex flex-col items-center justify-center w-full min-h-[6rem] space-y-3">
@@ -196,7 +196,7 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
             />
           ) : (
             <span className="flex items-center justify-center w-16 h-16 p-5 text-yellow-500 bg-yellow-200 rounded-full dark:bg-yellow-700">
-              <i className="text-2xl fas fa-comments" />
+              <ChatAlt2Icon className="w-8 h-8" />
             </span>
           )}
           {isUnread && (
@@ -244,9 +244,9 @@ const NotificationOverview = ({ type, data, createdAt }) => {
     >
       <span className="flex items-center justify-center w-8 h-8 p-5 text-yellow-500 bg-yellow-200 rounded-xl dark:bg-yellow-700">
         {data?.action === "new_message" ? (
-          <i className="text-lg fas fa-envelope" />
+          <MailIcon className="w-4 h-4" />
         ) : (
-          <i className="text-lg fas fa-bell" />
+          <BellIcon className="w-4 h-4" />
         )}
       </span>
       <div className="flex flex-col ml-2">

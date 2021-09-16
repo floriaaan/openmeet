@@ -23,6 +23,7 @@ import {
 import { Dialog, Tab, Transition } from "@headlessui/react";
 import { userImgFallback } from "@libs/imgOnError";
 import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { CalendarIcon, CheckIcon, ExclamationIcon, MapIcon, PencilIcon, PlusIcon, ShareIcon, UsersIcon, XIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -112,12 +113,12 @@ export default function GroupPage({
           <div className="flex flex-col w-full px-6 py-6 bg-white border-b border-gray-200 lg:px-32 xl:px-48 dark:bg-black dark:border-gray-800">
             <div className="flex flex-col lg:h-10 lg:items-center lg:flex-row lg:space-x-6">
               <div className="flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-                <i className="hidden lg:flex items-center fas fa-map flex-shrink-0 mr-1.5 h-5 w-5 "></i>
+                <MapIcon className="hidden lg:flex items-center flex-shrink-0 mr-1.5 h-5 w-5 "/>
                 {location?.location || "Remote"}
               </div>
 
               <div className="items-center hidden text-sm text-gray-500 transition duration-200 lg:inline-flex hover:text-gray-700 dark:text-gray-400">
-                <i className="flex items-center flex-shrink-0 w-5 h-5 mr-1 fas fa-calendar "></i>
+                <CalendarIcon className="flex items-center flex-shrink-0 w-5 h-5 mr-1"/>
                 {formatDistance(new Date(createdAt), new Date(), {
                   addSuffix: true,
                 })}
@@ -125,14 +126,14 @@ export default function GroupPage({
               {subs.length ? (
                 <div className="items-center hidden text-sm text-gray-500 transition duration-200 lg:inline-flex hover:text-gray-700 dark:text-gray-400">
                   <AvatarGroup users={subs} limit={4} />
-                  <i className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+                  <UsersIcon className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 " />
                   {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
                 </div>
               ) : null}
             </div>
             {subs.length ? (
               <div className="inline-flex items-center mb-2 text-sm text-gray-500 transition duration-200 lg:hidden hover:text-gray-700 dark:text-gray-400">
-                <i className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
+                <UsersIcon className="hidden lg:flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "/>
                 {subs?.length || 0} {subs?.length > 1 ? "members" : "member"}
               </div>
             ) : null}
@@ -145,7 +146,7 @@ export default function GroupPage({
                   <Link href={"/group/settings/?slug=" + slug}>
                     <a className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 ">
                       <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
-                        <i className="text-gray-700 select-none fas fa-pencil-alt dark:text-gray-300 "></i>
+                        <PencilIcon className="w-4 h-4 text-gray-700 select-none dark:text-gray-300 "/>
                       </span>
                       <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
                         Edit
@@ -169,7 +170,7 @@ export default function GroupPage({
                   className="inline-flex items-center px-1 py-1 space-x-3 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 lg:pr-6 focus:outline-none group max-w-max dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:bg-opacity-30 dark:bg-opacity-30 "
                 >
                   <span className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full dark:bg-gray-800 dark:bg-opacity-30">
-                    <i className="text-gray-700 select-none fas fa-share-alt dark:text-gray-300 "></i>
+                    <ShareIcon className="w-4 h-4 text-gray-700 select-none dark:text-gray-300 "/>
                   </span>
                   <p className="hidden text-sm font-extrabold text-gray-700 select-none lg:flex dark:text-gray-300">
                     Share
@@ -188,8 +189,8 @@ export default function GroupPage({
                   {isSubscribed ? (
                     <div className="inline-flex items-center space-x-3">
                       <span className="flex items-center justify-center w-8 h-8 transition duration-500 bg-green-300 rounded-full group-hover:bg-red-300 dark:group-hover:bg-red-800 dark:bg-green-800 dark:bg-opacity-30">
-                        <i className="text-green-700 select-none fas fa-check dark:text-green-300 group-hover:hidden"></i>
-                        <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
+                        <CheckIcon className="w-4 h-4 text-green-700 select-none dark:text-green-300 group-hover:hidden" />
+                        <XIcon className="hidden w-4 h-4 text-red-700 select-none dark:text-red-300 group-hover:block" />
                       </span>
                       <p className="hidden text-sm font-extrabold text-green-700 select-none lg:flex dark:text-green-300 lg:group-hover:hidden">
                         Subscribed
@@ -201,7 +202,7 @@ export default function GroupPage({
                   ) : (
                     <>
                       <span className="flex items-center justify-center w-8 h-8 bg-green-300 rounded-full dark:bg-green-800 dark:bg-opacity-30">
-                        <i className="text-green-700 select-none fas fa-plus dark:text-green-300 "></i>
+                        <PlusIcon className="w-4 h-4 text-green-700 select-none dark:text-green-300 "/>
                       </span>
                       <p className="hidden text-sm font-extrabold text-green-700 select-none lg:flex dark:text-green-300">
                         Subscribe
@@ -765,7 +766,7 @@ const ReportModal = ({
                     className="inline-flex items-center justify-center px-4 py-2 mr-2 text-sm font-medium text-red-900 duration-300 bg-red-100 rounded-md dark:bg-red-800 dark:hover:bg-red-700 dark:text-red-300 hover:bg-red-200 focus:outline-none"
                     onClick={handleSubmit}
                   >
-                    <i className="mr-2 fas fa-exclamation-triangle"></i>
+                    <ExclamationIcon className="w-4 h-4 mr-2"/>
                     Report
                   </button>
                   <button

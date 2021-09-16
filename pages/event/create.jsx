@@ -18,6 +18,16 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import {
+  CalendarIcon,
+  ExternalLinkIcon,
+  LocationMarkerIcon,
+  LockClosedIcon,
+  PaperClipIcon,
+  PlusCircleIcon,
+  UserGroupIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -224,7 +234,7 @@ export default function GroupCreatePage() {
                           setPicture(null);
                         }}
                       >
-                        <i className="text-xs text-white fas fa-times"></i>
+                        <XIcon className="w-3 h-3"></XIcon>
                       </div>
                     </div>
                   )}
@@ -245,7 +255,26 @@ export default function GroupCreatePage() {
                         htmlFor="filePicture"
                         className="relative block w-full p-12 text-center duration-300 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
-                        <svg className="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        <svg
+                          className="w-12 h-12 mx-auto text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
 
                         <span className="block mt-2 text-sm font-medium text-gray-900">
                           Add a photo
@@ -279,7 +308,7 @@ export default function GroupCreatePage() {
                   </label>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                      <i className="text-green-700 dark:text-green-400 fas fa-users" />
+                      <UserGroupIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                     </span>
                     <select
                       type="text"
@@ -321,7 +350,7 @@ export default function GroupCreatePage() {
                   </label>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-map-marker-alt" />
+                      <LocationMarkerIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
                     </span>
                     <input
                       type="text"
@@ -354,7 +383,7 @@ export default function GroupCreatePage() {
                   </label>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-paperclip" />
+                      <PaperClipIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
                     </span>
                     <input
                       type="file"
@@ -421,7 +450,7 @@ export default function GroupCreatePage() {
               </p> */}
                   <div className="flex flex-col items-center lg:flex-row">
                     <span className="items-center flex-shrink-0 justify-center hidden w-10 h-10 mt-[25px] mr-2 bg-purple-200 dark:bg-purple-900 rounded-lg lg:flex">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-calendar-alt" />
+                      <CalendarIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
                     </span>
                     <div className="w-full mb-2 lg:w-1/2 lg:mb-0 lg:pr-2">
                       <label
@@ -467,7 +496,7 @@ export default function GroupCreatePage() {
                   </label>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-external-link-alt" />
+                      <ExternalLinkIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
                     </span>
                     <input
                       type="text"
@@ -487,7 +516,7 @@ export default function GroupCreatePage() {
                   </p>
                   <div className="inline-flex items-center space-x-2">
                     <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-                      <i className="text-purple-700 dark:text-purple-400 fas fa-lock" />
+                      <LockClosedIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
                     </span>
                     <label className="flex items-center space-x-3">
                       <input
@@ -509,9 +538,10 @@ export default function GroupCreatePage() {
               <div className="flex flex-row mb-3 space-x-2">
                 <button
                   type="submit"
-                  className="flex-grow px-6 py-2 text-lg text-white bg-purple-500 border-0 rounded-xl focus:outline-none hover:bg-purple-600"
+                  className="inline-flex items-center justify-center flex-grow px-6 py-2 text-lg text-white duration-300 bg-purple-500 border-0 rounded-xl focus:outline-none hover:bg-purple-600"
                   onClick={createEvent}
                 >
+                  <PlusCircleIcon className="w-5 h-5 mr-2" />
                   Create
                 </button>
                 <MeetupImportDropdown />

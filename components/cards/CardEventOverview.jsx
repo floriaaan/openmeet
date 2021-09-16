@@ -1,7 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { EventContextMenu } from "@components/contextmenus/EventContextMenu";
 import { AvatarGroup } from "@components/ui/AvatarGroup";
-import { Transition } from "@headlessui/react";
+import { CalendarIcon } from "@heroicons/react/outline";
+import {
+  LocationMarkerIcon,
+  ShareIcon,
+  VideoCameraIcon,
+} from "@heroicons/react/solid";
 import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -40,19 +45,19 @@ export const EventOverview = (props) => {
                 />
               ) : (
                 <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg lg:h-32 xl:h-48 dark:bg-purple-900">
-                  <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+                  <CalendarIcon className="w-6 h-6 text-purple-700 dark:text-purple-400" />
                 </span>
               )}
               <div className="absolute top-2 left-2">
                 <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
                   {props?.location?.location === "Remote" ? (
                     <>
-                      <i className="mr-1 fas fa-video"></i>
+                      <VideoCameraIcon className="w-3 h-3 mr-1" />
                       <span className="truncate">Online Event</span>
                     </>
                   ) : (
                     <>
-                      <i className="mr-1 fas fa-map-marker"></i>
+                      <LocationMarkerIcon className="w-3 h-3 mr-1" />
                       <span className="truncate">
                         {props?.location?.details
                           ? props.location.details.city +
@@ -90,10 +95,7 @@ export const EventOverview = (props) => {
                       {"Why don't you participate ?"}
                     </p>
                   </div>
-                )}{" "}
-                {/* <i className="flex items-center fas fa-users flex-shrink-0 mx-1.5 h-5 w-5 "></i>
-              {subs?.length || 0}{" "}
-              {subs?.length > 1 ? "participants" : "participant"} */}
+                )}
               </div>
               <div className="flex">
                 <button
@@ -117,7 +119,7 @@ export const EventOverview = (props) => {
                   className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
                 >
                   <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-purple-300 dark:hover:bg-purple-700 dark:bg-opacity-30">
-                    <i className="text-gray-700 duration-300 select-none fas fa-share-alt dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400"></i>
+                    <ShareIcon className="w-5 h-5 text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400"></ShareIcon>
                   </span>
                 </button>
               </div>
@@ -136,12 +138,12 @@ export const EventSkeleton = () => (
   <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
     <span className="relative w-full">
       <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg animate-pulse lg:h-32 xl:h-48 dark:bg-purple-900">
-        <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+        <CalendarIcon className="w-6 h-6 text-purple-700 dark:text-purple-400" />
       </span>
       <div className="absolute top-2 left-2">
         <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl animate-pulse rounded-xl">
           <>
-            <i className="mr-1 fas fa-video"></i>
+            <VideoCameraIcon className="w-3 h-3 mr-1" />
             <span className="truncate">Loading</span>
           </>
         </div>

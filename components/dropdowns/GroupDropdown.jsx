@@ -6,7 +6,7 @@ import { firestore } from "@libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { UserGroupIcon } from "@heroicons/react/outline";
+import { CogIcon, PlusIcon, UserGroupIcon } from "@heroicons/react/outline";
 
 export const GroupDropdown = () => {
   const { user } = useAuth();
@@ -27,7 +27,8 @@ export const GroupDropdown = () => {
         const randomGroup = list[randomIndex];
         if (
           list.length > 0 &&
-          groups.findIndex((group) => group.slug === randomGroup.slug) === -1 && !randomGroup.private
+          groups.findIndex((group) => group.slug === randomGroup.slug) === -1 &&
+          !randomGroup.private
         ) {
           groups.push(randomGroup);
         }
@@ -67,7 +68,7 @@ export const GroupDropdown = () => {
           <Menu.Button>
             <div className="flex items-center">
               <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-green-200 rounded-full dark:bg-green-800">
-                <UserGroupIcon className="w-4 h-4 text-green-500"/>
+                <UserGroupIcon className="w-4 h-4 text-green-500" />
               </span>
             </div>
           </Menu.Button>
@@ -94,27 +95,28 @@ export const GroupDropdown = () => {
                 ))}
               </div>
               <div className="border-t border-gray-100 dark:border-gray-800"></div>
-
-              <Link href="/group/create">
-                <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-plus"></i>
-                  Create a group
-                </a>
-              </Link>
-              <Link href="/group/all">
-                <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-users"></i>
-                  All groups
-                </a>
-              </Link>
-              {isGroupAdmin && (
-                <Link href="/group/settings">
-                  <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
-                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-cog"></i>
-                    Manage your groups
+              <div className="flex flex-col">
+                <Link href="/group/create">
+                  <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
+                    <PlusIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
+                    Create a group
                   </a>
                 </Link>
-              )}
+                <Link href="/group/all">
+                  <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
+                    <UserGroupIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
+                    All groups
+                  </a>
+                </Link>
+                {isGroupAdmin && (
+                  <Link href="/group/settings">
+                    <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
+                      <CogIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
+                      Manage your groups
+                    </a>
+                  </Link>
+                )}
+              </div>
             </Menu.Items>
           </Transition>
         </>
@@ -128,7 +130,7 @@ const GroupOverview = ({ slug, name }) => (
     <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900">
       <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
         <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-full dark:bg-green-700">
-          <i className="text-2xl fas fa-users" />
+          <UserGroupIcon className="w-8 h-8" />
         </span>
       </div>
       <div className="flex flex-col items-center justify-center w-full px-1">

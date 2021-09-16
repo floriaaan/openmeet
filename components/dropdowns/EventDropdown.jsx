@@ -6,7 +6,7 @@ import { firestore } from "@libs/firebase";
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs } from "firebase/firestore";
 import { eventImgFallback } from "@libs/imgOnError";
-import { CalendarIcon } from "@heroicons/react/outline";
+import { CalendarIcon, PlusIcon } from "@heroicons/react/outline";
 
 export const EventDropdown = () => {
   const { user } = useAuth();
@@ -50,7 +50,7 @@ export const EventDropdown = () => {
           <Menu.Button>
             <div className="flex items-center">
               <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-purple-200 rounded-full dark:bg-purple-800">
-                <CalendarIcon className="w-4 h-4 text-purple-500 dark:text-purple-400"/>
+                <CalendarIcon className="w-4 h-4 text-purple-500 dark:text-purple-400" />
               </span>
             </div>
           </Menu.Button>
@@ -79,18 +79,20 @@ export const EventDropdown = () => {
               </div>
               <div className="border-t border-gray-100 dark:border-gray-800"></div>
 
-              <Link href="/event/create">
-                <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-plus"></i>
-                  Create an event
-                </a>
-              </Link>
-              <Link href="/event/all">
-                <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
-                  <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-calendar-alt"></i>
-                  All events
-                </a>
-              </Link>
+              <div className="flex flex-col">
+                <Link href="/event/create">
+                  <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+                    <PlusIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
+                    Create an event
+                  </a>
+                </Link>
+                <Link href="/event/all">
+                  <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
+                    <CalendarIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
+                    All events
+                  </a>
+                </Link>
+              </div>
             </Menu.Items>
           </Transition>
         </>
@@ -122,7 +124,7 @@ const EventOverview = ({
           </>
         ) : (
           <span className="flex items-center justify-center w-16 h-16 p-5 text-purple-500 bg-purple-200 rounded-full dark:bg-purple-700">
-            <i className="text-2xl fas fa-calendar-alt" />
+            <CalendarIcon className="w-8 h-8" />
           </span>
         )}
       </div>

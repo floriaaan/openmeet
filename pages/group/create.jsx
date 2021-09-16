@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { makeRequest } from "@libs/asyncXHR";
 import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { LocationMarkerIcon, LockClosedIcon, TagIcon } from "@heroicons/react/outline";
 
 const LoadingDynamic = () => (
   <div className="flex items-center justify-center w-full h-full mx-auto text-2xl font-bold tracking-wide uppercase">
@@ -164,7 +165,7 @@ export default function GroupCreatePage() {
               </label>
               <div className="inline-flex items-center space-x-2">
                 <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                  <i className="text-green-700 dark:text-green-400 fas fa-tags" />
+                  <TagIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                 </span>
                 <input
                   type="text"
@@ -190,7 +191,7 @@ export default function GroupCreatePage() {
               </label>
               <div className="inline-flex items-center space-x-2">
                 <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                  <i className="text-green-700 dark:text-green-400 fas fa-map-marker-alt" />
+                  <LocationMarkerIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                 </span>
                 <input
                   type="text"
@@ -232,7 +233,7 @@ export default function GroupCreatePage() {
               </p>
               <div className="inline-flex items-center space-x-2">
                 <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-200 rounded-lg dark:bg-green-900">
-                  <i className="text-green-700 dark:text-green-400 fas fa-lock" />
+                  <LockClosedIcon className="w-5 h-5 text-green-700 dark:text-green-400" />
                 </span>
                 <label className="flex items-center space-x-3">
                   <input

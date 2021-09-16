@@ -1,10 +1,11 @@
 import { Popover, Transition } from "@headlessui/react";
+import { LinkIcon } from "@heroicons/react/outline";
 
 export const ApiKey = ({ color = "gray", apikey }) => {
   return (
     <Popover className="relative">
       <Popover.Button className="flex flex-row items-center text-xs font-bold transition duration-300 cursor-pointer">
-        <i className="w-3 h-3 mr-1 fas fa-link" />
+        <LinkIcon className="w-4 h-4 mr-1" />
         API key
       </Popover.Button>
 

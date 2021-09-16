@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { UserDropdown } from "components/dropdowns/UserDropdown";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 export const Sidebar = () => {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -20,7 +21,7 @@ export const Sidebar = () => {
               setCollapseShow("bg-white dark:bg-gray-900 m-2 py-3 px-6")
             }
           >
-            <i className="fas fa-bars"></i>
+            <MenuIcon className="w-5 h-5"/>
           </button>
           {/* Brand */}
           <Link href="/">
@@ -66,7 +67,7 @@ export const Sidebar = () => {
                     className="px-3 py-1 text-xl leading-none text-black bg-transparent border border-transparent border-solid opacity-50 cursor-pointer rounded-xl md:hidden"
                     onClick={() => setCollapseShow("hidden")}
                   >
-                    <i className="fas fa-times"></i>
+                    <XIcon className="w-4 h-4"/>
                   </button>
                 </div>
               </div>

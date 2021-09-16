@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 
 export default function GroupAllPage({ groups }) {
   const [displayables, setDisplayables] = useState(groups);
@@ -152,7 +153,7 @@ const DistanceSelect = ({ distance, setDistance }) => {
           <Menu.Button className="flex items-center justify-between px-4 py-2 mr-4 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
             {distance?.label || "Any distance"}
             <span className="ml-2">
-              <i className="text-xs fas fa-chevron-down"></i>
+              <ChevronDownIcon className="w-3 h-3" />
             </span>
           </Menu.Button>
           <Transition
@@ -217,7 +218,7 @@ const CategorySelect = ({ category, setCategory }) => {
           <Menu.Button className="flex items-center justify-between px-4 py-2 mr-4 font-medium transition duration-300 rounded-xl max-h-12 w-max hover:bg-green-200 hover:text-green-700 dark:hover:bg-green-800 dark:hover:text-green-300">
             {category?.label || "Any category"}
             <span className="ml-2">
-              <i className="text-xs fas fa-chevron-down"></i>
+              <ChevronDownIcon className="w-3 h-3" />
             </span>
           </Menu.Button>
           <Transition

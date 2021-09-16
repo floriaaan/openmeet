@@ -7,7 +7,15 @@ import { Menu, Transition } from "@headlessui/react";
 
 import Link from "next/link";
 import { userImgFallback } from "@libs/imgOnError";
-import { UserIcon } from "@heroicons/react/outline";
+import {
+  CogIcon,
+  LoginIcon,
+  LogoutIcon,
+  MoonIcon,
+  SunIcon,
+  UserAddIcon,
+  UserIcon,
+} from "@heroicons/react/outline";
 
 export const UserDropdown = () => {
   const { user, signout } = useAuth();
@@ -36,7 +44,7 @@ export const UserDropdown = () => {
                 </span>
               ) : (
                 <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-red-200 rounded-full dark:bg-red-800 focus:outline-none focus:border-gray-300 dark:border-gray-800">
-                  <UserIcon className="w-4 h-4 text-red-500" />
+                  <UserIcon className="w-5 h-5 text-red-500" />
                 </span>
               )}
             </div>
@@ -78,10 +86,10 @@ export const UserDropdown = () => {
                   </Link>
 
                   <a
-                    className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
+                    className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out cursor-pointer dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800"
                     onClick={signout}
                   >
-                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-lock"></i>
+                    <LogoutIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
                     Logout
                   </a>
 
@@ -91,8 +99,8 @@ export const UserDropdown = () => {
                         OpenMeet Settings
                       </div>
                       <Link href="/admin">
-                        <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                          <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-cog"></i>
+                        <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
+                          <CogIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 " />
                           Settings
                         </a>
                       </Link>
@@ -105,14 +113,14 @@ export const UserDropdown = () => {
                     Connect
                   </div>
                   <Link href="/auth">
-                    <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                      <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-lock-open"></i>
+                    <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
+                      <LoginIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 " />
                       Login
                     </a>
                   </Link>
                   <Link href="/auth/register">
-                    <a className="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
-                      <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-user-plus"></i>
+                    <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
+                      <UserAddIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
                       Register
                     </a>
                   </Link>
@@ -132,9 +140,9 @@ export const UserDropdown = () => {
               >
                 <span className="inline-flex items-center">
                   {theme === "light" ? (
-                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-moon"></i>
+                    <MoonIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800"/>
                   ) : (
-                    <i className="w-8 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 fas fa-sun"></i>
+                    <SunIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800"/>
                   )}
                   Toggle Dark Mode
                 </span>

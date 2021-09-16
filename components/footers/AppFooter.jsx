@@ -1,3 +1,5 @@
+import { GitHubIcon } from "@components/SocialIcon";
+import { TwitterIcon } from "@components/SocialIcon";
 import { useAuth } from "@hooks/useAuth";
 import useFirestoreToggle from "@hooks/useFirestoreToggle";
 
@@ -59,18 +61,18 @@ export const AppFooter = () => {
             </div>
           </div>
         )}
-        <span className="inline-flex justify-center space-x-5 sm:mt-0 sm:justify-start">
+        <span className="inline-flex items-center justify-center space-x-5 sm:mt-0 sm:justify-start">
           <a
             href="https://twitter.com/t3tra_"
-            className="text-gray-600 transition duration-300 dark:text-gray-400 hover:text-blue-600"
+            className="mb-0 text-gray-600 transition duration-300 dark:text-gray-400 hover:text-blue-600"
           >
-            <i className="fab fa-twitter" />
+            <TwitterIcon className="w-4 h-4 fill-current" />
           </a>
           <a
             href="https://github.com/floriaaan"
             className="text-gray-600 transition duration-300 dark:text-gray-400 hover:text-blue-600"
           >
-            <i className="fab fa-github" />
+            <GitHubIcon className="w-4 h-4" />
           </a>
         </span>
       </div>

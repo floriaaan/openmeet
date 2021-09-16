@@ -20,6 +20,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CalendarIcon, CheckIcon, ClockIcon, LocationMarkerIcon, PaperClipIcon, PlusIcon, UserGroupIcon, VideoCameraIcon, XIcon } from "@heroicons/react/outline";
 
 export default function EventPage(props) {
   const [participants, setParticipants] = useState([]);
@@ -131,8 +132,8 @@ export default function EventPage(props) {
               ) ? (
                 <div className="inline-flex items-center space-x-3">
                   <span className="flex items-center justify-center w-8 h-8 transition duration-500 bg-purple-300 rounded-full group-hover:bg-red-300 dark:group-hover:bg-red-800 md:w-12 md:h-12 dark:bg-purple-800 dark:bg-opacity-30">
-                    <i className="text-purple-700 select-none fas fa-check dark:text-purple-300 group-hover:hidden"></i>
-                    <i className="hidden text-red-700 select-none fas fa-times dark:text-red-300 group-hover:block"></i>
+                    <CheckIcon className="w-4 h-4 text-purple-700 select-none md:w-6 md:h-6 dark:text-purple-300 group-hover:hidden"/>
+                    <XIcon className="hidden w-4 h-4 text-red-700 select-none md:w-6 md:h-6 dark:text-red-300 group-hover:block"/>
                   </span>
                   <p className="text-sm font-extrabold text-purple-700 select-none dark:text-purple-300 group-hover:hidden">
                     {"You're in !"}
@@ -144,7 +145,7 @@ export default function EventPage(props) {
               ) : (
                 <>
                   <span className="flex items-center justify-center w-8 h-8 bg-purple-300 rounded-full md:w-12 md:h-12 dark:bg-purple-800 dark:bg-opacity-30">
-                    <i className="text-purple-700 select-none fas fa-plus dark:text-purple-300 "></i>
+                    <PlusIcon className="w-4 h-4 text-purple-700 select-none md:w-6 md:h-6 dark:text-purple-300 "/>
                   </span>
                   <p className="text-sm font-extrabold text-purple-700 select-none dark:text-purple-300">
                     Participate
@@ -166,19 +167,19 @@ export default function EventPage(props) {
                 />
               ) : (
                 <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg lg:h-64 dark:bg-purple-900">
-                  <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+                  <CalendarIcon className="w-12 h-12 text-purple-700 dark:text-purple-400 md:w-24 md:h-24" />
                 </span>
               )}
               <div className="absolute p-4 top-2 left-2">
                 <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl rounded-xl">
                   {props?.location?.location === "Remote" ? (
                     <>
-                      <i className="mr-1 fas fa-video"></i>
+                      <VideoCameraIcon className="w-3 h-3 mr-1"/>
                       <span className="truncate">Online Event</span>
                     </>
                   ) : (
                     <>
-                      <i className="mr-1 fas fa-map-marker"></i>
+                      <LocationMarkerIcon className="w-3 h-3 mr-1"/>
                       <span className="truncate">
                         {props?.location?.details
                           ? props.location.details.city +
@@ -205,7 +206,7 @@ export default function EventPage(props) {
               <Link href={"/group/" + props.group.slug}>
                 <a className="inline-flex items-center p-3 space-x-4 transition duration-500 bg-white dark:bg-gray-900 rounded-xl hover:bg-green-100 dark:hover:bg-green-900">
                   <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-xl dark:bg-green-700">
-                    <i className="text-2xl fas fa-users" />
+                    <UserGroupIcon className="w-8 h-8 " />
                   </span>
                   <div className="flex flex-col">
                     <h4 className="text-base font-bold">{props.group.name}</h4>
@@ -222,13 +223,13 @@ export default function EventPage(props) {
                     <span className="inline-flex items-center flex-grow space-x-4">
                       {props.endDate ? (
                         <div className="flex flex-col items-center w-6 ml-4 ">
-                          <i className="text-lg text-center far fa-clock" />
+                          <ClockIcon className="w-4 h-4 text-center " />
                           <span className="text-[0.6rem] font-bold uppercase">
                             from
                           </span>
                         </div>
                       ) : (
-                        <i className="w-6 ml-4 text-lg text-center far fa-clock" />
+                        <ClockIcon className="w-6 h-6 ml-4 text-center" />
                       )}
 
                       <div className="flex flex-col">
@@ -275,7 +276,7 @@ export default function EventPage(props) {
                     <div className="inline-flex items-center justify-between w-full pt-2 pb-4 space-x-4 ">
                       <span className="inline-flex items-center flex-grow space-x-4">
                         <div className="flex flex-col items-center w-6 ml-4 ">
-                          <i className="text-lg text-center far fa-clock" />
+                          <ClockIcon className="w-4 h-4 text-center" />
                           <span className="text-[0.6rem] text-center font-bold uppercase">
                             to
                           </span>
@@ -303,9 +304,9 @@ export default function EventPage(props) {
                 >
                   <span className="inline-flex items-center flex-grow space-x-4">
                     {props.location.location === "Remote" ? (
-                      <i className="w-6 ml-4 text-lg text-center fas fa-video" />
+                      <VideoCameraIcon className="w-6 h-6 ml-4 text-center" />
                     ) : (
-                      <i className="w-6 ml-4 text-lg text-center fas fa-map-marker-alt" />
+                      <LocationMarkerIcon className="w-6 h-6 ml-4 text-center" />
                     )}
                     {props.location.location === "Remote" ||
                     !props.location.location ? (
@@ -370,7 +371,7 @@ export default function EventPage(props) {
                   >
                     <div className="inline-flex items-center justify-between w-full pt-4 pb-2 space-x-4 ">
                       <span className="inline-flex items-center flex-grow space-x-4">
-                        <i className="w-6 ml-4 text-lg text-center fas fa-paperclip" />
+                        <PaperClipIcon className="w-6 h-6 ml-4 text-center" />
 
                         <div className="flex flex-col">
                           <p className="text-xs">Attachment</p>
@@ -393,62 +394,6 @@ export default function EventPage(props) {
 
 export async function getServerSideProps(ctx) {
   const event = await getDoc(doc(firestore, "events", ctx.query.slug));
-
-  // const event = {
-  //   data: () => {
-  //     return {
-  //       slug: "test",
-  //       location: {
-  //         location: "6 Chaussée Lamandé, Le Havre 76600, France",
-  //         position: {
-  //           lat: 49.48597005571962,
-  //           lng: 0.11723955309840496,
-  //         },
-  //         details: {
-  //           label: "6 Chaussée Lamandé 76600 Le Havre",
-  //           citycode: "76351",
-  //           id: "76351_pl592w_00006",
-  //           importance: 0.64465,
-  //           y: 6935824.8,
-  //           country: "France",
-  //           distance: 168,
-  //           x: 491057.11,
-  //           context: "76, Seine-Maritime, Normandie",
-  //           street: "Chaussée Lamandé",
-  //           name: "6 Chaussée Lamandé",
-  //           housenumber: "6",
-  //           postcode: "76600",
-  //           type: "housenumber",
-  //           score: 0.9999886833518531,
-  //           city: "Le Havre",
-  //         },
-  //       },
-  //       startDate: "2021-08-25T22:45",
-  //       name: "Lorem ipsum dolor sit amet.",
-  //       endDate: "2021-08-30T22:45",
-  //       createdAt: "2021-08-04T20:45:57.919Z",
-  //       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed lacus nec ante laoreet porttitor in eget erat. Curabitur bibendum eget urna at viverra. Praesent dictum eleifend mauris sit amet ultrices. Aliquam tempor elit at sapien euismod, et tristique metus iaculis. Quisque non mi sit amet ex congue vehicula. Fusce suscipit, mi a interdum vestibulum, lorem tortor ullamcorper magna, et mattis purus quam vitae risus. Maecenas vitae nulla non est accumsan maximus.
-
-  //       Praesent convallis erat eget dapibus elementum. Suspendisse potenti. Maecenas lacinia lacinia pellentesque. Aliquam nulla lacus, cursus ac commodo nec, consequat convallis mauris. Cras euismod a erat sed porttitor. In convallis ultricies nibh, eu porttitor ante pretium quis. Mauris sodales dui nec eleifend fermentum. Suspendisse in diam iaculis eros auctor tempor. Pellentesque luctus elit non tincidunt finibus. In molestie elit rhoncus nisi pretium porttitor. Duis augue leo, auctor et vehicula eget, interdum eget ligula. Pellentesque ullamcorper, tellus nec consectetur vulputate, tortor justo sodales neque, sed elementum enim erat nec quam. Mauris leo risus, dignissim eu mi at, faucibus viverra nunc. Morbi nulla mauris, efficitur sed mauris in, semper consequat arcu. Sed mattis justo id ultrices cursus.
-
-  //       Cras ullamcorper tempus purus, a vestibulum velit venenatis eget. Vivamus tempor pulvinar ex, a lacinia ex. Nullam quam odio, ullamcorper vitae urna ac, vehicula aliquam nisl. Etiam tempus, orci eu convallis posuere, elit sem imperdiet nunc, ac pellentesque risus ex non purus. Fusce lectus nunc, blandit et luctus nec, consequat venenatis magna. Etiam id nunc nec lorem tempor hendrerit. Curabitur malesuada lacus eu ex pretium porttitor. Etiam in facilisis velit. Duis tempus leo erat. Cras pretium congue purus, a malesuada augue viverra eget. Suspendisse dictum risus ac ante porta, et vehicula libero sagittis. Pellentesque ullamcorper est leo, et pretium magna pulvinar quis. Aenean eget commodo ipsum, at imperdiet leo. Ut molestie, nunc a laoreet dapibus, justo turpis feugiat diam, eget elementum erat metus non diam.
-
-  //       Nullam eros dolor, ullamcorper ac feugiat ultrices, tempus quis eros. Phasellus volutpat nibh vitae tortor venenatis molestie. Proin laoreet aliquet ultricies. Donec dictum, tellus in porta imperdiet, mauris odio dapibus elit, eget sodales augue lectus sit amet neque. Nunc interdum vestibulum ipsum, sit amet fringilla enim porta non. Sed sagittis lobortis justo, ut scelerisque felis placerat vitae. Quisque non purus condimentum, hendrerit metus non, vestibulum velit. Phasellus eu nibh vitae nunc viverra efficitur non a tortor. Nullam a auctor lacus.
-
-  //       Maecenas vitae tempus est. Nulla pellentesque nulla eget elit congue porta. Mauris commodo libero ex, nec elementum mauris commodo vel. Ut rutrum dolor et mi ultricies, ac blandit felis pharetra. Fusce dui velit, molestie at dignissim nec, malesuada vel ipsum. Nunc vestibulum neque neque, id eleifend quam vehicula vel. Nam feugiat placerat nunc, eget molestie nisi rhoncus non. Integer ut mauris accumsan, ullamcorper tortor sed, congue neque. Donec dapibus porta neque, at commodo erat. Etiam vel elit eget libero semper maximus.`,
-  //       host: {
-  //         photoUrl:
-  //           "https://lh3.googleusercontent.com/a-/AOh14GgSJjELDsgk7Q16h6hQ7HTUQoscGUGg0CJFcucbkQ=s96-c",
-  //         uid: "Oa5FaaI2hAMmqA1vkCK7fI9X8wU2",
-  //         fullName: "Florian Leroux",
-  //       },
-  //       group: {
-  //         slug: "test",
-  //         name: "Lorem ipsum dolor sit amet.",
-  //       },
-  //     };
-  //   },
-  // };
 
   return {
     props: {

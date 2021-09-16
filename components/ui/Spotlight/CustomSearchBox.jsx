@@ -1,3 +1,4 @@
+import { SearchIcon } from "@heroicons/react/outline";
 import { connectSearchBox } from "react-instantsearch-dom";
 
 function SearchBox({ refine }) {
@@ -15,7 +16,7 @@ function SearchBox({ refine }) {
       </label>
       <div className="inline-flex items-center space-x-2">
         <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-blue-200 rounded-lg dark:bg-blue-900">
-          <i className="text-blue-700 dark:text-blue-400 fas fa-search" />
+          <SearchIcon className="w-5 h-5 text-blue-700 dark:text-blue-400" />
         </span>
         <input
           id="algolia_search"

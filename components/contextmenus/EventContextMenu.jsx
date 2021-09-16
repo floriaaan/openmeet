@@ -1,3 +1,12 @@
+import {
+  CalendarIcon,
+  EyeIcon,
+  ShareIcon,
+  PlusIcon,
+  StarIcon as StarOutlineIcon,
+  XIcon,
+} from "@heroicons/react/outline";
+import { StarIcon as StarSolidIcon } from "@heroicons/react/solid";
 import { useAuth } from "@hooks/useAuth";
 import useFirestoreToggle from "@hooks/useFirestoreToggle";
 
@@ -24,16 +33,16 @@ export const EventContextMenu = ({ slug, name }) => {
     <div className="z-50 w-full h-auto py-3 bg-white rounded-lg shadow-lg dark:bg-black lg:w-96">
       <div className="inline-flex items-center w-full px-3 pb-3 mb-3 border-b dark:border-gray-800">
         <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-purple-200 rounded-lg dark:bg-purple-900">
-          <i className="text-purple-700 dark:text-purple-400 fas fa-calendar" />
+          <CalendarIcon className="w-5 h-5 text-purple-700 dark:text-purple-400" />
         </span>
         <p className="ml-3 text-xs font-bold text-gray-400">{name}</p>
       </div>
       <div className="flex flex-col space-y-2">
         <a
           href={`/event/${slug}`}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 py-2 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
-          <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-eye"></i>
+          <EyeIcon className="flex items-center justify-center w-4 h-4 mr-2" />
           See more
         </a>
         <hr className="my-2 border-gray-200 dark:border-gray-800" />
@@ -55,39 +64,39 @@ export const EventContextMenu = ({ slug, name }) => {
                 .catch((error) => console.log("Error sharing", error));
             }
           }}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 py-2 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
-          <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-share-alt"></i>
+          <ShareIcon className="flex items-center justify-center w-4 h-4 mr-2" />
           Share
         </button>
         <button
           onClick={togglePart}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 py-2 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isParticipant ? (
             <>
-              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-plus"></i>
+              <PlusIcon className="flex items-center justify-center w-4 h-4 mr-2" />
               Participate
             </>
           ) : (
             <>
-              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-times"></i>
+              <XIcon className="flex items-center justify-center w-4 h-4 mr-2" />
               Leave the participants list
             </>
           )}
         </button>
         <button
           onClick={toggleFav}
-          className="inline-flex items-center w-full px-4 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
+          className="inline-flex items-center w-full px-4 py-2 text-sm duration-200 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"
         >
           {!isFavorite ? (
             <>
-              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-star"></i>
+              <StarOutlineIcon className="flex items-center justify-center w-4 h-4 mr-2" />
               Add to favorites
             </>
           ) : (
             <>
-              <i className="flex items-center justify-center w-8 h-8 mr-2 fas fa-star"></i>
+              <StarSolidIcon className="flex items-center justify-center w-4 h-4 mr-2" />
               Remove from favorites
             </>
           )}

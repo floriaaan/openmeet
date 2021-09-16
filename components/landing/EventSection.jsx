@@ -1,5 +1,6 @@
 import { EventSkeleton } from "@components/cards/CardEventOverview";
 import { EventOverview } from "@components/cards/CardEventOverview";
+import { ChevronRightIcon, PlusIcon } from "@heroicons/react/outline";
 import { firestore } from "@libs/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export const EventSection = () => {
         <Link href="/event/all">
           <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer dark:text-gray-300 dark:hover:text-purple-500 hover:text-purple-500">
             Explore more events
-            <i className="ml-2 fas fa-arrow-right"></i>
+            <ChevronRightIcon className="w-4 h-4 ml-2"/>
           </a>
         </Link>
       </div>
@@ -53,7 +54,7 @@ export const EventSection = () => {
                 <div className="flex items-center justify-center w-full h-full py-6 min-h-[5rem] lg:min-h-[20rem]  bg-gray-200 dark:bg-gray-800 dark:bg-opacity-20 rounded-xl ">
                   <Link href="/event/create">
                     <a className="flex items-center justify-center w-24 h-24 text-purple-700 transition duration-300 bg-purple-200 border border-purple-500 rounded-full cursor-pointer dark:border-purple-500 dark:bg-opacity-50 dark:bg-purple-700 dark:text-purple-200 hover:bg-purple-300 dark:hover:bg-purple-800">
-                      <i className="text-xl fas fa-plus"></i>
+                      <PlusIcon className="w-12 h-12"/>
                     </a>
                   </Link>
                 </div>
