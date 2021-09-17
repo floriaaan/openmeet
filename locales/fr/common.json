@@ -1,0 +1,63 @@
+{
+    "test": "test",
+    "search": "Rechercher",
+    "sr-only": {
+      "press": "Presser",
+      "and": "et",
+      "to-search": "pour effectuer une recherche",
+      "dark-mode": "pour basculer le mode sombre"
+    },
+    "email": {
+      "email-address": "Adresse courriel",
+      "enter-your-email": "Entrez votre adresse e-mail"
+    },
+    "notify-me": "M’avertir",
+    "privacy-policy": {
+      "sentence": "Nous nous soucions de la protection de vos données. Lisez notre",
+      "name": "Politique de confidentialité"
+    },
+    "dropdowns": {
+      "event": {
+        "title": "Événement",
+        "create": "Créer un événement",
+        "all": "Tous les événements"
+      },
+      "user": {
+        "logout": "Logout",
+        "superuser": {
+          "title": "Paramètres OpenMeet",
+          "settings": "Settings"
+        },
+        "connect": "Connect",
+        "login": "Login",
+        "register": "Register",
+        "dark-mode": {
+          "title": "Dark Mode",
+          "toggle": "Toggle Dark Mode"
+        }
+      },
+      "group": {
+        "title": "Group",
+        "create": "Create a group",
+        "all": "All groups",
+        "manage": "Manage your groups"
+      },
+      "notification": {
+        "message": {
+          "title": "Message",
+          "more": "See more",
+          "no-message": "No message yet",
+          "no-member": "No member"
+        },
+        "notification": {
+          "title": "Notification",
+          "read-all": "Read all",
+          "no-notification": "No notification yet",
+          "new-message": "New message",
+          "new-notification": "New notification"
+        }
+      }
+    },
+    "name-not-provided": "Name not provided",
+    "sent": "sent"
+  }

@@ -1,14 +1,19 @@
 import { Chip } from "@components/ui/Chip";
 import { SearchIcon, CalendarIcon, LocationMarkerIcon } from "@heroicons/react/outline";
+import useTranslation from "next-translate/useTranslation";
 import { useState } from "react";
 
 export const SearchSection = () => {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("");
+
+  const { t } = useTranslation("landing");
+
+
   return (
     <div className="flex-col hidden w-full px-32 my-4 mb-12 space-y-4 lg:flex lg:my-12">
       <h4 className="mb-1 text-xl font-bold tracking-tight text-center sm:text-2xl">
-        What do you want to do ?
+        {t("search.title")}
       </h4>
       <div className="relative w-full ">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
@@ -26,7 +31,7 @@ export const SearchSection = () => {
               onChange={(e) => setQuery(e.target.value)}
               required
               className="w-full px-5 py-2 pl-[2.25rem] placeholder-gray-500 duration-300 bg-white border border-gray-300 dark:border-gray-700 lg:w-96 rounded-xl dark:bg-black form-input focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white"
-              placeholder="Search for ..."
+              placeholder={t("search.for")}
             />
           </label>
           <label className="relative text-gray-400 focus-within:text-gray-600">
@@ -40,21 +45,21 @@ export const SearchSection = () => {
               onChange={(e) => setLocation(e.target.value)}
               required
               className="w-full px-5 py-2 pl-[2.25rem] placeholder-gray-500 duration-300 bg-white border border-gray-300 lg:w-48 dark:border-gray-700 rounded-xl dark:bg-black form-input focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white"
-              placeholder="Where ..."
+              placeholder={t("search.where")}
             />
           </label>
           <button className="inline-flex items-center justify-center w-full px-5 py-2 mt-3 text-base font-semibold text-white duration-300 bg-blue-600 shadow rounded-xl hover:bg-blue-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0">
             <SearchIcon className="w-4 h-4 mr-2" />
-            Search
+            {t("search.search")}
           </button>
         </div>
       </div>
       <div className="hidden pt-3 mx-auto space-x-3 overflow-x-hidden lg:inline-flex md:pt-0 md:pl-3">
-        <Chip color="green" name="Tomorrow" />
-        <Chip color="amber" name="This week" />
-        <Chip color="purple" name="Near you" />
-        <Chip color="blue" name="Online" />
-        <Chip color="red" name="In person" />
+        <Chip color="green" name={t("search.chips.tomorrow")} />
+        <Chip color="amber" name={t("search.chips.this-week")} />
+        <Chip color="purple" name={t("search.chips.near-you")} />
+        <Chip color="blue" name={t("search.chips.online")} />
+        <Chip color="red" name={t("search.chips.in-person")} />
       </div>
     </div>
   );

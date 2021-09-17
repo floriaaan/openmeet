@@ -17,9 +17,17 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { BellIcon, ChatAlt2Icon, CheckIcon, ChevronRightIcon, MailIcon } from "@heroicons/react/outline";
+import {
+  BellIcon,
+  ChatAlt2Icon,
+  CheckIcon,
+  ChevronRightIcon,
+  MailIcon,
+} from "@heroicons/react/outline";
+import useTranslation from "next-translate/useTranslation";
 
 export const NotificationDropdown = () => {
+  const { t } = useTranslation("common");
   const { user } = useAuth();
 
   const [chats, setChats] = React.useState([]);
@@ -116,10 +124,10 @@ export const NotificationDropdown = () => {
               }
             >
               <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
-                Messages
+                {t("dropdowns.notification.message.title")}
                 <Link href="/chat">
                   <a className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900">
-                    See more
+                    {t("dropdowns.notification.message.more")}
                     <ChevronRightIcon className="mt-0.5 ml-2 w-4 h-4" />
                   </a>
                 </Link>
@@ -142,18 +150,18 @@ export const NotificationDropdown = () => {
                   )
                 ) : (
                   <div className="flex items-center justify-center w-full h-full col-span-3">
-                    No messages yet
+                    {t("dropdowns.notification.message.no-message")}
                   </div>
                 )}
               </div>
 
               <div className="flex flex-row items-center justify-between px-4 py-2 text-xs text-gray-400">
-                Notifications
+                {t("dropdowns.notification.notification.title")}
                 <button
                   onClick={readAllNotifications}
                   className="flex flex-row items-center px-2 py-1 text-yellow-600 transition duration-300 dark:text-yellow-300 rounded-xl hover:text-yellow-700 dark:hover:text-yellow-200 hover:bg-yellow-100 dark:hover:bg-yellow-900"
                 >
-                  Read all
+                  {t("dropdowns.notification.notification.read-all")}
                   <CheckIcon className="mt-0.5 ml-2 w-4 h-4" />
                 </button>
               </div>
@@ -162,7 +170,7 @@ export const NotificationDropdown = () => {
                   ? notifications.map((notification, index) => (
                       <NotificationOverview {...notification} key={index} />
                     ))
-                  : "No notifications yet"}
+                  : t("dropdowns.notification.notification.no-notification")}
               </div>
             </Menu.Items>
           </Transition>
@@ -173,6 +181,8 @@ export const NotificationDropdown = () => {
 };
 
 const ChatOverview = ({ members, id, isUnread, messages }) => {
+  const { t } = useTranslation("common");
+
   const [displayableUser, setDisplayableUser] = useState(null);
   const { user } = useAuth();
 
@@ -211,11 +221,11 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
             <Fragment key={key}>
               {/* {e.uid !== user?.uid && ( */}
               <span className="text-xs text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-                {e.fullName || "Name not provided"}
+                {e.fullName || t("name-not-provided")}
               </span>
               {/* )} */}
             </Fragment>
-          )) || "No members"}
+          )) || t("dropdowns.notification.message.no-member")}
           <span className="text-[0.55rem] leading-4">
             {formatDistance(
               new Date(messages?.[messages.length - 1]?.createdAt),
@@ -232,6 +242,8 @@ const ChatOverview = ({ members, id, isUnread, messages }) => {
 };
 
 const NotificationOverview = ({ type, data, createdAt }) => {
+  const { t } = useTranslation("common");
+
   const url = "/" + type + "/" + data?.id;
 
   return (
@@ -252,14 +264,14 @@ const NotificationOverview = ({ type, data, createdAt }) => {
       <div className="flex flex-col ml-2">
         <span className="font-bold text-yellow-600 dark:text-yellow-400">
           {data?.action === "new_message"
-            ? "New message"
+            ? t("dropdowns.notification.notification.new-message")
             : data?.action === "new_participant"
             ? data.message
-            : "New notification"}
+            : t("dropdowns.notification.notification.new-notification")}
         </span>
 
         <span className="text-xs text-gray-400 dark:text-gray-300">
-          sent{" "}
+          {t("sent") + " "}
           {formatDistance(new Date(createdAt), new Date(), {
             addSuffix: true,
           })}

@@ -3,9 +3,11 @@ import { ChevronRightIcon, StarIcon } from "@heroicons/react/solid";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 
 export const HeroSection = () => {
   const [stars, setStars] = useState(null);
+  const { t } = useTranslation("landing");
 
   useEffect(
     () => [
@@ -20,6 +22,14 @@ export const HeroSection = () => {
     []
   );
 
+  const colors = [
+    "text-green-500",
+    "text-amber-500",
+    "text-purple-500",
+    "text-blue-500",
+    "text-red-500",
+  ];
+
   return (
     <main>
       <div>
@@ -30,7 +40,7 @@ export const HeroSection = () => {
                 <Link href="/blog/latest">
                   <a className="inline-flex space-x-4">
                     <span className="rounded bg-blue-50 dark:bg-blue-800 dark:text-blue-200 px-2.5 py-1 text-xs font-semibold text-blue-600 tracking-wide uppercase">
-                      {"What's new"}
+                      {t("what-new")}
                     </span>
                     <span className="inline-flex items-center space-x-1 text-sm font-medium text-blue-600 dark:text-blue-400">
                       <span>Just shipped our first release 🎉</span>
@@ -44,18 +54,17 @@ export const HeroSection = () => {
               </div>
               <div className="mt-6 sm:max-w-xl">
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl">
-                  {"Let's meet the "}
-                  <span className="text-green-500">w</span>
-                  <span className="text-amber-500">o</span>
-                  <span className="text-purple-500">r</span>
-                  <span className="text-blue-500">l</span>
-                  <span className="text-red-500">d</span>
+                  <span className="mr-2">{t("tagline.sentence")}</span>
+                  {t("tagline.subsentence")
+                    .split("")
+                    .map((c, i) => (
+                      <span className={colors[i]} key={i}>
+                        {c}
+                      </span>
+                    ))}
                 </h1>
                 <p className="mt-6 text-xl text-gray-500 dark:text-gray-400">
-                  Form a group to meet new people, form friendships, receive
-                  support, expand your company, and develop your hobbies. Day
-                  after day, lots of activities take place both online and in
-                  person!
+                  {t('paragraph')}
                 </p>
               </div>
 
@@ -87,9 +96,9 @@ export const HeroSection = () => {
                     {stars ? (
                       <>
                         <span className="font-medium text-gray-900 dark:text-gray-200">
-                          {stars} stars
+                          {stars} {t("stars")}
                         </span>{" "}
-                        on{" "}
+                        {t("on") + " "}
                         <a
                           href="https://github.com/floriaaan/openmeet"
                           target="_blank"
@@ -102,7 +111,7 @@ export const HeroSection = () => {
                         </a>
                       </>
                     ) : (
-                      "Retrieving GitHib project stargazers count"
+                      t("retrieving")
                     )}
                   </div>
                 </div>

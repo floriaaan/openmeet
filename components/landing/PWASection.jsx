@@ -1,6 +1,9 @@
 import { useEventListener } from "@hooks/useEventListener";
+import useTranslation from "next-translate/useTranslation";
 
 export const PWASection = () => {
+  const { t } = useTranslation("landing");
+
   let deferredPrompt;
   useEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
@@ -13,12 +16,11 @@ export const PWASection = () => {
         <div className="px-6 pt-10 pb-12 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
           <div className="flex-col justify-center h-full lg:flex">
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-              <span className="block">Ready to dive in?</span>
-              <span className="block">Install OpenMeet on your phone.</span>
+              <span className="block">{t("pwa.title")}</span>
+              <span className="block">{t("pwa.subtitle")}</span>
             </h2>
             <p className="mt-4 text-lg leading-6 text-blue-100">
-              Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-              Malesuada adipiscing sagittis vel nulla nec.
+            {t("pwa.description")}
             </p>
             <button
               onClick={(e) => {
@@ -40,7 +42,7 @@ export const PWASection = () => {
                 ""
               }
             >
-              Install for free
+              {t("pwa.button")}
             </button>
           </div>
         </div>

@@ -1,0 +1,73 @@
+{
+  "what-new": "Quoi de neuf",
+  "tagline": {
+    "sentence": "Rencontrons le ",
+    "subsentence": "monde"
+  },
+  "paragraph": "Former un groupe pour rencontrer de nouvelles personnes, former des amitiés, recevoir\nsoutenir, développer votre entreprise\net développez vos passe-temps. Jour\naprès la journée, de nombreuses activités ont lieu à la fois en ligne et en\npersonne!",
+  "stars": "étoiles",
+  "on": "sur",
+  "retrieving": "Récupération du nombre d’astronomes du projet GitHib",
+  "search": {
+    "title": "Que voulez-vous faire?",
+    "for": "Chercher...",
+    "where": "Où...",
+    "search": "Rechercher",
+    "chips": {
+      "tomorrow": "Demain",
+      "this-week": "Cette semaine",
+      "near-you": "Près de chez vous",
+      "online": "En ligne",
+      "in-person": "En personne"
+    }
+  },
+
+  "newsletter": {
+    "title": "Vous voulez des nouvelles et des mises à jour sur les produits?",
+    "subtitle": "Inscrivez-vous à notre newsletter pour rester à jour."
+  },
+  "pwa": {
+    "title": "Prêt à plonger ?",
+    "subtitle": "Installez OpenMeet sur votre téléphone.",
+    "description": "!lorem",
+    "button": "Installer gratuitement"
+  },
+  "footer": {
+    "heading": "",
+    "solutions": {
+      "heading": "Solutions",
+      "marketing": "Marketing",
+      "analytics": "Analytics",
+      "commerce": "Commerce",
+      "insights": "Idées"
+    },
+    "support": {
+      "heading": "Support",
+      "pricing": "Tarif",
+      "documentation": "Documentation",
+      "guides": "Guides",
+      "api-status": "Statut de l'API"
+    },
+    "company": {
+      "heading": "Entreprise",
+      "about": "A propos",
+      "blog": "Blog",
+      "jobs": "Emplois",
+      "press": "Presse",
+      "partners": "Partenaires"
+    },
+    "legal": {
+      "heading": "Légal",
+      "claim": "Réclamations",
+      "privacy": "Confidentialité",
+      "terms": "Terms"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "subtitle": "The latest news, articles, and resources, sent to your inbox weekly.",
+      "button": "Subscribe",
+      "already": "Subscribed"
+    },
+    "copyright": " OpenMeet - Floriaaan. All rights reserved."
+  }
+}

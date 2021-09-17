@@ -4,6 +4,9 @@ const runtimeCaching = require("next-pwa/cache");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+
+const withTranslate = require('next-translate')
+
 const withPWA = require("next-pwa")({
   pwa: {
     dest: "public",
@@ -14,6 +17,7 @@ const withPWA = require("next-pwa")({
 });
 
 module.exports = withPlugins([
-  [withBundleAnalyzer, withPWA],
+  [withBundleAnalyzer, withPWA, ],
   // your other plugins here
+  withTranslate
 ]);

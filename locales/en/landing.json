@@ -1,0 +1,69 @@
+{
+  "what-new": "What's new",
+  "tagline": { "sentence": "Let's meet the ", "subsentence": "world" },
+  "paragraph": "Form a group to meet new people, form friendships, receive\nsupport, expand your company\nand develop your hobbies. Day\nafter day, lots of activities take place both online and in\nperson!",
+  "stars": "stars",
+  "on": "on",
+  "retrieving": "Retrieving GitHib project stargazers count",
+  "search": {
+    "title": "What do you want to do?",
+    "for": "Search for ...",
+    "where": "Where ...",
+    "search": "Search",
+    "chips": {
+      "tomorrow": "Tomorrow",
+      "this-week": "This week",
+      "near-you": "Near you",
+      "online": "Online",
+      "in-person": "In person"
+    }
+  },
+  "newsletter": {
+    "title": "Want product news and updates?",
+    "subtitle": "Sign up for our newsletter to stay up to date."
+  },
+  "pwa": {
+    "title": "Ready to dive in?",
+    "subtitle": "Install OpenMeet on your phone.",
+    "description": "!lorem",
+    "button": "Install for free"
+  },
+  "footer": {
+    "heading": "Footer",
+    "solutions": {
+      "heading": "Solutions",
+      "marketing": "Marketing",
+      "analytics": "Analytics",
+      "commerce": "Commerce",
+      "insights": "Insights"
+    },
+    "support": {
+      "heading": "Support",
+      "pricing": "Pricing",
+      "documentation": "Documentation",
+      "guides": "Guides",
+      "api-status": "API Status"
+    },
+    "company": {
+      "heading": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "jobs": "Jobs",
+      "press": "Press",
+      "partners": "Partners"
+    },
+    "legal": {
+      "heading": "Legal",
+      "claim": "Claim",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "subtitle": "The latest news, articles, and resources, sent to your inbox weekly.",
+      "button": "Subscribe",
+      "already": "Subscribed"
+    },
+    "copyright": " OpenMeet - Floriaaan. All rights reserved."
+  }
+}

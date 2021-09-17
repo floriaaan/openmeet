@@ -16,8 +16,11 @@ import {
   UserAddIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import useTranslation from "next-translate/useTranslation";
 
 export const UserDropdown = () => {
+  const { t } = useTranslation("common");
+
   const { user, signout } = useAuth();
   const { theme, setTheme } = useTheme();
 
@@ -79,7 +82,7 @@ export const UserDropdown = () => {
                       </div>
                       <div className="flex flex-col items-center justify-center w-full px-1">
                         <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-                          {user?.fullName || "Name not provided"}
+                          {user?.fullName || t("name-not-provided")}
                         </span>
                       </div>
                     </a>
@@ -90,13 +93,13 @@ export const UserDropdown = () => {
                     onClick={signout}
                   >
                     <LogoutIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    Logout
+                    {t('dropdowns.user.logout')}
                   </a>
 
                   {user.superuser && (
                     <>
                       <div className="block px-4 py-2 text-xs text-gray-400">
-                        OpenMeet Settings
+                        {t('dropdowns.user.superuser.settings')}
                       </div>
                       <Link href="/admin">
                         <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
@@ -110,18 +113,18 @@ export const UserDropdown = () => {
               ) : (
                 <>
                   <div className="block px-4 py-2 pt-4 text-xs text-gray-400">
-                    Connect
+                    {t('dropdowns.user.connect')}
                   </div>
                   <Link href="/auth">
                     <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                       <LoginIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 " />
-                      Login
+                      {t('dropdowns.user.login')}
                     </a>
                   </Link>
                   <Link href="/auth/register">
                     <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                       <UserAddIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                      Register
+                      {t('dropdowns.user.register')}
                     </a>
                   </Link>
                   {/* <Link href="/auth">
@@ -132,7 +135,7 @@ export const UserDropdown = () => {
                 </>
               )}
               <div className="block px-4 py-2 text-xs text-gray-400">
-                Dark Mode
+                {t('dropdowns.user.dark-mode.title')}
               </div>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -144,19 +147,19 @@ export const UserDropdown = () => {
                   ) : (
                     <SunIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800"/>
                   )}
-                  Toggle Dark Mode
+                  {t('dropdowns.user.dark-mode.toggle')}
                 </span>
                 <span
                   style={{ opacity: 1 }}
                   className="hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-100 dark:border-gray-800 rounded-md bg-white select-none dark:bg-gray-900"
                 >
-                  <span className="sr-only">Press </span>
+                  <span className="sr-only">{t("sr-only.press")} </span>
                   <kbd className="font-sans">
                     <abbr className="no-underline">Ctrl</abbr>
                   </kbd>
-                  <span className="sr-only"> and </span>
+                  <span className="sr-only"> {t("sr-only.and")} </span>
                   <kbd className="font-sans"> + D</kbd>
-                  <span className="sr-only"> to toggle dark mode</span>
+                  <span className="sr-only"> {t("sr-only.dark-mode")}</span>
                 </span>
               </button>
             </Menu.Items>

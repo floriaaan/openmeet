@@ -7,8 +7,10 @@ import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs } from "firebase/firestore";
 import { eventImgFallback } from "@libs/imgOnError";
 import { CalendarIcon, PlusIcon } from "@heroicons/react/outline";
+import useTranslation from "next-translate/useTranslation";
 
 export const EventDropdown = () => {
+  const { t } = useTranslation("common");
   const { user } = useAuth();
 
   const [events, setEvents] = useState([]);
@@ -70,7 +72,7 @@ export const EventDropdown = () => {
               }
             >
               <div className="block px-4 py-2 text-xs text-gray-400">
-                Events
+                {t("dropdowns.event.title")}
               </div>
               <div className="grid grid-cols-3 gap-3 px-4 mb-3 w-full mx-auto min-h-[6rem]">
                 {events?.map((el, key) => (
@@ -83,13 +85,13 @@ export const EventDropdown = () => {
                 <Link href="/event/create">
                   <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
                     <PlusIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    Create an event
+                    {t("dropdowns.event.create")}
                   </a>
                 </Link>
                 <Link href="/event/all">
                   <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 focus:outline-none hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-800">
                     <CalendarIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    All events
+                    {t("dropdowns.event.all")}
                   </a>
                 </Link>
               </div>
@@ -130,7 +132,7 @@ const EventOverview = ({
       </div>
       <div className="flex flex-col items-center justify-center w-full px-1">
         <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-          {name || "Name not provided"}
+          {name || t("name-not-provided")}
         </span>
         {/* <span className="text-[0.6rem] leading-4">
             from {format(new Date(props.startDate), "Pp")} to{" "}

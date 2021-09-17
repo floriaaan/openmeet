@@ -7,8 +7,10 @@ import { firestore } from "@libs/firebase";
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { CogIcon, PlusIcon, UserGroupIcon } from "@heroicons/react/outline";
+import useTranslation from "next-translate/useTranslation";
 
 export const GroupDropdown = () => {
+  const { t } = useTranslation("common");
   const { user } = useAuth();
   const [groups, setGroups] = useState([]);
 
@@ -87,7 +89,9 @@ export const GroupDropdown = () => {
                 "bg-white md:origin-top-right fixed md:absolute left-0 md:left-auto md:right-0 mt-6 dark:bg-gray-900 text-base z-50 float-left py-2 list-none text-left rounded-xl shadow-lg w-full md:w-96"
               }
             >
-              <div className="block px-4 py-2 text-xs text-gray-400">Group</div>
+              <div className="block px-4 py-2 text-xs text-gray-400">
+                {t("dropdowns.group.title")}
+              </div>
 
               <div className="grid grid-cols-3 gap-3 px-4 mb-3 w-full mx-auto min-h-[6rem]">
                 {groups?.map((el, key) => (
@@ -99,20 +103,20 @@ export const GroupDropdown = () => {
                 <Link href="/group/create">
                   <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
                     <PlusIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    Create a group
+                    {t("dropdowns.group.create")}
                   </a>
                 </Link>
                 <Link href="/group/all">
                   <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
                     <UserGroupIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    All groups
+                    {t("dropdowns.group.all")}
                   </a>
                 </Link>
                 {isGroupAdmin && (
                   <Link href="/group/settings">
                     <a className="inline-flex items-center px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-800">
                       <CogIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                      Manage your groups
+                      {t("dropdowns.group.manage")}
                     </a>
                   </Link>
                 )}
@@ -135,7 +139,7 @@ const GroupOverview = ({ slug, name }) => (
       </div>
       <div className="flex flex-col items-center justify-center w-full px-1">
         <span className="text-[0.7rem] overflow-ellipsis text-center tracking-tight leading-[1.12rem] text-gray-800 dark:text-gray-200">
-          {name || "Name not provided"}
+          {name || t("name-not-provided")}
         </span>
         {/* <span className="text-[0.6rem] leading-4">
             from {format(new Date(props.startDate), "Pp")} to{" "}

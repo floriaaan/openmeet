@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { Spotlight } from "@components/ui/Spotlight";
 import { DarkModeToggler } from "@components/helpers/DarkMode";
 
-function MyApp({ Component, pageProps }) {
+function OpenMeetApp({ Component, pageProps }) {
   const Loader = dynamic(
     () => {
       return import("@components/ui/TopLoader");
@@ -36,4 +36,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default OpenMeetApp;

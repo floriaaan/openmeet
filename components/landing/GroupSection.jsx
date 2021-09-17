@@ -3,10 +3,13 @@ import { GroupSkeleton } from "@components/cards/CardGroupOverview";
 import { ChevronRightIcon, PlusIcon } from "@heroicons/react/outline";
 import { firestore } from "@libs/firebase";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const GroupsSection = () => {
+  const { t } = useTranslation("group");
+
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -35,12 +38,12 @@ export const GroupsSection = () => {
     <div className="flex flex-col w-full">
       <div className="inline-flex items-end justify-between p-3">
         <h3 className="text-xl font-extrabold text-gray-800 md:text-2xl lg:text-3xl xl:text-4xl dark:text-gray-200">
-          Latest{" "}
-          <span className="text-green-600 dark:text-green-400">groups</span>
+          {t("latest") +" "}
+          <span className="text-green-600 dark:text-green-400">{t("groups").toLocaleLowerCase()}</span>
         </h3>
         <Link href="/group/all">
           <a className="flex flex-row items-center text-sm font-medium transition duration-300 cursor-pointer dark:text-gray-300 dark:hover:text-green-500 hover:text-green-500">
-            Explore more groups
+            {t("explore-more-groups")}
             <ChevronRightIcon className="w-4 h-4 ml-2"/>
           </a>
         </Link>
