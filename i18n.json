@@ -3,6 +3,23 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common"],
-    "/": ["landing", "contextmenus", "group", "event"]
+    "/": ["landing", "contextmenus", "group", "event"],
+    "/auth": ["auth"],
+    "/auth/register": ["auth"],
+    "/blog": ["blog"],
+    "/blog/[slug]": ["blog"],
+    "/blog/latest": ["blog"],
+    "/chat/": ["chat"],
+    "/chat/[id]": ["chat"],
+    "/chat/new": ["chat"],
+    "/event/all": ["event"],
+    "/event/create": ["event"],
+    "/event/[slug]": ["event"],
+    "/group/all": ["group"],
+    "/group/create": ["group"],
+    "/group/[slug]": ["group"],
+    "/group/settings": ["group"],
+    "/profile/[uid]": ["profile"],
+    "/profile/settings": ["profile"]
   }
 }

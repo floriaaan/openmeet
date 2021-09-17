@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { GuestLayout } from "@components/layouts/GuestLayout";
 import { useAuth } from "@hooks/useAuth";
+import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 
 export default function RegisterPage() {
@@ -11,6 +12,8 @@ export default function RegisterPage() {
         signinWithFacebook,
         signinWithTwitter,
       } = useAuth();
+      const { t } = useTranslation("auth");
+
   return (
     <GuestLayout>
       <div className="w-full max-w-sm mx-auto lg:w-96">
@@ -21,7 +24,7 @@ export default function RegisterPage() {
             </a>
           </Link>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-            Register your account
+            {t("register")}
           </h2>
         </div>
 
@@ -29,7 +32,7 @@ export default function RegisterPage() {
           <div>
             <div>
               <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Sign in with
+                {t("social.title")}
               </p>
 
               <div className="grid grid-cols-3 gap-3 mt-1">
@@ -37,7 +40,7 @@ export default function RegisterPage() {
                   onClick={signinWithGoogle}
                   className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 duration-300 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 group"
                 >
-                  <span className="sr-only">Sign in with Google</span>
+                  <span className="sr-only">{t("social.google")}</span>
 
                   <img
                     className="w-5 h-5"
@@ -49,7 +52,7 @@ export default function RegisterPage() {
                   onClick={signinWithFacebook}
                   className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 duration-300 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 group"
                 >
-                  <span className="sr-only">Sign in with Facebook</span>
+                  <span className="sr-only">{t("social.facebook")}</span>
                   <img
                     className="w-5 h-5"
                     src="/img/brand/facebook.svg"
@@ -60,7 +63,7 @@ export default function RegisterPage() {
                   onClick={signinWithTwitter}
                   className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 duration-300 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 group"
                 >
-                  <span className="sr-only">Sign in with Twitter</span>
+                  <span className="sr-only">{t("social.twitter")}</span>
                   <img
                     className="w-5 h-5 "
                     src="/img/brand/twitter.svg"
@@ -72,7 +75,7 @@ export default function RegisterPage() {
                   onClick={signinWithGitHub}
                   className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 duration-300 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 group"
                 >
-                  <span className="sr-only">Sign in with GitHub</span>
+                  <span className="sr-only">{t("social.github")}</span>
                   <svg
                     className="w-5 h-5 text-black dark:text-white"
                     aria-hidden="true"
@@ -90,7 +93,7 @@ export default function RegisterPage() {
                   onClick={signinWithMicrosoft}
                   className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 duration-300 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 group"
                 >
-                  <span className="sr-only">Sign in with Microsoft</span>
+                  <span className="sr-only">{t("social.microsoft")}</span>
                   <img
                     className="w-4 h-4 my-0.5 "
                     src="/img/brand/microsoft.png"
@@ -109,7 +112,7 @@ export default function RegisterPage() {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 text-gray-500 bg-white dark:bg-gray-900">
-                  Or continue with
+                {t("form.or")}
                 </span>
               </div>
             </div>
@@ -122,7 +125,7 @@ export default function RegisterPage() {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
-                  Email address
+                  {t("form.email")}
                 </label>
                 <div className="mt-1">
                   <input
@@ -142,7 +145,7 @@ export default function RegisterPage() {
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                 >
-                  Password
+                  {t("form.password")}
                 </label>
                 <div className="mt-1">
                   <input
@@ -170,7 +173,7 @@ export default function RegisterPage() {
                     htmlFor="remember-me"
                     className="block ml-2 text-sm text-gray-900 dark:text-gray-300"
                   >
-                    Remember me
+                    {t("form.remember-me")}
                   </label>
                 </div>
 
@@ -179,7 +182,7 @@ export default function RegisterPage() {
                     href="#"
                     className="font-medium text-blue-600 duration-150 hover:text-blue-500"
                   >
-                    Forgot your password?
+                    {t("form.forgot")}
                   </a>
                 </div>
               </div>

@@ -1,5 +1,13 @@
 {
-    "latest": "Latest",
-    "groups": "Groups",
-    "explore-more-groups": "Explore more groups"
+  "latest": "Latest",
+  "groups": "Groups",
+  "explore-more-groups": "Explore more groups",
+  "card": {
+    "no-next-event": "No next event",
+    "no-subscriber": "No subscriber",
+    "tiny-event": {
+      "online": "Online event",
+      "starts": "Starts"
+    }
+  }
 }

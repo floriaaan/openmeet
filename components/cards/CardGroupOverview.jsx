@@ -9,10 +9,18 @@ import { ChipList } from "@components/ui/ChipList";
 import { ContextMenu, ContextMenuTrigger } from "react-contextmenu";
 import { GroupContextMenu } from "@components/contextmenus/GroupContextMenu";
 import { formatDistanceToNow } from "date-fns";
-import { CalendarIcon, ClockIcon, LocationMarkerIcon, VideoCameraIcon } from "@heroicons/react/outline";
+import {
+  CalendarIcon,
+  ClockIcon,
+  LocationMarkerIcon,
+  VideoCameraIcon,
+} from "@heroicons/react/outline";
 import { ChevronRightIcon, ShareIcon } from "@heroicons/react/solid";
+import useTranslation from "next-translate/useTranslation";
 
 export const GroupOverview = (props) => {
+  const { t } = useTranslation("group");
+
   const { user } = useAuth();
   const [subs, setSubs] = useState([]);
   const [lastEvent, setLastEvent] = useState(null);
@@ -59,7 +67,7 @@ export const GroupOverview = (props) => {
             <span className="flex items-center justify-center w-full h-32 bg-green-200 rounded-lg dark:bg-green-900">
               <CalendarIcon className="w-6 h-6 text-green-700 dark:text-green-400" />
               <span className="ml-4 text-sm text-green-700 dark:text-green-400">
-                No next event
+                {t("card.no-next-event")}
               </span>
             </span>
           ) : (
@@ -82,7 +90,7 @@ export const GroupOverview = (props) => {
                   {subs.length ? (
                     <AvatarGroup users={subs} limit={4} />
                   ) : (
-                    <p className="text-xs text-gray-500">No subscribers</p>
+                    <p className="text-xs text-gray-500">{t("card.no-subscriber")}</p>
                   )}
                 </div>
                 <hr className="mx-6 mt-4 border-gray-200 dark:border-gray-700" />
@@ -114,7 +122,7 @@ export const GroupOverview = (props) => {
               className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-100 rounded-full cursor-pointer hover:bg-green-200 dark:hover:bg-green-800 focus:outline-none group max-w-max dark:bg-gray-900 dark:bg-opacity-30 "
             >
               <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-300 rounded-full dark:bg-gray-800 hover:bg-green-300 dark:hover:bg-green-700 dark:bg-opacity-30">
-              <ShareIcon className="w-5 h-5 text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></ShareIcon>
+                <ShareIcon className="w-5 h-5 text-gray-700 duration-300 select-none dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400"></ShareIcon>
               </span>
             </button>
           </div>
@@ -128,13 +136,12 @@ export const GroupOverview = (props) => {
 };
 
 const TinyEvent = (props) => {
+  const {t} = useTranslation("group");
   return (
     <div className="flex flex-col p-2 bg-white rounded-xl max-w-max dark:bg-black">
-      
       <div className="flex flex-row justify-between w-full text-gray-600 overflow-ellipsis dark:text-gray-400">
         <div className="flex flex-col flex-grow w-full space-y-1">
           <h3 className="text-xs">
-
             <span className="ml-2 text-sm font-bold text-green-500">
               {props.name}
             </span>
@@ -143,11 +150,11 @@ const TinyEvent = (props) => {
             {props?.location?.location === "Remote" ? (
               <>
                 <VideoCameraIcon className="w-4 h-4 text-center " />
-                <span className="ml-2 truncate">Online Event</span>
+                <span className="ml-2 truncate">{t("card.tiny-event.online")}</span>
               </>
             ) : (
               <>
-                <LocationMarkerIcon className="w-4 h-4 text-center "/>
+                <LocationMarkerIcon className="w-4 h-4 text-center " />
                 <span className="ml-2 truncate">
                   {props?.location?.details
                     ? props.location.details.city +
@@ -159,8 +166,8 @@ const TinyEvent = (props) => {
             )}
           </div>
           <div className="inline-flex items-center text-xs">
-            <ClockIcon className="w-4 h-4 mr-2 text-center"/>
-            starts{" "}
+            <ClockIcon className="w-4 h-4 mr-2 text-center" />
+            {t("card.tiny-event.starts") +" "}
             {formatDistanceToNow(new Date(props.startDate), {
               addSuffix: true,
             })}
@@ -170,7 +177,7 @@ const TinyEvent = (props) => {
         <Link href={"/event/" + props.slug}>
           <a className="rounded-xl  w-1/3 text-xs px-1.5 ml-2 py-1.5 my-3 hover:bg-green-200 text-green-700 dark:text-green-400 dark:hover:bg-green-800 duration-300 transition inline-flex items-center">
             {/* <span className="hidden w-full sm:block">See more</span>{" "} */}
-            <ChevronRightIcon className="w-6 h-6"/>
+            <ChevronRightIcon className="w-6 h-6" />
           </a>
         </Link>
       </div>

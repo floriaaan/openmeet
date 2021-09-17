@@ -10,11 +10,13 @@ import {
 import { firestore } from "@libs/firebase";
 import { format } from "date-fns";
 import { collection, onSnapshot } from "firebase/firestore";
+import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ContextMenu, ContextMenuTrigger, MenuItem } from "react-contextmenu";
+import { ContextMenu, ContextMenuTrigger } from "react-contextmenu";
 
 export const EventOverview = (props) => {
+  const { t } = useTranslation("event");
   const [subs, setSubs] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(
@@ -53,7 +55,7 @@ export const EventOverview = (props) => {
                   {props?.location?.location === "Remote" ? (
                     <>
                       <VideoCameraIcon className="w-3 h-3 mr-1" />
-                      <span className="truncate">Online Event</span>
+                      <span className="truncate">{t("online")}</span>
                     </>
                   ) : (
                     <>
@@ -90,9 +92,11 @@ export const EventOverview = (props) => {
                   <AvatarGroup users={subs} limit={4} />
                 ) : (
                   <div className="flex flex-col">
-                    <p className="text-xs text-gray-500">No participants yet</p>{" "}
+                    <p className="text-xs text-gray-500">
+                      {t("no-participant")}
+                    </p>{" "}
                     <p className="text-[10px] text-gray-400 dark:text-gray-600">
-                      {"Why don't you participate ?"}
+                      {t("why-dont-you-participate")}
                     </p>
                   </div>
                 )}
@@ -134,38 +138,41 @@ export const EventOverview = (props) => {
   );
 };
 
-export const EventSkeleton = () => (
-  <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
-    <span className="relative w-full">
-      <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg animate-pulse lg:h-32 xl:h-48 dark:bg-purple-900">
-        <CalendarIcon className="w-6 h-6 text-purple-700 dark:text-purple-400" />
-      </span>
-      <div className="absolute top-2 left-2">
-        <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl animate-pulse rounded-xl">
-          <>
-            <VideoCameraIcon className="w-3 h-3 mr-1" />
-            <span className="truncate">Loading</span>
-          </>
+export const EventSkeleton = () => {
+  const { t } = useTranslation("event");
+  return (
+    <div className="flex flex-col w-full h-full p-2 transition duration-300 bg-white shadow rounded-xl dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
+      <span className="relative w-full">
+        <span className="flex items-center justify-center w-full h-24 bg-purple-200 rounded-lg animate-pulse lg:h-32 xl:h-48 dark:bg-purple-900">
+          <CalendarIcon className="w-6 h-6 text-purple-700 dark:text-purple-400" />
+        </span>
+        <div className="absolute top-2 left-2">
+          <div className="z-10 flex flex-row items-center px-2 py-1 text-xs font-medium text-gray-200 truncate bg-gray-800 shadow-xl animate-pulse rounded-xl">
+            <>
+              <VideoCameraIcon className="w-3 h-3 mr-1" />
+              <span className="truncate">{t("loading")}</span>
+            </>
+          </div>
         </div>
-      </div>
-    </span>
-    <div className="flex flex-col justify-between w-full h-full p-3">
-      <span className="w-16 h-4 bg-gray-500 rounded-md animate-pulse"> </span>
-      <span className="w-32 h-4 mt-1 bg-gray-500 rounded-md animate-pulse">
-        {" "}
       </span>
-      <hr className="mx-6 my-3 border-gray-200 dark:border-gray-700" />
+      <div className="flex flex-col justify-between w-full h-full p-3">
+        <span className="w-16 h-4 bg-gray-500 rounded-md animate-pulse"> </span>
+        <span className="w-32 h-4 mt-1 bg-gray-500 rounded-md animate-pulse">
+          {" "}
+        </span>
+        <hr className="mx-6 my-3 border-gray-200 dark:border-gray-700" />
 
-      <div className="flex justify-between w-full">
-        <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
-          <span className="w-6 h-6 bg-gray-500 rounded-full animate-pulse"></span>
-        </div>
-        <div className="flex">
-          <span className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-500 rounded-full animate-pulse focus:outline-none group max-w-max dark:bg-opacity-30 ">
-            <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-600 rounded-full dark:bg-gray-400 dark:bg-opacity-30 animate-pulse"></span>
-          </span>
+        <div className="flex justify-between w-full">
+          <div className="inline-flex items-center text-sm text-gray-500 transition duration-200 hover:text-gray-700 dark:text-gray-400">
+            <span className="w-6 h-6 bg-gray-500 rounded-full animate-pulse"></span>
+          </div>
+          <div className="flex">
+            <span className="inline-flex items-center px-1 py-1 transition duration-300 bg-gray-500 rounded-full animate-pulse focus:outline-none group max-w-max dark:bg-opacity-30 ">
+              <span className="flex items-center justify-center w-8 h-8 duration-300 bg-gray-600 rounded-full dark:bg-gray-400 dark:bg-opacity-30 animate-pulse"></span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

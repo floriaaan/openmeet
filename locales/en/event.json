@@ -2,5 +2,9 @@
   "upcoming": "Upcoming",
   "events": "Events",
   "explore-more-events": "Explore more events",
-  "no-events-yet": "No upcoming events yet..."
+  "no-events-yet": "No upcoming events yet...",
+  "online": "Online event",
+  "no-participant": "No participant yet",
+  "loading": "Loading",
+  "why-dont-you-participate": "Why don't you participate?"
 }

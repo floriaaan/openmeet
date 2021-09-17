@@ -62,12 +62,13 @@
       "privacy": "Confidentialité",
       "terms": "Terms"
     },
+
     "newsletter": {
-      "title": "Subscribe to our newsletter",
-      "subtitle": "The latest news, articles, and resources, sent to your inbox weekly.",
-      "button": "Subscribe",
-      "already": "Subscribed"
+      "title": "Abonnez-vous à notre newsletter",
+      "subtitle": "Les dernières nouvelles, articles et ressources, envoyés à votre boîte de réception chaque semaine.",
+      "button": "S’inscrire",
+      "already": "Souscrit"
     },
-    "copyright": " OpenMeet - Floriaaan. All rights reserved."
+    "copyright": " OpenMeet - Floriaaan. Tous droits réservés."
   }
 }
