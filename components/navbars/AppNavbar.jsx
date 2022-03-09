@@ -7,11 +7,7 @@ import { UserDropdown } from "@components/dropdowns/UserDropdown";
 import { NotificationDropdown } from "@components/dropdowns/NotificationDropdown";
 import { GroupDropdown } from "@components/dropdowns/GroupDropdown";
 
-import algoliasearch from "algoliasearch/lite";
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
-);
+
 
 import { MenuIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
@@ -21,7 +17,6 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
   const { user } = useAuth();
   const { t } = useTranslation("common");
 
-  const navbarSearchRef = React.useRef(null);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -61,9 +56,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
           >
             <ul className="flex flex-row mr-auto list-none ">
               <div className="relative flex flex-row items-center w-full text-gray-600">
-                {/* <InstantSearch searchClient={searchClient} indexName="group"> */}
                 <input
-                  ref={navbarSearchRef}
                   type="search"
                   name="query"
                   autoComplete="off"
@@ -98,30 +91,7 @@ export const AppNavbar = ({ shadowOnNavbar }) => {
                     </svg>
                   </button>
                 </div>
-                {/* <Menu as="div" className="relative flex items-center h-full">
-                    <Transition
-                      show={
-                        navbarSearchRef?.current?.value !== undefined &&
-                        navbarSearchRef.current.value !== ""
-                      }
-                      enter="transform transition duration-100 ease-in"
-                      enterFrom="opacity-0 scale-95"
-                      enterTo="opacity-100 scale-100"
-                      leave="transform transition duration-75 ease-out"
-                      leaveFrom="opacity-100 scale-100"
-                      leaveTo="opacity-0 scale-95"
-                    >
-                      <Menu.Items
-                        static
-                        className={
-                          "bg-white border absolute left-0 -ml-72 mt-8 dark:bg-gray-900 text-base z-50 p-3 list-none text-left rounded-xl shadow-lg w-full md:w-96"
-                        }
-                      >
-                        <CustomHits />
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </InstantSearch> */}
+                
               </div>
             </ul>
             <ul className="flex flex-row justify-center w-full mt-3 space-x-12 list-none lg:space-x-8 lg:justify-start lg:w-auto lg:mt-0 lg:ml-auto">

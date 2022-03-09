@@ -4,7 +4,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { UserDropdown } from "components/dropdowns/UserDropdown";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import {
+  AdjustmentsIcon,
+  CogIcon,
+  ColorSwatchIcon,
+  MenuIcon,
+  ShieldCheckIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 
 export const Sidebar = () => {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -21,7 +28,7 @@ export const Sidebar = () => {
               setCollapseShow("bg-white dark:bg-gray-900 m-2 py-3 px-6")
             }
           >
-            <MenuIcon className="w-5 h-5"/>
+            <MenuIcon className="w-5 h-5" />
           </button>
           {/* Brand */}
           <Link href="/">
@@ -67,7 +74,7 @@ export const Sidebar = () => {
                     className="px-3 py-1 text-xl leading-none text-black bg-transparent border border-transparent border-solid opacity-50 cursor-pointer rounded-xl md:hidden"
                     onClick={() => setCollapseShow("hidden")}
                   >
-                    <XIcon className="w-4 h-4"/>
+                    <XIcon className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -93,23 +100,23 @@ export const Sidebar = () => {
 
             <ul className="flex flex-col space-y-1 list-none md:flex-col md:min-w-full">
               <li className="items-center">
-                <Link href="/admin/">
+                <Link href="/admin">
                   <a
                     className={
-                      "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
+                      "text-xs uppercase py-3 font-bold inline-flex items-center w-full rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname === "/admin"
                         ? "bg-gray-300 dark:bg-gray-700"
                         : "")
                     }
                   >
-                    <i
+                    <AdjustmentsIcon
                       className={
-                        "fas fa-tv mr-2 text-sm " +
+                        "w-5 h-5 mr-2 text-sm " +
                         (router.pathname === "/admin"
                           ? "opacity-75"
                           : "text-gray-500")
                       }
-                    ></i>{" "}
+                    ></AdjustmentsIcon>{" "}
                     Dashboard
                   </a>
                 </Link>
@@ -119,20 +126,20 @@ export const Sidebar = () => {
                 <Link href="/admin/settings">
                   <a
                     className={
-                      "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
+                      "text-xs uppercase py-3 font-bold inline-flex items-center w-full rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/settings") !== -1
                         ? "bg-gray-300 dark:bg-gray-700"
                         : "")
                     }
                   >
-                    <i
+                    <CogIcon
                       className={
-                        "fas fa-tools mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/settings") !== -1
+                        "w-5 h-5 mr-2 text-sm " +
+                        (router.pathname === "/admin/settings"
                           ? "opacity-75"
                           : "text-gray-500")
                       }
-                    ></i>{" "}
+                    />
                     Settings
                   </a>
                 </Link>
@@ -142,20 +149,20 @@ export const Sidebar = () => {
                 <Link href="/admin/themes">
                   <a
                     className={
-                      "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
+                      "text-xs uppercase py-3 font-bold inline-flex items-center w-full rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/themes") !== -1
                         ? "bg-gray-300 dark:bg-gray-700"
                         : "")
                     }
                   >
-                    <i
+                    <ColorSwatchIcon
                       className={
-                        "fas fa-palette mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/themes") !== -1
+                        "w-5 h-5 mr-2 text-sm " +
+                        (router.pathname === "/admin/themes"
                           ? "opacity-75"
                           : "text-gray-500")
                       }
-                    ></i>{" "}
+                    />
                     Themes
                   </a>
                 </Link>
@@ -165,21 +172,21 @@ export const Sidebar = () => {
                 <Link href="/admin/security">
                   <a
                     className={
-                      "text-xs uppercase py-3 font-bold block rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
+                      "text-xs uppercase py-3 font-bold inline-flex items-center w-full rounded-xl px-5 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-200 " +
                       (router.pathname.indexOf("/admin/security") !== -1
                         ? "bg-gray-300 dark:bg-gray-700"
                         : "")
                     }
                   >
-                    <i
+                    <ShieldCheckIcon
                       className={
-                        "fas fa-shield-alt mr-2 text-sm " +
+                        "w-5 h-5 mr-2 text-sm " +
                         (router.pathname.indexOf("/admin/security") !== -1
                           ? "opacity-75"
                           : "text-gray-500")
                       }
-                    ></i>{" "}
-                    Security and privacy
+                    />
+                    Security & privacy
                   </a>
                 </Link>
               </li>

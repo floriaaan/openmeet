@@ -5,7 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withTranslate = require('next-translate')
+const withTranslate = require("next-translate");
 
 const withPWA = require("next-pwa")({
   pwa: {
@@ -17,7 +17,7 @@ const withPWA = require("next-pwa")({
 });
 
 module.exports = withPlugins([
-  [withBundleAnalyzer, withPWA, ],
-  // your other plugins here
-  withTranslate
+  withBundleAnalyzer,
+  withPWA,
+  withTranslate,
 ]);

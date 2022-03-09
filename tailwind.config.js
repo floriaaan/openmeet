@@ -1,14 +1,12 @@
-const colors = require("tailwindcss/colors");
-
 module.exports = {
   mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   darkMode: "class",
   plugins: [
-    require('@tailwindcss/typography'),
-    require("@tailwindcss/forms")({
-      strategy: "class",
-    }),
+    // require("@tailwindcss/typography"),
   ],
   theme: {
     extend: {
@@ -31,9 +29,6 @@ module.exports = {
           },
         },
       },
-    },
-    colors: {
-      ...colors,
     },
   },
 };
