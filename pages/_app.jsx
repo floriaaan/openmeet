@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/nprogress.css";
+import "../styles/leaflet.css";
 import "leaflet/dist/leaflet.css";
 
 import { AuthProvider } from "@hooks/useAuth";

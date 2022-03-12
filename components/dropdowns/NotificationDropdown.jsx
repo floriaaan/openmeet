@@ -25,6 +25,7 @@ import {
   MailIcon,
 } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
+import { classes } from "@libs/classes";
 
 export const NotificationDropdown = () => {
   const { t } = useTranslation("common");
@@ -95,13 +96,16 @@ export const NotificationDropdown = () => {
       {({ open }) => (
         <>
           <Menu.Button>
-            <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-yellow-100 rounded-full dark:bg-yellow-800 focus:outline-none ">
-              <BellIcon className="w-4 h-4 text-yellow-400" />
+            <span
+              className={classes(
+                "btn-amber rounded-full p-2",
+                open &&
+                  "text-amber-800 bg-amber-300 dark:bg-amber-700 dark:text-amber-300"
+              )}
+            >
+              <BellIcon className="w-4 h-4" />
               {notifications?.length > 0 && (
-                <span
-                  style={{ marginTop: "-22px", marginRight: "-22px" }}
-                  className="absolute flex items-center justify-center"
-                >
+                <span className="absolute top-0 right-0 flex items-center justify-center">
                   <span className="w-3 h-3 bg-red-400 rounded-full opacity-75 animate-ping" />
                   <span className="absolute w-2 h-2 bg-red-600 rounded-full" />
                 </span>

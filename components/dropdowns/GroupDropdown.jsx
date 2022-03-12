@@ -8,6 +8,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { CogIcon, PlusIcon, UserGroupIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
+import { classes } from "@libs/classes";
 
 export const GroupDropdown = () => {
   const { t } = useTranslation("common");
@@ -69,8 +70,14 @@ export const GroupDropdown = () => {
         <>
           <Menu.Button>
             <div className="flex items-center">
-              <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-green-200 rounded-full dark:bg-green-800">
-                <UserGroupIcon className="w-4 h-4 text-green-500" />
+            <span
+                className={classes(
+                  "btn-green rounded-full p-2",
+                  open &&
+                    "text-green-800 bg-green-300 dark:bg-green-700 dark:text-green-300"
+                )}
+              >
+                <UserGroupIcon className="w-4 h-4 " />
               </span>
             </div>
           </Menu.Button>
@@ -131,7 +138,7 @@ export const GroupDropdown = () => {
 
 const GroupOverview = ({ slug, name }) => (
   <Link href={"/group/" + slug}>
-    <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900">
+    <a className="flex flex-col items-center justify-start w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-green-50 dark:hover:bg-green-900">
       <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white bg-white rounded-full">
         <span className="flex items-center justify-center w-16 h-16 p-5 text-green-500 bg-green-200 rounded-full dark:bg-green-700">
           <UserGroupIcon className="w-8 h-8" />

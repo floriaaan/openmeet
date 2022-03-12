@@ -2,40 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .animation-delay-2000 {
-    animation-delay: 2s
+    animation-delay: 2s;
   }
   .animation-delay-4000 {
-    animation-delay: 4s
+    animation-delay: 4s;
   }
 }
 
+@layer components {
+  .input {
+    @apply w-full px-3 py-2 text-sm font-light text-gray-600 transition-all duration-300 bg-gray-100 rounded-lg hover:bg-gray-200 active:bg-gray-100 focus:outline-none dark:focus:ring-blue-800 focus:ring focus:ring-offset-2 focus:ring-blue-400 focus:bg-gray-50 placeholder-shown:text-gray-400 dark:text-gray-200 dark:bg-gray-800 dark:placeholder-shown:text-gray-200 dark:focus:ring-offset-0;
+  }
 
+  .input-auth {
+    @apply block w-full px-3 py-2 placeholder-gray-400 duration-300 border border-gray-300 rounded-md shadow-sm appearance-none dark:border-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:outline-none dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:text-sm disabled:opacity-75;
+  }
 
-.leaflet-popup-content {
-  margin: 0 !important;
-}
+  .invalid {
+    @apply text-red-500 dark:text-red-200 ring-red-500 ring-offset-2 ring-1;
+  }
 
-.leaflet-popup-content-wrapper {
-  padding: 0 !important;
-}
+  .btn {
+    @apply inline-flex items-center px-2 py-2 text-sm font-light transition-all duration-300 rounded-lg sm:px-4 active:ring ring-offset-1 focus:outline-none;
+  }
 
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  background: none !important;
-}
+  .btn-blue {
+    @apply text-blue-600 bg-blue-200 btn dark:bg-blue-800 dark:text-blue-200 hover:bg-blue-300 active:bg-blue-700 active:text-blue-100 ring-blue-500;
+  }
 
-.leaflet-control-container {
-  display: none;
-}
+  .btn-blue {
+    @apply text-blue-600 bg-blue-100 btn dark:bg-blue-800 dark:text-blue-200 hover:bg-blue-200 active:bg-blue-700 active:text-blue-100 ring-blue-500;
+  }
 
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-}
+  .btn-green {
+    @apply text-green-700 bg-green-100 btn hover:bg-green-300 active:bg-green-700 active:text-green-100 hover:text-green-800 dark:bg-green-800 dark:text-green-200 ring-green-500;
+  }
 
-.leaflet-pane {
-  z-index: 0 !important;
+  .btn-red {
+    @apply text-red-700 bg-red-100 btn hover:bg-red-300 active:bg-red-700 active:text-red-100 hover:text-red-800 ring-red-500;
+  }
+
+  .btn-yellow {
+    @apply text-amber-700 bg-amber-100 btn hover:bg-amber-300 active:bg-amber-700 active:text-amber-100 hover:text-amber-800 dark:bg-amber-800 dark:text-amber-200 ring-amber-500;
+  }
+
+  .btn-amber {
+    @apply text-amber-700 bg-amber-100 btn hover:bg-amber-300 active:bg-amber-700 active:text-amber-100 hover:text-amber-800 dark:bg-amber-800 dark:text-amber-200 ring-amber-500;
+  }
+
+  .btn-purple {
+    @apply text-purple-700 bg-purple-100 btn hover:bg-purple-300 active:bg-purple-700 active:text-purple-100 hover:text-purple-800 dark:bg-purple-800 dark:text-purple-200 ring-purple-500;
+  }
+
+  .btn-gray {
+    @apply text-gray-700 bg-gray-100 btn hover:bg-gray-300 active:bg-gray-700 active:text-gray-100 hover:text-gray-800 dark:bg-gray-800 dark:text-gray-200 ring-gray-500;
+  }
+
+  .btn-text {
+    @apply inline-flex items-center w-full p-2 text-sm duration-300 ease-linear rounded-md sm:px-4 max-w-max;
+  }
+
+  .btn-text-gray {
+    @apply text-gray-500 btn-text hover:bg-gray-100 active:bg-gray-300 active:text-gray-700;
+  }
+
+  .btn-text-green {
+    @apply text-green-500 btn-text hover:bg-green-100 active:bg-green-300 active:text-green-700;
+  }
+
+  .btn-text-blue {
+    @apply text-blue-500 btn-text hover:bg-blue-100 active:bg-blue-300 active:text-blue-700;
+  }
+
+  .btn-text-yellow {
+    @apply text-amber-500 btn-text hover:bg-amber-100 active:bg-amber-300 active:text-amber-700;
+  }
+  .btn-text-red {
+    @apply text-red-500 btn-text hover:bg-red-100 active:bg-red-300 active:text-red-700;
+  }
 }

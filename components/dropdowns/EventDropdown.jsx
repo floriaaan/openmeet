@@ -8,6 +8,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { eventImgFallback } from "@libs/imgOnError";
 import { CalendarIcon, PlusIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
+import { classes } from "@libs/classes";
 
 export const EventDropdown = () => {
   const { t } = useTranslation("common");
@@ -51,8 +52,14 @@ export const EventDropdown = () => {
         <>
           <Menu.Button>
             <div className="flex items-center">
-              <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-purple-200 rounded-full dark:bg-purple-800">
-                <CalendarIcon className="w-4 h-4 text-purple-500 dark:text-purple-400" />
+              <span
+                className={classes(
+                  "btn-purple rounded-full p-2",
+                  open &&
+                    "text-purple-800 bg-purple-300 dark:bg-purple-700 dark:text-purple-300"
+                )}
+              >
+                <CalendarIcon className="w-4 h-4 " />
               </span>
             </div>
           </Menu.Button>
@@ -112,7 +119,7 @@ const EventOverview = ({
   picture,
 }) => (
   <Link href={"/event/" + slug}>
-    <a className="flex flex-col items-center justify-center w-full min-h-[6rem] p-2 duration-300 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900">
+    <a className="flex flex-col items-center justify-start w-full min-h-[6rem] h-full p-2 duration-300 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900">
       <div className="relative flex items-center justify-center w-16 h-16 m-1 mr-2 text-xl text-white rounded-full">
         {picture ? (
           <>
@@ -121,7 +128,7 @@ const EventOverview = ({
               className="object-cover h-full rounded-full"
               alt={name}
               src={picture}
-              onError={(e) => eventImgFallback(e, displayableUser?.fullName)}
+              onError={(e) => eventImgFallback(e, name)}
             />
           </>
         ) : (

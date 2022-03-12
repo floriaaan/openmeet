@@ -4,6 +4,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { FlagIcon as HiFlagIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { FlagIcon } from "@components/FlagIcon";
+import { classes } from "@libs/classes";
 
 const locales = [
   { code: "en", label: "English" },
@@ -18,8 +19,14 @@ export const LocaleDropdown = () => {
         <>
           <Menu.Button>
             <div className="flex items-center">
-              <span className="flex items-center justify-center w-8 h-8 text-sm transition duration-150 ease-in-out bg-gray-200 rounded-full dark:bg-gray-800">
-                <FlagIcon className="w-4 h-4 text-gray-500" locale={router.locale} />
+              <span
+                className={classes(
+                  "btn-gray rounded-full p-2",
+                  open &&
+                    "text-gray-800 bg-gray-300 dark:bg-gray-700 dark:text-gray-300"
+                )}
+              >
+                <FlagIcon className="w-4 h-4" locale={router.locale} />
               </span>
             </div>
           </Menu.Button>

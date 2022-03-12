@@ -17,6 +17,7 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
+import { classes } from "@libs/classes";
 
 export const UserDropdown = () => {
   const { t } = useTranslation("common");
@@ -31,11 +32,17 @@ export const UserDropdown = () => {
           <Menu.Button>
             <div className="flex items-center">
               {user ? (
-                <span className="inline-flex items-center justify-center w-8 h-8 text-sm rounded-full">
+                <span
+                  className={classes(
+                    "btn-red rounded-full p-px",
+                    open &&
+                      "text-red-800 bg-red-300 dark:bg-red-700 dark:text-red-300"
+                  )}
+                >
                   <img
                     alt={user?.fullName}
                     onError={(e) => userImgFallback(e, user.fullName)}
-                    className="w-full h-full align-middle border-none rounded-full select-none "
+                    className="align-middle border-none rounded-full select-none w-7 h-7 "
                     src={
                       user?.photoUrl
                         ? user.photoUrl
@@ -93,13 +100,13 @@ export const UserDropdown = () => {
                     onClick={signout}
                   >
                     <LogoutIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                    {t('dropdowns.user.logout')}
+                    {t("dropdowns.user.logout")}
                   </a>
 
                   {user.superuser && (
                     <>
                       <div className="block px-4 py-2 text-xs text-gray-400">
-                        {t('dropdowns.user.superuser.settings')}
+                        {t("dropdowns.user.superuser.settings")}
                       </div>
                       <Link href="/admin">
                         <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
@@ -113,18 +120,18 @@ export const UserDropdown = () => {
               ) : (
                 <>
                   <div className="block px-4 py-2 pt-4 text-xs text-gray-400">
-                    {t('dropdowns.user.connect')}
+                    {t("dropdowns.user.connect")}
                   </div>
                   <Link href="/auth">
                     <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                       <LoginIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800 " />
-                      {t('dropdowns.user.login')}
+                      {t("dropdowns.user.login")}
                     </a>
                   </Link>
                   <Link href="/auth/register">
                     <a className="inline-flex items-center w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-800">
                       <UserAddIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
-                      {t('dropdowns.user.register')}
+                      {t("dropdowns.user.register")}
                     </a>
                   </Link>
                   {/* <Link href="/auth">
@@ -135,7 +142,7 @@ export const UserDropdown = () => {
                 </>
               )}
               <div className="block px-4 py-2 text-xs text-gray-400">
-                {t('dropdowns.user.dark-mode.title')}
+                {t("dropdowns.user.dark-mode.title")}
               </div>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -143,11 +150,11 @@ export const UserDropdown = () => {
               >
                 <span className="inline-flex items-center">
                   {theme === "light" ? (
-                    <MoonIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800"/>
+                    <MoonIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
                   ) : (
-                    <SunIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800"/>
+                    <SunIcon className="w-6 h-6 pr-2 mr-2 text-center border-r border-gray-200 dark:border-gray-800" />
                   )}
-                  {t('dropdowns.user.dark-mode.toggle')}
+                  {t("dropdowns.user.dark-mode.toggle")}
                 </span>
                 <span
                   style={{ opacity: 1 }}
