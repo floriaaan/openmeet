@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import Link from "next/link";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs } from "firebase/firestore";
-import { eventImgFallback } from "@libs/imgOnError";
+import { eventImgFallback } from "libs/imgOnError";
 import { CalendarIcon, PlusIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
-import { classes } from "@libs/classes";
+import { classes } from "libs/classes";
 
 export const EventDropdown = () => {
   const { t } = useTranslation("common");

@@ -1,5 +1,5 @@
-import { firestore } from "@libs/firebase";
-import { useAuth } from "@hooks/useAuth";
+import { firestore } from "libs/firebase";
+import { useAuth } from "hooks/useAuth";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";

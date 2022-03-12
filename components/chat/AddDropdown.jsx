@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
-import { firestore } from "@libs/firebase";
-import { userImgFallback } from "@libs/imgOnError";
+import { firestore } from "libs/firebase";
+import { userImgFallback } from "libs/imgOnError";
 import { Menu, Transition } from "@headlessui/react";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { PlusIcon } from "@heroicons/react/solid";

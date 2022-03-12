@@ -1,4 +1,4 @@
-import { AppLayout } from "@components/layouts/AppLayout";
+import { AppLayout } from "components/layouts/AppLayout";
 import Lottie from "react-lottie";
 import animationData from "resources/lotties/404.json";
 

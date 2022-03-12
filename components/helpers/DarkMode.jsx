@@ -1,4 +1,4 @@
-import { useEventListener } from "@hooks/useEventListener";
+import { useEventListener } from "hooks/useEventListener";
 import { useTheme } from "next-themes";
 
 export const DarkModeToggler = () => {

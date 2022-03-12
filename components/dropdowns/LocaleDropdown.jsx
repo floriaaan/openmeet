@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
 import { FlagIcon as HiFlagIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { FlagIcon } from "@components/FlagIcon";
-import { classes } from "@libs/classes";
+import { FlagIcon } from "components/FlagIcon";
+import { classes } from "libs/classes";
 
 const locales = [
   { code: "en", label: "English" },

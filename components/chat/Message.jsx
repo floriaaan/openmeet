@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { userImgFallback } from "@libs/imgOnError";
+import { userImgFallback } from "libs/imgOnError";
 import { format, formatRelative } from "date-fns";
 import Link from "next/link";
 

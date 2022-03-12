@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
-import { useAuth } from "@hooks/useAuth";
-import { GuestLayout } from "@components/layouts/GuestLayout";
+import { useAuth } from "hooks/useAuth";
+import { GuestLayout } from "components/layouts/GuestLayout";
 import useTranslation from "next-translate/useTranslation";
 
 export default function Login() {

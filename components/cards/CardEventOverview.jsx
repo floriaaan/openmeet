@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { EventContextMenu } from "@components/contextmenus/EventContextMenu";
-import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { EventContextMenu } from "components/contextmenus/EventContextMenu";
+import { AvatarGroup } from "components/ui/AvatarGroup";
 import { CalendarIcon } from "@heroicons/react/outline";
 import {
   LocationMarkerIcon,
   ShareIcon,
   VideoCameraIcon,
 } from "@heroicons/react/solid";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { format } from "date-fns";
 import { collection, onSnapshot } from "firebase/firestore";
 import useTranslation from "next-translate/useTranslation";

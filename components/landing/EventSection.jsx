@@ -1,7 +1,7 @@
-import { EventSkeleton } from "@components/cards/CardEventOverview";
-import { EventOverview } from "@components/cards/CardEventOverview";
+import { EventSkeleton } from "components/cards/CardEventOverview";
+import { EventOverview } from "components/cards/CardEventOverview";
 import { ChevronRightIcon, PlusIcon } from "@heroicons/react/outline";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";

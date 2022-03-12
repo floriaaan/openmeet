@@ -1,4 +1,4 @@
-import { useEventListener } from "@hooks/useEventListener";
+import { useEventListener } from "hooks/useEventListener";
 import useTranslation from "next-translate/useTranslation";
 
 export const PWASection = () => {

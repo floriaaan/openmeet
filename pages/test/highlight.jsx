@@ -1,5 +1,5 @@
-import { AppLayout } from "@components/layouts/AppLayout";
-import { RainbowHighlight } from "@components/ui/RainbowHighlight";
+import { AppLayout } from "components/layouts/AppLayout";
+import { RainbowHighlight } from "components/ui/RainbowHighlight";
 import { RoughNotationGroup } from "react-rough-notation";
 
 export default function TestBlurryPage() {

@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { AppLayout } from "@components/layouts/AppLayout";
-import { firestore } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { firestore } from "libs/firebase";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { AvatarGroup } from "@components/ui/AvatarGroup";
-import { EventOverview } from "@components/cards/CardEventOverview";
-import { ChipList } from "@components/ui/ChipList";
+import { AvatarGroup } from "components/ui/AvatarGroup";
+import { EventOverview } from "components/cards/CardEventOverview";
+import { ChipList } from "components/ui/ChipList";
 
 import ReactMarkdown from "react-markdown";
 import Lottie from "react-lottie";
@@ -21,8 +21,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { Dialog, Tab, Transition } from "@headlessui/react";
-import { userImgFallback } from "@libs/imgOnError";
-import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { userImgFallback } from "libs/imgOnError";
+import useFirestoreToggle from "hooks/useFirestoreToggle";
 import { CalendarIcon, CheckIcon, ExclamationIcon, MapIcon, PencilIcon, PlusIcon, ShareIcon, UsersIcon, XIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {

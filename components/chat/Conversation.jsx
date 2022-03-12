@@ -1,7 +1,7 @@
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import React, { useEffect, useRef, useState } from "react";
-import { Message } from "@components/chat/Message";
-import { useAuth } from "@hooks/useAuth";
+import { Message } from "components/chat/Message";
+import { useAuth } from "hooks/useAuth";
 import Link from "next/link";
 import { AddDropdown } from "./AddDropdown";
 import { useRouter } from "next/router";

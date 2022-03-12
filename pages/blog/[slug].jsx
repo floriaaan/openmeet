@@ -1,5 +1,5 @@
-import { AppLayout } from "@components/layouts/AppLayout";
-import { postFilePaths, POSTS_PATH } from "@libs/mdx";
+import { AppLayout } from "components/layouts/AppLayout";
+import { postFilePaths, POSTS_PATH } from "libs/mdx";
 
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";

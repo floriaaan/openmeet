@@ -2,8 +2,8 @@ import React from "react";
 
 // components
 
-import { Navbar } from "@components/navbars/GuestNavbar";
-import { FooterSmall } from "@components/footers/SmallFooter";
+import { Navbar } from "components/navbars/GuestNavbar";
+import { FooterSmall } from "components/footers/SmallFooter";
 
 export const AuthLayout = ({ children }) => {
   return (

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { AppLayout } from "@components/layouts/AppLayout";
-import { ApiKey } from "@components/profile/ApiKey";
-import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { ApiKey } from "components/profile/ApiKey";
+import { useAuth } from "hooks/useAuth";
+import { firestore } from "libs/firebase";
 import { formatDistance } from "date-fns";
 import { doc, getDoc } from "firebase/firestore";
 import Lottie from "react-lottie";

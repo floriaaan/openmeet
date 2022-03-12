@@ -2,7 +2,7 @@ import React from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
-import { MeetupIcon } from "@components/SocialIcon";
+import { MeetupIcon } from "components/SocialIcon";
 
 const cheerio = require("cheerio");
 

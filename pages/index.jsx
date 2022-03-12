@@ -1,11 +1,11 @@
-import { EventSection } from "@components/landing/EventSection";
-import { Footer } from "@components/landing/Footer";
-import { GroupsSection } from "@components/landing/GroupSection";
-import { HeroSection } from "@components/landing/HeroSection";
-import { NewsletterSection } from "@components/landing/NewsletterSection";
-import { PWASection } from "@components/landing/PWASection";
-import { SearchSection } from "@components/landing/SearchSection";
-import { AppLayout } from "@components/layouts/AppLayout";
+import { EventSection } from "components/landing/EventSection";
+import { Footer } from "components/landing/Footer";
+import { GroupsSection } from "components/landing/GroupSection";
+import { HeroSection } from "components/landing/HeroSection";
+import { NewsletterSection } from "components/landing/NewsletterSection";
+import { PWASection } from "components/landing/PWASection";
+import { SearchSection } from "components/landing/SearchSection";
+import { AppLayout } from "components/layouts/AppLayout";
 
 export default function Index() {
   // const { user, signout } = useAuth();

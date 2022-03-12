@@ -1,4 +1,4 @@
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";

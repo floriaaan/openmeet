@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 
 // components

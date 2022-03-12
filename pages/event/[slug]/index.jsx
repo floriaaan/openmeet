@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { AppLayout } from "@components/layouts/AppLayout";
-import { AvatarGroup } from "@components/ui/AvatarGroup";
-import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { AvatarGroup } from "components/ui/AvatarGroup";
+import { useAuth } from "hooks/useAuth";
+import { firestore } from "libs/firebase";
 import { format } from "date-fns";
 import {
   addDoc,

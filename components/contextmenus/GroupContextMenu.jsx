@@ -9,8 +9,8 @@ import {
 } from "@heroicons/react/outline";
 import { StarIcon as StarSolidIcon } from "@heroicons/react/solid";
 
-import { useAuth } from "@hooks/useAuth";
-import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { useAuth } from "hooks/useAuth";
+import useFirestoreToggle from "hooks/useFirestoreToggle";
 
 export const GroupContextMenu = ({ slug, name, admin }, props) => {
   const { user } = useAuth();

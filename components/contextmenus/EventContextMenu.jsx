@@ -7,8 +7,8 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { StarIcon as StarSolidIcon } from "@heroicons/react/solid";
-import { useAuth } from "@hooks/useAuth";
-import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { useAuth } from "hooks/useAuth";
+import useFirestoreToggle from "hooks/useFirestoreToggle";
 
 export const EventContextMenu = ({ slug, name }) => {
   const { user } = useAuth();

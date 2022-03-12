@@ -2,10 +2,10 @@ import React from "react";
 
 // components
 
-import { AdminNavbar } from "@components/navbars/AdminNavbar";
-import { Sidebar } from "@components/admin/Sidebar";
-import { HeaderStats } from "@components/admin/HeaderStats";
-import { FooterAdmin } from "@components/footers/AdminFooter";
+import { AdminNavbar } from "components/navbars/AdminNavbar";
+import { Sidebar } from "components/admin/Sidebar";
+import { HeaderStats } from "components/admin/HeaderStats";
+import { FooterAdmin } from "components/footers/AdminFooter";
 
 export const AdminLayout = ({ children, pageTitle }) => {
   return (

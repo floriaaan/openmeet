@@ -1,5 +1,5 @@
 import { setDoc, deleteDoc, getDoc, doc } from "@firebase/firestore";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { useEffect, useState } from "react";
 
 export default function useFirestoreToggle(queryPath = "", document) {

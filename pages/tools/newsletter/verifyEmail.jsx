@@ -1,6 +1,6 @@
-import { AppLayout } from "@components/layouts/AppLayout";
-import { GuestLayout } from "@components/layouts/GuestLayout";
-import { firestore } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { GuestLayout } from "components/layouts/GuestLayout";
+import { firestore } from "libs/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState } from "react";

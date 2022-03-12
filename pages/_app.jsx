@@ -3,17 +3,17 @@ import "../styles/nprogress.css";
 import "../styles/leaflet.css";
 import "leaflet/dist/leaflet.css";
 
-import { AuthProvider } from "@hooks/useAuth";
+import { AuthProvider } from "hooks/useAuth";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Spotlight } from "@components/ui/Spotlight";
-import { DarkModeToggler } from "@components/helpers/DarkMode";
+import { Spotlight } from "components/ui/Spotlight";
+import { DarkModeToggler } from "components/helpers/DarkMode";
 
 function OpenMeetApp({ Component, pageProps }) {
   const Loader = dynamic(
     () => {
-      return import("@components/ui/TopLoader");
+      return import("components/ui/TopLoader");
     },
     { ssr: false }
   );

@@ -1,4 +1,4 @@
-import { GuestLayout } from "@components/layouts/GuestLayout";
+import { GuestLayout } from "components/layouts/GuestLayout";
 import Lottie from "react-lottie";
 import animationData from "resources/lotties/offline.json";
 

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { GuestLayout } from "@components/layouts/GuestLayout";
-import { useAuth } from "@hooks/useAuth";
+import { GuestLayout } from "components/layouts/GuestLayout";
+import { useAuth } from "hooks/useAuth";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 

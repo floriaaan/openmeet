@@ -1,5 +1,5 @@
-import { Sidebar } from "@components/chat/Sidebar";
-import { AppLayout } from "@components/layouts/AppLayout";
+import { Sidebar } from "components/chat/Sidebar";
+import { AppLayout } from "components/layouts/AppLayout";
 
 export default function ChatPage() {
   return <AppLayout shadowOnNavbar>

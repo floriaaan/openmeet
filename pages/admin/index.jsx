@@ -1,8 +1,8 @@
 import React from "react";
-import { AdminLayout } from "@components/layouts/AdminLayout";
+import { AdminLayout } from "components/layouts/AdminLayout";
 
-import CardSocialTraffic from "@components/admin/CardSocialTraffic";
-import ThemeOverview from "@components/admin/ThemeOverview";
+import CardSocialTraffic from "components/admin/CardSocialTraffic";
+import ThemeOverview from "components/admin/ThemeOverview";
 
 export default function Dashboard() {
   return (

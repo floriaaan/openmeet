@@ -1,4 +1,4 @@
-import { Chip } from "@components/ui/Chip";
+import { Chip } from "components/ui/Chip";
 import { SearchIcon, CalendarIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { AppLayout } from "@components/layouts/AppLayout";
+import { AppLayout } from "components/layouts/AppLayout";
 // import { useEffect, useState } from "react";
 // import { getLocalStream, servers } from "resources/webrtc";
 

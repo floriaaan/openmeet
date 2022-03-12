@@ -1,4 +1,4 @@
-const { AppLayout } = require("@components/layouts/AppLayout");
+const { AppLayout } = require("components/layouts/AppLayout");
 
 const PrivacyPolicy = () => {
   return (

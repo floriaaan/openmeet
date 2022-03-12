@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
-import { firebase, createUser } from "@libs/firebase";
+import { firebase, createUser } from "libs/firebase";
 import {
   getAuth,
   signInWithPopup,

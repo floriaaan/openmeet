@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { Fragment, useEffect, useState } from "react";
-import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
+import { useAuth } from "hooks/useAuth";
+import { firestore } from "libs/firebase";
 
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 import Router from "next/router";
 
 import { Menu, Transition } from "@headlessui/react";
-import { userImgFallback } from "@libs/imgOnError";
+import { userImgFallback } from "libs/imgOnError";
 import {
   collection,
   deleteDoc,
@@ -25,7 +25,7 @@ import {
   MailIcon,
 } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
-import { classes } from "@libs/classes";
+import { classes } from "libs/classes";
 
 export const NotificationDropdown = () => {
   const { t } = useTranslation("common");

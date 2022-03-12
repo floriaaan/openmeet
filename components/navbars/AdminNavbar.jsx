@@ -1,6 +1,6 @@
 import React from "react";
 
-import {UserDropdown} from "@components/dropdowns/UserDropdown";
+import {UserDropdown} from "components/dropdowns/UserDropdown";
 import { SearchIcon } from "@heroicons/react/outline";
 
 export const AdminNavbar = ({title}) => {

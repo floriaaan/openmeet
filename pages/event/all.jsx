@@ -1,11 +1,11 @@
-import { AppLayout } from "@components/layouts/AppLayout";
-import { ChipList } from "@components/ui/ChipList";
-import { firestore } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { ChipList } from "components/ui/ChipList";
+import { firestore } from "libs/firebase";
 import { useEffect, useState } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { EventOverview } from "@components/cards/CardEventOverview";
+import { EventOverview } from "components/cards/CardEventOverview";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
 export default function EventAllPage({ events }) {

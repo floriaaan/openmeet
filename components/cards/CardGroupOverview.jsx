@@ -1,13 +1,13 @@
-import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
+import { useAuth } from "hooks/useAuth";
+import { firestore } from "libs/firebase";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import { AvatarGroup } from "@components/ui/AvatarGroup";
+import { AvatarGroup } from "components/ui/AvatarGroup";
 import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
-import { ChipList } from "@components/ui/ChipList";
+import { ChipList } from "components/ui/ChipList";
 import { ContextMenu, ContextMenuTrigger } from "react-contextmenu";
-import { GroupContextMenu } from "@components/contextmenus/GroupContextMenu";
+import { GroupContextMenu } from "components/contextmenus/GroupContextMenu";
 import { formatDistanceToNow } from "date-fns";
 import {
   CalendarIcon,

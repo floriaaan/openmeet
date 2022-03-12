@@ -1,9 +1,9 @@
-import { AppLayout } from "@components/layouts/AppLayout";
+import { AppLayout } from "components/layouts/AppLayout";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { CalendarIcon, CheckIcon, ChevronDownIcon, CogIcon, EyeIcon, LocationMarkerIcon, LockClosedIcon, PencilAltIcon, TagIcon, UserGroupIcon } from "@heroicons/react/outline";
-import { useAuth } from "@hooks/useAuth";
-import { firestore } from "@libs/firebase";
-import { eventImgFallback, userImgFallback } from "@libs/imgOnError";
+import { useAuth } from "hooks/useAuth";
+import { firestore } from "libs/firebase";
+import { eventImgFallback, userImgFallback } from "libs/imgOnError";
 import { differenceInDays } from "date-fns";
 import {
   collection,

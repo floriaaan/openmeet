@@ -3,8 +3,8 @@ import Link from "next/link";
 import semver from "semver";
 import openmeet from "resources/openmeet";
 
-import CardStats from "@components/cards/CardStats";
-import { firestore } from "@libs/firebase";
+import CardStats from "components/cards/CardStats";
+import { firestore } from "libs/firebase";
 import OpenMeetOverview from "./OpenMeetOverview";
 import { collection, getDocs } from "firebase/firestore";
 

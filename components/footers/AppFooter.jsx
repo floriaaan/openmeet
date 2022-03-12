@@ -1,7 +1,7 @@
-import { GitHubIcon } from "@components/SocialIcon";
-import { TwitterIcon } from "@components/SocialIcon";
-import { useAuth } from "@hooks/useAuth";
-import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { GitHubIcon } from "components/SocialIcon";
+import { TwitterIcon } from "components/SocialIcon";
+import { useAuth } from "hooks/useAuth";
+import useFirestoreToggle from "hooks/useFirestoreToggle";
 
 export const AppFooter = () => {
   const { user } = useAuth();

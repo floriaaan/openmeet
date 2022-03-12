@@ -1,7 +1,7 @@
-import { AppFooter } from "@components/footers/AppFooter";
-import { AppNavbar } from "@components/navbars/AppNavbar";
-import { Alert } from "@components/ui/Alert";
-import { firestore } from "@libs/firebase";
+import { AppFooter } from "components/footers/AppFooter";
+import { AppNavbar } from "components/navbars/AppNavbar";
+import { Alert } from "components/ui/Alert";
+import { firestore } from "libs/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 

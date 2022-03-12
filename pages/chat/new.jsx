@@ -1,6 +1,6 @@
-import { NewConversation } from "@components/chat/Conversation";
-import { Sidebar } from "@components/chat/Sidebar";
-import { AppLayout } from "@components/layouts/AppLayout";
+import { NewConversation } from "components/chat/Conversation";
+import { Sidebar } from "components/chat/Sidebar";
+import { AppLayout } from "components/layouts/AppLayout";
 
 export default function ChatNewPage() {
   return (

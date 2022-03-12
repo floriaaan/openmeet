@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
 
-import { useAuth } from "@hooks/useAuth";
-import { EventDropdown } from "@components/dropdowns/EventDropdown";
-import { UserDropdown } from "@components/dropdowns/UserDropdown";
-import { NotificationDropdown } from "@components/dropdowns/NotificationDropdown";
-import { GroupDropdown } from "@components/dropdowns/GroupDropdown";
+import { useAuth } from "hooks/useAuth";
+import { EventDropdown } from "components/dropdowns/EventDropdown";
+import { UserDropdown } from "components/dropdowns/UserDropdown";
+import { NotificationDropdown } from "components/dropdowns/NotificationDropdown";
+import { GroupDropdown } from "components/dropdowns/GroupDropdown";
 
 
 
 import { MenuIcon } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
-import { LocaleDropdown } from "@components/dropdowns/LocaleDropdown";
+import { LocaleDropdown } from "components/dropdowns/LocaleDropdown";
 
 export const AppNavbar = ({ shadowOnNavbar }) => {
   const { user } = useAuth();

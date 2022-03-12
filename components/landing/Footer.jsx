@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { useAuth } from "@hooks/useAuth";
-import useFirestoreToggle from "@hooks/useFirestoreToggle";
+import { useAuth } from "hooks/useAuth";
+import useFirestoreToggle from "hooks/useFirestoreToggle";
 import useTranslation from "next-translate/useTranslation";
 
 import Link from "next/link";

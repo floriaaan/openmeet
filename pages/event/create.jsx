@@ -1,12 +1,12 @@
-import { AppLayout } from "@components/layouts/AppLayout";
-import { useAuth } from "@hooks/useAuth";
-import { firestore, uploadInFirebaseStorage } from "@libs/firebase";
+import { AppLayout } from "components/layouts/AppLayout";
+import { useAuth } from "hooks/useAuth";
+import { firestore, uploadInFirebaseStorage } from "libs/firebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { makeRequest } from "@libs/asyncXHR";
-import { MeetupImportDropdown } from "@components/dropdowns/MeetupImportDropdown";
-import { createUID } from "@libs/createUID";
+import { makeRequest } from "libs/asyncXHR";
+import { MeetupImportDropdown } from "components/dropdowns/MeetupImportDropdown";
+import { createUID } from "libs/createUID";
 import {
   arrayUnion,
   collection,
@@ -35,7 +35,7 @@ const LoadingDynamic = () => (
   </div>
 );
 
-const Map = dynamic(import("@components/map/Map"), {
+const Map = dynamic(import("components/map/Map"), {
   ssr: false,
   loading: LoadingDynamic,
 });

@@ -1,7 +1,7 @@
-import { GroupOverview } from "@components/cards/CardGroupOverview";
-import { AppLayout } from "@components/layouts/AppLayout";
-import { ChipList } from "@components/ui/ChipList";
-import { firestore } from "@libs/firebase";
+import { GroupOverview } from "components/cards/CardGroupOverview";
+import { AppLayout } from "components/layouts/AppLayout";
+import { ChipList } from "components/ui/ChipList";
+import { firestore } from "libs/firebase";
 import { useEffect, useState } from "react";
 
 import { Menu, Transition } from "@headlessui/react";

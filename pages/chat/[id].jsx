@@ -1,11 +1,11 @@
-import { AppLayout } from "@components/layouts/AppLayout";
+import { AppLayout } from "components/layouts/AppLayout";
 
 import { useRouter } from "next/router";
-import { Conversation } from "@components/chat/Conversation";
-import { Sidebar } from "@components/chat/Sidebar";
+import { Conversation } from "components/chat/Conversation";
+import { Sidebar } from "components/chat/Sidebar";
 import { useEffect } from "react";
-import { firestore } from "@libs/firebase";
-import { useAuth } from "@hooks/useAuth";
+import { firestore } from "libs/firebase";
+import { useAuth } from "hooks/useAuth";
 import {
   collection,
   deleteDoc,

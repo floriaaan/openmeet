@@ -1,4 +1,4 @@
-import { AppLayout } from "@components/layouts/AppLayout";
+import { AppLayout } from "components/layouts/AppLayout";
 import useTranslation from "next-translate/useTranslation";
 
 import { useRouter } from "next/router";

@@ -1,7 +1,7 @@
-import { GroupOverview } from "@components/cards/CardGroupOverview";
-import { GroupSkeleton } from "@components/cards/CardGroupOverview";
+import { GroupOverview } from "components/cards/CardGroupOverview";
+import { GroupSkeleton } from "components/cards/CardGroupOverview";
 import { ChevronRightIcon, PlusIcon } from "@heroicons/react/outline";
-import { firestore } from "@libs/firebase";
+import { firestore } from "libs/firebase";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";

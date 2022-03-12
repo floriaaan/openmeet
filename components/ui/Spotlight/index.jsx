@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { useEventListener } from "@hooks/useEventListener";
+import { useEventListener } from "hooks/useEventListener";
 import { Fragment, useEffect, useState } from "react";
 import { SearchCore } from "./SearchCore";
 

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from "hooks/useAuth";
 import { useTheme } from "next-themes";
 
 import { Menu, Transition } from "@headlessui/react";
 
 import Link from "next/link";
-import { userImgFallback } from "@libs/imgOnError";
+import { userImgFallback } from "libs/imgOnError";
 import {
   CogIcon,
   LoginIcon,
@@ -17,7 +17,7 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import useTranslation from "next-translate/useTranslation";
-import { classes } from "@libs/classes";
+import { classes } from "libs/classes";
 
 export const UserDropdown = () => {
   const { t } = useTranslation("common");
