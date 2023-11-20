@@ -47,7 +47,7 @@
     "react-lottie": "^1.2.3",
     "react-markdown": "^7.0.1",
     "react-rough-notation": "^1.0.1",
-    "semver": "^7.3.5"
+    "semver": "^7.5.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.1.1",
