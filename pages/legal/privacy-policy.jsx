@@ -1,4 +1,4 @@
-const { AppLayout } = require("@components/layouts/AppLayout");
+import { AppLayout } from "@components/layouts/AppLayout";
 
 const PrivacyPolicy = () => {
   return (
